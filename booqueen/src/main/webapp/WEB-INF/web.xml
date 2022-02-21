@@ -35,8 +35,7 @@
 			<param-value>/WEB-INF/spring/user/userContext.xml</param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>
-	</servlet>
-		
+	</servlet>		
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -50,13 +49,12 @@
 			<param-value>/WEB-INF/spring/partner/partnerContext.xml</param-value>
 		</init-param>
 		<load-on-startup>3</load-on-startup>
-	</servlet>
-		
+	</servlet>		
 	<servlet-mapping>
 		<servlet-name>partner</servlet-name>
 		<url-pattern>*.pdo</url-pattern>
 	</servlet-mapping>
-	
+		
 	<servlet>
 		<servlet-name>admin</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -65,8 +63,7 @@
 			<param-value>/WEB-INF/spring/admin/adminContext.xml</param-value>
 		</init-param>
 		<load-on-startup>4</load-on-startup>
-	</servlet>
-		
+	</servlet>		
 	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.mdo</url-pattern>
