@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.booqueen.user.member.MemberVO" alias="vo"/>
 	</typeAliases>
+  <typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
+	</typeAliases>
   <mappers>
     <mapper resource="mappings/user/member-mapping.xml"/>
+    <mapper resource="mappings/member-mapping.xml"/>
   </mappers>
 </configuration>
