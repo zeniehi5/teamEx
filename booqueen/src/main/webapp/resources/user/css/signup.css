@@ -1,0 +1,190 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'poppins', sans-serif;
+}
+body {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	overflow: scroll;
+}
+a {
+	text-decoration: none;
+}
+.container {
+	display: flex;
+	padding: 20px 0;
+	width: 1090px;
+	max-width: 800px;
+	margin: 0 auto;
+	flex-direction: column;
+}
+.signup-top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+	width: 100%;
+}
+.signup-title {
+	display: flex;
+	margin-top: 30px;
+	margin-bottom: 16px;
+	flex-direction: column;
+	flex-grow: 1;
+}
+.signup-title span {
+	color: #484848;
+	padding: 7px;
+	font-weight: 600;
+	font-size: 14px;
+}
+.title {
+	margin: 0;
+	padding-left: 6px;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 40px;
+	color: #262626;
+}
+.signup-avatar {
+	padding: 4px 16px;
+	border: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: left;
+	cursor: pointer;
+	box-sizing: border-box;
+	vertical-align: middle;
+	position: relative;
+	background: transparent;
+}
+.avatar {
+	position: relative;
+	height: 64px;
+	width: 64px;
+	justify-content: center;
+	background-color: #494949;
+	border-radius: 50%;
+}
+.edit-icon {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	bottom: 0;
+}
+.bi-camera {
+	font-size: 14px;
+	color: #fff;
+}
+.bi {
+	display: inline-flex;
+	vertical-align: top;
+	height: 100%;
+	width: auto;
+	font-size: 18px;
+}
+.signup-table {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	white-space: nowrap;
+}
+.signup-row {
+	padding: 16px;
+	border-top: 1px solid #e6e6e6;
+	color: #333;
+	align-items: flex-start;
+}
+.signup-container {
+	display: flex;
+}
+.container-label {
+	min-width: 146px;
+	align-self: center;
+}
+.container-label h2 {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+}
+.container-element {
+	padding-left: 16px;
+	flex-grow: 1;
+	color: #6b6b6b;
+	align-self: center;
+}
+.element {
+	flex-direction: column;
+	align-items: stretch;
+	font-size: 14px;
+	line-height: 20px;
+}
+.element-text {
+	display: flex;
+}
+input[type=text], input[type=password], select {
+	width: 95%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  /* -webkit-transition: 0.2s; */
+  transition: 0.2s;
+  outline: none;
+	border-radius: 4px;
+}
+input[type=text]:focus, input[type=password]:focus, select:focus {
+  border: 2px solid #555;
+}
+#phone1, #phone2, #phone3 {
+	width: 24%;
+	text-align: center;
+}
+.element-phone {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 5%;
+}
+.element-birth {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 5%;
+}
+#birth-year, #birth-month, #birth-day {
+	width: 30%;
+	text-align: center;
+}
+.signup-row-last {
+	border-bottom: 1px solid #e6e6e6;
+	color: #333;
+}
+.signup-button {
+	margin: 38px;
+	text-align: center;
+}
+.signup-button button {
+	background-color: #003580d7;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	width: 100%;
+	border-radius: 5px;
+	transition-duration: 0.2s;
+}
+.signup-button button:hover {
+	background-color: #003580;
+}
