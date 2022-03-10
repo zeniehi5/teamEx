@@ -13,6 +13,10 @@ public class MemberService {
 		return memberDAO.getMember(vo);
 	}
 	
+	public MemberVO getMemberByUserid(String userid) {
+		return memberDAO.getMemberByUserid(userid);
+	}
+	
 	public int insertMember(MemberVO vo) {
 		return memberDAO.insertMember(vo);
 	}
@@ -23,5 +27,9 @@ public class MemberService {
 	
 	public int deleteMember(MemberVO vo) {
 		return memberDAO.deleteMember(vo);
+	}
+	
+	public int changePasswd(MemberVO vo) {
+		return memberDAO.changePasswd(vo);
 	}
 }

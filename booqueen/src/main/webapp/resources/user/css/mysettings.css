@@ -215,13 +215,21 @@ input[type=text]:focus, input[type=password]:focus, select:focus {
 	border-top: 1px solid #e6e6e6;
 }
 .modify-button {
-	margin: 38px;
+   margin: 38px;
+   display: flex;
+   justify-content: space-between;
 }
-.modal-delete-button  {
-	margin: 42px 24px 24px 24px;
+.modal-delete-button, .modal-modify-button  {
+   margin: 42px 24px 24px 24px;
 }
-.modify-btn, .delete-btn-real {
-	background-color: #003580d7; 
+.modify-btn,.modify-pw-btn {
+   width: 49%;
+}
+.delete-btn-real, .modify-pw-btn-real {
+   width: 100%;   
+}
+.modify-btn, .modify-pw-btn, .delete-btn-real, .modify-pw-btn-real {
+   background-color: #003580d7; 
   border: none;
   color: white;
   padding: 16px 32px;
@@ -229,12 +237,14 @@ input[type=text]:focus, input[type=password]:focus, select:focus {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-	width: 100%;
-	border-radius: 5px;
-	transition-duration: 0.2s;
+   border-radius: 5px;
+   transition-duration: 0.2s;
 }
-.modify-btn:hover, .delete-btn-real:hover {
-	background-color: #003580;
+.modify-btn:hover,
+.modify-pw-btn:hover,
+.delete-btn-real:hover,
+.modify-pw-btn-real:hover {
+   background-color: #003580;
 }
 .delete-button {
 	margin-top: 12px;
@@ -328,27 +338,242 @@ input[type=text]:focus, input[type=password]:focus, select:focus {
 	color: #484848;
 }
 
+/* overlay */
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+  ._3wdogU_BPiAO796UieqXu4 {
+	background: #fff;
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+    outline: none;
+    height: 20%;
+    width: 34%;
+    margin: 20% 33%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.AjHVSw_0X32hqyrAh3MUT {
+    flex-grow: 1;
+    padding: 20px 16px;
+    box-sizing: border-box;
+}
+._1X0LeewVPMTpAX22drlvZ3 {
+    flex-direction: column;
+    align-items: stretch;
+}
+._2TqRTXEePkV7u2syZ0Nq9z {
+    display: flex;
+    pointer-events: none;
+}
+._3sMXBxNj_x3hbgmbkj8r2R {
+    position: relative;
+}
+._2TqRTXEePkV7u2syZ0Nq9z>* {
+    flex-shrink: 0;
+    pointer-events: all;
+}
+.my-settings-flex-by-row {
+    display: flex;
+    flex-direction: row;
+	gap: 35px;
+}
+.my-settings-avatar-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+._2snvxn2KX3RwldusJ44Ez6 {
+    height: 128px;
+    width: 128px;
+    font-size: 32px;
+    line-height: 40px;
+}
+._3_WZQkZUZTGSLPBIQMP_nQ {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #494949;
+    color: #fff;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+._3pU5tM4MQzFtYInGl8UH5o {
+    border-radius: 9999px;
+}
+.my-settings-avatar-controls__container {
+    overflow-x: auto;
+    max-width: 100%;
+    width: 350px;
+}
+._16qew0Y8jvEvovkAvEDWkH {
+    color: #262626;
+	margin-bottom: 20px;
+}
+.my-settings-large-margin-top {
+    margin-top: 16px;
+}
+#my-settings-file-upload {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+._1i4IBvGxFV336WwjLZIu7p{
+	text-align: left;
+}
+.my-settings-avatar-bottom-controls {
+    flex-grow: 1;
+}
+.my-settings-flex-grow {
+    flex-grow: 1;
+    width: 0;
+}
+button._2emQHDWTNbBMVHK80Tj0A2[disabled] {
+    cursor: not-allowed;
+}
+._3idbYJ1oAGD-sl-6gdCR2e[disabled]{
+	text-decoration: none;
+	color: #949494;
+}
+.my-settings-avatar-save {
+    margin-top: auto;
+    align-self: flex-end;
+}
+._2hGEkEybl8yfB856UNZRrl {
+    padding: 4px 16px;
+    min-height: 36px;
+    min-width: 36px;
+}
+._3idbYJ1oAGD-sl-6gdCR2e[disabled]:before, ._3idbYJ1oAGD-sl-6gdCR2e[disabled]:hover:before {
+    background-color: #d9d9d9;
+    border-color: #d9d9d9;
+}
+._36nb0Acmnwz7d6zO_z67nC {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    z-index: 5;
+}
+._3emjUeI82v5sK9ORoPWii {
+    display: inline-block;
+    vertical-align: middle;
+}
+._2z2vMbkB0u-n29UvuzaoL3 ._1cIr3TVDFXPBWOPm5iPASW, ._2z2vMbkB0u-n29UvuzaoL3 ._1FTTNGoNRUyslbavDhKmik {
+    margin-right: -8px;
+}
+._36fOkOHXSmy8oq_aSJZ3fP ._1cIr3TVDFXPBWOPm5iPASW, ._36fOkOHXSmy8oq_aSJZ3fP ._1FTTNGoNRUyslbavDhKmik {
+    margin-top: -8px;
+}
+._2hGEkEybl8yfB856UNZRrl._1FTTNGoNRUyslbavDhKmik {
+    padding-left: 8px;
+    padding-right: 8px;
+    background: transparent;
+    border: 0;
+}
+._1DYeoLTBFL3S4-b0JE_GoR svg {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: auto;
+}
+._3uTqlFFf-UdhcjqE8SRhTn {
+    height: 16px;
+}
 
+/* */
+.delete-modal, .modify-pw-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.delete-modal-content, .delete-modal-title, .modify-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
 
-@media screen and (max-width: 480px) {
-  .container-right {
-		display: none;
-	}
-	.container-label {
-		min-width: 112px;
-	}
-	#birth-year, #birth-month, #birth-day {
-		padding: 12px 10px;
-	}
-	#phone1, #phone2, #phone3 {
-		padding: 12px 10px;
-		width: 30%;
-	}
-	.logo {
-		padding: 8px 1px;
-	}
-	.header-right {
-		padding: 4px 7px;
-	}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-title {
+   margin: 2%;
+   margin-bottom: 34px;
+}
+.modal-delete-reason {
+   margin: 2%;
+   display: flex;
+   align-items: center;
+}
+.reason-title, .password-title {
+   margin: 12px 0 12px 12px;
+   width: 130px;
+}
+.delete-hr {
+   margin-top: 24px;
+   margin-bottom: 24px;
+}
+.delete-hr div {
+   border: 0.5px solid #EBEBEB;
+}
+.modal-delete-password, .modal-password {
+   margin: 2%;
+   display: flex;
+   align-items: center;
+}
+#delete-account, .input-password {
+   width: 76%;
+   margin-left: 6%;
+   margin-right: 3%;
+}
+#deletePassword {
+   width: 100%;
+}
+.input-password div {
+   color: #484848;
+}
+
+#preview-image{
+	position: absolute;
+    border-radius: 9999px;
+    height: 128px;
+    width: 128px;
 }

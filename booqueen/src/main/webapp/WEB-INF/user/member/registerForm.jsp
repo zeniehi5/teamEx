@@ -30,7 +30,7 @@
 			</button> -->
 		</div>
 
-		<form class="signup-table" action="register.do" method="post">
+		<form class="signup-table" enctype="multipart/form-data" action="${contextPath}/member/register.do" method="post">
 
 			<!-- 이메일 주소 또는 아이디 -->
 			<div class="signup-row">

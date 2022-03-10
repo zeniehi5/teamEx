@@ -2,26 +2,47 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.booqueen.user.member.MemberVO" alias="vo"/>
-		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
-		<typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
-		<typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
-		<typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
-		<typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
-		<typeAlias type="com.booqueen.partner.hotel.HotelPaymentVO" alias="payment"/>	
-		<typeAlias type="com.booqueen.partner.room.RoomVO" alias="myRoom"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesBasicVO" alias="facilitiesBasic"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesBathVO" alias="facilitiesBath"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesMediaVO" alias="facilitiesMedia"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesFoodVO" alias="facilitiesFood"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
-		<typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>		
+		<!-- user -->
+		<typeAlias type="com.booqueen.user.member.MemberVO" alias="userMemberVO"/>
+		<typeAlias type="com.booqueen.user.review.vo.ReviewVO" alias="reviewVO"/>
+		<typeAlias type="com.booqueen.user.review.vo.ReviewAvgVO" alias="reviewAvgVO"/>
+		<typeAlias type="com.booqueen.user.wishlist.vo.WishlistVO" alias="wishlistVO"/>
+		<typeAlias type="com.booqueen.user.member.vo.MemberProfileVO" alias="memberProfileVO"/>
+		<typeAlias type="com.booqueen.user.review.vo.ReviewProfileVO" alias="reviewProfileVO"/>
+		<typeAlias type="com.booqueen.user.room.vo.RoomVO" alias="roomVO"/>
+		<typeAlias type="com.booqueen.user.room.vo.RoomFacilitiesVO" alias="roomFacilitiesVO"/>
+		<typeAlias type="com.booqueen.user.chat.vo.ChatVO" alias="chatVO"/>
+		
+		<!-- shared -->
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelImgVO" alias="hotelImgVO"/>
+		
+		<!-- partner -->
+  		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
+      <typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
+		  <typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
+		  <typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
+		  <typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
+		  <typeAlias type="com.booqueen.partner.hotel.HotelPaymentVO" alias="payment"/>	
+		  <typeAlias type="com.booqueen.partner.room.RoomVO" alias="myRoom"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesBasicVO" alias="facilitiesBasic"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesBathVO" alias="facilitiesBath"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesMediaVO" alias="facilitiesMedia"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesFoodVO" alias="facilitiesFood"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>		
 	</typeAliases>
-  <mappers>
-    <mapper resource="mappings/user/member-mapping.xml"/>
+	<mappers>
+	  <mapper resource="mappings/user/member-mapping.xml"/>
+	  <mapper resource="mappings/user/profile-mapping.xml"/>
+	  <mapper resource="mappings/user/hotel-mapping.xml"/>
+	  <mapper resource="mappings/user/review-mapping.xml"/>
+	  <mapper resource="mappings/user/wishlist-mapping.xml"/>
+	  <mapper resource="mappings/user/room-mapping.xml"/>
+	  <mapper resource="mappings/user/chat-mapping.xml"/>
     <mapper resource="mappings/partner/member-mapping.xml"/>
     <mapper resource="mappings/partner/hotel-mapping.xml"/>
     <mapper resource="mappings/partner/room-mapping.xml"/>
-  </mappers>
+	</mappers>
 </configuration>
