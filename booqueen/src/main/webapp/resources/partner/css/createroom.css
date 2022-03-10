@@ -1,0 +1,153 @@
+@charset "UTF-8";
+* {
+    margin:0;   /* 마진 리셋 */
+    padding:0;   /* 패딩 리셋 */
+    box-sizing: border-box;   /* 박스 영역은 테두리까지 */ 
+}
+body{
+    background-color: #f7f7f7;
+}
+.container{
+    background-color:#003580;
+    width: 1920px;
+    height: 100px;
+}
+.container header{
+    display: inline;
+    height: 150px;
+}
+.container span a img{
+    display: inline-block;
+    width: 150px;
+    margin-left: 60px;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+.container nav{
+    text-align: right;
+    margin-left: 500px;
+}
+.container nav li{
+    display: inline;
+    margin-right: 100px;
+    margin-bottom: 120px;
+}
+.container nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.contents{
+    margin-left: 400px;
+    width: 1000pt;
+}
+#continue{
+    width: 780px;
+    height: 35pt;
+    margin-bottom: 30px;
+    background-color: #0071c2;
+    border: none;
+    color: white;
+    font-size: 12pt;
+}
+.option{
+    display: flex;
+    margin-top: 30px;
+}
+.option a{
+user-select: none;
+text-decoration-line:none;
+text-decoration: none;
+color: black;
+}
+.basic{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+}
+.basic img{
+    width: 15px;
+}
+.price{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.service{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.fac{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.pic{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.policy{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.payment{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.input{
+    margin-top: 30px;
+    width: 1080px;
+    display: flex;
+}
+.right{
+    margin-left: 20px;
+    width: 340px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.048);
+    display: inline-block;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: small;
+}
+.input-1{
+    background-color: white;
+    width: 850px;
+}
+.img{
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 280px;
+    margin-bottom: 20px;
+}
+.addroom{
+    width: 520px;
+    margin-left: 130px;
+    text-align: center;
+}
+.addroom input{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: #0071c2;
+    border: none;
+    color: white;
+}

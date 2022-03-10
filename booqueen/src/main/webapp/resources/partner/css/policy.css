@@ -1,0 +1,522 @@
+* {
+    margin:0;   /* 마진 리셋 */
+    padding:0;   /* 패딩 리셋 */
+    box-sizing: border-box;   /* 박스 영역은 테두리까지 */ 
+
+}
+body{
+    background-color: #f7f7f7;
+}
+.container{
+    background-color:#003580;
+    width: 1920px;
+    height: 100px;
+}
+.container header{
+    display: inline;
+    height: 150px;
+}
+.container span a img{
+    display: inline-block;
+    width: 150px;
+    margin-left: 60px;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+.container nav{
+    text-align: right;
+    margin-left: 500px;
+}
+.container nav li{
+    display: inline;
+    margin-right: 100px;
+    margin-bottom: 120px;
+}
+.container nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.contents{
+    margin-left: 400px;
+    width: 1000pt;
+}
+#continue{
+    width: 780px;
+    height: 35pt;
+    margin-bottom: 30px;
+    background-color: #0071c2;
+    border: none;
+    color: white;
+    font-size: 12pt;
+}
+#name{
+    margin-top: 10px;
+    padding-bottom: -10px;
+    font-size: small;
+}
+.option{
+    display: flex;
+    margin-top: 30px;
+}
+.basic{
+    background-color: rgba(255, 255, 255, 0.055);
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+}
+.basic img{
+    width: 15px;
+}
+.price{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.price img{
+    width: 15px;
+}
+.service{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.service img{
+    width: 15px;
+}
+.fac{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.fac img{
+    width: 15px;
+}
+.pic{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.pic img{
+    width: 15px;
+}
+.policy{
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.payment{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.input{
+    margin-top: 30px;
+    width: 1080px;
+    display: flex;
+
+}
+.right{
+    margin-left: 20px;
+    width: 340px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.048);
+    display: inline-block;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.right p{
+    font-size: small;
+}
+.cancel{
+    background-color: white;
+    width: 950px;
+    padding-left: 20px;
+    border:none;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.cancel p{
+    font-size: x-large;
+    margin-top: 10px;
+}
+.cancel-1{
+    margin-top: 10px;
+}
+.cancel-1 select{
+    width: 500px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.cancel-2 select{
+    width: 500px;
+    height: 40px;
+    margin-top: 10px;
+}
+.alarm{
+    padding: 20px;
+}
+.alarm-1{
+    background-color: #ececec;
+    padding: 10px;
+    width: 740px;
+    margin-left: -20px;
+}
+.alarm-1 img{
+    width: 40px;
+    margin-right: -5px;
+}
+.alarm-1 p{
+    font-size: small;
+    margin-left: 10px;
+}
+
+.check-in p{
+    font-size: x-large;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.check-in div p{
+    font-size: medium;
+}
+/* --------------------- radio버튼 변환 ---------------------- */
+.radio {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    user-select: none;
+}
+.radio label {
+    float:left;
+    width: 75px;
+    height: 40px;
+}
+.radio label span {
+    text-align:center;
+    padding:8px 0px;
+    display:block;
+}
+.radio label input {
+    position:absolute;
+    top:-20px;
+}
+.radio input + span {
+    display: block;
+    width: 75px;
+    height: 40px;
+    background-color: white;
+}
+.radio input:checked + span {
+    background-color:#ebfcff;
+    color:#000;
+    width: 75px;
+    height: 40px;
+}
+.radio-1 {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    user-select: none;
+}
+.radio-1 label {
+    float:left;
+    width: 75px;
+    height: 40px;
+}
+.radio-1 label span {
+    text-align:center;
+    padding:8px 0px;
+    display:block;
+}
+.radio-1 label input {
+    position:absolute;
+    top:-20px;
+}
+.radio-1 input + span {
+    display: block;
+    width: 75px;
+    height: 40px;
+    background-color: white;
+}
+.radio-1 input:checked + span {
+    background-color:#ebfcff;
+    color:#000;
+    width: 75px;
+    height: 40px;
+}
+.radio-2 {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    user-select: none;
+}
+.radio-2 label {
+    float:left;
+    width: 75px;
+    height: 40px;
+}
+.radio-2 label span {
+    text-align:center;
+    padding:8px 0px;
+    display:block;
+}
+.radio-2 label input {
+    position:absolute;
+    top:-20px;
+}
+.radio-2 input + span {
+    display: block;
+    width: 75px;
+    height: 40px;
+    background-color: white;
+}
+.radio-2 input:checked + span {
+    background-color:#ebfcff;
+    color:#000;
+    width: 75px;
+    height: 40px;
+}
+.check-in-1 div select{
+    width: 75px;
+    height: 42px;
+    margin-top: 11px;
+    margin-left: 5px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: white;
+    border:1px solid #D0D0D0;
+}
+/* --------------------- check-in radio버튼 변환 ---------------------- */
+
+.check-in{
+    width: 380px;
+    background-color: white;
+    border:none;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.check-in-1{
+    padding-bottom: 10px;
+}
+.check-in-2 div select{
+    width: 75px;
+    height: 42px;
+    margin-top: 11px;
+    margin-left: 5px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: white;
+    border:1px solid #D0D0D0;
+}
+.flex{
+    display: flex;
+    width: 950px;
+}
+.check-out{
+    margin-left: 20px;
+    width: 380px;
+    background-color: white;
+    border:none;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}.check-out-1 div select{
+    width: 75px;
+    height: 42px;
+    margin-top: 11px;
+    margin-left: 5px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: white;
+    border:1px solid #D0D0D0;
+}
+.check-out-2{
+    margin-top: 20px;
+}
+.check-out-2 div select{
+    width: 75px;
+    height: 42px;
+    margin-top: 11px;
+    margin-left: 5px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: white;
+    border:1px solid #D0D0D0;
+}
+.check-out p{
+    font-size: x-large;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.check-out div p{
+    font-size: medium;
+}
+.child{
+    width: 780px;
+    background-color: white;
+    border:none;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+.child p{
+    font-size: x-large;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.child div p{
+    font-size: medium;
+}
+.child-1 {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.child-1 label {
+    float:left;
+    width: 120px;
+    height: 40px;
+}
+.child-1 label span {
+    text-align:center;
+    padding:8px 0px;
+    display:block;
+}
+.child-1 label input {
+    position:absolute;
+    top:-20px;
+}
+.child-1 input + span {
+    display: block;
+    width: 120px;
+    height: 40px;
+    background-color: white;
+}
+.child-1 input:checked + span {
+    background-color:#ebfcff;
+    color:#000;
+    width: 120px;
+    height: 40px;
+}
+.child-2 {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.child-2 label {
+    float:left;
+    width: 120px;
+    height: 40px;
+}
+.child-2 label span {
+    text-align:center;
+    padding:8px 0px;
+    display:block;
+}
+.child-2 label input {
+    position:absolute;
+    top:-20px;
+}
+.child-2 input + span {
+    display: block;
+    width: 120px;
+    height: 40px;
+    background-color: white;
+}
+.child-2 input:checked + span {
+    background-color:#ebfcff;
+    color:#000;
+    width: 120px;
+    height: 40px;
+}
+.pat div{
+        background-color: rgba(0, 0, 0, 0.137);
+        width: 700px;
+        padding: 4px;
+        margin-left: -20px;
+        padding-left: 20px;
+        font-size: small;
+}
+.input-3{
+    background-color: white;
+    width: 780px;
+    padding-left: 20px;
+    border:none;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.input-3 p{
+    font-size: x-large;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.input-3 div p{
+    font-size: medium;
+}
+.input-3 div select{
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.option a{
+    user-select: none;
+    text-decoration-line:none;
+    text-decoration: none;
+    color: black;
+}
+.option a:hover{
+    color: #0071c2;
+}
+.option a:visited{
+    text-decoration: none;
+}
+.option a label{
+    cursor: pointer;
+}

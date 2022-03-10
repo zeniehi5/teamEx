@@ -739,9 +739,9 @@ bui-button__icon{
 .bui-radio__input{
     position: absolute;
     overflow: hidden;
-    width: 0;
-    height: 0;
-    opacity: 0;
+    width: 24px;
+    height: 24px;
+    opacity: 15;
 }
 .bui-radio__input:checked~ .bui-radio__label:before{
     border-color: #07c;
@@ -1097,4 +1097,85 @@ body .bui-f-font-strong, .bui_font_strong{
     pointer-events: none;
     right: 8px;
     top: 30%;
+}
+.datepicker{
+    background-color: #fff;
+    border: none;
+    border-radius: 0 !important
+}
+.datepicker-dropdown{
+    top: 0;
+    left: 0
+}
+.datepicker table tr td.today,
+span.focused{
+    border-radius: 50% !important;
+    background-image: linear-gradient(#FFF3E0, #FFE0B2)
+}
+.datepicker table tr td.today.range{
+    background-image: linear-gradient(#eeeeee, #eeeeee) !important;
+    border-radius: 0 !important
+}
+thead tr:nth-child(3) th{
+    font-weight: bold !important;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+.dow,
+.old-day,
+.day,
+.new-day{
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 0px !important
+}
+.old-day:hover,
+.day:hover,
+.new-day:hover,
+.month:hover,
+.year:hover,
+.decade:hover,
+.century:hover{
+    border-radius: 50% !important;
+    background-color: #eee
+}
+.active{
+    border-radius: 50% !important;
+    background-image: linear-gradient(#90CAF9, #64B5F6) !important;
+    color: #fff !important
+}
+.range-start,
+.range-end{
+    border-radius: 50% !important;
+    background-image: linear-gradient(#FFA726, #FFA726) !important
+}
+.prev,
+.next,
+.datepicker-switch{
+    border-radius: 0 !important;
+    padding: 10px 10px 10px 10px !important;
+    text-transform: uppercase;
+    font-size: 14px;
+    opacity: 0.8
+}
+.prev:hover,
+.next:hover,
+.datepicker-switch:hover{
+    background-color: inherit !important;
+    opacity: 1
+}
+.btn-black{
+    background-color: #37474F !important;
+    color: #fff !important;
+    width: 100%
+}
+.btn-black:hover{
+    color: #fff !important;
+    background-color: #000 !important
+}
+.input-daterange input{
+    text-align: left! important;
+}
+.input-group{
+    display: table! important;
 }

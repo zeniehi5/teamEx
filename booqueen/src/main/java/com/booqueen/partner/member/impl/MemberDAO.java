@@ -17,18 +17,20 @@ public class MemberDAO {
 	}
 
 	public MemberVO getMember(MemberVO vo) {
-		System.out.println("Mybatis로 getMember() 기능 처리");
 		return (MemberVO) sqlSessionTemplate.selectOne("MemberDAO.getMember", vo);
 	}
 	
 	public MemberVO getPassword(MemberVO vo) {
-		System.out.println("Mybatis로 getPassword() 기능 처리");
 		return (MemberVO) sqlSessionTemplate.selectOne("MemberDAO.getPassword", vo);
 	}
 
 	public void register(MemberVO vo) {
-		System.out.println("Mybatis로 register() 기능 처리");
 		sqlSessionTemplate.insert("MemberDAO.insertMember", vo);
+	}
+
+	public void changePassword(MemberVO vo) {
+		sqlSessionTemplate.update("MemberDAO.updatePassword", vo);
+		
 	}
 
 }

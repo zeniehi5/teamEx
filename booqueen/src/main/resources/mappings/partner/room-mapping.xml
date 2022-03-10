@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoomDAO">
+	<resultMap type="myRoom" id="roomResult">
+		<id property="room_id" column="room_id"/>
+		<result property="serialnumber" column="serialnumber"/>
+		<result property="type" column="type"/>
+		<result property="price" column="price"/>
+		<result property="smoking" column="smoking"/>
+		<result property="available" column="available"/>
+	</resultMap>
+	<insert id="addRoom" parameterType="myRoom">INSERT INTO room values (nextval('seq_room_id'), #{serialnumber}, #{type}, #{price}, #{smoking}, #{available})</insert>
+	<select id="getIdBySerial" resultType="myRoom">SELECT * FROM room where "serialnumber" = #{serialnumber}</select>
+</mapper>

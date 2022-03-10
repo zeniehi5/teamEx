@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/partner/css/login.css" >
+<title>booqueen.com · 로그인</title>
+<link rel="stylesheet" href="${contextPath}/resources/partner/css/login.css" >
 </head>
 <body>
 <form action="login.pdo" method="post">
 	<div class="container">
 		<header>
 			<span id="logo">
-				<a href="#"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
+				<a href="${contextPath}/home.jsp"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
 			</span>
 			<nav>
 				<ul id="topMenu">
-					<li><a href="${pageContext.request.contextPath}/WEB-INF/partner/login.jsp">로그인</a></li>
-					<li><a href="${pageContext.request.contextPath}/register.jsp">회원가입</a></li>
+					<li><a href="${contextPath}/login.jsp">로그인</a></li>
+					<li><a href="${contextPath}/register.jsp">회원가입</a></li>
 				</ul>
 			</nav>
 		</header>

@@ -18,25 +18,22 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO getMember(MemberVO vo) {
-		System.out.println("받아온 이메일값: " + vo.getEmail());
 		return memberDAO.getMember(vo);
 	}
 
 	@Override
 	public MemberVO getPassword(MemberVO vo) {
-		System.out.println("받아온 이메일값: " + vo.getEmail());
-		System.out.println("받아온 비밀번호값: " + vo.getPassword());
 		return memberDAO.getPassword(vo);
 	}
 
 	@Override
 	public void addMember(MemberVO vo) {
-		System.out.println("받아온 이메일값: " + vo.getEmail());
-		System.out.println("받아온 비밀번호값: " + vo.getPassword());
-		System.out.println("받아온 성: " + vo.getLastName());
-		System.out.println("받아온 이름: " + vo.getFirstName());
-		System.out.println("받아온 전화번호: " + vo.getTelephone());
 		memberDAO.register(vo);
+	}
+
+	@Override
+	public void changePassword(MemberVO vo) {
+		memberDAO.changePassword(vo);
 	}
 
 }

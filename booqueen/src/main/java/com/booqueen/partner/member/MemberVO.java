@@ -11,8 +11,9 @@ public class MemberVO {
 	
 	private String email;
 	private String password;
-	private String lastName;
-	private String firstName;
+	private String confirmpass;
+	private String lastname;
+	private String firstname;
 	private String telephone;
 	private int active;
 	

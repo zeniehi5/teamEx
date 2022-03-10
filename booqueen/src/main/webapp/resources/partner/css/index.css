@@ -1,0 +1,145 @@
+@charset "UTF-8";
+.index{
+    margin-left: 500px;
+}
+.index-inner{
+    margin-top: 50px;
+    display: flex;
+}
+.index-head input{
+    width: 150px;
+    height: 40px;
+    background-color: #07c;
+    border: none;
+    color: white;
+    margin-left: 670px;
+}
+.table-back{
+    background-color: white;
+    width:1000px;
+}
+.table{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    border-radius: 2px;
+    border-spacing: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: #c6c6c6 1px solid;
+}
+.table tr th{
+    height: 50px;
+    text-align: left;
+    border-collapse: collapse;
+    border-bottom: #c6c6c6 1px solid;
+    padding: 20px;
+}
+#th5{
+    width: 50px;
+}
+#progress {
+    width: 200px;
+    margin-right: -120px;
+}
+#tr1{
+    height: 50px;
+    text-align: left;
+    border-collapse: collapse;
+    border-bottom: #c6c6c6 1px solid;
+    padding-left: 20px;
+    
+}
+#td2{
+    height: 50px;
+    text-align: left;
+    margin-left: 20px;
+    padding: 20px;
+}
+.index-bottom{
+    margin-bottom: 20px;
+}
+.active{
+    display: flex;
+}
+.active a{
+    color: black;
+    margin-left: 440px;
+}
+.active input{
+    width: 500px;
+    height: 35px;
+    padding-left: 10px;
+    outline: none;
+}
+.active input::placeholder{
+    color: grey;
+}
+.active input:focus{
+    border: 2px solid #0071c2;
+}
+.table-bottom{
+    margin-top: 20px;
+    background-color: white;
+    width: 1000px;
+    text-align: left;
+    border-collapse: collapse;
+    border: #c6c6c6 1px solid;
+}
+.table-bottom td{
+    text-align: left;
+    border-collapse: collapse;
+    border-right: #c6c6c6 1px solid;
+    padding: 10px;
+}
+#last-td{
+    padding-bottom: 30px;
+}
+.table-last {
+    margin-top: 34px;
+    background-color: white;
+    width: 1000px;
+    text-align: left;
+    border-collapse: collapse;
+    border: #c6c6c6 1px solid;
+}
+.table-last th{
+    font-size: small;  
+    height: 10px;
+    text-align: left;
+    border-collapse: collapse;
+    border-bottom: #c6c6c6 1px solid;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#th1{
+    width: 50px;
+}
+#th2{
+    width: 50px;
+}
+#th3-1{
+    width: 100px;
+}
+#th4-1{
+    width: 100px;
+}
+#th5-1{
+    width: 150px;
+}
+#th6{
+    width: 80px;
+}
+#th7{
+    width: 170px;
+}
+#td3{
+    font-size: small;
+    height: 50px;
+    text-align: left;
+    padding: 20px;
+}
+#td5{
+    text-align: center;
+}
