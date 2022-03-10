@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="${contextPath}/resources/user/css/index-copy.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/d2826a4f92.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css"
-     href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="${contextPath}/resources/user/javascript/index-copy.js"></script>
@@ -48,29 +47,29 @@
     </div>
 
     <div class="form-container">
-        <form class="main-form">
+        <form class="main-form" action="${contextPath}/searchResult.do" method="get">
             <div class="form-inner">
                 <div class="form-inner-frist">
                     <div>
-                        <input type="text" placeholder="어디로 향하시나요?">  
+                        <input type="text" placeholder="어디로 향하시나요?" name="keyword" value="">  
                     </div>
                 </div>
                 <div class="form-inner-second">
                     <div>
                         <form autocomplete="off">
-                            <input type="text" id="from" name="daterange">
+                            <input type="text" value="" id="from" name="daterange">
                         </form>
                     </div>
                 </div>
     
                 <div class="form-inner-third">
                     <div>
-                        <input type="number" placeholder="인원" class="number-of-member" name="quantity">
+                        <input type="number" placeholder="인원" class="number-of-member" value="">
                     </div>
                 </div>
                 <div class="form-inner-fourth">
                     <div>
-                        <button class="fourth-button"><span>검색</span></button>
+                        <button type="submit" class="fourth-button"><span>검색</span></button>
                     </div>
                 </div>
             </div>
@@ -126,7 +125,9 @@
             </ul>
         </div>
     </div>
-
+	
+	<c:choose>
+	<c:when test="${isLogOn == true  && member!= null}">
     <div class="section comming-trip">
         <h2>다가오는 여행</h2>
         <div class="recent-div comming-div">
@@ -144,6 +145,8 @@
             </ul>
         </div>
     </div>
+    </c:when>
+    </c:choose>
 
     <div class="promotion">
         <div><span class="promotion-i"><i class="fas fa-tag fa-lg"></i></span></div>
@@ -154,6 +157,8 @@
         <span class="x-button"><i class="bi bi-x-lg"></i></span>
     </div>
 
+	<c:choose>
+	<c:when test="${isLogOn == true  && member!= null}">
     <div class="review-request">
         <div id="myBanner2" class="bui-banner">
             <div class="bui-banner__image-container">
@@ -168,7 +173,7 @@
                 </p>
                 <a
                     class="bui-banner__button"
-                    href="https://secure.booking.com/review/fd5af190dea72aa9.ko.html?label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Aob2m5AGwAIB0gIkYjUwNjgxMzUtZTFiYy00MjFiLWExYmQtYjNjMTc2MjJkNWQ22AIG4AIB;sid=bac1796509bc54b36dbc023726e3547c"
+                    href="${contextPath}/review/reviewForm.do" target="_blank"
                     target="_blank">
                     <span class="bui-button__text">숙박 경험을 평가해주세요</span>
                 </a>
@@ -176,9 +181,10 @@
             <span class="x-button2"><i class="bi bi-x-lg"></i></span>
         </div>
     </div>
+	</c:when>
+	</c:choose>
 
-
-    <div class="gallery">
+    <div class="galleries">
         <div class="main-grid">
             <div class="main-grid-1">
                 <div class="gallery-text-box">

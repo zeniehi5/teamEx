@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sql">
-	<resultMap id="memberResult" type="vo">
+	<resultMap id="memberResult" type="userMemberVO">
 		<id property="userid" column="userid"/>
 		<result property="passwd" column="passwd"/>
 		<result property="name" column="name"/>
@@ -14,20 +14,27 @@
 		<result property="birth_day" column="birth_day"/>
 	</resultMap>
 	
-	<select id="sel" resultType="vo" parameterType="vo">
+	<select id="sel" resultType="userMemberVO" parameterType="userMemberVO">
 		<![CDATA[SELECT * FROM u_member where userid = #{userid} and passwd = #{passwd}]]>
 	</select>
 	
-	<insert id="insertMember" parameterType="vo"> 
+	<select id="selectMemberByUserid" resultType="userMemberVO" parameterType="String">
+		<![CDATA[SELECT * FROM u_member where userid = #{userid}]]>
+	</select>
+	
+	<insert id="insertMember" parameterType="userMemberVO"> 
         <![CDATA[INSERT INTO u_member (userid, passwd, name, gender, phone1, phone2, phone3, birth_year, birth_month, birth_day) VALUES (#{userid}, #{passwd}, #{name}, #{gender}, #{phone1}, #{phone2}, #{phone3}, #{birth_year}, #{birth_month}, #{birth_day})]]> 
     </insert>
     
-    <update id="updateMember" parameterType="vo">
+    <update id="updateMember" parameterType="userMemberVO">
     	<![CDATA[UPDATE u_member SET passwd = #{passwd}, name = #{name}, gender = #{gender}, phone1 = #{phone1}, phone2 = #{phone2}, phone3 = #{phone3}, birth_year = #{birth_year}, birth_month = #{birth_month}, birth_day = #{birth_day} where userid = #{userid}]]>
     </update>
     
-    <delete id="deleteMember" parameterType="vo">
+    <delete id="deleteMember" parameterType="userMemberVO">
     	<![CDATA[DELETE from u_member where userid = #{userid} ]]>
     </delete>
     
+    <update id="changePasswd" parameterType="userMemberVO">
+       <![CDATA[UPDATE u_member SET passwd = #{newPasswd} where userid = #{userid}]]>
+    </update>
 </mapper>	

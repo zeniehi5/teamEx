@@ -19,7 +19,7 @@
 		
 		      <!-- Modal content -->
 		      <div class="login-modal">
-		         <form class="login-modal-content" action="login.do" method="post">
+		         <form class="login-modal-content" action="${contextPath}/member/login.do" method="post">
 		            <div class="login-modal-top">
 		               <h2>부퀸닷컴에 오신 것을 환영합니다.</h2>
 		            </div>

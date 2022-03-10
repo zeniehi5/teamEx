@@ -11,6 +11,7 @@
 	<title>mysettings</title>
 	<link rel="stylesheet" href="${contextPath}/resources/user/css/mysettings.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/user/member/header.jsp"/>
@@ -19,17 +20,17 @@
 
 		<!-- container-left -->
 		<!-- 개인정보 -->
-		<form class="container-left" action="mypageUpdate.do" method="post">
+		<form class="container-left" action="${contextPath}/mypageUpdate.do" method="post">
 			<div class="settings-top">
 				<div class="settings-title">
 					<div class="title">계정 관리</div>
 				</div>
-				<button class="settings-avatar">
+				<div class="settings-avatar" onclick="on()">
 					<span class="avatar">
 						<div class="my-avatar"></div>
 						<span class="edit-icon"><i class="bi-camera"></i></span>
 					</span>
-				</button>
+				</div>
 			</div>
 			<div class="settings-table">
 				<!-- 이름 -->
@@ -89,13 +90,13 @@
 						<div class="container-element">
 							<div class="element element-phone">
 								<select id="phone1" name="phone1">
-									<option value="010">010</option>
-									<option value="011">011</option>
-									<option value="016">016</option>
-									<option value="017">017</option>
-									<option value="018">018</option>
-									<option value="019">019</option>
-								</select>
+		                           <option value="010" <c:if test="${member.phone1 == '010'}">selected</c:if>>010</option>
+		                           <option value="011" <c:if test="${member.phone1 == '011'}">selected</c:if>>011</option>
+		                           <option value="016" <c:if test="${member.phone1 == '016'}">selected</c:if>>016</option>
+		                           <option value="017" <c:if test="${member.phone1 == '017'}">selected</c:if>>017</option>
+		                           <option value="018" <c:if test="${member.phone1 == '018'}">selected</c:if>>018</option>
+		                           <option value="019" <c:if test="${member.phone1 == '019'}">selected</c:if>>019</option>
+                        		</select>
 								<div class="hyphen">-</div>
 								<input type="text" placeholder="0000" id="phone2" maxlength="4" value=${member.phone2 } name="phone2">
 								<div class="hyphen">-</div>
@@ -118,6 +119,7 @@
 				</div>
 				<div class="modify-hr"><div></div></div>
 				<div class="modify-button">
+					<button type="button" class="modify-pw-btn" id="modifyPwBtn">비밀번호 변경</button>
 					<button type="submit" class="modify-btn">개인정보 수정</button>
 				</div>
 				
@@ -181,14 +183,151 @@
 				<button type="submit" class="delete-btn-real" id="deleteBtnReal">회원 탈퇴하기</button>
 			</div>
 		</form>
-
 	</div>
+	
+	<!-- 비밀번호 수정 Modal -->
+   <div id="modifyPassword" class="modify-pw-modal">
+
+      <!-- Modal content -->
+      <form class="modify-modal-content" action="${contextPath }/changePasswd.do" method="post">
+         <span class="close modifyClose">&times;</span>
+         <div><h2 class="modal-title">비밀번호 변경</h2></div>
+         <div class="delete-hr"><div></div></div>
+         <div class="modal-password">
+            <div class="password-title">현재 비밀번호</div>
+            <div class="input-password">
+               <input type="hidden" value="${member.userid }" name="userid">
+               <input type="hidden" id="name" value="${member.name }" name="name" readonly />
+               <input type="hidden" value="${member.gender }" name="gender" readonly/>
+               <input type="hidden" placeholder="YYYY" id="birth-year" maxlength="4" value="${member.birth_year }" name="birth_year">
+               <input type="hidden" placeholder="MM" id="birth-month" maxlength="2" value="${member.birth_month }" name="birth_month">
+               <input type="hidden" placeholder="DD" id="birth-day" maxlength="2" value="${member.birth_day }" name="birth_day">
+               <input type="hidden" placeholder="0000" id="phone1" maxlength="3" value="${member.phone1 }" name="phone1">
+               <input type="hidden" placeholder="0000" id="phone2" maxlength="4" value="${member.phone2 }" name="phone2">
+               <input type="hidden" placeholder="0000" id="phone3" maxlength="4" value="${member.phone3 }" name="phone3">
+               
+               <input type="password" placeholder="현재 비밀번호를 입력해 주세요" name="passwd" id="old-passwd">
+            </div>
+         </div>
+         <div class="delete-hr"><div></div></div>
+         <div class="modal-password">
+            <div class="password-title">새 비밀번호</div>
+            <div class="input-password">
+               <input type="password" placeholder="새 비밀번호를 입력해 주세요" name="newPasswd" id="new-passwd" >
+            </div>
+         </div>
+         <div class="modal-password">
+            <div class="password-title">새 비밀번호 확인</div>
+            <div class="input-password">
+               <input type="password" placeholder="새 비밀번호를 다시 입력해 주세요" name="rePasswd" id="re-passwd">
+            </div>
+         </div>
+         <div class="delete-hr"><div></div></div>
+         <div class="modal-modify-button">
+            <button type="submit" class="modify-pw-btn-real" id="modifyPwBtnReal" onmouseover="passwd-check()">확인</button>
+         </div>
+      </form>
+   </div>
 
 	<!-- footer -->
 	<div class="footer">
 
 
 	</div>
+	
+	<div id="overlay">
+		<div class="_3wdogU_BPiAO796UieqXu4">
+			<div class="_2TqRTXEePkV7u2syZ0Nq9z _1X0LeewVPMTpAX22drlvZ3 _1BiqJ9_C-T-CmHOq8EfJPo AjHVSw_0X32hqyrAh3MUT">
+				<div class="_3sMXBxNj_x3hbgmbkj8r2R">
+					<div class="my-settings-flex-by-row">
+						<div class="my-settings-avatar-block">
+							<div class="Dw6-MstZiKz3coVI3dKuj _2jQGBo-dU-M17-7-nkJvPF _3pU5tM4MQzFtYInGl8UH5o _2XvExLWApLv6qJyr0CBtpT _3_WZQkZUZTGSLPBIQMP_nQ my-settings-avatar-modal-avatar _2snvxn2KX3RwldusJ44Ez6"></div>
+							<img id="preview-image" src="" >
+						</div>
+						<div class="my-settings-avatar-controls">
+							<div class="my-settings-avatar-controls__container">
+								<div class="_1wW80ZAB9m6Wqrw4PPEzrT my-settings-large-margin-sides">
+									<div class="_16qew0Y8jvEvovkAvEDWkH _1B97E_2FGLDQnmvbkd4Ax4">업로드할 이미지를 선택해 주세요</div>
+								</div>
+								<div lass="my-settings-large-margin-top my-settings-large-margin-sides bui-spacer--large">
+									<form id="fileForm" method="post" enctype="multipart/form-data" action="${contextPath}/profile/upload.do">
+										<div class="iux-file-upload">
+											<input id="my-settings-file-upload" type="file" accept="image/*" name="file" onchange="myFunction()">
+											<label for="my-settings-file-upload">
+												<span class="bui-button my-settings-avatar-select bui-button--secondary">파일 선택</span>
+											</label>
+										</div>
+									</form>
+									<progress hidden="" tabindex="-1"></progress>
+								</div>
+								<div class="my-settings-file-name"><span id="file-name"></span></div>
+							</div>
+							<div class="my-settings-flex-by-row my-settings-avatar-bottom-controls">
+								<div class="my-settings-flex-grow"></div>
+								<button
+									type="button"  id="submit-button" onclick="document.getElementById('fileForm').submit();" disabled
+									class="_2emQHDWTNbBMVHK80Tj0A2 _2V1p8Jqj0mC6lhwPQD7Wm2 _3idbYJ1oAGD-sl-6gdCR2e _2hGEkEybl8yfB856UNZRrl my-settings-avatar-save">
+									<span class="_1jp30RWusTBQoML9GSCZ_C">저장</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="_3emjUeI82v5sK9ORoPWii _36fOkOHXSmy8oq_aSJZ3fP _2z2vMbkB0u-n29UvuzaoL3 _36nb0Acmnwz7d6zO_z67nC">
+						<button onclick="off()"
+							aria-label="닫기"
+							type="button"
+							class="_2emQHDWTNbBMVHK80Tj0A2 _2V1p8Jqj0mC6lhwPQD7Wm2 _1FTTNGoNRUyslbavDhKmik _2hGEkEybl8yfB856UNZRrl _1cIr3TVDFXPBWOPm5iPASW">
+							<span class="_1egDh0TNT7Uqzh_IMo60Zv">
+								<span
+									class="_1DYeoLTBFL3S4-b0JE_GoR _3uTqlFFf-UdhcjqE8SRhTn"
+									aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path
+											d="M13.31 12l6.89-6.89a.93.93 0 1 0-1.31-1.31L12 10.69 5.11 3.8A.93.93 0 0 0 3.8 5.11L10.69 12 3.8 18.89a.93.93 0 0 0 1.31 1.31L12 13.31l6.89 6.89a.93.93 0 1 0 1.31-1.31z"></path>
+									</svg>
+								</span>
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		var isEmpty = function(value){ 
+			if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ 
+				return true 
+			} else { 
+				return false 
+			}
+		};
+	
+		/*
+		function passwd-check(){
+			var oldPass = document.getElementById('old-passwd').value;
+			var newPass = document.getElementById('new-passwd').value;
+			var RePass = document.getElementById('re-passwd').value;
+			
+			if(!isEmpty(oldPass) && !isEmpty(newPass) && !isEmpty(RePass)){
+				document.getElementById('modifyPwBtnReal').disabled = false;
+			}
+		}
+		*/
+		
+        function on() {
+        	document.getElementById("overlay").style.display = "block";
+	        var paragraph = document.getElementById("file-name");
+	   	  	paragraph.textContent = "";
+	   	  	const previewImage = document.getElementById("preview-image")
+	      	previewImage.src = "${contextPath}/resources/user/images/default_profile.jpg";
+	   	 	document.getElementById('submit-button').disabled = true;
+        }
+
+        function off() {
+          document.getElementById("overlay").style.display = "none";
+        }
+    </script>
 
 <script>
 	var deleteMyAccount = document.getElementById("deleteMyAccount");
@@ -210,6 +349,71 @@
 			deleteMyAccount.style.display = "none";
     }
 	}
+
+   // 비밀번호 변경
+   var modifyPassword = document.getElementById("modifyPassword");
+   var modifyPwBtn = document.getElementById("modifyPwBtn");
+   var modifyPwBtnReal = document.getElementById("modifyPwBtnReal");
+   var modifyClose = document.getElementsByClassName("modifyClose")[0];
+
+   modifyPwBtn.onclick = function () {
+      modifyPassword.style.display = "block";
+   }
+   modifyPwBtnReal.onclick = function () {
+      modifyPassword.style.display = "none";
+   }
+   modifyClose.onclick = function () {
+      modifyPassword.style.display = "none";
+   }
+   window.onclick = function (event) {
+    if (event.target == modifyPassword) {
+         modifyPassword.style.display = "none";
+    }
+   }
+   
+   // input label change
+   function myFunction() {
+	   
+	   var paragraph = document.getElementById("file-name");
+	   paragraph.textContent = "";
+	   
+	   var fullPath = document.getElementById('my-settings-file-upload').value;
+	   if (fullPath) {
+	       var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+	       var filename = fullPath.substring(startIndex);
+	       if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+	           filename = filename.substring(1);
+	       }
+	       paragraph.textContent = filename;
+	   }
+	   
+		document.getElementById('submit-button').disabled = false;
+   }
+   
+   // input preview
+   function readImage(input) {
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+	        // 이미지 파일인지 검사 (생략)
+	        // FileReader 인스턴스 생성
+	        const reader = new FileReader()
+	        // 이미지가 로드가 된 경우
+	        reader.onload = e => {
+	            const previewImage = document.getElementById("preview-image")
+	            previewImage.src = e.target.result
+	        }
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0])
+	    }
+	}
+   
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("my-settings-file-upload")
+	inputImage.addEventListener("change", e => {
+	    readImage(e.target)
+	})
+	
+	
 </script>
 </body>
 </html>

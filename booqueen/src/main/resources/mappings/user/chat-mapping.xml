@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.chat.dao.chatmapper">
+	
+	<select id="selectchats" resultType="chatVO" parameterType="chatVO">
+		<![CDATA[select * from chat where userid = #{userid} and serialnumber = #{serialnumber} order by send_date, send_time]]>
+	</select>
+	
+	<insert id="insertchat" parameterType="chatVO">
+		<![CDATA[INSERT INTO chat(userid, serialnumber, content, partner) VALUES (#{userid}, #{serialnumber}, #{content}, #{partner})]]>
+	</insert>
+	
+</mapper>

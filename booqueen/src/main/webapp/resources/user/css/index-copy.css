@@ -13,7 +13,7 @@ a:hover{
     z-index: 2;
 }
 */
-.gallery img:hover{
+.galleries img:hover{
     background-color: hsla(0, 0%, 100%, .12);
     border-color: transparent;
     border-radius: 2px;
@@ -586,7 +586,7 @@ a:hover{
 }
 
 /* */
-.gallery{
+.galleries{
     padding: 30px 18%;
 }
 .main-grid{
@@ -838,3 +838,7 @@ tbody tr td {
     color:#fff;
     outline: 0;
 }
+.bi-x-lg::before{
+	color: black;
+}
+

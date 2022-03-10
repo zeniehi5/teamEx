@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.room.dao.roomapper">
+
+	<resultMap type="roomVO" id="RoomVOMap">
+    	<id property="room_id" column="room_id"/>
+    	<result property="serialnumber" column="serialnumber"/>
+		<result property="type" column="type"/>
+		<result property="price" column="price"/>
+		<result property="smoking" column="smoking"/>
+		<result property="available" column="available"/>
+		<collection property="roomFacilitiesVO" resultMap="RoomFacilitiesVOMap" />
+    </resultMap>
+
+	<resultMap type="roomFacilitiesVO" id="RoomFacilitiesVOMap">
+   		<result property="ground_floor" column="ground_floor"/>
+   		<result property="wheelchair" column="wheelchair"/>
+   		<result property="elevator" column="elevator"/>
+   		<result property="stair_only" column="stair_only"/>
+   		<result property="bathroom_handle" column="bathroom_handle"/>
+   		
+   		<result property="hanger" column="hanger"/>
+   		<result property="drying_rack" column="drying_rack"/>
+   		<result property="folding_bed" column="folding_bed"/>
+   		<result property="electric_kettle" column="electric_kettle"/>
+   		<result property="sofa_bed" column="sofa_bed"/>
+   		<result property="ac" column="ac"/>
+   		<result property="closet" column="closet"/>
+   		<result property="carpet_floor" column="carpet_floor"/>
+   		<result property="marble_floor" column="marble_floor"/>
+   		<result property="wooden_floor" column="wooden_floor"/>
+   		<result property="dress_room" column="dress_room"/>
+   		<result property="fan" column="fan"/>
+   		<result property="heater" column="heater"/>
+   		<result property="private_entrance" column="private_entrance"/>
+   		<result property="safety_box" column="safety_box"/>
+   		<result property="sofa" column="sofa"/>
+   		<result property="sound_proof" column="sound_proof"/>
+   		<result property="resting_area" column="resting_area"/>
+   		<result property="cleaning_tools" column="cleaning_tools"/>
+   		
+   		<result property="restroom" column="restroom"/>
+   		<result property="bathtub" column="bathtub"/>
+   		<result property="bidet" column="bidet"/>
+   		<result property="bathrobe" column="bathrobe"/>
+   		<result property="amenities" column="amenities"/>
+   		<result property="hair_dryer" column="hair_dryer"/>
+   		<result property="spabath" column="spabath"/>
+   		<result property="public_bathroom" column="public_bathroom"/>
+   		<result property="slipper" column="slipper"/>
+   		
+   		<result property="dining_area" column="dining_area"/>
+   		<result property="dining_table" column="dining_table"/>
+   		<result property="barbeque" column="barbeque"/>
+   		<result property="cooktop" column="cooktop"/>
+   		<result property="toaster" column="toaster"/>
+   		<result property="coffee_pot" column="coffee_pot"/>
+   		<result property="outdoor_dining" column="outdoor_dining"/>
+   		<result property="public_bathroom" column="public_bathroom"/>
+   		<result property="mini_bar" column="mini_bar"/>
+   		<result property="microwave" column="microwave"/>
+   		<result property="refridge" column="refridge"/>
+   		<result property="coffee_machine" column="coffee_machine"/>
+   		
+   		<result property="computer" column="computer"/>
+   		<result property="game_console" column="game_console"/>
+   		<result property="laptop" column="laptop"/>
+   		<result property="tablet_pc" column="tablet_pc"/>
+   		<result property="cable_channel" column="cable_channel"/>
+   		<result property="fax" column="fax"/>
+   		<result property="ipad_docking_station" column="ipad_docking_station"/>
+   		<result property="laptop_safebox" column="laptop_safebox"/>
+   		<result property="tv" column="tv"/>
+   		<result property="pay_per_view" column="pay_per_view"/>
+   		<result property="radio" column="radio"/>
+   		<result property="satellite_channel" column="satellite_channel"/>
+   		<result property="telephone" column="telephone"/>
+   		<result property="video_game" column="video_game"/>
+   		
+ 		<result property="lounge" column="lounge"/>
+   		<result property="alarm_clock" column="alarm_clock"/>
+   		<result property="morning_call" column="morning_call"/>
+   		<result property="towel" column="towel"/>
+   		<result property="bathing_sheet" column="bathing_sheet"/>
+   		
+   		<result property="balcony" column="balcony"/>
+   		<result property="terras" column="terras"/>
+   		<result property="city_view" column="city_view"/>
+   		<result property="garden_view" column="garden_view"/>
+   		<result property="lake_view" column="lake_view"/>
+   		<result property="attractions_view" column="attractions_view"/>
+   		<result property="mountain_view" column="mountain_view"/>
+   		<result property="pool_view" column="pool_view"/>
+   		<result property="river_view" column="river_view"/>
+   		<result property="ocean_view" column="ocean_view"/>
+   </resultMap>
+
+	<select id="selectRoomFacilities" resultMap="RoomVOMap" parameterType="Integer">
+		<![CDATA[
+				select 	r.room_id, r.serialnumber, r.type, r.price, r.smoking, r.available,
+				access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
+				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
+				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
+				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
+				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view
+			
+				from room as r
+				
+				full join room_facilities_access as access
+				on r.room_id = access.room_id
+				
+				full join room_facilities_basic as basic
+				on r.room_id = basic.room_id
+				
+				full join room_facilities_bath as bath
+				on r.room_id = bath.room_id
+				
+				full join room_facilities_food as food
+				on r.room_id = food.room_id
+				
+				full join room_facilities_media as media
+				on r.room_id = media.room_id
+				
+				full join room_facilities_service as service
+				on r.room_id = service.room_id
+				
+				full join room_facilities_view as view
+				on r.room_id = view.room_id	
+
+				where r.serialnumber = #{serialnumber}
+		]]>
+	</select>
+</mapper>

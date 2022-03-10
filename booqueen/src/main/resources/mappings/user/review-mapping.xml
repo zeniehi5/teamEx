@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.review.dao.reviewmapper">
+	
+	<insert id="insertReview" parameterType="reviewVO"> 
+        <![CDATA[INSERT INTO review (serialnumber, score, staff, service, cleanness, comfort, effectiveness, place, strength, weakness, title, userid, username) VALUES (#{serialnumber}, #{score}, #{staff}, #{service}, #{cleanness}, #{comfort}, #{effectiveness}, #{place}, #{strength}, #{weakness}, #{title}, #{userid}, #{username})]]> 
+    </insert>
+    
+    <select id="selectReviews" resultType="reviewVO" parameterType="Integer">
+		<![CDATA[SELECT * FROM review where serialnumber = #{serialnumber}]]>
+	</select>
+    
+    <select id="selectReviewsAvg" resultType="reviewAvgVO" parameterType="Integer">
+    	<![CDATA[SELECT round(AVG (score), 1) as scoreAvg,
+						round(AVG (staff*2.5), 1) as staffAvg,
+						round(AVG (service*2.5), 1) as serviceAvg,
+						round(AVG (cleanness*2.5), 1) as cleannessAvg,
+						round(AVG (comfort*2.5), 1) as comfortAvg,
+						round(AVG (effectiveness*2.5), 1) as effectivenessAvg,
+						round(AVG (place*2.5), 1) as placeAvg
+					from
+						review
+					where
+						serialnumber = #{serialnumber}; ]]>
+    </select>
+    
+    <resultMap type="reviewVO" id="reviewVOMap">
+    	<result property="serialnumber" column="serialnumber"/>
+    	<result property="score" column="score"/>
+    	<result property="strength" column="strength"/>
+    	<result property="weakness" column="weakness"/>
+    	<result property="title" column="title"/>
+    	<result property="userid" column="userid"/>
+    	<result property="writing" column="writing"/>
+    	<result property="username" column="username"/>
+    </resultMap>
+    
+   	<resultMap type="memberProfileVO" id="memberProfileVOMap">
+   		<result property="userid" column="userid"/>
+   		<result property="profile_data" column="profile_data"/>
+   		<result property="profile_type" column="profile_type"/>
+   	</resultMap>
+    
+    <resultMap type="reviewProfileVO" id="reviewProfileResult">
+    	<collection property="reviewVO" resultMap="reviewVOMap"></collection>
+    	<collection property="memberProfileVO" resultMap="memberProfileVOMap"></collection>
+    </resultMap>
+    
+    <select id="selectReviewAndProfile" resultMap="reviewProfileResult" parameterType="Integer">
+    	<![CDATA[SELECT * FROM review AS r FULL JOIN profile AS p ON r.userid = p.userid where serialnumber = #{serialnumber} order by writing desc]]>
+    </select>
+   
+</mapper>

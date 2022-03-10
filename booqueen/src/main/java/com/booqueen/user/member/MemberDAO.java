@@ -15,6 +15,10 @@ public class MemberDAO {
 		return (MemberVO) sqlSession.selectOne("sql.sel", vo);
 	}
 	
+	public MemberVO getMemberByUserid(String userid) throws DataAccessException{
+		return (MemberVO) sqlSession.selectOne("sql.selectMemberByUserid", userid);
+	}
+	
 	public int insertMember(MemberVO vo) throws DataAccessException{
 		return sqlSession.insert("sql.insertMember", vo);
 	}
@@ -25,6 +29,10 @@ public class MemberDAO {
 
 	public int deleteMember(MemberVO vo) throws DataAccessException{
 		return sqlSession.delete("sql.deleteMember", vo);
+	}
+	
+	public int changePasswd(MemberVO vo) throws DataAccessException{
+	    return sqlSession.update("sql.changePasswd", vo);
 	}
 }
  
