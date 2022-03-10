@@ -127,6 +127,8 @@ li{
     text-overflow: ellipsis;
     font-weight: 300;
     display: block;
+    white-space:nowrap;
+    overflow: hidden;
 }
 /* header_navigation */
 .header_navigation{

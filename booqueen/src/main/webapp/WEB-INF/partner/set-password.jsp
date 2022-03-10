@@ -1,10 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/partner/css/set-password.css">
+<script type="text/javascript">
+function checkPassword(){
+	var pass = document.getElementById("pass").value;
+	var passcheck = document.getElementById("repass").value;
+	
+	if(pass.value != '' && passcheck.value != '') {
+		if(pass.value == passcheck.value) {
+			document.getElementById('passcheck').innerHTML = '비밀번호와 비밀번호 확인이 일치합니다.';
+			document.getElementById('passcheck').style.color = '#545454';
+		} else {
+			document.getElementById('passcheck').innerHTML = '비밀번호와 비밀번호 확인이 일치하지 않습니다.';
+			document.getElementById('passcheck').style.color = '#e21111';
+		}
+	}
+}
+</script>
 </head>
 <body>
 <form action="set-password.pdo" method="POST">
@@ -15,8 +33,8 @@
          </span>
          <nav>
             <ul id="topMenu">
-               <li><a href="/register/Register.jsp">로그인</a></li>
-               <li><a href="/register/Register.jsp">회원가입</a></li>
+               <li><a href="${contextPath}/login.jsp">로그인</a></li>
+               <li><a href="${contextPath}/register.jsp">회원가입</a></li>
             </ul>
          </nav>
 
@@ -28,13 +46,14 @@
       <br />
       <h4>비밀번호</h4>
       <input type="hidden" name="email" value="${email}">
-      <input type="hidden" name="firstName" value="${firstName}">
-      <input type="hidden" name="lastName" value="${lastName}">
+      <input type="hidden" name="firstname" value="${firstname}">
+      <input type="hidden" name="lastname" value="${lastname}">
       <input type="hidden" name="telephone" value="${telephone}">
-      <input type="password" name="password" id="text"><br>
+      <input type="password" name="password" id="pass" class="text"><br>
       <h4>비밀번호 확인</h4>
-      <input type="password" name="repass" id="text"><br />
-      <input type="submit" name="register" id="continue" value="회원가입"></a> <br>
+      <input type="password" name="repass" id="repass" class="text" onkeyup="checkPassword()"><br/>
+      <span id="passcheck"></span>
+      <input type="submit" name="register" id="continue" value="회원가입"><br>
       <br>
       <hr>
       <br>

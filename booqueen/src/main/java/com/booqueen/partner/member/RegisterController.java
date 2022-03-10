@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegisterController {
@@ -13,43 +14,45 @@ public class RegisterController {
 	@Autowired
 	private MemberService memberService;
 	
+	/* email Ï§ëÎ≥µ Í≤ÄÏÇ¨ */
+	@RequestMapping(value = "/emailCheck.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String emailCheck(MemberVO vo) {
+		MemberVO member = memberService.getMember(vo);
+		String message = null;
+		
+		if(member == null) {
+			message = "success";
+		} else {
+			message = "fail";
+		}
+		return message;
+	}
+	
 	@RequestMapping(value = "/register.pdo", method = RequestMethod.POST)
-	public String confirmEmail(MemberVO vo, HttpSession session) {
-		System.out.println("∞°¿‘ ø©∫Œ ∞À¡ı");
+	public String checkEmail(MemberVO vo, HttpSession session) {
 		MemberVO member = memberService.getMember(vo);
 		
 		if(member == null) {
-			System.out.println("¿‘∑¬«— ¿Ã∏ﬁ¿œ ¡§∫∏∑Œ ∞°¿‘ ∞°¥…");
 			session.setAttribute("email", vo.getEmail());
 			return "contact-details";
 		} else {
-			System.out.println("¿ÃπÃ «ÿ¥Á ¿Ã∏ﬁ¿œ ¡÷º“∑Œ µÓ∑œµ» ∞Ë¡§¿Ã ¿÷Ω¿¥œ¥Ÿ.");
 			return "login";
 		}
 	}
 	
-	@RequestMapping(value = "details.pdo", method = RequestMethod.POST)
+	@RequestMapping(value = "/details.pdo", method = RequestMethod.POST)
 	public String addDetails(MemberVO vo, HttpSession session) {
-		System.out.println("∞≥¿Œ¡§∫∏ ¿‘∑¬");
-		session.setAttribute("lastName", vo.getLastName());
-		session.setAttribute("firstName", vo.getFirstName());
+		session.setAttribute("lastname", vo.getLastname());
+		session.setAttribute("firstname", vo.getFirstname());
 		session.setAttribute("telephone", vo.getTelephone());
-		System.out.println(session.getAttribute("email"));
-		System.out.println(session.getAttribute("lastName"));
-		System.out.println(session.getAttribute("firstName"));
-		System.out.println(session.getAttribute("telephone"));
 		return "set-password";
 	}
 	
 	@RequestMapping(value = "/set-password.pdo", method= RequestMethod.POST)
 	public String setPassword(MemberVO vo, HttpSession session) {
-		System.out.println("∫Òπ–π¯»£ ¿‘∑¬");
 		session.setAttribute("password", vo.getPassword());
-		System.out.println(session.getAttribute("password"));
-		
-		/* *********************************** */
 		memberService.addMember(vo);
-		System.out.println("º∫∞¯?");
-		return "sample";
+		return "basic-info";
 	}
 }

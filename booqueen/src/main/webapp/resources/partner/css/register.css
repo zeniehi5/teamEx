@@ -4,7 +4,6 @@
     margin:0;  
     padding:0;  
     box-sizing: border-box;
-
 }
 .container{
     background-color:#003580;
@@ -59,7 +58,7 @@
     margin-bottom: -10px;
     text-align: center;
 }
-.text{  
+.email{  
     height: 25pt;
     width: 270pt;
 }

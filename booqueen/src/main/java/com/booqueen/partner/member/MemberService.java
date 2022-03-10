@@ -8,4 +8,6 @@ public interface MemberService {
 	
 	public void addMember(MemberVO vo);
 
+	public void changePassword(MemberVO vo);
+
 }
