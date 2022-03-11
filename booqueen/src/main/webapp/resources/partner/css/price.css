@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+* {
+    margin:0;   /* 마진 리셋 */
+    padding:0;   /* 패딩 리셋 */
+    box-sizing: border-box;   /* 박스 영역은 테두리까지 */ 
+
+}
+body{
+    background-color: #f7f7f7;
+}
+.container{
+    background-color:#003580;
+    width: 1920px;
+    height: 100px;
+}
+.container header{
+    display: inline;
+    height: 150px;
+}
+.container span a img{
+    display: inline-block;
+    width: 150px;
+    margin-left: 60px;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+.container nav{
+    text-align: right;
+    margin-left: 500px;
+}
+.container nav li{
+    display: inline;
+    margin-right: 100px;
+    margin-bottom: 120px;
+}
+.container nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.contents{
+    margin-left: 400px;
+    width: 1000pt;
+}
+#continue{
+    width: 780px;
+    height: 35pt;
+    margin-bottom: 30px;
+    background-color: #0071c2;
+    border: none;
+    color: white;
+    font-size: 12pt;
+}
+.option{
+    display: flex;
+    margin-top: 30px;
+}
+.basic{
+    background-color: rgba(255, 255, 255, 0.055);
+    border-bottom: 5px solid #0071c2;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+}
+.basic img{
+    width: 15px;
+}
+.price{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.658);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.service{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.fac{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.pic{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.policy{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.payment{
+    border-bottom: 5px solid rgba(0, 0, 0, 0.37);
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-left: 5px;
+}
+.input{
+    margin-top: 30px;
+    width: 1080px;
+    display: flex;
+
+}
+.right{
+    margin-left: 20px;
+    width: 340px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.048);
+    display: inline-block;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.roomtype{
+    background-color: white;
+    width: 950px;
+    padding-left: 20px;
+    border:none;
+}
+.roomtype p{
+    font-size: x-large;
+    margin-top: 10px;
+}
+#name{
+    margin-top: 10px;
+    padding-bottom: -10px;
+    font-size: small;
+}
+.roomtype select{
+    width: 400px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.roomtype input{
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.right p{
+    font-size: small;
+}
+.input-group-addon {
+    padding: 6px 16px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #eee;
+}
+.price-1{
+    display: flex;
+    width: 80px;
+    margin-bottom: 20px;
+}
+.price-1 input{
+    border: #ccc 1px solid;
+}
+.price-1 span{
+    border: #ccc 1px solid;
+}
+.roomprice{
+    background-color: white;
+    width: 778px;
+    padding-left: 20px;
+    border:none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.roomprice p{
+    font-size: x-large;
+    margin-top: 10px;
+}
+#control{
+    background-color: #eee;
+    margin-left: -20px;
+    font-size: small;
+    padding: 10px;
+    margin-top: 10px;
+}
+.option a{
+    user-select: none;
+    text-decoration-line:none;
+    text-decoration: none;
+    color: black;
+}
+.option a:hover{
+    color: #0071c2;
+}
+.option a:visited{
+    text-decoration: none;
+}
+.option a label{
+    cursor: pointer;
+}

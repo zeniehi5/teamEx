@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+	<insert id="insertMember" parameterType="myMember">INSERT INTO pMember (email, password, lastname, firstname, telephone) values (#{email}, #{password}, #{lastname}, #{firstname}, #{telephone})</insert>
+	<select id="getMember" resultType="myMember">SELECT email FROM pMember WHERE email = #{email}</select>
+	<select id="getPassword" resultType="myMember">SELECT * FROM pMember WHERE email = #{email} and password = #{password}</select>
+	<update id="updatePassword" parameterType="myMember">UPDATE pMember SET password = #{confirmpass} WHERE email = #{email}</update>
+</mapper>

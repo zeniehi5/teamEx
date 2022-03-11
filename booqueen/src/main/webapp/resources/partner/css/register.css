@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+* {
+    margin:0;  
+    padding:0;  
+    box-sizing: border-box;
+}
+.container{
+    background-color:#003580;
+    width: 1920px;
+    height: 100px;
+}
+.container header{
+    display: inline;
+    height: 150px;
+}
+.container span a img{
+    display: inline-block;
+    width: 150px;
+    margin-left: 60px;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+.container nav{
+    text-align: right;
+    margin-left: 500px;
+}
+.container nav li{
+    display: inline;
+    margin-right: 100px;
+    margin-bottom: 120px;
+}
+.container nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.contents{
+    margin-left: 800px;
+    width: 280pt;
+}
+.contents h1, h2{ 
+    margin-top: 100px;
+}
+
+.contents h4{   
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#help{
+    color: #07c;
+}
+#line{
+    text-decoration-line: none;
+    color: #07c;
+}
+.contents h5{
+    margin-top: 2px;
+    margin-bottom: -10px;
+    text-align: center;
+}
+.email{  
+    height: 25pt;
+    width: 270pt;
+}
+#continue{
+    width: 270pt;
+    height: 35pt;
+    margin-top: 20pt;
+    background-color: #0071c2;
+    border-color: #0071c2;
+    color: white;
+    font-size: 12pt;
+}
+.contents hr{
+    width: 270pt;
+    opacity: 40%;
+
+}
+#login{
+    width: 270pt;
+    height: 35pt;
+    margin-top: 0pt;
+    background-color: white;
+    border-color: #0071c2;
+    color: #0071c2;
+    font-size: 12pt;
+}
+section{
+    background-color: #dddddd;
+    width: 350pt;
+}
+#verify{
+    margin-left: 15pt;
+}
+#click{
+    text-decoration: none;
+}
+.contents h6{   
+    text-align: center;
+}
+#find{
+    text-align: center;
+    margin-left: 90px;
+}

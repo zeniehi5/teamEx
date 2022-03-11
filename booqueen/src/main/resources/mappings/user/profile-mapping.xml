@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.member.dao.memberProfilemapper">
+	
+	<insert id="insertProfile" parameterType="memberProfileVO">
+		<![CDATA[INSERT INTO profile (userid, profile_name, profile_size, profile_type, profile_data) VALUES (#{userid}, #{profile_name}, #{profile_size}, #{profile_type}, #{profile_data})]]> 
+	</insert>
+	
+	<delete id="deleteProfile" parameterType="memberProfileVO">
+    	<![CDATA[DELETE from profile where userid = #{userid} ]]>
+    </delete>
+	
+	<select id="selectProfile" resultType="memberProfileVO" parameterType="memberProfileVO">
+		<![CDATA[SELECT * FROM profile where userid = #{userid}]]>
+	</select>
+	
+	<select id="selectProfileByUserid" resultType="memberProfileVO" parameterType="String">
+		<![CDATA[SELECT * FROM profile where userid = #{userid}]]>
+	</select>
+</mapper>
