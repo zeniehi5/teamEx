@@ -3,8 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.booqueen.user.member.MemberVO" alias="vo"/>
-	</typeAliases>
-  <typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
+ 	<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
 	</typeAliases>
   <mappers>
     <mapper resource="mappings/user/member-mapping.xml"/>
