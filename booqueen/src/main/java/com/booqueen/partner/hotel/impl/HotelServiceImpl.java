@@ -128,4 +128,9 @@ public class HotelServiceImpl implements HotelService {
 		hotelDAO.updateSmokingPolicy(vo);
 	}
 
+	@Override
+	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber) {
+		return hotelDAO.getHotelServiceByHotelSerial(serialnumber);
+	}
+
 }

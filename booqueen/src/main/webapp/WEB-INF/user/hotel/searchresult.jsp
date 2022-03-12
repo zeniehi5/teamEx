@@ -1601,10 +1601,6 @@ function getHotelByStar() {
 	// 		});
 	// });
 
-
-
-
-	
 </script>
 </body>
 </html>

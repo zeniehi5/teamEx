@@ -199,7 +199,6 @@
                                                     <li class="submenu_item">
                                                         <a class="submenu_link" href="#">
                                                             <span class="submenu_title">숙박인원 기준 요금</span>
-                                                            <span class="submenu_label">NEW</span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -254,20 +253,17 @@
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>일반
                                                                 정보</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
-                                                            href="#"><span>사진</span><span class="title_label"> 2
-                                                            </span></a></li>
+                                                            href="${contextPath}/update-picture.pdo"><span>사진</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
-                                                            href="${contextPath}/set-policies.pdo"><span>정책</span><span class="title_label"> 1
-                                                            </span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/set-facilities.pdo"><span>시설 및
-                                                                서비스</span><span class="title_label"> 1 </span></a></li>
+                                                            href="${contextPath}/set-policies.pdo"><span>정책</span></a></li>
+                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/get-service.pdo"><span>시설 및
+                                                                서비스</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>숙소
                                                                 레이아웃</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>객실
-                                                                편의시설</sapn><span class="title_label"> 2 </span></a></li>
+                                                                편의시설</sapn></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>찾아오는
                                                                 길</span>
-                                                            <sapn class="title_label"> 1 </span>
                                                         </a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="#"><span>프로필</span></a></li>
@@ -342,7 +338,7 @@
                                             </a>
                                             <div class="submenu" id="submenu">
                                                 <ul class="submenu_list">
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>고객
+                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/reviews.pdo"><span>고객
                                                                 이용 후기</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>고객
                                                                 경험</span></a></li>

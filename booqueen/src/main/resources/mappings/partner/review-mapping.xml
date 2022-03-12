@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewDAO">
+	<select id="getReviewAvgByHotelSerial" resultType="myReviewAvg">
+		SELECT round(AVG (score), 1) as scoreAvg,
+			   round(AVG (staff*2.5), 1) as staffAvg,
+			   round(AVG (service*2.5), 1) as serviceAvg,
+			   round(AVG (cleanness*2.5), 1) as cleannessAvg,
+			   round(AVG (comfort*2.5), 1) as comfortAvg,
+			   round(AVG (effectiveness*2.5), 1) as effectivenessAvg,
+			   round(AVG (place*2.5), 1) as placeAvg
+		FROM
+			   review
+		WHERE
+			   serialnumber = #{serialnumber}
+	</select>
+</mapper>

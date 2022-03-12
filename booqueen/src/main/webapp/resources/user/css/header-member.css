@@ -472,7 +472,8 @@ nav {
 	color: #707070;
 	text-align: center;
 }
-.presentation-message-right {
+.presentation-message-right,
+.presentation-message-left {
 	margin-bottom: 16px;
 	padding: 0;
 	margin: 0;

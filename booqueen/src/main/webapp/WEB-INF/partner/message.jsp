@@ -18,7 +18,7 @@
                     <div class="tab-top">
                         <div>
                             <ul class="tabs">
-                                <li class="tab-link current" data-tab="tab-1">고객</li>
+                                <li class="tab-link current" data-tab="tab-1" id="for_chat">고객</li>
                                 <li class="tab-link" data-tab="tab-2">고객 서비스팀</li>
                             </ul>
                             <hr id="hr">
@@ -81,63 +81,14 @@
                                     <span>(${name})</span>
                                 </div>
 
-                                <div class="message">
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 09:14</div>
-                                        <div class="user">
-                                            <p>이건 또</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 10:28</div>
-                                        <div class="partner">
-                                            <p>어떻게 기능을 넣지?</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 12:19</div>
-                                        <div class="user">
-                                            <p>그러게
-                                                <br>
-                                                망했네?
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 12:45</div>
-                                        <div class="partner">
-                                            <p>이거 화면</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 21:16</div>
-                                        <div class="user">
-                                            <p>화가난다</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 21:22</div>
-                                        <div class="user">
-                                            <p>탈주각 나온다</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 22:14</div>
-                                        <div class="partner">
-                                            <p>이정도 썼으면 충분하겠지</p>
-                                        </div>
-                                    </div>
-                                    <div class="spacer">
-                                        <div class="date">1월 21일 (금) 22:15</div>
-                                        <div class="user">
-                                            <p>길게도 써봐야지 제발 한번에 끝났으면 좋겠다 제발 제발 제발 제발 fhjadislkfnklanfjdaioslkfjdlaksf</p>
-                                        </div>
-                                    </div>
+								<!-- message -->
+                                <div class="message" id="message_wrapper">
+                                    
                                 </div>
 
                                 <div class="msg-input">
                                     <div>
-                                        <textarea class="text" autocomplete="off" placeholder="메시지를 입력해주세요."></textarea>
+                                        <textarea class="text" autocomplete="off" placeholder="메시지를 입력해주세요." id="message_textarea"></textarea>
                                     </div>
                                     <div class="send">
                                         <input type="button" id="button" value="전송">
@@ -214,5 +165,154 @@
         </div>
     </div>
     </div>
+
+	<script>
+    $(function(){
+    	$("#for_chat").on("click", reqList);
+    	$("#button").on("click", insertChat);
+    })
+    
+    function reqList() {    
+    	
+    	var sendReply = {"userid": 'booqueen@naver.com', "serialnumber": 1118}
+    	
+	    $.ajax({
+	        url:'/web/chat.do'
+	        , method : 'POST'
+	        , data: JSON.stringify(sendReply)
+	        , dataType: 'json'
+	        , contentType: 'application/json'
+	        , success : function(data) {
+	        	$("#message_wrapper").empty();      	
+	        
+	        	var pre_date = 0;
+	        	
+	        	$.each(data, function(index, item){
+	        
+	        		if(index === 0){
+	        			const d = new Date(item.send_date);
+		        		let text = d.toLocaleDateString();
+		        		
+		        		var date_text = '';
+		        		date_text += "<div class='msg-separator'><div class='msg-separator-text'>";
+		        		date_text += text;
+		        		date_text += "</div></div>";
+		        
+		        		$("#message_wrapper").append(date_text);
+		        		
+	        		} else if(pre_date < item.send_date){
+	        			
+	        			const d = new Date(item.send_date);
+		        		let text = d.toLocaleDateString();
+		        		
+		        		var date_text = '';
+		        		date_text += "<div class='msg-separator'><div class='msg-separator-text'>";
+		        		date_text += text;
+		        		date_text += "</div></div>";
+		        
+		        		$("#message_wrapper").append(date_text);
+	        		}
+	        		
+	        		
+	        		if(item.partner){
+	        			var result = '';
+	        			result += "<div class='presentation-message-right'><div class='msg-guest'><div class='msg-guest-inner'><p>";
+	        			result += item.content;
+	        			result += "</p></div></div><div class='msg-guest-status'>";
+	        			result += item.send_time;
+	        			result += "</div>";
+	        		} else {
+	        			var result = '';
+	        			result += "<div class='presentation-message-left'><div class='msg-partner'><div class='msg-partner-inner'><p>";
+	        			result += item.content
+	        			result += "</p><div id='partner_chat'></div></div></div><div class='msg-partner-status'>"
+	        			result += item.send_time;
+	        			result += "</div></div></div>"
+	        		}
+	        		
+	        		$("#message_wrapper").append(result);
+	        		
+	        		pre_date = item.send_date;
+	        		
+	           })
+	        },
+	       	error : function() {
+				alert('error');			
+			}
+	   })
+	}
+    
+    function insertChat(){
+    	
+    	var content_val = $('#message_textarea').val();
+    	var chatVO = {"userid": 'booqueen@naver.com', "serialnumber": 1118, "content": content_val, "partner": true }
+    	var path = '${contextPath}';
+    	
+    	$.ajax({
+    		url: path + "/insertChat.do"
+   			, method : 'POST'
+		    , data: JSON.stringify(chatVO)
+		    , dataType: 'json'
+		    , contentType: 'application/json'
+		    , success : function(data) {
+		    	$("#message_wrapper").empty();
+		    	var pre_date = 0;
+		    	
+	        	$.each(data, function(index,item){
+	        		
+	        		if(index === 0){
+	        			const d = new Date(item.send_date);
+		        		let text = d.toLocaleDateString();
+		        		
+		        		var date_text = '';
+		        		date_text += "<div class='msg-separator'><div class='msg-separator-text'>";
+		        		date_text += text;
+		        		date_text += "</div></div>";
+		        
+		        		$("#message_wrapper").append(date_text);
+		        		
+	        		} else if(pre_date < item.send_date){
+	        			
+	        			const d = new Date(item.send_date);
+		        		let text = d.toLocaleDateString();
+		        		
+		        		var date_text = '';
+		        		date_text += "<div class='msg-separator'><div class='msg-separator-text'>";
+		        		date_text += text;
+		        		date_text += "</div></div>";
+		        
+		        		$("#message_wrapper").append(date_text);
+	        		}
+	        		
+	        		if(item.partner){
+	        			var result = '';
+	        			result += "<div class='presentation-message-right'><div class='msg-guest'><div class='msg-guest-inner'><p>";
+	        			result += item.content;
+	        			result += "</p></div></div><div class='msg-guest-status'>";
+	        			result += item.send_time;
+	        			result += "</div>";
+	        		} else {
+	        			var result = '';
+	        			result += "<div class='presentation-message-left'><div class='msg-partner'><div class='msg-partner-inner'><p>";
+	        			result += item.content
+	        			result += "</p><div id='partner_chat'></div></div></div><div class='msg-partner-status'>"
+	        			result += item.send_time;
+	        			result += "</div></div></div>"
+	        		}
+	        		$("#message_wrapper").append(result);
+	        		$('#message_textarea').val('');
+	        		$('#message_wrapper').scrollTop($('#message_wrapper').height());
+	           
+	        		pre_date = item.send_date;
+	        	})
+   	     	},
+   	    	error : function() {
+				alert('error');			
+			}
+    	})
+    }
+  
+    </script>
+
 </body>
 </html>

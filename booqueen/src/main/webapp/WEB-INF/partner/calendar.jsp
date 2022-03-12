@@ -68,861 +68,297 @@
                     </div>
                     <div class="av-monthly">
                         <div class="av-monthly-layout">
-                            <div>
-                                <div class="av-cal-header-row">
-                                    <div class="av-cal-header-row__section av-cal-header-row__section--primary">
-                                        <div class="av-cal-header-row__element av-cal-header-row__element--flexible">
-                                            <div class="av-monthly-flex-inline__wrap">
-                                                <div
-                                                    class="av-monthly__month-selector av-monthly-flex-inline__item av-monthly-flex-inline-tiem--grow bui-form__group">
-                                                    <label></label>
-                                                    <div class="bui-input-select">
-                                                        <select class="bui-form__control">
-                                                            <option value="#" selected="selected">2022년 2월</option>
-                                                            <option value="#">2022년 3월</option>
-                                                        </select>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            class="bui-input-select__icon" style="user-select: auto;">
-                                                            <path
-                                                                d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z"
-                                                                style="user-select: auto;"></path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly-flex-inline__item">
-                                                    <button type="button"
-                                                        class="av-monthly__month-selector av-monthly-no-bui-button__text av-monthly-prev bui-button bui-button--secondary">
-                                                        <span class="bui-button__icon">
-                                                            <svg fill="currentColor" focusable="false"
-                                                                viewBox="0 0 24 24" role="presentation" width="16"
-                                                                aria-hidden="true" height="16"
-                                                                class="bk-icon -streamline-arrow_nav_left"
-                                                                style="user-select: auto;">
-                                                                <path
-                                                                    d="M14.55 18a.74.74 0 0 1-.53-.22l-5-5A1.08 1.08 0 0 1 8.7 12a1.1 1.1 0 0 1 .3-.78l5-5a.75.75 0 0 1 1.06 0 .74.74 0 0 1 0 1.06L10.36 12l4.72 4.72a.74.74 0 0 1 0 1.06.73.73 0 0 1-.53.22zm-4.47-5.72zm0-.57z"
-                                                                    style="user-select: auto;"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <span class="bui-button__text"></span>
-                                                    </button>
-                                                    <button type="button"
-                                                        class="av-monthly__month-selector av-monthly-no-bui-button__text av-monthly-next bui-button bui-button--secondary">
-                                                        <span class="bui-button__icon">
-                                                            <svg fill="currentColor" viewBox="0 0 24 24"
-                                                                focusable="false" width="16" role="presentation"
-                                                                height="16" aria-hidden="true"
-                                                                class="bk-icon -streamline-arrow_nav_right"
-                                                                style="user-select: auto;">
-                                                                <path
-                                                                    d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z"
-                                                                    style="user-select: auto;"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <span class="bui-button__text"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="av-cal-header-row__element av-cal-header-row__element--flexible">
-                                        </div>
+                            <div class="calendarWrap">
+                                        <table class="calendarHeader">
+                                            <tr>
+                                                <td class="calendarHeaderLeft"></td>
+
+                                                <td class="calendarHeaderYearAndMonth"><select class="calendarSelect"
+                                                        id="_calendarHeaderYear">
+                                                        <c:forEach begin="2020" end="2023" step="1" var="y">
+                                                            <option value="${y}">${y}</option>
+                                                        </c:forEach>
+                                                    </select>년 &nbsp;&nbsp;<select class="calendarSelect"
+                                                        id="_calendarHeaderMonth">
+                                                        <c:forEach begin="1" end="12" step="1" var="m">
+                                                            <option value="${m }">${m }</option>
+                                                        </c:forEach>
+                                                    </select>월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                                <td class="calendarHeaderRight"><a href="#none" title="이전 월"
+                                                        id="_showNextYear" onclick="changeYearAndMonth(2);">
+                                                        <button type="button"
+                                                            class="av-monthly__month-selector av-monthly-no-bui-button__text av-monthly-prev bui-button bui-button--secondary">
+                                                            <span class="bui-button__icon"> <svg fill="currentColor"
+                                                                    focusable="false" viewbox="0 0 24 24"
+                                                                    role="presentation" width="16" aria-hidden="true"
+                                                                    height="16"
+                                                                    class="bk-icon -streamline-arrow_nav_left"
+                                                                    style="user-select: auto;">
+                                                                    <path
+                                                                        d="M14.55 18a.74.74 0 0 1-.53-.22l-5-5A1.08 1.08 0 0 1 8.7 12a1.1 1.1 0 0 1 .3-.78l5-5a.75.75 0 0 1 1.06 0 .74.74 0 0 1 0 1.06L10.36 12l4.72 4.72a.74.74 0 0 1 0 1.06.73.73 0 0 1-.53.22zm-4.47-5.72zm0-.57z"
+                                                                        style="user-select: auto;"></path>
+                                                                </svg>
+                                                            </span> <span class="bui-button__text"></span>
+                                                        </button>
+                                                    </a> <a href="#none" title="다음월" id="_showNextMonth"
+                                                        onclick="changeYearAndMonth(3);">
+                                                        <button type="button"
+                                                            class="av-monthly__month-selector av-monthly-no-bui-button__text av-monthly-next bui-button bui-button--secondary">
+                                                            <span class="bui-button__icon"> <svg fill="currentColor"
+                                                                    viewbox="0 0 24 24" focusable="false" width="16"
+                                                                    role="presentation" height="16" aria-hidden="true"
+                                                                    class="bk-icon -streamline-arrow_nav_right"
+                                                                    style="user-select: auto;">
+                                                                    <path
+                                                                        d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z"
+                                                                        style="user-select: auto;"></path>
+                                                                </svg>
+                                                            </span> <span class="bui-button__text"></span>
+                                                        </button>
+                                                    </a> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="av-cal-header-row__section av-cal-header-row__section--secondary">
-                                        <div class="av-cal-header-row__element av-cal-header-row__element--flexible">
-                                            <div>
-                                                <div class="ext-feedback-cta av-monthly__feedback-button--exp">
-                                                    <button type="button" class="bui-button bui-button--secondary">
-                                                        <span class="bui-button__text">
-                                                            <span>의견 보내기</span>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <div class="av-monthly__setting-menu bui-dropdown bui-dropdown--end">
-                                                    <button type="button"
-                                                        class="bui-dropdown__button bui-button bui-button--secondary">
-                                                        <span class="bui-button__text">
-                                                            <span>캘린더 설정 관리</span>
-                                                        </span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            class="bui-dropdown__arrows" style="user-select: auto;">
-                                                            <path
-                                                                d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z"
-                                                                style="user-select: auto;"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="av-cal-header-row__element">
-                                            <button type="button" class="bui-button bui-button--secondary">
-                                                <span class="bui-button__icon">
-                                                    <svg width="16" aria-hidden="true" focusable="false"
-                                                        fill="currentColor" height="16" role="presentation"
-                                                        viewBox="0 0 24 24" class="bk-icon -streamline-lightbulb"
-                                                        style="user-select: auto;">
-                                                        <path
-                                                            d="M12.75 2.251v-1.5a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0zm6.144 3.167l1.061-1.06a.75.75 0 0 0-1.06-1.061l-1.061 1.06a.75.75 0 0 0 1.06 1.061zM21 12.001h1.5a.75.75 0 0 0 0-1.5H21a.75.75 0 0 0 0 1.5zm-3.166 6.144l1.06 1.061a.75.75 0 1 0 1.061-1.06l-1.06-1.061a.75.75 0 1 0-1.061 1.06zM6.166 4.358l-1.06-1.061a.75.75 0 0 0-1.061 1.06l1.06 1.061a.75.75 0 0 0 1.061-1.06zM3 10.5H1.5a.75.75 0 0 0 0 1.5H3a.75.75 0 0 0 0-1.5zm2.106 6.584l-1.061 1.06a.75.75 0 1 0 1.06 1.061l1.061-1.06a.75.75 0 1 0-1.06-1.061zm3.144-.636v2.3a3.75 3.75 0 1 0 7.5 0v-2.3a.75.75 0 0 0-1.5 0v2.3a2.25 2.25 0 0 1-4.5 0v-2.3a.75.75 0 0 0-1.5 0zm9-5.198a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0zm1.5 0a6.75 6.75 0 1 0-13.5 0 6.75 6.75 0 0 0 13.5 0zm-7.5 10.5v1.5a.75.75 0 0 0 1.5 0v-1.5a.75.75 0 0 0-1.5 0z"
-                                                            style="user-select: auto;"></path>
-                                                    </svg>
-                                                </span>
-                                                <span class="bui-button__text">
-                                                    <span>유용한 팁</span>
-                                                    &nbsp;
-                                                    <span class="bui-badge bui-badge--destructive">2</span>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="av-monthly-layout__main">
                             <div class="av-monthly-layout">
                                 <span></span>
                                 <div class="av-monthly-container">
                                     <div class="av-monthly-container__grid">
-                                        <div class="av-monthly__grid">
-                                            <div></div>
-                                            <div></div>
-                                            <div>
-                                                <div class="av-monthly__grid-month-wrap">
-                                                    <h2><span>2022년 2월</span></h2>
-                                                    <div class="av-monthly__grid-month">
-                                                        <div class="av-monthly__grid-week--header">
-                                                            <div class="av-monthly__grid-weekname">Sun</div>
-                                                            <div class="av-monthly__grid-weekname">Mon</div>
-                                                            <div class="av-monthly__grid-weekname">Tue</div>
-                                                            <div class="av-monthly__grid-weekname">Wed</div>
-                                                            <div class="av-monthly__grid-weekname">Thu</div>
-                                                            <div class="av-monthly__grid-weekname">Fri</div>
-                                                            <div class="av-monthly__grid-weekname">Sat</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly__grid-week">
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day av-monthly__cell-is-past">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell av-monthly__cell-first">
-                                                            <div>
-                                                                <div class="av-monthly__status">1일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day av-monthly__cell-is-past">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell av-monthly__cell-first">
-                                                            <div>
-                                                                <div class="av-monthly__status">2일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day av-monthly__cell-is-past">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell av-monthly__cell-first">
-                                                            <div>
-                                                                <div class="av-monthly__status">3일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day av-monthly__cell-is-past">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell av-monthly__cell-first">
-                                                            <div>
-                                                                <div class="av-monthly__status">4일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day av-monthly__cell-is-past">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell av-monthly__cell-first">
-                                                            <div>
-                                                                <div class="av-monthly__status">5일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly__grid-week">
-                                                    <div
-                                                        class="av-monthly__grid-day av-monthly__month-selected-date av-monthly__grid-select-border-left av-monthly__grid-select-border-right av-monthly__grid-select-border-top av-monthly__grid-select-border-bottom">
-                                                        <div>
-                                                            <div
-                                                                class="av-monthly__grid-selection-handle av-monthly__grid-selection-handle--start">
-                                                                <svg viewBox="0 0 24 24" role="presentation"
-                                                                    focusable="false" height="16" width="16"
-                                                                    fill="currentColor" aria-hidden="true"
-                                                                    class="av-monthly__grid-selection-handle-icon bk-icon -streamline-lines_horizontal"
-                                                                    style="user-select: auto;">
-                                                                    <path
-                                                                        d="M2.25 18.753h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5zm0-6h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5zm0-6h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5z"
-                                                                        style="user-select: auto;"></path>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="av-monthly__cell">
-                                                                <div>
-                                                                    <div class="av-monthly__status">6일</div>
-                                                                    <div>
-                                                                        <div
-                                                                            class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div
-                                                                    class="av-monthly-bar__wrap--start av-monthly-bar__wrap">
-                                                                    <div
-                                                                        class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                        <div
-                                                                            class="av-monthly-bar__wrap-length-7 av-monthly-bar__text">
-                                                                            예약 불가</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div
-                                                                    class="av-monthly__grid-selection-handle av-monthly__grid-selection-handle--end">
-                                                                    <svg height="16" width="16" fill="currentColor"
-                                                                        aria-hidden="true" viewBox="0 0 24 24"
-                                                                        role="presentation" focusable="false"
-                                                                        class="av-monthly__grid-selection-handle-icon bk-icon -streamline-lines_horizontal"
-                                                                        style="user-select: auto;">
-                                                                        <path
-                                                                            d="M2.25 18.753h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5zm0-6h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5zm0-6h19.5a.75.75 0 0 0 0-1.5H2.25a.75.75 0 0 0 0 1.5z"
-                                                                            style="user-select: auto;"></path>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">7일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">8일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">9일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">10일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">11일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthy__status">12일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap--end av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--unbookable av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly__grid-week">
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">13일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">14일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">15일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">16일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">17일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">18일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">19일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly__grid-week">
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">20일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div
-                                                                class="av-monthly-bar__wrap--start av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--reservation av-monthly-bar__body">
-                                                                    <div
-                                                                        class="av-monthly-bar__wrap--length-1 av-monthly-bar__text">
-                                                                        예약자명1
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">21일</div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap">
-                                                                <div
-                                                                    class="av-monthly-bar--reservation av-monthly-bar__body">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">22일</div>
-                                                                <div>
-                                                                    <div
-                                                                        class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor"
-                                                                            viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false"
-                                                                            class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="av-monthly-bar__wrap--end av-monthly-bar__wrap">
-                                                                <div class="av-monthly-bar--reservation av-monthly-bar__body"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">23일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">24일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">25일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">26일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                </div>
-                                                <div class="av-monthly__grid-week">
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">27일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation" aria-hidden="true"
-                                                                            focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day">
-                                                        <div></div>
-                                                        <div class="av-monthly__cell">
-                                                            <div>
-                                                                <div class="av-monthly__status">28일</div>
-                                                                <div>
-                                                                    <div class="av-monthly__price av-monthly__hide-mobile">
-                                                                        ₩200,000
-                                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="presentation"
-                                                                            aria-hidden="true" focusable="false" class="bk-icon -streamline-arrow_nav_down">
-                                                                            <path
-                                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        <div class="av-monthly__price-tooltip">
-                                                                            <div>Standard Rate ₩200,000</div>
-                                                                            <div>Non-refundable Rate ₩180,000</div>
-                                                                            <div>Weekly Rate ₩170,000</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="av-monthly__cell-center av-monthly__hide-mobile">
-                                                                        <span>잔여 객실 1개</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div></div>
-                                                    </div>
-                                                    <div class="av-monthly__grid-day-empty">
-                                                        <div class="av-monthly__grid-day-empty-right"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button type="button"
-                                                class="av-monthly__load-more bui-button bui-button--secondary bui-button--wide">
-                                                <span class="bui-button__text"><span>다음 달도 표시하기</span></span>
-                                            </button>
-                                        </div>
+                                    <div class="av-monthly__grid">
+                                        <h2>2022년 3월</h2>
+                                        <table class="calendarBodytbl">
+                                            <colgroup>
+                                                <col width="300">
+                                                <col width="300">
+                                                <col width="300">
+                                                <col width="300">
+                                                <col width="300">
+                                                <col width="300">
+                                                <col width="300">
+                                            </colgroup>
+                                            <thead class="calendarBodytblHead">
+                                                <tr>
+                                                    <th>Sun</th>
+                                                    <th>Mon</th>
+                                                    <th>Tue</th>
+                                                    <th>Wed</th>
+                                                    <th>Thu</th>
+                                                    <th>Fri</th>
+                                                    <th>Sat</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody class="calendarBodytblBody"></tbody>
+                                        </table>
+
+                                        <script type="text/javascript">
+                                            var currYear = 1;
+                                            var currMonth = 1;
+
+                                            $(function () {
+                                                //오늘 날짜 기준으로 달력 결정 및 생성
+                                                var now = new Date();
+                                                var nowYear = now.getFullYear();
+                                                var nowMon = now.getMonth() + 1;
+                                                $("#_calendarHeaderYear")
+                                                    .val(nowYear)
+                                                    .attr("selected", "selected");
+                                                $("#_calendarHeaderMonth")
+                                                    .val(nowMon)
+                                                    .attr("selected", "selected");
+                                                makeCalendar(nowYear, nowMon);
+
+                                                currYear = parseInt($("#_calendarHeaderYear option:selected").val());
+                                                currMonth = parseInt($("#_calendarHeaderMonth option:selected").val());
+                                                // alert('현재년' + currYear + '  현재월' + currMonth); select 변경 이벤트 발생하면 선택한 년-월에
+                                                // 해당하는 달력을 그려줌
+                                                $(".calendarSelect").change(function () {
+                                                    currYear = parseInt($("#_calendarHeaderYear option:selected").val());
+                                                    currMonth = parseInt($("#_calendarHeaderMonth option:selected").val());
+                                                    $(".calendarRow").remove();
+                                                    makeCalendar(currYear, currMonth);
+                                                });
+
+                                                //버튼을 클릭하면 선택한 년-월에 해당하는 달력을 그려줌 Ajax 통신을 통해 년-월을 넘겨서 일정 정보를 받아 테이블을 만들어주는 함수
+                                                $("#btnDelInDetail").click(function () {
+                                                    alert('삭제버튼');
+                                                    //배열 초기화
+                                                    var viewData = {};
+                                                    //data[키] 벨류
+                                                    viewData["seq"] = '${bbs.seq}';
+
+                                                    $.ajax({
+                                                        contentType: 'application/json',
+                                                        dataType: 'json',
+                                                        url: 'bbsdeletepost.do',
+                                                        type: 'post',
+                                                        data: JSON.stringify(viewData),
+                                                        success: function (resp) {
+                                                            //alert(resp);
+                                                            if (resp === 1) {
+                                                                alert('삭제가 완료되었습니다');
+                                                                location.href = "bbslist.do";
+                                                            } else {
+                                                                alert('삭제에 실패했습니다. 다시 시도해 주세요.');
+                                                            }
+
+                                                        },
+                                                        error: function () {
+                                                            alert('error');
+                                                        }
+                                                    });
+                                                });
+                                            });
+
+                                            //num 매개변수를 받아 현재 년-월을 변경해주는 메소드
+                                            function changeYearAndMonth(num) {
+                                                //alert('현재년' + currYear + '  현재월' + currMonth);
+
+                                                $("#_calendarHeaderYear").removeAttr("selected", "selected");
+                                                $("#_calendarHeaderMonth").removeAttr("selected", "selected");
+                                                //alert( typeof currYear + ' ' + typeof currMonth);
+
+                                                switch (num) {
+                                                    case 1:
+                                                        currYear = ((currYear - 1) < 2020)
+                                                            ? 2020
+                                                            : (currYear - 1);
+                                                        break;
+                                                    case 2:
+                                                        if ((currMonth - 1) < 1) {
+
+                                                            if ((currYear - 1) < 2020) {
+                                                                alert('2020년 이하로 설정할 수 없습니다.');
+                                                                currMonth = 12;
+                                                            } else {
+                                                                currYear = currYear - 1;
+                                                                currMonth = 1;
+                                                            }
+                                                        } else {
+                                                            currMonth = currMonth - 1;
+                                                        }
+                                                        break;
+                                                    case 3:
+                                                        if ((currMonth + 1) > 12) {
+                                                            currMonth = 1;
+                                                            if ((currYear + 1) > 2023) {
+                                                                alert('2023년 이상으로 설정할 수 없습니다');
+                                                                currMonth = 12;
+                                                            } else {
+                                                                currYear = currYear + 1;
+                                                            }
+                                                        } else {
+                                                            currMonth = currMonth + 1;
+                                                        }
+                                                        break;
+                                                    case 4:
+                                                        currYear = ((currYear + 1) > 2023)
+                                                            ? 2023
+                                                            : (currYear + 1);
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                //설정된 값에 맞게 select 설정
+                                                $("#_calendarHeaderYear")
+                                                    .val(currYear)
+                                                    .attr("selected", "selected");
+                                                $("#_calendarHeaderMonth")
+                                                    .val(currMonth)
+                                                    .attr("selected", "selected");
+
+                                                //달력 지우고 새로 그려주기
+                                                $(".calendarRow").remove();
+                                                makeCalendar(currYear, currMonth);
+                                            }
+
+                                            //매개변수에 맞는 달력을 그려 주는 메소드
+                                            function makeCalendar(year, month) {
+                                                //select에 해당하는 년-월을 매개변수로 받아서 날짜 설정
+                                                var now = new Date(year + '-' + month + '-01');
+                                                var dayOfWeek = now.getDay() + 1; //시작요일 설정
+                                                var lastDay = (new Date(year, month, 0)).getDate(); //마지막 날짜 설정
+                                                var weeks = (lastDay / 7) + 1; // 총 주 수를 설정
+
+                                                //시작일 전 빈칸 채우기
+                                                var trDay = document.createElement('tr');
+                                                trDay.setAttribute('class', 'calendarRow');
+                                                var tdDay = document.createElement('td');
+                                                tdDay.setAttribute('class', 'tableBlank');
+                                                tdDay.append('');
+                                                for (i = 1; i < dayOfWeek; i++) {
+                                                    tdDay = document.createElement('td');
+                                                    tdDay.setAttribute('class', 'tableBlank');
+                                                    tdDay.setAttribute('id', 'blank');
+                                                    tdDay.append('');
+                                                    trDay.append(tdDay);
+                                                }
+
+                                                //날짜 채우기 alert('dayOfWeek : ' + dayOfWeek + (typeof dayOfWeek));
+                                                for (i = 1; i < lastDay + 1; i++) {
+                                                    // console.log( 'i : ' + i + ',  cond:' + (i + dayOfWeek - 1 ) + ',  dayOfWeek :
+                                                    // ' + dayOfWeek ) ;
+                                                    tdDay = document.createElement('td');
+                                                    tdDay.setAttribute('class', 'tableDay');
+                                                    tdDay.setAttribute('id', 'HighLight');
+                                                    //tdDay.setAttribute('onclick', 'HighLightTD(this,"#d8fafa","#003b95")');
+                                                    tdDay.append(i + '일');
+                                                    trDay.append(tdDay);
+                                                    if ((i + dayOfWeek - 1) % 7 === 0 && i != lastDay) {
+                                                        //7일을 모두 수행했으면 새로운 행 추가
+                                                        $(".calendarBodytbl").append(trDay);
+                                                        trDay = document.createElement('tr');
+                                                        trDay.setAttribute('class', 'calendarRow');
+                                                        trDay.setAttribute('id', 'result');
+                                                    }
+                                                }
+                                                //마지막주 빈칸append
+                                                for (i = 0; i < ((7 - ((dayOfWeek + lastDay - 1)) % 7)) % 7; i++) {
+                                                    tdDay = document.createElement('td');
+                                                    tdDay.setAttribute('id', 'blank');
+                                                    tdDay.append('');
+                                                    trDay.append(tdDay);
+                                                }
+
+                                                $(".calendarBodytbl").append(trDay); //마지막주
+                                            }
+                                        </script>
+                                        <script src="js/plugins/dataTables/datatables.min.js"></script>
+                                        <script src="js/plugins/dataTables/datatables.select.min.js"></script>
+
+                                        <script>
+
+                                            $(function () {
+                                                var isMouseDown = false,
+                                                    isHighlighted;
+                                                $(".calendarBodytbl td")
+                                                    .mousedown(function () {
+                                                        isMouseDown = true;
+                                                        $(this).toggleClass("highlighted");
+                                                        isHighlighted = $(this).hasClass("highlighted");
+                                                        return false;
+                                                    })
+                                                    .mouseover(function () {
+                                                        if (isMouseDown) {
+                                                            $(this).toggleClass("highlighted", isHighlighted);
+                                                        }
+                                                    })
+                                                    .bind("selectstart", function () {
+                                                        return false;
+                                                    })
+
+                                                $(document)
+                                                    .mouseup(function () {
+                                                        isMouseDown = false;
+                                                    });
+                                            });
+
+                                        </script>
                                     </div>
+                                </div>
                                     <div class="av-monthly-container__form">
                                         <div class="av-monthly-container__block av-monthly__hide-medium">
                                             <div data-tour-onboarding="datepicker">
