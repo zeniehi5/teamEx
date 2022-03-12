@@ -16,6 +16,8 @@
 		<!-- shared -->
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelImgVO" alias="hotelImgVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelServiceVO" alias="hotelServiceVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelMapVO" alias="hotelMapVO"/>
 		
 		<!-- partner -->
   		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
