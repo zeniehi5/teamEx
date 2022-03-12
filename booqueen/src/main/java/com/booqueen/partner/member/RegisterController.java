@@ -1,5 +1,8 @@
 package com.booqueen.partner.member;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +53,13 @@ public class RegisterController {
 	}
 	
 	@RequestMapping(value = "/set-password.pdo", method= RequestMethod.POST)
-	public String setPassword(MemberVO vo, HttpSession session) {
+	public String setPassword(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {
 		session.setAttribute("password", vo.getPassword());
-		memberService.addMember(vo);
+		try {
+			memberService.addMember(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "basic-info";
 	}
 }

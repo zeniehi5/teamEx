@@ -11,4 +11,33 @@
 	</resultMap>
 	<insert id="addRoom" parameterType="myRoom">INSERT INTO room values (nextval('seq_room_id'), #{serialnumber}, #{type}, #{price}, #{smoking}, #{available})</insert>
 	<select id="getIdBySerial" resultType="myRoom">SELECT * FROM room where "serialnumber" = #{serialnumber}</select>
+	<select id="getBasicInfoByHotelSerial" resultType="facilitiesBasic">SELECT * from room_facilities_access where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<select id="getBathInfoByHotelSerial" resultType="facilitiesBath">SELECT * from room_facilities_bath where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<select id="getMediaInfoByHotelSerial" resultType="facilitiesMedia">SELECT * from room_facilities_media where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<select id="getViewInfoByHotelSerial" resultType="facilitiesView">SELECT * from room_facilities_view where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<select id="getAccessInfoByHotelSerial" resultType="facilitiesAccess">SELECT * from room_facilities_access where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<select id="getServiceInfoByHotelSerial" resultType="facilitiesService">SELECT * from room_facilities_service where room_id = (select room_id from room where serialnumber = #{serialnumber})</select>
+	<update id="updateHotelService" parameterType="java.util.HashMap">
+		UPDATE hotel_service SET breakfast = #{breakfast}, front_desk = #{front_desk}, smoking = #{smoking},
+		parking = #{parking}, sauna = #{sauna}, swimming_pool = #{swimming_pool}, shuttle = #{shuttle}, ac = #{ac},
+		terras = #{terras}, fitnesscenter = #{fitnesscenter}, aquapark = #{aquapark}, jacuzzi = #{jacuzzi} where serialnumber = #{serialnumber}
+	</update>
+	<update id="updateFacilitiesBasic" parameterType="java.util.HashMap">
+		UPDATE room_facilities_basic SET heater = #{heater} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
+	<update id="updateFacilitiesAccess" parameterType="java.util.HashMap">
+		UPDATE room_facilities_access SET elevator = #{elevator} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
+	<update id="updateFacilitiesMedia" parameterType="java.util.HashMap">
+		UPDATE room_facilities_media SET tv = #{tv} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
+	<update id="updateFacilitiesView" parameterType="java.util.HashMap">
+		UPDATE room_facilities_view SET balcony = #{balcony} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
+	<update id="updateFacilitiesBath" parameterType="java.util.HashMap">
+		UPDATE room_facilities_bath SET bathtub = #{bathtub}, spabath = #{spabath} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
+	<update id="updateFacilitiesService" parameterType="java.util.HashMap">
+		UPDATE room_facilities_service SET lounge = #{lounge} where room_id = (select room_id from room where serialnumber = #{serialnumber})
+	</update>
 </mapper>
