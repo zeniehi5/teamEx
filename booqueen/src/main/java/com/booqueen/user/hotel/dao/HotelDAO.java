@@ -1,5 +1,6 @@
 package com.booqueen.user.hotel.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.booqueen.user.hotel.vo.HotelImgVO;
+import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 
 
@@ -27,8 +29,8 @@ public class HotelDAO {
 		return hotelListWithImg;
 	}
 	
-	public List<HotelVO> getHotelListByStar(String[] star) throws DataAccessException{
-		List<HotelVO> hotelListByStar = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectFilterByStar", star);
+	public List<HotelVO> getHotelListByStar(HashMap<String, Object> map) throws DataAccessException{
+		List<HotelVO> hotelListByStar = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectFilterByStar", map);
 		return hotelListByStar;
 	}
 	
@@ -41,5 +43,12 @@ public class HotelDAO {
 		HotelImgVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.selectHotelImg", serialnumber);
 		return vo;
 	}
+	
+	public List<HotelVO> selectHotelByMap(HotelMapVO vo) throws DataAccessException{
+		List<HotelVO> hotelListByMap = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectHotelByMap", vo);
+		return hotelListByMap;
+	}
+	
+	
 	
 }

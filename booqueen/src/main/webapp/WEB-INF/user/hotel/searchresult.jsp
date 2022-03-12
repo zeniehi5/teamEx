@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 	<script src="https://kit.fontawesome.com/fdb0bc6f32.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29b5f78cb856dc4d592f3c3f87388524"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
@@ -114,7 +114,7 @@
 					</form>
 				</div>
 				<div class="map">
-					<div class="map-back">
+					<div class="map-back" style="background-image: url(${contextPath}/resources/user/images/searchresultmap.png)">
 						<div class="map-pin"><i class="fas fa-map-marker-alt"></i></div>
 						<button class="map-button" id="mapBtn1">
 							<span class="map-text">지도에서 보기</span>
@@ -247,88 +247,7 @@
 							</div>
 						</div>
 					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button" id="filterMealBtn">
-								<span class="filters-title">
-									<h3>식사</h3>
-								</span>
-								<span class="filter-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-									</svg>
-								</span>
-							</button>
-							<div id="filterMealCheck">
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkMeals1">
-									<label class="filter-text" for="checkMeals1">
-										조식 포함
-									</label>
-									<label class="filter-count" for="checkMeals1">
-										43
-									</label>
-								</div>
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkMeals2">
-									<label class="filter-text" for="checkMeals2">
-										바베큐
-									</label>
-									<label class="filter-count" for="checkMeals2">
-										42
-									</label>
-								</div>
 					
-							
-							</div>
-						</div>
-					</div>
-					
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button" id="filterLandmarkBtn">
-								<span class="filters-title">
-									<h3>명소</h3>
-								</span>
-								<span class="filter-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-									</svg>
-								</span>
-							</button>
-							<div id="filterLandmarkCheck">
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkLandmark1">
-									<label class="filter-text" for="checkLandmark1">
-										천제연폭포
-									</label>
-									<label class="filter-count" for="checkLandmark1">
-										9
-									</label>
-								</div>
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkLandmark2">
-									<label class="filter-text" for="checkLandmark2">
-										정방폭포
-									</label>
-									<label class="filter-count" for="checkLandmark2">
-										2
-									</label>
-								</div>
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkLandmark3">
-									<label class="filter-text" for="checkLandmark3">
-										성산일출봉
-									</label>
-									<label class="filter-count" for="checkLandmark3">
-										1
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
 					<hr>
 					<div class="filters-group">
 						<div class="filters">
@@ -399,7 +318,7 @@
 								<div class="filter-checkbox">
 									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities1">
 									<label class="filter-text" for="checkFacilities1">
-										주차장
+										조식
 									</label>
 									<label class="filter-count" for="checkFacilities1">
 										85
@@ -417,7 +336,7 @@
 								<div class="filter-checkbox">
 									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities3">
 									<label class="filter-text" for="checkFacilities3">
-										반려동물 허용
+										셔틀
 									</label>
 									<label class="filter-count" for="checkFacilities3">
 										1
@@ -426,7 +345,7 @@
 								<div class="filter-checkbox">
 									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities4">
 									<label class="filter-text" for="checkFacilities4">
-										룸서비스
+										수영장
 									</label>
 									<label class="filter-count" for="checkFacilities4">
 										23
@@ -441,87 +360,77 @@
 										48
 									</label>
 								</div>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button" id="filterRoomBtn">
-								<span class="filters-title">
-									<h3>객실 시설</h3>
-								</span>
-								<span class="filter-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-									</svg>
-								</span>
-							</button>
-							<div id="filterRoomCheck">
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkRoom1">
-									<label class="filter-text" for="checkRoom1">
-										주방/간이 주방
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities6">
+									<label class="filter-text" for="checkFacilities6">
+										wifi
 									</label>
-									<label class="filter-count" for="checkRoom1">
-										43
+									<label class="filter-count" for="checkFacilities6">
+										48
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkRoom2">
-									<label class="filter-text" for="checkRoom2">
-										전용 욕실
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities7">
+									<label class="filter-text" for="checkFacilities7">
+										피트니스 센터
 									</label>
-									<label class="filter-count" for="checkRoom2">
-										87
-									</label>
-								</div>
-								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkRoom3">
-									<label class="filter-text" for="checkRoom3">
-										에어컨
-									</label>
-									<label class="filter-count" for="checkRoom3">
-										86
+									<label class="filter-count" for="checkFacilities7">
+										48
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkRoom4">
-									<label class="filter-text" for="checkRoom4">
-										스파 욕조
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities8">
+									<label class="filter-text" for="checkFacilities8">
+										흡연
 									</label>
-									<label class="filter-count" for="checkRoom4">
-										22
+									<label class="filter-count" for="checkFacilities8">
+										48
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkRoom5">
-									<label class="filter-text" for="checkRoom5">
-										노트북 책상 있음
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities9">
+									<label class="filter-text" for="checkFacilities9">
+										라운지 바
 									</label>
-									<label class="filter-count" for="checkRoom5">
-										36
+									<label class="filter-count" for="checkFacilities9">
+										48
+									</label>
+								</div>
+								<div class="filter-checkbox">
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities10">
+									<label class="filter-text" for="checkFacilities10">
+										스파
+									</label>
+									<label class="filter-count" for="checkFacilities10">
+										48
+									</label>
+								</div>
+								<div class="filter-checkbox">
+									<input class="filter-checkbox-input" type="checkbox" value="" id="checkFacilities11">
+									<label class="filter-text" for="checkFacilities11">
+										주차
+									</label>
+									<label class="filter-count" for="checkFacilities11">
+										48
 									</label>
 								</div>
 							</div>
 						</div>
 					</div>
-					<hr>
-					
 				</div> 
 			</div>
 			<!-- ------------------------- 호텔 목록 -------------------------  -->
 			<div class="container-right">
 				<div class="title">
-					<h2>${hotelList.get(0).city }: 검색된 숙소 ${fn:length(hotelList)}개</h2>
-					<button class="mini-map" id="mapBtn2">
+					<h2>${hotelList.get(0).city }: 검색된 숙소 <span id="number_hotel">${fn:length(hotelList)}</span>개</h2>
+					<button class="mini-map" id="mapBtn2" style="background-image: url(${contextPath}/resources/user/images/searchresultmap.png)";>
 						<i class="fas fa-map-marker-alt"></i>
 					</button>
 				</div>
 				<div class="content">
 					<div class="orderby">
 						<ul class="menubar">
-							<li class="menuitem popularity"><a href="#">저희가 추천하는 숙소</a></li>
+							<li class="menuitem popularity"><a href="#">최다 예약</a></li>
 							<li class="menuitem upsort"><a href="#">홈/아파트 먼저</a></li>
 							<li class="menuitem price"><a href="#">요금(낮은 순)</a></li>
 							<li class="menuitem review-price"><a href="#">최고평점 + 최저가</a></li>
@@ -573,12 +482,12 @@
 									<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank">
 									
 									<c:if test="${!empty hotel.hotelImgVO.file_url }">
-										<img class="s3-img" src="${hotel.hotelImgVO.file_url }"></a>
+										<img class="s3-img" src="${hotel.hotelImgVO.file_url }">
 									</c:if>
 									<c:if test="${empty hotel.hotelImgVO.file_url }">
-										<img class="s3-img" src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></a>
+										<img class="s3-img" src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png">
 									</c:if>
-									
+									</a>
 								</div>
 								<div class="hotel-content">
 									<div class="hotel-top">
@@ -730,8 +639,8 @@
 						</div>
 						</a>
 						<!-- list end -->
-						
 						</c:forEach>
+						
 						</div>
 					</div>
 				</div>
@@ -769,6 +678,7 @@
 		<div class="modal-content">
 			
 			<!-- Modal Filter -->
+			<!--  
 			<div class="map-filter">
 				<div class="filter-left">
 					<div class="filter-by"><h2>필터링 기준:</h2></div>
@@ -1044,11 +954,11 @@
 								</label>
 							</div>
 							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities5">
-								<label class="filter-text" for="mapCheckFacilities5">
+								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities12">
+								<label class="filter-text" for="mapCheckFacilities12">
 									24시간 프런트 데스크
 								</label>
-								<label class="filter-count" for="mapCheckFacilities5">
+								<label class="filter-count" for="mapCheckFacilities12">
 									48
 								</label>
 							</div>
@@ -1116,9 +1026,11 @@
 				</div>
 
 			</div>
+			-->
 			<!-- Modal List -->
 			<div class="map-list">
 				<!-- <div class="sorter-hotellist"> -->
+				<div id="map_result"></div>
 				<div class="map-sorter">
 					<div class="map-dropdown">
 						<button class="dropdown-btn" id="dropdownBtn">
@@ -1129,7 +1041,7 @@
 							<div class="map-dropdown-menu">
 								<ul>
 									<li class="dropdown-item">
-										<button><span>저희가 추천하는 숙소</span></button>
+										<button><span>최다 예약</span></button>
 										<button><span>요금(낮은 순)</span></button>
 										<button><span>최고 평점 + 최저가</span></button>
 										<button><span>성급(높은 순)</span></button>
@@ -1140,8 +1052,10 @@
 					</div>
 				</div>
 				
+				<div id="map_hotel_list">
+				<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 				<div class="map-hotel-list">
-					<a href="#" class="map-hotel-card">
+					<div class="map-hotel-card">
 						<div class="map-hotel-save">
 							<button class="map-save-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000" class="bi bi-heart wishlist-heart" id="wishlist5" viewBox="0 0 16 16">
@@ -1152,38 +1066,112 @@
 								</svg>
 							</button>
 						</div>
-						<div class="map-hotel-image"></div>
+						
+						<c:if test="${!empty hotel.hotelImgVO.file_url }">
+							<div class="map-hotel-image" style="background-image: url(${hotel.hotelImgVO.file_url })"></div>
+						</c:if>
+						<c:if test="${empty hotel.hotelImgVO.file_url }">
+							<div class="map-hotel-image" style="background-image: url(https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png)"></div>
+						</c:if>
+						
 						<div class="map-hotel-container">
 							<div class="map-hotel-title">
-								<span class="map-hotel-title-link">더 큐브 리조트 제주</span>
+								<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank"><span class="map-hotel-title-link">${hotel.hotelname }</span></a>
 								<div class="map-stars">
 									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-											<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-										</svg>
-									</span>
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-											<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-										</svg>
-									</span>
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-											<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-										</svg>
-									</span>
-									<span>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-											<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-										</svg>
-									</span>
+										<c:if test="${hotel.star+0 == '5'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>	
+										<c:if test="${hotel.star+0 == '4'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${hotel.star+0 == '3'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${hotel.star+0 == '2'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${hotel.star+0 == '1'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+									</span>		
 								</div>
 							</div>
 							<div class="map-hotel-review">
-								<div class="map-hotel-review-score">8.3</div>
+								<div class="map-hotel-review-score">${hotel.reviewAvgVO.scoreAvg }</div>
 								<div class="map-hotel-review-content">
 									<div class="map-hotel-review-title">매우 좋음</div>
-									<div class="map-hotel-review-text">1,425개 이용 후기</div>
+									<div class="map-hotel-review-text">${hotel.reviewAvgVO.count }개 이용 후기</div>
 								</div>
 							</div>
 							<div class="map-hotel-content">
@@ -1209,22 +1197,27 @@
 						<div class="map-hotel-card-arrow">
 							<i class="bi bi-chevron-right"></i>
 						</div>
-					</a>
+					</div>
 				</div>
-
+				</c:forEach>
+				</div>
 			</div>
 
-			<!-- 접기  onclick="move()" map-show-->
+			<!-- 접기  onclick="move()" map-show
 			<div class="map-hide-button">
 				<i class="bi bi-chevron-left" id="mapListCloseBtn"></i>
 				<i class="bi bi-chevron-right" id="mapListOpenBtn"></i>
 			</div>
-
+-->
 			<!-- Modal Map -->
 			<div class="map-api" id="mapApi">
 
 			</div>
 		</div>
+	</div>
+	
+	<div class="wrap-loading display-none">
+    	<div><img src="${contextPath }/resources/user/images/spinner2.gif" /></div>
 	</div>
 
 
@@ -1238,10 +1231,21 @@ var isEmpty = function(value){
 	}
 };
 
+var isNumber = function(value){
+	let text = "";
+	for(let i = 0; i < value*1; i++){
+		text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";	
+	}
+	return text;
+}
+
+
 var starArr = new Array(); //필터 내용을 저장하는 배열
+var cityArr = new Array();
+var serviceArr = new Array();
 
 function makeFilter(target) {     
- 	var ageVal = target.value; //check value
+ 	 var ageVal = target.value; //check value
      var confirmCheck = target.checked; //check여부 확인
      
      if (confirmCheck == true) {           
@@ -1249,18 +1253,33 @@ function makeFilter(target) {
      } else {
      	starArr.splice(starArr.indexOf(ageVal), 1); // check value filter 배열내용 삭제
      }
-  
 }
-
-
 
 $(function(){
 	$(".filter-checkbox-input").on("change", getHotelByStar);
 })
 
+var city = '';	
+
 function getHotelByStar() {    
 
 	var contextPath = '${contextPath}';
+	city = $('.searchbox-destination-input').val();
+	cityArr.push(city);
+	
+	var breakfast = $('#checkFacilities1').is(":checked");
+	var restaurant = $('#checkFacilities2').is(":checked");
+	var shuttle = $('#checkFacilities3').is(":checked");
+	var swimming_pool = $('#checkFacilities4').is(":checked");
+	var front_desk = $('#checkFacilities5').is(":checked");
+	var wifi = $('#checkFacilities6').is(":checked");
+	var fitnesscenter = $('#checkFacilities7').is(":checked");
+	var smoking = $('#checkFacilities8').is(":checked");
+	var bar = $('#checkFacilities9').is(":checked");
+	var spa = $('#checkFacilities10').is(":checked");
+	var parking = $('#checkFacilities11').is(":checked");
+	serviceArr.push(breakfast, restaurant, shuttle, swimming_pool, front_desk, wifi, fitnesscenter, smoking, bar, spa, parking);
+	
 	
 	if(isEmpty(starArr)){
    	 starArr = ['1', '2', '3', '4', '5'];
@@ -1269,14 +1288,16 @@ function getHotelByStar() {
     $.ajax({
         url:'/web/hotelByStar.do'
         , type : 'POST'
+        , async:false
         , traditional : true
-        , data: {starArr: starArr}
+        , dataType: "JSON"
+        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr}
         , success : function(data) {
-   
-        	$("#content_from_ajax").empty();
+        	
+        	$('#content_from_ajax').empty();
         	
     		$.each(data, function(index, hotel){
-    			
+    		
     			var text = '';
         		text += "<a href='";
         		text +=	contextPath;
@@ -1295,51 +1316,35 @@ function getHotelByStar() {
 				text +=	"' target='_blank'><h3>";
 				text += hotel.hotelname;
 				text += "</h3></a><div class='star'>";
-				
-				if(hotel.star === '5'){
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-				} else if(hotel.star === '4'){
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";	
-				} else if(hotel.star === '3'){
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-				} else if(hotel.star === '2'){
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-				} else if(hotel.star === '1'){
-					text += "<span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='#febb02' class='bi bi-star-fill' viewBox='0 0 16 16'><path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z'/></svg></span>";
-				}
-				
+				text += isNumber(hotel.star);
 				text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
 				text +=	hotel.city;
 				text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>좋음</div><div class='review-subtitle'>";
 				text +=	hotel.reviewAvgVO.count;
 				text += "개 이용 후기 </div></div><div class='grade'>";
 				text +=	hotel.reviewAvgVO.scoreAvg;
-				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>프리미어 트윈룸</div><div class='bed-count'>더블침대 2개</div><div class='cancel'><div class='cancel1'>무료취소 • 선결제 필요 없음</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>우리 사이트에 이 요금으로 남은 객실 단 3개</div></div></div><div class='room-right'><div class='price'><div class='option-info'>1박, 성인 2명</div><div class='option-price'><span class='fixed-price'>'\402,770</span><span class='sale-price'>'\145,000</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span><svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
-
-        		$("#content_from_ajax").append(text);
+				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>프리미어 트윈룸</div><div class='bed-count'>더블침대 2개</div><div class='cancel'><div class='cancel1'>무료취소 • 선결제 필요 없음</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>우리 사이트에 이 요금으로 남은 객실 단 3개</div></div></div><div class='room-right'><div class='price'><div class='option-info'>1박, 성인 2명</div><div class='option-price'><span class='fixed-price'>'\402,770</span><span class='sale-price'>'\145,000</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
+    		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
+    			
+        		$('#content_from_ajax').append(text);
     		});
         
-        },
-       	error : function() {
+        }
+       	, error : function() {
 			alert('error');			
-		}  
-    })
+		}
+		
+    });
     
     if(starArr.length == 5){
     	starArr = [];	
     }
-    
+    cityArr.splice(0, 1);
+    serviceArr = [];
+    $('#number_hotel').text($('.list').length);
  }
+</script>
+
 </script>
 
 <script>
@@ -1523,11 +1528,30 @@ function getHotelByStar() {
 	// 지도 ---------------------------
 	var container = document.getElementById('mapApi');
 	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
-		level: 3
+		center: new kakao.maps.LatLng(37.693575533651774, 126.63953347844458),
+		level: 8
 	};
 	var map = new kakao.maps.Map(container, options);
- 
+ 	
+	// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+	kakao.maps.event.addListener(map, 'center_changed', function() {
+
+	    // 지도의  레벨을 얻어옵니다
+	    var level = map.getLevel();
+
+	    // 지도의 중심좌표를 얻어옵니다 
+	    var latlng = map.getCenter(); 
+
+	    var message = '<p>지도 레벨은 ' + level + ' 이고</p>';
+	    message += '<p>중심 좌표는 위도 ' + latlng.getLat() + ', 경도 ' + latlng.getLng() + '입니다</p>';
+
+	    var resultDiv = document.getElementById('map_result');
+	    resultDiv.innerHTML = message;
+
+	});
+	   
+
+	
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 	var positions = [
 		{
@@ -1580,8 +1604,73 @@ function getHotelByStar() {
 			infowindow.close();
 		};
 	}
-
 	
+
+	kakao.maps.event.addListener(map, 'dragend', selectMap);
+	
+	function selectMap(){
+        
+		var bounds = map.getBounds();
+		
+		var wLatitude = bounds.qa;
+		var eLatitude = bounds.pa;
+		var sLongitude = bounds.ha;
+		var nLongitude = bounds.oa;
+		
+		var contextPath = '${contextPath}';
+		
+        var sendData = {
+        				"wLatitude" : wLatitude,
+                        "eLatitude" : eLatitude,
+                        "sLongitude" : sLongitude,
+                        "nLongitude" : nLongitude
+                        }
+       	
+        	$.ajax({
+                method : "POST",
+                url : "/web/getMap.do",
+                async: false,
+                data : sendData,
+                dataType : "JSON",
+                success : function(data){
+                	
+                	$('#map_hotel_list').empty();
+                	
+                	$.each(data, function(index, hotel){
+                		                		
+                		var text = '';
+                		text += "<div class='map-hotel-list'><div class='map-hotel-card'><div class='map-hotel-save'><button class='map-save-icon'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#000' class='bi bi-heart wishlist-heart' id='wishlist5' viewBox='0 0 16 16'>";
+                		text += "<path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/>";
+                		text += "</svg><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#c00' class='bi bi-heart-fill wishlist-heart-fill' id='wishlistFill5' viewBox='0 0 16 16'>";
+                		text += "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button></div>";
+                		text += "<div class='map-hotel-image' style='background-image: url(";
+                		text += hotel.hotelImgVO.file_url;
+                		text += ")'></div><div class='map-hotel-container'><div class='map-hotel-title'><a href='";
+                		text += contextPath;
+                		text += "/hotelInfo.do?serialNumber=";
+                		text += hotel.serialnumber;
+                		text += "' target='_blank'><span class='map-hotel-title-link'>";
+                		text += hotel.hotelname;
+                		text += "</span></a><div class='map-stars'><span>";
+               			text += isNumber(hotel.star);
+                		text += "</span></div></div><div class='map-hotel-review'><div class='map-hotel-review-score'>";
+                		text += hotel.reviewAvgVO.scoreAvg;
+                		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>매우 좋음</div><div class='map-hotel-review-text'>";
+                		text += hotel.reviewAvgVO.count;
+                		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>\88,000</span><span class='map-hotel-content-price-sale'>\79,200</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
+            		 	
+                		$('#map_hotel_list').append(text);
+                		
+                	});
+
+                },
+                error : function(){
+                	alert('error');
+                }
+            })
+       
+    }
+
 	// function move() {
 	// 	document.querySelector(".map-hide-button").classList.add("go");
 	// }
@@ -1601,6 +1690,8 @@ function getHotelByStar() {
 	// 		});
 	// });
 
+
 </script>
+
 </body>
 </html>

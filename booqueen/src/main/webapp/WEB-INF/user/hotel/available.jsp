@@ -1927,7 +1927,7 @@
     <script>
         // mySnackbar
         var x = document.getElementById("snackbar");
-		var fsave = document.getElementById("fsave");$
+		var fsave = document.getElementById("fsave");
         
         function mySnackbar() {
             if($("#fheart").hasClass("bi-heart-fill")){

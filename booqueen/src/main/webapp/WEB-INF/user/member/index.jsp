@@ -721,11 +721,9 @@
         $('.slider').slick({
             slidesToShow: 3,
             slidesToScroll: 1,
-            arrows: true,
             autoplay: true,
             autoplaySpeed: 2000,
             dots: true,
-            centerMode: true,
             variableWidth: true
         });
     </script>
@@ -738,7 +736,7 @@
                     "endDate": "17/01/2022",
                     opens: 'center',
                     locale: {
-                        format: 'DD/MM/YYYY'
+                        format: 'YYYY/MM/DD'
                     }
                 });
             });

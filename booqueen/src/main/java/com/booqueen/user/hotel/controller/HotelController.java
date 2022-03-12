@@ -1,5 +1,7 @@
 package com.booqueen.user.hotel.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.user.hotel.service.HotelService;
 import com.booqueen.user.hotel.vo.HotelImgVO;
+import com.booqueen.user.hotel.vo.HotelMapVO;
+import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.member.MemberVO;
 import com.booqueen.user.review.service.ReviewService;
@@ -94,10 +98,47 @@ public class HotelController {
 	public List<HotelVO> getHotelByStar(HttpServletRequest request) {
 		
 		String[] stars = request.getParameterValues("starArr");
+		String[] city = request.getParameterValues("cityArr");
+		String[] service = request.getParameterValues("serviceArr"); 
 		
-		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(stars);
+		boolean[] service_b = new boolean[11];
+		
+		for(int i = 0; i < service.length; i++) {
+			service_b[i] = Boolean.parseBoolean(service[i]); 
+		}
+		
+		HotelServiceVO hotelServiceVO = new HotelServiceVO();
+		hotelServiceVO.setBreakfast(service_b[0]);
+		hotelServiceVO.setRestaurant(service_b[1]);
+		hotelServiceVO.setShuttle(service_b[2]);
+		hotelServiceVO.setSwimming_pool(service_b[3]);
+		hotelServiceVO.setFront_desk(service_b[4]);
+		hotelServiceVO.setWifi(service_b[5]);
+		hotelServiceVO.setFitnesscenter(service_b[6]);
+		hotelServiceVO.setSmoking(service_b[7]);
+		hotelServiceVO.setBar(service_b[8]);
+		hotelServiceVO.setSpa(service_b[9]);
+		hotelServiceVO.setParking(service_b[10]);
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("stars", stars);
+		map.put("city", city);
+		map.put("hotelServiceVO", hotelServiceVO);
+		
+		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(map);
 		
 		return hotelListByStar;
+	}
+	
+	@RequestMapping(value="/getMap.do")
+	@ResponseBody
+	public List<HotelVO> getMap(HotelMapVO vo) throws Exception{
+		
+		List<HotelVO> hotelListByMap = hotelService.selectHotelByMap(vo);
+		
+		return hotelListByMap;
+		
 	}
 	
 }
