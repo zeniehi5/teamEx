@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -366,6 +367,75 @@ public class HotelController {
 			e.printStackTrace();
 		}
 		return "set-policies";	
+	}
+	
+	@RequestMapping(value = "/update-service.pdo", method = RequestMethod.POST)
+	public String updateHotelService(HotelVO hotel, HotelServiceVO service, FacilitiesBasicVO basic, 
+									FacilitiesBathVO bath, FacilitiesMediaVO media, FacilitiesViewVO view,
+									FacilitiesAccessVO access, FacilitiesServiceVO room_service, 
+									HttpServletResponse response, HttpSession session) {
+		HashMap<String, Object> updateList = new HashMap<>();
+		HashMap<String, Object> updateBasic = new HashMap<>();
+		HashMap<String, Object> updateAccess = new HashMap<>();
+		HashMap<String, Object> updateMedia = new HashMap<>();
+		HashMap<String, Object> updateView = new HashMap<>();
+		HashMap<String, Object> updateBath = new HashMap<>();
+		HashMap<String, Object> updateService = new HashMap<>();
+ 		try {
+			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+			if(hotel != null) {
+				//hotel_service 수정값 저장
+				updateList.put("serialnumber", hotel.getSerialnumber());
+				updateList.put("breakfast", service.isBreakfast());
+				updateList.put("front_desk", service.isFront_desk());
+				updateList.put("smoking", service.isSmoking());
+				updateList.put("parking", service.isParking());
+				updateList.put("sauna", service.isSauna());
+				updateList.put("swimming_pool", service.isSwimming_pool());
+				updateList.put("shuttle", service.isShuttle());
+				updateList.put("ac", service.isAc());
+				updateList.put("terras", service.isTerras());
+				updateList.put("fitnesscenter", service.isFitnesscenter());
+				updateList.put("aquapark", service.isAquapark());
+				updateList.put("jacuzzi", service.isJacuzzi());
+				roomService.updateHotelService(updateList);
+				//room_faclities_basic 수정값 저장
+				updateBasic.put("serialnumber", hotel.getSerialnumber());
+				updateBasic.put("heater", basic.isHeater());
+				roomService.updateFaciliteisBasic(updateBasic);
+				//room_facilities_access 수정값 저장
+				updateAccess.put("serialnumber", hotel.getSerialnumber());
+				updateAccess.put("elevator", access.isElevator());
+				roomService.updateFacilitiesAccess(updateAccess);
+				//room_facilities_media 수정값 저장
+				updateMedia.put("serialnumber", hotel.getSerialnumber());
+				updateMedia.put("tv", media.isTv());
+				roomService.updateFacilitiesMedia(updateMedia);
+				//room_facilities_view 수정값 저장
+				updateView.put("serialnumber", hotel.getSerialnumber());
+				updateView.put("balcony", view.isBalcony());
+				roomService.updateFacilitiesView(updateView);
+				//room_facilities_bath 수정값 저장
+				updateBath.put("serialnumber", hotel.getSerialnumber());
+				updateBath.put("bathtub", bath.isBathtub());
+				updateBath.put("spabath", bath.isSpabath());
+				roomService.updateFacilitiesBath(updateBath);
+				//room_facilities_service 수정값 저장
+				updateService.put("serialnumber", hotel.getSerialnumber());
+				updateService.put("lounge", room_service.isLounge());
+				roomService.updateFacilitiesService(updateService);
+				//alert
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script type='text/javascript'>");
+				writer.println("alert('시설 및 서비스에 관한 정보를 성공적으로 수정하였습니다.');");
+		        writer.println("</script>");
+		        writer.flush();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "home";
 	}
 	
 }

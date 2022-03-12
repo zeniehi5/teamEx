@@ -7,6 +7,7 @@ import com.booqueen.partner.room.FacilitiesFoodVO;
 import com.booqueen.partner.room.FacilitiesMediaVO;
 import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
+import com.booqueen.user.review.vo.ReviewAvgVO;
 
 public interface HotelService {
 	
@@ -52,4 +53,6 @@ public interface HotelService {
 
 	public void updateSmokingPolicy(HotelServiceVO vo);
 
+	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber);
+	
 }

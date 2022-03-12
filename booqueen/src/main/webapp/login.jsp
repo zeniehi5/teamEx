@@ -26,7 +26,7 @@
 	<main class="contents">
 		<h2>로그인하여 숙소를 관리하세요</h2><br/>
 		<h4>사용자명</h4>
-		<input type="text" name="email" id="email" class="text" placeholder="&nbsp;&nbsp;&nbsp;'로그인 이름' 및 '로그인 ID와 동일" value="test" ><br/>
+		<input type="text" name="email" id="email" class="text" placeholder="&nbsp;&nbsp;&nbsp;'로그인 이름' 및 '로그인 ID와 동일"><br/>
 		<input type="submit" name="continue" id="continue" value="다음"><br/><br/>
 		<a href="/web/partner/register/FindID.jsp" id="find">로그인할 수 없나요?</a><br/><br/>
     	<hr><br/>

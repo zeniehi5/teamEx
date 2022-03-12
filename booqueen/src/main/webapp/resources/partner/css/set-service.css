@@ -446,7 +446,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 /* main contents */
 #content{
-    min-height: calc(480vh - 0px);
     padding-bottom: 1em;
 }
 .is_new_hnav #content{

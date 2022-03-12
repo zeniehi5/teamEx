@@ -1605,6 +1605,7 @@ function getHotelByStar() {
 		};
 	}
 	
+
 	kakao.maps.event.addListener(map, 'dragend', selectMap);
 	
 	function selectMap(){
@@ -1669,6 +1670,26 @@ function getHotelByStar() {
             })
        
     }
+
+	// function move() {
+	// 	document.querySelector(".map-hide-button").classList.add("go");
+	// }
+
+
+	// 날짜
+	// $(document).ready(function() {
+	// 		$(function () {
+	// 				$('input[name="daterange"]').daterangepicker({
+	// 						"startDate": "2022년 2월 14일",
+	// 						"endDate": "2022년 2월 15일",
+	// 						opens: 'center',
+	// 						locale: {
+	// 								format: 'YYYY년 MM월 DD일'
+	// 						}
+	// 				});
+	// 		});
+	// });
+
 
 </script>
 
