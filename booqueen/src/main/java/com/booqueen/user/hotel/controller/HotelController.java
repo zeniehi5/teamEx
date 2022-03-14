@@ -99,7 +99,9 @@ public class HotelController {
 		
 		String[] stars = request.getParameterValues("starArr");
 		String[] city = request.getParameterValues("cityArr");
-		String[] service = request.getParameterValues("serviceArr"); 
+		String[] service = request.getParameterValues("serviceArr");
+		String[] score = request.getParameterValues("scoreArr");
+		String[] order = request.getParameterValues("orderArr");
 		
 		boolean[] service_b = new boolean[11];
 		
@@ -120,11 +122,24 @@ public class HotelController {
 		hotelServiceVO.setSpa(service_b[9]);
 		hotelServiceVO.setParking(service_b[10]);
 		
+		Double[] score_b = new Double[5];
+
+		for(int i = 0; i < score.length; i++) {
+			score_b[i] = Double.parseDouble(score[i]);
+		}
+		
+		int[] order_b = new int[1];
+		
+		for(int i = 0; i < order.length; i++) {
+			order_b[i] = Integer.parseInt(order[i]);
+		}
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("stars", stars);
 		map.put("city", city);
 		map.put("hotelServiceVO", hotelServiceVO);
+		map.put("scoreAvg", score_b);
+		map.put("order", order_b);
 		
 		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(map);
 		

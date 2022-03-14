@@ -132,7 +132,14 @@
                         	<i class="fas fa-star fa-xs"></i>
                         </div>
 					</c:if>
-                     <span>${fn:length(reviewList)} 리뷰</span>
+                     <span>
+                     <c:if test="${reviewAvg.scoreAvg == 0.0 }">
+                		0
+                	</c:if>
+                	<c:if test="${reviewAvg.scoreAvg != 0.0}">
+                		${fn:length(reviewList)}
+                	</c:if>
+                     리뷰</span>
                 </div>
                 <div>
                 	<c:choose>
@@ -145,7 +152,7 @@
                     <i class="fas fa-map"></i>&nbsp;<span><span id="city">${hotelInfo.city }</span>,<span id="address1"> ${hotelInfo.address1 }</span><span id="address2"> ${hotelInfo.address2 }</span></span>
                     
                     <c:choose>
-                    <c:when test="${!empty reviewList}">
+                    <c:when test="${!empty reviewList && reviewAvg.scoreAvg != 0.0}">
                     <div class="review_board_wrapper">    
                         <div class="review_board review_board1">
                             <div class="review-score">${reviewAvg.scoreAvg }</div>
@@ -193,10 +200,10 @@
             </div>
             <div class="gallery">
                 <div class="gallery-img-1">
-                	<c:if test="${!empty hotel.hotelImgVO.file_url }">
+                	<c:if test="${!empty hotelImg.file_url }">
 						<img class="hotel_img_path" src="${hotelImg.file_url}">
 					</c:if>
-					<c:if test="${empty hotel.hotelImgVO.file_url }">
+					<c:if test="${empty hotelImg.file_url }">
 						<img class="hotel_img_path"  src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></a>
 					</c:if>
                 </div>
@@ -734,7 +741,7 @@
    </div>
 
 	<c:choose>
-	<c:when test="${!empty reviewList}">
+	<c:when test="${!empty reviewList && reviewAvg.scoreAvg != 0.0}">
    <div class="review">
         <h2>이용후기</h2>
         <div class="now-booking">
@@ -745,7 +752,14 @@
             <div id="score" class="review-score">${reviewAvg.scoreAvg }</div>
             <div>
                 <span>매우좋음</span>
-                <span id="reviewcount"> ${fn:length(reviewList)} </span><span>개 이용 후기</span>
+                <span id="reviewcount">
+                	<c:if test="${reviewAvg.scoreAvg == 0.0 }">
+                		0
+                	</c:if>
+                	<c:if test="${reviewAvg.scoreAvg != 0.0}">
+                		${fn:length(reviewList)}
+                	</c:if>
+                	</span><span>개 이용 후기</span>
             </div>
             <div class="reveiw-text-smaller">
                 <span>이용후기 모두 보기</span>
@@ -1523,7 +1537,7 @@
 			<div class="review-list-panel-content">
 				
 				<c:choose>
-				<c:when test="${!empty reviewList}">
+				<c:when test="${!empty reviewList && reviewAvg.scoreAvg != 0.0}">
 				<div class="review-list-container">
 					
 					<div class="review-list-score">

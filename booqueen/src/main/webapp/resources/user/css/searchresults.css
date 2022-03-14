@@ -366,14 +366,16 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.popularity {
+.filter_radio_checked {
+	color: #fff;
 	background-color: #0071c2;
 }
-.popularity a {
-	color: #fff;
+.filter_radio{
+	display : none;
 }
-.menuitem:hover:not(.popularity) {
+.menuitem:hover:not(.filter_radio_checked){
 	background-color: #ebf3ff;
+	color:  #0071c2;
 }
 .dropdown {
 	width: 10px;

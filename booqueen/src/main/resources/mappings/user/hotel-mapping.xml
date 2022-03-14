@@ -142,6 +142,33 @@
 		<![CDATA[	
 				group by t.serialnumber, h.file_name, h.file_url
 				]]>	
+				
+				<if test="scoreAvg != null">
+					
+					<![CDATA[
+						having round(avg(r.score), 1) >= 
+					]]>	
+					
+					<foreach collection="scoreAvg" item="score" separator="and round(avg(r.score), 1) >=">
+						<if test ="score != null">
+							<![CDATA[#{score}]]>	
+						</if>
+					</foreach>
+				</if>
+			
+		<if test="order != null">
+			<![CDATA[
+					order by  
+				]]>
+		
+				<foreach collection="order" item="order" separator=",">
+					<![CDATA[ ${order}]]>	
+				</foreach>
+				
+				<![CDATA[
+					desc  
+				]]>
+		</if>			
 	</select>
 	
 	<select id="selectHotelByMap" resultMap="HotelVOMap" parameterType="hotelMapVO">

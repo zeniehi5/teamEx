@@ -263,7 +263,7 @@
 							</button>
 							<div id="filterReviewCheck">
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkReview1">
+									<input class="filter-checkbox-input" type="checkbox" value="9.0" id="checkReview1" onchange="makeScoreFilter(this);">
 									<label class="filter-text" for="checkReview1">
 										최고: 9 이상
 									</label>
@@ -272,7 +272,7 @@
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkReview2">
+									<input class="filter-checkbox-input" type="checkbox" value="8.0" id="checkReview2" onchange="makeScoreFilter(this);">
 									<label class="filter-text" for="checkReview2">
 										매우 좋음: 8 이상
 									</label>
@@ -281,7 +281,7 @@
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkReview3">
+									<input class="filter-checkbox-input" type="checkbox" value="7.0" id="checkReview3" onchange="makeScoreFilter(this);">
 									<label class="filter-text" for="checkReview3">
 										좋음: 7 이상
 									</label>
@@ -290,7 +290,7 @@
 									</label>
 								</div>
 								<div class="filter-checkbox">
-									<input class="filter-checkbox-input" type="checkbox" value="" id="checkReview4">
+									<input class="filter-checkbox-input" type="checkbox" value="6.0" id="checkReview4" onchange="makeScoreFilter(this);">
 									<label class="filter-text" for="checkReview4">
 										만족: 6 이상
 									</label>
@@ -430,12 +430,24 @@
 				<div class="content">
 					<div class="orderby">
 						<ul class="menubar">
-							<li class="menuitem popularity"><a href="#">최다 예약</a></li>
-							<li class="menuitem upsort"><a href="#">홈/아파트 먼저</a></li>
-							<li class="menuitem price"><a href="#">요금(낮은 순)</a></li>
-							<li class="menuitem review-price"><a href="#">최고평점 + 최저가</a></li>
-							<li class="menuitem star-highest"><a href="#">성급(높은 순)</a></li>
-							<li class="menuitem dropdown" onclick="myFunction()">
+							<li class="menuitem popularity" data-value="3">
+								<input type="radio" class="filter_radio" id="popularity_filter" name="order_filter" >
+								<label for="popularity_filter">최다 예약</label>
+							</li>
+							<li class="menuitem price" data-value="2">
+								<input type="radio" class="filter_radio" id="price_filter" name="order_filter">
+								<label for="price_filter">요금(낮은 순)</label>
+							</li>
+							<li class="menuitem review-price" data-value="5">
+								<input type="radio" class="filter_radio" id="review-price_filter" name="order_filter" >
+								<label for="review-price_filter">평점(높은 순)</label>
+							</li>
+							<li class="menuitem star-highest" data-value="8">
+								<input type="radio" class="filter_radio" id="star-highest_filter" name="order_filter" >
+								<label for="star-highest_filter">성급(높은 순)</label>
+							</li>
+							
+							<!--<li class="menuitem dropdown" onclick="myFunction()">
 								<a href="#">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
 										<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
@@ -449,7 +461,7 @@
 									<a href="#">가장 가까운 해변까지의 거리</a>
 									<a href="#">최다 예약</a>
 								</div>
-							</li>
+							</li>-->
 						</ul>
 					</div>
 
@@ -593,7 +605,13 @@
 										</div>
 										<div class="reviews">
 											<div class="review">
-												<div class="review-title">좋음</div>
+											
+											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 9}"><div class="review-title">최고</div></c:if>
+											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 8}"><div class="review-title">매우 좋음</div></c:if>
+											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 7}"><div class="review-title">좋음</div></c:if>
+											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 6}"><div class="review-title">만족</div></c:if>
+											<c:if test="${hotel.reviewAvgVO.scoreAvg < 6}"><div class="review-title">보통</div></c:if>
+												
 												<div class="review-subtitle">${hotel.reviewAvgVO.count }개 이용 후기</div>
 											</div>
 											<div class="grade">${hotel.reviewAvgVO.scoreAvg }</div>
@@ -1222,7 +1240,19 @@
 
 
 <script>
+	$(document).ready(function(){
+          $(".filter_radio").click(function(){
+        	  if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
+                $(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
+            	$(this.parentNode).toggleClass("filter_radio_checked");
+        	  } else {
+       		  	$(this.parentNode).toggleClass("filter_radio_checked");
+        	  }
+          });
+	});
+</script>
 
+<script>
 var isEmpty = function(value){ 
 	if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ 
 		return true 
@@ -1239,10 +1269,20 @@ var isNumber = function(value){
 	return text;
 }
 
+var scoreText = function(value){
+	if(value >= 9){ return "최고"}
+	else if(value >= 8){ return "매우 좋음"}
+	else if(value >= 7){ return "좋음"}
+	else if(value >= 6){ return "만족"}
+	else{return "보통"}
+}
 
-var starArr = new Array(); //필터 내용을 저장하는 배열
+//필터 내용을 저장하는 배열
+var starArr = new Array(); 
 var cityArr = new Array();
 var serviceArr = new Array();
+var scoreArr = new Array();
+var orderArr = new Array();
 
 function makeFilter(target) {     
  	 var ageVal = target.value; //check value
@@ -1255,15 +1295,28 @@ function makeFilter(target) {
      }
 }
 
+function makeScoreFilter(target) {     
+	var scoreVal = target.value; //check value
+    var confirmCheck = target.checked; //check여부 확인
+    
+    if (confirmCheck == true) {           
+    	scoreArr.push(scoreVal); // check value filter 배열에 입력  check false
+    } else {
+    	scoreArr.splice(scoreArr.indexOf(scoreVal), 1); // check value filter 배열내용 삭제
+    }
+}
+
 $(function(){
-	$(".filter-checkbox-input").on("change", getHotelByStar);
+	$(".filter-checkbox-input").on("change", getHotel);
+	$('.menuitem').on("change", getHotel);
 })
 
-var city = '';	
+var city = '';
 
-function getHotelByStar() {    
+function getHotel() {    
 
 	var contextPath = '${contextPath}';
+	
 	city = $('.searchbox-destination-input').val();
 	cityArr.push(city);
 	
@@ -1280,10 +1333,19 @@ function getHotelByStar() {
 	var parking = $('#checkFacilities11').is(":checked");
 	serviceArr.push(breakfast, restaurant, shuttle, swimming_pool, front_desk, wifi, fitnesscenter, smoking, bar, spa, parking);
 	
-	
 	if(isEmpty(starArr)){
    	 starArr = ['1', '2', '3', '4', '5'];
     }
+	
+	scoreArr.push(0);
+	
+	orderArr.push('1');
+	var orderText = $('.filter_radio_checked').data('value');
+	if(!isEmpty(orderText)){
+		orderArr.splice(0, 1);
+		orderArr.push(orderText);
+	}
+		
 	
     $.ajax({
         url:'/web/hotelByStar.do'
@@ -1291,7 +1353,7 @@ function getHotelByStar() {
         , async:false
         , traditional : true
         , dataType: "JSON"
-        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr}
+        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr}
         , success : function(data) {
         	
         	$('#content_from_ajax').empty();
@@ -1319,7 +1381,9 @@ function getHotelByStar() {
 				text += isNumber(hotel.star);
 				text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
 				text +=	hotel.city;
-				text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>좋음</div><div class='review-subtitle'>";
+				text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>";
+				text += scoreText(hotel.reviewAvgVO.scoreAvg);
+				text +=	"</div><div class='review-subtitle'>";
 				text +=	hotel.reviewAvgVO.count;
 				text += "개 이용 후기 </div></div><div class='grade'>";
 				text +=	hotel.reviewAvgVO.scoreAvg;
@@ -1341,6 +1405,13 @@ function getHotelByStar() {
     }
     cityArr.splice(0, 1);
     serviceArr = [];
+    for(let i = 0; i < scoreArr.length; i++) {
+    	  if(scoreArr[i] === 0)  {
+    		  scoreArr.splice(i, 1);
+    	    i--;
+    	  }
+    	}
+    orderArr = [];
     $('#number_hotel').text($('.list').length);
  }
 </script>
