@@ -111,7 +111,6 @@
 .checkin-field, .checkout-field, .guest {
 	background: #fff;
 	border-radius: 2px;
-	display: flex;
 }
 .checkin-select, .checkout-select {
 	font-size: 14px;
@@ -127,9 +126,10 @@
 .startdate,
 .enddate {
 	margin-left: 1px;
-	padding: 8px 0;
+	padding: 8px;
 	border: none;
 	font-size: 14px;
+	width: 100%;
 }
 .startdate:focus,
 .enddate:focus {
@@ -206,6 +206,7 @@
 	border: 0;
 	color: #fff;
 	background-color: #0071c2;
+	margin-top: 15px;
 }
 .map-back {
 	width: 100%;
@@ -469,7 +470,7 @@
 }
 .wishlist-heart,
 .wishlist-heart-fill {
-	filter: drop-shadow(0 2px 1.5px rgba(0,0,0,.5));
+/* 	filter: drop-shadow(0 2px 1.5px rgba(0,0,0,.5)); */
 	cursor: pointer;
 }
 #wishlist,
@@ -849,11 +850,10 @@
 .map-list {
 	background-color: #f9f9f9;
 	z-index: 2;
-	position: absolute;
 	overflow-y: scroll;
 	padding: 8px;
 	padding-top: 0;
-	width: 380px;
+	width: 470px;
 	height: 100%;
 	left: 0;
 	top: 0;
@@ -869,6 +869,7 @@
 	justify-content: flex-end;
 }
 .map-dropdown-menu {
+	position: relative;
 	display: none;
 }
 .dropdown-btn {
@@ -894,8 +895,6 @@
 }
 .map-dropdown-content {
 	left: auto;
-	right: 8px;
-	top: 57px;
 	position: absolute;
 	z-index: 200;
 }

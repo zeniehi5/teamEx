@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.board.dao.boardmapper">
+	
+	<select id="selectboard" resultType="boardVO" parameterType="Integer">
+		<![CDATA[
+		select * from board where groupno in
+		(SELECT groupno FROM (SELECT groupno, row_number() over (partition by groupno) as row FROM board) a WHERE a.row > 1)
+		and serialnumber = #{serialnumber}
+		]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="boardVO">
+		<![CDATA[insert into board(userid, serialnumber, content, partner) values (#{userid}, #{serialnumber}, #{content}, #{partner})]]>
+	</insert>
+	
+</mapper>

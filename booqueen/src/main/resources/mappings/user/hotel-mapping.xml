@@ -26,7 +26,8 @@
 		<result property="longitude" column="longitude"/>
 		<result property="latitude" column="latitude"/>
 		<collection property="hotelImgVO" resultMap="HotelImgVOMap" />
-		<collection property="reviewAvgVO"	resultMap="ReviewAvgVOMap"/>	
+		<collection property="reviewAvgVO"	resultMap="ReviewAvgVOMap"/>
+		<collection property="roomVO" resultMap="RoomVOMap"/>
     </resultMap>
 
 	<resultMap type="hotelImgVO" id="HotelImgVOMap">
@@ -38,12 +39,19 @@
    		<result property="scoreAvg" column="score"/>
    		<result property="count" column="count"/>
    </resultMap>
+   
+   <resultMap type="roomVO" id="RoomVOMap">
+   		<result property="room_id" column="room_id"/>
+   		<result property="price" column="price"/>
+   </resultMap>
 
-	<select id="selectHotelWithImg" resultMap="HotelVOMap" parameterType="String">
+	<select id="selectHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
 		<![CDATA[
 				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
 	
-				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
 				
 				from hotel_image as h 
 				
@@ -54,10 +62,20 @@
 				full join review as r
 				
 				on t.serialnumber = r.serialnumber
+		
+				full join room as o
 				
-				where t.city LIKE CONCAT('%', #{city}, '%')
+				on t.serialnumber = o.serialnumber
 				
-				group by t.serialnumber, h.file_name, h.file_url
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where t.city LIKE CONCAT('%', #{city}, '%') and
+				
+				open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
 		]]>
 	</select>
 	
@@ -151,7 +169,7 @@
 					
 					<foreach collection="scoreAvg" item="score" separator="and round(avg(r.score), 1) >=">
 						<if test ="score != null">
-							<![CDATA[#{score}]]>	
+							<![CDATA[${score}]]>	
 						</if>
 					</foreach>
 				</if>
@@ -191,6 +209,10 @@
 				
 				group by t.serialnumber, h.file_name, h.file_url
 		]]>
+	</select>
+	
+	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">
+		<![CDATA[select * from hotel_policy where serialnumber = #{serialnumber} ]]>
 	</select>
 	
 </mapper>

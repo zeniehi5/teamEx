@@ -24,10 +24,9 @@ li {
 	color: #fff;
 }
 nav {
-	padding: 8px 16px;
+	padding: 8px 18%;
 	display: flex;
 	align-items: center;
-	max-width: 1140px;
 	margin: 0 auto;
 }
 .nav-top {

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.partner.hotel.HotelPolicyVO;
+import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelVO;
@@ -24,8 +26,8 @@ public class HotelDAO {
 		return hotelListByCity;
 	}
 	
-	public List<HotelVO> getHotelListWithImgByCity(String city) throws DataAccessException{
-		List<HotelVO> hotelListWithImg = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectHotelWithImg", city);
+	public List<HotelVO> getHotelListWithImgByCity(HotelAvailableVO vo) throws DataAccessException{
+		List<HotelVO> hotelListWithImg = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectHotelWithImg", vo);
 		return hotelListWithImg;
 	}
 	
@@ -49,6 +51,9 @@ public class HotelDAO {
 		return hotelListByMap;
 	}
 	
-	
+	public HotelPolicyVO selectHotelPolicy(Integer serialNumber) throws DataAccessException{
+		HotelPolicyVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.selectHotelPolicy", serialNumber);
+		return vo;
+	}
 	
 }

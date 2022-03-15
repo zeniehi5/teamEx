@@ -721,11 +721,27 @@
     </script>
 
     <script>
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+
+    var dateString = year + '/' + month  + '/' + day;
+    
+    var tomorrow = new Date(today.setDate(today.getDate() + 1));
+    
+    var year_2 = tomorrow.getFullYear();
+    var month_2 = ('0' + (tomorrow.getMonth() + 1)).slice(-2);
+    var day_2 = ('0' + tomorrow.getDate()).slice(-2);
+    
+    var dateString_2 = year_2 + '/' + month_2  + '/' + day_2;
+    
         $(document).ready(function () {
             $(function () {
                 $('input[name="daterange"]').daterangepicker({
-                    "startDate": "01/01/2022",
-                    "endDate": "02/01/2022",
+                    "startDate": dateString,
+                    "endDate": dateString_2,
                     opens: 'center',
                     locale: {
                         format: 'YYYY/MM/DD'

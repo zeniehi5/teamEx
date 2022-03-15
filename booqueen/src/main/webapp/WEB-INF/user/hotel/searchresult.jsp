@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />    
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 	<script src="https://kit.fontawesome.com/fdb0bc6f32.js" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29b5f78cb856dc4d592f3c3f87388524"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29b5f78cb856dc4d592f3c3f87388524&libraries=services"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -49,7 +50,7 @@
 			<!-- ------------------------- 검색 필터 -------------------------  -->
 			<div class="container-left">
 				<div class="searchbox">
-					<form action="${contextPath}/searchResult.do" class="searchbox-form">
+					<form action="${contextPath}/searchResultInBox.do" class="searchbox-form">
 						<div class="searchbox-search"><h2><span class="searchbox-title">검색</span></h2></div>
 						<div class="searchbox-destination">
 							<span class="label">여행지/숙소 이름:</span>
@@ -65,43 +66,14 @@
 								<div class="checkin-date">
 									<span class="label">체크인 날짜</span>
 									<div class="checkin-field">
-										<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-calendar bi-checkin" viewBox="0 0 16 16">
-											<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-										</svg>
-										<div class="checkin-select">
-											<input class="startdate" id="startdate" type="text" name="daterange" value="2022년 2월 14일 (월)" readonly />
-										</div>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-down chevron-down" viewBox="0 0 16 16">
-											<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-										</svg>
+											<input class="startdate" id="startdate" type="date" name="daterange1" value="2022년 2월 14일 (월)" />
 									</div>
 								</div>
 								<div class="checkout-date">
 									<span class="label">체크아웃 날짜</span>
 									<div class="checkout-field">
-										<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-calendar bi-checkout" viewBox="0 0 16 16">
-											<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-										</svg>
-										<div class="checkout-select">
-											<input class="enddate" id="enddate" type="text" name="daterange" value="2022년 2월 15일 (화)" readonly />
-										</div>
-										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-down chevron-down" viewBox="0 0 16 16">
-											<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-										</svg>
+											<input class="enddate" id="enddate" type="date" name="daterange2" value="2022년 2월 15일 (화)" >
 									</div>
-								</div>
-								<span class="label">2박 선택</span>
-							</div>
-							<div class="period">
-								<div class="guest">
-									<span class="guest-select">
-										<span class="adults-count">성인 2명</span> · 
-										<span class="children-count">아동 0명</span> · 
-										<span class="rooms-count">객실 1개</span>
-									</span>
-									<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-down chevron-down" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-									</svg>
 								</div>
 							</div>
 						</div>
@@ -434,11 +406,11 @@
 								<input type="radio" class="filter_radio" id="popularity_filter" name="order_filter" >
 								<label for="popularity_filter">최다 예약</label>
 							</li>
-							<li class="menuitem price" data-value="2">
+							<li class="menuitem price" data-value="15">
 								<input type="radio" class="filter_radio" id="price_filter" name="order_filter">
 								<label for="price_filter">요금(낮은 순)</label>
 							</li>
-							<li class="menuitem review-price" data-value="5">
+							<li class="menuitem review-price" data-value="13">
 								<input type="radio" class="filter_radio" id="review-price_filter" name="order_filter" >
 								<label for="review-price_filter">평점(높은 순)</label>
 							</li>
@@ -634,8 +606,8 @@
 												<div class="price">
 													<div class="option-info">1박, 성인 2명</div>
 													<div class="option-price">
-														<span class="fixed-price">\402,770</span>
-														<span class="sale-price">\145,000</span>
+														<span class="fixed-price">\500,000</span>
+														<span class="sale-price"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price }" /></span>
 													</div>
 													<div class="price-info">세금 및 기타 요금 포함</div>
 												</div>
@@ -695,356 +667,7 @@
 		<!-- Modal Content -->
 		<div class="modal-content">
 			
-			<!-- Modal Filter -->
-			<!--  
-			<div class="map-filter">
-				<div class="filter-left">
-					<div class="filter-by"><h2>필터링 기준:</h2></div>
-
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>내 예산(1박 기준)</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckbudget1">
-								<label class="filter-text" for="mapCheckbudget1">
-									\0 - \50,000
-								</label>
-								<label class="filter-count" for="mapCheckbudget1">
-									9
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckbudget2">
-								<label class="filter-text" for="mapCheckbudget2">
-									\50,000 - \100,000
-								</label>
-								<label class="filter-count" for="mapCheckbudget2">
-									9
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckbudget3">
-								<label class="filter-text" for="mapCheckbudget3">
-									\100,000 - \150,000
-								</label>
-								<label class="filter-count" for="mapCheckbudget3">
-									9
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckbudget4">
-								<label class="filter-text" for="mapCheckbudget4">
-									\150,000 - 200,000
-								</label>
-								<label class="filter-count" for="mapCheckbudget4">
-									9
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckbudget5">
-								<label class="filter-text" for="mapCheckbudget5">
-									\200,000 +
-								</label>
-								<label class="filter-count" for="mapCheckbudget5">
-									9
-								</label>
-							</div>
-						</div>
-					</div>
-					<hr>
-					
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>성급</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="1" id="mapCheckGrade1">
-								<label class="filter-text" for="mapCheckGrade1">
-									1성급
-								</label>
-								<label class="filter-count" for="mapCheckGrade1">
-									2
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="2" id="mapCheckGrade2">
-								<label class="filter-text" for="mapCheckGrade2">
-									2성급
-								</label>
-								<label class="filter-count" for="mapCheckGrade2">
-									2
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="3" id="mapCheckGrade3">
-								<label class="filter-text" for="mapCheckGrade3">
-									3성급
-								</label>
-								<label class="filter-count" for="mapCheckGrade3">
-									26
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="4" id="mapCheckGrade4">
-								<label class="filter-text" for="mapCheckGrade4">
-									4성급
-								</label>
-								<label class="filter-count" for="mapCheckGrade4">
-									27
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="5" id="mapCheckGrade5">
-								<label class="filter-text" for="mapCheckGrade5">
-									5성급
-								</label>
-								<label class="filter-count" for="mapCheckGrade5">
-									19
-								</label>
-							</div>
-						</div>
-					</div>
-					
-
-					
-				
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>식사</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckMeals1">
-								<label class="filter-text" for="mapCheckMeals1">
-									조식 포함
-								</label>
-								<label class="filter-count" for="mapCheckMeals1">
-									43
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckMeals2">
-								<label class="filter-text" for="mapCheckMeals2">
-									바베큐
-								</label>
-								<label class="filter-count" for="mapCheckMeals2">
-									42
-								</label>
-							</div>
-							
-						</div>
-					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>명소</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckLandmark1">
-								<label class="filter-text" for="mapCheckLandmark1">
-									천제연폭포
-								</label>
-								<label class="filter-count" for="mapCheckLandmark1">
-									9
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckLandmark2">
-								<label class="filter-text" for="mapCheckLandmark2">
-									정방폭포
-								</label>
-								<label class="filter-count" for="mapCheckLandmark2">
-									2
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckLandmark3">
-								<label class="filter-text" for="mapCheckLandmark3">
-									성산일출봉
-								</label>
-								<label class="filter-count" for="mapCheckLandmark3">
-									1
-								</label>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>후기 평점</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckReview1">
-								<label class="filter-text" for="mapCheckReview1">
-									최고: 9 이상
-								</label>
-								<label class="filter-count" for="mapCheckReview1">
-									6
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckReview2">
-								<label class="filter-text" for="mapCheckReview2">
-									매우 좋음: 8 이상
-								</label>
-								<label class="filter-count" for="mapCheckReview2">
-									60
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckReview3">
-								<label class="filter-text" for="mapCheckReview3">
-									좋음: 7 이상
-								</label>
-								<label class="filter-count" for="mapCheckReview3">
-									79
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckReview4">
-								<label class="filter-text" for="mapCheckReview4">
-									만족: 6 이상
-								</label>
-								<label class="filter-count" for="mapCheckReview4">
-									81
-								</label>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>호텔 시설</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities1">
-								<label class="filter-text" for="mapCheckFacilities1">
-									주차장
-								</label>
-								<label class="filter-count" for="mapCheckFacilities1">
-									85
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities2">
-								<label class="filter-text" for="mapCheckFacilities2">
-									레스토랑
-								</label>
-								<label class="filter-count" for="mapCheckFacilities2">
-									48
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities3">
-								<label class="filter-text" for="mapCheckFacilities3">
-									반려동물 허용
-								</label>
-								<label class="filter-count" for="mapCheckFacilities3">
-									1
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities4">
-								<label class="filter-text" for="mapCheckFacilities4">
-									룸서비스
-								</label>
-								<label class="filter-count" for="mapCheckFacilities4">
-									23
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckFacilities12">
-								<label class="filter-text" for="mapCheckFacilities12">
-									24시간 프런트 데스크
-								</label>
-								<label class="filter-count" for="mapCheckFacilities12">
-									48
-								</label>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="filters-group">
-						<div class="filters">
-							<button class="filters-button">
-								<span class="filters-title">
-									<h3>객실 시설</h3>
-								</span>
-							</button>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckRoom1">
-								<label class="filter-text" for="mapCheckRoom1">
-									주방/간이 주방
-								</label>
-								<label class="filter-count" for="mapCheckRoom1">
-									43
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckRoom2">
-								<label class="filter-text" for="mapCheckRoom2">
-									전용 욕실
-								</label>
-								<label class="filter-count" for="mapCheckRoom2">
-									87
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckRoom3">
-								<label class="filter-text" for="mapCheckRoom3">
-									에어컨
-								</label>
-								<label class="filter-count" for="mapCheckRoom3">
-									86
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckRoom4">
-								<label class="filter-text" for="mapCheckRoom4">
-									스파 욕조
-								</label>
-								<label class="filter-count" for="mapCheckRoom4">
-									22
-								</label>
-							</div>
-							<div class="filter-checkbox">
-								<input class="filter-checkbox-input" type="checkbox" value="" id="mapCheckRoom5">
-								<label class="filter-text" for="mapCheckRoom5">
-									노트북 책상 있음
-								</label>
-								<label class="filter-count" for="mapCheckRoom5">
-									36
-								</label>
-							</div>
-						</div>
-					</div>
-					
-					
-					
-	
-				</div>
-
-			</div>
-			-->
+			
 			<!-- Modal List -->
 			<div class="map-list">
 				<!-- <div class="sorter-hotellist"> -->
@@ -1238,9 +861,25 @@
     	<div><img src="${contextPath }/resources/user/images/spinner2.gif" /></div>
 	</div>
 
-
 <script>
+function getParameterByName(name) { 
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
+}
+
+// var dateArr = new Array();
+// var dateRow = getParameterByName('daterange');
+// dateArr = dateRow.split('-');
+
+// var start_date = dateArr[0].trim().replaceAll("/", "-");
+// var end_date = dateArr[1].trim().replaceAll("/", "-");
+
 	$(document).ready(function(){
+		
+// 		$('#startdate').val(start_date);
+// 		$('#enddate').val(end_date);
+				
           $(".filter_radio").click(function(){
         	  if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
                 $(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
@@ -1348,7 +987,7 @@ function getHotel() {
 		
 	
     $.ajax({
-        url:'/web/hotelByStar.do'
+        url:'/web/hotelByFilter.do'
         , type : 'POST'
         , async:false
         , traditional : true
@@ -1414,8 +1053,6 @@ function getHotel() {
     orderArr = [];
     $('#number_hotel').text($('.list').length);
  }
-</script>
-
 </script>
 
 <script>
@@ -1570,7 +1207,8 @@ function getHotel() {
 		}
 	}
 
-
+</script>
+<script>
 	// ---------------------------
 
 	// 지도보기, 닫기
@@ -1599,10 +1237,158 @@ function getHotel() {
 	// 지도 ---------------------------
 	var container = document.getElementById('mapApi');
 	var options = {
-		center: new kakao.maps.LatLng(37.693575533651774, 126.63953347844458),
-		level: 8
+		center: new kakao.maps.LatLng(37.56049052322909, 126.98053287039083),
+		level: 5
 	};
 	var map = new kakao.maps.Map(container, options);
+	
+	var MapArray = new Array();
+	var positions = [];
+	
+	kakao.maps.event.addListener(map, 'dragend', selectMap);
+	
+	function selectMap(){
+        
+		var bounds = map.getBounds();
+		
+		var wLatitude = bounds.qa;
+		var eLatitude = bounds.pa;
+		var sLongitude = bounds.ha;
+		var nLongitude = bounds.oa;
+		
+		var contextPath = '${contextPath}';
+		
+        var sendData = {
+        				"wLatitude" : wLatitude,
+                        "eLatitude" : eLatitude,
+                        "sLongitude" : sLongitude,
+                        "nLongitude" : nLongitude
+                        }
+       	
+        	$.ajax({
+                method : "POST",
+                url : "/web/getMap.do",
+                async: false,
+                data : sendData,
+                dataType : "JSON",
+                success : function(data){
+                	
+                	positions = [];
+                	$('#map_hotel_list').empty();
+                	
+                	$.each(data, function(index, hotel){
+                		                		
+                		var text = '';
+                		text += "<div class='map-hotel-list'><div class='map-hotel-card'><div class='map-hotel-save'><button class='map-save-icon'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#000' class='bi bi-heart wishlist-heart' id='wishlist5' viewBox='0 0 16 16'>";
+                		text += "<path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/>";
+                		text += "</svg><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#c00' class='bi bi-heart-fill wishlist-heart-fill' id='wishlistFill5' viewBox='0 0 16 16'>";
+                		text += "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button></div>";
+                		text += "<div class='map-hotel-image' style='background-image: url(";
+                		text += hotel.hotelImgVO.file_url;
+                		text += ")'></div><div class='map-hotel-container'><div class='map-hotel-title'><a href='";
+                		text += contextPath;
+                		text += "/hotelInfo.do?serialNumber=";
+                		text += hotel.serialnumber;
+                		text += "' target='_blank'><span class='map-hotel-title-link'>";
+                		text += hotel.hotelname;
+                		text += "</span></a><div class='map-stars'><span>";
+               			text += isNumber(hotel.star);
+                		text += "</span></div></div><div class='map-hotel-review'><div class='map-hotel-review-score'>";
+                		text += hotel.reviewAvgVO.scoreAvg;
+                		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>매우 좋음</div><div class='map-hotel-review-text'>";
+                		text += hotel.reviewAvgVO.count;
+                		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>"
+                		text += \88,000;
+                		text += "</span><span class='map-hotel-content-price-sale'>\79,200</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
+            		 	
+                		$('#map_hotel_list').append(text);
+                		
+                		var contents = {
+                			content: '<div class="map-hotel-card" style="width: 300px; display: flex; margin: 0; flex-direction: row-reverse; border: 1px solid #000;"> <div class="map-hotel-image" style="background-image: url(' + hotel.hotelImgVO.file_url + ')"></div> <div class="map-hotel-container" style="padding: 10px;"> <div class="map-hotel-title"><span class="map-hotel-title-link">' + hotel.hotelname + '</span><div class="map-stars">' + isNumber(hotel.star) + '</div></div><div class="map-hotel-review"><div class="map-hotel-review-score">' + hotel.reviewAvgVO.scoreAvg + '</div><div class="map-hotel-review-content"><div class="map-hotel-review-title">' + scoreText(hotel.reviewAvgVO.scoreAvg) + '</div><div class="map-hotel-review-text">' + hotel.reviewAvgVO.count + '개 이용 후기' + '</div></div></div><div class="map-hotel-content"><div class="map-hotel-content-price"><div class="map-hotel-content-price-option">' + 1 + '박,' + 2 + '명</div><div class="map-hotel-content-price-price"><span class="map-hotel-content-price-fixed">\'' + '88,000' + '</span><span class="map-hotel-content-price-sale">\'' + '79,200' + '</span></div></div><div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단' + 3 + '개</div></div></div></div>',
+               				latlng: new kakao.maps.LatLng(hotel.latitude, hotel.longitude)
+               			};
+                		
+               			MapArray.push(contents);
+               			
+               			positions[index] = MapArray[index];
+
+               			var imageSrc = contextPath + '/resources/user/images/hotelMaker.png', // 마커이미지의 주소입니다    
+               		    imageSize = new kakao.maps.Size(32, 32), // 마커이미지의 크기입니다
+               		    imageOption = {offset: new kakao.maps.Point(27, 69)};
+               			
+               			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+               			
+               			var marker = new kakao.maps.Marker({
+               				map: map, // 마커를 표시할 지도
+               				position: positions[index].latlng,
+               				image: markerImage
+               			});
+
+               			// 마커에 표시할 인포윈도우를 생성합니다 
+               			var infowindow = new kakao.maps.InfoWindow({
+               				content: positions[index].content // 인포윈도우에 표시할 내용
+               			});
+
+               			var serialnumber = hotel.serialnumber;
+               			
+               			// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+               			// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+               			// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+               			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+               			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+               			kakao.maps.event.addListener(marker, 'click', function() {
+               				window.open(contextPath + '/hotelInfo.do?serialNumber=' +  serialnumber, '_blank');
+               			});
+               			
+               			
+               			// 장소 검색 객체를 생성합니다
+               			var ps = new kakao.maps.services.Places(map); 
+
+               			// 카테고리로 은행을 검색합니다
+               			ps.categorySearch('AT4', placesSearchCB, {useMapBounds:true}); 
+
+               			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+               			function placesSearchCB (data, status, pagination) {
+               			    if (status === kakao.maps.services.Status.OK) {
+               			        for (var i=0; i<data.length; i++) {
+               			            displayMarker(data[i]);    
+               			        }       
+               			    }
+               			}
+
+               			var imageSrc_attr = contextPath + '/resources/user/images/attractionMaker.png', // 마커이미지의 주소입니다    
+               		    imageSize_attr = new kakao.maps.Size(24, 24), // 마커이미지의 크기입니다
+               		    imageOption_attr = {offset: new kakao.maps.Point(27, 69)};
+               			
+               			var markerImage_for_attraction = new kakao.maps.MarkerImage(imageSrc_attr, imageSize_attr, imageOption_attr);
+               			
+               			// 지도에 마커를 표시하는 함수입니다
+               			function displayMarker(place) {
+               			    // 마커를 생성하고 지도에 표시합니다
+               			    var marker = new kakao.maps.Marker({
+               			        map: map,
+               			        position: new kakao.maps.LatLng(place.y, place.x),
+               			        image : markerImage_for_attraction
+               			    });
+
+               			    // 마커에 클릭이벤트를 등록합니다
+               			    kakao.maps.event.addListener(marker, 'mouseover', function() {
+               			        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+               			        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+               			        infowindow.open(map, marker);
+               			    });
+               			 	kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+               			}
+               			
+                	});
+
+                },
+                error : function(){
+                	alert('error');
+                }
+            })
+       
+    }
  	
 	// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
 	kakao.maps.event.addListener(map, 'center_changed', function() {
@@ -1621,27 +1407,8 @@ function getHotel() {
 
 	});
 	   
-
-	
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-	var positions = [
-		{
-			content: '<div>카카오</div>', 
-			latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-		},
-		{
-			content: '<div>생태연못</div>', 
-			latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-		},
-		{
-			content: '<div>텃밭</div>', 
-			latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-		},
-		{
-			content: '<div>근린공원</div>',
-			latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-		}
-	];
+	
 
 	for (var i = 0; i < positions.length; i ++) {
 		// 마커를 생성합니다
@@ -1675,93 +1442,6 @@ function getHotel() {
 			infowindow.close();
 		};
 	}
-	
-
-	kakao.maps.event.addListener(map, 'dragend', selectMap);
-	
-	function selectMap(){
-        
-		var bounds = map.getBounds();
-		
-		var wLatitude = bounds.qa;
-		var eLatitude = bounds.pa;
-		var sLongitude = bounds.ha;
-		var nLongitude = bounds.oa;
-		
-		var contextPath = '${contextPath}';
-		
-        var sendData = {
-        				"wLatitude" : wLatitude,
-                        "eLatitude" : eLatitude,
-                        "sLongitude" : sLongitude,
-                        "nLongitude" : nLongitude
-                        }
-       	
-        	$.ajax({
-                method : "POST",
-                url : "/web/getMap.do",
-                async: false,
-                data : sendData,
-                dataType : "JSON",
-                success : function(data){
-                	
-                	$('#map_hotel_list').empty();
-                	
-                	$.each(data, function(index, hotel){
-                		                		
-                		var text = '';
-                		text += "<div class='map-hotel-list'><div class='map-hotel-card'><div class='map-hotel-save'><button class='map-save-icon'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#000' class='bi bi-heart wishlist-heart' id='wishlist5' viewBox='0 0 16 16'>";
-                		text += "<path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/>";
-                		text += "</svg><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#c00' class='bi bi-heart-fill wishlist-heart-fill' id='wishlistFill5' viewBox='0 0 16 16'>";
-                		text += "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button></div>";
-                		text += "<div class='map-hotel-image' style='background-image: url(";
-                		text += hotel.hotelImgVO.file_url;
-                		text += ")'></div><div class='map-hotel-container'><div class='map-hotel-title'><a href='";
-                		text += contextPath;
-                		text += "/hotelInfo.do?serialNumber=";
-                		text += hotel.serialnumber;
-                		text += "' target='_blank'><span class='map-hotel-title-link'>";
-                		text += hotel.hotelname;
-                		text += "</span></a><div class='map-stars'><span>";
-               			text += isNumber(hotel.star);
-                		text += "</span></div></div><div class='map-hotel-review'><div class='map-hotel-review-score'>";
-                		text += hotel.reviewAvgVO.scoreAvg;
-                		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>매우 좋음</div><div class='map-hotel-review-text'>";
-                		text += hotel.reviewAvgVO.count;
-                		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>\88,000</span><span class='map-hotel-content-price-sale'>\79,200</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
-            		 	
-                		$('#map_hotel_list').append(text);
-                		
-                	});
-
-                },
-                error : function(){
-                	alert('error');
-                }
-            })
-       
-    }
-
-	// function move() {
-	// 	document.querySelector(".map-hide-button").classList.add("go");
-	// }
-
-
-	// 날짜
-	// $(document).ready(function() {
-	// 		$(function () {
-	// 				$('input[name="daterange"]').daterangepicker({
-	// 						"startDate": "2022년 2월 14일",
-	// 						"endDate": "2022년 2월 15일",
-	// 						opens: 'center',
-	// 						locale: {
-	// 								format: 'YYYY년 MM월 DD일'
-	// 						}
-	// 				});
-	// 		});
-	// });
-
-
 </script>
 
 </body>
