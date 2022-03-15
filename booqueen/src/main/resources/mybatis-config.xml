@@ -21,7 +21,7 @@
 		
 		<!-- partner -->
   		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
-      <typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
+      	<typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
 		  <typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
 		  <typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
 		  <typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
@@ -34,7 +34,10 @@
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
+		  <typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
       <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
+      <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
+      
 		  
 		  <!-- admin -->
 		  <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>

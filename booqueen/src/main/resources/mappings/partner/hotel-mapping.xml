@@ -22,4 +22,7 @@
 	<update id="updateWifiPolicy" parameterType="myService">UPDATE hotel_service SET wifi = #{wifi} where serialnumber = #{serialnumber}</update>
 	<update id="updateSmokingPolicy" parameterType="myService">UPDATE hotel_service SET smoking = #{smoking} where serialnumber = #{serialnumber}</update>
 	<select id="getHotelServiceByHotelSerial" resultType="myService">SELECT * FROM hotel_service where serialnumber = #{serialnumber}</select>
+	<select id="selectInquiryByHotelSerial" resultType="inquiry">
+		SELECT * FROM board where serialnumber = 1118
+	</select>
 </mapper>

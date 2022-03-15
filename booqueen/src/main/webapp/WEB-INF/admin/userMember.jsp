@@ -223,6 +223,7 @@
                                         <p class="card-category">총 가입자 수</p>
                                         <h3 class="card-title"><fmt:formatNumber type="number" value= />
                                             <small> ${fn:length(userList)}명</small>
+
                                         </h3>
                                     </div>
                                     <div class="card-footer">
@@ -329,6 +330,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+
                                     <c:forEach var="userList" items="${userList }" varStatus ="status">
                                         <tr>
                                             <th scope="row">${status.count }</th>
@@ -352,6 +354,7 @@
         <script src="${contextPath}/resources/admin/javascript/chart-area-demo.js"></script>
 		<script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script>
 		<script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
 

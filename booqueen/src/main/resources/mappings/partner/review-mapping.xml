@@ -14,4 +14,7 @@
 		WHERE
 			   serialnumber = #{serialnumber}
 	</select>
+	<select id="getReviewList" resultType="reviewVO">
+		SELECT * FROM review where serialnumber = #{serialnumber}
+	</select>
 </mapper>
