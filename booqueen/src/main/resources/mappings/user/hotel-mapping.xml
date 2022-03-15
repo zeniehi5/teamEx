@@ -23,6 +23,8 @@
 		<result property="city" column="city"/>
 		<result property="telephone" column="telephone"/>
 		<result property="star" column="star"/>
+		<result property="longitude" column="longitude"/>
+		<result property="latitude" column="latitude"/>
 		<collection property="hotelImgVO" resultMap="HotelImgVOMap" />
 		<collection property="reviewAvgVO"	resultMap="ReviewAvgVOMap"/>	
     </resultMap>
@@ -41,7 +43,7 @@
 		<![CDATA[
 				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
 	
-				t.telephone, t.star, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
 				
 				from hotel_image as h 
 				
@@ -59,11 +61,11 @@
 		]]>
 	</select>
 	
-	<select id="selectFilterByStar" resultMap="HotelVOMap" parameterType="java.util.ArrayList">
+	<select id="selectFilterByStar" resultMap="HotelVOMap" parameterType="java.util.HashMap">
 		<![CDATA[ 
 			select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
 	
-				t.telephone, t.star, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
 				
 				from hotel_image as h 
 				
@@ -75,16 +77,93 @@
 				
 				on t.serialnumber = r.serialnumber
 				
+				full join hotel_service as s
+				
+				on t.serialnumber = s.serialnumber
+				
 				where star in (
 		]]>			
-				<foreach collection="array" item="item" separator="," index="index">
-       				 <![CDATA[ #{item}]]>	
+				<foreach collection="stars" item="stars" separator="," index="index">
+       				 <![CDATA[ #{stars}]]>	
    	 			</foreach>
 		<![CDATA[		
-				)
+				) and city LIKE CONCAT('%',
+				]]>	
+				<foreach collection="city" item="city" index="index">
+				 	<![CDATA[#{city}]]>	
+				</foreach>		
 				
+				<![CDATA[, '%')]]>
+				
+				<if test= "hotelServiceVO.breakfast == true">
+					<![CDATA[and breakfast = #{hotelServiceVO.breakfast}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.restaurant == true">
+					<![CDATA[and restaurant = #{hotelServiceVO.restaurant}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.shuttle == true">
+					<![CDATA[and shuttle = #{hotelServiceVO.shuttle}]]>	
+				</if>	
+				
+				<if test= "hotelServiceVO.swimming_pool == true">
+					<![CDATA[and swimming_pool = #{hotelServiceVO.swimming_pool}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.front_desk == true">
+					<![CDATA[and front_desk = #{hotelServiceVO.front_desk}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.wifi == true">
+					<![CDATA[and wifi = #{hotelServiceVO.wifi}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.fitnesscenter == true">
+					<![CDATA[and fitnesscenter = #{hotelServiceVO.fitnesscenter}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.smoking == true">
+					<![CDATA[and smoking = #{hotelServiceVO.smoking}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.bar == true">
+					<![CDATA[and bar = #{hotelServiceVO.bar}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.spa == true">
+					<![CDATA[and spa = #{hotelServiceVO.spa}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.parking == true">
+					<![CDATA[and parking = #{hotelServiceVO.parking}]]>	
+				</if>
+				
+		<![CDATA[	
 				group by t.serialnumber, h.file_name, h.file_url
 				]]>	
+	</select>
+	
+	<select id="selectHotelByMap" resultMap="HotelVOMap" parameterType="hotelMapVO">
+		<![CDATA[
+				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
+	
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
+				
+				from hotel_image as h 
+				
+				full join temphotel as t
+				
+				on h.serialnumber = t.serialnumber
+				
+				full join review as r
+				
+				on t.serialnumber = r.serialnumber
+				
+				where latitude >= #{wLatitude} and latitude <= #{eLatitude} and longitude >= #{sLongitude} and longitude <= #{nLongitude}
+				
+				group by t.serialnumber, h.file_name, h.file_url
+		]]>
 	</select>
 	
 </mapper>

@@ -210,7 +210,6 @@
 .map-back {
 	width: 100%;
 	height: 150px;
-	background-image: url(images/map.png);
 	margin-top: 10px;
 }
 .map-image {
@@ -854,7 +853,7 @@
 	padding-top: 0;
 	width: 380px;
 	height: 100%;
-	left: 265px;
+	left: 0;
 	top: 0;
 		/* transform: translateX(-380px);
 	transition: transform ease .2s; */
@@ -978,7 +977,6 @@
 	border-radius: 3px 0 0 3px;
 	overflow: hidden;
 	background: #fff;
-	background-image: url(images/hotel2.jpg);
 	background-size: cover; /* 가로여백 */
 	background-position: center; /* 세로축 센터 */
 }
@@ -1015,10 +1013,12 @@
 	color: #febb02;
 }
 .map-hotel-review {
-	display: flex;
-	position: relative;
-	align-items: center;
-	margin-bottom: 10px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: row-reverse;
+    gap: 10px;
 }
 .map-hotel-review-score {
 	background: #003580;
@@ -1032,7 +1032,10 @@
 	line-height: 32px;
 }
 .map-hotel-review-content {
-	margin-left: 8px;
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 .map-hotel-review-title {
 	color: #262626;
@@ -1179,6 +1182,24 @@
 }
 
 
+/* loader */
+
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	display: none;
+	margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(255 255 255 / 58%);
+}
+    .wrap-loading div{ /*로딩 이미지*/
+     position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    opacity: 0.5;
+    }
 
 
 

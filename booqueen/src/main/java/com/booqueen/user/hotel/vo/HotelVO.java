@@ -14,6 +14,8 @@ public class HotelVO {
 	private String city;
 	private String telephone;
 	private String star;
+	private Double longitude;
+	private Double latitude;
 	HotelImgVO hotelImgVO;
 	ReviewAvgVO reviewAvgVO;
 }

@@ -16,6 +16,8 @@
 		<!-- shared -->
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelImgVO" alias="hotelImgVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelServiceVO" alias="hotelServiceVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.HotelMapVO" alias="hotelMapVO"/>
 		
 		<!-- partner -->
   		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
@@ -31,7 +33,11 @@
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesFoodVO" alias="facilitiesFood"/>
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
 		  <typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>		
+		  <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
+      <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
+		  
+		  <!-- admin -->
+		  <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
 	</typeAliases>
 	<mappers>
 	  <mapper resource="mappings/user/member-mapping.xml"/>
@@ -44,5 +50,7 @@
     <mapper resource="mappings/partner/member-mapping.xml"/>
     <mapper resource="mappings/partner/hotel-mapping.xml"/>
     <mapper resource="mappings/partner/room-mapping.xml"/>
+    <mapper resource="mappings/partner/review-mapping.xml"/>
+    <mapper resource="mappings/admin/member-mapping.xml"/>
 	</mappers>
 </configuration>

@@ -21,4 +21,6 @@
 		<property name="prefix" value="/WEB-INF/admin/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	<mvc:annotation-driven/>
+	<context:annotation-config/>
 </beans>

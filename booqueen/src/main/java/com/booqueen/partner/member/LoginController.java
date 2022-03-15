@@ -58,7 +58,7 @@ public class LoginController {
 	@RequestMapping(value = "/logout.pdo", method = RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletResponse response) throws IOException {
 		session.invalidate();
-		return "redirect:/home.jsp";
+		return "redirect:/login.jsp";
 	}
 
 }

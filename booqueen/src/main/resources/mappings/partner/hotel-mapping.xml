@@ -21,4 +21,5 @@
 	<update id="updateTimePolicy" parameterType="policy">UPDATE hotel_policy SET check_in_start = #{check_in_start}, check_in_end = #{check_in_end}, check_out_start = #{check_out_start}, check_out_end = #{check_out_end} where serialnumber = #{serialnumber}</update>
 	<update id="updateWifiPolicy" parameterType="myService">UPDATE hotel_service SET wifi = #{wifi} where serialnumber = #{serialnumber}</update>
 	<update id="updateSmokingPolicy" parameterType="myService">UPDATE hotel_service SET smoking = #{smoking} where serialnumber = #{serialnumber}</update>
+	<select id="getHotelServiceByHotelSerial" resultType="myService">SELECT * FROM hotel_service where serialnumber = #{serialnumber}</select>
 </mapper>
