@@ -1,6 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>예약 현황</title>
+        <title>거래상세내역</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
+        <link href="${contextPath}/resources/admin/css/transactionDetail.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     </head>
@@ -208,130 +209,97 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-            <!--main-->
-               <main>
-                <div class="container-fluid px-4"> 
-                    
-                    <h1 class="mt-4">예약</h1>
-                    <br>
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">금월 총 예약</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">1111명</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">금일 예약건 수</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">2명</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-success text-white mb-4">
-                                <div class="card-body">금일 예약취소</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">1명</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">금월 이용완료</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">1명</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
+                <main>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            예약 현황
+                            거래
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>투숙객 이름</th>
-                                        <th>체크인</th>
-                                        <th>체크아웃</th>
-                                        <th>객실</th>
-                                        <th>예약 날짜</th>
-                                        <th>예약 상태</th>
-                                        <th>요금</th>
+                                        <th>룸</th>
+                                        <th>가격</th>
                                         <th>수수료</th>
-                                        <th>예약번호</th>
+                                        <th style="width: 200px;">누적 예약수</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                        <tr> 
-                                            <td> <a href="reservationStatusDetail.html">투숙객명1</a></td>
-                                            <td>2022년 7월 15일</td>
-                                            <td>2022년 7월 16일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 1월 21일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td>2299035596</td>
-                                        </tr>
-                                    
-                                    
-                                        <tr>
-                                            <td>투숙객명2</td>
-                                            <td>2022년 3월 10일</td>
-                                            <td>2022년 3월 11일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 1월 1일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">2272346596</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>투숙객명3</td>
-                                            <td>2022년 5월 15일</td>
-                                            <td>2022년 5월 16일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 2월 15일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">2834535596</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>투숙객명4</td>
-                                            <td>2022년 7월 12일</td>
-                                            <td>2022년 7월 19일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 3월 1일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">3254035596</a></td>
-                                        </tr>
-                                    <tr>
-                                        <th colspan="9" style="text-align: right; padding-right: 75px;">수수료: &#8361;3000<span style="margin-left: 30px; font-weight: bolder;">총 금액: &#8361;180,000</span></th>
-                                    </tr>
-                                </tbody>
                                 <tfoot>
-                                    
+                                    <tr>
+                                        <th>룸</th>
+                                        <th>가격</th>
+                                        <th>수수료</th>
+                                        <th>누적 예약수</th>
+                                    </tr>
                                 </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>디럭스 싱글룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>수페리어 싱글룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>디럭스 더블룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>수페리어 더블룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>디럭스 트리플룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>수페리어 트리플룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>주니어 스위트룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        <td>이그제큐티브 스위트룸</td>
+                                        <td>10,000</td>
+                                        <td>1,000</td>
+                                        <td>101건</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td colspan="4" style="text-align: right; padding-right: 210px;">
+                                            
+                                            <span id="ca">
+                                                총 금액 :
+                                            </span>
+                                            <span>
+                                                총 수수료:
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

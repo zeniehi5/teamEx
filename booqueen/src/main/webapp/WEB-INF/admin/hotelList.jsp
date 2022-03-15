@@ -43,102 +43,151 @@
                 </li>
             </ul>
         </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                대시보드
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                재무
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="reservationStatus.html">예약 현황 관리</a>
-                                    <a class="nav-link" href="transactionHistory.html">거래 내역 리스트</a>
-                                    <a class="nav-link" href="payment.html">대금 지급 관리</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                회원관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="userMember.html">회원 목록</a>
-                                    <a class="nav-link" href="reportedUser.html">신고 및 이용이 제한된 회원 관리</a>
-                                    <a class="nav-link" href="">회원 탈퇴</a>                                 
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                파트너 관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="partnerMember.html">파트너 목록</a>
-                                    <a class="nav-link" href="blockPartner.html">파트너 계정 차단</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                사이트 관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="faq.html">문의 게시판</a>
-                                    <a class="nav-link" href="banner.html">추천 여행지(배너)</a>
-                                    <a class="nav-link" href="terms.html">이용 약관 관리</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                호텔 목록
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="hotelList.html">호텔 목록</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
+        	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark"
+				id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">Core</div>
+						<a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 대시보드
+						</a>
+						<div class="sb-sidenav-menu-heading">Interface</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 재무
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
+									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
+									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts2" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 회원관리
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts2"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
+									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
+									관리</a> 
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts3" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 파트너 관리
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts3"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
+									class="nav-link" href="${contextPath }/blockPartner.mdo">파트너 계정 차단</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts4" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 사이트 관리
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts4"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
+									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
+									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts5" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 호텔 목록
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts5"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapsePages" aria-expanded="false"
+							aria-controls="collapsePages">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-book-open"></i>
+							</div> Pages
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapsePages"
+							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav accordion"
+								id="sidenavAccordionPages">
+								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+									aria-controls="pagesCollapseAuth"> Authentication
+									<div class="sb-sidenav-collapse-arrow">
+										<i class="fas fa-angle-down"></i>
+									</div>
+								</a>
+								<div class="collapse" id="pagesCollapseAuth"
+									aria-labelledby="headingOne"
+									data-bs-parent="#sidenavAccordionPages">
+									<nav class="sb-sidenav-menu-nested nav">
+										<a class="nav-link" href="${contextPath }/login.mdo">Login</a> <a
+											class="nav-link" href="${contextPath }/register.mdo">Register</a> <a
+											class="nav-link" href="${contextPath }/password.mdo">Forgot Password</a>
+									</nav>
+								</div>
+								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+									data-bs-target="#pagesCollapseError" aria-expanded="false"
+									aria-controls="pagesCollapseError"> Error
+									<div class="sb-sidenav-collapse-arrow">
+										<i class="fas fa-angle-down"></i>
+									</div>
+								</a>
+								<div class="collapse" id="pagesCollapseError"
+									aria-labelledby="headingOne"
+									data-bs-parent="#sidenavAccordionPages">
+									<nav class="sb-sidenav-menu-nested nav">
+										<a class="nav-link" href="${contextPath }/401.mdo">401 Page</a> <a
+											class="nav-link" href="${contextPath }/404.mdo">404 Page</a> <a
+											class="nav-link" href="${contextPath }/500.mdo">500 Page</a>
+									</nav>
                                     </div>
                                 </nav>
                             </div>
@@ -179,12 +228,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="hotelList" items="${hotelList }" varStatus="status">
                                         <tr>
-                                            <td><a href="hotelDetail.html"> 그랜드 워커힐 서울</a></td>
-                                            <td>광진구, 서울</td>
-                                            <td>장진아</td>
-                                            <td>02-123-123</td>
-                                            <td>★★★★★</td>
+                                            <td><a href="hotelDetail.html">${hotelList.hotelname }</a></td>
+                                            <td>${hotelList.city }</td>
+                                            <td>${hotelList.manager}</td>
+                                            <td>${hotelList.telephone}</td>
+                                            <td>
+	                                            <c:if test="${hotelList.star+0 == '5'}">★★★★★</c:if>
+	                                            <c:if test="${hotelList.star+0 == '4'}">★★★★</c:if>
+	                                            <c:if test="${hotelList.star+0 == '3'}">★★★</c:if>
+	                                            <c:if test="${hotelList.star+0 == '2'}">★★</c:if>
+	                                            <c:if test="${hotelList.star+0 == '1'}">★</c:if>
+                                            </td>
                                             <td><div class="dataTable-dropdown">
                                                     <label>
                                                         <select class="dataTable-selector"><option value="Y">가능</option><option value="N" selected="">불가능</option></select>                                                        
@@ -192,32 +248,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="hotelDetail.html">조선팰리스</a></td>
-                                            <td>강남구, 서울</td>
-                                            <td>최태원</td>
-                                            <td>02-456-456</td>
-                                            <td>★★★★★</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">가능</option><option value="N" selected="">불가능</option></select>                                                        
-                                                </label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="hotelDetail.html">롯데시티호텔 명동</a></td>
-                                            <td>중구, 서울</td>
-                                            <td>김상민</td>
-                                            <td>02-789-789</td>
-                                            <td>★★★★★</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">가능</option><option value="N" selected="">불가능</option></select>                                                        
-                                                </label>
-                                                </div>
-                                            </td>
-                                        </tr>
+
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

@@ -80,9 +80,9 @@
 						<div class="collapse" id="collapseLayouts"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="reservationStatus.html">예약 현황 관리</a> <a
-									class="nav-link" href="transactionHistory.html">거래 내역 리스트</a> <a
-									class="nav-link" href="payment.html">대금 지급 관리</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
+									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
+									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -98,9 +98,10 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="userMember.html">회원 목록</a> <a
-									class="nav-link" href="reportedUser.html">신고 및 이용이 제한된 회원
-									관리</a> <a class="nav-link" href="">회원 탈퇴</a>
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
+									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
+									관리</a> 
+
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -116,8 +117,9 @@
 						<div class="collapse" id="collapseLayouts3"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="PartnerMember.html">파트너 목록</a> <a
-									class="nav-link" href="blockPartner.html">파트너 계정 차단</a>
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
+									class="nav-link" href="${contextPath }/blockPartner.mdo">파트너 계정 차단</a>
+
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -133,9 +135,9 @@
 						<div class="collapse" id="collapseLayouts4"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="faq.html">문의 게시판</a> <a
-									class="nav-link" href="banner.html">추천 여행지(배너)</a> <a
-									class="nav-link" href="terms.html">이용 약관 관리</a>
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
+									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
+									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -151,7 +153,7 @@
 						<div class="collapse" id="collapseLayouts5"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="hotelList.html">호텔 목록</a>
+								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -179,9 +181,9 @@
 									aria-labelledby="headingOne"
 									data-bs-parent="#sidenavAccordionPages">
 									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="login.html">Login</a> <a
-											class="nav-link" href="register.html">Register</a> <a
-											class="nav-link" href="password.html">Forgot Password</a>
+										<a class="nav-link" href="${contextPath }/login.mdo">Login</a> <a
+											class="nav-link" href="${contextPath }/register.mdo">Register</a> <a
+											class="nav-link" href="${contextPath }/password.mdo">Forgot Password</a>
 									</nav>
 								</div>
 								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -195,9 +197,9 @@
 									aria-labelledby="headingOne"
 									data-bs-parent="#sidenavAccordionPages">
 									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="401.html">401 Page</a> <a
-											class="nav-link" href="404.html">404 Page</a> <a
-											class="nav-link" href="500.html">500 Page</a>
+										<a class="nav-link" href="${contextPath }/401.mdo">401 Page</a> <a
+											class="nav-link" href="${contextPath }/404.mdo">404 Page</a> <a
+											class="nav-link" href="${contextPath }/500.mdo">500 Page</a>
 									</nav>
 								</div>
 							</nav>
@@ -282,20 +284,26 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
-								</div>
-								<div class="card-body">
-									<canvas id="myBarChart" width="100%" height="40"></canvas>
-								</div>
-							</div>
-						</div>
-						<canvas id="myPieChart"
-							style="width: 724px; height: 133px; margin-bottom: 10px; display: block;"
-							width="724" height="133" class="chartjs-render-monitor"></canvas>
-					</div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        가입자 연령
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        남녀비율
+                                    </div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fas fa-table me-1"></i> DataTable Example
@@ -806,12 +814,12 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 		crossorigin="anonymous"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="${contextPath}/resources/admin/javascript/chart-area-demo.js"></script>
+	<script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script>
+	<script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 		crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-
 	<script>
             // Pie Chart Example
             var ctx = document.getElementById("myPieChart");
