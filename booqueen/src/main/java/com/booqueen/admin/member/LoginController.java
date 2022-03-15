@@ -19,10 +19,10 @@ public class LoginController {
 		MemberVO member = memberService.getAdminMember(vo);
 		if(member != null) {
 			System.out.println("¼º°ø");
-			return "sample";
+			return "index2";
 			
 		}
-		return "sample";
+		return "login";
 		
 	}
 	
