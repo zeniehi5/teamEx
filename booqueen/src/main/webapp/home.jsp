@@ -702,7 +702,7 @@
         </div>
     </div>
 
-    <div class="section">&nbsp;</div>
+    <div class="section">&nbsp;&nbsp;</div>
     <script>
         document.getElementById("defaultOpen").click();
     </script>
