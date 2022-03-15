@@ -1,5 +1,7 @@
 package com.booqueen.partner.review;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelVO;
+import com.booqueen.user.review.vo.ReviewVO;
 
 @Controller
 public class ReviewController {
@@ -25,6 +28,9 @@ public class ReviewController {
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			avg = reviewService.getReviewAvgByHotelSerial(hotel.getSerialnumber());
+			List<ReviewVO> review = reviewService.getReviewList(hotel.getSerialnumber());
+			
+			System.out.println(review.toString());
 			if(hotel != null) {
 				model.addAttribute("avg", avg);
 				model.addAttribute("hotel", hotel);
@@ -35,5 +41,4 @@ public class ReviewController {
 		}
 		return "reviews";
 	}
-
 }

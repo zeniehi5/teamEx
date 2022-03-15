@@ -1,4 +1,4 @@
-package com.booqueen.partner.calendar;
+package com.booqueen.partner.analysis;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,19 +12,22 @@ import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelVO;
 
 @Controller
-public class CalenderController {
+public class AnalysisController {
 	
 	@Autowired
 	private HotelService hotelService;
 	
-	@RequestMapping(value = "/calendar.pdo", method = RequestMethod.GET)
-	public String getMonthlyCalendar(Model model, HttpSession session) {
-		HotelVO hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
-		if(hotel != null) {
-			model.addAttribute("hotel", hotel);
-			//예약 내역 가져오기
+	@RequestMapping(value = "/analysis.pdo", method = RequestMethod.GET)
+	public String getAnalysisPage(HotelVO hotel, Model model, HttpSession session) {
+		try {
+			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+			if(hotel != null) {
+				model.addAttribute("hotel", hotel);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-		return "calendar";
+		return "analysis";
 	}
 
 }

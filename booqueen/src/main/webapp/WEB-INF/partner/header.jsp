@@ -304,7 +304,7 @@
                                                                 관련 메시지</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="#"><span>Booking.com 메시지</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>숙소
+                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/inquiry.pdo"><span>숙소
                                                                 관련 문의</span></a></li>
                                                 </ul>
                                             </div>
@@ -411,7 +411,7 @@
                                             </a>
                                             <div class="submenu" id="submenu">
                                                 <ul class="submenu_list">
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>분석
+                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/analysis.pdo"><span>분석
                                                                 게시판</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>예약
                                                                 현황</span></a></li>

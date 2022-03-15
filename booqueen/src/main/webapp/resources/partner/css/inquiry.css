@@ -1,0 +1,190 @@
+@charset "UTF-8";
+.qna{
+    margin-top: 10px;
+    margin-left: 360px;
+    margin-right: 360px;
+}
+.qna h1{
+    margin-bottom: -10px;
+}
+.msgleft{
+    background-color: white;
+    width: 780px;
+    height: 350px;
+}
+.leftinside{
+    align-items: center;
+    text-align: center;
+    width: 330px;
+    margin-left: 140px;
+    margin-top: 0px;
+    margin-bottom: 100px;
+}
+.leftinside input {
+    margin-bottom: 60px;
+}
+.msg{
+    display: flex;
+    justify-content: flex-start;
+}
+.msgright{
+    background-color: white;
+    margin-left: 40px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    width: 460px;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+}
+.msgright img{
+    width: 100px;
+    height: 150px;
+    margin-right: 10px;
+}
+#moremsg{
+    width: 150px;
+    height: 50px;
+    background-color: #07c;
+    border: 1px solid #07c;
+    color: white;
+}
+.introduce_qna{
+    background-color: white;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    padding-right: 20px;
+    width: 460px;
+
+    display: flex;
+    justify-content: flex-start;
+}
+.introduce_qna img{
+    width: 100px;
+    height: 150px;
+    margin-right: 20px;
+}
+/*----------------------------------------------------------*/
+ul.tabs{
+   margin: 0px;
+   padding: 0px;
+   list-style: none;
+}
+ul.tabs li{
+   background: none;
+   color: #222;
+   display: inline-block;
+   padding: 10px 15px;
+   cursor: pointer;
+}
+
+ul.tabs li.current{
+    border-bottom: 3px solid;
+    color: #07c;
+}
+
+.tab-content{
+   display: none;
+   background: #ededed;
+
+}
+
+.tab-content.current{
+    display: block;
+    text-align: center;
+    background-color: #ededed;
+    margin-top: 20px;
+    padding:20px;
+    margin-bottom:20px;
+}
+.tab{
+    width: 800px;
+    margin-top: -50px;
+}
+.tab-top{
+    display: flex;
+    width: 1300px;
+}
+#qnaset{
+    margin-left: 980px;
+    margin-top: 10px;
+}
+#hr{
+    margin-top: -0px;
+    margin-bottom: 0px;
+    width: 1300px;
+}
+.msginside{
+    background-color: white;
+    height: 400px;
+    padding-top: 70px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.msg hr{
+    margin-top: 10px;
+    opacity: 0.4;
+}
+
+#tab-2{
+    text-align: left;
+    background-color: white;
+}
+.question{
+    background-color: #f3f3f3;
+    padding: 15px;
+    border: 1px solid #f3f3f3;
+    border-radius: 10px;
+    margin-top: 10px;
+    opacity: 0.8;
+    margin-right: 40px;
+}
+.receivetime_que{
+    margin-top: 10px;
+    margin-left: 5px;
+    opacity: 0.7;
+    font-size: 12px;
+}
+.answer{
+    background-color: #ededed;
+    padding: 15px;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.receivetime_ans{
+    margin-top: 10px;
+    text-align: right;
+    opacity: 0.7;
+    font-size: 12px;
+}
+#tab-2 hr{
+    opacity: 0.3;
+    margin-top: 20px;
+}
+#deletebtn{
+    color: #fff;
+    background-color: #07c;
+    border-color: #07c;
+    margin-top: 30px;
+    height: 40px;
+    width: 100px;
+}
+.question_bottom{
+    display: flex;
+}
+.public_ans{
+    align-items: right;
+    margin-top: 40px;
+    margin-left: 440px;
+}
+#ans{
+    width: 20px;
+    height: 20px;
+}
+.checkbox_text{
+    margin-top: 40px;
+    margin-left: 10px;
+}
