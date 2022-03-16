@@ -1,6 +1,7 @@
 package com.booqueen.partner.room.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.booqueen.partner.room.FacilitiesBathVO;
 import com.booqueen.partner.room.FacilitiesMediaVO;
 import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
+import com.booqueen.partner.room.RoomAvailableVO;
 import com.booqueen.partner.room.RoomVO;
 
 @Repository("roomDAO")
@@ -78,6 +80,22 @@ public class RoomDAO {
 
 	public void updateFacilitiesService(HashMap<String, Object> attribute) {
 		sqlSessionTemplate.update("RoomDAO.updateFacilitiesService", attribute);
+	}
+
+	public RoomVO getRoomByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectOne("RoomDAO.getRoomByHotelSerial", serialnumber);
+	}
+
+	public void insertRoomPrice(HashMap<String, Object> setPrice) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomPrice", setPrice);
+	}
+
+	public void insertRoomAvailable(HashMap<String, Object> setPrice) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomAvailable", setPrice);
+	}
+
+	public List<RoomAvailableVO> selectRoomAvailable(int room_id) {
+		return sqlSessionTemplate.selectList("RoomDAO.selectRoomAvailable", room_id);
 	}
 
 }

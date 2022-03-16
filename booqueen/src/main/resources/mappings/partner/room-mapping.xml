@@ -40,4 +40,13 @@
 	<update id="updateFacilitiesService" parameterType="java.util.HashMap">
 		UPDATE room_facilities_service SET lounge = #{lounge} where room_id = (select room_id from room where serialnumber = #{serialnumber})
 	</update>
+	<select id="getRoomByHotelSerial" resultType="myRoom">
+		SELECT * from room where serialnumber = #{serialnumber}
+	</select>
+	<insert id="insertRoomAvailable" parameterType="java.util.HashMap">
+		INSERT INTO room_available values (nextval('seq_room_price'), #{room_id}, #{open_date}, #{standard_price}, #{non_refundable_price}, #{available})
+	</insert>
+	<select id="selectRoomAvailable" resultType="roomAvailable">
+		select * FROM room_available where room_id = #{room_id}
+	</select>
 </mapper>

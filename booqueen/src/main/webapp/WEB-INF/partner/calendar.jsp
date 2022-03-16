@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,6 +27,7 @@
         });
 
     });
+
 </script>
 <body>
     <div class="main-container">
@@ -303,7 +305,8 @@
                                                     // ' + dayOfWeek ) ;
                                                     tdDay = document.createElement('td');
                                                     tdDay.setAttribute('class', 'tableDay');
-                                                    tdDay.setAttribute('id', 'HighLight');
+                                                    tdDay.setAttribute('value', i);
+                                                    //tdDay.setAttribute('id', 'HighLight');
                                                     //tdDay.setAttribute('onclick', 'HighLightTD(this,"#d8fafa","#003b95")');
                                                     tdDay.append(i + '일');
                                                     trDay.append(tdDay);
@@ -325,6 +328,7 @@
 
                                                 $(".calendarBodytbl").append(trDay); //마지막주
                                             }
+                                            
                                         </script>
                                         <script src="js/plugins/dataTables/datatables.min.js"></script>
                                         <script src="js/plugins/dataTables/datatables.select.min.js"></script>
@@ -360,6 +364,7 @@
                                     </div>
                                 </div>
                                     <div class="av-monthly-container__form">
+                                    <form action="update-calendar.pdo" method="POST">
                                         <div class="av-monthly-container__block av-monthly__hide-medium">
                                             <div data-tour-onboarding="datepicker">
                                                 <div class="bui-spacer--large">
@@ -382,7 +387,7 @@
                                                                             style="user-select: auto;"></path>
                                                                     </svg>
                                                                 </div>
-                                                                <input class="form-control bui-form__control" placeholder="2022년 3월 9일" readonly>
+                                                                <input class="form-control bui-form__control" placeholder="2022년 3월 9일" name="open_date_start">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -407,7 +412,7 @@
                                                                             style="user-select: auto;"></path>
                                                                     </svg>
                                                                 </div>
-                                                                <input class="form-control bui-form__control" placeholder="2022년 3월 1일" readonly>
+                                                                <input class="form-control bui-form__control" placeholder="2022년 3월 1일" name="open_date_end">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,7 +420,6 @@
                                             </div>
                                         </div>
                                         <div class="av-monthly-container__block">
-                                            <form>
                                                 <div data-tour-onboarding="open-close">
                                                     <div class="bui-spacer--medium">
                                                         <span>객실 Open/Close</span>
@@ -424,7 +428,7 @@
                                                         <div class="bui-group bui-group--inline bui-group--large">
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="open">
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 가능</span>
                                                                     </span>
@@ -432,7 +436,7 @@
                                                             </div>
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="open">
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 불가</span>
                                                                     </span>
@@ -450,9 +454,9 @@
                                                             <div class="bui-spacer--medium bui-form__group">
                                                                 <label><span>판매 수량 선택</span></label>
                                                                 <div class="bui-input-select">
-                                                                    <select class="bui-form__control">
-                                                                        <option>잔여 옵션 0개</option>
-                                                                        <option>잔여 옵션 1개</option>
+                                                                    <select name="available" class="bui-form__control">
+                                                                        <option value=0>잔여 옵션 0개</option>
+                                                                        <option value=1>잔여 옵션 1개</option>
                                                                     </select>
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                         viewBox="0 0 24 24"
@@ -480,7 +484,7 @@
                                                             class="bui-spacer--small bui-group bui-group bui-group--inline bui-group--large">
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="standard" >
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 가능</span>
                                                                     </span>
@@ -488,7 +492,7 @@
                                                             </div>
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="standard">
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 불가</span>
                                                                     </span>
@@ -496,11 +500,11 @@
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <div class="bui-form__group bui-has-error">
+                                                            <div class="bui-form__group">
                                                                 <div
                                                                     class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
                                                                     <div class="bui-input__addon">KRW</div>
-                                                                    <input type="text"
+                                                                    <input type="text" value="${room.price}" name="standard_price"
                                                                         class="bui-form__control av-monthly__segmented--middle">
                                                                     <div
                                                                         class="bui-input__addon av-monthly__right-bui-addon">
@@ -523,9 +527,6 @@
                                                                             <span class="bui-button__text">4</span>
                                                                         </button>
                                                                     </div>
-                                                                </div>
-                                                                <div class="bui-form__error">
-                                                                    <span>요금을 입력해 주세요.</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -540,7 +541,7 @@
                                                             class="bui-spacer--small bui-group bui-group--inline bui-group--large">
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="non_refund">
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 가능</span>
                                                                     </span>
@@ -548,7 +549,7 @@
                                                             </div>
                                                             <div class="bui-form__group">
                                                                 <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
+                                                                    <input type="radio" class="bui-radio__input" name="non_refund">
                                                                     <span class="bui-radio__label">
                                                                         <span>예약 불가</span>
                                                                     </span>
@@ -560,7 +561,7 @@
                                                                 <div
                                                                     class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
                                                                     <div class="bui-input__addon">KRW</div>
-                                                                    <input disabled="disabled" type="text"
+                                                                    <input type="text" name="non_refundable_price"
                                                                         class="bui-form__control av-monthly__segmented--middle">
                                                                     <div
                                                                         class="bui-input__addon av-monthly__right-bui-addon">
@@ -588,63 +589,7 @@
                                                         </div>
                                                         <a href="#"
                                                             class="bui-link bui-link--primary"><span>제한사항</span></a>
-                                                    </div>
-                                                    <div class="bui-spacer--largest">
-                                                        <div class="bui-spacer--small bui-f-color-grayscale">Weekly
-                                                            Rate</div>
-                                                        <div
-                                                            class="bui-spacer--small bui-group bui-group--inline bui-group--large">
-                                                            <div class="bui-form__group">
-                                                                <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
-                                                                    <span class="bui-radio__label">
-                                                                        <span>예약 가능</span>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="bui-form__group">
-                                                                <label class="bui-radio">
-                                                                    <input type="radio" class="bui-radio__input">
-                                                                    <span class="bui-radio__label">
-                                                                        <span>예약 불가</span>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="bui-form__group">
-                                                                <div
-                                                                    class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
-                                                                    <div class="bui-input__addon">KRW</div>
-                                                                    <input disabled="disabled" type="text"
-                                                                        class="bui-form__control av-monthly__segmented--middle">
-                                                                    <div
-                                                                        class="bui-input__addon av-monthly__right-bui-addon">
-                                                                        <button type="button"
-                                                                            class="bui-button bui-button--secondary">
-                                                                            <span class="bui-button__icon">
-                                                                                <svg width="16" height="16"
-                                                                                    fill="currentColor"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    role="presentation"
-                                                                                    aria-hidden="true" focusable="false"
-                                                                                    class="bk-icon -streamline-person_half"
-                                                                                    style="user-select: auto;">
-                                                                                    <path
-                                                                                        d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"
-                                                                                        style="user-select: auto;">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span class="bui-button__text">4</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#"
-                                                            class="bui-link bui-link--primary"><span>제한사항</span></a>
-                                                    </div>
+                                                    </div>             
                                                 </div>
                                                 <div>
                                                     <div class="bui-f-font-caption bui-spacer--medium">
@@ -658,7 +603,7 @@
                                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--secondary bui-button--wide">
                                                             <span class="bui-button__text"><span>취소</span></span>
                                                         </button>
-                                                        <button type="button" disabled="disabled"
+                                                        <button type="submit"
                                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--primary bui-button--wide">
                                                             <span class="bui-button__text"><span>저장</span></span>
                                                         </button>
@@ -690,6 +635,24 @@
                         </div>
                     </div>
                 </main>
+                <script>
+              		//calendar에서 선택된 날짜 받아오기
+                </script>
+                <script>
+                	//예약가능, 예약불가 버튼 동시 선택 제어하기
+                	$("input:radio[name='open']:radio[value='yes']").prop('checked', true);
+                	$("input:radio[name='open']:radio[value='no']").prop('checked', false);
+                	$("input:radio[name='standard']:radio[value='yes']").prop('checked', true);
+                	$("input:radio[name='standard']:radio[value='no']").prop('checked', false);
+                	$("input:radio[name='non_refund']:radio[value='yes']").prop('checked', true);
+                	$("input:radio[name='non_refund']:radio[value='no']").prop('checked', false);
+                	
+                	//(미완성) 예약 불가 선택시 textfield disabled 적용
+                	if("input:radio[name='standard']:radio[value='no']").prop('checked', false) {
+                		$('input[name="refundable"]').setAttribute('disabled', disabled);
+                	}
+                	
+                </script>
                 <jsp:include page="/WEB-INF/partner/footer.jsp"/>
             </div>
         </div>

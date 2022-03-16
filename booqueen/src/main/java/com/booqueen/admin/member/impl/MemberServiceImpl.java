@@ -1,5 +1,7 @@
 package com.booqueen.admin.member.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO getAdminMember(MemberVO vo) {
 		return memberDAO.getAdminMember(vo);
+	}
+
+	@Override
+	public List<com.booqueen.user.member.MemberVO> getUserMember() {
+		return memberDAO.getUserMember();
 	}
 
 	

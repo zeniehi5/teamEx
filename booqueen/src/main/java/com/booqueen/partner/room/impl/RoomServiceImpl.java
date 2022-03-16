@@ -1,6 +1,7 @@
 package com.booqueen.partner.room.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.booqueen.partner.room.FacilitiesBathVO;
 import com.booqueen.partner.room.FacilitiesMediaVO;
 import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
+import com.booqueen.partner.room.RoomAvailableVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
 
@@ -93,6 +95,21 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public void updateFacilitiesService(HashMap<String, Object> attribute) {
 		roomDAO.updateFacilitiesService(attribute);
+	}
+
+	@Override
+	public RoomVO getRoomByHotelSerial(int serialnumber) {
+		return roomDAO.getRoomByHotelSerial(serialnumber);
+	}
+
+	@Override
+	public void insertRoomAvailable(HashMap<String, Object> setPrice) {
+		roomDAO.insertRoomAvailable(setPrice);
+	}
+
+	@Override
+	public List<RoomAvailableVO> selectRoomAvailable(int room_id) {
+		return roomDAO.selectRoomAvailable(room_id);
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.booqueen.partner.hotel;
 
+import java.util.List;
+
+import com.booqueen.partner.message.InquiryVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -7,7 +10,6 @@ import com.booqueen.partner.room.FacilitiesFoodVO;
 import com.booqueen.partner.room.FacilitiesMediaVO;
 import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
-import com.booqueen.user.review.vo.ReviewAvgVO;
 
 public interface HotelService {
 	
@@ -54,5 +56,7 @@ public interface HotelService {
 	public void updateSmokingPolicy(HotelServiceVO vo);
 
 	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber);
+
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber);
 	
 }

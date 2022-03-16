@@ -1,5 +1,8 @@
 package com.booqueen.partner.hotel.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +13,7 @@ import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.hotel.HotelVO;
+import com.booqueen.partner.message.InquiryVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -110,5 +114,9 @@ public class HotelDAO {
 
 	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectOne("HotelDAO.getHotelServiceByHotelSerial", serialnumber);
+	}
+
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber);
 	}
 }
