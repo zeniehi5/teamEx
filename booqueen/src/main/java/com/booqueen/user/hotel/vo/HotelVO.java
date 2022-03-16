@@ -1,6 +1,7 @@
 package com.booqueen.user.hotel.vo;
 
 import com.booqueen.user.review.vo.ReviewAvgVO;
+import com.booqueen.user.room.vo.RoomVO;
 
 import lombok.Data;
 
@@ -18,4 +19,5 @@ public class HotelVO {
 	private Double latitude;
 	HotelImgVO hotelImgVO;
 	ReviewAvgVO reviewAvgVO;
+	RoomVO roomVO;
 }

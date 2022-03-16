@@ -144,6 +144,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding: 10px;
 }
 .search-bar form input{
     display: block;
@@ -152,10 +153,13 @@
     background-color: #fff;
     line-height: 30px;
     width: 225px;
+    line-height: 32px;
+    padding-left: 9px;
 }
 .search-bar form button{
     background: #0071c2;
-    width: 80%;
+    width: 100%;
+    line-height: 25px;
     padding: 8px 0;
     border: 0;
     cursor: pointer;
@@ -872,8 +876,11 @@ time > a{
     width: 100%;
     padding: 20px
 }
-.question-third-right div:first-child{
+.question-third-right div{
     margin-bottom: 20px;
+}
+.question-third-right div:last-child{
+    margin-bottom: 0;
 }
 .question-more{
     margin-top: 20px;

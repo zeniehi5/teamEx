@@ -1,6 +1,5 @@
 package com.booqueen.user.hotel.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.booqueen.partner.hotel.HotelPolicyVO;
+import com.booqueen.user.board.service.BoardService;
+import com.booqueen.user.board.vo.BoardVO;
 import com.booqueen.user.hotel.service.HotelService;
+import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelServiceVO;
@@ -45,9 +48,41 @@ public class HotelController {
 	@Autowired
 	RoomService roomService;
 	
+	@Autowired
+	BoardService boardService;
+	
 	@RequestMapping(value = "/searchResult.do", method = RequestMethod.GET)
-	public String getHotelList(@RequestParam("keyword") String keyword, Model model){
-		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(keyword);
+	public String getHotelList(@RequestParam("keyword") String keyword, @RequestParam("daterange") String date, Model model){
+		
+		String date_re = date.replaceAll(" ", "");
+		String[] tempData = date_re.split("-|/");
+		
+		String start_date = tempData[0] + tempData[1] + tempData[2];
+		String end_date = tempData[3] + tempData[4] + tempData[5];
+		
+		HotelAvailableVO hotelAvailableVO = new HotelAvailableVO();
+		hotelAvailableVO.setCity(keyword);
+		hotelAvailableVO.setStart_date(start_date);
+		hotelAvailableVO.setEnd_date(end_date);
+		
+		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
+		model.addAttribute("hotelList", getByCity);
+		
+		return "hotel/searchresult";
+	}
+	
+	@RequestMapping(value = "/searchResultInBox.do", method = RequestMethod.GET)
+	public String getHotelListInOtherPage(@RequestParam("keyword") String keyword, @RequestParam("daterange1") String date1, @RequestParam("daterange2") String date2, Model model){
+		
+		String start_date = date1.replaceAll("-", "");
+		String end_date = date2.replaceAll("-", "");
+		
+		HotelAvailableVO hotelAvailableVO = new HotelAvailableVO();
+		hotelAvailableVO.setCity(keyword);
+		hotelAvailableVO.setStart_date(start_date);
+		hotelAvailableVO.setEnd_date(end_date);
+		
+		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
 		model.addAttribute("hotelList", getByCity);
 		
 		return "hotel/searchresult";
@@ -75,6 +110,12 @@ public class HotelController {
 		List<RoomVO> roomList = roomService.getRoomFacilities(serialNumber2);
 		model.addAttribute("roomList", roomList);
 		
+		List<BoardVO> boardList = boardService.getBoardList(serialNumber2);
+		model.addAttribute("boardList", boardList);
+		
+		HotelPolicyVO hotelPolicy = hotelService.selectHotelPolicy(serialNumber2);
+		model.addAttribute("hotelPolicy", hotelPolicy);
+		
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO != null) {
 			String userid_from = memberVO.getUserid();
@@ -93,13 +134,15 @@ public class HotelController {
 		return "hotel/available";
 	}
 	
-	@RequestMapping(value="/hotelByStar.do")
+	@RequestMapping(value="/hotelByFilter.do")
 	@ResponseBody
 	public List<HotelVO> getHotelByStar(HttpServletRequest request) {
 		
 		String[] stars = request.getParameterValues("starArr");
 		String[] city = request.getParameterValues("cityArr");
-		String[] service = request.getParameterValues("serviceArr"); 
+		String[] service = request.getParameterValues("serviceArr");
+		String[] score = request.getParameterValues("scoreArr");
+		String[] order = request.getParameterValues("orderArr");
 		
 		boolean[] service_b = new boolean[11];
 		
@@ -120,14 +163,27 @@ public class HotelController {
 		hotelServiceVO.setSpa(service_b[9]);
 		hotelServiceVO.setParking(service_b[10]);
 		
+		Double[] score_b = new Double[5];
+
+		for(int i = 0; i < score.length; i++) {
+			score_b[i] = Double.parseDouble(score[i]);
+		}
+		
+		int[] order_b = new int[1];
+		
+		for(int i = 0; i < order.length; i++) {
+			order_b[i] = Integer.parseInt(order[i]);
+		}
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("stars", stars);
 		map.put("city", city);
 		map.put("hotelServiceVO", hotelServiceVO);
+		map.put("scoreAvg", score_b);
+		map.put("order", order_b);
 		
 		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(map);
-		
+				
 		return hotelListByStar;
 	}
 	
