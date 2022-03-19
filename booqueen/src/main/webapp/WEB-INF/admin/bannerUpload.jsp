@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="mt-4 mb-0">
                                             <div class="d-grid"><a class="btn btn-danger btn-block" id="submit" style="background-color: #0d6efd; border:solid 1px #0d6efd;">배너 등록</a></div>
-                                            <div class="d-grid" style="padding-top: 5px"><a class="btn btn-danger btn-block" id="cancle" style="background-color: #0d6efd; border:solid 1px #0d6efd;" onClick="window.location.href='banner.html';">취	소</a></div>
+                                            <div class="d-grid" style="padding-top: 5px"><a class="btn btn-danger btn-block" id="cancle" style="background-color: #0d6efd; border:solid 1px #0d6efd;" href="banner.mdo">취	소</a></div>
                                         </div>
                                     </form>
                                 </div>

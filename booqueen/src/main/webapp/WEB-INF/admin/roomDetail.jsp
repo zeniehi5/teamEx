@@ -26,7 +26,7 @@
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
                                     <button type="button" class="btn-close" aria-label="Close"
-                                        style="float: right;" onClick="window.location.href='hotelDetail.html';"></button>
+                                        style="float: right;" onClick="window.location.href='hotelDetail.mdo';"></button>
                                     <h5 class="text-center font-weight-light my-4">객실 상세정보 보기</h5>
                                 </div>
                                 <div class="card-body">

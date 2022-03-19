@@ -42,10 +42,13 @@
     <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
     <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="reservation"/>
     <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>    
-		  
+    
 		<!-- admin -->
 		<typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
 		<typeAlias type="com.booqueen.admin.hotel.HotelVO" alias="adminHotel"/>
+		<typeAlias type="com.booqueen.admin.partner.PartnerVO" alias="partnerMember"/>
+		<!--<typeAlias type="com.booqueen.admin.partner.BlockPartnerVO" alias="blockPartner"/>-->
+		<typeAlias type="com.booqueen.admin.hotel.ReservationVO" alias="reservation"/>
 	</typeAliases>
 	<mappers>
 		  <mapper resource="mappings/user/member-mapping.xml"/>
@@ -64,5 +67,5 @@
       <mapper resource="mappings/partner/reservation-mapping.xml"/>
       <mapper resource="mappings/admin/member-mapping.xml"/>
       <mapper resource="mappings/admin/hotel-mapping.xml"/>
-	    </mappers>
+	</mappers>
 </configuration>
