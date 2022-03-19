@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -110,6 +111,16 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<RoomAvailableVO> selectRoomAvailable(int room_id) {
 		return roomDAO.selectRoomAvailable(room_id);
+	}
+
+	@Override
+	public List<HotelImageVO> selectImageBySerial(int serialnumber) {
+		return roomDAO.selectImageBySerial(serialnumber);
+	}
+
+	@Override
+	public List<HotelImageVO> deleteImageBySerial(int serialnumber) {
+		return roomDAO.deleteImageBySerial(serialnumber);
 	}
 
 }
