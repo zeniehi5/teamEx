@@ -26,8 +26,19 @@ public class HotelController {
 		
 		return "hotelList";
 	}
+	@RequestMapping(value = "/hotelDetail.mdo", method=RequestMethod.GET)
+	public String hotelDetail(HttpSession session) {
+		return "hotelDetail";
+	}
+	@RequestMapping(value = "/roomDetail.mdo", method=RequestMethod.GET)
+	public String roomDetail(HttpSession session) {
+		return "roomDetail";
+	}
 	@RequestMapping(value = "/reservationStatus.mdo", method=RequestMethod.GET)
-	public String reservationStatus(HttpSession session) {
+	public String reservationStatus(Model model, HttpSession session) {
+		List<ReservationVO> reservation = hotelServiceImpl.selectReservationList();
+		model.addAttribute("reservation", reservation);
+		System.out.println(model.toString());
 		return "reservationStatus";
 	}
 	@RequestMapping(value = "/transactionHistory.mdo", method=RequestMethod.GET)
@@ -43,17 +54,26 @@ public class HotelController {
 	public String reportedUser(HttpSession session) {
 		return "reportedUser";
 	}
-	@RequestMapping(value = "/PartnerMember.mdo", method=RequestMethod.GET)
-	public String partnerMember(HttpSession session) {
-		return "partnerMember";
-	}
+
+	/*
+	 * @RequestMapping(value = "/PartnerMember.mdo", method=RequestMethod.GET)
+	 * public String partnerMember(HttpSession session) { return "partnerMember"; }
+	 */
 	@RequestMapping(value = "/blockPartner.mdo", method=RequestMethod.GET)
 	public String blockPartner(HttpSession session) {
 		return "blockPartner";
 	}
 	@RequestMapping(value = "/faq.mdo", method=RequestMethod.GET)
-	public String fqp(HttpSession session) {
+	public String fap(HttpSession session) {
 		return "faq";
+	}
+	@RequestMapping(value = "/faqCorrection.mdo", method=RequestMethod.GET)
+	public String faqCorrection(HttpSession session) {
+		return "faqCorrection";
+	}
+	@RequestMapping(value = "/faqUpload.mdo", method=RequestMethod.GET)
+	public String faqUpload(HttpSession session) {
+		return "faqUpload";
 	}
 	@RequestMapping(value = "/banner.mdo", method=RequestMethod.GET)
 	public String banner(HttpSession session) {
@@ -63,4 +83,20 @@ public class HotelController {
 	public String terms(HttpSession session) {
 		return "terms";
 	}
+	@RequestMapping(value = "/index2.mdo", method=RequestMethod.GET)
+	public String index2(HttpSession session) {
+		return "index2";
+	}
+	/*@RequestMapping(value = "/userMember.mdo", method=RequestMethod.GET)
+	public String userMember(HttpSession session) {
+		return "userMember";
+	}*/
+	@RequestMapping(value = "/userMemberDetail.mdo", method=RequestMethod.GET)
+	public String userMemberDetail(HttpSession session) {
+		return "userMemberDetail";
+	}
+	/*@RequestMapping(value = "/partnerMemberDetail.mdo", method=RequestMethod.GET)
+	public String partnerMember(HttpSession session) {
+		return "partnerMemberDetail";
+	}*/
 }

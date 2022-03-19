@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,68 +18,54 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+			id="sidebarToggle" href="#!">
+			<i class="fas fa-bars"></i>
+		</button>
+		<!-- Navbar Search-->
+		<form
+			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="Search for..."
+					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="logout.mdo">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        	<div id="layoutSidenav">
+       	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<div class="sb-sidenav-menu-heading">Core</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 대시보드
-						</a>
+						
+						
 						<div class="sb-sidenav-menu-heading">Interface</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 재무
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
-							</nav>
-						</div>
+						
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseLayouts2" aria-expanded="false"
 							aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
-							</div> 회원관리
+							</div> 회원 관리
 							<div class="sb-sidenav-collapse-arrow">
 								<i class="fas fa-angle-down"></i>
 							</div>
@@ -89,6 +76,22 @@
 								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
 									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
 									관리</a> 
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts5" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 호텔 관리
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts5"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -105,7 +108,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartner.mdo">파트너 계정 차단</a>
+									class="nav-link" href="${contextPath }/blockPartnerList.mdo">파트너 계정 차단</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -126,79 +129,25 @@
 									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
+						
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts5" aria-expanded="false"
+							data-bs-target="#collapseLayouts" aria-expanded="false"
 							aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
-							</div> 호텔 목록
+							</div> 재무
 							<div class="sb-sidenav-collapse-arrow">
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts5"
+						<div class="collapse" id="collapseLayouts"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
+									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
+									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapsePages" aria-expanded="false"
-							aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> Pages
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages"
-							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion"
-								id="sidenavAccordionPages">
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-									aria-controls="pagesCollapseAuth"> Authentication
-									<div class="sb-sidenav-collapse-arrow">
-										<i class="fas fa-angle-down"></i>
-									</div>
-								</a>
-								<div class="collapse" id="pagesCollapseAuth"
-									aria-labelledby="headingOne"
-									data-bs-parent="#sidenavAccordionPages">
-									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="${contextPath }/login.mdo">Login</a> <a
-											class="nav-link" href="${contextPath }/register.mdo">Register</a> <a
-											class="nav-link" href="${contextPath }/password.mdo">Forgot Password</a>
-									</nav>
-								</div>
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseError" aria-expanded="false"
-									aria-controls="pagesCollapseError"> Error
-									<div class="sb-sidenav-collapse-arrow">
-										<i class="fas fa-angle-down"></i>
-									</div>
-								</a>
-								<div class="collapse" id="pagesCollapseError"
-									aria-labelledby="headingOne"
-									data-bs-parent="#sidenavAccordionPages">
-									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="${contextPath }/401.mdo">401 Page</a> <a
-											class="nav-link" href="${contextPath }/404.mdo">404 Page</a> <a
-											class="nav-link" href="${contextPath }/500.mdo">500 Page</a>
-									</nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -273,53 +222,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+								<c:forEach  var="ReservationVO" items="${reservation }" varStatus ="status">
                                         <tr> 
-                                            <td> <a href="reservationStatusDetail.html">투숙객명1</a></td>
-                                            <td>2022년 7월 15일</td>
-                                            <td>2022년 7월 16일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 1월 21일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td>2299035596</td>
+                                            <td> <a href="reservationStatusDetail.html">${ReservationVO.lastname }${ReservationVO.firstname }</a></td>
+                                            <td>${ReservationVO.checkin_date }</td>
+                                            <td>${ReservationVO.checkout_date }</td>
+                                            <td>${ReservationVO.type }</td>
+                                            <td>${ReservationVO.reservation_date }</td>
+                                            <c:choose>
+                                                	<c:when test="${ReservationVO.status == true }">
+                                                		<td>정상</td>
+                                                	</c:when>
+                                                	<c:otherwise>
+                                                		<td>취소</td>
+                                                	</c:otherwise>
+                                               </c:choose>
+                                            <td>&#8361;<fmt:formatNumber type="number" value="${ReservationVO.price }"/></td>
+                                            <td>&#8361;<fmt:formatNumber type="number" value="${ReservationVO.commission}"/></td>
+                                            <td>${ReservationVO.reservation_number }</td>
                                         </tr>
-                                    
-                                    
-                                        <tr>
-                                            <td>투숙객명2</td>
-                                            <td>2022년 3월 10일</td>
-                                            <td>2022년 3월 11일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 1월 1일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">2272346596</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>투숙객명3</td>
-                                            <td>2022년 5월 15일</td>
-                                            <td>2022년 5월 16일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 2월 15일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">2834535596</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>투숙객명4</td>
-                                            <td>2022년 7월 12일</td>
-                                            <td>2022년 7월 19일</td>
-                                            <td>1베드룸 아파트</td>
-                                            <td>2022년 3월 1일</td>
-                                            <td>정상</td>
-                                            <td>&#8361;180,000</td>
-                                            <td>&#8361;27,000</td>
-                                            <td><a href="reservationStatusDetail.html">3254035596</a></td>
-                                        </tr>
+                                </c:forEach>                     
                                     <tr>
                                         <th colspan="9" style="text-align: right; padding-right: 75px;">수수료: &#8361;3000<span style="margin-left: 30px; font-weight: bolder;">총 금액: &#8361;180,000</span></th>
                                     </tr>
