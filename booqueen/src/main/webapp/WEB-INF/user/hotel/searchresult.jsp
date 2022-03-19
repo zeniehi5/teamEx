@@ -5,7 +5,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

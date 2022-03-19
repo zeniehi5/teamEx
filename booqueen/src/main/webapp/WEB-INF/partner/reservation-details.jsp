@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="ko_kr"/>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -41,50 +43,6 @@
                         <div class="details_wrapper grid">
                             <div class="main_reservation_wrapper grid_column_full">
                                 <div class="reservation_content">
-                                    <div>
-                                        <div class="spacer">
-                                            <div class="alert alert_error">
-                                                <span class="icon_hint alert_icon">
-                                                    <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg"
-                                                        viewbox="0 0 24 24" style="user-select: auto;">
-                                                        <path
-                                                            d="M12 15.75A1.125 1.125 0 1 0 12 18a1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm.75-2.25V5.25a.75.75 0 0 0-1.5 0v8.25a.75.75 0 0 0 1.5 0zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z"
-                                                            style="user-select: auto;"></path>
-                                                    </svg>
-                                                </span>
-                                                <div class="alert_description">
-                                                    <span class="alert_title">파트너님의 숙박일정 변경 제안이 만료되었습니다.</span>
-                                                    <button class="link link_primary">
-                                                        <span>OK</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="reservation_changes accordion">
-                                        <li class="accordion_row">
-                                            <button type="button" class="accordion_row_inner">
-                                                <div class="accordion_row_header">
-                                                    <h1 class="accordion_title">
-                                                        <span>예약 변경사항
-                                                            <span class="reservation_count">(8)</span></span>
-                                                    </h1>
-                                                    <p class="accordion_subtitle">
-                                                        <span>2022년 1월 22일 11:07에 마지막 업데이트됨</span>
-                                                    </p>
-                                                </div>
-                                                <span class="accordion_icon_container">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"
-                                                        class="accordion_icon" style="user-select: auto;">
-                                                        <path
-                                                            d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z"
-                                                            style="user-select: auto;"></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                            <div class="accordion_content"></div>
-                                        </li>
-                                    </ul>
                                     <div class="panel_group">
                                         <div class="reservation_overview panel">
                                             <div class="grid">
@@ -95,14 +53,14 @@
                                                         </p>
                                                         <p
                                                             class="reservation_content_info reservation_content_info_emphasized">
-                                                            <span>2022년 7월 15일(금)</span>
+                                                            <span>${details.checkin_date}</span>
                                                         </p>
                                                         <p class="reservation_content_label">
                                                             <span>체크아웃</span>
                                                         </p>
                                                         <p
                                                             class="reservation_content_info reservation_content_info_emphasized">
-                                                            <span>2022년 7월 16일(토)</span>
+                                                            <span>${details.checkout_date}</span>
                                                         </p>
                                                         <p class="reservation_content_label">
                                                             <span>숙박 기간:</span>
@@ -123,7 +81,7 @@
                                                         </p>
                                                         <p
                                                             class="reservation_content_info reservation_content_info_emphasized">
-                                                            <span>₩180,000</span>
+                                                            <span><fmt:formatNumber value="${details.price}" type="currency"/></span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -137,7 +95,7 @@
                                                                 class="reservation_content_info reservation_content_info_emphasized">
                                                                 <div class="inline">
                                                                     <button class="link link_primary">
-                                                                        <span>예약자명</span>
+                                                                        <span>${details.lastname}${details.firstname}</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="flag">
@@ -149,7 +107,7 @@
                                                             </div>
                                                             <p class="font_featured">
                                                                 <a href="#"
-                                                                    class="link link_primary">xxxxx@xxxxxxx.com</a>
+                                                                    class="link link_primary">${details.userid}</a>
                                                                 <br>
                                                             </p>
                                                         </address>
@@ -169,7 +127,7 @@
                                                                         <p class="reservation_content_label">
                                                                             <span>예약자 이름:</span>
                                                                         </p>
-                                                                        <p class="reservation_content_info">강호동</p>
+                                                                        <p class="reservation_content_info">${details.lastname}${details.firstname}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -191,25 +149,25 @@
                                                                 <p class="reservation_content_label">
                                                                     <span>예약 번호</span>
                                                                 </p>
-                                                                <p class="reservation_content_info">2299035596</p>
+                                                                <p class="reservation_content_info">${details.reservation_number}</p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">
                                                                 <p class="reservation_content_label">
                                                                     <span>수수료 부과 대상 금액:</span>
                                                                 </p>
-                                                                <p class="reservation_content_info">₩180,000</p>
+                                                                <p class="reservation_content_info"><fmt:formatNumber value="${details.price}" type="currency"/></p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">
                                                                 <p class="reservation_content_label">
                                                                     <span>예약일</span>
                                                                 </p>
-                                                                <p class="reservation_content_info">2022년 1월 21일 (금)</p>
+                                                                <p class="reservation_content_info">${details.reservation_date}</p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">
                                                                 <p class="reservation_content_label">
                                                                     <span>수수료:</span>
                                                                 </p>
-                                                                <p class="reservation_content_info">₩27,000</p>
+                                                                <p class="reservation_content_info"><fmt:formatNumber value="${details.commission}" type="currency"/></p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_full_medium">
                                                                 <div>
@@ -235,7 +193,7 @@
                                                                     <span>예상 도착 시간</span>
                                                                 </p>
                                                                 <p class="reservation_content_info">
-                                                                    <span>오후 3:00~오후 4:00</span>
+                                                                    <span>${details.time_arrival}</span>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -251,7 +209,7 @@
                                                     <div class="accordion_row_header">
                                                         <h1 class="accordion_title">
                                                             <div class="reservation_room_title">
-                                                                <div class="room_title_name">1베드룸 아파트</div>
+                                                                <div class="room_title_name">${details.type}</div>
                                                                 <div class="price_display test_right room_price">
                                                                     <div class="price_display_value">
                                                                         <span>₩180,000</span>
@@ -271,7 +229,7 @@
                                                                             d="M87.33 66.22c.06-.1.11-.2.16-.3.077-.125.143-.255.2-.39.054-.133.097-.27.13-.41.04-.112.073-.225.1-.34.1-.515.1-1.045 0-1.56a3.352 3.352 0 0 0-.1-.34 2.802 2.802 0 0 0-.13-.41 2.868 2.868 0 0 0-.2-.39c0-.1-.1-.2-.16-.3a4.922 4.922 0 0 0-.5-.61l-24-24a4.002 4.002 0 1 0-5.66 5.66L74.34 60H20a4 4 0 0 0 0 8h54.34L57.17 85.17a4.002 4.002 0 1 0 5.66 5.66l24-24c.183-.19.35-.394.5-.61zM92 0h-8a4 4 0 0 0 0 8h8c6.627 0 12 5.373 12 12v88c0 6.627-5.373 12-12 12h-8a4 4 0 0 0 0 8h8c11.046 0 20-8.954 20-20V20c0-11.046-8.954-20-20-20z"
                                                                             style="user-select: auto;"></path>
                                                                     </svg>
-                                                                    <span>2022년 7월 15일 (금)</span>
+                                                                    <span>${details.checkin_date}</span>
                                                                 </span>
                                                                 <span class="room_subtitle_item">
                                                                     <svg fill="currentColor" focusable="false"
@@ -283,7 +241,7 @@
                                                                             d="M111.33 66.22c.06-.1.11-.2.16-.3.05-.1.15-.25.21-.39s.08-.27.12-.41c.039-.112.073-.225.1-.34.1-.515.1-1.045 0-1.56a3.352 3.352 0 0 0-.1-.34c0-.14-.07-.28-.12-.41-.05-.13-.14-.26-.21-.39-.07-.13-.1-.2-.16-.3a4.886 4.886 0 0 0-.5-.61l-24-24a4.002 4.002 0 1 0-5.66 5.66L98.34 60H44a4 4 0 0 0 0 8h54.34L81.17 85.17a4.002 4.002 0 1 0 5.66 5.66l24-24c.183-.19.35-.394.5-.61zM44 120h-8c-6.627 0-12-5.373-12-12V20c0-6.627 5.373-12 12-12h8a4 4 0 0 0 0-8h-8C24.954 0 16 8.954 16 20v88c0 11.046 8.954 20 20 20h8a4 4 0 0 0 0-8z"
                                                                             style="user-select: auto;"></path>
                                                                     </svg>
-                                                                    <span>2022년 7월 16일 (토)</span>
+                                                                    <span>${details.checkout_date}</span>
                                                                 </span>
                                                             </span>
                                                         </p>
@@ -417,7 +375,7 @@
                                                     </button>
                                                     <div class="accordion_content">
                                                         <div class="conversation-requests_item">
-                                                            체크인 관련 요청: 15:00 - 16:00
+                                                            "${details.special_request}"
                                                             <div class="conversation-requests__item-status"></div>
                                                         </div>
                                                     </div>
@@ -431,7 +389,7 @@
                                             <div class="bui-card__content">
                                                 <div class="res-policies__rooms">
                                                     <div class="bui-spacer--largest">
-                                                        <h1 class="res-policies__title">1베드룸 아파트</h1>
+                                                        <h1 class="res-policies__title">${details.type}</h1>
                                                         <div class="res-policies__row">
                                                             <div class="grid bui-grid--bleed">
                                                                 <div class="grid_column grid_column_left">
@@ -564,22 +522,20 @@
                                             </button>
                                         </div>
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide"
-                                                disabled="disabled">
+                                            <button type="button" class="button button_secondary button_wide">
                                                 <span class="button_text">
                                                     <span>노쇼 표시</span>
                                                 </span>
                                             </button>
                                         </div>
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide"
-                                                disabled="disabled">
+                                            <button type="button" class="button button_secondary button_wide">
                                                 <span class="button_text">
                                                     <span>투숙객 부정/불법 행위 신고하기</span>
                                                 </span>
                                             </button>
                                         </div>
-                                        <button type="button" class="button button_secondary button_wide">
+                                        <button type="button" class="button button_secondary button_wide" onClick="window.print()">
                                             <span class="button_text">
                                                 <span>이 페이지 인쇄하기</span>
                                             </span>

@@ -69,5 +69,33 @@ public class RoomController {
 		}
 		return "update-picture";
 	}
+	
+	@RequestMapping(value = "/addHotel.pdo", method = RequestMethod.GET)
+	public String addRoom(Model model, HotelVO hotel, HttpSession session) {
+		try {
+			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+			if(hotel != null) {
+				model.addAttribute("hotel", hotel);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping(value = "/roomlist.pdo", method = RequestMethod.GET)
+	public String roomList(Model model, HotelVO hotel, HttpSession session) {
+		RoomVO room = null;
+		try {
+			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+			if(hotel != null) {
+				room = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("room", room);
+		return "price";
+	}
 
 }

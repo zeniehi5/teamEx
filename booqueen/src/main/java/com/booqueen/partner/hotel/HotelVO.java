@@ -19,7 +19,7 @@ public class HotelVO {
 	private String telephone;
 	private String star;
 	private String manager;
-	private int longitude;
-	private int latitude;
+	private double longitude = 0.0;
+	private double latitude = 0.0;
 	
 }

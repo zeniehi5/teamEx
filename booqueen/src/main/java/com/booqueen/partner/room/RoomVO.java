@@ -15,5 +15,7 @@ public class RoomVO {
 	private int price;
 	private int smoking;
 	private int available;
+	private int quota;
+	private int bed;
 
 }

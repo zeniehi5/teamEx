@@ -24,41 +24,43 @@
 		<!-- partner -->
   		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
       	<typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
-		  <typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
-		  <typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
-		  <typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
-		  <typeAlias type="com.booqueen.partner.hotel.HotelPaymentVO" alias="payment"/>	
-		  <typeAlias type="com.booqueen.partner.room.RoomVO" alias="myRoom"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesBasicVO" alias="facilitiesBasic"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesBathVO" alias="facilitiesBath"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesMediaVO" alias="facilitiesMedia"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesFoodVO" alias="facilitiesFood"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
-		  <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
-		  <typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
-      <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
-      <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
-      
+		<typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
+		<typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
+		<typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
+		<typeAlias type="com.booqueen.partner.hotel.HotelPaymentVO" alias="payment"/>	
+		<typeAlias type="com.booqueen.partner.room.RoomVO" alias="myRoom"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesBasicVO" alias="facilitiesBasic"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesBathVO" alias="facilitiesBath"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesMediaVO" alias="facilitiesMedia"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesFoodVO" alias="facilitiesFood"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesServiceVO" alias="facilitiesService"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
+		<typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
+		<typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
+        <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
+        <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
+        <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="reservation"/>
+        <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>    
 		  
-		  <!-- admin -->
-		  <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
-		  <typeAlias type="com.booqueen.admin.hotel.HotelVO" alias="adminHotel"/>
+		<!-- admin -->
+		<typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
+		<typeAlias type="com.booqueen.admin.hotel.HotelVO" alias="adminHotel"/>
 	</typeAliases>
 	<mappers>
-	  <mapper resource="mappings/user/member-mapping.xml"/>
-	  <mapper resource="mappings/user/profile-mapping.xml"/>
-	  <mapper resource="mappings/user/hotel-mapping.xml"/>
-	  <mapper resource="mappings/user/review-mapping.xml"/>
-	  <mapper resource="mappings/user/wishlist-mapping.xml"/>
-	  <mapper resource="mappings/user/room-mapping.xml"/>
-	  <mapper resource="mappings/user/chat-mapping.xml"/>
-	  <mapper resource="mappings/user/board-mapping.xml"/>
-    <mapper resource="mappings/partner/member-mapping.xml"/>
-    <mapper resource="mappings/partner/hotel-mapping.xml"/>
-    <mapper resource="mappings/partner/room-mapping.xml"/>
-    <mapper resource="mappings/partner/review-mapping.xml"/>
-    <mapper resource="mappings/admin/member-mapping.xml"/>
-    <mapper resource="mappings/admin/hotel-mapping.xml"/>
-	</mappers>
+		<mapper resource="mappings/user/member-mapping.xml"/>
+	    <mapper resource="mappings/user/profile-mapping.xml"/>
+	    <mapper resource="mappings/user/hotel-mapping.xml"/>
+	    <mapper resource="mappings/user/review-mapping.xml"/>
+	    <mapper resource="mappings/user/wishlist-mapping.xml"/>
+	    <mapper resource="mappings/user/room-mapping.xml"/>
+	    <mapper resource="mappings/user/chat-mapping.xml"/>
+	    <mapper resource="mappings/user/board-mapping.xml"/>
+        <mapper resource="mappings/partner/member-mapping.xml"/>
+        <mapper resource="mappings/partner/hotel-mapping.xml"/>
+        <mapper resource="mappings/partner/room-mapping.xml"/>
+        <mapper resource="mappings/partner/review-mapping.xml"/>
+        <mapper resource="mappings/partner/reservation-mapping.xml"/>
+        <mapper resource="mappings/admin/member-mapping.xml"/>
+        <mapper resource="mappings/admin/hotel-mapping.xml"/>
+	    </mappers>
 </configuration>

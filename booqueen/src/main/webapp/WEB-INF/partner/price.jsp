@@ -84,6 +84,14 @@
                <p id="name">이 유형에 해당하는 객실 수</p>
                <br> <input type="number" name="available">
             </div>
+            <div>
+               <p id="name">객실 정원</p>
+               <br> <input type="number" name="quota">
+            </div>
+            <div>
+               <p id="name">침대 수</p>
+               <br> <input type="number" name="bed">
+            </div>
          </fieldset>
          <div class="right">
             <p>숙소 등록 후에도 온라인으로 숙소 판매가 시작되기 전에 정보를 수정하실 수 있습니다.</p>
