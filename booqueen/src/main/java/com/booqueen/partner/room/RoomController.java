@@ -98,7 +98,6 @@ public class RoomController {
 	@RequestMapping(value = "/remove-picture.pdo", method = RequestMethod.POST)
 	public String removepictureS3(MultipartFile[] deleteFile, HttpSession session) {
 		
-		int length = deleteFile.length;
 		for(MultipartFile multipartFile : deleteFile) {
 			String deleteFileName = multipartFile.getOriginalFilename();
 			deleteFileName = deleteFileName.substring(deleteFileName.lastIndexOf("\\")+1);
