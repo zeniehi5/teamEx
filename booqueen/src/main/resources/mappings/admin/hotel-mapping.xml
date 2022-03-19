@@ -4,7 +4,7 @@
 	<select id="selectHotel" resultType="adminHotel">
 		<![CDATA[SELECT * FROM tempHotel]]>
 	</select>
-	<select id="selectReservationList" resultType="reservation">
+	<select id="selectReservationList" resultType="aReservation">
 		<![CDATA[SELECT
          r.lastname,
          r.firstname,
