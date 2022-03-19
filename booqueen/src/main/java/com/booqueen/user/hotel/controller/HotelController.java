@@ -1,5 +1,6 @@
 package com.booqueen.user.hotel.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -66,7 +67,14 @@ public class HotelController {
 		hotelAvailableVO.setEnd_date(end_date);
 		
 		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
+		List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
+		
+		if(getByCity != null) {
+			getUnavailableByCity.removeAll(getByCity);
+		}
+		
 		model.addAttribute("hotelList", getByCity);
+		model.addAttribute("unavailableHotelList", getUnavailableByCity);
 		
 		return "hotel/searchresult";
 	}
@@ -83,7 +91,16 @@ public class HotelController {
 		hotelAvailableVO.setEnd_date(end_date);
 		
 		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
+		List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
+		
+		if(getByCity != null) {
+			getUnavailableByCity.removeAll(getByCity);
+		}
+		
 		model.addAttribute("hotelList", getByCity);
+		model.addAttribute("unavailableHotelList", getUnavailableByCity);
+		model.addAttribute("date1", date1);
+		model.addAttribute("date2", date2);
 		
 		return "hotel/searchresult";
 	}
@@ -136,13 +153,14 @@ public class HotelController {
 	
 	@RequestMapping(value="/hotelByFilter.do")
 	@ResponseBody
-	public List<HotelVO> getHotelByStar(HttpServletRequest request) {
+	public List<HotelVO> getHotelByFilter(HttpServletRequest request) {
 		
 		String[] stars = request.getParameterValues("starArr");
 		String[] city = request.getParameterValues("cityArr");
 		String[] service = request.getParameterValues("serviceArr");
 		String[] score = request.getParameterValues("scoreArr");
 		String[] order = request.getParameterValues("orderArr");
+		String[] dates = request.getParameterValues("datesArr");
 		
 		boolean[] service_b = new boolean[11];
 		
@@ -181,6 +199,7 @@ public class HotelController {
 		map.put("hotelServiceVO", hotelServiceVO);
 		map.put("scoreAvg", score_b);
 		map.put("order", order_b);
+		map.put("dates", dates);
 		
 		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(map);
 				
@@ -192,7 +211,7 @@ public class HotelController {
 	public List<HotelVO> getMap(HotelMapVO vo) throws Exception{
 		
 		List<HotelVO> hotelListByMap = hotelService.selectHotelByMap(vo);
-		
+	
 		return hotelListByMap;
 		
 	}

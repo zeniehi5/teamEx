@@ -27,6 +27,10 @@ public class HotelService {
 		return hotelDAO.getHotelListWithImgByCity(vo);
 	}
 	
+	public List<HotelVO> getUnavailableHotelListWithImgByCity(HotelAvailableVO vo) {
+		return hotelDAO.getUnavailableHotelListWithImgByCity(vo);
+	}
+	
 	public List<HotelVO> getHotelListByStar(HashMap<String, Object> map) {
 		return hotelDAO.getHotelListByStar(map);
 	}
