@@ -1,5 +1,7 @@
 package com.booqueen.user.member;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,7 +16,10 @@ public class MemberVO {
 	private String birth_year;
 	private String birth_month;
 	private String birth_day;
+	private Date since;
 	
 	private String newPasswd;
 	private String rePasswd;
+	
+	private String type;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
@@ -166,12 +167,38 @@
                                                                         </div>
                                                                         <div class="spacer"></div>
                                                                     </div>
+                                                                    <c:choose>
+                                                                    <c:when test="${empty reservation}">
                                                                     <div class="empty_state">
                                                                         <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty_state_icon">
                                                                             <path d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"></path>
                                                                         </svg>
                                                                         <p class="empty_state_text"><span>지난 60일 간 접수된 예약이 없습니다.</span></p>    
                                                                     </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <div>
+                                                                    	<table class="reservation_list">
+                                                                    		<tr>
+                                                                    			<th>예약번호</th>
+                                                                    			<th>예약자명</th>
+                                                                    			<th>체크인</th>
+                                                                    			<th>체크아웃</th>
+                                                                    			<th>요금</th>
+                                                                    		</tr>
+                                                                    		<c:forEach var="ReservationVO" items="${reservation}" end="2">
+                                                                    		<tr>
+                                                                    			<td>${ReservationVO.reservation_number}</td>
+                                                                    			<td>${ReservationVO.lastname}${ReservationVO.firstname}</td>
+                                                                    			<td>${ReservationVO.checkin_date}</td>
+                                                                    			<td>${ReservationVO.checkout_date}</td>
+                                                                    			<td>&#8361;<fmt:formatNumber value="${ReservationVO.price}" type="number"/></td>
+                                                                    		</tr>
+                                                                    		</c:forEach>
+                                                                    	</table>
+                                                                    </div>
+                                                                    </c:otherwise>
+                                                                    </c:choose>
                                                                 </div>
                                                             </div>    
                                                         </div>

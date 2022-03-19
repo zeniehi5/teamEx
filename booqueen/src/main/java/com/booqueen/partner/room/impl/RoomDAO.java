@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -22,6 +23,10 @@ public class RoomDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
+
 	public void addRoom(RoomVO vo) {
 		sqlSessionTemplate.insert("RoomDAO.addRoom", vo);
 	}
@@ -96,6 +101,13 @@ public class RoomDAO {
 
 	public List<RoomAvailableVO> selectRoomAvailable(int room_id) {
 		return sqlSessionTemplate.selectList("RoomDAO.selectRoomAvailable", room_id);
+	}
+	public List<HotelImageVO> selectImageBySerial(int serialnumber){
+		return sqlSessionTemplate.selectList("RoomDAO.selectImageBySerial", serialnumber);
+	}
+
+	public List<HotelImageVO> deleteImageBySerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("RoomDAO.deleteImageBySerial", serialnumber);
 	}
 
 }

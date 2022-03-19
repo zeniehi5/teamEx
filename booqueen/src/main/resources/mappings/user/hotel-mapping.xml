@@ -44,7 +44,7 @@
    		<result property="room_id" column="room_id"/>
    		<result property="price" column="price"/>
    </resultMap>
-
+   
 	<select id="selectHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
 		<![CDATA[
 				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
@@ -79,11 +79,45 @@
 		]]>
 	</select>
 	
+	<select id="selectUnavailableHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
+		<![CDATA[
+				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
+	
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
+				
+				from hotel_image as h 
+				
+				full join temphotel as t
+				
+				on h.serialnumber = t.serialnumber
+				
+				full join review as r
+				
+				on t.serialnumber = r.serialnumber
+		
+				full join room as o
+				
+				on t.serialnumber = o.serialnumber
+				
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where t.city LIKE CONCAT('%', #{city}, '%')
+				
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+		]]>
+	</select>
+	
 	<select id="selectFilterByStar" resultMap="HotelVOMap" parameterType="java.util.HashMap">
 		<![CDATA[ 
 			select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
 	
-				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
 				
 				from hotel_image as h 
 				
@@ -99,7 +133,21 @@
 				
 				on t.serialnumber = s.serialnumber
 				
-				where star in (
+				full join room as o
+				
+				on t.serialnumber = o.serialnumber
+				
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where open_date between
+		]]>	
+				<foreach collection="dates" item="dates" separator="and">
+					<![CDATA[ TO_DATE(#{dates}, 'YYYYMMDD')]]>	
+				</foreach>
+		<![CDATA[ 
+				and star in (
 		]]>			
 				<foreach collection="stars" item="stars" separator="," index="index">
        				 <![CDATA[ #{stars}]]>	
@@ -158,7 +206,7 @@
 				</if>
 				
 		<![CDATA[	
-				group by t.serialnumber, h.file_name, h.file_url
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
 				]]>	
 				
 				<if test="scoreAvg != null">

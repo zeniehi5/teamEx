@@ -39,7 +39,7 @@
 						<div class="container-label"><h2>이름</h2></div>
 						<div class="container-element">
 							<div class="element">
-									<input type="text" id="name" value="${member.name }" name="name" readonly />
+									<input type="text" id="name" value="${member.name }" name="name" readonly/>
 							</div>
 						</div>
 					</div>
@@ -63,7 +63,19 @@
 						<div class="container-label"><h2>성별</h2></div>
 						<div class="container-element">
 							<div class="element element-gender">
-								<input type="text" value="${member.gender }" name="gender" readonly/>
+								<c:choose>
+								<c:when test="${member.gender == '남성' || member.gender == '여성'}">
+									<input type="text" value="${member.gender }" name="gender" readonly/>
+								</c:when>
+								<c:otherwise>
+									<c:if test="${member.gender == 'male'}">
+										<input type="text" value="남성" name="gender" readonly/>
+									</c:if>
+									<c:if test="${member.gender == 'female'}">
+										<input type="text" value="여성" name="gender" readonly/>
+									</c:if>
+								</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -98,9 +110,9 @@
 		                           <option value="019" <c:if test="${member.phone1 == '019'}">selected</c:if>>019</option>
                         		</select>
 								<div class="hyphen">-</div>
-								<input type="text" placeholder="0000" id="phone2" maxlength="4" value=${member.phone2 } name="phone2">
+								<input type="text" placeholder="0000" id="phone2" maxlength="4" value="${member.phone2 }" name="phone2">
 								<div class="hyphen">-</div>
-								<input type="text" placeholder="0000" id="phone3" maxlength="4" value=${member.phone3 } name="phone3">
+								<input type="text" placeholder="0000" id="phone3" maxlength="4" value="${member.phone3 }" name="phone3">
 							</div>
 						</div>
 					</div>
@@ -112,7 +124,7 @@
 						<div class="container-label"><h2>이메일 주소</h2></div>
 						<div class="container-element">
 							<div class="element">
-								<input type="text" value="${member.userid }" name="userid">
+								<input type="text" value="${member.userid }" name="userid" readonly>
 							</div>
 						</div>
 					</div>
@@ -161,8 +173,8 @@
 			<div class="delete-hr"><div></div></div>
 			<div class="modal-delete-reason">
 				<div class=reason-title>회원 탈퇴 사유</div>
-				<select id="delete-account">
-					<option value="delete-default">선택</option>
+				<select id="delete-account" name="reason">
+					<option value="">선택</option>
 					<option value="delete1">사이트 사용이 불편해서</option>
 					<option value="delete2">원하는 정보가 없어서</option>
 					<option value="delete3">여러 계정을 보유하고 있어서</option>
@@ -213,18 +225,20 @@
          <div class="modal-password">
             <div class="password-title">새 비밀번호</div>
             <div class="input-password">
-               <input type="password" placeholder="새 비밀번호를 입력해 주세요" name="newPasswd" id="new-passwd" >
+               <input type="password" placeholder="새 비밀번호를 입력해 주세요" name="newPasswd" id="new-passwd" onkeyup="passwdCheck(this)">
+               <div id="new-passwdCheck"></div>
             </div>
          </div>
          <div class="modal-password">
             <div class="password-title">새 비밀번호 확인</div>
             <div class="input-password">
-               <input type="password" placeholder="새 비밀번호를 다시 입력해 주세요" name="rePasswd" id="re-passwd">
+               <input type="password" placeholder="새 비밀번호를 다시 입력해 주세요" name="rePasswd" id="re-passwd" onkeyup="passwdCheck(this)">
+               <div id="re-passwdCheck"></div>
             </div>
          </div>
          <div class="delete-hr"><div></div></div>
          <div class="modal-modify-button">
-            <button type="submit" class="modify-pw-btn-real" id="modifyPwBtnReal" onmouseover="passwd-check()">확인</button>
+            <button type="submit" class="modify-pw-btn-real" id="modifyPwBtnReal">확인</button>
          </div>
       </form>
    </div>
@@ -294,125 +308,144 @@
 		</div>
 	</div>
 	
-	<script>
-		var isEmpty = function(value){ 
-			if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ 
-				return true 
-			} else { 
-				return false 
-			}
-		};
-	
-		/*
-		function passwd-check(){
-			var oldPass = document.getElementById('old-passwd').value;
-			var newPass = document.getElementById('new-passwd').value;
-			var RePass = document.getElementById('re-passwd').value;
-			
-			if(!isEmpty(oldPass) && !isEmpty(newPass) && !isEmpty(RePass)){
-				document.getElementById('modifyPwBtnReal').disabled = false;
-			}
-		}
-		*/
-		
-        function on() {
-        	document.getElementById("overlay").style.display = "block";
-	        var paragraph = document.getElementById("file-name");
-	   	  	paragraph.textContent = "";
-	   	  	const previewImage = document.getElementById("preview-image")
-	      	previewImage.src = "${contextPath}/resources/user/images/default_profile.jpg";
-	   	 	document.getElementById('submit-button').disabled = true;
-        }
+<script>
+var isEmpty = function(value){ 
+	if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ 
+		return true 
+	} else { 
+		return false 
+	}
+};
 
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-    </script>
+function on() {
+	document.getElementById("overlay").style.display = "block";
+	var paragraph = document.getElementById("file-name");
+	paragraph.textContent = "";
+	const previewImage = document.getElementById("preview-image")
+	previewImage.src = "${contextPath}/resources/user/images/default_profile.jpg";
+	document.getElementById('submit-button').disabled = true;
+ }
+
+function off() {
+	document.getElementById("overlay").style.display = "none";
+ }
+</script>
 
 <script>
-	var deleteMyAccount = document.getElementById("deleteMyAccount");
-	var deleteBtn = document.getElementById("deleteBtn");
-	var deleteBtnReal = document.getElementById("deleteBtnReal");
-	var close = document.getElementsByClassName("close")[0];
+var deleteMyAccount = document.getElementById("deleteMyAccount");
+var deleteBtn = document.getElementById("deleteBtn");
+var deleteBtnReal = document.getElementById("deleteBtnReal");
+var close = document.getElementsByClassName("close")[0];
 
-	deleteBtn.onclick = function () { // When the user clicks the button, open the modal
-		deleteMyAccount.style.display = "block";
-	}
-	deleteBtnReal.onclick = function () { // When the user clicks the button, open the modal
-		deleteMyAccount.style.display = "none"; // 회원 탈퇴시? 일단 닫기로 해놓음. 나중에 홈화면으로 돌아가는 걸로 수정
-	}
-	close.onclick = function () { // When the user clicks on <span> (x), close the modal
+deleteBtn.onclick = function () { // When the user clicks the button, open the modal
+	deleteMyAccount.style.display = "block";
+}
+deleteBtnReal.onclick = function () { // When the user clicks the button, open the modal
+	deleteMyAccount.style.display = "none"; // 회원 탈퇴시? 일단 닫기로 해놓음. 나중에 홈화면으로 돌아가는 걸로 수정
+}
+close.onclick = function () { // When the user clicks on <span> (x), close the modal
+	deleteMyAccount.style.display = "none";
+}
+window.onclick = function (event) { // When the user clicks anywhere outside of the modal, close it
+   if (event.target == deleteMyAccount) {
 		deleteMyAccount.style.display = "none";
-	}
-	window.onclick = function (event) { // When the user clicks anywhere outside of the modal, close it
-    if (event.target == deleteMyAccount) {
-			deleteMyAccount.style.display = "none";
-    }
-	}
+   }
+}
 
-   // 비밀번호 변경
-   var modifyPassword = document.getElementById("modifyPassword");
-   var modifyPwBtn = document.getElementById("modifyPwBtn");
-   var modifyPwBtnReal = document.getElementById("modifyPwBtnReal");
-   var modifyClose = document.getElementsByClassName("modifyClose")[0];
+// 비밀번호 변경
+var modifyPassword = document.getElementById("modifyPassword");
+var modifyPwBtn = document.getElementById("modifyPwBtn");
+var modifyPwBtnReal = document.getElementById("modifyPwBtnReal");
+var modifyClose = document.getElementsByClassName("modifyClose")[0];
 
-   modifyPwBtn.onclick = function () {
-      modifyPassword.style.display = "block";
-   }
-   modifyPwBtnReal.onclick = function () {
-      modifyPassword.style.display = "none";
-   }
-   modifyClose.onclick = function () {
-      modifyPassword.style.display = "none";
-   }
-   window.onclick = function (event) {
-    if (event.target == modifyPassword) {
-         modifyPassword.style.display = "none";
-    }
-   }
-   
-   // input label change
-   function myFunction() {
-	   
-	   var paragraph = document.getElementById("file-name");
-	   paragraph.textContent = "";
-	   
-	   var fullPath = document.getElementById('my-settings-file-upload').value;
-	   if (fullPath) {
-	       var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-	       var filename = fullPath.substring(startIndex);
-	       if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-	           filename = filename.substring(1);
-	       }
-	       paragraph.textContent = filename;
-	   }
-	   
-		document.getElementById('submit-button').disabled = false;
-   }
-   
-   // input preview
-   function readImage(input) {
-	    // 인풋 태그에 파일이 있는 경우
-	    if(input.files && input.files[0]) {
-	        // 이미지 파일인지 검사 (생략)
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
-	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result
-	        }
-	        // reader가 이미지 읽도록 하기
-	        reader.readAsDataURL(input.files[0])
-	    }
+modifyPwBtn.onclick = function () {
+	modifyPassword.style.display = "block";
+}
+modifyPwBtnReal.onclick = function () {
+	modifyPassword.style.display = "none";
+}
+modifyClose.onclick = function () {
+	modifyPassword.style.display = "none";
+}
+window.onclick = function (event) {
+	if (event.target == modifyPassword) {
+		modifyPassword.style.display = "none";
 	}
+}
    
-	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("my-settings-file-upload")
-	inputImage.addEventListener("change", e => {
-	    readImage(e.target)
-	})
+// input label change
+function myFunction() {
+  
+	var paragraph = document.getElementById("file-name");
+	paragraph.textContent = "";
+	  
+	var fullPath = document.getElementById('my-settings-file-upload').value;
+	if (fullPath) {
+		var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+		var filename = fullPath.substring(startIndex);
+		if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			filename = filename.substring(1);
+		}
+		paragraph.textContent = filename;
+	}
+	document.getElementById('submit-button').disabled = false;
+}
+   
+// input preview
+function readImage(input) {
+	// 인풋 태그에 파일이 있는 경우
+	if(input.files && input.files[0]) {
+		// 이미지 파일인지 검사 (생략)
+		// FileReader 인스턴스 생성
+		const reader = new FileReader()
+		// 이미지가 로드가 된 경우
+		reader.onload = e => {
+			const previewImage = document.getElementById("preview-image")
+			previewImage.src = e.target.result
+		}
+		// reader가 이미지 읽도록 하기
+		reader.readAsDataURL(input.files[0])
+	}
+}
+  
+// input file에 change 이벤트 부여
+const inputImage = document.getElementById("my-settings-file-upload")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+})
+
+// 비밀번호 변경
+function passwdCheck() {
+	var passwdRules = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
+	var newPasswd = $('#new-passwd').val();
+	var rePasswd = $('#re-passwd').val();
 	
+	if (!passwdRules.test(newPasswd)) {
+		$('#new-passwd').css('border', '1px solid #e21111')
+		$('#new-passwdCheck').css('color', 'red')
+		$('#new-passwdCheck').html("비밀번호는 영문/숫자/특수문자(!@#$%^&*)를 포함하여 8~16자로 입력해야 합니다.")
+		flag = false;
+	} else {
+		$('#new-passwd').css('border', '1px solid #545454')
+		$('#new-passwdCheck').css('color', '#0071c2')
+		$('#new-passwdCheck').html("사용 가능합니다.")
+		flag = true;
+	}
+	if (!isEmpty(rePasswd)) {
+		if (newPasswd != rePasswd) {
+			$('#re-passwd').css('border', '1px solid #e21111')
+			$('#re-passwdCheck').css('color', 'red')
+			$('#re-passwdCheck').html("새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.")
+			flag = false;
+		} else {
+			$('#re-passwd').css('border', '1px solid #545454')
+			$('#re-passwdCheck').css('color', '#0071c2')
+			$('#re-passwdCheck').html("새 비밀번호와 새 비밀번호 확인이 일치합니다.")
+			flag = true;
+		}
+	}
+}
+
 	
 </script>
 </body>

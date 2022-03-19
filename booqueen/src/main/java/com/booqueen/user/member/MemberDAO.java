@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.user.member.vo.MemberProfileVO;
+import com.booqueen.user.member.vo.ReasonVO;
+
 @Repository
 public class MemberDAO {
 
@@ -31,8 +34,24 @@ public class MemberDAO {
 		return sqlSession.delete("sql.deleteMember", vo);
 	}
 	
+	public int deleteProfile(MemberProfileVO vo) throws DataAccessException{
+		return sqlSession.delete("com.booqueen.user.member.dao.memberProfilemapper.deleteProfile", vo);
+	}
+	
 	public int changePasswd(MemberVO vo) throws DataAccessException{
 	    return sqlSession.update("sql.changePasswd", vo);
+	}
+	 
+	public MemberVO selectMemberByKakao(MemberVO vo) throws DataAccessException{
+		return (MemberVO) sqlSession.selectOne("sql.selectMemberByKakao", vo);
+	}
+	
+	public int insertMemberByKakao(MemberVO vo) throws DataAccessException{
+		return sqlSession.insert("sql.insertMemberByKakao", vo);
+	}
+	
+	public int insertReason(ReasonVO vo) throws DataAccessException{
+		return sqlSession.insert("com.booqueen.user.member.dao.reasonmapper.insertReason", vo);
 	}
 }
  

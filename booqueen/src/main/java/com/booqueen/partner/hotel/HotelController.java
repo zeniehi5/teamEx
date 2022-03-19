@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booqueen.partner.common.S3Service;
+import com.booqueen.partner.reservation.ReservationService;
+import com.booqueen.partner.reservation.ReservationVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -43,6 +46,9 @@ public class HotelController {
 	@Autowired
 	private S3Service s3service;
 	
+	@Autowired
+	private ReservationService reservationService;
+	
 	@RequestMapping(value = "/basic.pdo", method = RequestMethod.POST)
 	public String setBasicInfo(HotelVO vo, HttpSession session) {
 			session.setAttribute("hotelname", vo.getHotelname());
@@ -54,18 +60,18 @@ public class HotelController {
 			session.setAttribute("city", vo.getCity());
 			session.setAttribute("postalcode", vo.getPostalcode());
 			hotelService.addHotel(vo);
-			return "createroom";
+			return "createroom";	
 	}
 	
-	@RequestMapping(value = "/price.pdo", method = RequestMethod.GET)
+	@RequestMapping(value = "/price.pdo", method = RequestMethod.POST)
 	public String setPrice(RoomVO vo, HttpSession session) {
 		HotelVO searchhotel = hotelService.findHotelByName(session.getAttribute("hotelname"));
+		String email = (String) session.getAttribute("email");
 		if(searchhotel != null) {
 			session.setAttribute("serialnumber", searchhotel.getSerialnumber());
 			vo.setSerialnumber(searchhotel.getSerialnumber());
 			roomService.addRoom(vo);
-		}
-		
+		}	
 		session.setAttribute("type", vo.getType());
 		session.setAttribute("smoking", vo.getSmoking());
 		session.setAttribute("availablitiy", vo.getAvailable());
@@ -167,7 +173,7 @@ public class HotelController {
 	}
 	
 	@PostMapping("policy.pdo")
-	public String setHotelPolicy(HotelPolicyVO policy, HttpSession session) {
+	public String setHotelPolicy(Model model, HotelPolicyVO policy, HttpSession session) {
 		if(session != null) {
 			policy.setSerialnumber((int) session.getAttribute("serialnumber"));
 			try {
@@ -175,6 +181,20 @@ public class HotelController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
+		RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
+		model.addAttribute("room", room);
+		//return "payment";
+		return "add-room";
+	}
+	
+	//결제정보 입력 화면
+	@RequestMapping(value = "/setpayment.pdo", method = RequestMethod.GET)
+	public String getPaymentPage(HotelVO hotel, HttpSession session) {
+		try {
+			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		return "payment";
 	}
@@ -196,9 +216,12 @@ public class HotelController {
 	public String getMain(@ModelAttribute("hotel")HotelVO hotel, Model model, HttpSession session) {
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
-			System.out.println(hotel.toString());
-			model.addAttribute("hotel", hotel);
-			System.out.println(model.toString());
+			if(hotel != null) {
+				List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
+				model.addAttribute("hotel", hotel);
+				model.addAttribute("reservation", reservation);
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}		
@@ -437,5 +460,4 @@ public class HotelController {
 		}
 		return "home";
 	}
-	
 }

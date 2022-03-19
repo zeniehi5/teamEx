@@ -27,7 +27,7 @@
                 <header class="header">
                     <div class="header_container">
                         <section class="logo_container">
-                            <a href="#"><img src="${contextPath}/resources/partner/images/booking_logo_retina.png" class="header_logo"></a>
+                            <a href="#"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
                             <div class="header_property">${hotel.hotelname} - ${hotel.serialnumber}</div>
                         </section>
                         <div class="side_items">
@@ -128,7 +128,7 @@
                                             <hr class="bui-divider">
                                             <h4 class="ext-action-dropdown__paragraph"><span>계정에 숙소 추가하기</span></h4>
                                             <ul class="ext-action-dropdown__content">
-                                                <li><a href="#" class="ext-action-dropdown__item"><svg width="20" height="20"
+                                                <li><a href="${contextPath}/addHotel.pdo" class="ext-action-dropdown__item"><svg width="20" height="20"
                                                             fill="currentColor" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"
                                                             class="ext-action-dropdown__icon bk-icon -streamline-plus_circle" slot="icon">
                                                             <path
@@ -196,11 +196,6 @@
                                                             href="${contextPath}/calendar.pdo"><span>캘린더</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="#"><span>요금제</span></a></li>
-                                                    <li class="submenu_item">
-                                                        <a class="submenu_link" href="#">
-                                                            <span class="submenu_title">숙박인원 기준 요금</span>
-                                                        </a>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -250,8 +245,6 @@
                                             </a>
                                             <div class="submenu" id="submenu">
                                                 <ul class="submenu_list">
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>일반
-                                                                정보</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="${contextPath}/update-picture.pdo"><span>사진</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
@@ -261,14 +254,7 @@
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>숙소
                                                                 레이아웃</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>객실
-                                                                편의시설</sapn></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>찾아오는
-                                                                길</span>
-                                                        </a></li>
-                                                    <li class="submenu_item"><a class="submenu_link"
-                                                            href="#"><span>프로필</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>내 숙소
-                                                                설명 보기</span></a></li>
+                                                                편의시설</sapn></a></li>     
                                                 </ul>
                                             </div>
                                         </li>
@@ -302,8 +288,6 @@
                                                 <ul class="submenu_list">
                                                     <li class="submenu_item"><a class="submenu_link" href="${contextPath}/message.pdo"><span>예약
                                                                 관련 메시지</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link"
-                                                            href="#"><span>Booking.com 메시지</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="${contextPath}/inquiry.pdo"><span>숙소
                                                                 관련 문의</span></a></li>
                                                 </ul>
