@@ -437,5 +437,4 @@ public class HotelController {
 		}
 		return "home";
 	}
-	
 }

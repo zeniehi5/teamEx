@@ -10,9 +10,62 @@
 <title>${hotel.hotelname} · 분석 게시판</title>
 </head>
 <body>
-
 <jsp:include page="/WEB-INF/partner/header.jsp"/>
+                <div class="middle">
+                    <div class="table">
+                        <table>
+                            <tr id="tr1">
+                                <td colspan="3"><h2>성과분석</h2></td>
+                            </tr>
+                            <tr>
+                                <td>    </td>
+                                <td>
+                                    지난 예약 건 기준: <br>
+                                    <select>
+                                        <option>90일</option>
+                                        <option>14일</option>
+                                        <option>30일</option>
+                                        <option>60일</option>
+                                        <option>90일</option>
+                                        <option>365일</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    향후 예약 건 기준: <br>
+                                    <select>
+                                        <option>90일</option>
+                                        <option>14일</option>
+                                        <option>30일</option>
+                                        <option>60일</option>
+                                        <option>90일</option>
+                                        <option>365일</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="td1">숙박일 수</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td id="td1">객실 매출액</td>
+                                <td>\0</td>
+                                <td>\0</td>
+                            </tr>
+                            <tr>
+                                <td id="td1">일일 평균 요금</td>
+                                <td>\0</td>
+                                <td>\0</td>
+                            </tr>
+                            <tr id="last_tr">
+                                <td></td>
+                                <td> <a href="#"><input type="button" value="판매 통계"></a></td>
+                                <td> <a href="#"><input type="button" value="예약 현황 | 온북"></a></td>
+                            </tr>
+                        </table>
+                    </div>
 <div id="chart"></div>
+</div>
 <jsp:include page="/WEB-INF/partner/footer.jsp"/>
 <script>
 var options = {

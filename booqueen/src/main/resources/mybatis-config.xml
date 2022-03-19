@@ -39,7 +39,6 @@
 		  <typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
       <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
       <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
-      
 		  
 		  <!-- admin -->
 		  <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>

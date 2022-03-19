@@ -49,4 +49,10 @@
 	<select id="selectRoomAvailable" resultType="roomAvailable">
 		select * FROM room_available where room_id = #{room_id}
 	</select>
+	<select id="selectImageBySerial" resultType="images">
+		select * FROM hotel_image where serialnumber = #{serialnumber}
+	</select>
+	<delete id="deleteImageBySerial" parameterType="images">
+		DELETE FROM hotel_image where serialnumber = #{serialnumber}
+	</delete>
 </mapper>

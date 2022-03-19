@@ -25,4 +25,5 @@
 	<select id="selectInquiryByHotelSerial" resultType="inquiry">
 		SELECT * FROM board where serialnumber = 1118
 	</select>
+
 </mapper>
