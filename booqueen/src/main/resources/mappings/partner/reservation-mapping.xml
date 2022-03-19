@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-	<select id="selectReservationListByHotelSerial" resultType="reservation">
+	<select id="selectReservationListByHotelSerial" resultType="aReservation">
 		SELECT
 			r.lastname,
 			r.firstname,
@@ -19,7 +19,7 @@
 			room as h
 		ON r.room_id = h.room_id;
 	</select>
-	<select id="selectReservationPagingByHotelSerial" resultType="reservation">
+	<select id="selectReservationPagingByHotelSerial" resultType="aReservation">
 		SELECT
 			r.lastname,
 			r.firstname,

@@ -40,9 +40,10 @@
       <typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
     <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
     <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
-    <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="reservation"/>
+    <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="pReservation"/>
     <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>    
     
+<<<<<<< HEAD
       <!-- admin -->
       <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
       <typeAlias type="com.booqueen.admin.hotel.HotelVO" alias="adminHotel"/>
@@ -59,6 +60,24 @@
        <mapper resource="mappings/user/room-mapping.xml"/>
        <mapper resource="mappings/user/chat-mapping.xml"/>
        <mapper resource="mappings/user/board-mapping.xml"/>
+=======
+		<!-- admin -->
+		<typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
+		<typeAlias type="com.booqueen.admin.hotel.HotelVO" alias="adminHotel"/>
+		<typeAlias type="com.booqueen.admin.partner.PartnerVO" alias="partnerMember"/>
+		<!--<typeAlias type="com.booqueen.admin.partner.BlockPartnerVO" alias="blockPartner"/>-->
+		<typeAlias type="com.booqueen.admin.hotel.ReservationVO" alias="aReservation"/>
+	</typeAliases>
+	<mappers>
+		  <mapper resource="mappings/user/member-mapping.xml"/>
+	    <mapper resource="mappings/user/profile-mapping.xml"/>
+	    <mapper resource="mappings/user/hotel-mapping.xml"/>
+	    <mapper resource="mappings/user/review-mapping.xml"/>
+	    <mapper resource="mappings/user/wishlist-mapping.xml"/>
+	    <mapper resource="mappings/user/room-mapping.xml"/>
+	    <mapper resource="mappings/user/chat-mapping.xml"/>
+	    <mapper resource="mappings/user/board-mapping.xml"/>
+>>>>>>> 0b211bd762727b17e128f7c2e50cd759a123a642
       <mapper resource="mappings/user/reason-mapping.xml"/>
       <mapper resource="mappings/partner/member-mapping.xml"/>
       <mapper resource="mappings/partner/hotel-mapping.xml"/>
