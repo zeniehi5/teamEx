@@ -80,9 +80,9 @@
                                         <th id="th7">Booqueen.com 메시지</th>
                                     </tr>
                                     <tr>
-                                        <td id="td3">(serialnumber)</td>
-                                        <td id="td3">(hotelnam)</td>
-                                        <td id="td3">(address2),(address1)(city)</td>
+                                        <td id="td3">${hotel.serialnumber}</td>
+                                        <td id="td3">${hotel.hotelname}</td>
+                                        <td id="td3">${hotel.address2}, ${hotel.address1}, ${hotel.city}</td>
                                         <td id="td3">비공개/예약불가</td>
                                         <td id="td5">0 0</td>
                                         <td id="td3">0</td>

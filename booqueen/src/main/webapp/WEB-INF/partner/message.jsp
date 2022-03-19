@@ -71,6 +71,8 @@
                                     </select>
                                 </div>
                             </div>
+                            <c:choose>
+                            <c:when test="${!empty messageList}">
                             <div class="middle-middle-1">
                                 <div class="middle-top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -95,6 +97,16 @@
                                     </div>
                                 </div>
                             </div>
+                            </c:when>
+                            <c:when test="${empty messageList}">
+                            <div class="middle-middle-1">
+								<!-- message -->
+                                <div class="message" id="message_wrapper">
+                                    <p>주고 받은 메시지가 없습니다.</p>
+                                </div>
+                            </div>
+                            </c:when>
+                            </c:choose>
                             <div class="middle-right">
                                 <div class="right-top">
                                     <div>
@@ -174,7 +186,7 @@
     
     function reqList() {    
     	
-    	var sendReply = {"userid": 'booqueen@naver.com', "serialnumber": 1118}
+    	var sendReply = {"userid": 'booqueen@naver.com', "serialnumber": ${hotel.serialnumber}}
     	
 	    $.ajax({
 	        url:'/web/chat.do'
@@ -245,7 +257,7 @@
     function insertChat(){
     	
     	var content_val = $('#message_textarea').val();
-    	var chatVO = {"userid": 'booqueen@naver.com', "serialnumber": 1118, "content": content_val, "partner": true }
+    	var chatVO = {"userid": 'booqueen@naver.com', "serialnumber": ${hotel.serialnumber}, "content": content_val, "partner": true }
     	var path = '${contextPath}';
     	
     	$.ajax({

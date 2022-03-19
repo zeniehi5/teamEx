@@ -3,6 +3,8 @@ package com.booqueen.partner.room;
 import java.util.HashMap;
 import java.util.List;
 
+import com.booqueen.partner.hotel.HotelImageVO;
+
 public interface RoomService {
 
 	public void addRoom(RoomVO vo);
@@ -40,4 +42,9 @@ public interface RoomService {
 	public void insertRoomAvailable(HashMap<String, Object> setPrice);
 
 	public List<RoomAvailableVO> selectRoomAvailable(int room_id);
+
+	public List<HotelImageVO> selectImageBySerial(int serialnumber);
+	
+	public List<HotelImageVO> deleteImageBySerial(int serialnumber);
+
 }
