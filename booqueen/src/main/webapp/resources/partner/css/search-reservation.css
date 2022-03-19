@@ -644,6 +644,14 @@ li{
     box-shadow: none;
     opacity: .4;
 }
+.pagination{
+    border-color: transparent;
+    background-color: transparent;
+    fill: #07c;
+    color: #07c;
+    outline: none;
+    box-shadow: none;
+}
 .pagination_link{
     display: flex;
     align-items: center;
