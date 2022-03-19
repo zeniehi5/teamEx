@@ -33,7 +33,7 @@ a:hover{
     background-clip: initial;
     background-color: #003580;
     color: #fff;
-    padding: 0.3% 18%;
+    /* padding: 0.3% 18%; */
 }
 .bui-header__bar{
     display: flex;

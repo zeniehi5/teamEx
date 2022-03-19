@@ -12,6 +12,7 @@
 		<result property="birth_year" column="birth_year"/>
 		<result property="birth_month" column="birth_month"/>
 		<result property="birth_day" column="birth_day"/>
+		<result property="type" column="type"/>
 	</resultMap>
 	
 	<select id="sel" resultType="userMemberVO" parameterType="userMemberVO">
@@ -37,4 +38,13 @@
     <update id="changePasswd" parameterType="userMemberVO">
        <![CDATA[UPDATE u_member SET passwd = #{newPasswd} where userid = #{userid}]]>
     </update>
+    
+    <select id="selectMemberByKakao" resultType="userMemberVO" parameterType="userMemberVO">
+		<![CDATA[SELECT * FROM u_member where userid = #{userid} and type = #{type}]]>
+	</select>
+	
+	<insert id="insertMemberByKakao" parameterType="userMemberVO"> 
+        <![CDATA[INSERT INTO u_member (userid, name, gender, type) VALUES (#{userid}, #{name}, #{gender}, #{type})]]> 
+    </insert>
+    
 </mapper>	
