@@ -5,7 +5,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +35,16 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#000" class="bi bi-chevron-right arrow" viewBox="0 0 16 16">
 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
 					</svg>
-					<a href="#" class="region">${hotelList.get(0).city }</a>
+					<a href="#" class="region">
+						<c:choose>
+							<c:when test="${!empty hotelList }">
+								${hotelList.get(0).city }
+							</c:when>
+							<c:otherwise>
+								${unavailableHotelList.get(0).city }
+							</c:otherwise>	
+						</c:choose>
+					</a>
 				</li>
 				<li class="search">
 					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#000" class="bi bi-chevron-right arrow" viewBox="0 0 16 16">
@@ -58,7 +67,14 @@
 								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 									<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg>
-								<input type="search" class="searchbox-destination-input" value="${hotelList.get(0).city }" name="keyword">
+								<c:choose>
+									<c:when test="${!empty hotelList }">
+										<input type="search" class="searchbox-destination-input" value="${hotelList.get(0).city }" name="keyword">
+									</c:when>
+									<c:otherwise>
+										<input type="search" class="searchbox-destination-input" value="${unavailableHotelList.get(0).city }" name="keyword">
+									</c:otherwise>	
+								</c:choose>
 							</div>
 						</div>
 						<div class="searchbox-date">
@@ -66,13 +82,13 @@
 								<div class="checkin-date">
 									<span class="label">체크인 날짜</span>
 									<div class="checkin-field">
-											<input class="startdate" id="startdate" type="date" name="daterange1" value="2022년 2월 14일 (월)" />
+											<input class="startdate" id="startdate" type="date" name="daterange1" value="${date1 }">
 									</div>
 								</div>
 								<div class="checkout-date">
 									<span class="label">체크아웃 날짜</span>
 									<div class="checkout-field">
-											<input class="enddate" id="enddate" type="date" name="daterange2" value="2022년 2월 15일 (화)" >
+											<input class="enddate" id="enddate" type="date" name="daterange2" value="${date2 }">
 									</div>
 								</div>
 							</div>
@@ -394,7 +410,19 @@
 			<!-- ------------------------- 호텔 목록 -------------------------  -->
 			<div class="container-right">
 				<div class="title">
-					<h2>${hotelList.get(0).city }: 검색된 숙소 <span id="number_hotel">${fn:length(hotelList)}</span>개</h2>
+					<c:choose>
+						<c:when test="${!empty hotelList }">
+							<h2>${hotelList.get(0).city }: 검색된 숙소 
+								<span id="number_hotel">${fn:length(hotelList)+fn:length(unavailableHotelList)}</span>개
+							</h2>
+						</c:when>
+						<c:otherwise>
+							<h2>${unavailableHotelList.get(0).city }: 검색된 숙소 
+								<span id="number_hotel">${fn:length(unavailableHotelList)}</span>개
+							</h2>
+						</c:otherwise>	
+					</c:choose>
+					
 					<button class="mini-map" id="mapBtn2" style="background-image: url(${contextPath}/resources/user/images/searchresultmap.png)";>
 						<i class="fas fa-map-marker-alt"></i>
 					</button>
@@ -455,6 +483,10 @@
 							</div>
 						</div>
 						
+						<c:choose>
+						<c:when test="${!empty hotelList || !empty unavailableHotelList}">
+						
+						<c:if test="${!empty hotelList }">
 						<div id="content_from_ajax">
 						<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 						
@@ -631,7 +663,189 @@
 						<!-- list end -->
 						</c:forEach>
 						
+						</div><!-- end content_from_ajax -->
+						</c:if>
+
+						<c:if test="${!empty unavailableHotelList }">
+						<div id="content_from_ajax_unavailable">
+						<c:forEach var="unavilalbeHotel" items="${unavailableHotelList}" varStatus="status">
+						
+						<!-- list start -->
+						<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank">
+						<div class="list">
+							<div class="hotel-info">
+								<div class="hotel-image">
+									<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank">
+									
+									<c:if test="${!empty unavilalbeHotel.hotelImgVO.file_url }">
+										<img class="s3-img" src="${unavilalbeHotel.hotelImgVO.file_url }">
+									</c:if>
+									<c:if test="${empty unavilalbeHotel.hotelImgVO.file_url }">
+										<img class="s3-img" src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png">
+									</c:if>
+									</a>
+								</div>
+								<div class="hotel-content">
+									<div class="hotel-top">
+										<div class="hotel-title">
+											<div class="hotel-name">
+												<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank"><h3>${unavilalbeHotel.hotelname }</h3></a>								
+												<div class="star">
+													<c:if test="${unavilalbeHotel.star+0 == '5'}">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:if>	
+													<c:if test="${unavilalbeHotel.star+0 == '4'}">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:if>
+													<c:if test="${unavilalbeHotel.star+0 == '3'}">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:if>
+													<c:if test="${unavilalbeHotel.star+0 == '2'}">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:if>
+													<c:if test="${unavilalbeHotel.star+0 == '1'}">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:if>
+												</div>
+											</div>
+											<div class="hotel-location">
+												<a href="#">
+													<span>
+														<span class="hotel-address">${unavilalbeHotel.city }</span>
+														<span class="hotel-map">지도에서 표시</span>
+													</span>
+												</a>
+											</div>
+										</div>
+										<div class="reviews">
+											<div class="review">
+											
+											<c:if test="${unavilalbeHotel.reviewAvgVO.scoreAvg >= 9}"><div class="review-title">최고</div></c:if>
+											<c:if test="${unavilalbeHotel.reviewAvgVO.scoreAvg >= 8}"><div class="review-title">매우 좋음</div></c:if>
+											<c:if test="${unavilalbeHotel.reviewAvgVO.scoreAvg >= 7}"><div class="review-title">좋음</div></c:if>
+											<c:if test="${unavilalbeHotel.reviewAvgVO.scoreAvg >= 6}"><div class="review-title">만족</div></c:if>
+											<c:if test="${unavilalbeHotel.reviewAvgVO.scoreAvg < 6}"><div class="review-title">보통</div></c:if>
+												
+												<div class="review-subtitle">${unavilalbeHotel.reviewAvgVO.count }개 이용 후기</div>
+											</div>
+											<div class="grade">${unavilalbeHotel.reviewAvgVO.scoreAvg }</div>
+										</div>
+									</div>
+									<div class="hotel-bottom">
+										<div class="room">
+											<div class="room-left">
+												<div class="room-info">
+													
+													<div class="left">죄송합니다. 이 날짜에 이용 가능한 객실이 없습니다.</div>
+												</div>
+											</div>
+											<div class="room-right">
+												<div class="price">
+													<div class="option-info">1박, 성인 2명</div>
+													<div class="option-price">
+														<span class="fixed-price">\500,000</span>
+														<span class="sale-price"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${unavilalbeHotel.roomVO.price }" /></span>
+													</div>
+													<div class="price-info">세금 및 기타 요금 포함</div>
+												</div>
+												<div class="see-availability">
+													<a href="#">
+														<span class="move-detail">예약 가능한 날짜 보기</span>
+														<span>
+															<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+																<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+															</svg>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						</a>
+						<!-- list end -->
+						</c:forEach>
+						
+						</div><!-- end content_from_ajax_unavailable -->
+						</c:if>
+						</c:when>
+						
+						<c:otherwise>
+							<div>죄송합니다. 해당 날짜에 이용 가능한 객실이 없습니다.</div>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
@@ -694,6 +908,10 @@
 				</div>
 				
 				<div id="map_hotel_list">
+				<c:choose>
+				<c:when test="${!empty hotelList || !empty unavailableHotelList}">
+						
+				<c:if test="${!empty hotelList }">
 				<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 				<div class="map-hotel-list">
 					<div class="map-hotel-card">
@@ -824,7 +1042,7 @@
 									<div class="map-hotel-content-price-option">1박, 성인 2명</div>
 									<div class="map-hotel-content-price-price">
 										<span class="map-hotel-content-price-fixed">\88,000</span>
-										<span class="map-hotel-content-price-sale">\79,200</span>
+										<span class="map-hotel-content-price-sale"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price }" /></span>
 									</div>
 									<div class="map-hotel-content-price-fees">
 										세금 및 기타 요금 포함
@@ -841,6 +1059,165 @@
 					</div>
 				</div>
 				</c:forEach>
+				</c:if>
+				
+				<c:if test="${!empty unavailableHotelList }">
+		
+						<c:forEach var="unavailableHotel" items="${unavailableHotelList}" varStatus="status">
+						
+						<div class="map-hotel-list">
+					<div class="map-hotel-card">
+						<div class="map-hotel-save">
+							<button class="map-save-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000" class="bi bi-heart wishlist-heart" id="wishlist5" viewBox="0 0 16 16">
+									<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#c00" class="bi bi-heart-fill wishlist-heart-fill" id="wishlistFill5" viewBox="0 0 16 16">
+									<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+								</svg>
+							</button>
+						</div>
+						
+						<c:if test="${!empty unavailableHotel.hotelImgVO.file_url }">
+							<div class="map-hotel-image" style="background-image: url(${unavailableHotel.hotelImgVO.file_url })"></div>
+						</c:if>
+						<c:if test="${empty unavailableHotel.hotelImgVO.file_url }">
+							<div class="map-hotel-image" style="background-image: url(https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png)"></div>
+						</c:if>
+						
+						<div class="map-hotel-container">
+							<div class="map-hotel-title">
+								<a href="${contextPath}/hotelInfo.do?serialNumber=${unavailableHotel.serialnumber}" target="_blank"><span class="map-hotel-title-link">${unavailableHotel.hotelname }</span></a>
+								<div class="map-stars">
+									<span>
+										<c:if test="${unavailableHotel.star+0 == '5'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>	
+										<c:if test="${unavailableHotel.star+0 == '4'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${unavailableHotel.star+0 == '3'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${unavailableHotel.star+0 == '2'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+										<c:if test="${unavailableHotel.star+0 == '1'}">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+											</svg>
+										</span>
+										</c:if>
+									</span>		
+								</div>
+							</div>
+							<div class="map-hotel-review">
+								<div class="map-hotel-review-score">${unavailableHotel.reviewAvgVO.scoreAvg }</div>
+								<div class="map-hotel-review-content">
+									<div class="map-hotel-review-title">매우 좋음</div>
+									<div class="map-hotel-review-text">${unavailableHotel.reviewAvgVO.count }개 이용 후기</div>
+								</div>
+							</div>
+							<div class="map-hotel-content">
+								<div class="map-hotel-content-info">
+									<div class="map-hotel-content-info-name">디럭스 더블룸</div>
+									<div class="map-hotel-content-info-configuration">침대 1개</div>
+								</div>
+								<div class="map-hotel-content-price">
+									<div class="map-hotel-content-price-option">1박, 성인 2명</div>
+									<div class="map-hotel-content-price-price">
+										<span class="map-hotel-content-price-fixed">\88,000</span>
+										<span class="map-hotel-content-price-sale"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${unavailableHotel.roomVO.price }" /></span>
+									</div>
+									<div class="map-hotel-content-price-fees">
+										세금 및 기타 요금 포함
+									</div>
+								</div>
+								<div class="map-hotel-urgency-scarcity">죄송합니다. 현재 예약 가능한 방이 없습니다.</div>
+							</div>
+
+						</div>
+						<div class="map-hotel-card-arrow">
+							<i class="bi bi-chevron-right"></i>
+						</div>
+					</div>
+				</div>
+						</c:forEach>
+						
+				
+						</c:if>
+				</c:when>
+				<c:otherwise>
+					<div>죄송합니다. 해당 날짜에 이용 가능한 객실이 없습니다.</div>
+				</c:otherwise>
+				</c:choose>
 				</div>
 			</div>
 
@@ -860,36 +1237,6 @@
 	<div class="wrap-loading display-none">
     	<div><img src="${contextPath }/resources/user/images/spinner2.gif" /></div>
 	</div>
-
-<script>
-function getParameterByName(name) { 
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
-	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
-}
-
-// var dateArr = new Array();
-// var dateRow = getParameterByName('daterange');
-// dateArr = dateRow.split('-');
-
-// var start_date = dateArr[0].trim().replaceAll("/", "-");
-// var end_date = dateArr[1].trim().replaceAll("/", "-");
-
-	$(document).ready(function(){
-		
-// 		$('#startdate').val(start_date);
-// 		$('#enddate').val(end_date);
-				
-          $(".filter_radio").click(function(){
-        	  if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
-                $(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
-            	$(this.parentNode).toggleClass("filter_radio_checked");
-        	  } else {
-       		  	$(this.parentNode).toggleClass("filter_radio_checked");
-        	  }
-          });
-	});
-</script>
 
 <script>
 var isEmpty = function(value){ 
@@ -916,12 +1263,55 @@ var scoreText = function(value){
 	else{return "보통"}
 }
 
+function getParameterByName(name) { 
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
+}
+
+var dateArr = new Array();
+var start_date, end_date;
+
+	if(!isEmpty(getParameterByName('daterange'))){
+		var dateRow = getParameterByName('daterange');
+		dateArr = dateRow.split('-');
+		
+		var start_date_raw = dateArr[0].replace(/^\+|\s+$/gm,'');
+		var end_date_raw = dateArr[1].replace(/^\s+|\s+$/gm,'');
+		
+		start_date = start_date_raw.replaceAll("/", "-");
+		end_date = end_date_raw.replaceAll("/", "-");
+	} else {
+		start_date = getParameterByName('daterange1');
+		end_date = getParameterByName('daterange2');
+	}
+	
+	$(document).ready(function(){
+		
+		$('#startdate').val(start_date);
+		$('#enddate').val(end_date);
+				
+          $(".filter_radio").click(function(){
+        	  if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
+                $(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
+            	$(this.parentNode).toggleClass("filter_radio_checked");
+        	  } else {
+       		  	$(this.parentNode).toggleClass("filter_radio_checked");
+        	  }
+          });
+	});
+</script>
+
+<script>
+
+
 //필터 내용을 저장하는 배열
 var starArr = new Array(); 
 var cityArr = new Array();
 var serviceArr = new Array();
 var scoreArr = new Array();
 var orderArr = new Array();
+var datesArr = new Array();
 
 function makeFilter(target) {     
  	 var ageVal = target.value; //check value
@@ -951,6 +1341,8 @@ $(function(){
 })
 
 var city = '';
+var start_date_pram = start_date.replaceAll("-", "");
+var end_date_pram = end_date.replaceAll("-", "");
 
 function getHotel() {    
 
@@ -985,17 +1377,20 @@ function getHotel() {
 		orderArr.push(orderText);
 	}
 		
+	datesArr.push(start_date_pram);
+	datesArr.push(end_date_pram);
 	
     $.ajax({
-        url:'/web/hotelByFilter.do'
+        url:contextPath + '/hotelByFilter.do'
         , type : 'POST'
         , async:false
         , traditional : true
         , dataType: "JSON"
-        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr}
+        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr, datesArr: datesArr}
         , success : function(data) {
         	
         	$('#content_from_ajax').empty();
+        	$('#content_from_ajax_unavailable').empty();
         	
     		$.each(data, function(index, hotel){
     		
@@ -1008,9 +1403,9 @@ function getHotel() {
 				text += contextPath;
 				text += "/hotelInfo.do?serialNumber=";
 				text += hotel.serialnumber;
-        		text +=	"' target='_blank'><img class='s3-img' src='";
-        		text += hotel.hotelImgVO.file_url;
-        		text += "'></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+        		text +=	"' target='_blank'><img class='s3-img' src=";
+        		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
    				text += contextPath;
 				text += "/hotelInfo.do?serialNumber=";
 				text +=	hotel.serialnumber;
@@ -1030,8 +1425,16 @@ function getHotel() {
     		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
     			
         		$('#content_from_ajax').append(text);
+        		$('#content_from_ajax_unavailable').append(text);
     		});
-        
+    		
+        	
+        	
+        	
+        	
+        	
+        	
+
         }
        	, error : function() {
 			alert('error');			
@@ -1051,6 +1454,7 @@ function getHotel() {
     	  }
     	}
     orderArr = [];
+    datesArr = [];
     $('#number_hotel').text($('.list').length);
  }
 </script>
@@ -1298,7 +1702,7 @@ function getHotel() {
                 		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>매우 좋음</div><div class='map-hotel-review-text'>";
                 		text += hotel.reviewAvgVO.count;
                 		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>"
-                		text += \88,000;
+                		text += "";
                 		text += "</span><span class='map-hotel-content-price-sale'>\79,200</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
             		 	
                 		$('#map_hotel_list').append(text);
@@ -1398,13 +1802,6 @@ function getHotel() {
 
 	    // 지도의 중심좌표를 얻어옵니다 
 	    var latlng = map.getCenter(); 
-
-	    var message = '<p>지도 레벨은 ' + level + ' 이고</p>';
-	    message += '<p>중심 좌표는 위도 ' + latlng.getLat() + ', 경도 ' + latlng.getLng() + '입니다</p>';
-
-	    var resultDiv = document.getElementById('map_result');
-	    resultDiv.innerHTML = message;
-
 	});
 	   
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 

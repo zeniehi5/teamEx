@@ -22,7 +22,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -41,50 +41,27 @@
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-					class="fas fa-user fa-fw"></i></a>
-				<ul class="dropdown-menu dropdown-menu-end"
-					aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="#!">Settings</a></li>
-					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
-					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item" href="#!">Logout</a></li>
-				</ul></li>
-		</ul>
-	</nav>
-	<div id="layoutSidenav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="logout.mdo">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+       	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<div class="sb-sidenav-menu-heading">Core</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 대시보드
-						</a>
+						
+						
 						<div class="sb-sidenav-menu-heading">Interface</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 재무
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
-							</nav>
-						</div>
+						
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseLayouts2" aria-expanded="false"
 							aria-controls="collapseLayouts">
@@ -101,7 +78,22 @@
 								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
 									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
 									관리</a> 
-
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseLayouts5" aria-expanded="false"
+							aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 호텔 관리
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseLayouts5"
+							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -118,8 +110,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartner.mdo">파트너 계정 차단</a>
-
+									class="nav-link" href="${contextPath }/blockPartnerList.mdo">파트너 계정 차단</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -140,82 +131,27 @@
 									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
+						
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts5" aria-expanded="false"
+							data-bs-target="#collapseLayouts" aria-expanded="false"
 							aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
-							</div> 호텔 목록
+							</div> 재무
 							<div class="sb-sidenav-collapse-arrow">
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts5"
+						<div class="collapse" id="collapseLayouts"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
+									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
+									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapsePages" aria-expanded="false"
-							aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> Pages
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages"
-							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion"
-								id="sidenavAccordionPages">
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-									aria-controls="pagesCollapseAuth"> Authentication
-									<div class="sb-sidenav-collapse-arrow">
-										<i class="fas fa-angle-down"></i>
-									</div>
-								</a>
-								<div class="collapse" id="pagesCollapseAuth"
-									aria-labelledby="headingOne"
-									data-bs-parent="#sidenavAccordionPages">
-									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="${contextPath }/login.mdo">Login</a> <a
-											class="nav-link" href="${contextPath }/register.mdo">Register</a> <a
-											class="nav-link" href="${contextPath }/password.mdo">Forgot Password</a>
-									</nav>
-								</div>
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseError" aria-expanded="false"
-									aria-controls="pagesCollapseError"> Error
-									<div class="sb-sidenav-collapse-arrow">
-										<i class="fas fa-angle-down"></i>
-									</div>
-								</a>
-								<div class="collapse" id="pagesCollapseError"
-									aria-labelledby="headingOne"
-									data-bs-parent="#sidenavAccordionPages">
-									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="${contextPath }/401.mdo">401 Page</a> <a
-											class="nav-link" href="${contextPath }/404.mdo">404 Page</a> <a
-											class="nav-link" href="${contextPath }/500.mdo">500 Page</a>
-									</nav>
-								</div>
-							</nav>
-						</div>
-						<div class="sb-sidenav-menu-heading">Addons</div>
-						<a class="nav-link" href="charts.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-chart-area"></i>
-							</div> Charts
-						</a> <a class="nav-link" href="tables.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-table"></i>
-							</div> Tables
-						</a>
-					</div>
-				</div>
+                        </div>
+                    </div>
 				<div class="sb-sidenav-footer">
 					<div class="small">Logged in as:</div>
 					Start Bootstrap

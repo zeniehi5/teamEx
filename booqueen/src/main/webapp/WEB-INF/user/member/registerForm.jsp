@@ -10,8 +10,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>회원가입</title>
 	<link rel="stylesheet" href="${contextPath}/resources/user/css/signup.css">
-	<link rel="stylesheet" href="${contextPath}/resources/user/css/test.css">
-	
+	<!-- <link rel="stylesheet" href="${contextPath}/resources/user/css/test.css"> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/user/member/header.jsp"/>
@@ -22,12 +23,6 @@
 				<span>부퀸닷컴에 오신 것을 환영합니다 !</span>
 				<div class="title">회원가입</div>
 			</div>
-			<!-- <button class="settings-avatar">
-				<span class="avatar">
-					<div class="my-avatar"></div>
-					<span class="edit-icon"><i class="bi-camera"></i></span>
-				</span>
-			</button> -->
 		</div>
 
 		<form class="signup-table" enctype="multipart/form-data" action="${contextPath}/member/register.do" method="post">
@@ -38,7 +33,8 @@
 					<div class="container-label"><h2>아이디</h2></div>
 					<div class="container-element">
 						<div class="element">
-							<input type="text" placeholder="booqueen@bq.com" name="userid">
+							<input type="text" placeholder="booqueen@bq.com" name="userid" id="userid" onkeyup="useridCheck(this)">
+							<div id="useridCheck"></div>
 						</div>
 					</div>
 				</div>
@@ -50,7 +46,8 @@
 					<div class="container-label"><h2>비밀번호</h2></div>
 					<div class="container-element">
 						<div class="element">
-								<input type="password" placeholder="" id="password" name="passwd">
+							<input type="password" id="password" name="passwd" onkeyup="passwdCheck(this)">
+							<div id="passwdCheck"></div>
 						</div>
 					</div>
 				</div>
@@ -62,7 +59,7 @@
 					<div class="container-label"><h2>이름</h2></div>
 					<div class="container-element">
 						<div class="element">
-								<input type="text" placeholder="이름" id="name" name="name">
+							<input type="text" placeholder="이름" id="name" name="name">
 						</div>
 					</div>
 				</div>
@@ -75,7 +72,7 @@
 					<div class="container-element">
 						<div class="element element-gender">
 							<select id="gender" name="gender">
-								<option value="gender-default">선택</option>
+								<option value="">선택</option>
 								<option value="남성">남성</option>
 								<option value="여성">여성</option>
 							</select>
@@ -99,9 +96,9 @@
 								<option value="012">019</option>
 							</select>
 							<div class="hyphen">-</div>
-							<input type="text" placeholder="0000" id="phone2" maxlength="4" name="phone2">
+							<input type="text" placeholder="0000" id="phone2" maxlength="4" name="phone2" oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');">
 							<div class="hyphen">-</div>
-							<input type="text" placeholder="0000" id="phone3" maxlength="4" name="phone3">
+							<input type="text" placeholder="0000" id="phone3" maxlength="4" name="phone3" oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');">
 						</div>
 					</div>
 				</div>
@@ -113,9 +110,9 @@
 					<div class="container-label"><h2>생년월일</h2></div>
 					<div class="container-element">
 						<div class="element element-birth">
-							<input type="text" placeholder="YYYY" id="birth-year" maxlength="4" name="birth_year">
-							<input type="text" placeholder="MM" id="birth-month" maxlength="2" name="birth_month">
-							<input type="text" placeholder="DD" id="birth-day" maxlength="2" name="birth_day">
+							<input type="text" placeholder="YYYY" id="birth-year" minlength="4" maxlength="4" name="birth_year" oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');">
+							<input type="text" placeholder="MM" id="birth-month" minlength="2" maxlength="2" name="birth_month" oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');">
+							<input type="text" placeholder="DD" id="birth-day" minlength="2" maxlength="2" name="birth_day" oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');">
 						</div>
 					</div>
 				</div>
@@ -123,16 +120,60 @@
 
 			<div class="signup-hr"><div></div></div>
 			<div class="signup-button">
-				<button type="submit" class="signup-btn">회원 가입하기</button>
+				<button type="submit" class="signup-btn" onclick="checkField()">회원 가입하기</button>
 			</div>
-			
-
-			<!-- image -->
 
 		</form>
 		
 	</div>
 
 	<!-- <div id="footers"></div> -->
+<script>
+function useridCheck() {
+	var userid = $('#userid').val();
+	var sendData = {"userid" : userid}
+	$.ajax({
+		method : 'POST',
+		url : 'useridCheck.do',
+		data : sendData,
+		success : function(resp) {
+			if (resp == 'fail') {
+				$('#userid').css('border', '1px solid #e21111')
+				$('#useridCheck').css('color', 'red')
+				$('#useridCheck').html("이미 존재하는 이메일 계정입니다.")
+				flag = false;
+			} else if (resp == 'err') {
+				$('#userid').css('border', '1px solid #e21111')
+				$('#useridCheck').css('color', 'red')
+				$('#useridCheck').html("이메일 형식이 잘못되었습니다.")
+				flag = false;
+			} else {
+				$('#userid').css('border', '1px solid #545454')
+				$('#useridCheck').css('color', '#0071c2')
+				$('#useridCheck').html("사용 가능한 이메일 주소입니다.")
+				flag = true;
+			}
+		}
+	})
+}
+function passwdCheck() {
+	var passwdRules = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
+	var passwd = $('#password').val();
+	if (!passwdRules.test(passwd)) {
+		$('#passwd').css('border', '1px solid #e21111')
+		$('#passwdCheck').css('color', 'red')
+		$('#passwdCheck').html("비밀번호는 영문/숫자/특수문자(!@#$%^&*)를 포함하여 8~16자로 입력해야 합니다.")
+		flag = false;
+	} else {
+		$('#passwd').css('border', '1px solid #545454')
+		$('#passwdCheck').css('color', '#0071c2')
+		$('#passwdCheck').html("사용 가능합니다.")
+		flag = true;
+	}
+}
+
+
+
+</script>
 </body>
 </html>

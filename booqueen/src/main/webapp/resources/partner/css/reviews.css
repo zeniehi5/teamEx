@@ -54,3 +54,123 @@
     height: 48px;
     opacity: .6;
 }
+.bui-state{
+    max-width: 100%;
+    /* text-align: center; */
+    margin: 2px;
+    border: 1px solid #ececec;
+    padding: 10px;
+}
+.hp-review_score_entry{
+    margin-top: 24px;
+    padding-right: 570px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ececec;
+}
+.hp-review-score-cta-container-remote{
+    display: inline-flex;
+}
+.review-score-component{
+    margin-right: -8px;
+    margin-top: -8px;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    display: flex;
+}
+.review-data{
+    align-items: center;
+    background: #003580;
+    border-radius: 5.8181818182px 5.8181818182px 5.8181818182px 0;
+    color: #fff;
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    min-width: 50px;
+    vertical-align: baseline;
+    width: 88px;
+    font-weight: 700;
+    font-size: 25px;
+    margin-right: 10px;
+}
+.review-data__text{
+    margin-right: 8px;
+    margin-top: 8px;
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+.review-data__description{
+    font-style: normal! important;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #262626;
+}
+.review-data__count{
+    font-style: normal! important;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #262626;
+}
+.bui-f-font-heading{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+}
+.hp_subscore_explanation_inline{
+    display: inline-block;
+}
+.bui-spacer--large{
+    margin-bottom: 16px! important;
+}
+.hp_subsocre_explanation_container{
+    width: 100%;
+    border-bottom: none! important;
+}
+.review_list_score_container{
+    float: left;
+    position: absolute;
+    text-align: left;
+    overflow: hidden;
+}
+/* review-itemized score*/
+.itemized-score{
+    display: grid;
+    grid-template-areas: '. . .';
+    grid-gap: 30px;
+}
+.itemized-score-text{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.c-score-bar__value{
+    background-color: #003580;
+    color: #003580;
+    display: inline-block;
+    border-radius: 2px;
+    height: 10px;
+}
+.c-score-bar{
+    background-color: #ebf3ff;
+    display: inline-block;
+    width: 100%;
+    height: 10px;
+    border-radius: 2px;
+}
+.inner-text{
+    color: #fff;
+}
+.itemized-score-detail{
+    display: flex;
+}

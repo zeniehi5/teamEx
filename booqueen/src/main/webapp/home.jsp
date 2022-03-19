@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,7 +83,7 @@
                 <div>
                     <button class="people-form-button" data-quantity="minus" data-field="quantity"><span>-</span></button>&nbsp;&nbsp;
                     <input type="number" name="quantity" value="0" class="input-number-of-member"></input>&nbsp;&nbsp;
-                    <button class="people-form-button" data-quantity="plus" data-field="quantity"><spn>+</span></button>
+                    <button class="people-form-button" data-quantity="plus" data-field="quantity"><span>+</span></button>
                 </div>
             </div>
             <div class="form-first">
