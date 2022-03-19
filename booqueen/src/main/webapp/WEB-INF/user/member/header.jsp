@@ -11,7 +11,9 @@
 <link rel="stylesheet" href="${contextPath}/resources/user/css/header-member.css">	
 <link rel="stylesheet" href="${contextPath}/resources/user/css/loginForm.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/d2826a4f92.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/d2826a4f92.js" crossorigin="anonymous"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  -->
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 </head>
