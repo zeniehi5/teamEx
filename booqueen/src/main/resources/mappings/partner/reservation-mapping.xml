@@ -17,7 +17,8 @@
 			reservation as r
 		JOIN
 			room as h
-		ON r.room_id = h.room_id;
+		ON r.room_id = h.room_id
+		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationPagingByHotelSerial" resultType="aReservation">
 		SELECT

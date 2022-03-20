@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -411,7 +411,7 @@
                                                                     </svg>
 																	</div>
 																	<input class="form-control bui-form__control"
-																		placeholder="2022년 3월 9일" name="open_date_start">
+																		placeholder="<fmt:formatNumber value="${today}" pattern="yyyy-MM-dd"/>" name="open_date_start">
 																</div>
 															</div>
 														</div>
@@ -521,7 +521,7 @@
 																<div
 																	class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
 																	<div class="bui-input__addon">KRW</div>
-																	<input type="text" value="${room.price}"
+																	<input type="text" value="<fmt:formatNumber value="${room.price}" type="number"/>"
 																		name="standard_price"
 																		class="bui-form__control av-monthly__segmented--middle">
 																	<div

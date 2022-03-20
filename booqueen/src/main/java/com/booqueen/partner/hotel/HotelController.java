@@ -59,6 +59,9 @@ public class HotelController {
 			session.setAttribute("address2", vo.getAddress2());
 			session.setAttribute("city", vo.getCity());
 			session.setAttribute("postalcode", vo.getPostalcode());
+			session.setAttribute("latitude", vo.getLatitude());
+			session.setAttribute("longitude", vo.getLongitude());
+			System.out.println(vo.toString());
 			hotelService.addHotel(vo);
 			return "createroom";	
 	}

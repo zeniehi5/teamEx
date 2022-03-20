@@ -169,7 +169,7 @@
                                         	<td class="table_cell" data-heading="객실"><span>${ReservationVO.type}</span></td>
                                         	<td class="table_cell" data-heading="예약 날짜"><span>${ReservationVO.reservation_date}</span></td>
                                         	<c:choose>
-                                        	<c:when test="${ReservationVO.status eq 't'}">
+                                        	<c:when test="${ReservationVO.status eq true}">
                                         		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>정상</span></td>
                                         	</c:when>
                                         	<c:otherwise>
