@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Register-email</title>
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="${contextPath}/resources/partner/css/login.css">
 </head>
 <body>
 	<div class="container">
@@ -13,12 +13,6 @@
 			<span id="logo"> <a href="#"><img alt=""
 					src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
 			</span>
-			<nav>
-				<ul id="topMenu">
-					<li><a href="${pageContext.request.contextPath}/login.jsp">로그인</a></li>
-					<li><a href="${pageContext.request.contextPath}/register.jsp">회원가입</a></li>
-				</ul>
-			</nav>
 		</header>
 	</div>
 	<div class="contents">
@@ -30,10 +24,8 @@
 				바랍니다.
 			</h4>
 			<br>
-			</h4>
 		</section>
 	</div>
 
 </body>
 </html>
->

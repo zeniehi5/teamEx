@@ -23,8 +23,8 @@ public class S3Service {
 	
 	private AmazonS3 s3Client;
 	
-	final private String accessKey = "AKIAR3ILZRPYBZFIUXOC";
-	final private String secretKey = "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";
+	final private String accessKey = "AKIAR3ILZRPYNQ3U5S7O";
+	final private String secretKey = "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";
 	private Regions clientRegion = Regions.AP_NORTHEAST_2;
 	private String bucket = "booqueen";
 	
@@ -51,7 +51,7 @@ public class S3Service {
 		uploadToS3(new PutObjectRequest(this.bucket, key, file));
 	}
 	
-	/* MultipartFile을 이용할 경우 */
+	/* MultipartFile�쓣 �씠�슜�븷 寃쎌슦 */
 	public void upload(InputStream is, String key, String contentType, long contentLength) {
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(contentType);
