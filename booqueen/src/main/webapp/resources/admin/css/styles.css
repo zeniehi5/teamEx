@@ -1604,6 +1604,12 @@ progress {
     flex: 0 0 auto;
     width: 50%;
   }
+  
+  .col-xl-1234 {
+    flex: 0 0 auto!important;
+    width: 70%!important;
+    margin: 10px 15%!important;
+  }
 
   .col-xl-7 {
     flex: 0 0 auto;
@@ -11886,4 +11892,7 @@ body {
 }
 .delete-btn-fake:hover {
    background-color: #003580;
+}
+#UpdateModal {
+	display: none; /* Hidden by default */	
 }

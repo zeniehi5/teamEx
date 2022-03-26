@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.admin.hotel.HotelDetailVO;
 import com.booqueen.admin.hotel.HotelService;
 import com.booqueen.admin.hotel.ReservationVO;
 
@@ -21,6 +22,11 @@ public class HotelServiceImpl implements HotelService {
 
 	public List<ReservationVO> selectReservationList() {
 		return hotelDAO.selectReservationList();
+	}
+
+	public HotelDetailVO selectHotelDetail(int serialnumber) {
+		
+		return hotelDAO.selectHotelDetail(serialnumber);
 	}
 
 }

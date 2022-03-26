@@ -15,11 +15,12 @@
         <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -151,7 +152,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
@@ -181,34 +182,26 @@
                                         <tr>
                                             <th>#</th>
                                             <th>약관 제목</th>
+                                            <th>약관 내용</th>
                                             <th>수정 및 삭제</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="TermsVO" items="${termsList }" varStatus="status">
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="">요금.</a></td>
-                                            <td>&nbsp;&nbsp; <button id="termsCorrection" class="btn btn-danger" onclick="correction()">수정</button>&nbsp;&nbsp;<button id="termsRemove" style="width:auto; margin: auto;" class="btn btn-warning" onclick="remove()">삭제</button></td>
+                                            <td>${TermsVO.seq }</td>
+                                            <td>${TermsVO.title }</td>
+                                            <td style="width:70%">${TermsVO.contents }</td>
+                                            <td>&nbsp;&nbsp; <button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${TermsVO.seq}'" >수정 및 삭제</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="">결제.</a></td>
-                                            <td>&nbsp;&nbsp; <button id="termsCorrection" class="btn btn-danger" onclick="correction()">수정</button>&nbsp;&nbsp;<button id="termsRemove" style="width:auto; margin: auto;" class="btn btn-warning" onclick="remove()">삭제</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><a href="">정책.</a></td>
-                                            <td>&nbsp;&nbsp; <button id="termsCorrection" class="btn btn-danger" onclick="correction()">수정</button>&nbsp;&nbsp;<button id="termsRemove" style="width:auto; margin: auto;" class="btn btn-warning" onclick="remove()">삭제</button></td>
-                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </main>
-                <!-- 약관 제목 눌렀을때 약관 내용을 보이는 페이지를 만들어야함 
-                    약관 등록할 때 제목만 약관 페이지에 표시되게 하는 방법 ? 
-                -->
+                
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

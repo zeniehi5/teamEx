@@ -23,4 +23,6 @@
 	</bean>
 	<mvc:annotation-driven/>
 	<context:annotation-config/>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
 </beans>

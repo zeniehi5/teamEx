@@ -1,8 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>호텔 목록</title>
+        <title>약관 수정</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -158,47 +157,40 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">약관 수정</h1>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                호텔 목록
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>호텔 이름</th>
-                                            <th>주소</th>
-                                            <th>호텔 매니저</th>
-                                            <th>호텔 전화번호</th>
-                                            <th>성급</th>
-                                            <th>상세정보 보기</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="hotelList" items="${hotelList }" varStatus="status">
-                                    	<input type ="hidden" value="${hotelList.serialnumber }">
-                                        <tr>
-                                            <td>${hotelList.hotelname }</td>
-                                            <td>${hotelList.city }</td>
-                                            <td>${hotelList.manager}</td>
-                                            <td>${hotelList.telephone}</td>
-                                            <td>
-	                                            <c:if test="${hotelList.star+0 == '5'}">★★★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '4'}">★★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '3'}">★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '2'}">★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '1'}">★</c:if>
-                                            </td>
-                                            <td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a>
-                                            </td>
-                                        </tr>
-
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
+                        <div class="card mb-4">
+                       
+                            <div class="card-header">
+                                <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 약관 수정
+                            </div>
+                             <form action="updateTerms.mdo" method="POST">
+                            <table style="width: 90%;"> 
+                            <tbody>
+                            <tr>
+                                <td style="text-align: center">제목<input type="hidden" name="seq" value="${TermsVO.seq }"></td>
+                                <td>
+                                    <textarea id="terms_title" name="title" style="width: 90%;">${TermsVO.title }</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">약관내용</td>
+                                <td style="">
+                                <textarea id="terms_content" name="contents" style="width: 90%; height: 200px;">${TermsVO.contents }</textarea></td>
+                            </tr>
+                        </tbody></table>
+                       
+                                <div style="float:right">
+                                    <input id="submit" type="submit" class="btn btn-primary" value="수정하기">
+                                    <c:set var="seq" value="${TermsVO.seq}"/>
+                                    <a class="btn btn-danger" href="${contextPath }/deleteTerms.mdo?seq=${seq}">삭제하기</a>
+                                    <a href="terms.mdo" class="btn btn-warning">돌아가기</a>
+                                </div>
+                         </form>
+                        </div>
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

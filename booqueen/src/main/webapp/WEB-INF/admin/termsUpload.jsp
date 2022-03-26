@@ -19,7 +19,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -151,7 +151,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
@@ -168,25 +168,26 @@
                             </div>
                         </div>
                         <div class="card mb-4">
+                        <form action="${contextPath}/insertTerms.mdo" method="post" id="addterm">
                             <div class="card-header">
                             <div>
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com --> 약관 등록</div>
                                 <div style="float: right; margin-top: -20px;">
-                                    <input type="button" onclick="" class="btn btn-warning" value="등록">
+                                    <input type="submit" onclick="" class="btn btn-warning" value="등록">
                                 </div>
                             </div>
                             <div style="margin-left: 100px;">
-                            <form action="" method="post" id="addterm">
+                            
                                 <table style="width: 90%;"> 
                                     <tbody>	
                                     <tr>
                                         <td style="text-align: center">제목</td>
-                                        <td><input type="text" class="form-control" name="term_title" id="term_title"> </td>
+                                        <td><input type="text" class="form-control" name="title" id="term_title"> </td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">약관내용</td>
                                         <td style="">
-                                            <textarea style="width: 100%; height: 500px;" id="term_content" name="term_content"></textarea>
+                                            <textarea style="width: 100%; height: 500px;" id="term_content" name="contents"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>

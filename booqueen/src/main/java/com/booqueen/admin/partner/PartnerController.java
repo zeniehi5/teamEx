@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.booqueen.admin.hotel.HotelVO;
 import com.booqueen.admin.partner.impl.PartnerServiceImpl;
 
 @Controller
@@ -73,7 +75,12 @@ public class PartnerController {
 		return "blockPartner";
 	}
 	@RequestMapping(value = "/partnerMemberDetail.mdo", method=RequestMethod.GET)
-	public String partnerMemberDetail(HttpSession session) {
+	public String partnerMemberDetail(HttpSession session, @RequestParam("email")String email, Model model) {
+		PartnerVO partner = partnerServiceImpl.selectPartnerByEmail(email);
+		List<HotelVO> hotel = partnerServiceImpl.selectHotelByEmail(email);
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("partner", partner);
+		
 		return "partnerMemberDetail";
 	}
 }
