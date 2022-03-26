@@ -63,7 +63,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -195,7 +195,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
                     </div>
@@ -218,24 +218,28 @@
                                     <table class="type02">
                                         <tr>
                                             <th>이름</th>
-                                            <td><input type="text" name="partner_name" style="width: 100%; height: 100%" readonly value="장진아"></td>
+                                            <td><input type="text" name="partner_name" style="width: 100%; height: 100%" readonly value="${partner.lastname }${partner.firstname }"></td>
                                         </tr>
                                         <tr>    
                                             <th scope="row">이메일</th>
-                                            <td><input type="text" name="partner_email" readonly value="abc@def.com"></td>
+                                            <td><input type="text" name="partner_email" readonly value="${partner.email }"></td>
                                         </tr>                              
                                         <tr>
                                             <th>전화번호</th>
-                                            <td><input type="text" name="partner_Phone"  readonly value="010-1234-1234"></td>
+                                            <td><input type="text" name="partner_Phone"  readonly value="${partner.telephone }"></td>
                                         </tr>
-                                        <tr>    
-                                            <th scope="row">생년월일</th>
-                                            <td><input type="text" name="partner_email" readonly value="1991-01-01"></td>
-                                        </tr>           
+                                                 
                                         <tr>
                                             <th>활성화</th>
                                             <td>
+                                            <c:choose>
+                                                	<c:when test="${partner.active == 1 }">
+                                                <input type="text" readonly value="활성화">
+                                                </c:when>
+                                                <c:otherwise>
                                                 <input type="text" readonly value="비활성화">
+                                                </c:otherwise>
+                                                </c:choose>
                                             </td>
                                         </tr>                                  
                                     </table>
@@ -256,43 +260,27 @@
                                     <!--#   시리얼넘버      호텔이름      담당자      연락처       주소      활성화 여부-->
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>시리얼넘버</th>
                                             <th>호텔이름</th>
                                             <th>담당자</th>                                              
                                             <th>연락처</th>
-                                            <th>주소</th>
-                                            <th>활성화</th>
+                                            <th>도시</th>
+                                            <th>주소1</th>
+                                            <th>주소2</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="HotelVO" items="${hotel }" varStatus ="status">
                                         <tr>
-                                            <td><input type="text" readonly value="1"></td>
-                                            <td><input type="text" readonly value="111"></td>
-                                            <td><input type="text" readonly value="abc호텔"></td>
-                                            <td><input type="text" readonly value="장진아"></td>
-                                            <td><input type="text" readonly value="02-111-111"></td>
-                                            <td><input type="text" readonly value="서울특별시 강남구"></td>
-                                            <td><input type="text" readonly value="비활성화"></td>    
+                                            <td>${HotelVO.serialnumber }</td>
+                                            <td>${HotelVO.hotelname }</td>
+                                            <td>${HotelVO.manager }</td>
+                                            <td>${HotelVO.telephone }</td>
+                                            <td>${HotelVO.city }</td>
+                                            <td>${HotelVO.address1 }</td>
+                                            <td>${HotelVO.address2 }</td>    
                                         </tr>
-                                        <tr>
-                                            <td><input type="text" readonly value="2"></td>
-                                            <td><input type="text" readonly value="112"></td>
-                                            <td><input type="text" readonly value="bbc호텔"></td>
-                                            <td><input type="text" readonly value="최태원"></td>
-                                            <td><input type="text" readonly value="02-222-222"></td>
-                                            <td><input type="text" readonly value="서울특별시 마포구"></td>
-                                            <td><input type="text" readonly value="비활성화"></td>    
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" readonly value="3"></td>
-                                            <td><input type="text" readonly value="113"></td>
-                                            <td><input type="text" readonly value="cbc호텔"></td>
-                                            <td><input type="text" readonly value="김상민"></td>
-                                            <td><input type="text" readonly value="02-333-333"></td>
-                                            <td><input type="text" readonly value="서울특별시 종로구"></td>
-                                            <td><input type="text" readonly value="비활성화"></td>
-                                        </tr>
+                                       </c:forEach> 
                                     </tbody>
                                 </table>
                                </form> 

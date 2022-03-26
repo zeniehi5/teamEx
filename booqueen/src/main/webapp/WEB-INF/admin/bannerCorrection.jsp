@@ -14,12 +14,14 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+       
     </head>
    <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -151,7 +153,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
@@ -181,10 +183,10 @@
                             <div class="input-group">
                             <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Upload <input type="file" name="file" id="file" style="display: none;" multiple="">
+                                    Upload <input type="file" name="uploadFile" id="file" style="display: none;" multiple="">
                                 </span>
                             </label>
-                            <input type="text" id="banner_img" class="form-control" readonly="">
+                            <input type="text" id="banner_img" class="form-control"  readonly="">
                             </div>
                         </div>
                                 <div style="float:right">

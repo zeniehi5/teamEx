@@ -15,11 +15,12 @@
         <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -151,12 +152,25 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
+           
             <div id="layoutSidenav_content">
                 <main>
+                 <div class="row">
+                            <div class="col-xl-1234">
+                                <div class="col-xl-1234">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        거래내역
+                                    </div>
+                                    <div class="card-body"><canvas id="myChart" width="1000%" height="400"></canvas></div>
+                                </div>
+                            </div>
+                            
+            </div> 
                     <div class="container-fluid px-4">
                         <div class="card mb-4">
                             <div class="card-header">
@@ -182,7 +196,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <td><a href="transactionDetail.html">신라호텔</a></td>
+                                        <td><a href="transactionDetail.mdo">신라호텔</a></td>
                                         <td>123</td>
                                         <td>&#8361;10,000</td>
                                         <td>2021-07-25</td>
@@ -213,7 +227,45 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script>
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45, 10, 20, 30, 40, 12],
+    }]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+</script>
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
         
     </body>
 </html>

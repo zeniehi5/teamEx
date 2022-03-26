@@ -13,6 +13,7 @@ public class ReservationVO {
 	private Date checkin_date;
 	private Date checkout_date;
 	private Date reservation_date;
+	private Date cancel_date;
 	private int price;
 	private String lastname;
 	private String firstname;
@@ -21,5 +22,5 @@ public class ReservationVO {
 	private boolean status;
 	private String type;
 	private int commission;
-
+	private String hotelname;
 }

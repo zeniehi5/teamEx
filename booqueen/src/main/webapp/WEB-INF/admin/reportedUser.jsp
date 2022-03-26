@@ -19,7 +19,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -151,7 +151,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
@@ -177,21 +177,21 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><a href="userMemberDetail.html">abc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">abc@abc.com</a></td>
                                             <td>장진아</td>
-                                            <td><a href="reportContent.html">ㅇㅇ</a></td>
-                                            <td><a href="hotelDetail.html">신라호텔</a></td>
+                                            <td><a href="reportContent.mdo">ㅇㅇ</a></td>
+                                            <td><a href="hotelDetail.mdo">신라호텔</a></td>
                                             <td><button id="block" class="btn btn-danger" onclick="blockUser();">이용제한</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="userMemberDetail.html">bbc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">bbc@abc.com</a></td>
                                             <td>최태원</td>
                                             <td><a href="">ㅇㅇ</a></td>
                                             <td>신라호텔</td>
                                             <td><button id="block" class="btn btn-danger" onclick="blockUser();">이용제한</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="userMemberDetail.html">ccc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">ccc@abc.com</a></td>
                                             <td>김상민</td>
                                             <td><a href="">ㅇㅇ</a></td>
                                             <td>신라호텔</td>
@@ -225,21 +225,21 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td><a href="userMemberDetail.html">abc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">abc@abc.com</a></td>
                                             <td>장진아</td>
-                                            <td><a href="hotelDetail.html">신라호텔</a></td>
+                                            <td><a href="hotelDetail.mdo">신라호텔</a></td>
                                             <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td><a href="userMemberDetail.html">bbc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">bbc@abc.com</a></td>
                                             <td>최태원</td>
                                             <td>신라호텔</td>
                                             <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td><a href="userMemberDetail.html">ccc@abc.com</a></td>
+                                            <td><a href="userMemberDetail.mdo">ccc@abc.com</a></td>
                                             <td>김상민</td>
                                             <td>신라호텔</td>
                                             <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>                                           
