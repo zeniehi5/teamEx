@@ -122,4 +122,6 @@ public class HotelDAO {
 
 	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectOne("HotelDAO.selectHotelImgByHotelSerial", serialnumber);
-  }
+	}
+	
+}

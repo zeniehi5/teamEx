@@ -10,8 +10,8 @@ public class S3TestMain {
 		
 		S3TestMain main = new S3TestMain();
 		
-		File file = new File("C:\\upload\\default-hotel-img.png");
-		String key = "hotel/default-hotel-img.png";
+		File file = new File("C:\\upload\\default_profile.jpg");
+		String key = "default_profile.jpg";
 		
 		try {
 			main.upload(file, key);

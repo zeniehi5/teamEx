@@ -21,6 +21,7 @@ public class HotelController {
 	
 	@Autowired
 	HotelServiceImpl hotelServiceImpl;
+	
 	@Autowired
 	TermsServiceImpl termsServiceImpl;
 	
