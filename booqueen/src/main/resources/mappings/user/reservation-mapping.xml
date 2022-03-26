@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.booqueen.user.reservation.dao.reservationmapper">
+
+	<resultMap type="uReservationVO" id="ReservationVOMap">
+    	<result property="reservation_number" column="reservation_number"/>
+    	<result property="merchant" column="merchant"/>
+    	<result property="room_id" column="room_id"/>
+    	<result property="serialnumber" column="serialnumber"/>
+		<result property="hotelname" column="hotelname"/>
+		<result property="start_date" column="checkin_date"/>
+		<result property="end_date" column="checkout_date"/>
+		<result property="reservation_date" column="reservation_date"/>
+		<result property="lastname" column="lastname"/>
+		<result property="firstname" column="firstname"/>
+		<result property="arrive_time" column="time_arrival"/>
+		<result property="file_url" column="file_url"/>
+		<result property="city" column="city"/>
+		<result property="price" column="price"/>
+		<result property="status" column="status"/>
+		<result property="pincode" column="pincode"/>
+		<result property="count_room" column="count_room"/>
+		<result property="cancel_date" column="cancel_date"/>
+		<result property="cancel_reason" column="cancel_reason"/>
+		<result property="imp_uid" column="imp_uid"/>
+    </resultMap>
+
+
+	<insert id="insertReservation" parameterType="uReservationVO">
+		<![CDATA[INSERT INTO reservation (reservation_number, imp_uid, merchant, serialnumber, room_id, userid, checkin_date, checkout_date, price, count_room, lastname, firstname, special_request, time_arrival, status, email, pincode, hotelname) 
+				VALUES (nextval('seq_reservation'), #{imp_uid}, #{merchant}, ${serialnumber}, ${room_id}, #{userid}, TO_DATE(#{start_date}, 'YYYYMMDD'), TO_DATE(#{end_date}, 'YYYYMMDD'), #{price}, #{count_room}, #{lastname}, #{firstname}, #{request_text}, ${arrive_time}, ${status}, #{email}, #{pincode}, #{hotelname})]]>
+	</insert>
+
+	<select id="selectReservationList" parameterType="String" resultMap="ReservationVOMap">
+		<![CDATA[SELECT 	
+						r.reservation_number, r.imp_uid, r.merchant, r.room_id, r.serialnumber, r.hotelname, r.userid, r.checkin_date,
+						r.checkout_date, r.reservation_date, r.lastname, r.status, r.cancel_date, r.cancel_reason,
+						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city
+				FROM 	
+						reservation as r
+				LEFT JOIN 
+						hotel_image as i 
+				ON 
+						r.serialnumber = i.serialnumber
+				LEFT JOIN
+						temphotel as h
+				ON
+						r.serialnumber = h.serialnumber
+				WHERE 
+						r.userid = #{userid} 
+						
+				order by r.checkin_date desc
+		]]>
+	</select>
+	
+	<select id="selectReservation" parameterType="Integer" resultMap="ReservationVOMap">
+		<![CDATA[SELECT 	
+						r.reservation_number, r.imp_uid, r.merchant, r.room_id, r.serialnumber, r.hotelname, r.userid, r.checkin_date,
+						r.checkout_date, r.reservation_date, r.lastname, r.status, r.cancel_date, r.cancel_reason,
+						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city
+				FROM 	
+						reservation as r
+				LEFT JOIN 
+						hotel_image as i 
+				ON 
+						r.serialnumber = i.serialnumber
+				LEFT JOIN
+						temphotel as h
+				ON
+						r.serialnumber = h.serialnumber
+				WHERE 
+						r.reservation_number = #{reservation_number}
+		]]>
+	</select>
+	
+	<update id="cancelReservation" parameterType="uReservationVO">
+		<![CDATA[UPDATE reservation set status = #{status}, cancel_date = TO_DATE(#{cancel_date}, 'YYYY-MM-DD'), cancel_reason = #{cancel_reason} where merchant = #{merchant}]]>
+	</update>
+	
+	<select id="selectReservationByMerchant" parameterType="String" resultMap="ReservationVOMap">
+		<![CDATA[SELECT * from reservation where merchant = #{merchant} ]]>
+	</select>
+	
+	<delete id="deleteDuplicatedReservation">
+		<![CDATA[DELETE FROM reservation
+		WHERE reservation_number IN (SELECT reservation_number
+		FROM (SELECT reservation_number,
+		    row_number() over (partition BY merchant ORDER BY reservation_number) AS rnum
+		     FROM reservation) t
+		WHERE t.rnum > 1)]]>
+	</delete>
+</mapper>

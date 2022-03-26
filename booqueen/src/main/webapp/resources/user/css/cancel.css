@@ -1,0 +1,568 @@
+body {
+	color: #262626;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+}
+.container {
+	margin: 0 auto;
+	max-width: 1140px;
+}
+.container-inner {
+	padding: 16px;
+	position: relative;
+	width: 100%;
+}
+.cancellation-head {
+	margin: -24px -12px 0;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	list-style-type: none;
+	/* margin: -16px -8px 0; */
+	padding: 0;
+	/* pointer-events: none; */
+}
+.cancellation-header {
+	padding: 24px 12px 0;
+	width: 66.66%;
+	margin-bottom: 16px;
+}
+.cancellation-head-btn {
+	/* pointer-events: all; */
+	color: #262626;
+	display: inline-flex;
+	text-decoration: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: inherit;
+	font-weight: inherit;
+	padding: 0;
+	position: relative;
+	text-align: left;
+	align-items: center;
+}
+/* .cancellation-head-btn:hover {
+	text-decoration: underline;
+} */
+#goBackMyReservation span:hover,
+#PreviousStep span:hover {
+	text-decoration: underline;
+}
+
+.cancellation-head-btn svg {
+	margin-right: 8px;
+	/* display: inline-block; */
+	height: 100%;
+	/* vertical-align: top; */
+	width: auto;
+}
+#PreviousStep {
+	display: none;
+}
+.cancellation-head-btn span {
+	font-size: 12px;
+	/* font-weight: inherit; */
+}
+.container-main {
+	display: flex;
+	justify-content: flex-start;
+	list-style-type: none;
+	padding: 0;
+	/* pointer-events: none; */
+}
+#stepTwo {
+	display: none;
+}
+.container-main-left {
+	width: 66.6666666667%;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	list-style-type: none;
+	padding: 0;
+	/* pointer-events: none; */
+}
+.main-left {
+	margin-bottom: 32px;
+}
+/* .main-left-title {
+
+} */
+.title-step {
+	color: #6b6b6b;
+	margin-bottom: 8px;
+	font-size: 12px;
+	line-height: 18px;
+}
+.title-reason {
+	margin: 0 0 8px;
+	padding: 0;
+	font-size: 24px;
+	line-height: 32px;
+	font-weight: 700;
+}
+.title-reason-sub {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+}
+.main-left-content {
+	margin-top: 24px;
+	border: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 20px;
+}
+.content-reason-label {
+	align-items: flex-end;
+	display: flex;
+	padding: 0 0 4px;
+}
+.content-reason {
+	position: relative;
+	z-index: 0;
+}
+.content-reason-select {
+	color: #6b6b6b;
+	font-size: 14px;
+	min-height: 48px;
+	padding: 9px 32px 9px 12px;
+	appearance: none;
+	background: #fff;
+	border: 1px solid #949494;
+	border-radius: 2px;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	text-align: left;
+	text-overflow: ellipsis;
+	width: 100%;
+	z-index: 100;
+	/* pointer-events: all; */
+}
+.content-reason-select option {
+	font-size: 14px;
+}
+.reason-icon {
+	right: 12px;
+	align-items: center;
+	display: flex;
+	z-index: 100;
+	/* pointer-events: none; */
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 8px;
+	height: 20px;
+}
+.container-main-right {
+	width: 33.3333333333%;
+}
+.main-right-box {
+	border: 1px solid #e7e7e7;
+	border-radius: 2px;
+	flex: 1;
+	margin-bottom: 16px;
+	margin-left: 32px;
+	margin-top: 0;
+	padding: 16px;
+	list-style-type: none;
+}
+.booking-info {
+	position: relative;
+	padding: 2px;
+	display: flex;
+	flex-grow: 1;
+}
+.booking-hotel-img {
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+.booking-hotel-img img {
+	object-fit: cover;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 80px;
+	height: 80px;
+}
+.booking-hotel-info {
+	margin-left: 24px;
+	padding: 0;
+}
+/* .booking-hotel-name {
+
+} */
+.booking-hotel-date {
+	margin-top: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.box-hr {
+	margin: 24px 0;
+	background: #e7e7e7;
+	border: 0;
+	height: 1px;
+}
+.booking-price {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.booking-price-thin {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+}
+/* .price-left {
+
+} */
+/* .price-right {
+
+} */
+.booking-price-bold {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+.total-price-left,
+.total-price-right {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 700;
+}
+.booking-button {
+	/* pointer-events: all; */
+	margin-top: 24px;
+	display: flex;
+	flex-basis: 100%;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+.booking-cancel {
+	margin-top: 0;
+	flex-shrink: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+}
+.booking-cancel-btn,
+.booking-keep-btn {
+	text-align: center;
+	width: 100%;
+	min-height: 48px;
+	min-width: 48px;
+	padding: 8px 24px;
+	align-items: center;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 16px;
+	font-weight: 500;
+	justify-content: center;
+	position: relative;
+	border-radius: 2px;
+}
+#cancelBtn {
+	background-color: #0071c2;
+	border: 1px solid #0071c2;
+	color: #fff;
+}
+#cancelBtn:hover {
+	background-color: #00487a;
+	border-color: #00487a;
+}
+#realCancelBtn {
+	display: none;
+	background-color: #c00;
+	border: 1px solid #c00;
+	color: #fff;
+}
+#realCancelBtn:hover {
+	background-color: #8a0000;
+	border-color: #8a0000;
+}
+.booking-keep {
+	margin-top: 8px;
+	flex-shrink: 0;
+}
+.booking-keep-btn {
+	color: #0071c2;
+	background: transparent;
+	border: 1px solid transparent;
+}
+.booking-keep-btn:hover {
+	background-color: rgba(0,113,194,.06);
+	border-color: transparent;
+}
+/* .cancel-policy {
+
+} */
+.policy-title {
+	margin-bottom: 16px;
+	font-size: 20px;
+	line-height: 28px;
+	font-weight: 700;
+}
+.policy-content {
+	align-items: stretch;
+	flex-direction: column;
+	display: flex;
+	font-size: 14px;
+	line-height: 20px;
+}
+.policy-text {
+	margin-bottom: 8px;
+	flex-shrink: 0;
+	/* pointer-events: all; */
+}
+.policy-view {
+	flex-shrink: 0;
+	/* pointer-events: all; */
+	display: flex;
+}
+.policy-btn {
+	margin-left: -8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	min-height: 36px;
+	min-width: 36px;
+	color: #0071c2;
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: 2px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+}
+.policy-btn:hover {
+	background-color: rgba(0,113,194,.06);
+	border-color: transparent;
+}
+.booking-room-info {
+	display: flex;
+}
+.bedroom-icon {
+	min-width: 32px;
+}
+.bedroom-icon svg {
+	margin-top: 3px;
+}
+.room-info {
+	align-self: center;
+	margin-left: 8px;
+}
+.room-information {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+}
+.room-price {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+}
+.cancel-hr {
+	background: #e7e7e7;
+	border: 0;
+	height: 1px;
+	margin: 24px 0;
+}
+.booking-price-title {
+	margin: 24px 0;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 28px;
+}
+.booking-price-left {
+	max-width: 562px;
+}
+.contact-link {
+	text-decoration: none;
+	color: #0071c2;
+	/* pointer-events: all; */
+	cursor: pointer;
+}
+.contact-link:hover {
+	text-decoration: underline;
+}
+
+/* 예약 유지 */
+#cancelModal {
+	display: none;
+}
+.exit-cancel-page {
+	background-color: rgba(0,0,0,.5);
+	transition-property: background-color;
+	transition-timing-function: cubic-bezier(0,0,.2,1);
+	visibility: visible;
+	border: none;
+	bottom: 0;
+	left: 0;
+	outline: none;
+	overflow: auto;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+	transition: .25s cubic-bezier(.4,0,1,1);
+	z-index: 200;
+	height: 100%;
+	/* table-layout: fixed; */
+	width: 100%;
+	/* display: table-cell; */
+	vertical-align: middle;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.exit-cancel-page-modal {
+	display: flex;
+	vertical-align: top;
+	transform: translate(0);
+	opacity: 1;
+	transition-timing-function: cubic-bezier(0,0,.2,1);
+	width: 576px;
+	height: auto;
+	padding: 24px;
+	position: relative;
+	text-align: left;
+	transition: .25s cubic-bezier(.4,0,1,1);
+	transition-property: opacity,transform,box-shadow;
+	vertical-align: middle;
+	will-change: transform,opacity,box-shadow;
+	z-index: 400;
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+	flex-direction: column;
+	outline: none;
+	overflow: hidden;
+	/* pointer-events: all; */
+}
+.exit-cancel-page-content {
+	height: auto;
+	align-items: stretch;
+	flex-direction: column;
+	display: flex;
+}
+.exit-page-header {
+	margin-bottom: 8px;
+	position: relative;
+	flex-shrink: 0;
+	display: flex;
+	justify-content: space-between;
+}
+.exit-page-title {
+	display: flex;
+	flex-direction: column;
+}
+.exit-page-x {
+	display: inline-block;
+	vertical-align: middle;
+}
+.exit-x-btn {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: 2px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	vertical-align: middle;
+	margin-right: -9px;
+	margin-top: -8px;
+	padding: 3px;
+}
+.exit-x-btn:hover {
+	background-color: #F0F0F0;
+}
+/* .exit-page-main {
+	
+} */
+.exit-page-text {
+	margin-bottom: 8px;
+	font-size: 16px;
+}
+.exit-page-button {
+	display: flex;
+	margin-left: -12px;
+	/* padding: 24px; */
+	/* position: relative; */
+	/* text-align: left; */
+	/* transform: translateY(24px); */
+	/* transition: .25s cubic-bezier(.4,0,1,1); */
+	/* transition-property: opacity,transform,box-shadow; */
+	/* vertical-align: middle; */
+	/* will-change: transform,opacity,box-shadow; */
+	/* z-index: 400; */
+}
+.view-page {
+	margin-right: 8px;
+	margin-top: 8px;
+	padding-left: 12px;
+	padding-right: 12px;
+	min-height: 48px;
+	min-width: 48px;
+	background: transparent;
+	border: 0;
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	position: relative;
+	color: #0071c2;
+
+	/* padding: 24px; */
+	/* position: relative; */
+	/* text-align: left; */
+	/* transform: translateY(24px); */
+	/* transition: .25s cubic-bezier(.4,0,1,1); */
+	/* transition-property: opacity,transform,box-shadow; */
+	/* vertical-align: middle; */
+	/* will-change: transform,opacity,box-shadow; */
+	/* z-index: 400; */
+}
+.view-page:hover {
+	background-color: #F0F7FB;
+}
+.exit-page {
+	margin-right: 8px;
+	margin-top: 8px;
+	padding: 8px 24px;
+	border: 0;
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	position: relative;
+	background-color: #0071c2;
+	color: #fff;
+}
+.exit-page:hover {
+	background-color: #00487a;
+}

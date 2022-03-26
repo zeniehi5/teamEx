@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.payment.dao.paymentmapper">
+	
+	<insert id="insertPayment" parameterType="paymentVO">
+		INSERT INTO payment(imp_uid, merchant, userid, name, email, phone, price, serialnumber, room_id, payment_status) VALUES (#{imp_uid}, #{order_merchant_serial}, #{userid}, #{name}, #{email}, #{phone}, #{price}, #{serialnumber}, #{room_id}, #{payment_status});
+	</insert>
+	
+	<select id="selectPayment" parameterType="String" resultType="paymentVO">
+		SELECT * FROM payment where merchant = #{merchant}
+	</select>
+	
+	<update id="updatePayment" parameterType="paymentVO">
+		<![CDATA[UPDATE payment set payment_status = #{payment_status} where merchant = #{merchant}]]>
+	</update>
+
+</mapper>

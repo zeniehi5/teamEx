@@ -1,6 +1,8 @@
 package com.booqueen.user.hotel.controller;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,14 +69,15 @@ public class HotelController {
 		hotelAvailableVO.setEnd_date(end_date);
 		
 		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
-		List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
+		/*List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
 		
 		if(getByCity != null) {
 			getUnavailableByCity.removeAll(getByCity);
 		}
 		
+		model.addAttribute("unavailableHotelList", getUnavailableByCity);*/
 		model.addAttribute("hotelList", getByCity);
-		model.addAttribute("unavailableHotelList", getUnavailableByCity);
+		model.addAttribute("hotelAvailableVO", hotelAvailableVO);
 		
 		return "hotel/searchresult";
 	}
@@ -91,22 +94,23 @@ public class HotelController {
 		hotelAvailableVO.setEnd_date(end_date);
 		
 		List<HotelVO> getByCity = hotelService.getHotelListWithImgByCity(hotelAvailableVO);
-		List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
+		/*List<HotelVO> getUnavailableByCity = hotelService.getUnavailableHotelListWithImgByCity(hotelAvailableVO);
 		
 		if(getByCity != null) {
 			getUnavailableByCity.removeAll(getByCity);
 		}
-		
+
+		model.addAttribute("unavailableHotelList", getUnavailableByCity);*/
 		model.addAttribute("hotelList", getByCity);
-		model.addAttribute("unavailableHotelList", getUnavailableByCity);
 		model.addAttribute("date1", date1);
 		model.addAttribute("date2", date2);
+		model.addAttribute("hotelAvailableVO", hotelAvailableVO);
 		
 		return "hotel/searchresult";
 	}
 	
 	@RequestMapping(value = "/hotelInfo.do", method = RequestMethod.GET)
-	public String hotelDetail(@RequestParam("serialNumber") String serialNumber, Model model, HttpSession session) {
+	public String hotelDetail(@RequestParam("serialNumber") String serialNumber, Model model, HttpSession session, @RequestParam("start_date") String start_date, @RequestParam("end_date") String end_date ) throws ParseException {
 		Integer serialNumber2 = Integer.parseInt(serialNumber);
 		
 		HotelVO vo = hotelService.getHotelBySerialnumber(serialNumber2);
@@ -124,7 +128,28 @@ public class HotelController {
 		ReviewAvgVO reviewAvgVO = reviewService.getReviewAvg(serialNumber2);
 		model.addAttribute("reviewAvg", reviewAvgVO);
 		
-		List<RoomVO> roomList = roomService.getRoomFacilities(serialNumber2);
+		HotelAvailableVO hotelAvailableVO = new HotelAvailableVO();
+		hotelAvailableVO.setSerialnumber(serialNumber2);
+		hotelAvailableVO.setStart_date(start_date);
+		hotelAvailableVO.setEnd_date(end_date);
+		
+		Date format1 = new SimpleDateFormat("yyyyMMdd").parse(start_date);
+        Date format2 = new SimpleDateFormat("yyyyMMdd").parse(end_date);
+        long diffSec = (format2.getTime() - format1.getTime()) / 1000;
+        long diffDays = diffSec / (24*60*60);
+        
+        hotelAvailableVO.setDiffDays(diffDays);
+        model.addAttribute("hotelAvailableVO", hotelAvailableVO);
+		
+		List<RoomVO> roomList = roomService.getRoomFacilities(hotelAvailableVO);
+			
+		if(roomList != null && !roomList.isEmpty()) {
+			model.addAttribute("available", true);
+			
+		} else {
+			model.addAttribute("available", false);
+		}
+		
 		model.addAttribute("roomList", roomList);
 		
 		List<BoardVO> boardList = boardService.getBoardList(serialNumber2);
@@ -146,14 +171,13 @@ public class HotelController {
 		} else {
 			model.addAttribute("wishlistVO2", "wishlistVO2");
 		}
-		// 날짜 데이터와 함께 수정이 필요
-		model.addAttribute("available", true);
+		
 		return "hotel/available";
 	}
 	
-	@RequestMapping(value="/hotelByFilter.do")
+	@RequestMapping(value="/availableHotelByFilter.do")
 	@ResponseBody
-	public List<HotelVO> getHotelByFilter(HttpServletRequest request) {
+	public List<HotelVO> getAvailableHotelByFilter(HttpServletRequest request) {
 		
 		String[] stars = request.getParameterValues("starArr");
 		String[] city = request.getParameterValues("cityArr");
@@ -201,10 +225,67 @@ public class HotelController {
 		map.put("order", order_b);
 		map.put("dates", dates);
 		
-		List<HotelVO> hotelListByStar = hotelService.getHotelListByStar(map);
+		List<HotelVO> hotelListByFilter = hotelService.getHotelListByStar(map);
 				
-		return hotelListByStar;
+		return hotelListByFilter;
 	}
+
+	/*
+	@RequestMapping(value="/unavailableHotelByFilter.do")
+	@ResponseBody
+	public List<HotelVO> getUnavailableHotelByFilter(HttpServletRequest request) {
+		
+		String[] stars = request.getParameterValues("starArr");
+		String[] city = request.getParameterValues("cityArr");
+		String[] service = request.getParameterValues("serviceArr");
+		String[] score = request.getParameterValues("scoreArr");
+		String[] order = request.getParameterValues("orderArr");
+		String[] dates = request.getParameterValues("datesArr");
+		
+		boolean[] service_b = new boolean[11];
+		
+		for(int i = 0; i < service.length; i++) {
+			service_b[i] = Boolean.parseBoolean(service[i]); 
+		}
+		
+		HotelServiceVO hotelServiceVO = new HotelServiceVO();
+		hotelServiceVO.setBreakfast(service_b[0]);
+		hotelServiceVO.setRestaurant(service_b[1]);
+		hotelServiceVO.setShuttle(service_b[2]);
+		hotelServiceVO.setSwimming_pool(service_b[3]);
+		hotelServiceVO.setFront_desk(service_b[4]);
+		hotelServiceVO.setWifi(service_b[5]);
+		hotelServiceVO.setFitnesscenter(service_b[6]);
+		hotelServiceVO.setSmoking(service_b[7]);
+		hotelServiceVO.setBar(service_b[8]);
+		hotelServiceVO.setSpa(service_b[9]);
+		hotelServiceVO.setParking(service_b[10]);
+		
+		Double[] score_b = new Double[5];
+
+		for(int i = 0; i < score.length; i++) {
+			score_b[i] = Double.parseDouble(score[i]);
+		}
+		
+		int[] order_b = new int[1];
+		
+		for(int i = 0; i < order.length; i++) {
+			order_b[i] = Integer.parseInt(order[i]);
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("stars", stars);
+		map.put("city", city);
+		map.put("hotelServiceVO", hotelServiceVO);
+		map.put("scoreAvg", score_b);
+		map.put("order", order_b);
+		map.put("dates", dates);
+		
+		List<HotelVO> unavailableHotelListByFilter = hotelService.getUnavailableHotelListByStar(map);
+				
+		return unavailableHotelListByFilter;
+	}
+	*/
 	
 	@RequestMapping(value="/getMap.do")
 	@ResponseBody

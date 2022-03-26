@@ -17,7 +17,8 @@
 						round(AVG (cleanness*2.5), 1) as cleannessAvg,
 						round(AVG (comfort*2.5), 1) as comfortAvg,
 						round(AVG (effectiveness*2.5), 1) as effectivenessAvg,
-						round(AVG (place*2.5), 1) as placeAvg
+						round(AVG (place*2.5), 1) as placeAvg,
+						count(staff) 
 					from
 						review
 					where

@@ -12,11 +12,12 @@ public class ChatVO {
 	private Time send_time;
 	private String content;
 	private boolean partner;
+	private Integer reservation_number;
 	
 	public ChatVO() {}
-	
+
 	public ChatVO(Integer chat_seq, String userid, Integer serialnumber, Date send_date, Time send_time, String content,
-			boolean partner) {
+			boolean partner, Integer reservation_number) {
 		super();
 		this.chat_seq = chat_seq;
 		this.userid = userid;
@@ -25,8 +26,15 @@ public class ChatVO {
 		this.send_time = send_time;
 		this.content = content;
 		this.partner = partner;
+		this.reservation_number = reservation_number;
 	}
 
+	public Integer getReservation_number() {
+		return reservation_number;
+	}
+	public void setReservation_number(Integer reservation_number) {
+		this.reservation_number = reservation_number;
+	}
 	public Integer getChat_seq() {
 		return chat_seq;
 	}
