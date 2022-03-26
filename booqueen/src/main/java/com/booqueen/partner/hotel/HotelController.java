@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booqueen.partner.common.S3Service;
+import com.booqueen.partner.message.MessageService;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
@@ -33,6 +34,7 @@ import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
+import com.booqueen.user.chat.vo.ChatVO;
 
 @Controller
 public class HotelController {
@@ -49,6 +51,9 @@ public class HotelController {
 	@Autowired
 	private ReservationService reservationService;
 	
+	@Autowired
+	private MessageService messageService;
+	
 	@RequestMapping(value = "/basic.pdo", method = RequestMethod.POST)
 	public String setBasicInfo(HotelVO vo, HttpSession session) {
 			session.setAttribute("hotelname", vo.getHotelname());
@@ -59,6 +64,9 @@ public class HotelController {
 			session.setAttribute("address2", vo.getAddress2());
 			session.setAttribute("city", vo.getCity());
 			session.setAttribute("postalcode", vo.getPostalcode());
+			session.setAttribute("latitude", vo.getLatitude());
+			session.setAttribute("longitude", vo.getLongitude());
+			System.out.println(vo.toString());
 			hotelService.addHotel(vo);
 			return "createroom";	
 	}
@@ -218,6 +226,8 @@ public class HotelController {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
 				List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
+				List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
+				model.addAttribute("messageList", messageList);
 				model.addAttribute("hotel", hotel);
 				model.addAttribute("reservation", reservation);
 			}

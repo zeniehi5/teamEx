@@ -24,4 +24,8 @@
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
 	
+	<mvc:annotation-driven/>
+	
+	<mvc:default-servlet-handler/>
+	
 </beans>

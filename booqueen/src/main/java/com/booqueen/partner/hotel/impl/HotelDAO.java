@@ -118,5 +118,8 @@ public class HotelDAO {
 	
 	public void setHotelImage(HotelImageVO vo) {
 		sqlSessionTemplate.insert("HotelDAO.setHotelImage", vo);
-	}
-}
+  }
+
+	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectOne("HotelDAO.selectHotelImgByHotelSerial", serialnumber);
+  }

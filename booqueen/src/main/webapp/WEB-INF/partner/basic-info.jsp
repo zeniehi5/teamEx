@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/basic-info.css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29b5f78cb856dc4d592f3c3f87388524&libraries=services"></script>
 </head>
 <body>
 <form action="basic.pdo" method="post">
@@ -101,19 +102,19 @@
                   </div>
                   <div>
                      <p id="name">도로명 주소</p>
-                     <input type="text" name="address1" placeholder=" &nbsp;예) 사직로 161">
+                     <input type="text" name="address1" id="address1" placeholder=" &nbsp;예) 사직로 161">
                   </div>
                   <div>
                      <p id="name">주소2</p>
-                     <input type="text" name="address2" placeholder=" &nbsp;빌딩, 층, 호수 등">
+                     <input type="text" name="address2" id="address2" placeholder=" &nbsp;빌딩, 층, 호수 등">
                   </div>
                   <div>
                      <p id="name">도시</p>
-                     <input type="text" name="city" placeholder=" &nbsp;예) Samgo-ri">
+                     <input type="text" name="city" id="city" placeholder=" &nbsp;예) Samgo-ri">
                   </div>
                   <div>
                      <p id="name">우편번호</p>
-                     <input type="text" name="postalcode">
+                     <input type="text" name="postalcode" onchange="openMapModal();">
                   </div>
                </div>
                <div class="location-1-1">
@@ -129,10 +130,76 @@
             </div>
          </fieldset>
       </div>
+<div id="map" style="width:58%;height:350px;"></div>
+	<p><em>숙소의 정확한 위치를 지도에 표시해 주세요!</em></p> 
+<div id="clickLatlng"></div>
       <div>
          <input type="submit" id="continue" value="계속">
       </div>
+	
    </main>
 </form>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+function openMapModal(){
+	var address1 = document.getElementById('address1').value;
+	var address2 = document.getElementById('address2').value;
+	var city = document.getElementById('city').value;
+	var fullAddress = city + ' ' + address1 + ' ' + address2;
+	console.log(fullAddress);
+	
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(fullAddress, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+  	// 지도에 클릭 이벤트를 등록합니다
+ 	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+  	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+      
+      // 클릭한 위도, 경도 정보를 가져옵니다 
+      var latlng = mouseEvent.latLng; 
+      
+      // 마커 위치를 클릭한 위치로 옮깁니다
+      marker.setPosition(latlng);
+      
+      var message = '선택한 숙소위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+      message += '경도는 ' + latlng.getLng() + ' 입니다';
+      var input = '<input type="hidden" name="latitude" value="' + latlng.getLat() + '">';
+      input += '<input type="hidden" name="longitude" value="' + latlng.getLng() + '">';
+      
+      var resultDiv = document.getElementById('clickLatlng'); 
+      resultDiv.innerHTML = message;
+      resultDiv.innerHTML = input;
+      
+  });
+    
+});
+
+}
+</script>
 </body>
 </html>

@@ -209,21 +209,43 @@
                                                                         <div class="grid_align_center">
                                                                             <div class="homepage_grid_column">
                                                                                 <div class="group_inline">
-                                                                                    <span class="display_one"><span>답변하지 않은 메시지</span></span>
+                                                                                    <span class="display_one"><span>최근 메시지</span></span>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="homepage_header_text">
-                                                                                <a href="#" class="show_link"><span>메시지 모두 보기</span></a>
+                                                                                <a href="${contextPath}/message.pdo" class="show_link"><span>메시지 모두 보기</span></a>
                                                                             </div>    
                                                                         </div>
                                                                         <div class="spacer"></div>
                                                                     </div>
+                                                                    <c:choose>
+                                                                    <c:when test="${empty messageList}">
                                                                     <div class="empty_state">
                                                                         <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty_state_icon">
                                                                             <path d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"></path>
                                                                         </svg>
                                                                         <p class="empty_state_text"><span>답변하지 않은 메시지가 없습니다.</span></p>    
                                                                     </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <div>
+                                                                    	<table class="reservation_list">
+                                                                    		<tr>
+                                                                    			<th>예약자 ID</th>
+                                                                    			<th>보낸 날짜</th>
+                                                                    			<th>내용</th>
+                                                                    		</tr>
+                                                                    		<c:forEach var="ChatVO" items="${messageList}" end="2">
+                                                                    		<tr>
+                                                                    			<td>${ChatVO.userid}</td>
+                                                                    			<td>${ChatVO.send_date}</td>
+                                                                    			<td>${ChatVO.content}</td>
+                                                                    		</tr>
+                                                                    		</c:forEach>
+                                                                    	</table>
+                                                                    </div>
+                                                                    </c:otherwise>
+                                                                    </c:choose>
                                                                 </div>
                                                             </div>    
                                                         </div>
@@ -260,131 +282,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="main_side_bar">
-                            <div>
-                                <div>
-                                    <div>
-                                        <div class="module_wrap">
-                                            <h3 class="module_title"><span>시작하기</span></h3>
-                                            <p class="module_title_sub"><span>다가오는 첫 번째 예약부터 성공적으로 관리하실 수 있도록 아래와 같이 절차를 간단하게 설명해드리겠습니다.</span></p>
-                                            <div class="module_item">
-                                                <img src="https://q-xx.bstatic.com/backend_static/common/img/dashboard/addphotos_icon@2x/d7046b4d351fea822a949281759ba1686d881898.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">사진을 4장 더 올려주세요.</div>
-                                                    <div>
-                                                        <a href="#" class="module_button">사진 4장 추가하기</a>    
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://r-xx.bstatic.com/backend_static/common/img/dashboard/setprice_icon@2x/3c0d485b988415bb0977f6fa1c2fe7854e5c00f7.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">경쟁사와 요금 비교</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">다른 숙소 살펴보기</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://q-xx.bstatic.com/backend_static/common/img/dashboard/addfacilities_icon@2x/5a276eaab16127258582f79c1ff08563cd02e420.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">인기 편의시설을 체크해주세요</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">아직 확인하지 않은 편의시설: 8개</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://q-xx.bstatic.com/backend_static/common/img/dashboard/previewProperty_icon@2x/82f0a8591b9a972ce1bb0478ea6c8dcedfa5fb95.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">Booking.com에서 숙소 확인</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">Booking.com에서 숙소 확인하기</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://q-xx.bstatic.com/backend_static/common/img/dashboard/checkCalendar_icon@2x/49323e446dfc964df4249a2bb71a8b1d15fbe0d8.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">오픈 날짜 확인</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">캘린더 확인하기</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://r-xx.bstatic.com/backend_static/common/img/dashboard/hostprofile_icon@2x/4256172c991c4a918ea8e2e87e38d1d9e3f8e811.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">본인 소개를 부탁드립니다</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">프로필 만들기</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                            <div class="module_item">
-                                                <img src="https://r-xx.bstatic.com/backend_static/common/img/dashboard/pulse_icon@2x/25955ee0d00bf2e2013e0030f5b39e7cea498c08.png" class="module_image" style="user-select: auto;">
-                                                <div class="module_body">
-                                                    <div class="module_text">언제 어디서나 손쉬운 예약 관리</div>
-                                                    <div>
-                                                        <a href="#" class="module_action">무료 앱 다운로드</a>
-                                                    </div>
-                                                </div>
-                                                <div class="module_close">
-                                                    <svg viewBox="0 0 24 24" width="20" aria-hidden="true" height="20" role="presentation" fill="currentColor" focusable="false" class="bk-icon -material-ic_close" color="currentColor" style="user-select: auto;">
-                                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="user-select: auto;"></path>
-                                                    </svg>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tour_alert">
-                                    <div>
-                                        <h3 class="title_with_icon">
-                                            <svg role="presentation" fill="#6B6B6B" focusable="false" width="16" viewBox="0 0 24 24" aria-hidden="true" height="16" class="bell_icon" style="user-select: auto;">
-                                                <path d="M9.28 21.961a2.837 2.837 0 0 0 5.445 0 .75.75 0 1 0-1.44-.422 1.337 1.337 0 0 1-2.565 0 .75.75 0 1 0-1.44.422zM12.75 3V.75a.75.75 0 0 0-1.5 0V3a.75.75 0 0 0 1.5 0zm-.75.75a6.75 6.75 0 0 1 6.75 6.75c0 3.154.29 5.436.785 6.994.323 1.02.684 1.59.995 1.84L21 18H3l.59 1.212c.248-.315.572-.958.88-2 .49-1.66.78-3.872.78-6.712A6.75 6.75 0 0 1 12 3.75zm0-1.5a8.25 8.25 0 0 0-8.25 8.25c0 2.702-.272 4.772-.72 6.288-.254.864-.493 1.336-.62 1.5A.75.75 0 0 0 3 19.5h18c.708 0 1.022-.892.47-1.335.019.016-.008-.015-.07-.113-.14-.223-.29-.553-.435-1.012-.443-1.396-.715-3.529-.715-6.54A8.25 8.25 0 0 0 12 2.25z" style="user-select: auto;"></path>
-                                            </svg>
-                                            <span>알림</span>
-                                        </h3>
-                                        <div class="font_caption">
-                                            <span>알림 설정 완료! 새로운 처리사항이 발생할 경우 여기에 알림이 나타납니다.</span>
-                                            <div class="spacer"></div>
-                                        </div>
-                                        <hr class="divider">
-                                    </div>
-                                </div>    
-                            </div>    
-                        </div>    
                       </div> 
                    </div>
                </main>

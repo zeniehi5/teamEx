@@ -141,4 +141,9 @@ public class HotelServiceImpl implements HotelService {
 		return hotelDAO.selectInquiryByHotelSerial(serialnumber);
 	}
 
+	@Override
+	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
+		return hotelDAO.selectHotelImgByHotelSerial(serialnumber);
+	}
+
 }

@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelVO;
+import com.booqueen.partner.message.MessageService;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
+import com.booqueen.user.chat.vo.ChatVO;
 
 @Controller
 public class LoginController {
@@ -30,6 +33,9 @@ public class LoginController {
 	
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@RequestMapping(value = "/login.pdo", method = RequestMethod.POST)
 	public String checkEmail(MemberVO vo, HttpServletRequest request) {
@@ -53,6 +59,10 @@ public class LoginController {
 				hotel = hotelService.getHotelByMemberEmail(member.getEmail());
 				if(hotel != null) {
 					List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
+					List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
+					HotelImageVO image = hotelService.selectHotelImgByHotelSerial(hotel.getSerialnumber());
+					session.setAttribute("image", image.getFile_url());
+					model.addAttribute("messageList", messageList);
 					model.addAttribute("reservation", reservation);
 				}
 				model.addAttribute("hotel", hotel);

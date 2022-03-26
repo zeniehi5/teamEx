@@ -785,6 +785,7 @@ li{
 .input_select{
     position: relative;
     display: block;
+    width: 200px;
 }
 .form_control{
     padding-right: 32px;
