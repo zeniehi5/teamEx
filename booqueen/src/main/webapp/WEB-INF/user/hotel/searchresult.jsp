@@ -36,14 +36,15 @@
 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
 					</svg>
 					<a href="#" class="region">
-						<c:choose>
+					<%--<c:choose> 
 							<c:when test="${!empty hotelList }">
 								${hotelList.get(0).city }
 							</c:when>
 							<c:otherwise>
 								${unavailableHotelList.get(0).city }
 							</c:otherwise>	
-						</c:choose>
+						</c:choose>--%>
+						${hotelList.get(0).city }
 					</a>
 				</li>
 				<li class="search">
@@ -67,14 +68,15 @@
 								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 									<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg>
-								<c:choose>
+							<%-- <c:choose> 
 									<c:when test="${!empty hotelList }">
 										<input type="search" class="searchbox-destination-input" value="${hotelList.get(0).city }" name="keyword">
 									</c:when>
 									<c:otherwise>
 										<input type="search" class="searchbox-destination-input" value="${unavailableHotelList.get(0).city }" name="keyword">
 									</c:otherwise>	
-								</c:choose>
+								</c:choose> --%>
+									<input type="search" class="searchbox-destination-input" value="${hotelList.get(0).city }" name="keyword">
 							</div>
 						</div>
 						<div class="searchbox-date">
@@ -410,7 +412,7 @@
 			<!-- ------------------------- 호텔 목록 -------------------------  -->
 			<div class="container-right">
 				<div class="title">
-					<c:choose>
+				<%-- <c:choose> 
 						<c:when test="${!empty hotelList }">
 							<h2>${hotelList.get(0).city }: 검색된 숙소 
 								<span id="number_hotel">${fn:length(hotelList)+fn:length(unavailableHotelList)}</span>개
@@ -421,7 +423,10 @@
 								<span id="number_hotel">${fn:length(unavailableHotelList)}</span>개
 							</h2>
 						</c:otherwise>	
-					</c:choose>
+					</c:choose>--%>
+						<h2>${hotelList.get(0).city }: 검색된 숙소 
+							<span id="number_hotel">${fn:length(hotelList)}</span>개
+						</h2>
 					
 					<button class="mini-map" id="mapBtn2" style="background-image: url(${contextPath}/resources/user/images/searchresultmap.png)";>
 						<i class="fas fa-map-marker-alt"></i>
@@ -483,19 +488,19 @@
 							</div>
 						</div>
 						
-						<c:choose>
-						<c:when test="${!empty hotelList || !empty unavailableHotelList}">
-						
-						<c:if test="${!empty hotelList }">
+					<%--<c:choose>
+							<c:when test="${!empty hotelList || !empty unavailableHotelList}">
+							<c:if test="${!empty hotelList }"> --%>
 						<div id="content_from_ajax">
+						<c:set var="hotelAvailableVO" value="${hotelAvailableVO }"/>
 						<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 						
 						<!-- list start -->
-						<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank">
+						<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank">
 						<div class="list">
 							<div class="hotel-info">
 								<div class="hotel-image">
-									<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank">
+									<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank">
 									
 									<c:if test="${!empty hotel.hotelImgVO.file_url }">
 										<img class="s3-img" src="${hotel.hotelImgVO.file_url }">
@@ -509,7 +514,7 @@
 									<div class="hotel-top">
 										<div class="hotel-title">
 											<div class="hotel-name">
-												<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank"><h3>${hotel.hotelname }</h3></a>								
+												<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank"><h3>${hotel.hotelname }</h3></a>								
 												<div class="star">
 													<c:if test="${hotel.star+0 == '5'}">
 													<span>
@@ -610,12 +615,14 @@
 										<div class="reviews">
 											<div class="review">
 											
-											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 9}"><div class="review-title">최고</div></c:if>
-											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 8}"><div class="review-title">매우 좋음</div></c:if>
-											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 7}"><div class="review-title">좋음</div></c:if>
-											<c:if test="${hotel.reviewAvgVO.scoreAvg >= 6}"><div class="review-title">만족</div></c:if>
-											<c:if test="${hotel.reviewAvgVO.scoreAvg < 6}"><div class="review-title">보통</div></c:if>
-												
+											<c:choose>
+												<c:when test="${hotel.reviewAvgVO.scoreAvg >= 9}"><div class="review-title">최고</div></c:when>
+												<c:when test="${hotel.reviewAvgVO.scoreAvg >= 8}"><div class="review-title">매우 좋음</div></c:when>
+												<c:when test="${hotel.reviewAvgVO.scoreAvg >= 7}"><div class="review-title">좋음</div></c:when>
+												<c:when test="${hotel.reviewAvgVO.scoreAvg >= 6}"><div class="review-title">만족</div></c:when>
+												<c:when test="${hotel.reviewAvgVO.scoreAvg < 6}"><div class="review-title">보통</div></c:when>
+											</c:choose>
+											
 												<div class="review-subtitle">${hotel.reviewAvgVO.count }개 이용 후기</div>
 											</div>
 											<div class="grade">${hotel.reviewAvgVO.scoreAvg }</div>
@@ -664,18 +671,18 @@
 						</c:forEach>
 						
 						</div><!-- end content_from_ajax -->
-						</c:if>
-
-						<c:if test="${!empty unavailableHotelList }">
+						<%-- </c:if> 
+							<c:if test="${!empty unavailableHotelList }"> 
 						<div id="content_from_ajax_unavailable">
+						<c:set var="hotelAvailableVO" value="${hotelAvailableVO }"/>
 						<c:forEach var="unavilalbeHotel" items="${unavailableHotelList}" varStatus="status">
 						
 						<!-- list start -->
-						<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank">
+						<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank">
 						<div class="list">
 							<div class="hotel-info">
 								<div class="hotel-image">
-									<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank">
+									<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank">
 									
 									<c:if test="${!empty unavilalbeHotel.hotelImgVO.file_url }">
 										<img class="s3-img" src="${unavilalbeHotel.hotelImgVO.file_url }">
@@ -689,7 +696,7 @@
 									<div class="hotel-top">
 										<div class="hotel-title">
 											<div class="hotel-name">
-												<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}" target="_blank"><h3>${unavilalbeHotel.hotelname }</h3></a>								
+												<a href="${contextPath}/hotelInfo.do?serialNumber=${unavilalbeHotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank"><h3>${unavilalbeHotel.hotelname }</h3></a>								
 												<div class="star">
 													<c:if test="${unavilalbeHotel.star+0 == '5'}">
 													<span>
@@ -845,13 +852,13 @@
 						<c:otherwise>
 							<div>죄송합니다. 해당 날짜에 이용 가능한 객실이 없습니다.</div>
 						</c:otherwise>
-						</c:choose>
+						</c:choose>--%>
 					</div>
 				</div>
 
 				<!-- 검색된 숙소, 번호 -->
 				<div class="container-bottom">
-					<div class="found-room">제주도: 검색된 숙소 456개</div>
+					<div class="found-room">${hotelList.get(0).city}: 검색된 숙소 ${fn:length(hotelList)}개</div>
 					<div class="showing">
 						<div class="pagination">
 							<a href="#">&laquo;</a>
@@ -908,10 +915,10 @@
 				</div>
 				
 				<div id="map_hotel_list">
-				<c:choose>
+<%-- 			<c:choose> 
 				<c:when test="${!empty hotelList || !empty unavailableHotelList}">
 						
-				<c:if test="${!empty hotelList }">
+				<c:if test="${!empty hotelList }">--%>
 				<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 				<div class="map-hotel-list">
 					<div class="map-hotel-card">
@@ -1059,9 +1066,9 @@
 					</div>
 				</div>
 				</c:forEach>
-				</c:if>
+					<%--</c:if> 
 				
-				<c:if test="${!empty unavailableHotelList }">
+					<c:if test="${!empty unavailableHotelList }"> 
 		
 						<c:forEach var="unavailableHotel" items="${unavailableHotelList}" varStatus="status">
 						
@@ -1212,12 +1219,12 @@
 						</c:forEach>
 						
 				
-						</c:if>
+				</c:if> 
 				</c:when>
 				<c:otherwise>
 					<div>죄송합니다. 해당 날짜에 이용 가능한 객실이 없습니다.</div>
 				</c:otherwise>
-				</c:choose>
+				</c:choose> --%>
 				</div>
 			</div>
 
@@ -1225,8 +1232,8 @@
 			<div class="map-hide-button">
 				<i class="bi bi-chevron-left" id="mapListCloseBtn"></i>
 				<i class="bi bi-chevron-right" id="mapListOpenBtn"></i>
-			</div>
--->
+			</div>-->
+
 			<!-- Modal Map -->
 			<div class="map-api" id="mapApi">
 
@@ -1336,15 +1343,18 @@ function makeScoreFilter(target) {
 }
 
 $(function(){
-	$(".filter-checkbox-input").on("change", getHotel);
-	$('.menuitem').on("change", getHotel);
+	$(".filter-checkbox-input").on("change", getAvailableHotel);
+	$('.menuitem').on("change", getAvailableHotel);
+	
+// 	$(".filter-checkbox-input").on("change", getUnavailableHotel);
+// 	$('.menuitem').on("change", getUnavailableHotel);
 })
 
 var city = '';
 var start_date_pram = start_date.replaceAll("-", "");
 var end_date_pram = end_date.replaceAll("-", "");
 
-function getHotel() {    
+function getAvailableHotel() {    
 
 	var contextPath = '${contextPath}';
 	
@@ -1381,7 +1391,7 @@ function getHotel() {
 	datesArr.push(end_date_pram);
 	
     $.ajax({
-        url:contextPath + '/hotelByFilter.do'
+        url:contextPath + '/availableHotelByFilter.do'
         , type : 'POST'
         , async:false
         , traditional : true
@@ -1390,7 +1400,6 @@ function getHotel() {
         , success : function(data) {
         	
         	$('#content_from_ajax').empty();
-        	$('#content_from_ajax_unavailable').empty();
         	
     		$.each(data, function(index, hotel){
     		
@@ -1404,7 +1413,8 @@ function getHotel() {
 				text += "/hotelInfo.do?serialNumber=";
 				text += hotel.serialnumber;
         		text +=	"' target='_blank'><img class='s3-img' src=";
-        		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+//         		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+        		text += hotel.hotelImgVO.file_url;
         		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
    				text += contextPath;
 				text += "/hotelInfo.do?serialNumber=";
@@ -1421,20 +1431,133 @@ function getHotel() {
 				text +=	hotel.reviewAvgVO.count;
 				text += "개 이용 후기 </div></div><div class='grade'>";
 				text +=	hotel.reviewAvgVO.scoreAvg;
-				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>프리미어 트윈룸</div><div class='bed-count'>더블침대 2개</div><div class='cancel'><div class='cancel1'>무료취소 • 선결제 필요 없음</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>우리 사이트에 이 요금으로 남은 객실 단 3개</div></div></div><div class='room-right'><div class='price'><div class='option-info'>1박, 성인 2명</div><div class='option-price'><span class='fixed-price'>'\402,770</span><span class='sale-price'>'\145,000</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
+				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
+				text += "프리미어 트윈룸";
+				text += "</div><div class='bed-count'>";
+				text += "더블침대 2개";
+				text += "</div><div class='cancel'><div class='cancel1'>";
+				text += "무료취소 • 선결제 필요 없음";
+				text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
+				text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
+				text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
+				text += "1박, 성인 2명";
+				text += "</div><div class='option-price'><span class='fixed-price'>";
+				text += hotel.roomVO.price;
+				text += "</span><span class='sale-price'>";
+				text += hotel.roomVO.price;
+				text += "</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
     		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
     			
         		$('#content_from_ajax').append(text);
-        		$('#content_from_ajax_unavailable').append(text);
     		});
-    		
-        	
-        	
-        	
-        	
-        	
-        	
+        }
+       	, error : function() {
+			alert('error');			
+		}
+		
+    });
+    
+    if(starArr.length == 5){
+    	starArr = [];	
+    }
+    cityArr.splice(0, 1);
+    serviceArr = [];
+    for(let i = 0; i < scoreArr.length; i++) {
+    	  if(scoreArr[i] === 0)  {
+    		  scoreArr.splice(i, 1);
+    	    i--;
+    	  }
+    	}
+    orderArr = [];
+    datesArr = [];
+    $('#number_hotel').text($('.list').length);
+ }
 
+function getUnavailableHotel() {    
+
+	var contextPath = '${contextPath}';
+	
+	city = $('.searchbox-destination-input').val();
+	cityArr.push(city);
+	
+	var breakfast = $('#checkFacilities1').is(":checked");
+	var restaurant = $('#checkFacilities2').is(":checked");
+	var shuttle = $('#checkFacilities3').is(":checked");
+	var swimming_pool = $('#checkFacilities4').is(":checked");
+	var front_desk = $('#checkFacilities5').is(":checked");
+	var wifi = $('#checkFacilities6').is(":checked");
+	var fitnesscenter = $('#checkFacilities7').is(":checked");
+	var smoking = $('#checkFacilities8').is(":checked");
+	var bar = $('#checkFacilities9').is(":checked");
+	var spa = $('#checkFacilities10').is(":checked");
+	var parking = $('#checkFacilities11').is(":checked");
+	serviceArr.push(breakfast, restaurant, shuttle, swimming_pool, front_desk, wifi, fitnesscenter, smoking, bar, spa, parking);
+	
+	if(isEmpty(starArr)){
+   	 starArr = ['1', '2', '3', '4', '5'];
+    }
+	
+	scoreArr.push(0);
+	
+	orderArr.push('1');
+	var orderText = $('.filter_radio_checked').data('value');
+	if(!isEmpty(orderText)){
+		orderArr.splice(0, 1);
+		orderArr.push(orderText);
+	}
+		
+	datesArr.push(start_date_pram);
+	datesArr.push(end_date_pram);
+	
+    $.ajax({
+        url:contextPath + '/unavailableHotelByFilter.do'
+        , type : 'POST'
+        , async:false
+        , traditional : true
+        , dataType: "JSON"
+        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr, datesArr: datesArr}
+        , success : function(data) {
+        	
+        	$('#content_from_ajax_unavailable').empty();
+        	
+    		$.each(data, function(index, hotel){
+    		
+    			var text = '';
+        		text += "<a href='";
+        		text +=	contextPath;
+        		text += "/hotelInfo.do?serialNumber=";
+       			text += hotel.serialnumber;
+   				text += "' target='_blank'><div class='list'><div class='hotel-info'><div class='hotel-image'><a href='";
+				text += contextPath;
+				text += "/hotelInfo.do?serialNumber=";
+				text += hotel.serialnumber;
+        		text +=	"' target='_blank'><img class='s3-img' src=";
+//         		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+        		text += hotel.hotelImgVO.file_url;
+        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+   				text += contextPath;
+				text += "/hotelInfo.do?serialNumber=";
+				text +=	hotel.serialnumber;
+				text +=	"' target='_blank'><h3>";
+				text += hotel.hotelname;
+				text += "</h3></a><div class='star'>";
+				text += isNumber(hotel.star);
+				text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
+				text +=	hotel.city;
+				text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>";
+				text += scoreText(hotel.reviewAvgVO.scoreAvg);
+				text +=	"</div><div class='review-subtitle'>";
+				text +=	hotel.reviewAvgVO.count;
+				text += "개 이용 후기 </div></div><div class='grade'>";
+				text +=	hotel.reviewAvgVO.scoreAvg;
+				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
+				text += "프리미어 트윈룸";
+				text += "</div><div class='bed-count'>더블침대 2개</div><div class='cancel'><div class='cancel1'>무료취소 • 선결제 필요 없음</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>죄송합니다. 이 날짜에는 가능한 방이 없습니다.</div></div></div><div class='room-right'><div class='price'><div class='option-info'>1박, 성인 2명</div><div class='option-price'><span class='fixed-price'>";
+				text += "'\402,770</span><span class='sale-price'>'\145,000</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
+				text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
+    			
+    		 	$('#content_from_ajax_unavailable').append(text);
+    		});
         }
        	, error : function() {
 			alert('error');			

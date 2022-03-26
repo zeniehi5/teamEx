@@ -35,6 +35,10 @@ public class HotelService {
 		return hotelDAO.getHotelListByStar(map);
 	}
 	
+	public List<HotelVO> getUnavailableHotelListByStar(HashMap<String, Object> map) {
+		return hotelDAO.getUnavailableHotelListByStar(map);
+	}
+	
 	public HotelVO getHotelBySerialnumber(Integer serialNumber) {
 		return hotelDAO.getHotelBySerialnumber(serialNumber);
 	}

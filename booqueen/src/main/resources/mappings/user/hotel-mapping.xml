@@ -73,7 +73,7 @@
 				
 				where t.city LIKE CONCAT('%', #{city}, '%') and
 				
-				open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD') and open_date != TO_DATE(#{end_date}, 'YYYYMMDD')
 				
 				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
 		]]>
@@ -142,6 +142,132 @@
 				on o.room_id = a.room_id
 				
 				where open_date between
+		]]>	
+				<foreach collection="dates" item="dates" separator="and">
+					<![CDATA[ TO_DATE(#{dates}, 'YYYYMMDD')]]>	
+				</foreach>
+		<![CDATA[ 
+				and star in (
+		]]>			
+				<foreach collection="stars" item="stars" separator="," index="index">
+       				 <![CDATA[ #{stars}]]>	
+   	 			</foreach>
+		<![CDATA[		
+				) and city LIKE CONCAT('%',
+				]]>	
+				<foreach collection="city" item="city" index="index">
+				 	<![CDATA[#{city}]]>	
+				</foreach>		
+				
+				<![CDATA[, '%')]]>
+				
+				<if test= "hotelServiceVO.breakfast == true">
+					<![CDATA[and breakfast = #{hotelServiceVO.breakfast}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.restaurant == true">
+					<![CDATA[and restaurant = #{hotelServiceVO.restaurant}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.shuttle == true">
+					<![CDATA[and shuttle = #{hotelServiceVO.shuttle}]]>	
+				</if>	
+				
+				<if test= "hotelServiceVO.swimming_pool == true">
+					<![CDATA[and swimming_pool = #{hotelServiceVO.swimming_pool}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.front_desk == true">
+					<![CDATA[and front_desk = #{hotelServiceVO.front_desk}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.wifi == true">
+					<![CDATA[and wifi = #{hotelServiceVO.wifi}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.fitnesscenter == true">
+					<![CDATA[and fitnesscenter = #{hotelServiceVO.fitnesscenter}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.smoking == true">
+					<![CDATA[and smoking = #{hotelServiceVO.smoking}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.bar == true">
+					<![CDATA[and bar = #{hotelServiceVO.bar}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.spa == true">
+					<![CDATA[and spa = #{hotelServiceVO.spa}]]>	
+				</if>
+				
+				<if test= "hotelServiceVO.parking == true">
+					<![CDATA[and parking = #{hotelServiceVO.parking}]]>	
+				</if>
+				
+		<![CDATA[	
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+				]]>	
+				
+				<if test="scoreAvg != null">
+					
+					<![CDATA[
+						having round(avg(r.score), 1) >= 
+					]]>	
+					
+					<foreach collection="scoreAvg" item="score" separator="and round(avg(r.score), 1) >=">
+						<if test ="score != null">
+							<![CDATA[${score}]]>	
+						</if>
+					</foreach>
+				</if>
+			
+		<if test="order != null">
+			<![CDATA[
+					order by  
+				]]>
+		
+				<foreach collection="order" item="order" separator=",">
+					<![CDATA[ ${order}]]>	
+				</foreach>
+				
+				<![CDATA[
+					desc  
+				]]>
+		</if>			
+	</select>
+	
+	<select id="selectUnavailableHotelByFilter" resultMap="HotelVOMap" parameterType="java.util.HashMap">
+		<![CDATA[ 
+			select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
+	
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
+				
+				from hotel_image as h 
+				
+				full join temphotel as t
+				
+				on h.serialnumber = t.serialnumber
+				
+				full join review as r
+				
+				on t.serialnumber = r.serialnumber
+				
+				full join hotel_service as s
+				
+				on t.serialnumber = s.serialnumber
+				
+				full join room as o
+				
+				on t.serialnumber = o.serialnumber
+				
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where open_date not between
 		]]>	
 				<foreach collection="dates" item="dates" separator="and">
 					<![CDATA[ TO_DATE(#{dates}, 'YYYYMMDD')]]>	

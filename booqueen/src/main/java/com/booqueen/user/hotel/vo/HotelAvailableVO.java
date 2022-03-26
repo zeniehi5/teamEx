@@ -4,7 +4,9 @@ import lombok.Data;
 
 @Data
 public class HotelAvailableVO {
+	private Integer serialnumber;
 	private String city;
 	private String start_date;
 	private String end_date;
+	private long diffDays;
 }

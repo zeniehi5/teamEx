@@ -3,11 +3,11 @@
 <mapper namespace="com.booqueen.user.chat.dao.chatmapper">
 	
 	<select id="selectchats" resultType="chatVO" parameterType="chatVO">
-		<![CDATA[select * from chat where userid = #{userid} and serialnumber = #{serialnumber} order by send_date, send_time]]>
+		<![CDATA[select * from chat where userid = #{userid} and reservation_number = #{reservation_number} order by send_date, send_time]]>
 	</select>
 	
 	<insert id="insertchat" parameterType="chatVO">
-		<![CDATA[INSERT INTO chat(userid, serialnumber, content, partner) VALUES (#{userid}, #{serialnumber}, #{content}, #{partner})]]>
+		<![CDATA[INSERT INTO chat(userid, serialnumber, content, partner, reservation_number) VALUES (#{userid}, #{serialnumber}, #{content}, #{partner}, #{reservation_number})]]>
 	</insert>
 	
 </mapper>

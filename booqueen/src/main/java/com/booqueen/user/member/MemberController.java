@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.booqueen.user.member.service.MemberProfileService;
 import com.booqueen.user.member.vo.MemberProfileVO;
 import com.booqueen.user.member.vo.ReasonVO;
+import com.booqueen.user.reservation.service.ReservationService;
+import com.booqueen.user.reservation.vo.ReservationVO;
 
 @Controller
 public class MemberController{
@@ -32,6 +35,9 @@ public class MemberController{
 	
 	@Autowired
 	MemberProfileService memberProfileService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	KakaoAPI kakaoApi = new KakaoAPI();
 
@@ -53,8 +59,12 @@ public class MemberController{
 			session.setAttribute("isLogOn", true);
 			
 			MemberProfileVO profile = getProfile(user.getUserid());
-						
 			session.setAttribute("user_profile", profile);
+			
+			List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
+			session.setAttribute("reservationList", reservationList);
+			
+//			out.println("<script>history.back();</script>");
 			
 			return "member/index";
 		} else {
@@ -161,7 +171,8 @@ public class MemberController{
 			
 			if(result > 0) {
 				
-				BufferedImage bufferimage = ImageIO.read(new File("C:/myProject/teamEx-2/booqueen/src/main/webapp/resources/user/images/default_profile.jpg")); // s3에 올릴 것
+				String imagePath = request.getServletContext().getRealPath("resources/user/images/default_profile.jpg");
+				BufferedImage bufferimage = ImageIO.read(new File(imagePath));
 				ByteArrayOutputStream output = new ByteArrayOutputStream();
 				ImageIO.write(bufferimage, "jpg", output);
 				byte[] data = output.toByteArray();
@@ -295,7 +306,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/member/klogin.do")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletResponse response) throws Exception {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		MemberVO vo = new MemberVO();
 		MemberVO user = new MemberVO();
@@ -335,7 +346,8 @@ public class MemberController{
 			if (user == null) {
 				result = memberService.insertMemberByKakao(vo);
 				
-				BufferedImage bufferimage = ImageIO.read(new File("C:/myProject/teamEx-2/booqueen/src/main/webapp/resources/user/images/default_profile.jpg")); // s3에 올릴 것
+				String imagePath = request.getServletContext().getRealPath("resources/user/images/default_profile.jpg");
+				BufferedImage bufferimage = ImageIO.read(new File(imagePath));
 				ByteArrayOutputStream output = new ByteArrayOutputStream();
 				ImageIO.write(bufferimage, "jpg", output);
 				byte[] data = output.toByteArray();

@@ -13,6 +13,8 @@
 		<typeAlias type="com.booqueen.user.room.vo.RoomFacilitiesVO" alias="roomFacilitiesVO"/>
 		<typeAlias type="com.booqueen.user.chat.vo.ChatVO" alias="chatVO"/>
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelAvailableVO" alias="hotelAvailableVO"/>
+		<typeAlias type="com.booqueen.user.reservation.vo.ReservationVO" alias="uReservationVO"/>
+		<typeAlias type="com.booqueen.user.payment.vo.PaymentVO" alias="paymentVO"/>
 		
 		<!-- shared -->
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
@@ -65,7 +67,9 @@
 	    <mapper resource="mappings/user/room-mapping.xml"/>
 	    <mapper resource="mappings/user/chat-mapping.xml"/>
 	    <mapper resource="mappings/user/board-mapping.xml"/>
+	    <mapper resource="mappings/user/reservation-mapping.xml"/>
       <mapper resource="mappings/user/reason-mapping.xml"/>
+      <mapper resource="mappings/user/payment-mapping.xml"/>
       <mapper resource="mappings/partner/member-mapping.xml"/>
       <mapper resource="mappings/partner/hotel-mapping.xml"/>
       <mapper resource="mappings/partner/room-mapping.xml"/>

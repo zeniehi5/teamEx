@@ -633,7 +633,7 @@
     </div>
 
 	<div class="footer-top1">
-        <p><button>내 숙소 등록</button></p>
+        <p><button onclick="location.href='${contextPath}/login.jsp';">내 숙소 등록</button></p>
     </div>
 
     <div class="footer-top2">

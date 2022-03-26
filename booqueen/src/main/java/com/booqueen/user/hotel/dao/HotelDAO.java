@@ -41,6 +41,11 @@ public class HotelDAO {
 		return hotelListByStar;
 	}
 	
+	public List<HotelVO> getUnavailableHotelListByStar(HashMap<String, Object> map) throws DataAccessException{
+		List<HotelVO> hotelListByStar = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectUnavailableHotelByFilter", map);
+		return hotelListByStar;
+	}
+	
 	public HotelVO getHotelBySerialnumber(Integer serialNumber) throws DataAccessException{
 		HotelVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.selectHotel", serialNumber);
 		return vo;

@@ -5,6 +5,7 @@ import java.sql.Time;
 
 
 public class ChatVO {
+
    private Integer chat_seq; 
    private String userid;
    private Integer serialnumber;
@@ -77,6 +78,5 @@ public class ChatVO {
    public void setPartner(boolean partner) {
       this.partner = partner;
    }
-   
-   
+     
 }

@@ -158,11 +158,14 @@
                         <div class="review_board review_board1">
                             <div class="review-score">${reviewAvg.scoreAvg }</div>
                             <div>
-                                <c:if test="${reviewAvg.scoreAvg >= 9}"><h5>최고</h5></c:if>
-								<c:if test="${reviewAvg.scoreAvg >= 8}"><h5>매우 좋음</h5></c:if>
-								<c:if test="${reviewAvg.scoreAvg >= 7}"><h5>좋음</h5></c:if>
-								<c:if test="${reviewAvg.scoreAvg >= 6}"><h5>만족</h5></c:if>
-								<c:if test="${reviewAvg.scoreAvg < 6}"><h5>보통</h5></c:if>
+                                <c:choose>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 9}"><div class="review-title">최고</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 8}"><div class="review-title">매우 좋음</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 7}"><div class="review-title">좋음</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 6}"><div class="review-title">만족</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg < 6}"><div class="review-title">보통</div></c:when>
+								</c:choose>
+											
                                 <span>${fn:length(reviewList)}개 후기</h5>
                             </div>
                         </div>
@@ -297,17 +300,11 @@
 		                    <div class="booking-top-box-first">
 		                        <div>
 		                            <h4>체크인 날짜</h4>
-		                            <time datetime="2022년 2월 15일 (화)">
-		                                <a>2022년 2월 15일 (화)</a>
-		                                <span>14:00부터</span>
-		                            </time>
+		                                <a>${hotelAvailableVO.start_date }</a>
 		                        </div>
 		                        <div>
 		                            <h4>체크아웃 날짜</h4>
-		                            <time datetime="2022년 3월 15일 (화)">
-		                                <a>2022년 3월 15일 (화)</a>
-		                                <span>검색한 일정: 4주</span>
-		                            </time>
+		                                <a>${hotelAvailableVO.end_date }</a>
 		                        </div>
 		                    </div>
 		                
@@ -331,12 +328,13 @@
 		        
 		        <div class="booking-table">
 		            <div class="booking-table-left">
+		                <form id="reservation_form" action="${contextPath}/reservationProcess.do">
 		                <table>
 		                    <thead>
 		                        <tr class="booking-row">
 		                            <th style="width: 50%;">객실 유형</th>
 		                            <th style="width: 10%;">정원</th>
-		                            <th id="day-charge" style="width: 15%;">2박 요금</th>
+		                            <th id="day-charge" style="width: 15%;">${hotelAvailableVO.diffDays}박 요금</th>
 		                            <th style="width: 15%;">선택사항</th>
 		                            <th style="width: 10%;">객실 선택</th>
 		                        </tr>
@@ -362,8 +360,6 @@
 			                                    </div>
 			                                    <div class="booking-table-tbody-div-third-row">	                                     
 			                                        <ul class="booking-table-ul">
-			                                        	
-			                                        	
 			                                        		<c:if test="${room.roomFacilitiesVO.ground_floor}"><li>1층</li></c:if>
 															<c:if test="${room.roomFacilitiesVO.wheelchair}"><li>휠체어</li></c:if>
 															<c:if test="${room.roomFacilitiesVO.elevator}"><li>엘리베이터</li></c:if>
@@ -444,8 +440,6 @@
 															<c:if test="${room.roomFacilitiesVO.pool_view}"><li>수영장뷰</li></c:if>
 															<c:if test="${room.roomFacilitiesVO.river_view}"><li>리버뷰</li></c:if>
 															<c:if test="${room.roomFacilitiesVO.ocean_view}"><li>오션뷰</li></c:if>
-			                                        	
-			                                            
 			                                        </ul>
 			                                    </div>
 			                                </div>
@@ -454,24 +448,42 @@
 			                            <td class="booking-table-cell">₩ ${room.price }</td>
 			                            <td class="booking-table-cell booking-cancel-cell" >무료취소</td>
 			                            <td class="booking-table-cell">
-			                                <select>
-			                                    <option value="0">0</option>
-			                                    <option value="1">1&nbsp;&nbsp;&nbsp;&nbsp;(₩ ${room.price })</option>
-			                                    <option value="2">2&nbsp;&nbsp;&nbsp;&nbsp;(₩ ${room.price } x 2)</option>
+			                                <select name="count_room">
+			                                	<c:set var="count_room" value="${room.count_room }"/>
+			                                	<c:forEach begin="1" end="${count_room }" varStatus="status">
+			                                		<option value="${status.count}">${status.count }<span>&nbsp;&nbsp;&nbsp;&nbsp;(<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${room.price * status.count}" />)</span></option> 
+			                                	</c:forEach>
 			                                </select>
 			                            </td>    
 			                        </tr>
+			                        <input type="hidden" name="sequence" value="${room.sequence }">
+			                        <input type="hidden" name="room_id" value="${room.room_id }">
+			                        <input type="hidden" name="serialnumber" value="${room.serialnumber }">
+			                        <input type="hidden" name="type" value="${room.type }">
+			                        <input type="hidden" name="start_date" value="${hotelAvailableVO.start_date }">
+			                        <input type="hidden" name="end_date" value="${hotelAvailableVO.end_date }">
+			                        <input type="hidden" name="price" value="${room.price }">
+			                        <input type="hidden" name="diffDays" value="${hotelAvailableVO.diffDays}">
 		                        </c:forEach>
 		                                 
 		                                       
 		                    </tbody>
 		                </table>
+		                </form>
 		            </div>
 		            <div class="booking-table-right">
 		                <div class="fake-header"></div>
 		                <div class="fake-header-bottom">&nbsp;</div>
 		                <div class="following-booking">
-		                    <button>예약하기</button>
+		                    
+		                    <c:choose>
+		                    <c:when test="${isLogOn == true  && member != null}">
+		                    	<button id="reservation_btn" form="reservation_form" type="submit">예약하기</button>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<button id="reservation_btn" onclick="disabled_btn()">예약하기</button>
+		                    </c:otherwise>
+		                    </c:choose>
 		                    <ul>
 		                        <li>단 2분이면 예약 완료</li>
 		                        <li>즉시 예약 확정</li>    
@@ -484,7 +496,7 @@
 		
 		</c:when>
 
-		<c:otherwise>
+		<c:when test="${available == false }">
 			<div class="add">
 		        <i class="bi bi-info-circle"></i>
 		        <div>
@@ -727,7 +739,7 @@
 		        </div>
 		    </div>
 		
-		</c:otherwise>
+		</c:when>
 
 	</c:choose>
 
@@ -1863,8 +1875,13 @@
 	</div>
 
 	<script>
+	function disabled_btn(){
+		alert('로그인 후 예약을 진행해주세요!');
+	}
+	
 	$(document).ready(function () {
 		$('.see-closer').on("click", more_review);
+		$('#reservation_btn').on("click", )
 	 });
 	 
  	function more_review() {

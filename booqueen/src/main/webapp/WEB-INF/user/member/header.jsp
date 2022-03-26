@@ -89,7 +89,7 @@
 							</a>
 						</li>
 						<li class="header-dropdown-menu-item">
-							<a href="#" class="header-dropdown-item">
+							<a href="${contextPath}/bookingPage.do" class="header-dropdown-item">
 								<span class="header-dropdown-menu-icon">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6B6B6B" class="bi bi-building" viewBox="0 0 16 16">
 										<path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
@@ -136,19 +136,30 @@
 			               <h2>숙소에 메시지 보내기</h2>
 			               <p>다가오는 숙박에 대해 질문을 남기시면 숙소 호스트나 직원으로부터 답변을 받으실 수 있습니다</p>
 			               <ul class="msg-entry-points">
+			                  <c:if test="${!empty reservationList }">
+			                  <c:forEach var="reservationList" items="${reservationList}">	
 			                  <li class="msg_li">
+			                  <input class="input_for_reservation_number" type="hidden" value="${reservationList.reservation_number }">
+			                  <input class="input_for_hotelname" type="hidden" value="${reservationList.hotelname}">
+			             	  <input class="input_for_start_date" type="hidden" value="${reservationList.start_date}">
+			             	  <input class="input_for_end_date" type="hidden" value="${reservationList.end_date}">
+			             	  <input class="input_for_serialnumber" type="hidden" value="${reservationList.serialnumber}">
 			                     <div class="msg-entry-point">
 			                        <div class="msg-entry-point-link" onclick="entryChatting()">
-			                           <img src="images/hotel1.jpg" alt="" class="msg-entry-point-image">
+			                           <img src="${reservationList.file_url}" alt="" class="msg-entry-point-image">
 			                           <div class="msg-entry-point-thumbnail">
-			                              <div class="msg-title">Best Western Hotel Gunsan</div>
-			                              <div class="msg-trip-dates">1월 30일 | 2월 1일</div>
+			                              <div class="msg-title">${reservationList.hotelname}</div>
+			                              <div class="msg-trip-dates">${reservationList.start_date} | ${reservationList.end_date}</div>
 			                           </div>
 			                        </div>
 			                     </div>
 			                  </li>
-			                  <li>
-			                     <div class="msg-entry-point msg-cancel-point">
+			                  </c:forEach>
+			                  </c:if>
+			               </ul>
+				<!-- 취소됨 <ul> 
+               				<li>
+		                     	<div class="msg-entry-point msg-cancel-point">
 			                        <div class="msg-entry-point-link">
 			                           <img src="images/hotel1.jpg" alt="" class="msg-entry-point-image msg-cancel-image">
 			                           <div class="msg-entry-point-thumbnail">
@@ -159,97 +170,96 @@
 			                        </div>
 			                     </div>
 			                  </li>
-			               </ul>
+			               </ul>-->
 			            </div>
-			         </div>
-			         <!-- 채팅창 -->
-			         <div class="chatting" id="chatting">
-			            <div class="msg-app-header">
-			               <div class="msg-header">
-			                  <button class="msg-header-left" onclick="exitChatting()"><i class="fas fa-arrow-left"></i></button>
-			                  <div class="msg-header-title">
-			                     <div class="msg-header-title-heading">Best Western Hotel Gunsan</div>
-			                     <div class="msg-header-title-caption">1월 30일 | 2월 1일</div>
-			                  </div>
-			                  <button class="msg-header-right" onclick="entryHelp()">도움말</button>
-			               </div>
-			            </div>
-			            <div class="msg-app-content">
-			               <div class="msg-messages-list">
-			                  <div class="msg-messages-list-scrollview">
-			                     <!-- 채팅 내용 -->
-			                     <div class="msg-messages-container">
-			                        <!-- 날짜 -->
-			                        <div class="msg-separator">
-			                        </div>
-			                        <!-- 내용 -->
-			                        <div class="presentation-message">
-			                           <div class="msg-footprint">베스트웨스턴 군산호텔 측과의 대화창입니다. 대개 24시간 내로 숙소에서 답변합니다. 답변이 오는 즉시 고객님께 알려드리겠습니다.
-			                              여기서 모든 대화 내용을 확인하실 수 있습니다.</div>
-			                        </div>
-			                     </div>
-			                     <!-- 채팅 내용 -->
-			                     <div class="msg-messages-container">
-			                   <!-- 채팅 -->
-			                        <div id="chat_content">
-			                        </div>
-			                  </div>
-			                  
-			               </div>
-			            </div>
-			            <!-- 도움말 -->
-			            <div class="msg-help" id="msgHelp">
-			               <div class="msg-help-background" onclick="exitHelp()"></div>
-			               <div class="msg-help-content">
-			                  <div class="help-menu">
-			                     <div class="help-header">
-			                        <div class="help-header-left"></div>
-			                        <div class="help-header-title">연락처</div>
-			                        <div class="help-header-right" onclick="exitHelp()"><i class="bi bi-x-lg help-x"></i></div>
-			                     </div>
-			                     <div class="help-content">
-			                        <div class="content-card">
-			                           <div class="card-hotel-image"><img src="images/hotel1.jpg" alt=""></div>
-			                           <div class="card-hotel-description">
-			                              <div class="hotel-name">Best Western Hotel Gunsan</div>
-			                              <div class="hotel-region">Gunsan</div>
-			                              <div class="hotel-dates">1월 30일 | 2월 1일</div>
-			                           </div>
-			                        </div>
-			                        <div class="content-button">
-			                           <a href="#" class="hotel-call">
-			                              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#07c" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-			                                 <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-			                              </svg>
-			                              숙소에 전화하기
-			                           </a>
-			                           <a href="#" class="booking-management">
-			                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#07c" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-			                                 <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
-			                                 <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-			                                 <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-			                              </svg>
-			                              예약 관리하기
-			                           </a>
-			                        </div>
-			                     </div>
-			                  </div>
-			               </div>
-			            </div>
-			         </div>
-			      </div>
-			      <div class="msg-footer-wrap_1" id="msg-footer-wrap">
-                       <div class="msg-footer-container">
-                          <form id="chat_form" class="msg-input-form" method="post">
-                             
-                             <div class="msg-text">
-                                <textarea id="chat_content" name="content" class="msg-text-input" name="text" rows="1"></textarea>
-                             </div>
-                             <input class="msg-send" value="전송" id="chat_send_button" type="button">
-                          </form>
-                       </div>
-                    </div>
-			   </div>
+			         	</div>
+	         			<!-- 채팅창 -->
+				         <div class="chatting" id="chatting">
+				            <div class="msg-app-header">
+				               <div class="msg-header">
+				                  <button class="msg-header-left" onclick="exitChatting()"><i class="fas fa-arrow-left"></i></button>
+				                  <div class="msg-header-title">
+				                     <div class="msg-header-title-heading"></div>
+				                     <div class="msg-header-title-caption"></div>
+				                  </div>
+				                  <button class="msg-header-right" onclick="entryHelp()">도움말</button>
+				               </div>
+				            </div>
+				            <div class="msg-app-content">
+				               <div class="msg-messages-list">
+				                  <div class="msg-messages-list-scrollview">
+				                     <!-- 채팅 내용 -->
+				                     <div class="msg-messages-container">
+				                        <!-- 날짜 -->
+				                        <div class="msg-separator">
+				                        </div>
+				                        <!-- 내용 -->
+				                        <div class="presentation-message">
+				                           <div class="msg-footprint">대개 24시간 내로 숙소에서 답변합니다. 답변이 오는 즉시 고객님께 알려드리겠습니다.
+				                              여기서 모든 대화 내용을 확인하실 수 있습니다.</div>
+				                        </div>
+				                     </div>
+				                     <!-- 채팅 내용 -->
+				                     <div class="msg-messages-container">
+				                   		<!-- 채팅 -->
+				                        <div id="chat_content">
+				                        
+				                        </div>
+			                  		</div>
+				               		</div>
+				            	</div>
+				            <!-- 도움말 -->
+				            <div class="msg-help" id="msgHelp">
+				               <div class="msg-help-background" onclick="exitHelp()"></div>
+				               <div class="msg-help-content">
+				                  <div class="help-menu">
+				                     <div class="help-header">
+				                        <div class="help-header-left"></div>
+				                        <div class="help-header-title">연락처</div>
+				                        <div class="help-header-right" onclick="exitHelp()"><i class="bi bi-x-lg help-x"></i></div>
+				                     </div>
+				                     <div class="help-content">
+				                        <div class="content-card">
+				                           <div class="card-hotel-image"><img src="images/hotel1.jpg" alt=""></div>
+				                           <div class="card-hotel-description">
+				                              <div class="hotel-name"></div>
+				                              <div class="hotel-dates"></div>
+				                           </div>
+				                        </div>
+				                        <div class="content-button">
+				                           <a href="#" class="hotel-call">
+				                              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#07c" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+				                                 <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+				                              </svg>
+				                              숙소에 전화하기
+				                           </a>
+				                           <a href="#" class="booking-management">
+				                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#07c" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+				                                 <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
+				                                 <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+				                                 <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+				                              </svg>
+				                              예약 관리하기
+				                           </a>
+				                        </div>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				      </div>
+				      <div class="msg-footer-wrap_1" id="msg-footer-wrap">
+	                       <div class="msg-footer-container">
+	                          <form id="chat_form" class="msg-input-form" method="post">
+	                             
+	                             <div class="msg-text">
+	                                <textarea id="chat_content" name="content" class="msg-text-input" name="text" rows="1"></textarea>
+	                             </div>
+	                             <input class="msg-send" value="전송" id="chat_send_button" type="button">
+	                          </form>
+	                       </div>
+	                  </div>
+			  	</div>
 			  </div>
 		</c:when>
 		<c:otherwise>
@@ -281,13 +291,39 @@
 	
 	<script>
     $(function(){
-    	$(".msg_li").on("click", reqList);
-    	$("#chat_send_button").on("click", insertChat);
-    })
-    
-    function reqList() {    
+    	var reservation_number = 0;
+    	var hotelname;
+    	var reservation_days;
+    	var start_date;
+    	var end_date;
+    	var serialnumber = 0;
     	
-    	var sendReply = {"userid": '${member.userid}', "serialnumber": 1118}
+    	$('.msg_li').click(function(){
+    		reservation_number = $(this).children('.input_for_reservation_number').val();
+    		serialnumber = $(this).children('.input_for_serialnumber').val();
+    		reqList(reservation_number, serialnumber);
+    		hotelname = $(this).children('.input_for_hotelname').val();
+    		start_date = $(this).children('.input_for_start_date').val();
+    		end_date = $(this).children('.input_for_end_date').val();
+    		reservation_days = start_date + " | " + end_date;
+    		
+    		
+    		$('.hotel-name').text(hotelname);
+    		$('.msg-header-title-heading').text(hotelname);
+    		$('.hotel-dates').text(reservation_days);
+    		$('.msg-header-title-caption').text(reservation_days);
+    		
+    	});
+    	$("#chat_send_button").click(function(){
+    		insertChat(reservation_number, serialnumber);
+    	});
+    });
+    
+    
+    
+    function reqList(reservation_number, serialnumber) {    
+    	
+    	var sendReply = {"userid": '${member.userid}', "reservation_number": reservation_number, "serialnumber": serialnumber}
     	
 	    $.ajax({
 	        url:'/web/chat.do'
@@ -355,10 +391,10 @@
 	   })
 	}
     
-    function insertChat(){
+    function insertChat(reservation_number, serialnumber){
     	
     	var content_val = $('.msg-text-input').val();
-    	var chatVO = {"userid": '${member.userid}', "serialnumber": 1118, "content": content_val, "partner": false }
+    	var chatVO = {"userid": '${member.userid}', "reservation_number": reservation_number, "content": content_val, "partner": false, "serialnumber": serialnumber}
     	var path = '${contextPath}';
     	
     	$.ajax({

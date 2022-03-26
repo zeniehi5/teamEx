@@ -4,11 +4,13 @@
 
 	<resultMap type="roomVO" id="RoomVOMap">
     	<id property="room_id" column="room_id"/>
+    	<result property="sequence" column="sequence"/>
     	<result property="serialnumber" column="serialnumber"/>
 		<result property="type" column="type"/>
 		<result property="price" column="price"/>
 		<result property="smoking" column="smoking"/>
 		<result property="available" column="available"/>
+		<result property="count_room" column="count"/>
 		<collection property="roomFacilitiesVO" resultMap="RoomFacilitiesVOMap" />
     </resultMap>
 
@@ -95,18 +97,21 @@
    		<result property="ocean_view" column="ocean_view"/>
    </resultMap>
 
-	<select id="selectRoomFacilities" resultMap="RoomVOMap" parameterType="Integer">
+	<select id="selectRoomFacilities" resultMap="RoomVOMap" parameterType="hotelAvailableVO">
 		<![CDATA[
-				select 	r.room_id, r.serialnumber, r.type, r.price, r.smoking, r.available,
+				select 	r.room_id, count(a.open_date), a.open_date, r.serialnumber, r.type, r.price, r.smoking, r.available,
 				access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
 				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
 				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
 				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
 				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
 				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
-				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view
+				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view			
 			
 				from room as r
+				
+				left join room_available as a
+				on r.room_id = a.room_id
 				
 				full join room_facilities_access as access
 				on r.room_id = access.room_id
@@ -129,7 +134,85 @@
 				full join room_facilities_view as view
 				on r.room_id = view.room_id	
 
-				where r.serialnumber = #{serialnumber}
+				where r.serialnumber = #{serialnumber} and open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				
+				group by r.room_id, a.open_date, access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
+				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
+				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
+				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
+				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view	
 		]]>
 	</select>
+	
+	<select id="selectRoomDetail" resultMap="RoomVOMap" parameterType="uReservationVO">
+		<![CDATA[
+				select 	r.room_id, count(a.open_date), a.open_date, r.serialnumber, r.type, r.price, r.smoking, r.available,
+				access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
+				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
+				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
+				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
+				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view			
+			
+				from room as r
+				
+				left join room_available as a
+				on r.room_id = a.room_id
+				
+				full join room_facilities_access as access
+				on r.room_id = access.room_id
+				
+				full join room_facilities_basic as basic
+				on r.room_id = basic.room_id
+				
+				full join room_facilities_bath as bath
+				on r.room_id = bath.room_id
+				
+				full join room_facilities_food as food
+				on r.room_id = food.room_id
+				
+				full join room_facilities_media as media
+				on r.room_id = media.room_id
+				
+				full join room_facilities_service as service
+				on r.room_id = service.room_id
+				
+				full join room_facilities_view as view
+				on r.room_id = view.room_id	
+
+				where r.serialnumber = #{serialnumber} and open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date < TO_DATE(#{end_date}, 'YYYYMMDD')
+				
+				group by r.room_id, a.open_date, access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
+				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
+				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
+				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
+				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view	
+		]]>
+	</select>
+	
+	<delete id="deleteRoomAvailable" parameterType="uReservationVO">
+		<![CDATA[delete from room_available
+
+				where sequence = 
+				
+				(select 
+				    sequence 
+				FROM (
+						SELECT 
+							*
+						FROM room_available where room_id = #{room_id} and open_date = TO_DATE(#{start_date}, 'YYYYMMDD')
+					) a
+				
+				limit 1) ]]>
+	</delete>
+	
+	<insert id="insertRoomAvailable" parameterType="uReservationVO">
+		insert into room_available(sequence, room_id, open_date, standard_price) values(nextval('seq_room_id'), #{room_id}, TO_DATE(#{start_date}, 'YYYYMMDD'), (select price from room where room_id = #{room_id}) )
+	</insert>
+	
 </mapper>

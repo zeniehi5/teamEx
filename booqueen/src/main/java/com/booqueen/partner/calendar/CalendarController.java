@@ -140,10 +140,6 @@ public class CalendarController {
 			
 /////////////////////////////////////////////////////////////////////////
 			
-			
-			
-			
-
 			System.out.println(dateList);
 					//배열에 담음
 			model.addAttribute("dateList", dateList);		//날짜 데이터 배열

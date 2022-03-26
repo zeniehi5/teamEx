@@ -9,6 +9,7 @@ public class ReservationDetailVO {
 	
 	private String lastname;
 	private String firstname;
+	private Integer room_id;
 	private Date checkin_date;
 	private Date checkout_date;
 	private String userid;
