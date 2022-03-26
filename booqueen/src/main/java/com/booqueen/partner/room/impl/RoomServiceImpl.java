@@ -16,6 +16,7 @@ import com.booqueen.partner.room.FacilitiesViewVO;
 import com.booqueen.partner.room.RoomAvailableVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
+import com.booqueen.partner.room.UpdateImageVO;
 
 @Service("roomService")
 public class RoomServiceImpl implements RoomService {
@@ -114,7 +115,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<HotelImageVO> selectImageBySerial(int serialnumber) {
+	public HotelImageVO selectImageBySerial(int serialnumber) {
 		return roomDAO.selectImageBySerial(serialnumber);
 	}
 
@@ -122,5 +123,25 @@ public class RoomServiceImpl implements RoomService {
 	public List<HotelImageVO> deleteImageBySerial(int serialnumber) {
 		return roomDAO.deleteImageBySerial(serialnumber);
 	}
+	@Override
+	public void insertRoomImage(UpdateImageVO vo) {
+		roomDAO.insertRoomImage(vo);	
+	}
+
+	@Override
+	public List<UpdateImageVO> selectRoomImageBySerial(int serialnumber) {
+		return roomDAO.selectRoomImageBySerial(serialnumber);
+	}
+
+	@Override
+	public List<UpdateImageVO> selectTypeBySerial(int serialnumber) {
+		return roomDAO.selectTypeBySerial(serialnumber);
+	}
+
+	@Override
+	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
+		return roomDAO.selectRoom_idBySerial(serialnumber);
+	}
+
 
 }

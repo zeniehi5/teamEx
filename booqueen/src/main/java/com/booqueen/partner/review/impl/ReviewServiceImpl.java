@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.review.ReviewAvgVO;
 import com.booqueen.partner.review.ReviewService;
 import com.booqueen.user.review.vo.ReviewVO;
@@ -21,8 +22,13 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewVO> getReviewList(int serialnumber) {
-		return reviewDAO.getReviewList(serialnumber);
+	public List<ReviewVO> getReviewList(int serialnumber, PagingVO paging) {
+		return reviewDAO.getReviewList(serialnumber, paging);
+	}
+
+	@Override
+	public int getReviewCount(int serialnumber) {
+		return reviewDAO.getReviewCount(serialnumber);
 	}
 
 }

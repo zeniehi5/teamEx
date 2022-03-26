@@ -17,4 +17,7 @@
 	<select id="getReviewList" resultType="reviewVO">
 		SELECT * FROM review where serialnumber = #{serialnumber}
 	</select>
+	<select id="getReviewCount" resultType="int">
+		SELECT COUNT(*) FROM review where serialnumber = #{serialnumber}
+	</select>
 </mapper>

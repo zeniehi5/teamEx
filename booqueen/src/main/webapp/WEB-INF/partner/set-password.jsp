@@ -53,7 +53,8 @@ function checkPassword(){
       <h4>비밀번호 확인</h4>
       <input type="password" name="repass" id="repass" class="text" onkeyup="checkPassword()"><br/>
       <span id="passcheck"></span>
-      <input type="submit" name="register" id="continue" value="회원가입"><br>
+
+      <input type="submit" name="register" id="continue" value="다음"><br>
       <br>
       <hr>
       <br>

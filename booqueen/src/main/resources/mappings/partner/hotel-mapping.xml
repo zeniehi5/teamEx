@@ -12,7 +12,7 @@
 	<insert id="setFacilitiesView" parameterType="facilitiesView">INSERT INTO room_facilities_view values(nextval('seq_room_view'), #{room_id}, #{balcony}, #{terras}, #{city_view}, #{garden_view}, #{lake_view}, #{attractions_view}, #{mountain_view}, #{pool_view}, #{river_view}, #{ocean_view})</insert>
 	<insert id="setFacilitiesAccess" parameterType="facilitiesAccess">INSERT INTO room_facilities_access values(nextval('seq_room_access'), #{room_id}, #{ground_floor}, #{wheelchair}, #{elevator}, #{stair_only}, #{bathroom_handle})</insert>
 	<insert id="setHotelImage" parameterType="images">INSERT INTO hotel_image(sequence, serialnumber, file_name, file_url) values(nextval('seq_image'), #{serialnumber}, #{file_name}, #{file_url})</insert>
-	<insert id="setHotelPolicy" parameterType="policy">INSERT INTO hotel_policy values(nextval('seq_policy'), #{serialnumber}, #{free_cancel_allowed}, #{refund_policy}, #{check_in_start}, #{check_out_start}, #{check_in_end}, #{check_out_end}, #{kid_allowed}, #{pet_allowed})</insert>
+	<insert id="setHotelPolicy" parameterType="policy">INSERT INTO hotel_policy values(nextval('seq_policy'), #{serialnumber}, #{free_cancel_allowed}, #{check_in_start}, #{check_out_start}, #{check_in_end}, #{check_out_end}, #{kid_allowed}, #{pet_allowed})</insert>
 	<insert id="setHotelPayment" parameterType="payment">INSERT INTO hotel_payment values(nextval('seq_payment'), #{serialnumber}, #{unionpay}, #{amex}, #{master}, #{jcb}, #{bc}, #{visa}, #{maestro}, #{kakaopay}, #{payco})</insert>
 	<select id="getHotelByMemberEmail" resultType="myHotel">SELECT * FROM temphotel where member_email = #{email}</select>
 	<update id="updateCancellationPolicy" parameterType="policy">UPDATE hotel_policy SET free_cancel_allowed = #{free_cancel_allowed}, refund_policy = #{refund_policy} where serialnumber = #{serialnumber}</update>
@@ -23,7 +23,10 @@
 	<update id="updateSmokingPolicy" parameterType="myService">UPDATE hotel_service SET smoking = #{smoking} where serialnumber = #{serialnumber}</update>
 	<select id="getHotelServiceByHotelSerial" resultType="myService">SELECT * FROM hotel_service where serialnumber = #{serialnumber}</select>
 	<select id="selectInquiryByHotelSerial" resultType="inquiry">
-		SELECT * FROM board where serialnumber = 1118
+		SELECT * FROM board where serialnumber = ${serialnumber} order by groupno, send_date desc
+	</select>
+	<select id="selectHotelImgByHotelSerial" resultType="images">
+		SELECT * FROM hotel_image where serialnumber = #{serialnumber}
 	</select>
 
 </mapper>

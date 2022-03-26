@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="messageDAO">
+	<select id="selectMessageListByHotelSerial" resultType="chatVO">
+		SELECT
+			DISTINCT ON(userid)
+			userid,
+			send_date,
+			content,
+			reservation_number
+		FROM
+			chat
+		WHERE
+			serialnumber = #{serialnumber}
+		ORDER BY userid,
+			send_date DESC,
+			send_time DESC
+	</select>
+</mapper>
