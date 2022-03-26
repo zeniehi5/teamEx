@@ -283,6 +283,7 @@ body{
     padding-left: 20px;
     margin-left: -20px;
     margin-bottom: -20px;
+    display:none;
 }
 .inner-4-check div hr{
     opacity: 40%;

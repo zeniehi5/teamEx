@@ -55,4 +55,16 @@
 	<delete id="deleteImageBySerial" parameterType="images">
 		DELETE FROM hotel_image where serialnumber = #{serialnumber}
 	</delete>
+	<insert id="insertRoomImage" parameterType="roomImage">
+		INSERT INTO room_image values(nextval('seq_room_image'), #{file_url}, #{file_name},  #{type}, #{serialnumber}, #{room_id})
+	</insert>
+	<select id="selectRoomImageBySerial" resultType="roomImage">
+		SELECT * FROM room_image where serialnumber = #{serialnumber}
+	</select>
+	<select id="selectTypeBySerial" resultType = "roomImage">
+		SELECT DISTINCT TYPE FROM room_image where serialnumber = #{serialnumber}
+	</select>
+	<select id="selectRoom_idBySerial" resultType="roomImage">
+		SELECT room_id FROM room_image where serialnumber = #{serialnumber} 
+	</select>
 </mapper>

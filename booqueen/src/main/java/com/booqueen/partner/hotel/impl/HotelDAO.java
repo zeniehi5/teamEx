@@ -72,10 +72,6 @@ public class HotelDAO {
 		sqlSessionTemplate.insert("HotelDAO.setFacilitiesAccess", vo);
 	}
 
-	public void setHotelImage(HotelImageVO vo) {
-		sqlSessionTemplate.insert("HotelDAO.setHotelImage", vo);
-	}
-
 	public void setHotelPolicy(HotelPolicyVO vo) {
 		sqlSessionTemplate.insert("HotelDAO.setHotelPolicy", vo);	
 	}
@@ -119,8 +115,11 @@ public class HotelDAO {
 	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber);
 	}
+	
+	public void setHotelImage(HotelImageVO vo) {
+		sqlSessionTemplate.insert("HotelDAO.setHotelImage", vo);
+  }
 
 	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectOne("HotelDAO.selectHotelImgByHotelSerial", serialnumber);
-	}
-}
+  }

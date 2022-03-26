@@ -16,6 +16,7 @@ import com.booqueen.partner.room.FacilitiesServiceVO;
 import com.booqueen.partner.room.FacilitiesViewVO;
 import com.booqueen.partner.room.RoomAvailableVO;
 import com.booqueen.partner.room.RoomVO;
+import com.booqueen.partner.room.UpdateImageVO;
 
 @Repository("roomDAO")
 public class RoomDAO {
@@ -102,12 +103,24 @@ public class RoomDAO {
 	public List<RoomAvailableVO> selectRoomAvailable(int room_id) {
 		return sqlSessionTemplate.selectList("RoomDAO.selectRoomAvailable", room_id);
 	}
-	public List<HotelImageVO> selectImageBySerial(int serialnumber){
-		return sqlSessionTemplate.selectList("RoomDAO.selectImageBySerial", serialnumber);
+	public HotelImageVO selectImageBySerial(int serialnumber){
+		return sqlSessionTemplate.selectOne("RoomDAO.selectImageBySerial", serialnumber);
 	}
 
 	public List<HotelImageVO> deleteImageBySerial(int serialnumber) {
 		return sqlSessionTemplate.selectList("RoomDAO.deleteImageBySerial", serialnumber);
 	}
 
+	public void insertRoomImage(UpdateImageVO vo) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomImage", vo);
+	}
+	public List<UpdateImageVO> selectRoomImageBySerial(int serialnumber){
+		return sqlSessionTemplate.selectList("RoomDAO.selectRoomImageBySerial", serialnumber);
+	}
+	public List<UpdateImageVO> selectTypeBySerial(int serialnumber){
+		return sqlSessionTemplate.selectList("RoomDAO.selectTypeBySerial", serialnumber);
+	}
+	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
+		return sqlSessionTemplate.selectOne("RoomDAO.selectRoom_idBySerial", serialnumber);
+	}
 }
