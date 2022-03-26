@@ -61,40 +61,23 @@
                                 </a>
                             </div>
                         </div>
-                        <form method="post" class="filter_wrapper">
+                        <form id="search" method="get" class="filter_wrapper" action="searchByCondition.pdo">
                             <div class="filter_row">
                                 <fieldset>
                                     <div class="group_inline">
                                         <div class="form_group">
                                             <label>날짜 기준</label>
                                             <div class="input_select">
-                                                <select class="form_control">
-                                                    <option value="#">예약</option>
-                                                    <option value="#">체크인</option>
-                                                    <option value="#">체크아웃</option>
-                                                    <option value="#">인보이스</option>
-                                                    <option value="#">숙박</option>
+                                                <select class="form_control" name="condition">
+                                                    <option value="reservation_date">예약</option>
+                                                    <option value="checkin_date">체크인</option>
                                                 </select>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="input_select_icon" style="user-select: auto;">
                                                     <path d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z" style="user-select: auto;"></path>
                                                 </svg>
                                             </div>
                                         </div>
-                                        <div class="datepicker_wrap">
-                                            <div class="date_form_group">
-                                                <label>부터</label>
-                                                <input type="datepicker" value="2022-01-22" class="date_form_control">
-                                            </div>
-                                        </div>
-                                        <div class="datepicker_wrap">
-                                            <div class="date_form_group">
-                                                <label>까지</label>
-                                                <input type="datepicker" value="2022-01-22" class="date_form_control">
-                                            </div>    
-                                        </div>
-                                        <button type="button" class="button button_primary button_align">
-                                            <span class="button_text"><span>검색</span></span>     
-                                        </button>
+                                        <input type="submit" class="button button_primary button_align" form="search" value="검색">
                                     </div>
                                 </fieldset>
                             </div>
@@ -102,17 +85,12 @@
                         <div class="reservation_table_wrapper spacer">
                             <table class="reservation_table">
                                 <thead class="table_head">
-                                    <tr clas="table_row">
+                                    <tr class="table_row">
                                         <th class="table_cell">
                                             <button class="column_sort"><span>투숙객 이름</span></button>
                                         </th>
                                         <th class="table_cell">
-                                            <button class="column_sort">
-                                                <span>체크인</span>
-                                                <svg width="12" height="12" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" class="column_sort_icon" style="user-select: auto;">
-                                                    <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" style="user-select: auto;"></path>
-                                                </svg>
-                                            </button>
+                                            <button class="column_sort"><span>체크인</span></button>
                                         </th>
                                         <th class="table_cell">
                                             <button class="column_sort">
@@ -152,6 +130,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table_body">
+                                <c:set var="total" value="0"/>
+                                <c:set var="commission" value="0"/>
                                 <c:forEach var="ReservationVO" items="${reservation}">
                                     <tr class="table_row">
                                         <th class="table_cell_head">                    
@@ -176,8 +156,10 @@
                                         		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>취소</span></td>
                                         	</c:otherwise>
                                         	</c:choose>
-                                        	<td class="table_cell" data-heading="요금"><span><fmt:formatNumber value="${ReservationVO.price}" type="currency"/></span></td>
-                                        	<td class="table_cell" data-heading="수수료"><span><fmt:formatNumber value="${ReservationVO.commission}" type="currency"/></span></td>
+                                        	<td class="table_cell" data-heading="요금"><span>&#8361;<fmt:formatNumber value="${ReservationVO.price}" type="number"/></span></td>
+                                        	<c:set var="total" value="${total + ReservationVO.price}"/>
+                                        	<c:set var="commission" value="${commission + ReservationVO.commission}"/>
+                                        	<td class="table_cell" data-heading="수수료"><span>&#8361;<fmt:formatNumber value="${ReservationVO.commission}" type="number"/></span></td>
                                         	<td class="table_cell" data-heading="예약 번호"><a href="${contextPath}/details.pdo?reservation_number=${ReservationVO.reservation_number}" class="table_link">${ReservationVO.reservation_number}</a></td>     
                                     </tr>
                                    </c:forEach>
@@ -188,11 +170,11 @@
                                             <div>
                                                 <span class="totals_spacing">
                                                     <span>수수료: </span>
-                                                    <span>₩27,000</span>
+                                                    <span>&#8361;<fmt:formatNumber type="number"><c:out value="${commission}"/></fmt:formatNumber></span>
                                                 </span>
                                                 <div class="font_strong">
                                                     <span>총 금액: </span>
-                                                    <span>₩180,000</span>
+                                                    <span>&#8361;<fmt:formatNumber type="number"><c:out value="${total}"/></fmt:formatNumber></span>
                                                     <div class="item_inline">
                                                         <svg data-v-10eccdf1="" width="20" height="20" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" class="help_icon" style="user-select: auto;">
                                                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" style="user-select: auto;"></path>
@@ -202,7 +184,7 @@
                                             </div>
                                         </td>    
                                     </tr>
-                                </tbody>
+                                </tfoot>
                             </table>
                         </div>
                         <div class="table_pagination">

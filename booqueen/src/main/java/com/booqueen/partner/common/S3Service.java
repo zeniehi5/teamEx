@@ -23,8 +23,8 @@ public class S3Service {
 	
 	private AmazonS3 s3Client;
 	
-	final private String accessKey = "AKIAR3ILZRPYBZFIUXOC";
-	final private String secretKey = "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";
+	final private String accessKey = "#";
+	final private String secretKey = "#";
 	private Regions clientRegion = Regions.AP_NORTHEAST_2;
 	private String bucket = "booqueen";
 	

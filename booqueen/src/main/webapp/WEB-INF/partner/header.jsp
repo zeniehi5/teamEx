@@ -54,7 +54,7 @@
                             <div class="menu_wrap">
                                 <div class="menu_item">
                                     <button class="menu_section">
-                                        <div class="menu_avatar" style="background-image: url(https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/1201/main.jpg);">
+                                        <div class="menu_avatar" style="background-image: url(${image});">
                                         </div>
                                         <div class="menu_text">${hotel.hotelname}</div>
                                     </button>
@@ -134,7 +134,7 @@
                                                             <path
                                                                 d="M11.25 7.5v9a.75.75 0 0 0 1.5 0v-9a.75.75 0 0 0-1.5 0zM7.5 12.75h9a.75.75 0 0 0 0-1.5h-9a.75.75 0 0 0 0 1.5zm15-.75c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z">
                                                             </path>
-                                                        </svg> <span>신규 숙소 추가</span></a></li>
+                                                        </svg> <span>새로운 객실 추가</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -177,25 +177,12 @@
                                                 </span>
                                                 <span class="navigation_title">
                                                     <span class="title_text">캘린더</span>
-                                                    <span class="dropdown_indicator">
-                                                        <svg viewBox="0 0 24 24" focusable="false" height="15"
-                                                            aria-hidden="true" width="15" fill="currentColor"
-                                                            role="presentation"
-                                                            class="bk-icon -streamline-arrow_nav_down"
-                                                            style="user-select: auto;">
-                                                            <path
-                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z"
-                                                                style="user-select: auto;"></path>
-                                                        </svg>
-                                                    </span>
                                                 </span>
                                             </a>
                                             <div class="submenu" id="submenu">
                                                 <ul class="submenu_list">
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="${contextPath}/calendar.pdo"><span>캘린더</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link"
-                                                            href="#"><span>요금제</span></a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -229,7 +216,6 @@
                                                 </span>
                                                 <span class="navigation_title">
                                                     <span class="title_text">숙소</span>
-                                                    <sapn class="title_label"> 8 </sapn>
                                                     <span class="dropdown_indicator">
                                                         <svg viewBox="0 0 24 24" focusable="false" height="15"
                                                             aria-hidden="true" width="15" fill="currentColor"
@@ -251,10 +237,8 @@
                                                             href="${contextPath}/set-policies.pdo"><span>정책</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="${contextPath}/get-service.pdo"><span>시설 및
                                                                 서비스</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>숙소
-                                                                레이아웃</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link" href="#"><span>객실
-                                                                편의시설</sapn></a></li>     
+                                                                관리</span></a></li> 
                                                 </ul>
                                             </div>
                                         </li>
@@ -343,7 +327,6 @@
                                                 </span>
                                                 <span class="navigation_title">
                                                     <span class="title_text">재무</span>
-                                                    <sapn class="title_label"> 1 </sapn>
                                                     <span class="dropdown_indicator">
                                                         <svg viewBox="0 0 24 24" focusable="false" height="15"
                                                             aria-hidden="true" width="15" fill="currentColor"
@@ -380,25 +363,12 @@
                                                 </span>
                                                 <span class="navigation_title">
                                                     <span class="title_text">분석</span>
-                                                    <span class="dropdown_indicator">
-                                                        <svg viewBox="0 0 24 24" focusable="false" height="15"
-                                                            aria-hidden="true" width="15" fill="currentColor"
-                                                            role="presentation"
-                                                            class="bk-icon -streamline-arrow_nav_down"
-                                                            style="user-select: auto;">
-                                                            <path
-                                                                d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z"
-                                                                style="user-select: auto;"></path>
-                                                        </svg>
-                                                    </span>
                                                 </span>
                                             </a>
                                             <div class="submenu" id="submenu">
                                                 <ul class="submenu_list">
                                                     <li class="submenu_item"><a class="submenu_link" href="${contextPath}/analysis.pdo"><span>분석
                                                                 게시판</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>예약
-                                                                현황</span></a></li>
                                                 </ul>
                                             </div>
                                         </li>

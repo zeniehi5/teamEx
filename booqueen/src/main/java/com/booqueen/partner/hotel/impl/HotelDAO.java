@@ -119,4 +119,8 @@ public class HotelDAO {
 	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber);
 	}
+
+	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectOne("HotelDAO.selectHotelImgByHotelSerial", serialnumber);
+	}
 }

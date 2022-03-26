@@ -58,5 +58,7 @@ public interface HotelService {
 	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber);
 
 	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber);
+
+	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber);
 	
 }

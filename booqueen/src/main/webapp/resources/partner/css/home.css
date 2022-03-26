@@ -285,7 +285,7 @@ li{
 .grid_container{
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: center;
     box-sizing: border-box;
     clear: both;
 }

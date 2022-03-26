@@ -12,4 +12,8 @@ public interface ReservationService {
 
 	List<ReservationVO> selectReservationListByHotelSerial(int serialnumber);
 
+	List<ReservationVO> selectReservationListOnCondition(SearchVO search, PagingVO paging);
+
+	ReservationVO selectReservationDetailByUserId(ReservationVO vo);
+
 }

@@ -119,8 +119,10 @@ li{
     margin: 0 auto 4px;
     border-radius: 50%;
     width: 20px;
+    height: 20px;
     box-sizing: border-box;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .menu_text{
     white-space: nowrap;

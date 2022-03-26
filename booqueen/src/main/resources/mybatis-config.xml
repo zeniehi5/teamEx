@@ -23,8 +23,8 @@
 		<typeAlias type="com.booqueen.user.member.vo.ReasonVO" alias="reasonVO"/>
 		
 		<!-- partner -->
-  	<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
-    <typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
+  		<typeAlias type="com.booqueen.partner.member.MemberVO" alias="myMember"/>
+    	<typeAlias type="com.booqueen.partner.hotel.HotelVO" alias="myHotel"/>
 		<typeAlias type="com.booqueen.partner.hotel.HotelServiceVO" alias="myService"/>
 		<typeAlias type="com.booqueen.partner.hotel.HotelImageVO" alias="images"/>
 		<typeAlias type="com.booqueen.partner.hotel.HotelPolicyVO" alias="policy"/>
@@ -38,10 +38,11 @@
 		<typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
 		<typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
 		<typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
-    <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
-    <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
-    <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="pReservation"/>
-    <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>    
+    	<typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
+    	<typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
+    	<typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="pReservation"/>
+    	<typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>
+    	<typeAlias type="com.booqueen.partner.reservation.SearchVO" alias="search"/>
     
 		<!-- admin -->
 		<typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
@@ -68,5 +69,6 @@
       	<mapper resource="mappings/admin/member-mapping.xml"/>
       	<mapper resource="mappings/admin/hotel-mapping.xml"/>
       	<mapper resource="mappings/admin/partner-mapping.xml"/>
+      	<mapper resource="mappings/partner/message-mapping.xml"/>
 	</mappers>
 </configuration>
