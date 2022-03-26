@@ -63,7 +63,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -193,7 +193,13 @@
 						</div>
                         </div>
                     </div>
-            <div id="layoutSidenav_content">   
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        BooQueen
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content"> 
                 <main>
                     <div class="container-fluid px-4">
         

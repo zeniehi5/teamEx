@@ -17,7 +17,7 @@ public class RegisterController {
 	@Autowired
 	private MemberService memberService;
 	
-	/* email 중복 검사 */
+	/* email 以묐났 寃��궗 */
 	@RequestMapping(value = "/emailCheck.pdo", method = RequestMethod.POST)
 	@ResponseBody
 	public String emailCheck(MemberVO vo) {
@@ -55,11 +55,13 @@ public class RegisterController {
 	@RequestMapping(value = "/set-password.pdo", method= RequestMethod.POST)
 	public String setPassword(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {
 		session.setAttribute("password", vo.getPassword());
+		System.out.println(vo.toString());
 		try {
 			memberService.addMember(vo);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "basic-info";
+		return "redirect:sendMail.pdo";
 	}
+	
 }

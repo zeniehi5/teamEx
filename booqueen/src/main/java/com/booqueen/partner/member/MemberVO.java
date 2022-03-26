@@ -16,5 +16,6 @@ public class MemberVO {
 	private String firstname;
 	private String telephone;
 	private int active;
-	
+	private String whyblock;
+
 }

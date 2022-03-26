@@ -41,7 +41,7 @@
                                                 </table>
                                                 <tfoot>
                                                     <tr>
-                                                        <div class="d-grid" style="padding-top: 5px"><a class="btn btn-danger btn-block" id="cancle" style="background-color: none; border:solid 1px #0d6efd;" onClick="window.location.href='reportedUser.html';">돌아가기</a></div>
+                                                        <div class="d-grid" style="padding-top: 5px"><a class="btn btn-danger btn-block" id="cancle" style="background-color: none; border:solid 1px #0d6efd;" onClick="window.location.href='reportedUser.mdo';">돌아가기</a></div>
                                                     </tr>
                                                 </tfoot>
                                             </div>    

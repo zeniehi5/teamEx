@@ -1241,3 +1241,6 @@ thead tr:nth-child(3) th{
 #blank.highlighted{
 	background-color: white;
 }
+.navigation_item a span svg{
+	color: #fff! important;
+}

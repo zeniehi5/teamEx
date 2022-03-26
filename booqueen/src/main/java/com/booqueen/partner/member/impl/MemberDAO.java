@@ -11,7 +11,10 @@ public class MemberDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-		
+	
+//	
+	private String nameSpace = "member.model.MemberMapper";
+//		
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}

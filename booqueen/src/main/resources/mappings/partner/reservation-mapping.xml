@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-	<select id="selectReservationListByHotelSerial" resultType="aReservation">
+	<select id="selectReservationListByHotelSerial" resultType="pReservation">
 		SELECT
 			r.lastname,
 			r.firstname,
@@ -17,9 +17,10 @@
 			reservation as r
 		JOIN
 			room as h
-		ON r.room_id = h.room_id;
+		ON r.room_id = h.room_id
+		ORDER BY reservation_date DESC;
 	</select>
-	<select id="selectReservationPagingByHotelSerial" resultType="aReservation">
+	<select id="selectReservationPagingByHotelSerial" resultType="pReservation">
 		SELECT
 			r.lastname,
 			r.firstname,
@@ -35,7 +36,9 @@
 			reservation as r
 		JOIN
 			room as h
-		ON r.room_id = h.room_id;
+		ON r.room_id = h.room_id
+		WHERE r.serialnumber = #{serialnumber}
+		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationDetailByRSVN" resultType="details">
 		SELECT
@@ -63,5 +66,31 @@
 	</select>
 	<select id="getListCount" resultType="int">
 		SELECT COUNT(*) FROM reservation
+	</select>
+	<select id="selectReservationListOnCondition" parameterType="search" resultType="pReservation">
+		SELECT
+			r.lastname,
+			r.firstname,
+			r.checkin_date,
+			r.checkout_date,
+			h.type,
+			r.reservation_date,
+			r.status,
+			r.price,
+			r.price * 0.15 as "commission",
+			r.reservation_number
+		FROM 
+			reservation as r
+		JOIN
+			room as h
+		ON r.room_id = h.room_id
+		ORDER BY #{condition} DESC;
+	</select>
+	<select id="selectReservationDetailByUserId" parameterType="pReservation" resultType="pReservation">
+		SELECT
+		 	*
+		FROM
+			reservation
+		where userid = #{userid}
 	</select>
 </mapper>

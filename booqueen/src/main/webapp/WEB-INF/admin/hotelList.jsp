@@ -20,7 +20,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -152,7 +152,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
@@ -161,7 +161,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                호텔 목록
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -177,6 +177,7 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="hotelList" items="${hotelList }" varStatus="status">
+                                    	<input type ="hidden" value="${hotelList.serialnumber }">
                                         <tr>
                                             <td>${hotelList.hotelname }</td>
                                             <td>${hotelList.city }</td>
@@ -189,7 +190,7 @@
 	                                            <c:if test="${hotelList.star+0 == '2'}">★★</c:if>
 	                                            <c:if test="${hotelList.star+0 == '1'}">★</c:if>
                                             </td>
-                                            <td><a class="btn btn-danger" href="hotelDetail.mdo">상세정보</a>
+                                            <td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a>
                                             </td>
                                         </tr>
 

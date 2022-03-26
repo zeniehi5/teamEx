@@ -16,4 +16,10 @@
     <update id="unblockPartner" parameterType="partnerMember">
        <![CDATA[UPDATE pmember SET active = 1, whyblock = null where email = #{email}]]>
     </update>
+    <select id="selectHotelByEmail" resultType="adminHotel">
+    	<![CDATA[SELECT serialnumber, member_email, hotelname, address1, address2, city, telephone, manager, star FROM temphotel where member_email = #{email}]]>
+    </select>
+    <select id="selectPartnerByEmail" resultType="partnerMember">
+    	<![CDATA[SELECT * FROM pmember WHERE email=#{email} ]]>
+    </select>
 </mapper>

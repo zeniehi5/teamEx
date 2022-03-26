@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -55,7 +56,7 @@
                             <div class="review-data">${avg.scoreAvg}</div>
                             <div class="review-data__text">
                                 <span class="review-data__description">좋음</span>
-                                <span class="review-data__count">${avg.count}개 이용후기</span>
+                                <span class="review-data__count">${fn:length(review)}개 이용후기</span>
                             </div>
                         </div>
                     </div>
@@ -107,11 +108,136 @@
                         </div>
                     </div>
                 </div>
-                <div class="review_list_score_container hp_subscore_explanation_contaienr"></div>
-            </div>
-                </c:otherwise>	
-            </c:choose>
         </div>
+        <div class="review_list_score_container hp_subscore_explanation_contaienr">
+                	<table class="review_table">
+                		<thead class="table_head">
+                		<tr class="table_row">
+                        	<th class="table_cell">
+                            	<button class="column_sort"><span>투숙객 이름</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>아이디</span></button>
+                            </th>
+                           	<th class="table_cell">
+                                <button class="column_sort"><span>제목</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>강점</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>약점</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>staff</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>service</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>cleanness</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>comfort</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>effectiveness</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>place</span></button>
+                            </th>
+                            <th class="table_cell">
+                            	<button class="column_sort"><span>총점</span></button>
+                            </th>
+                    	</tr>
+                    	</thead>
+                    	<tbody class="table_body">
+                		<c:forEach var="ReviewVO" items="${review}">
+                			<tr class="table_row">
+                				<th class="table_cell_head">
+                					<span>${ReviewVO.username}</span>
+                				</th>
+                				<td class="table_cell"><span>${ReviewVO.userid}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.title}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.strength}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.weakness}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.staff}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.service}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.cleanness}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.comfort}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.effectiveness}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.place}</span></td>
+                				<td class="table_cell"><span>${ReviewVO.score}</span></td>
+                			</tr>
+            			</c:forEach>
+            			</tbody>
+            			<tfoot class="table_foot">
+            			</tfoot>	
+            		</table>
+            	</div>
+            	<div class="table_pagination">
+            		<div class="pagination_nav">
+            			<ul class="pagination_list">
+                        	<!-- 이전 -->
+                        	<c:if test="${paging.currentPage eq 1}">
+                        	<li class="pagination_item pagination_prev pagination_disabled">
+                            	<a class="pagination_link">
+                            		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="pagination_icon" style="user-select: auto;">
+                            			<path d="M14.55 18a.74.74 0 0 1-.53-.22l-5-5A1.08 1.08 0 0 1 8.7 12a1.1 1.1 0 0 1 .3-.78l5-5a.75.75 0 0 1 1.06 0 .74.74 0 0 1 0 1.06L10.36 12l4.72 4.72a.74.74 0 0 1 0 1.06.73.73 0 0 1-.53.22zm-4.47-5.72zm0-.57z" style="user-select: auto;"></path>
+                            		</svg>
+                            		<span class="pagination_direction">이전</span>
+                            	</a>
+                           	</li>
+                            </c:if>
+                            <c:if test="${paging.currentPage ne 1}">
+                           	<c:url var="before" value="/review.pdo">
+                            	<c:param name="currentPage" value="${paging.currentPage -1}"/>
+                           	</c:url>
+                           	<li class="pagination_item pagination_prev pagination">
+                            	<a href="${before}" class="pagination_link">
+                            	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="pagination_icon" style="user-select: auto;">
+                            		<path d="M14.55 18a.74.74 0 0 1-.53-.22l-5-5A1.08 1.08 0 0 1 8.7 12a1.1 1.1 0 0 1 .3-.78l5-5a.75.75 0 0 1 1.06 0 .74.74 0 0 1 0 1.06L10.36 12l4.72 4.72a.74.74 0 0 1 0 1.06.73.73 0 0 1-.53.22zm-4.47-5.72zm0-.57z" style="user-select: auto;"></path>
+                             	</svg>
+                            		<span class="pagination_direction">이전</span>
+                            	</a>
+                            </li>
+                            </c:if>
+                            <!-- 현재 페이지 -->
+                            <c:forEach var="page" begin="${paging.startPage}" end="${paging.endPage}">
+                            <c:if test="${page eq paging.currentPage}">
+                            	<li class="pagination_current_page"><span>${page} 페이지</span></li>
+                            </c:if>
+                            </c:forEach>
+                            <!-- 다음 -->
+                            <c:if test="${paging.currentPage eq paging.maxPage}">
+                           	<li class="pagination_item pagination_next pagination_disabled">
+                             	<a class="pagination_link">
+                             		<span class="pagination_direction">다음</span>
+                             		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="pagination_icon" style="user-select: auto;">
+                             			<path d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z" style="user-select: auto;"></path>
+                             		</svg>    
+                            	</a>
+                            </li>
+                            </c:if>
+                            <c:if test="${paging.currentPage ne paging.maxPage}">
+                            <c:url var="after" value="review.pdo">
+                            	<c:param name="currentPage" value="${paging.currentPage + 1}"/>
+                            </c:url>
+                           	<li class="pagination_item pagination_next pagination">
+                              		<a href="${after}" class="pagination_link">
+                               		<span class="pagination_direction">다음</span>
+                                	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="pagination_icon" style="user-select: auto;">
+                                		<path d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z" style="user-select: auto;"></path>
+                                	</svg>    
+                            	</a>
+                            </li>
+                        	</c:if>
+                    	</ul>
+            		</div>
+            		<div class="pagination_control"></div>	
+            	</div>
+            </c:otherwise>	
+    	</c:choose>
     </main>
 	<jsp:include page="/WEB-INF/partner/footer.jsp"/>
 </body>

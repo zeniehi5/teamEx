@@ -43,7 +43,7 @@
                         <div class="tab-content current" id="tab-1">
                             <div class="middle-left">
                                 <div>
-                                    <h4>메시지</h5>
+                                    <h4>메시지</h4>
                                         <a href="#">
                                             <button type="button" class="input_icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -57,32 +57,23 @@
                                         <input type="text" id="left-text" placeholder="이름 또는 예약번호로 검색해보세요">
                                 </div>
                                 <div>
-                                    메시지 정렬 기준:<br><br>
-                                    <select>
-                                        <option>
-                                            전송된 메시지
-                                        </option>
-                                        <option selected="selected">
-                                            아직 답변하지 않은 메시지
-                                        </option>
-                                        <option>
-                                            모든 메시지
-                                        </option>
-                                    </select>
+                                <table class="message_list">
+                                <tr>
+                                	<th>예약자 ID</th>
+                                	<th>예약 번호
+                                	<th>문의일</th>
+                                </tr>
+                                <c:forEach var="ChatVO" items="${messageList}">
+                                <tr>
+                                	<td><a onclick="reqList('${ChatVO.userid}', '${ChatVO.reservation_number}'), reqDetail();">${ChatVO.userid}</a></td>
+                                	<td>${ChatVO.reservation_number}</td>
+                                	<td>${ChatVO.send_date}</td>
+                                </tr>	
+                                </c:forEach>
+                                </table>
                                 </div>
                             </div>
-                            <c:choose>
-                            <c:when test="${!empty messageList}">
                             <div class="middle-middle-1">
-                                <div class="middle-top">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-arrow-left-square" viewbox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-                                    </svg>
-                                    <span>(${name})</span>
-                                </div>
-
 								<!-- message -->
                                 <div class="message" id="message_wrapper">
                                     
@@ -93,46 +84,13 @@
                                         <textarea class="text" autocomplete="off" placeholder="메시지를 입력해주세요." id="message_textarea"></textarea>
                                     </div>
                                     <div class="send">
-                                        <input type="button" id="button" value="전송">
+                                        <input type="button" id="button" value="전송" onclick="insertChat()">
                                     </div>
                                 </div>
                             </div>
-                            </c:when>
-                            <c:when test="${empty messageList}">
-                            <div class="middle-middle-1">
-								<!-- message -->
-                                <div class="message" id="message_wrapper">
-                                    <p>주고 받은 메시지가 없습니다.</p>
-                                </div>
-                            </div>
-                            </c:when>
-                            </c:choose>
                             <div class="middle-right">
-                                <div class="right-top">
-                                    <div>
-                                        <p>예약 취소됨</p>
-                                    </div>
-                                    <div class="detail">
-                                        <div class="name">투숙객명:<br>
-                                            (${name})
-                                        </div>
-                                        <div class="number">예약번호:<br>2299035596
-                                        </div>
-                                        <div class="check-in">체크인:<br>2022년 7월 15일(금)</div>
-                                        <div class="check-out">체크아웃:<br>2022년 7월 16일(토)</div>
-                                        <div class="price">총 요금:<br>
-                                            \0
-                                        </div>
-                                        <div class="lang">사용 언어:
-                                            <br>한국어
-                                        </div>
-                                        <div class="member">총 투숙객 수:<br>2</div>
-                                        <div class="room">객실 0개:</div>
-                                        <div class="arrival-time">예상 도착 시간
-                                            <br>
-                                            15:00 ~ 16:00
-                                        </div>
-                                    </div>
+                                <div class="right-top" id="reservation_wrapper">
+                                	<div id="reservation_info"></div>
                                 </div>
                                 <div class="right-bottom">
                                     <span>Booqueen.com은 여기에 쓰인 모든 메시지를 받아볼 수 있으며 당사
@@ -175,18 +133,25 @@
             </main>
             <jsp:include page="/WEB-INF/partner/footer.jsp"/>
         </div>
+        <input type="hidden" value="${hotel.serialnumber}" id="serialnumber">
     </div>
     </div>
-
-	<script>
-    $(function(){
-    	$("#for_chat").on("click", reqList);
-    	$("#button").on("click", insertChat);
-    })
-    
-    function reqList() {    
+	<script>  
+	var userid_shared = '';
+	var RSVN = '';
+	
+	var formatDate = function(value) {
+		var d = new Date(value);
+		var text = d.toLocaleDateString();
+		return text;
+	}
+	
+    function reqList(userid, reservation_number) {    
     	
-    	var sendReply = {"userid": 'booqueen@naver.com', "serialnumber": ${hotel.serialnumber}}
+    	userid_shared = userid;
+    	RSVN = reservation_number;
+    	
+    	var sendReply = {"userid": userid, "serialnumber": ${hotel.serialnumber}}
     	
 	    $.ajax({
 	        url:'/web/chat.do'
@@ -257,7 +222,7 @@
     function insertChat(){
     	
     	var content_val = $('#message_textarea').val();
-    	var chatVO = {"userid": 'booqueen@naver.com', "serialnumber": ${hotel.serialnumber}, "content": content_val, "partner": true }
+    	var chatVO = {"userid": userid_shared, "serialnumber": ${hotel.serialnumber}, "content": content_val, "partner": true }
     	var path = '${contextPath}';
     	
     	$.ajax({
@@ -316,15 +281,64 @@
 	        		$('#message_wrapper').scrollTop($('#message_wrapper').height());
 	           
 	        		pre_date = item.send_date;
-	        	})
+	        	});
    	     	},
    	    	error : function() {
 				alert('error');			
 			}
-    	})
+    	});
     }
-  
+    
+    function reqDetail(){
+    	const serialnumber=$("#serialnumber").val()
+    	const content_val = $('#reservation_info').val();
+    	const chatVO = {
+    			"userid": userid_shared, 
+    			"serialnumber": serialnumber, 
+    			"reservation_number": RSVN
+    			}
+       
+    	var path = '${contextPath}';
+    	
+    	$.ajax({
+    		url: path + "/selectReservationDetail.pdo"
+	    	, method : 'POST'
+	    	, data : JSON.stringify(chatVO)
+	    	, dataType : 'json'
+	    	, contentType : 'application/json'
+	    	, success : function(resp){
+		    		var result = '';
+		        	result += "<div><p>예약 정보 확인</p></div>";
+		        	result += "<div class='detail'>";
+		        	result += "<div class='name'>투숙객명 : <br>";
+		        	result += resp.lastname;
+		        	result += resp.firstname;
+		        	result += "</div><div class='number'>예약번호 : <br>";
+		        	result += resp.reservation_number;
+		        	result += "</div><div class='check-in'>체크인 : <br>";
+		        	result += formatDate(resp.checkin_date);
+		        	result += "</div><div class='check-out'>체크아웃 : <br>";
+		        	result += formatDate(resp.checkout_date);
+		        	result += "</div><div class='price'>총 요금 : <br>";
+		        	result += resp.price;
+		        	result += "</div><div class='lang'>사용 언어 : <br>";
+		        	result += "한국어";	
+		        	result += "</div><div class='member'>특별 요청 사항 : <br>";
+		        	result += resp.special_request;
+		        	result += "</div><div class='room'>객실 : ";
+		        	result += resp.type;
+		        	result += "</div><div class='arrival-time'>예상 도착 시간 : <br>";
+		        	result += resp.time_arrival;
+		        	result += "</div></div>";
+		        	$('#reservation_info').html(result);
+    	},
+    	error:function(e){
+    		console.log("통신실패 : " + e)
+    	}
+    }) //ajax close
+        
+  }
+ 
     </script>
-
 </body>
 </html>

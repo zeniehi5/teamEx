@@ -62,7 +62,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Start Bootstrap</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -194,13 +194,15 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        BooQueen
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">   
-                <main>
-                    <div class="container-fluid px-4">
+            <div id="layoutSidenav_content">
+            	<c:choose>
+            	<c:when test="${empty hotelDatail && hotelDetail == null}">
+            	<main>
+            		<div class="container-fluid px-4">
         
                         <!-- 여기만 수정해서 사용하세요!! -->
                         <h1 class="mt-4">호텔 상세 정보</h1>        
@@ -217,32 +219,28 @@
                                         <table class="type02">
                                             <tr style="margin: 100px;">
                                                 <th>이미지</th>
-                                                <td><img name="img" style="width: 30%; height: 30%" src="" /></td>
+                                                <td><img name="img" style="width: 30%; height: 30%" src="${contextPath}/resources/admin/images/default-hotel-img.png" /></td>
                                             </tr>
                                             <tr>
                                                 <th>호텔명</th>
-                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="그랜드 워커힐 서울"></td>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="준비중입니다"></td>
                                             </tr>
                                             <tr>
                                                 <th>대표자</th>
-                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="장진아"></td>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="준비중입니다"></td>
                                             </tr> 
                                             <tr>    
                                                 <th>대표자 이메일</th>
-                                                <td><input type="text" name="partner_email" readonly value="abc@def.com"></td>
+                                                <td><input type="text" name="partner_email" readonly value="준비중입니다"></td>
                                             </tr> 
                                             <tr>
                                                 <th>주소</th>
-                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="서울특별시 광진구 워커힐로 177"></td>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="준비중입니다"></td>
                                             </tr>                                      
                                             <tr>
                                                 <th>호텔번호</th>
-                                                <td><input type="text" name="partner_Phone"  readonly value="02-111-111"></td>
-                                            </tr>
-                                            <tr>    
-                                                <th scope="row">생년월일</th>
-                                                <td><input type="text" name="partner_email" readonly value="abc@def.com"></td>
-                                            </tr>                                             
+                                                <td><input type="text" name="partner_Phone"  readonly value="준비중입니다"></td>
+                                            </tr>                                            
                                         </table>
                                         <br>
                                                                     
@@ -310,6 +308,118 @@
                         </div>
                     </div>
                 </main>
+            	</main>
+            	</c:when>
+           		<c:otherwise>  
+                <main>
+                    <div class="container-fluid px-4">
+        
+                        <!-- 여기만 수정해서 사용하세요!! -->
+                        <h1 class="mt-4">호텔 상세 정보</h1>        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="col three">
+                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
+                                        호텔 정보
+                                    </div>							
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="" name="goodsForm" method="POST" enctype="multipart/form-data">
+                                        <table class="type02">
+                                            <tr style="margin: 100px;">
+                                                <th>이미지</th>
+                                                <td><img name="img" style="width: 30%; height: 30%" src="${hotelDetail.file_url }" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th>호텔명</th>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.hotelname }"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>대표자</th>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.manager }"></td>
+                                            </tr> 
+                                            <tr>    
+                                                <th>대표자 이메일</th>
+                                                <td><input type="text" name="partner_email" readonly value="${hotelDetail.member_email }"></td>
+                                            </tr> 
+                                            <tr>
+                                                <th>주소</th>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.city },${hotelDetail.address1 }${hotelDetail.address2 }"></td>
+                                            </tr>                                      
+                                            <tr>
+                                                <th>호텔번호</th>
+                                                <td><input type="text" name="partner_Phone"  readonly value="${hotelDetail.telephone }"></td>
+                                            </tr>                                            
+                                        </table>
+                                        <br>
+                                                                    
+                                </form>
+                                
+                            </div>
+                        </div>
+                        <!-- 여기만 수정해서 사용하세요!! -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="col three">
+                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
+                                        객실 정보
+                                    </div>							
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="" name="goodsForm" method="POST" enctype="multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th class="w-25" scope="col">객실 유형</th>
+                                                    <th class="w-25" scope="col">기본 판매가</th>
+                                                    <th class="w-25" scope="col">선택 사항</th>
+                                                    <th class="w-25" scope="col">비고</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span><a href="roomDetail.mdo"><strong>디럭스룸</strong></a></span>
+                                                    </td>
+                                                    <td><strong>₩147,396</strong></td>
+                                                    <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
+                                                    <td>This here is some placeholder text, intended to take up quite a bit of vertical space, to
+                                                        demonstrate how the vertical alignment works in the preceding cells.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span><a href="roomDetail.mdo"><strong>더블룸</strong></a></span>
+                                                    </td>
+                                                    <td><strong>₩167,396</strong></td>
+                                                    <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
+                                                    <td>This here is some placeholder text, intended to take up quite a bit of vertical space, to
+                                                        demonstrate how the vertical alignment works in the preceding cells.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span><a href="roomDetail.mdo"><strong>스위트룸</strong></a></span>
+                                                    </td>
+                                                    <td><strong>₩210,396</strong></td>
+                                                    <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
+                                                    <td>This here is some placeholder text, intended to take up quite a bit of vertical space, to
+                                                        demonstrate how the vertical alignment works in the preceding cells.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>    
+                                        <br>
+                                                                    
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                </c:otherwise>
+                </c:choose>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

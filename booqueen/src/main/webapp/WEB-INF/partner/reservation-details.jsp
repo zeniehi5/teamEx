@@ -81,7 +81,7 @@
                                                         </p>
                                                         <p
                                                             class="reservation_content_info reservation_content_info_emphasized">
-                                                            <span><fmt:formatNumber value="${details.price}" type="currency"/></span>
+                                                            <span>&#8361;<fmt:formatNumber value="${details.price}" type="number"/></span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -155,7 +155,7 @@
                                                                 <p class="reservation_content_label">
                                                                     <span>수수료 부과 대상 금액:</span>
                                                                 </p>
-                                                                <p class="reservation_content_info"><fmt:formatNumber value="${details.price}" type="currency"/></p>
+                                                                <p class="reservation_content_info">&#8361;<fmt:formatNumber value="${details.price}" type="number"/></p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">
                                                                 <p class="reservation_content_label">
@@ -167,7 +167,7 @@
                                                                 <p class="reservation_content_label">
                                                                     <span>수수료:</span>
                                                                 </p>
-                                                                <p class="reservation_content_info"><fmt:formatNumber value="${details.commission}" type="currency"/></p>
+                                                                <p class="reservation_content_info">&#8361;<fmt:formatNumber value="${details.commission}" type="number"/></p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_full_medium">
                                                                 <div>
@@ -212,7 +212,7 @@
                                                                 <div class="room_title_name">${details.type}</div>
                                                                 <div class="price_display test_right room_price">
                                                                     <div class="price_display_value">
-                                                                        <span>₩180,000</span>
+                                                                        <span>&#8361;<fmt:formatNumber value="${details.price}" type="number"/></span>
                                                                     </div>
                                                                 </div>
                                                             </div>

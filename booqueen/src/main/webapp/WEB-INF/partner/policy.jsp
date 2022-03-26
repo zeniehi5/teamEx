@@ -85,24 +85,18 @@ $(document).ready(function(){
             	<h2>취소</h2>
             	<div class="cancel-1">체크인 며칠전까지 무료 취소 가능으로 설정하시겠습니까?<br>
             		<select name="free_cancel_allowed">
-                  		<option value="18h">도착일(18:00)</option>
                   		<option value="1d">1일</option>
                   		<option value="2d">2일</option>
                   		<option value="3d">3일</option>
                   		<option value="7d">7일</option>
-                  		<option value="14d">14일</option>
                		</select>
             	</div>
             <div class="cancel-2">
-               그렇지 않으면 투숙객이<br> <select name="refund_policy">
-                  <option value="1">숙박료 전액을 지불합니다.</option>
-                  <option value="0">첫 1박 요금을 지불합니다.</option>
-               </select>
+               그렇지 않으면 투숙객이<br>
             </div>
             <div class="alarm">
                <div class="alarm-1">
-                  <img src="/images/alarm.png"> 예약 취소의 경우, 체크인 당일 18:00까지 취소되지
-                  않을 시 전체 숙박료를 100% 부과합니다.<br>
+                  <img src="/images/alarm.png"> 전체 숙박료의 10%를 부과합니다.<br>
                   <p>주의: 정책은 차후 수정이 가능합니다. 설정을 시작해보세요.</p>
                </div>
             </div>

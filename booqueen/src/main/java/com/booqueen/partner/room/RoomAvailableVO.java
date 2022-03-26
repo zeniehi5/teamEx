@@ -18,4 +18,9 @@ public class RoomAvailableVO {
 	private int non_refundable_price;
 	private int available;
 
+	///
+	private String type;
+	private String day;
+	private Integer month;
+	private Integer year;
 }

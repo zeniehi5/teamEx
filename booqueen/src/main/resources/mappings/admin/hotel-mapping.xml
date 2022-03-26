@@ -10,6 +10,7 @@
          r.firstname,
          r.checkin_date,
          r.checkout_date,
+         r.cancel_date,
          r.userid,
          r.price,
          h.type,
@@ -18,11 +19,35 @@
          r.reservation_date,
          r.special_request,
          r.time_arrival,
-         r.price * 0.15 as "commission"
+         r.price * 0.15 as "commission",
+         r.hotelname
       FROM
          reservation as r
       JOIN
          room as h
-      ON r.room_id = h.room_id]]>
+      ON r.room_id = h.room_id
+      
+      order by reservation_number desc
+      ]]>
+	</select>
+	<select id="selectHotelDetail" resultType="hotelDetail">
+		<![CDATA[SELECT
+		t.serialnumber,
+		t.hotelname,
+		t.member_email,
+		t.manager,
+		t.city,
+		t.address1,
+		t.address2,
+		t.telephone,
+		i.file_url		
+	FROM
+		temphotel as t
+	JOIN
+		hotel_image as i
+		ON t.serialnumber=i.serialnumber
+	WHERE
+		t.serialnumber = #{serialnumber}				
+		]]>
 	</select>
 </mapper>

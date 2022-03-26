@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.reservation.ReservationDetailVO;
 import com.booqueen.partner.reservation.ReservationVO;
+import com.booqueen.partner.reservation.SearchVO;
 
 @Repository("reservationDAO")
 public class ReservationDAO {
@@ -37,6 +38,16 @@ public class ReservationDAO {
 
 	public int getListCount() {
 		return sqlSessionTemplate.selectOne("reservationDAO.getListCount");
+	}
+
+	public List<ReservationVO> selectReservationListOnCondition(SearchVO search, PagingVO paging) {
+		int offset = (paging.getCurrentPage() -1) * paging.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, paging.getBoardLimit());
+		return sqlSessionTemplate.selectList("reservationDAO.selectReservationListOnCondition", search, rowBounds);
+	}
+
+	public ReservationVO selectReservationDetailByUserId(ReservationVO vo) {
+		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationDetailByUserId", vo);
 	}
 	
 }
