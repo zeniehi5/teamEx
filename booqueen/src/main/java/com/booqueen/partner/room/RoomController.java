@@ -2,7 +2,6 @@ package com.booqueen.partner.room;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booqueen.partner.common.S3Service;
@@ -37,21 +35,23 @@ public class RoomController {
 
 
 	@RequestMapping(value = "/get-service.pdo", method = RequestMethod.GET)
-	public String getFacilitiesPage(@ModelAttribute("hotel") HotelVO hotel,
-			@ModelAttribute("service") HotelServiceVO service, @ModelAttribute("basic") FacilitiesBasicVO basic,
-			@ModelAttribute("bath") FacilitiesBathVO bath, @ModelAttribute("media") FacilitiesMediaVO media,
-			@ModelAttribute("view") FacilitiesViewVO view, @ModelAttribute("access") FacilitiesAccessVO access,
-			@ModelAttribute("room_service") FacilitiesServiceVO room_service, Model model, HttpSession session) {
+	public String getFacilitiesPage(@RequestParam("room_id")int room_id,
+									@ModelAttribute("hotel") HotelVO hotel,
+									@ModelAttribute("service") HotelServiceVO service, @ModelAttribute("basic") FacilitiesBasicVO basic,
+									@ModelAttribute("bath") FacilitiesBathVO bath, @ModelAttribute("media") FacilitiesMediaVO media,
+									@ModelAttribute("view") FacilitiesViewVO view, @ModelAttribute("access") FacilitiesAccessVO access,
+									@ModelAttribute("room_service") FacilitiesServiceVO room_service, Model model, HttpSession session) {
+		
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if (hotel != null) {
 				service = hotelService.getHotelServiceByHotelSerial(hotel.getSerialnumber());
-				basic = roomService.getBasicInfoByHotelSerial(hotel.getSerialnumber());
-				bath = roomService.getBathInfoByHotelSerial(hotel.getSerialnumber());
-				media = roomService.getMediaInfoByHotelSerial(hotel.getSerialnumber());
-				view = roomService.getViewInfoByHotelSerial(hotel.getSerialnumber());
-				access = roomService.getAccessInfoByHotelSerial(hotel.getSerialnumber());
-				room_service = roomService.getServiceInfoByHotelSerial(hotel.getSerialnumber());
+				basic = roomService.getBasicInfoByRoomId(room_id);
+				bath = roomService.getBathInfoByRoomId(room_id);
+				media = roomService.getMediaInfoByRoomId(room_id);
+				view = roomService.getViewInfoByRoomId(room_id);
+				access = roomService.getAccessInfoByRoomId(room_id);
+				room_service = roomService.getServiceInfoByRoomId(room_id);
 				model.addAttribute("service", service);
 				model.addAttribute("basic", basic);
 				model.addAttribute("bath", bath);
@@ -107,7 +107,7 @@ public class RoomController {
 		
 		hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
 		int length = uploadFile.length;
-		System.out.println("¾÷·ÎµåÆÄÀÏ : " + length);
+		System.out.println("ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ : " + length);
 		for (MultipartFile multipartFile : uploadFile) {
 			
 			
@@ -167,21 +167,21 @@ public class RoomController {
 		}
 		return "index";
 	}
-
-	@RequestMapping(value = "/roomlist.pdo", method = RequestMethod.GET)
-	public String roomList(Model model, HotelVO hotel, HttpSession session) {
-		RoomVO room = null;
-		try {
-			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
-			if (hotel != null) {
-				room = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		model.addAttribute("room", room);
-		return "price";
-	}
+// ì–¸ë‹ˆì–¸ë‹ˆì–¸ë‹ˆ
+//	@RequestMapping(value = "/roomlist.pdo", method = RequestMethod.GET)
+//	public String roomList(Model model, HotelVO hotel, HttpSession session) {
+//		RoomVO room = null;
+//		try {
+//			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+//			if (hotel != null) {
+//				room = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		model.addAttribute("room", room);
+//		return "price";
+//	}
 
 	@RequestMapping(value = "/remove-picture.pdo", method = RequestMethod.POST)
 	public String removePicture(HotelVO hotel, Model model, HttpSession session, MultipartFile deleteFile) {
@@ -202,10 +202,10 @@ public class RoomController {
 //	@RequestMapping(value = "/remove-picture.pdo", method = RequestMethod.POST)
 //	public String removePicture(HotelVO hotel, Model model, @RequestParam("serialnumber") int serialnumber,
 //			@RequestParam("file_name") String file_name) {
-//		System.out.println("È£ÅÚ¸í: " + file_name);
+//		System.out.println("È£ï¿½Ú¸ï¿½: " + file_name);
 //
 //		String key = "hotel/" + serialnumber + "/" + file_name;
-//		System.out.println("s3°æ·Î : " + key);
+//		System.out.println("s3ï¿½ï¿½ï¿½ : " + key);
 //		try {
 ////			s3Service.delete(file_name);
 ////			System.out.println(file_name);
@@ -215,5 +215,16 @@ public class RoomController {
 //		}
 //		return "login";
 //	}
-
+	
+	@RequestMapping(value = "/roomlist.pdo", method = RequestMethod.GET)
+	public String selectRoomList(HotelVO hotel, HttpSession session, Model model) {
+		hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		List<RoomVO> roomList = null;
+		if(hotel != null) {
+			roomList = roomService.selectRoomListByHotelSerial(hotel.getSerialnumber());
+		}
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("roomList", roomList);
+		return "manage";
+	}
 }

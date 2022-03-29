@@ -12,6 +12,7 @@ import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.message.InquiryVO;
+import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -137,8 +138,8 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
-		return hotelDAO.selectInquiryByHotelSerial(serialnumber);
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber, PagingVO paging) {
+		return hotelDAO.selectInquiryByHotelSerial(serialnumber, paging);
 	}
 
 	@Override

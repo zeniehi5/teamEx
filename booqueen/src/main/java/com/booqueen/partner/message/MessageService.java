@@ -8,4 +8,10 @@ public interface MessageService {
 
 	List<ChatVO> selectMessageListByHotelSerial(int serialnumber);
 
+	int insertInquiryAnswer(InquiryVO inquiry);
+
+	int updateInquiryQuestion(InquiryVO inquiry);
+
+	int selectMessageCount(int serialnumber);
+
 }

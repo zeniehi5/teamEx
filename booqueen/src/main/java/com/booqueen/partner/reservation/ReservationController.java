@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Controller
 public class ReservationController {
@@ -34,15 +36,11 @@ public class ReservationController {
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			int listCount = reservationService.getListCount();	//전체 게시물 수
-			System.out.println("총 게시글 수 : " + listCount);
 			PagingVO paging = Pagination.getPagingVO(currentPage, listCount);
-			System.out.println(paging.toString());
 			List<ReservationVO> reservation = reservationService.selectReservationPagingByHotelSerial(hotel.getSerialnumber(), paging);
 			model.addAttribute("paging", paging);
 			model.addAttribute("reservation", reservation);
 			model.addAttribute("hotel", hotel);
-			System.out.println(reservation.toString());
-			System.out.println(model.toString());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}		
@@ -99,5 +97,52 @@ public class ReservationController {
 		ReservationVO reservation = reservationService.selectReservationDetailByUserId(vo);
 		//예약 정보 불러오기(예약번호 컬럼 추가 필요함)
 		return reservation;
+	}
+	
+	//체크인 처리
+	@RequestMapping(value = "/updateCheckInStatus.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateCheckInStatus(@RequestBody ReservationVO reservation) {
+		int updateNumber = reservationService.updateCheckInStatus(reservation);
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		String result = "";
+		if(updateNumber == 0) {
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);
+		} else {
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/updateCheckOutStatus.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateCheckOutStatus(@RequestBody ReservationVO reservation) {
+		int updateNumber = reservationService.updateCheckoutStatus(reservation);
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		String result = "";
+		if(updateNumber == 0) {
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);
+		} else {
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/selectReservationByRSVN.pdo", method = RequestMethod.GET)
+	@ResponseBody
+	public ReservationVO selectReservationByRSVN(@RequestParam("searchKeyword")int searchKeyword) {
+		ReservationVO searchResult = reservationService.selectReservationByRSVN(searchKeyword);
+		return searchResult;
 	}
 }

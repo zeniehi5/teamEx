@@ -49,5 +49,21 @@ public class ReservationDAO {
 	public ReservationVO selectReservationDetailByUserId(ReservationVO vo) {
 		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationDetailByUserId", vo);
 	}
+
+	public int updateReservationStatus(ReservationVO reservation) {
+		return sqlSessionTemplate.update("reservationDAO.updateReservationStatus", reservation);
+	}
+
+	public int updateReservationStatusToComplete(ReservationVO reservation) {
+		return sqlSessionTemplate.update("reservationDAO.updateReservationStatusToComplete", reservation);
+	}
+
+	public List<ReservationVO> selectCheckInListByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("reservationDAO.selectCheckInListByHotelSerial", serialnumber);
+	}
+
+	public ReservationVO selectReservationByRSVN(int searchKeyword) {
+		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationByRSVN", searchKeyword);
+	}
 	
 }

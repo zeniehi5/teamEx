@@ -20,5 +20,6 @@ public class ReservationDetailVO {
 	private Double commission;
 	private String type;
 	private Date reservation_date;
+	private int use_status;
 
 }

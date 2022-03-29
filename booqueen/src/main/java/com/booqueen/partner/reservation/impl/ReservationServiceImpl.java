@@ -47,4 +47,24 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.selectReservationDetailByUserId(vo);
 	}
 
+	@Override
+	public int updateCheckInStatus(ReservationVO reservation) {
+		return reservationDAO.updateReservationStatus(reservation);
+	}
+
+	@Override
+	public int updateCheckoutStatus(ReservationVO reservation) {
+		return reservationDAO.updateReservationStatusToComplete(reservation);
+	}
+
+	@Override
+	public List<ReservationVO> selectCheckInListByHotelSerial(int serialnumber) {
+		return reservationDAO.selectCheckInListByHotelSerial(serialnumber);
+	}
+
+	@Override
+	public ReservationVO selectReservationByRSVN(int searchKeyword) {
+		return reservationDAO.selectReservationByRSVN(searchKeyword);
+	}
+
 }

@@ -15,7 +15,7 @@
 </head>
 <body
     class="m-property_details m-facilities ua-chrome-97 ua-chrom is_desktop is_cjk is_new_hnav fix-badge-color env-self-manage facilities-buification-1 contents-ready">
-<form action="${contextPath}/update-service.pdo" method="post">
+<form action="${contextPath}/update-service.pdo?room_id=${basic.room_id}" method="post">
     <div class="js-dont-warn-about-unsaved-changes">
     	<jsp:include page="/WEB-INF/partner/header.jsp"/>
     </div>
@@ -37,7 +37,9 @@
                 <div class="row">
                     <div class="col-sm-12 main-content">
                             <div id="error_header"></div>
-                            <div id="hidden_inputs"></div>
+                            <div id="hidden_inputs">
+                            	<input type="hidden" name="roomId" value="${basic.room_id}">
+                            </div>
                             <div class="facilities_section">
                                 <fieldset class="facility-section--incomplete">
                                     <legend>인기 시설/서비스</legend>

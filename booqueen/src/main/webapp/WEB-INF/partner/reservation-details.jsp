@@ -8,7 +8,75 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/reservation-details.css" >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <title>${hotel.hotelname} · 예약 상세 정보</title>
+<script type="text/javascript">
+	
+	var path = '${contextPath}'
+
+	function checkIn() {
+		var checkin = confirm("체크인 처리하시겠습니까?")
+		if(checkin) {			
+			const reservationNumber = $("#reservationNumber").text()
+			const reservationVO = {
+					"reservation_number" : reservationNumber
+			}
+			
+			$.ajax({
+				method:"POST",
+				url:"updateCheckInStatus.pdo",
+				contentType:"application/json",
+				dataType:"json",
+				data:JSON.stringify(reservationVO),
+				success:function(result){
+					if(result.msg == "SUCCESS"){
+						alert("체크인 처리가 완료되었습니다.")
+						location.reload()
+					} else {
+						alert("다시 시도해 주세요.")
+					}
+				},
+				error:function(){
+					console.log("통신 실패")
+				}
+			})
+			
+		} else {
+			alert("체크인 처리를 취소합니다.")
+		}
+	}
+	
+	function checkOut() {
+		var checkout = confirm("이용 완료 처리하시겠습니까?")
+		if(checkout) {
+			const reservationNumber = $("#reservationNumber").text()
+			const reservationVO = {
+					"reservation_number" : reservationNumber
+			}
+			
+			$.ajax({
+				method:"POST",
+				url:"updateCheckOutStatus.pdo",
+				contentType:"application/json",
+				dataType:"json",
+				data:JSON.stringify(reservationVO),
+				success:function(result){
+					if(result.msg == "SUCCESS"){
+						alert("이용완료 처리가 완료되었습니다.")
+						location.href= path + '/reservation.pdo'
+					} else {
+						alert("다시 시도해 주세요.")
+					}
+				},
+				error:function(){
+					console.log("통신 실패")
+				}
+			})
+		} else {
+			alert("이용 완료 처리를 취소합니다.")
+		}
+	}
+</script>
 </head>
 <body>
 <body>
@@ -149,7 +217,7 @@
                                                                 <p class="reservation_content_label">
                                                                     <span>예약 번호</span>
                                                                 </p>
-                                                                <p class="reservation_content_info">${details.reservation_number}</p>
+                                                                <p class="reservation_content_info" id="reservationNumber">${details.reservation_number}</p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">
                                                                 <p class="reservation_content_label">
@@ -514,20 +582,42 @@
                                         </h3>
                                     </div>
                                     <div class="group">
+                                    	<c:if test="${1 ne details.use_status}">
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide">
+                                            <button type="button" class="button button_secondary button_wide" onclick="checkIn();">
                                                 <span class="button_text">
-                                                    <span>숙박일정 변경 제안하기</span>
+                                                    <span>체크인</span>
                                                 </span>
                                             </button>
                                         </div>
+                                        </c:if>
+                                        <c:if test="${1 eq details.use_status}">
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide">
+                                            <button type="button" class="button button_secondary button_wide" disabled="disabled">
                                                 <span class="button_text">
-                                                    <span>노쇼 표시</span>
+                                                    <span>체크인중</span>
                                                 </span>
                                             </button>
                                         </div>
+                                        </c:if>
+                                        <c:if test="${0 eq details.use_status}">
+                                        <div class="group">
+                                            <button type="button" class="button button_secondary button_wide" disabled="disabled">
+                                                <span class="button_text">
+                                                    <span>이용 완료</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        </c:if>
+                                        <c:if test="${1 eq details.use_status}">
+                                        <div class="group">
+                                            <button type="button" class="button button_secondary button_wide" onclick="checkOut();">
+                                                <span class="button_text">
+                                                    <span>이용 완료</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        </c:if>
                                         <div class="group">
                                             <button type="button" class="button button_secondary button_wide">
                                                 <span class="button_text">
@@ -540,13 +630,6 @@
                                                 <span>이 페이지 인쇄하기</span>
                                             </span>
                                         </button>
-                                        <div class="group">
-                                            <button type="button" class="button button_secondary button_wide">
-                                                <span class="button_text">
-                                                    <span>예약 취소 요청</span>
-                                                </span>
-                                            </button>
-                                        </div>
                                         <div class="spacer">
                                             <hr class="divider">
                                         </div>
@@ -611,44 +694,6 @@
                                                     </dis>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sidebar_banners_wrapper container">
-                                    <div class="group">
-                                        <div
-                                            class="no_show_info_banner sidebar_banner sidebar_banner_small sidebar_banner_hint">
-                                            <span class="banner_icon">
-                                                <svg height="24" viewbox="0 0 128 128" aria-hidden="true"
-                                                    role="presentation" width="24" focusable="false"
-                                                    class="no_show_banner_icon" style="user-select: auto;">
-                                                    <path
-                                                        d="M49.4 85l4.2-17.2c.7-2.7.8-3.8 0-3.8a29 29 0 0 0-8.8 3.8l-1.8-3A48 48 0 0 1 66.7 53c3.7 0 4.3 4.3 2.5 11l-5 18c-.7 3.3-.3 4.3.5 4.3a19 19 0 0 0 8.2-4L75 85c-8.6 8.7-18.2 12-21.8 12s-6.4-2.3-3.8-12zM75 36a9.2 9.2 0 0 1-9.2 9c-4.4 0-7-2.7-6.8-7a9 9 0 0 1 9.1-9c4.6 0 6.9 3.2 6.9 7z"
-                                                        style="user-select: auto;"></path>
-                                                    <path
-                                                        d="M62 16a48 48 0 1 1-48 48 48 48 0 0 1 48-48m0-8a56 56 0 1 0 56 56A56 56 0 0 0 62 8z"
-                                                        style="user-select: auto;"></path>
-                                                </svg>
-                                            </span>
-                                            <div class="banner_content">
-                                                <p class="banner_text">
-                                                    <span>노 쇼의 경우</span>
-                                                    <br>
-                                                    <button type="button" class="button button_primary button_link">
-                                                        <span class="button_text">
-                                                            <span>어떻게 처리하나요?</span>
-                                                        </span>
-                                                    </button>
-                                                </p>
-                                            </div>
-                                            <button type="button" class="banner_close">
-                                                <svg role="presentation" xmlns="http://www.w3.org/2000/svg"
-                                                    viewbox="0 0 24 24" style="user-select: auto;">
-                                                    <path
-                                                        d="M13 12l6.26-6.26a.73.73 0 0 0-1-1L12 11 5.74 4.71a.73.73 0 1 0-1 1L11 12l-6.29 6.26a.73.73 0 0 0 .52 1.24.73.73 0 0 0 .51-.21L12 13l6.26 6.26a.74.74 0 0 0 1 0 .74.74 0 0 0 0-1z"
-                                                        style="user-select: auto;"></path>
-                                                </svg>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

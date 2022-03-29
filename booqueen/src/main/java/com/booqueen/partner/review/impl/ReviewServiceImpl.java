@@ -31,4 +31,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.getReviewCount(serialnumber);
 	}
 
+	@Override
+	public List<ReviewVO> selectReviewListByHotelSerial(int serialnumber) {
+		return reviewDAO.selectReviewListByHotelSerical(serialnumber);
+	}
+
 }

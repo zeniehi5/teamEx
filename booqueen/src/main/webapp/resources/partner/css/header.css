@@ -75,6 +75,7 @@ li{
     height: 40px;
     box-sizing: border-box;
     background-color: hsla(0, 0%, 100%, .07);
+    color: #fff;
 }
 ::placeholder{
     color: white;
@@ -237,6 +238,14 @@ li{
     left: 0;
     box-shadow: 0 1px 4px 0 rgb(0, 0, 0, .3);
     width: 250px;
+}
+.search_list{
+    display: none;                 /* header dropdown menu 숨기기 */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 1px 4px 0 rgb(0, 0, 0, .3);
+    width: 273px;
 }
 .navigation_item:hover .submenu{
     display: block! important;

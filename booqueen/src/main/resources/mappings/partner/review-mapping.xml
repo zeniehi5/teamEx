@@ -20,4 +20,7 @@
 	<select id="getReviewCount" resultType="int">
 		SELECT COUNT(*) FROM review where serialnumber = #{serialnumber}
 	</select>
+	<select id="selectReviewListByHotelSerial" resultType="reviewVO">
+		SELECT * FROM review where serialnumber = #{serialnumber} ORDER BY writing DESC;
+	</select>
 </mapper>
