@@ -38,14 +38,21 @@
         				</tr>
     				</thead>
     			<tbody class="table_body">
-        		<c:forEach var="InquiryVO" items="${inquiry}">
+        		<c:forEach var="InquiryVO" items="${inquiryList}">
+        			<c:if test="${InquiryVO.partner ne true}">
             		<tr class="table_row">
                 		<th class="table_cell_head"><span>${InquiryVO.userid}</span></th>
                 		<td class="table_cell"><span>${InquiryVO.content}</span></td>
                 		<td class="table_cell"><span>${InquiryVO.send_date}</span></td>
+                		<c:if test="${InquiryVO.complete ne true}">
                 		<td class="table_cell"><button class="btn_primary" id="btnAnswer" onclick="openModal('${InquiryVO.userid}', '${InquiryVO.groupno}', '${InquiryVO.content}');">답변하기</button></td>
+            			</c:if>
+            			<c:if test="${InquiryVO.complete eq true}">
+            			<td class="table_cell"><button class="btn_disabled">답변완료</button></td>
+            			</c:if>
             		</tr>
-        </c:forEach>
+            		</c:if>
+        		</c:forEach>
     </tbody>
 </table>
 </div>
@@ -118,10 +125,11 @@
                     <div class="bui-modal__body">
                         <div>
                             <h3 class="form-title">답변하기</h3>
-                            <span>아이디&nbsp;</span><input type="text" id="userid" class="form-section-title" name="userid" disabled><br>   	
+                            <span>아이디&nbsp;</span><input type="text" id="userid" class="form-section-title" name="userid" readonly><br>   	
 							<span>문의&nbsp;&nbsp;</span><input type="text" id="question" class="question" disabled>
-							<textarea class="answer" name="content"></textarea>
-							<input type="hidden" id="groupno" name="groupno">      
+							<textarea class="answer" name="content"></textarea><br>
+							<span>답변 비공개 &nbsp;</span><input type="checkbox" id="closed" name="closed">
+							<input type="hidden" id="groupno" name="groupno">
                         </div>
                     </div>
                     <footer class="bui-modal__footer">

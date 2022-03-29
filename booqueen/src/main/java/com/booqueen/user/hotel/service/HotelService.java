@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.hotel.dao.HotelDAO;
+import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
@@ -61,7 +62,15 @@ public class HotelService {
 		return hotelDAO.getAutocompleteCity();
 	}
 	
-	// 최근 검색
+	public List<Integer> getHotelByDate(HotelAvailableVO hotelavailableVO) {
+		return hotelDAO.getHotelByDate(hotelavailableVO);
+	}
+	
+	public CityVO getCityLocation(String city) {
+		return hotelDAO.getCityLocation(city);
+	}
+  
+  // 최근 검색
 	public int insertRecentSearch(RecentSearchVO recentSearchVO) {
 		return hotelDAO.insertRecentSearch(recentSearchVO);
 	}
@@ -69,5 +78,5 @@ public class HotelService {
 	public List<RecentSearchVO> selectRecentSearch(String userid) {
 		return hotelDAO.selectRecentSearch(userid);
 	}
-	
+  
 }

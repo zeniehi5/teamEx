@@ -13,4 +13,6 @@ public interface ReviewService {
 
 	int getReviewCount(int serialnumber);
 
+	List<ReviewVO> selectReviewListByHotelSerial(int serialnumber);
+
 }

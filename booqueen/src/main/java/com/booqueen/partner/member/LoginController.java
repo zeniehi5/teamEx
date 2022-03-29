@@ -20,7 +20,9 @@ import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.message.MessageService;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
+import com.booqueen.partner.review.ReviewService;
 import com.booqueen.user.chat.vo.ChatVO;
+import com.booqueen.user.review.vo.ReviewVO;
 
 @Controller
 public class LoginController {
@@ -36,6 +38,9 @@ public class LoginController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value = "/login.pdo", method = RequestMethod.POST)
 	public String checkEmail(MemberVO vo, HttpServletRequest request) {
@@ -60,10 +65,14 @@ public class LoginController {
 				if(hotel != null) {
 					List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
 					List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
+					List<ReviewVO> reviewList = reviewService.selectReviewListByHotelSerial(hotel.getSerialnumber());
+					List<ReservationVO> checkInList = reservationService.selectCheckInListByHotelSerial(hotel.getSerialnumber());
 					HotelImageVO image = hotelService.selectHotelImgByHotelSerial(hotel.getSerialnumber());
 					session.setAttribute("image", image.getFile_url());
 					model.addAttribute("messageList", messageList);
 					model.addAttribute("reservation", reservation);
+					model.addAttribute("review", reviewList);
+					model.addAttribute("checkin", checkInList);
 				}
 				model.addAttribute("hotel", hotel);
 			} catch(Exception e) {

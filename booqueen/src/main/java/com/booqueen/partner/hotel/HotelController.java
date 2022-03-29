@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +25,7 @@ import com.booqueen.partner.common.S3Service;
 import com.booqueen.partner.message.MessageService;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
+import com.booqueen.partner.review.ReviewService;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -35,6 +36,7 @@ import com.booqueen.partner.room.FacilitiesViewVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
 import com.booqueen.user.chat.vo.ChatVO;
+import com.booqueen.user.review.vo.ReviewVO;
 
 @Controller
 public class HotelController {
@@ -53,6 +55,9 @@ public class HotelController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value = "/basic.pdo", method = RequestMethod.POST)
 	public String setBasicInfo(HotelVO vo, HttpSession session) {
@@ -190,8 +195,8 @@ public class HotelController {
 				e.printStackTrace();
 			}
 		}
-		RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
-		model.addAttribute("room", room);
+		//RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
+		//model.addAttribute("room", room);
 		//return "payment";
 		return "add-room";
 	}
@@ -227,9 +232,16 @@ public class HotelController {
 			if(hotel != null) {
 				List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
 				List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
+				List<ReviewVO> reviewList = reviewService.selectReviewListByHotelSerial(hotel.getSerialnumber());
+				
+				//체크인 중인 호텔 목록
+				List<ReservationVO> checkInList = reservationService.selectCheckInListByHotelSerial(hotel.getSerialnumber());
+				
+				model.addAttribute("checkin", checkInList);
 				model.addAttribute("messageList", messageList);
 				model.addAttribute("hotel", hotel);
 				model.addAttribute("reservation", reservation);
+				model.addAttribute("review", reviewList);
 			}
 			
 		} catch(Exception e) {
@@ -403,60 +415,29 @@ public class HotelController {
 	}
 	
 	@RequestMapping(value = "/update-service.pdo", method = RequestMethod.POST)
-	public String updateHotelService(HotelVO hotel, HotelServiceVO service, FacilitiesBasicVO basic, 
+	public String updateHotelService(@RequestParam("room_id")int room_id,
+									HotelVO hotel, HotelServiceVO service, FacilitiesBasicVO basic, 
 									FacilitiesBathVO bath, FacilitiesMediaVO media, FacilitiesViewVO view,
 									FacilitiesAccessVO access, FacilitiesServiceVO room_service, 
-									HttpServletResponse response, HttpSession session) {
-		HashMap<String, Object> updateList = new HashMap<>();
-		HashMap<String, Object> updateBasic = new HashMap<>();
-		HashMap<String, Object> updateAccess = new HashMap<>();
-		HashMap<String, Object> updateMedia = new HashMap<>();
-		HashMap<String, Object> updateView = new HashMap<>();
-		HashMap<String, Object> updateBath = new HashMap<>();
-		HashMap<String, Object> updateService = new HashMap<>();
+									HttpServletResponse response, HttpSession session, Model model) {
  		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
 				//hotel_service 수정값 저장
-				updateList.put("serialnumber", hotel.getSerialnumber());
-				updateList.put("breakfast", service.isBreakfast());
-				updateList.put("front_desk", service.isFront_desk());
-				updateList.put("smoking", service.isSmoking());
-				updateList.put("parking", service.isParking());
-				updateList.put("sauna", service.isSauna());
-				updateList.put("swimming_pool", service.isSwimming_pool());
-				updateList.put("shuttle", service.isShuttle());
-				updateList.put("ac", service.isAc());
-				updateList.put("terras", service.isTerras());
-				updateList.put("fitnesscenter", service.isFitnesscenter());
-				updateList.put("aquapark", service.isAquapark());
-				updateList.put("jacuzzi", service.isJacuzzi());
-				roomService.updateHotelService(updateList);
+				service.setSerialnumber(hotel.getSerialnumber());
+				roomService.updateHotelService(service);
 				//room_faclities_basic 수정값 저장
-				updateBasic.put("serialnumber", hotel.getSerialnumber());
-				updateBasic.put("heater", basic.isHeater());
-				roomService.updateFaciliteisBasic(updateBasic);
+				roomService.updateFaciliteisBasic(basic);
 				//room_facilities_access 수정값 저장
-				updateAccess.put("serialnumber", hotel.getSerialnumber());
-				updateAccess.put("elevator", access.isElevator());
-				roomService.updateFacilitiesAccess(updateAccess);
+				roomService.updateFacilitiesAccess(access);
 				//room_facilities_media 수정값 저장
-				updateMedia.put("serialnumber", hotel.getSerialnumber());
-				updateMedia.put("tv", media.isTv());
-				roomService.updateFacilitiesMedia(updateMedia);
+				roomService.updateFacilitiesMedia(media);
 				//room_facilities_view 수정값 저장
-				updateView.put("serialnumber", hotel.getSerialnumber());
-				updateView.put("balcony", view.isBalcony());
-				roomService.updateFacilitiesView(updateView);
+				roomService.updateFacilitiesView(view);
 				//room_facilities_bath 수정값 저장
-				updateBath.put("serialnumber", hotel.getSerialnumber());
-				updateBath.put("bathtub", bath.isBathtub());
-				updateBath.put("spabath", bath.isSpabath());
-				roomService.updateFacilitiesBath(updateBath);
+				roomService.updateFacilitiesBath(bath);
 				//room_facilities_service 수정값 저장
-				updateService.put("serialnumber", hotel.getSerialnumber());
-				updateService.put("lounge", room_service.isLounge());
-				roomService.updateFacilitiesService(updateService);
+				roomService.updateFacilitiesService(room_service);
 				//alert
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter writer = response.getWriter();
@@ -468,6 +449,12 @@ public class HotelController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+ 		//객실 목록
+ 		List<RoomVO> roomList = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
+ 		model.addAttribute("roomList", roomList);
+		model.addAttribute("hotel", hotel);
+		return "manage";
+
+ 		
 	}
 }

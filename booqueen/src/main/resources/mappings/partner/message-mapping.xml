@@ -16,4 +16,20 @@
 			send_date DESC,
 			send_time DESC
 	</select>
+	<insert id="insertInquiryAnswer" parameterType="inquiry">
+		INSERT INTO 
+			board
+		VALUES
+			(nextval('board_board_seq_seq'), #{userid}, #{serialnumber}, current_date, #{content}, true, #{closed}, #{groupno}, true)		
+	</insert>
+	<update id="updateInquiryQuestion" parameterType="inquiry">
+		UPDATE
+			board
+		SET
+			closed = #{closed}, complete = true
+		WHERE userid = #{userid} AND groupno = #{groupno} AND partner = false
+	</update>
+	<select id="selectMessageCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM board where partner = false AND serialnumber = #{serialnumber}
+	</select>
 </mapper>

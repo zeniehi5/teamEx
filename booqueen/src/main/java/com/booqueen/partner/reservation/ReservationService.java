@@ -16,4 +16,12 @@ public interface ReservationService {
 
 	ReservationVO selectReservationDetailByUserId(ReservationVO vo);
 
+	int updateCheckInStatus(ReservationVO reservation);
+
+	int updateCheckoutStatus(ReservationVO reservation);
+
+	List<ReservationVO> selectCheckInListByHotelSerial(int serialnumber);
+
+	ReservationVO selectReservationByRSVN(int searchKeyword);
+
 }

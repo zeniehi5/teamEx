@@ -21,6 +21,7 @@ import com.booqueen.partner.member.MemberVO;
 @Controller
 
 public class EmailController {
+	
 	@RequestMapping(value = "/sendMail.pdo", method = RequestMethod.GET)
 	public String mailSender(HttpServletRequest request, HttpSession session, MemberVO vo)
 			throws AddressException, MessagingException {
@@ -51,6 +52,7 @@ public class EmailController {
 				return new javax.mail.PasswordAuthentication(accountId, accountPwd);
 			}
 		});
+		
 		mailsession.setDebug(true);
 
 		Message mimeMessage = new MimeMessage(mailsession); // MimeMesage 생성
@@ -91,6 +93,6 @@ public class EmailController {
 				+ "</div>" + "</div>" + "</form>" + "</body>" + "</html>";
 		mimeMessage.setContent(msgg, "text/html; charset=utf-8");
 		Transport.send(mimeMessage); // Transfer
-		return "basic-info";
+		return "verify";
 	}
 }

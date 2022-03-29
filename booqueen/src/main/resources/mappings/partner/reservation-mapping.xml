@@ -12,7 +12,8 @@
 			r.status,
 			r.price,
 			r.price * 0.15 as "commission",
-			r.reservation_number
+			r.reservation_number,
+			r.use_status
 		FROM 
 			reservation as r
 		JOIN
@@ -31,13 +32,16 @@
 			r.status,
 			r.price,
 			r.price * 0.15 as "commission",
-			r.reservation_number
+			r.reservation_number,
+			r.use_status
 		FROM 
 			reservation as r
 		JOIN
 			room as h
 		ON r.room_id = h.room_id
-		WHERE r.serialnumber = #{serialnumber}
+		WHERE r.use_status IS NULL 
+		OR r.use_status NOT IN (2)
+		AND r.serialnumber = #{serialnumber}
 		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationDetailByRSVN" resultType="details">
@@ -53,7 +57,8 @@
 			r.reservation_date,
 			r.special_request,
 			r.time_arrival,
-			r.price * 0.15 as "commission"
+			r.price * 0.15 as "commission",
+			r.use_status
 		FROM
 			reservation as r
 		JOIN
@@ -78,7 +83,8 @@
 			r.status,
 			r.price,
 			r.price * 0.15 as "commission",
-			r.reservation_number
+			r.reservation_number,
+			r.use_status
 		FROM 
 			reservation as r
 		JOIN
@@ -92,5 +98,36 @@
 		FROM
 			reservation
 		where userid = #{userid}
+	</select>
+	<update id="updateReservationStatus" parameterType="pReservation">
+		UPDATE reservation SET use_status = 1 WHERE reservation_number = #{reservation_number};
+	</update>
+	<update id="updateReservationStatusToComplete" parameterType="pReservation">
+		UPDATE reservation SET use_status = 2 WHERE reservation_number = #{reservation_number};
+	</update>
+	<select id="selectCheckInListByHotelSerial" resultType="pReservation">
+		SELECT
+			r.lastname,
+			r.firstname,
+			r.checkin_date,
+			r.checkout_date,
+			h.type,
+			r.reservation_date,
+			r.status,
+			r.price,
+			r.price * 0.15 as "commission",
+			r.reservation_number,
+			r.use_status
+		FROM
+			reservation as r
+		JOIN
+			room as h
+		ON r.room_id = h.room_id
+		WHERE r.use_status IN (1)
+		AND r.serialnumber = #{serialnumber}
+		ORDER BY reservation_date DESC;
+	</select>
+	<select id="selectReservationByRSVN" resultType="pReservation">
+		SELECT * FROM reservation where reservation_number = #{keyword}
 	</select>
 </mapper>
