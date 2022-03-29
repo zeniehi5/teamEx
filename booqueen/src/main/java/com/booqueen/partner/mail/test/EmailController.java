@@ -31,8 +31,8 @@ public class EmailController {
 
 		// SMTP 서버 설정
 		final String host = "smtp.gmail.com"; // 사용할 smtp host, naver라면 smtp.naver.com
-		final String accountId = "xodnjs1009@gmail.com";
-		final String accountPwd = "sodlfmadms11";
+		final String accountId = "#";
+		final String accountPwd = "#";
 		final int port = 465; // SMTP 포트
 
 		String receiver = session.getAttribute("email").toString(); // 받는사람 이메일

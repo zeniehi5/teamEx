@@ -62,10 +62,7 @@
 		SELECT * FROM room_image where serialnumber = #{serialnumber}
 	</select>
 	<select id="selectTypeBySerial" resultType = "roomImage">
-		SELECT DISTINCT TYPE FROM room_image where serialnumber = #{serialnumber}
-	</select>
-	<select id="selectRoom_idBySerial" resultType="roomImage">
-		SELECT room_id FROM room_image where serialnumber = #{serialnumber} 
+		SELECT DISTINCT type, room_id FROM room where serialnumber = #{serialnumber}
 	</select>
 	<update id="partnerScheduleUpdate">
 		UPDATE room_available SET standard_price = #{standard_price} , non_refundable_price =#{non_refundable_price} WHERE room_id = #{room_id}

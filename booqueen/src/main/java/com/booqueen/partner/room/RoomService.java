@@ -54,7 +54,7 @@ public interface RoomService {
 	
 	public List<UpdateImageVO> selectTypeBySerial(int serialnumber);
 	
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo);
 
 	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber);
 

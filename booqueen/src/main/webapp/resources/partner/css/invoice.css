@@ -12,12 +12,13 @@ button, select {
 a {
 	text-decoration: none;
 }
-/* .container {
-
-} */
+.container {
+	height:670px;
+}
 .invoice-container {
 	margin: 0 auto;
-	max-width: 1140px;
+	max-width: 1300px;
+	height:100%;
 	position: relative;
 	width: 100%;
 	padding: 16px;
@@ -215,7 +216,7 @@ a {
 }
 .table-head {
 	display: table-row-group;
-	text-align: left;
+	text-align: center;
 }
 .table-row {
 	display: table-row;
@@ -409,13 +410,15 @@ a {
 	border: solid #e0e0e0;
 	border-width: 1px 0px 1px;
 	background-color: #fff;
-	font-size: 14px;
+	/*font-size: 14px;*/
 	font-weight: 400;
 	line-height: 1.4285714286em;
 	border-collapse: separate;
 	border-spacing: 0;
 	width: 100%;
 	border-radius: 2px;
+	font-size: small;
+	text-align:center;
 }
 
 /* Modal */
@@ -695,4 +698,100 @@ a {
 .alert-danger ul {
 	margin-bottom: 0;
 	margin-top: 0;
+}
+
+
+
+.table_pagination{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ededed;
+    padding: 8px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;    
+}
+.pagination_list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pagination_item{
+    display: inline-flex;
+}
+.pagination_prev{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+}
+.pagination_next{
+    margin-left: 16px;
+}
+.pagination_disabled{
+    border-color: transparent;
+    background-color: transparent;
+    fill: #07c;
+    color: #07c;
+    cursor: not-allowed;
+    outline: none;
+    box-shadow: none;
+    opacity: .4;
+}
+.pagination{
+    border-color: transparent;
+    background-color: transparent;
+    fill: #07c;
+    color: #07c;
+    outline: none;
+    box-shadow: none;
+}
+.pagination_link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    padding: 2px 4px;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 400;
+}
+.pagination_current_page{
+    display: inline-flex;
+    padding: 0 24px;
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+}
+.pagination_icon{
+    width: 18px;
+    height: 100%;
+    fill: currentColor;
+}
+.pagination_direction{
+    margin: 0 4px;
+}
+.pagination_direction:last_child{
+    margin-right: 0;
+}
+.pagination_control{
+    display: flex;
+    align-items: center;
+}
+.pagination_select{
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.pagination_select:last-child{
+    margin-bottom: 0;
+}
+.pagination_select label{
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
 }

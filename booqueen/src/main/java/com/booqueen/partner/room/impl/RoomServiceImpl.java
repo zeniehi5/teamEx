@@ -104,6 +104,7 @@ public class RoomServiceImpl implements RoomService {
 	public List<RoomVO> getRoomByHotelSerial(int serialnumber) {
 		return roomDAO.getRoomByHotelSerial(serialnumber);
 	}
+	
 
 	@Override
 	public void insertRoomAvailable(HashMap<String, Object> setPrice) {
@@ -140,14 +141,15 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
-		return roomDAO.selectRoom_idBySerial(serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo) {
+		return roomDAO.selectRoom_idBySerial(vo);
 	}
 
 	@Override
 	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber) {
 		return roomDAO.selectRoomListByHotelSerial(serialnumber);
 	}
+
 
 
 }
