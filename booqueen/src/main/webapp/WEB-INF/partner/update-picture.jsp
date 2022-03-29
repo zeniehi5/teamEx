@@ -12,6 +12,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>${hotel.hotelname}·숙박시설사진</title>
 </head>
+<script type="text/javascript">
+	function saveRoomType(){
+		var roomType = $("#roomType option:selected").val();
+		var roomId = roomType.split(':');
+		alert(roomId[0]);
+		alert(roomId[1]);
+		$("#room_id").attr("value", roomId[0]);
+		$("#type").attr("value", roomId[1]);
+	}
+</script>
+
 <body>
 	<jsp:include page="/WEB-INF/partner/header.jsp" />
 	<form action="update-picture.pdo" method="post"
@@ -27,15 +38,14 @@
 								<label class="upload__btn"> <input id="image"
 									class="upload__inputfile" type="file" name="uploadFile"
 									value="사진 추가" multiple="multiple"> <span>사진추가</span>
-								</label> 
-								<select name="type">
+								</label> <select id="roomType" name="roomType"
+									onchange="saveRoomType();">
 									<option value="none">---- 룸 타입 선택 ----</option>
-									<c:forEach items="${type}" var="UpdateImageVO">
-										<option value="${UpdateImageVO.type}"> ${UpdateImageVO.type}</option>
+									<c:forEach items="${type}" var="RoomVO">
+										<option value="${RoomVO.room_id}:${RoomVO.type}">${RoomVO.type}</option>
 									</c:forEach>
-									<input type="hidden" value="${UpdateImageVO.room_id}" name="room_id">
-								</select>
-								
+								</select> <input type="hidden" id="room_id" name="room_id"> <input
+									type="hidden" id="type" name="type">
 							</div>
 						</div>
 
@@ -140,16 +150,19 @@
 								<br>
 							</div>
 							<div>
-							<a href="#modal" id="popup">
-							<div><h3>${image.file_name}</h3><br>
-							<img src="${image.file_url}"></div>
-							<c:forEach items="${room_image}" var="UpdateImageVO" varStatus="status">
+								<a href="#modal" id="popup">
 									<div>
-									<h3>${UpdateImageVO.file_name}</h3>
-									<br>
-									<img src="${UpdateImageVO.file_url}"></div>
-							</c:forEach>
-							</a>
+										<h3>${image.file_name}</h3>
+										<br> <img src="${image.file_url}">
+									</div>
+								</a>
+								<c:forEach items="${room_image}" var="UpdateImageVO" varStatus="vs">
+										<div onclick="document.getElementById('modalId${vs.index}').style.display='block'">
+											<h3>${UpdateImageVO.file_name}</h3>
+											<br> <img src="${UpdateImageVO.file_url}">
+										</div>
+								</c:forEach>
+
 							</div>
 						</div>
 					</div>
@@ -159,48 +172,43 @@
 					</div>
 				</div>
 	</form>
-
-	<div class="modal-wrapper" id="modal">
-		<div class="modal">
-			<div class="explain">
-				<div class="change-pic">
-					<div class="change-pic-1">
-						<svg data-test-id="default-icon"
-							xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+	
+	
+		
+	<form
+		action="remove-picture.pdo?serialnumber=${UpdateImageVO.serialnumber}&&file_name=${UpdateImageVO.file_name}"
+		method="POST">
+		<div class="modal-wrapper" id="modal">
+			<div class="modal">
+				<div class="explain">
+					<div class="change-pic">
+						<div class="change-pic-1">
+							<svg data-test-id="default-icon"
+								xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
                                             <path
-								d="M14.25 15.75h-.75a.75.75 0 0 1-.75-.75v-3.75a1.5 1.5 0 0 0-1.5-1.5h-.75a.75.75 0 0 0 0 1.5h.75V15a2.25 2.25 0 0 0 2.25 2.25h.75a.75.75 0 0 0 0-1.5zM11.625 6a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z"></path>
+									d="M14.25 15.75h-.75a.75.75 0 0 1-.75-.75v-3.75a1.5 1.5 0 0 0-1.5-1.5h-.75a.75.75 0 0 0 0 1.5h.75V15a2.25 2.25 0 0 0 2.25 2.25h.75a.75.75 0 0 0 0-1.5zM11.625 6a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z"></path>
                                         </svg>
-						<h3>사진 바꾸기</h3>
+							<h3>사진 바꾸기</h3>
+						</div>
+						<div>
+							<p>사진이 최소 1280x900 픽셀 이상인 경우 더 깊고 오래 남는 인상을 전하실 수 있습니다.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-bottom">
+					<div class="modal_pic">
+						<h3>${image.file_name}</h3>
+						<img src="${image.file_url}" name="file_url"> <input
+							type="hidden" value="${UpdateImageVO.serialnumber}"> <input
+							type="hidden" value="${UpdateImageVO.file_name}">
 					</div>
 					<div>
-						<p>사진이 최소 1280x900 픽셀 이상인 경우 더 깊고 오래 남는 인상을 전하실 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-			<div class="modal-bottom">
-				<div class="modal_pic">
-					
-						<form
-							action="remove-picture.pdo?serialnumber=${UpdateImageVO.serialnumber}&&file_name=${UpdateImageVO.file_name}"
-							method="POST">
-							<h3>${UpdateImageVO.file_name}</h3>
-							<img src="${UpdateImageVO.file_url}" name="file_url"> <input
-								type="hidden" value="${UpdateImageVO.serialnumber}"> <input
-								type="hidden" value="${UpdateImageVO.file_name}">
-			
-				</div>
-
-				<div>
-
-				
-
 
 						<input type="submit" id="delete" value="삭제">
 
-	
-					</form>
-				</div>
-				<script>
+					</div>
+					<script>
                                 $(document).ready(function () {
                                     $("#delete").on("click", function () {
                                         var formData = new FormData();
@@ -221,27 +229,42 @@
                                         });
                                     });
                                 });
+                                
+                    
                             </script>
-			</div>
-			<div class="close">
-				<input type="button" id="close" value="닫기">
+				</div>
+				<div class="close">
+					<input type="button" id="close" value="닫기">
+				</div>
 			</div>
 		</div>
-	</div>
-	<script type="text/javascript">
-                        const popup = document.getElementById("popup");
-                        const close = document.getElementById("close");
-                        const modal = document.querySelector(".modal-wrapper");
+		<script type="text/javascript">
+             const popup = document.getElementById("popup");
+             const close = document.getElementById("close");
+             const modal = document.querySelector(".modal-wrapper");
 
-                        popup.addEventListener('click', () => {
-                            modal.style.display = 'block';
-                        });
-                        close.addEventListener('click', () => {
-                            modal.style.display = 'none';
-                        });
-                    </script>
-	</div>
-	</div>
+             popup.addEventListener('click', () => {
+                   modal.style.display = 'block';
+                   });
+             close.addEventListener('click', () => {
+                   modal.style.display = 'none';
+                   }); 
+		</script>
+		<!--
+		<script type="text/javascript">
+
+        
+        function open_url(e) {
+        	const popup1 = document.getElementById("popup1");
+            const close = document.getElementById("close");
+            const modal = document.querySelector(".modal-wrapper");
+              		if(modal.style.display == 'none'){
+              			modal.style.display = 'block'
+              		}
+		</script> -->
+		</div>
+		</div>
+	</form>
 	<jsp:include page="/WEB-INF/partner/footer.jsp" />
 </body>
 </html>

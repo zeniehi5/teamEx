@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.booqueen.partner.hotel.HotelImageVO;
+import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -35,74 +36,75 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public FacilitiesBasicVO getBasicInfoByHotelSerial(int serial) {
-		return roomDAO.getBasicInfoByHotelSerial(serial);
+	public FacilitiesBasicVO getBasicInfoByRoomId(int room_id) {
+		return roomDAO.getBasicInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public FacilitiesBathVO getBathInfoByHotelSerial(int serial) {
-		return roomDAO.getBathInfoByHotelSerial(serial);
+	public FacilitiesBathVO getBathInfoByRoomId(int room_id) {
+		return roomDAO.getBathInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public FacilitiesMediaVO getMediaInfoByHotelSerial(int serial) {
-		return roomDAO.getMediaInfoByHotelSerial(serial);
+	public FacilitiesMediaVO getMediaInfoByRoomId(int room_id) {
+		return roomDAO.getMediaInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public FacilitiesViewVO getViewInfoByHotelSerial(int serial) {	
-		return roomDAO.getViewInfoByHotelSerial(serial);
+	public FacilitiesViewVO getViewInfoByRoomId(int room_id) {	
+		return roomDAO.getViewInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public FacilitiesAccessVO getAccessInfoByHotelSerial(int serial) {	
-		return roomDAO.getAccessInfoByHotelSerial(serial);
+	public FacilitiesAccessVO getAccessInfoByRoomId(int room_id) {	
+		return roomDAO.getAccessInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public FacilitiesServiceVO getServiceInfoByHotelSerial(int serial) {
-		return roomDAO.getServiceInfoByHotelSerial(serial);
+	public FacilitiesServiceVO getServiceInfoByRoomId(int room_id) {
+		return roomDAO.getServiceInfoByHotelSerial(room_id);
 	}
 
 	@Override
-	public void updateHotelService(HashMap<String, Object> attribute) {
-		roomDAO.updateHotelService(attribute);
+	public void updateHotelService(HotelServiceVO service) {
+		roomDAO.updateHotelService(service);
 	}
 
 	@Override
-	public void updateFaciliteisBasic(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesBasic(attribute);
+	public void updateFaciliteisBasic(FacilitiesBasicVO basic) {
+		roomDAO.updateFacilitiesBasic(basic);
 	}
 
 	@Override
-	public void updateFacilitiesAccess(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesAccess(attribute);
+	public void updateFacilitiesAccess(FacilitiesAccessVO access) {
+		roomDAO.updateFacilitiesAccess(access);
 	}
 
 	@Override
-	public void updateFacilitiesMedia(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesMedia(attribute);
+	public void updateFacilitiesMedia(FacilitiesMediaVO media) {
+		roomDAO.updateFacilitiesMedia(media);
 	}
 
 	@Override
-	public void updateFacilitiesView(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesView(attribute);
+	public void updateFacilitiesView(FacilitiesViewVO view) {
+		roomDAO.updateFacilitiesView(view);
 	}
 
 	@Override
-	public void updateFacilitiesBath(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesBath(attribute);
+	public void updateFacilitiesBath(FacilitiesBathVO bath) {
+		roomDAO.updateFacilitiesBath(bath);
 	}
 
 	@Override
-	public void updateFacilitiesService(HashMap<String, Object> attribute) {
-		roomDAO.updateFacilitiesService(attribute);
+	public void updateFacilitiesService(FacilitiesServiceVO service) {
+		roomDAO.updateFacilitiesService(service);
 	}
 
 	@Override
-	public RoomVO getRoomByHotelSerial(int serialnumber) {
+	public List<RoomVO> getRoomByHotelSerial(int serialnumber) {
 		return roomDAO.getRoomByHotelSerial(serialnumber);
 	}
+	
 
 	@Override
 	public void insertRoomAvailable(HashMap<String, Object> setPrice) {
@@ -139,9 +141,15 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
-		return roomDAO.selectRoom_idBySerial(serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo) {
+		return roomDAO.selectRoom_idBySerial(vo);
 	}
+
+	@Override
+	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber) {
+		return roomDAO.selectRoomListByHotelSerial(serialnumber);
+	}
+
 
 
 }

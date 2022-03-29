@@ -35,8 +35,8 @@ nav {
    padding: 7px 12px;
 } */
 .question a span {
-   /* padding: 10px 10px 15px 10px; */
-   padding: 18px 10px 10px 10px;
+   padding: 10px 10px 15px 10px;
+   /* padding: 18px 10px 10px 10px */;
 }
 .question a span:hover {
    background-color: #1F4E8F;

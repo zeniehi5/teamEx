@@ -21,6 +21,7 @@ import com.booqueen.partner.member.MemberVO;
 @Controller
 
 public class EmailController {
+	
 	@RequestMapping(value = "/sendMail.pdo", method = RequestMethod.GET)
 	public String mailSender(HttpServletRequest request, HttpSession session, MemberVO vo)
 			throws AddressException, MessagingException {
@@ -28,11 +29,11 @@ public class EmailController {
 		String subject = (String) request.getParameter("subject"); // 硫붿씪 �젣紐�
 		String message = (String) request.getParameter("message"); // 硫붿씪 �궡�슜
 
-		// SMTP �꽌踰� �꽕�젙
-		final String host = "smtp.gmail.com"; // �궗�슜�븷 smtp host, naver�씪硫� smtp.naver.com
+		// SMTP 서버 설정
+		final String host = "smtp.gmail.com"; // 사용할 smtp host, naver라면 smtp.naver.com
 		final String accountId = "#";
 		final String accountPwd = "#";
-		final int port = 465; // SMTP �룷�듃
+		final int port = 465; // SMTP 포트
 
 		String receiver = session.getAttribute("email").toString(); // 諛쏅뒗�궗�엺 �씠硫붿씪
 		String sender = "xodnjs1009@gmail.com"; // 蹂대궡�뒗�궗�엺 �씠硫붿씪
@@ -51,6 +52,7 @@ public class EmailController {
 				return new javax.mail.PasswordAuthentication(accountId, accountPwd);
 			}
 		});
+		
 		mailsession.setDebug(true);
 
 		Message mimeMessage = new MimeMessage(mailsession); // MimeMesage �깮�꽦
@@ -91,6 +93,6 @@ public class EmailController {
 				+ "</div>" + "</div>" + "</form>" + "</body>" + "</html>";
 		mimeMessage.setContent(msgg, "text/html; charset=utf-8");
 		Transport.send(mimeMessage); // Transfer
-		return "basic-info";
+		return "verify";
 	}
 }

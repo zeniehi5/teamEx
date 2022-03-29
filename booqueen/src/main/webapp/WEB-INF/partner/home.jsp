@@ -49,16 +49,6 @@
                                                        </div>
                                                    </button>
                                                </li>
-                                               <li class="tab_item_hidden">
-                                                    <button class="tab_link">
-                                                        <div class="group_inline">
-                                                            <svg focusable="false" aria-hidden="true" height="20" role="presentation" viewBox="0 0 24 24" width="20" fill="#6B6B6B" class="homepage-tab-item-icon bk-icon -material-ic_timeline" color="#6B6B6B" style="user-select: auto;">
-                                                                <path d="M23 8c0 1.1-.9 2-2 2-.18 0-.35-.02-.51-.07l-3.56 3.55c.05.16.07.34.07.52 0 1.1-.9 2-2 2s-2-.9-2-2c0-.18.02-.36.07-.52l-2.55-2.55c-.16.05-.34.07-.52.07s-.36-.02-.52-.07l-4.55 4.56c.05.16.07.33.07.51 0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.18 0 .35.02.51.07l4.56-4.55C8.02 9.36 8 9.18 8 9c0-1.1.9-2 2-2s2 .9 2 2c0 .18-.02.36-.07.52l2.55 2.55c.16-.05.34-.07.52-.07s.36.02.52.07l3.55-3.56C19.02 8.35 19 8.18 19 8c0-1.1.9-2 2-2s2 .9 2 2z" style="user-select: auto;"></path>
-                                                            </svg>
-                                                        <span class="tab_item_wrapper"><span>데이터</span></span> 
-                                                       </div>
-                                                    </button>
-                                               </li>
                                             </ul>
                                             <div class="tab_content">
                                                 <div class="spacer"></div>
@@ -137,12 +127,36 @@
                                                                                     </ul>
                                                                                     <div class="reservation_tab_content">
                                                                                         <div>
+                                                                                        <c:choose>
+                                                                    					<c:when test="${empty checkin}">
                                                                                             <div class="empty_state">
                                                                                                 <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty_state_icon">
                                                                                                     <path d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"></path>
                                                                                                 </svg>
                                                                                                 <p class="empty_state_text"><span>선택하신 기간에는 체크인 건이 없습니다.</span></p>    
                                                                                             </div>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                        <div>
+                                                                    					<table class="reservation_list">
+                                                                    						<tr>
+                                                                    							<th>예약번호</th>
+                                                                    							<th>예약자명</th>
+                                                                    							<th>객실유형</th>
+                                                                    							<th>요금</th>
+                                                                    						</tr>
+                                                                    						<c:forEach var="checkin" items="${checkin}" end="2">
+                                                                    						<tr>
+                                                                    							<td>${checkin.reservation_number}</td>
+                                                                    							<td>${checkin.lastname}${checkin.firstname}</td>
+                                                                    							<td>${checkin.type}</td>
+                                                                    							<td>&#8361;<fmt:formatNumber value="${checkin.price}" type="number"/></td>
+                                                                    						</tr>
+                                                                    						</c:forEach>
+                                                                    					</table>
+                                                                    					</div>
+                                                                                        </c:otherwise>
+                                                                                        </c:choose>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -260,17 +274,41 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="homepage_header_text">
-                                                                                <a href="#" class="show_link"><span>이용후기 모두 보기</span></a>
+                                                                                <a href="${contextPath}/reviews.pdo" class="show_link"><span>이용후기 모두 보기</span></a>
                                                                             </div>    
                                                                         </div>
                                                                         <div class="spacer"></div>
                                                                     </div>
+                                                                    <c:choose>
+                                                                    <c:when test="${empty review}">
                                                                     <div class="empty_state">
                                                                         <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty_state_icon">
                                                                             <path d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"></path>
                                                                         </svg>
                                                                         <p class="empty_state_text"><span>최근 작성된 이용후기가 없습니다.</span></p>    
                                                                     </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <div>
+                                                                    	<table class="reservation_list">
+                                                                    		<tr>
+                                                                    			<th>총점</th>
+                                                                    			<th>제목</th>
+                                                                    			<th>강점</th>
+                                                                    			<th>약점</th>
+                                                                    		</tr>
+                                                                    		<c:forEach var="review" items="${review}" end="2">
+                                                                    		<tr>
+                                                                    			<td>${review.score}</td>
+                                                                    			<td>${review.title}</td>
+                                                                    			<td>${review.strength}</td>
+                                                                    			<td>${review.weakness}</td>
+                                                                    		</tr>
+                                                                    		</c:forEach>
+                                                                    	</table>
+                                                                    </div>
+                                                                    </c:otherwise>
+                                                                    </c:choose>
                                                                 </div>
                                                             </div>    
                                                         </div>                                                         

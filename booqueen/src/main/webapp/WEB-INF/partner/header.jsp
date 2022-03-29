@@ -4,21 +4,67 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${contextPath}/resources/partner/css/header.css">
-    <script type="text/javascript">
-        function dropdown() {
-            var menu = document.getElementById("ext-action-dropdown__menu");
-            if (menu.style.display === "none") {
-                menu.style.display = "block";
-            } else {
-                menu.style.display = "none";
-            }
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="${contextPath}/resources/partner/css/header.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<title>${hotel.hotelname}</title>
+<script type="text/javascript">
+	function dropdown() {
+    	var menu = document.getElementById("ext-action-dropdown__menu");
+        if (menu.style.display === "none") {
+        	menu.style.display = "block";
+        } else {
+        	menu.style.display = "none";
         }
-    </script>
-    <title>${hotel.hotelname}</title>
+	}
+	
+	
+	function openSearchMenu() {
+		var search = document.getElementById("searchList")
+		if(search.style.display === "none") {
+			search.style.display = "block";
+			
+			$("#searchList").empty();
+			var searchWord = $("#searchKeyWord").val();
+			
+			if(searchWord.length > 3) {
+				
+				var path = '${contextPath}';
+				
+				$.ajax({
+					method:"GET",
+					url:"selectReservationByRSVN.pdo?searchKeyword=" + searchWord,
+					contentType:"application.json",
+					dataType:"json",
+					error: function(){
+						alert("검색 도중 오류가 발생하였습니다.")
+					},
+					success: function(resp) {
+						var result = '';
+						result += "<ul class='submenu_list' style='z-index:999'>";
+						result += "<li class='submenu_item'><span";
+						result += " class='submenu_link'>검색 결과</span></li>";
+						result += "<li class='submenu_item'>";
+						result += "<a class='submenu_link' href='";
+						result += path + "/details.pdo?reservation_number=";
+						result += resp.reservation_number;
+						result +="'><span>";
+						result += resp.reservation_number;
+						result += "</span></a></li>";
+						result += "</ul>";
+						$('#searchList').html(result);
+					}
+				})	//end ajax
+				
+			}
+			
+		} else {
+			search.style.display = "none";
+		}
+	}
+</script>
 </head>
 <body>
     <div class="main-container">
@@ -27,7 +73,7 @@
                 <header class="header">
                     <div class="header_container">
                         <section class="logo_container">
-                            <a href="#"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
+                            <a href="${contextPath}/main.pdo"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
                             <div class="header_property">${hotel.hotelname} - ${hotel.serialnumber}</div>
                         </section>
                         <div class="side_items">
@@ -35,8 +81,8 @@
                                 <div class="search_wrap">
                                     <div class="input_container">
                                         <div class="input wrap">
-                                            <input class="search_input" type="text" placeholder="예약 검색"
-                                                autocomplete="off">
+                                            <input class="search_input" id="searchKeyWord" type="text" placeholder="예약 검색"
+                                                autocomplete="off" onkeyup="openSearchMenu()">
                                             <button type="button" class="input_icon">
                                                 <svg focusable="false" viewBox="0 0 24 24" role="presentation"
                                                     aria-hidden="true" width="16" height="16" fill="white"
@@ -48,13 +94,15 @@
                                                 </svg>
                                             </button>
                                         </div>
+                                        <div class="search_list" id="searchList">        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="menu_wrap">
                                 <div class="menu_item">
                                     <button class="menu_section">
-                                        <div class="menu_avatar" style="background-image: url(${image});">
+                                        <div class="menu_avatar" style="background-image: url('${image}');">
                                         </div>
                                         <div class="menu_text">${hotel.hotelname}</div>
                                     </button>
@@ -235,9 +283,7 @@
                                                             href="${contextPath}/update-picture.pdo"><span>사진</span></a></li>
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="${contextPath}/set-policies.pdo"><span>정책</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/get-service.pdo"><span>시설 및
-                                                                서비스</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>객실
+                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/roomlist.pdo"><span>객실
                                                                 관리</span></a></li> 
                                                 </ul>
                                             </div>

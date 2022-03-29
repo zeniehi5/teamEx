@@ -23,10 +23,16 @@
 	<update id="updateSmokingPolicy" parameterType="myService">UPDATE hotel_service SET smoking = #{smoking} where serialnumber = #{serialnumber}</update>
 	<select id="getHotelServiceByHotelSerial" resultType="myService">SELECT * FROM hotel_service where serialnumber = #{serialnumber}</select>
 	<select id="selectInquiryByHotelSerial" resultType="inquiry">
-		SELECT * FROM board where serialnumber = ${serialnumber} order by groupno, send_date desc
+		SELECT * FROM board where serialnumber = #{serialnumber} order by groupno, send_date desc
 	</select>
 	<select id="selectHotelImgByHotelSerial" resultType="images">
 		SELECT * FROM hotel_image where serialnumber = #{serialnumber}
+	</select>
+	<select id="selectInvoiceByHotelSerial" resultType="invoice">
+		SELECT * FROM reservation where serialnumber = #{serialnumber} and use_status = 2
+	</select>
+	<select id="getListCount" resultType="int">
+		SELECT COUNT(*) FROM reservation where serialnumber = #{serialnumber} and use_status = 2
 	</select>
 
 </mapper>

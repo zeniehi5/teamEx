@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.booqueen.partner.hotel.HotelImageVO;
+import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -60,36 +61,36 @@ public class RoomDAO {
 		return sqlSessionTemplate.selectOne("RoomDAO.getServiceInfoByHotelSerial", serial);
 	}
 
-	public void updateHotelService(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateHotelService", attribute);
+	public void updateHotelService(HotelServiceVO service) {
+		sqlSessionTemplate.update("RoomDAO.updateHotelService", service);
 	}
 
-	public void updateFacilitiesBasic(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesBasic", attribute);
+	public void updateFacilitiesBasic(FacilitiesBasicVO basic) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesBasic", basic);
 	}
 
-	public void updateFacilitiesAccess(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesAccess", attribute);
+	public void updateFacilitiesAccess(FacilitiesAccessVO access) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesAccess", access);
 	}
 
-	public void updateFacilitiesMedia(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesMedia", attribute);
+	public void updateFacilitiesMedia(FacilitiesMediaVO media) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesMedia", media);
 	}
 
-	public void updateFacilitiesView(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesView", attribute);
+	public void updateFacilitiesView(FacilitiesViewVO view) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesView", view);
 	}
 
-	public void updateFacilitiesBath(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesBath", attribute);
+	public void updateFacilitiesBath(FacilitiesBathVO bath) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesBath", bath);
 	}
 
-	public void updateFacilitiesService(HashMap<String, Object> attribute) {
-		sqlSessionTemplate.update("RoomDAO.updateFacilitiesService", attribute);
+	public void updateFacilitiesService(FacilitiesServiceVO service) {
+		sqlSessionTemplate.update("RoomDAO.updateFacilitiesService", service);
 	}
 
-	public RoomVO getRoomByHotelSerial(int serialnumber) {
-		return sqlSessionTemplate.selectOne("RoomDAO.getRoomByHotelSerial", serialnumber);
+	public List<RoomVO> getRoomByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("RoomDAO.getRoomByHotelSerial", serialnumber);
 	}
 
 	public void insertRoomPrice(HashMap<String, Object> setPrice) {
@@ -120,7 +121,11 @@ public class RoomDAO {
 	public List<UpdateImageVO> selectTypeBySerial(int serialnumber){
 		return sqlSessionTemplate.selectList("RoomDAO.selectTypeBySerial", serialnumber);
 	}
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
-		return sqlSessionTemplate.selectOne("RoomDAO.selectRoom_idBySerial", serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo) {
+		return sqlSessionTemplate.selectList("RoomDAO.selectRoom_idBySerial");
+	}
+
+	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("RoomDAO.selectRoomListByHotelSerial", serialnumber);
 	}
 }

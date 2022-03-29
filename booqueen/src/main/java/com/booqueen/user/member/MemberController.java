@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.booqueen.user.hotel.service.HotelService;
+import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.member.service.MemberProfileService;
 import com.booqueen.user.member.vo.MemberProfileVO;
 import com.booqueen.user.member.vo.ReasonVO;
@@ -38,6 +40,9 @@ public class MemberController{
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	HotelService hotelService;
 	
 	KakaoAPI kakaoApi = new KakaoAPI();
 
@@ -64,7 +69,8 @@ public class MemberController{
 			List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
 			session.setAttribute("reservationList", reservationList);
 			
-//			out.println("<script>history.back();</script>");
+			List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
+			session.setAttribute("recentSearchList", recentSearchList);
 			
 			return "member/index";
 		} else {
@@ -86,7 +92,7 @@ public class MemberController{
 			session.removeAttribute("member");
 			session.invalidate();
 		}
-		System.out.println("logout.do");
+		
 		return "member/index";
 		
 	}
@@ -268,7 +274,13 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/index.do")
-	public String index() {
+	public String index(HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		
+		List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
+		session.setAttribute("recentSearchList", recentSearchList);
+		
 		return "member/index";
 	}
 	
@@ -371,6 +383,9 @@ public class MemberController{
 		session.setAttribute("accessToken", accessToken);
 		session.setAttribute("member", user);
 		session.setAttribute("isLogOn", true);
+		
+		List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
+		session.setAttribute("recentSearchList", recentSearchList);
 		
 		return "member/index";
 	}

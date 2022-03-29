@@ -205,6 +205,24 @@ ul.tabs li.current{
 	font-weight: 500;
 	line-height: 1.5em;
 }
+.btn_disabled{
+	color: #fff;
+	background-color: #b3b3b3;
+	border: 1px solid #b3b3b3;
+	border-radius: 2px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+	cursor: pointer;
+	text-decoration: none;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.5em;
+}
 .input_box_wrapper button{
 	float: right;
 }

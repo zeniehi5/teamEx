@@ -149,11 +149,19 @@
                                         	<td class="table_cell" data-heading="객실"><span>${ReservationVO.type}</span></td>
                                         	<td class="table_cell" data-heading="예약 날짜"><span>${ReservationVO.reservation_date}</span></td>
                                         	<c:choose>
-                                        	<c:when test="${ReservationVO.status eq true}">
-                                        		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>정상</span></td>
+                                        	<c:when test="${ReservationVO.status eq true || ReservationVO.status eq 't'}">
+                                        		<c:if test="${null eq ReservationVO.use_status}">
+                                        			<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>예약 완료</span></td>
+                                        		</c:if>
+                                        		<c:if test="${1 eq ReservationVO.use_status}">
+                                        			<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>체크인 중</span></td>
+                                        		</c:if>
+                                        		<c:if test="${0 eq ReservationVO.use_status}">
+                                        			<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>예약 완료</span></td>
+                                        		</c:if>
                                         	</c:when>
                                         	<c:otherwise>
-                                        		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>취소</span></td>
+                                        		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>예약 취소</span></td>
                                         	</c:otherwise>
                                         	</c:choose>
                                         	<td class="table_cell" data-heading="요금"><span>&#8361;<fmt:formatNumber value="${ReservationVO.price}" type="number"/></span></td>

@@ -24,7 +24,7 @@ public class Pagination {
          * =>     (int)3.5 = 3
          *       총 페이지 = 1 2 3
          */
-        maxPage = (int)((listCount / boardLimit) + 1);
+        maxPage = (int)((double)listCount / boardLimit + 0.9);
         
         // * startPage : 
         /*

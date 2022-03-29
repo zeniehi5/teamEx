@@ -2,7 +2,9 @@ package com.booqueen.partner.hotel;
 
 import java.util.List;
 
+import com.booqueen.partner.finance.InvoiceVO;
 import com.booqueen.partner.message.InquiryVO;
+import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -57,8 +59,12 @@ public interface HotelService {
 
 	public HotelServiceVO getHotelServiceByHotelSerial(int serialnumber);
 
-	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber);
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber, PagingVO paging);
 
 	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber);
+
+	public List<InvoiceVO> selectInvoiceByHotelSerial(int serialnumber, PagingVO paging);
+
+	public int getListCount(int serialnumber);
 	
 }

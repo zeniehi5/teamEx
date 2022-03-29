@@ -1,19 +1,20 @@
 package com.booqueen.partner.hotel.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.partner.finance.InvoiceVO;
 import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.hotel.HotelPaymentVO;
 import com.booqueen.partner.hotel.HotelPolicyVO;
-import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.message.InquiryVO;
+import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -112,8 +113,10 @@ public class HotelDAO {
 		return sqlSessionTemplate.selectOne("HotelDAO.getHotelServiceByHotelSerial", serialnumber);
 	}
 
-	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
-		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber);
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber, PagingVO paging) {
+		int offset = (paging.getCurrentPage() -1) * paging.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, paging.getBoardLimit());
+		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber, rowBounds);
 	}
 	
 	public void setHotelImage(HotelImageVO vo) {
@@ -122,6 +125,16 @@ public class HotelDAO {
 
 	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectOne("HotelDAO.selectHotelImgByHotelSerial", serialnumber);
+	}
+
+	public List<InvoiceVO> selectInvoiceByHotelSerial(int serialnumber, PagingVO paging) {
+		int offset = (paging.getCurrentPage() - 1) * paging.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, paging.getBoardLimit());
+		return sqlSessionTemplate.selectList("HotelDAO.selectInvoiceByHotelSerial", serialnumber, rowBounds);
+	}
+
+	public int getListCount(int serialnumber) {
+		return sqlSessionTemplate.selectOne("HotelDAO.getListCount", serialnumber);
 	}
 	
 }

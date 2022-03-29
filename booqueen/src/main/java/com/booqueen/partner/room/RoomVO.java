@@ -17,5 +17,10 @@ public class RoomVO {
 	private int available;
 	private int quota;
 	private int bed;
+	
+	///
+	private String day;
+	private Integer month;
+	private Integer year;
 
 }

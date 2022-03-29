@@ -15,7 +15,7 @@ public class S3TestMain {
 		
 		try {
 			main.upload(file, key);
-			System.out.println("�꽦怨�");
+			System.out.println("성공");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

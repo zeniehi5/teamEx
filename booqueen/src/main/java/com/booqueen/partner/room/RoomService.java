@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.booqueen.partner.hotel.HotelImageVO;
+import com.booqueen.partner.hotel.HotelServiceVO;
 
 public interface RoomService {
 
@@ -11,33 +12,33 @@ public interface RoomService {
 	
 	public RoomVO getIdBySerial(int serial);
 
-	public FacilitiesBasicVO getBasicInfoByHotelSerial(int serial);
+	public FacilitiesBasicVO getBasicInfoByRoomId(int room_id);
 
-	public FacilitiesBathVO getBathInfoByHotelSerial(int serial);
+	public FacilitiesBathVO getBathInfoByRoomId(int room_id);
 
-	public FacilitiesMediaVO getMediaInfoByHotelSerial(int serial);
+	public FacilitiesMediaVO getMediaInfoByRoomId(int room_id);
 
-	public FacilitiesViewVO getViewInfoByHotelSerial(int serial);
+	public FacilitiesViewVO getViewInfoByRoomId(int room_id);
 
-	public FacilitiesAccessVO getAccessInfoByHotelSerial(int serial);
+	public FacilitiesAccessVO getAccessInfoByRoomId(int room_id);
 
-	public FacilitiesServiceVO getServiceInfoByHotelSerial(int serial);
+	public FacilitiesServiceVO getServiceInfoByRoomId(int room_id);
 
-	public void updateHotelService(HashMap<String, Object> attribute);
+	public void updateHotelService(HotelServiceVO service);
 
-	public void updateFaciliteisBasic(HashMap<String, Object> attribute);
+	public void updateFaciliteisBasic(FacilitiesBasicVO basic);
 
-	public void updateFacilitiesAccess(HashMap<String, Object> attribute);
+	public void updateFacilitiesAccess(FacilitiesAccessVO access);
 
-	public void updateFacilitiesMedia(HashMap<String, Object> attribute);
+	public void updateFacilitiesMedia(FacilitiesMediaVO media);
 
-	public void updateFacilitiesView(HashMap<String, Object> attribute);
+	public void updateFacilitiesView(FacilitiesViewVO view);
 
-	public void updateFacilitiesBath(HashMap<String, Object> attribute);
+	public void updateFacilitiesBath(FacilitiesBathVO bath);
 
-	public void updateFacilitiesService(HashMap<String, Object> attribute);
+	public void updateFacilitiesService(FacilitiesServiceVO service);
 
-	public RoomVO getRoomByHotelSerial(int serialnumber);
+	public List<RoomVO> getRoomByHotelSerial(int serialnumber);
 
 	public void insertRoomAvailable(HashMap<String, Object> setPrice);
 
@@ -53,6 +54,8 @@ public interface RoomService {
 	
 	public List<UpdateImageVO> selectTypeBySerial(int serialnumber);
 	
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo);
+
+	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber);
 
 }
