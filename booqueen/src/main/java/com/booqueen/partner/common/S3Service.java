@@ -52,7 +52,7 @@ public class S3Service {
 		uploadToS3(new PutObjectRequest(this.bucket, key, file));
 	}
 	
-	/* MultipartFile�쓣 �씠�슜�븷 寃쎌슦 */
+	/* MultipartFile占쎌뱽 占쎌뵠占쎌뒠占쎈막 野껋럩�뒭 */
 	public void upload(InputStream is, String key, String contentType, long contentLength) {
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(contentType);

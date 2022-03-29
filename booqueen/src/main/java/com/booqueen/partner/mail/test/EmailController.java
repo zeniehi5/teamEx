@@ -26,8 +26,8 @@ public class EmailController {
 	public String mailSender(HttpServletRequest request, HttpSession session, MemberVO vo)
 			throws AddressException, MessagingException {
 
-		String subject = (String) request.getParameter("subject"); // 메일 제목
-		String message = (String) request.getParameter("message"); // 메일 내용
+		String subject = (String) request.getParameter("subject"); // 硫붿씪 �젣紐�
+		String message = (String) request.getParameter("message"); // 硫붿씪 �궡�슜
 
 		// SMTP 서버 설정
 		final String host = "smtp.gmail.com"; // 사용할 smtp host, naver라면 smtp.naver.com
@@ -35,10 +35,10 @@ public class EmailController {
 		final String accountPwd = "#";
 		final int port = 465; // SMTP 포트
 
-		String receiver = session.getAttribute("email").toString(); // 받는사람 이메일
-		String sender = "xodnjs1009@gmail.com"; // 보내는사람 이메일
+		String receiver = session.getAttribute("email").toString(); // 諛쏅뒗�궗�엺 �씠硫붿씪
+		String sender = "xodnjs1009@gmail.com"; // 蹂대궡�뒗�궗�엺 �씠硫붿씪
 
-		// Property 정보 생성
+		// Property �젙蹂� �깮�꽦
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", port);
@@ -46,7 +46,7 @@ public class EmailController {
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.trust", host);
 
-		// 사용자 인증
+		// �궗�슜�옄 �씤利�
 		Session mailsession = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
 				return new javax.mail.PasswordAuthentication(accountId, accountPwd);
@@ -55,8 +55,8 @@ public class EmailController {
 		
 		mailsession.setDebug(true);
 
-		Message mimeMessage = new MimeMessage(mailsession); // MimeMesage 생성
-		mimeMessage.setFrom(new InternetAddress(sender)); // 보내는 EMAIL (정확히 적어야 SMTP 서버에서 인증 실패되지 않음)
+		Message mimeMessage = new MimeMessage(mailsession); // MimeMesage �깮�꽦
+		mimeMessage.setFrom(new InternetAddress(sender)); // 蹂대궡�뒗 EMAIL (�젙�솗�엳 �쟻�뼱�빞 SMTP �꽌踰꾩뿉�꽌 �씤利� �떎�뙣�릺吏� �븡�쓬)
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
 
 		// Message Setting
@@ -84,12 +84,12 @@ public class EmailController {
 				+ "                    </a>\r\n" + "                </span>           \r\n"
 				+ "            </header> \r\n" + "        </div>"
 				+ "<form action=\"http://localhost:8080/web/basic-info.pdo\" method=\"POST\">" + "<div class=\"mail\">"
-				+ "<div>" + " <h2>내 이메일 주소 인증</h2>" + " <p>\"확인\"을 클릭하시면 이메일 인증 및 고객님의 모든 계정 생성이 완료됩니다.</p>"
-				+ "<p>기존에 본 이메일 주소로 예약하셨던 내역도 그대로 이 계정에 저장됩니다.</p>" + "</div>" + "<div>"
-				+ "<input type=\"submit\" id=\"continue\" value=\"확인\">" + "<script type=\"text/javascript\">"
+				+ "<div>" + " <h2>�궡 �씠硫붿씪 二쇱냼 �씤利�</h2>" + " <p>\"�솗�씤\"�쓣 �겢由��븯�떆硫� �씠硫붿씪 �씤利� 諛� 怨좉컼�떂�쓽 紐⑤뱺 怨꾩젙 �깮�꽦�씠 �셿猷뚮맗�땲�떎.</p>"
+				+ "<p>湲곗〈�뿉 蹂� �씠硫붿씪 二쇱냼濡� �삁�빟�븯�뀲�뜕 �궡�뿭�룄 洹몃�濡� �씠 怨꾩젙�뿉 ���옣�맗�땲�떎.</p>" + "</div>" + "<div>"
+				+ "<input type=\"submit\" id=\"continue\" value=\"�솗�씤\">" + "<script type=\"text/javascript\">"
 				+ "document.getElementById(\"continue\").onclick=function(){location.href=\"http://localhost:8080/web/basic-info.pdo\";};"
 				+ "</script>" + "</div>" + " <div class=\"footer\"> " + "<div>" + " <hr>"
-				+ "<p>© All rights reserved. Booqueen.com </p>" + "<p>이 이메일은 Booqueen.com에 의해 발송되었습니다.</p>" + "</div>"
+				+ "<p>짤 All rights reserved. Booqueen.com </p>" + "<p>�씠 �씠硫붿씪�� Booqueen.com�뿉 �쓽�빐 諛쒖넚�릺�뿀�뒿�땲�떎.</p>" + "</div>"
 				+ "</div>" + "</div>" + "</form>" + "</body>" + "</html>";
 		mimeMessage.setContent(msgg, "text/html; charset=utf-8");
 		Transport.send(mimeMessage); // Transfer
