@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
@@ -12,6 +13,7 @@ import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelVO;
+import com.booqueen.user.hotel.vo.RecentSearchVO;
 
 @Service
 public class HotelService {
@@ -53,6 +55,19 @@ public class HotelService {
 	
 	public HotelPolicyVO selectHotelPolicy(Integer serialNumber) {
 		return hotelDAO.selectHotelPolicy(serialNumber);
+	}
+	
+	public List<String> getAutocompleteCity() {
+		return hotelDAO.getAutocompleteCity();
+	}
+	
+	// 최근 검색
+	public int insertRecentSearch(RecentSearchVO recentSearchVO) {
+		return hotelDAO.insertRecentSearch(recentSearchVO);
+	}
+	
+	public List<RecentSearchVO> selectRecentSearch(String userid) {
+		return hotelDAO.selectRecentSearch(userid);
 	}
 	
 }

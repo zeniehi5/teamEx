@@ -13,6 +13,7 @@ import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelVO;
+import com.booqueen.user.hotel.vo.RecentSearchVO;
 
 
 @Repository
@@ -64,6 +65,21 @@ public class HotelDAO {
 	public HotelPolicyVO selectHotelPolicy(Integer serialNumber) throws DataAccessException{
 		HotelPolicyVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.selectHotelPolicy", serialNumber);
 		return vo;
+	}
+	
+	public List<String> getAutocompleteCity() throws DataAccessException{
+		List<String> city = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.autocompleteCity");
+		return city;
+	}
+	
+	// 최근 검색
+	public int insertRecentSearch(RecentSearchVO recentSearchVO) throws DataAccessException{
+		return sqlSession.insert("com.booqueen.user.hotel.dao.recentsearchmapper.insertRecentSearch", recentSearchVO);
+	}
+	
+	public List<RecentSearchVO> selectRecentSearch(String userid) throws DataAccessException{
+		List<RecentSearchVO> recentSearchVO = sqlSession.selectList("com.booqueen.user.hotel.dao.recentsearchmapper.selectRecentSearch", userid);
+		return recentSearchVO;
 	}
 	
 }

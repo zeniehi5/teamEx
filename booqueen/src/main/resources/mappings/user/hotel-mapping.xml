@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.booqueen.user.hotel.dao.hotelmapper">
 	
+	<select id="autocompleteCity" resultType="String">
+		<![CDATA[SELECT city from temphotel group by city]]>
+	</select>
+	
 	<select id="selectHotels" resultType="hotelVO" parameterType="String">
 		<![CDATA[SELECT * FROM temphotel where city LIKE CONCAT('%', #{city}, '%') or hotelname like CONCAT('%', #{city}, '%')]]>
 	</select>
