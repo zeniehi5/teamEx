@@ -30,6 +30,7 @@ import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
+import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.member.MemberVO;
 import com.booqueen.user.review.service.ReviewService;
 import com.booqueen.user.review.vo.ReviewAvgVO;
@@ -39,6 +40,7 @@ import com.booqueen.user.room.service.RoomService;
 import com.booqueen.user.room.vo.RoomVO;
 import com.booqueen.user.wishlist.service.WishlistService;
 import com.booqueen.user.wishlist.vo.WishlistVO;
+import com.google.gson.Gson;
 
 @Controller
 public class HotelController {
@@ -57,6 +59,14 @@ public class HotelController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@RequestMapping(value = "/autocomplete.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String autocomplete(Model model) {
+		List<String> city = hotelService.getAutocompleteCity();
+		Gson gson = new Gson();
+		return gson.toJson(city);
+	}
 	
 	@RequestMapping(value = "/searchResult.do", method = RequestMethod.GET)
 	public String getHotelList(@RequestParam("keyword") String keyword, @RequestParam("daterange") String date, Model model, HttpServletResponse response) throws IOException{
@@ -85,6 +95,18 @@ public class HotelController {
 		
 		model.addAttribute("unavailableHotelList", getUnavailableByCity);*/
 		
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		
+		RecentSearchVO recentSearchVO = new RecentSearchVO();
+		
+		recentSearchVO.setUserid(user.getUserid());
+		recentSearchVO.setCity(keyword);
+		recentSearchVO.setStart_date(start_date);
+		recentSearchVO.setEnd_date(end_date);
+		recentSearchVO.setPeople(2); // 인원 설정 후 수정
+		
+		hotelService.insertRecentSearch(recentSearchVO);
+		
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
 		if(!getByCity.isEmpty() && getByCity != null) {
@@ -102,7 +124,7 @@ public class HotelController {
 	}
 	
 	@RequestMapping(value = "/searchResultInBox.do", method = RequestMethod.GET)
-	public String getHotelListInOtherPage(@RequestParam("keyword") String keyword, @RequestParam("daterange1") String date1, @RequestParam("daterange2") String date2, Model model, HttpServletResponse response) throws IOException{
+	public String getHotelListInOtherPage(@RequestParam("keyword") String keyword, @RequestParam("daterange1") String date1, @RequestParam("daterange2") String date2, Model model, HttpSession session, HttpServletResponse response) throws IOException{
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -124,6 +146,18 @@ public class HotelController {
 
 		model.addAttribute("unavailableHotelList", getUnavailableByCity);*/
 		
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		
+		RecentSearchVO recentSearchVO = new RecentSearchVO();
+		
+		recentSearchVO.setUserid(user.getUserid());
+		recentSearchVO.setCity(keyword);
+		recentSearchVO.setStart_date(start_date);
+		recentSearchVO.setEnd_date(end_date);
+		recentSearchVO.setPeople(2); // 인원 설정 후 수정
+		
+		hotelService.insertRecentSearch(recentSearchVO);
+
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
 		if(!getByCity.isEmpty() && getByCity != null) {

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.user.payment.vo.EmailVO;
 import com.booqueen.user.payment.vo.PaymentVO;
 
 
@@ -24,5 +25,9 @@ public class PaymentDAO {
 	
 	public int updatePayment(PaymentVO paymentVO) throws DataAccessException{
 		return sqlSession.update("com.booqueen.user.payment.dao.paymentmapper.updatePayment", paymentVO);
+	}
+	
+	public EmailVO getReservationInfo(String merchant) throws DataAccessException{
+		return sqlSession.selectOne("com.booqueen.user.payment.dao.emailmapper.getReservationInfo", merchant);
 	}
 }

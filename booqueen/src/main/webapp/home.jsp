@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,7 +18,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="${contextPath}/resources/user/javascript/index-copy.js"></script>
-
+	
+	<!-- autocomplete -->
+	<link rel="stylesheet" href="${contextPath}/resources/user/css/autocomplete.css">
+    <script type="text/javascript" src="${contextPath}/resources/user/javascript/autocomplete.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	
+	<!-- cookie -->
+	<script type="text/javascript" src="${contextPath}/resources/user/javascript/jquery.cookie.js"></script>
+	
     <!-- datepicker -->
     <link rel="stylesheet" href="${contextPath}/resources/user/css/datepicker.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -47,11 +57,11 @@
     </div>
 
     <div class="form-container">
-        <form class="main-form" action="${contextPath}/searchResult.do" method="get">
+        <form class="main-form" action="${contextPath}/searchResult.do" method="get" id="keywordForm">
             <div class="form-inner">
                 <div class="form-inner-frist">
                     <div>
-                        <input type="text" placeholder="어디로 향하시나요?" name="keyword" value="">  
+                        <input type="text" placeholder="어디로 향하시나요?" name="keyword" id="keywordInput" value="">  
                     </div>
                 </div>
                 <div class="form-inner-second">
@@ -81,18 +91,18 @@
             <div class="form-first">
                 <label>성인</label>
                 <div>
-                    <button class="people-form-button" data-quantity="minus" data-field="quantity"><span>-</span></button>&nbsp;&nbsp;
-                    <input type="number" name="quantity" value="0" class="input-number-of-member"></input>&nbsp;&nbsp;
-                    <button class="people-form-button" data-quantity="plus" data-field="quantity"><span>+</span></button>
+                    <button class="people-form-button" data-quantity="minus" data-field="quantity1"><span>-</span></button>&nbsp;&nbsp;
+                    <input type="number" name="quantity1" value="0" class="input-number-of-member"></input>&nbsp;&nbsp;
+                    <button class="people-form-button" data-quantity="plus" data-field="quantity1"><span>+</span></button>
                 </div>
             </div>
             <div class="form-first">
-                <label>어린이</label>
-                <div><button class="people-form-button" id="minus2"><span class="minus">-</span></button>&nbsp;&nbsp;<span id="span2">1</span>&nbsp;&nbsp;<button class="people-form-button" id="plus2"><span>+</span></button></div>
-            </div>
-            <div class="form-first">
                 <label>객실</label>
-                <div><button class="people-form-button" id="minus3"><span class="minus">-</span></button>&nbsp;&nbsp;<span id="span3">1</span>&nbsp;&nbsp;<button class="people-form-button" id="plus3"><span>+</span></button></div>
+                <div>
+                    <button class="people-form-button" data-quantity="minus" data-field="quantity2"><span>-</span></button>&nbsp;&nbsp;
+                    <input type="number" name="quantity2" value="0" class="input-number-of-member"></input>&nbsp;&nbsp;
+                    <button class="people-form-button" data-quantity="plus" data-field="quantity2"><span>+</span></button>
+                </div>
             </div>
         </div>
     </div>
@@ -108,23 +118,29 @@
             </div>
         </div>
     </div>
-
-    <div class="section">
+	
+	
+	<c:if test="${recentSearchList != null && !empty recentSearchList}">
+	    <div class="section">
         <h2>고객님의 최근 검색</h2>
         <div class="recent-div">
             <ul class="recent-ul">
+            	<c:forEach var="recentSearchList" items="${recentSearchList}" varStatus="status">
                 <li>
                     <a>
                         <div class="recent-ul-div">
-                            <div><img class="recent-img" src="${contextPath}/resources/user/images/recent1.webp"></div>
-                            <div><span>리스본</span><span>2월 27일~3월 1일, 2명</span></div>
+                            <div><img class="recent-img" src="${recentSearchList.file_url}"></div>
+                            <fmt:parseDate var="start_date" value="${recentSearchList.start_date}" pattern="yyyy-MM-dd" />
+                            <fmt:parseDate var="end_date" value="${recentSearchList.end_date}" pattern="yyyy-MM-dd" />
+                            <div><span>${recentSearchList.city}</span><span><fmt:formatDate value="${start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${end_date}" pattern="M월 dd일"/>, ${recentSearchList.people}명</span></div>
                         </div>
                     </a>
                 </li>
-                
+                </c:forEach>
             </ul>
         </div>
-    </div>
+    	</div>
+    </c:if>
 	
 	<c:choose>
 	<c:when test="${isLogOn == true  && member!= null}">
@@ -151,8 +167,8 @@
     <div class="promotion">
         <div><span class="promotion-i"><i class="fas fa-tag fa-lg"></i></span></div>
         <div>
-            <span>전국 숙소 파격 할인 중!</span>
-            <a>오늘의 특가를 알아보세요.</a>
+            <span>전국 숙소 파격 할인 중 !&nbsp;</span>
+            <a>추천 숙소를 알아보세요.</a>
         </div>
         <span class="x-button"><i class="bi bi-x-lg"></i></span>
     </div>
@@ -186,6 +202,7 @@
 
     <div class="galleries">
         <div class="main-grid">
+        	<%-- <c:forEach> --%>
             <div class="main-grid-1">
                 <div class="gallery-text-box">
                     <h1>부산</h1>
@@ -221,6 +238,7 @@
                 </div>
                 <img src="${contextPath}/resources/user/images/null.png">
             </div>
+            <%-- </c:forEach> --%>
         </div>
     </div>
 
@@ -745,18 +763,78 @@
     
     var dateString_2 = year_2 + '/' + month_2  + '/' + day_2;
     
-        $(document).ready(function () {
-            $(function () {
-                $('input[name="daterange"]').daterangepicker({
-                    "startDate": dateString,
-                    "endDate": dateString_2,
-                    opens: 'center',
-                    locale: {
-                        format: 'YYYY/MM/DD'
-                    }
-                });
-            });
-        });
+	
+	$(function () {
+		
+	    $('input[name="daterange"]').daterangepicker({
+	        "startDate": dateString,
+	        "endDate": dateString_2,
+	        opens: 'center',
+	        locale: {
+	            format: 'YYYY/MM/DD'
+	        }
+	    });
+		
+	});
+	
+	$(function() {
+		var contextPath = '${contextPath}';
+		$.ajax({
+			type: 'get',
+			url: contextPath + '/autocomplete.do',
+			dataType: "JSON",
+			success: function(data) {
+				let city = $.map(data, function(item) {
+					chosung ="";
+					full = Hangul.disassemble(item).join("").replace(/ /gi, ""); // 코드를 통해 한글 초중종성으로 나눠 label에 추가
+					Hangul.d(item, true).forEach(function(strItem, index) {
+						if (strItem[0] != " ") { // 띄어쓰기 아니면
+							chosung += strItem[0]; // 초성 추가
+						}
+					});
+					return {
+						label : chosung + "|" + (item).replace(/ /gi, "") + "|" + full, // 실제 검색어랑 비교 대상
+						value : item,
+						chosung : chosung,
+						full: full
+					}
+				});
+				
+				$('#keywordInput').autocomplete({
+					source : city,
+					select : function(event, ui) {
+						console.log(ui.item.label + " 선택 완료");
+					},
+					focus : function(event, ui) {
+						return false; // 한글 에러 잡기 용도
+					}
+				}).autocomplete("instance")._renderItem = function(ul, item) {
+					return $("<li>")
+					.append("<div style='display: flex; align-items: center;'>" + "<span class='sb-autocomplete--photo'><svg fill='#6B6B6B' height='24' width='24' viewBox='0 0 24 24' class='bk-icon -streamline-geo_pin'><path d='M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z'></path></svg></span><span style='padding-left: 6px;'>" + item.value + "</span></div>")
+					.appendTo(ul);
+				};
+			}
+		});
+		
+		$('#keywordInput').on("keyup", function() {
+			input = $('#keywordInput').val(); // 입력된 값 저장
+			$('#keywordInput').autocomplete("search", Hangul.disassemble(input).join("").replace(/ /gi, "")); // 자음모음 분리 후 띄어쓰기 삭제
+		})
+	});
+
+    </script>
+    
+    <script>
+    	
+   	/* $(function() {
+   		$.ajax({
+   			type: 'get',
+   			url: contextPath + "/getCityList.do",
+   			dataType: "JSON",
+   			success
+   		})
+   	}); */
+    
     </script>
 
 </body>

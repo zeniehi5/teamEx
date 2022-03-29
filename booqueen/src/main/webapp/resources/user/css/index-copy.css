@@ -111,7 +111,9 @@ a:hover{
 .bi{
     font-size: 20px;
 }
-
+.bi-alarm {
+    line-height: 27px;
+}
 /* next-trip */
 .next-trip{
     background-color: #003580;
@@ -843,3 +845,13 @@ tbody tr td {
 	color: black;
 }
 
+/* 최근검색 없을 때 */
+.recent-div-none {
+	margin-bottom: -16px;	
+}
+.recent-div-none-div {
+    margin-top: 13px;
+    border: 1px solid #ECEcec;
+    border-radius: 3px;
+    padding: 15px;
+}
