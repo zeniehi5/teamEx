@@ -913,20 +913,20 @@
 	                <div class="question-third-right">
 	                    
 	                    <c:forEach var="boardList" items="${boardList }" varStatus="status" begin="0" end="3">
-			                    <c:choose>
-			                    <c:when test="${!boardList.partner}">
-			                    <div class="question-third-right-row">
-			                        <div class="icon-text">
-			                            <i class="bi bi-person"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
-			                        </div>
-			                    </c:when>
-			                    <c:when test="${boardList.partner}">
-			                        <div class="icon-text">
-			                            <i class="bi bi-chat"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
-			                        </div>
-			                        </div>
-			                    </c:when>
-			                    </c:choose>
+	                    <c:choose>
+	                    <c:when test="${!boardList.partner}">
+	                    <div class="question-third-right-row">
+	                        <div class="icon-text">
+	                            <i class="bi bi-person"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
+	                        </div>
+	                    </c:when>
+	                    <c:when test="${boardList.partner}">
+	                        <div class="icon-text">
+	                            <i class="bi bi-chat"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
+	                        </div>
+                 	</div>
+	                    </c:when>
+	                    </c:choose>
                          </c:forEach>
 	                    <p class="question-more"><button class="button-white"><span>질문 더 보기(<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2-2 }"/>개)</span></button></p>
 	                </div>

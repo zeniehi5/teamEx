@@ -15,6 +15,7 @@
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelAvailableVO" alias="hotelAvailableVO"/>
 		<typeAlias type="com.booqueen.user.reservation.vo.ReservationVO" alias="uReservationVO"/>
 		<typeAlias type="com.booqueen.user.payment.vo.PaymentVO" alias="paymentVO"/>
+		<typeAlias type="com.booqueen.user.hotel.vo.CityVO" alias="cityVO"/>
 		
 		<!-- shared -->
 		<typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>

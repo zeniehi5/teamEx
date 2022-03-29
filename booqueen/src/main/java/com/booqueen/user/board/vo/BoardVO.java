@@ -9,15 +9,16 @@ public class BoardVO {
 	private Integer serialnumber;
 	private Date send_date;
 	private String content;
-	private Boolean partner;
-	private Integer closed;
+	private boolean partner;
+	private boolean closed;
 	private Integer groupno;
+	private boolean complete;
 
 	public BoardVO() {
 	}
 
 	public BoardVO(Integer board_seq, String userid, Integer serialnumber, Date send_date, String content,
-			Boolean partner, Integer closed, Integer groupno) {
+			boolean partner, boolean closed, Integer groupno, boolean complete) {
 		super();
 		this.board_seq = board_seq;
 		this.userid = userid;
@@ -27,6 +28,7 @@ public class BoardVO {
 		this.partner = partner;
 		this.closed = closed;
 		this.groupno = groupno;
+		this.setComplete(complete);
 	}
 
 	public Integer getBoard_seq() {
@@ -69,19 +71,19 @@ public class BoardVO {
 		this.content = content;
 	}
 
-	public Boolean getPartner() {
+	public boolean getPartner() {
 		return partner;
 	}
 
-	public void setPartner(Boolean partner) {
+	public void setPartner(boolean partner) {
 		this.partner = partner;
 	}
 
-	public Integer getClosed() {
+	public boolean getClosed() {
 		return closed;
 	}
 
-	public void setClosed(Integer closed) {
+	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
 
@@ -91,6 +93,14 @@ public class BoardVO {
 
 	public void setGroupno(Integer groupno) {
 		this.groupno = groupno;
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
 	}
 
 }

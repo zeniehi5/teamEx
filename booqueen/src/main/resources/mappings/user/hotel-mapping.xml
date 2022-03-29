@@ -47,69 +47,74 @@
    
 	<select id="selectHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
 		<![CDATA[
-				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
-	
-				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
-				
-				o.price, o.room_id, a.open_date
-				
-				from hotel_image as h 
-				
-				full join temphotel as t
-				
-				on h.serialnumber = t.serialnumber
-				
-				full join review as r
-				
-				on t.serialnumber = r.serialnumber
-		
-				full join room as o
-				
-				on t.serialnumber = o.serialnumber
-				
-				left join room_available as a
-				
-				on o.room_id = a.room_id
-				
-				where t.city LIKE CONCAT('%', #{city}, '%') and
-				
-				open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD') and open_date != TO_DATE(#{end_date}, 'YYYYMMDD')
-				
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+				SELECT
+				    t.serialnumber,
+				    t.hotelname,
+				    t.address1,
+				    t.address2,
+				    t.postalcode,
+				    t.city,
+				    t.telephone,
+				    t.star,
+				    t.longitude,
+				    t.latitude,
+				    h.file_name,
+				    h.file_url,
+				    round(AVG(r.score), 1) AS score,
+				    COUNT(r.username),
+				    o.price,
+				    o.room_id,
+				    a.open_date
+				FROM
+				    hotel_image as h 			
+				full join 
+						temphotel as t		
+				on 
+						h.serialnumber = t.serialnumber				
+				full join
+						review as r		
+				on 
+						t.serialnumber = r.serialnumber
+				full join 
+						room as o	
+				on 
+						t.serialnumber = o.serialnumber		
+				left join 
+						room_available as a	
+				on 
+						o.room_id = a.room_id	
+				where 
+						t.city LIKE CONCAT('%', #{city}, '%') and o.room_id in(
+										SELECT room_id FROM
+												(SELECT
+				        room_id, MIN(open_date) as open_date, MAX(close_date) as close_date
+				    FROM (
+				    SELECT
+				        *,
+				        ( ROW_NUMBER()
+				          OVER(PARTITION BY room_id
+				               ORDER BY
+				                   open_date
+				          ) ) AS rownum
+				    FROM
+				        room_available
+				    WHERE
+				            open_date >= TO_DATE(#{start_date}, 'YYYYMMDD')
+				        AND close_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				    ORDER BY
+				        room_id,
+				        open_date
+				) as a
+				        GROUP BY room_id, (open_date - cast(a.rownum as integer)), (close_date - cast(a.rownum as integer))
+				        ORDER BY room_id, Min(open_date), MAX(close_date)
+					) as b
+					WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')
+									
+								) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD')
+								group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
 		]]>
 	</select>
 	
-	<select id="selectUnavailableHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
-		<![CDATA[
-				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
-	
-				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
-				
-				o.price, o.room_id, a.open_date
-				
-				from hotel_image as h 
-				
-				full join temphotel as t
-				
-				on h.serialnumber = t.serialnumber
-				
-				full join review as r
-				
-				on t.serialnumber = r.serialnumber
-		
-				full join room as o
-				
-				on t.serialnumber = o.serialnumber
-				
-				left join room_available as a
-				
-				on o.room_id = a.room_id
-				
-				where t.city LIKE CONCAT('%', #{city}, '%')
-				
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
-		]]>
-	</select>
 	
 	<select id="selectFilterByStar" resultMap="HotelVOMap" parameterType="java.util.HashMap">
 		<![CDATA[ 
@@ -141,20 +146,26 @@
 				
 				on o.room_id = a.room_id
 				
-				where open_date between
+				where o.room_id in (
 		]]>	
-				<foreach collection="dates" item="dates" separator="and">
-					<![CDATA[ TO_DATE(#{dates}, 'YYYYMMDD')]]>	
+				<foreach collection="room_id" item="room_id" separator=",">
+					<![CDATA[ #{room_id} ]]>	
 				</foreach>
 		<![CDATA[ 
-				and star in (
+				) and star in (
 		]]>			
 				<foreach collection="stars" item="stars" separator="," index="index">
        				 <![CDATA[ #{stars}]]>	
    	 			</foreach>
 		<![CDATA[		
-				) and city LIKE CONCAT('%',
-				]]>	
+				) and open_date =
+		]]>		
+				<foreach collection="date_start" item="date_start" index="index">	
+					<![CDATA[ TO_DATE(#{date_start}, 'YYYYMMDD') ]]>	
+				</foreach>
+		<![CDATA[
+				and city LIKE CONCAT('%',
+		]]>	
 				<foreach collection="city" item="city" index="index">
 				 	<![CDATA[#{city}]]>	
 				</foreach>		
@@ -228,13 +239,129 @@
 				]]>
 		
 				<foreach collection="order" item="order" separator=",">
-					<![CDATA[ ${order}]]>	
+					<choose>
+					<when test="order == 15">
+						<![CDATA[ ${order}]]>	
+					</when>
+					<otherwise>
+						<![CDATA[ ${order} desc]]>
+					</otherwise>	
+					</choose>	
 				</foreach>
-				
-				<![CDATA[
-					desc  
-				]]>
 		</if>			
+	</select>
+	
+	<select id="getHotelByDate" resultType="Integer" parameterType="hotelAvailableVO">
+		<![CDATA[
+			SELECT room_id FROM
+								(SELECT
+       									room_id, MIN(open_date) as open_date, MAX(close_date) as close_date
+		    					FROM (
+		    							SELECT
+									        *,
+									        ( ROW_NUMBER()
+									          OVER(PARTITION BY room_id
+									               ORDER BY
+									                   open_date
+									          ) ) AS rownum
+									    FROM
+									        room_available
+									    WHERE
+									            open_date >= TO_DATE(#{start_date}, 'YYYYMMDD')
+									        AND close_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+									    ORDER BY
+									        room_id,
+									        open_date
+									) as a
+							        GROUP BY room_id, (open_date - cast(a.rownum as integer)), (close_date - cast(a.rownum as integer))
+							        ORDER BY room_id, Min(open_date), MAX(close_date)
+								) as b
+			WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')				
+		]]>
+	</select>
+	
+	<select id="selectHotelByMap" resultMap="HotelVOMap" parameterType="hotelMapVO">
+		<![CDATA[
+				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
+	
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
+				
+				from hotel_image as h 
+				
+				full join temphotel as t
+				
+				on h.serialnumber = t.serialnumber
+				
+				full join review as r
+				
+				on t.serialnumber = r.serialnumber
+				
+				full join hotel_service as s
+				
+				on t.serialnumber = s.serialnumber
+				
+				full join room as o
+				
+				on t.serialnumber = o.serialnumber
+				
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where latitude >= #{wLatitude} and latitude <= #{eLatitude} and longitude >= #{sLongitude} and longitude <= #{nLongitude}
+				
+				and o.room_id in (
+		]]>	
+				<foreach collection="room_id" item="room_id" separator=",">
+					<![CDATA[ #{room_id} ]]>	
+				</foreach>
+		<![CDATA[ 
+				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD')
+		]]>		
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+	</select>
+	
+	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">
+		<![CDATA[select * from hotel_policy where serialnumber = #{serialnumber} ]]>
+	</select>
+	
+	<select id="getCityLocation" resultType="cityVO" parameterType="String">
+		select * from city where city = #{city}
+	</select>
+	
+	<!-- unavailableHotel -->
+	<select id="selectUnavailableHotelWithImg" resultMap="HotelVOMap" parameterType="hotelAvailableVO">
+		<![CDATA[
+				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
+	
+				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
+				
+				o.price, o.room_id, a.open_date
+				
+				from hotel_image as h 
+				
+				full join temphotel as t
+				
+				on h.serialnumber = t.serialnumber
+				
+				full join review as r
+				
+				on t.serialnumber = r.serialnumber
+		
+				full join room as o
+				
+				on t.serialnumber = o.serialnumber
+				
+				left join room_available as a
+				
+				on o.room_id = a.room_id
+				
+				where t.city LIKE CONCAT('%', #{city}, '%')
+				
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+		]]>
 	</select>
 	
 	<select id="selectUnavailableHotelByFilter" resultMap="HotelVOMap" parameterType="java.util.HashMap">
@@ -362,31 +489,5 @@
 				]]>
 		</if>			
 	</select>
-	
-	<select id="selectHotelByMap" resultMap="HotelVOMap" parameterType="hotelMapVO">
-		<![CDATA[
-				select t.serialnumber, t.hotelname , t.address1, t.address2, t.postalcode, t.city,
-	
-				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username) 
-				
-				from hotel_image as h 
-				
-				full join temphotel as t
-				
-				on h.serialnumber = t.serialnumber
-				
-				full join review as r
-				
-				on t.serialnumber = r.serialnumber
-				
-				where latitude >= #{wLatitude} and latitude <= #{eLatitude} and longitude >= #{sLongitude} and longitude <= #{nLongitude}
-				
-				group by t.serialnumber, h.file_name, h.file_url
-		]]>
-	</select>
-	
-	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">
-		<![CDATA[select * from hotel_policy where serialnumber = #{serialnumber} ]]>
-	</select>
-	
+
 </mapper>

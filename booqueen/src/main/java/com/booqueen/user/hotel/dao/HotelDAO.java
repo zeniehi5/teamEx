@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
+import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
@@ -63,6 +64,16 @@ public class HotelDAO {
 	
 	public HotelPolicyVO selectHotelPolicy(Integer serialNumber) throws DataAccessException{
 		HotelPolicyVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.selectHotelPolicy", serialNumber);
+		return vo;
+	}
+	
+	public List<Integer> getHotelByDate(HotelAvailableVO hotelavailableVO) throws DataAccessException{
+		List<Integer> hotelList = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.getHotelByDate", hotelavailableVO);
+		return hotelList;
+	}
+	
+	public CityVO getCityLocation(String city) throws DataAccessException{
+		CityVO vo = sqlSession.selectOne("com.booqueen.user.hotel.dao.hotelmapper.getCityLocation", city);
 		return vo;
 	}
 	
