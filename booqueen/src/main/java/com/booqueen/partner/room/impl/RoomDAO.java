@@ -120,7 +120,7 @@ public class RoomDAO {
 	public List<UpdateImageVO> selectTypeBySerial(int serialnumber){
 		return sqlSessionTemplate.selectList("RoomDAO.selectTypeBySerial", serialnumber);
 	}
-	public UpdateImageVO selectRoom_idBySerial(int serialnumber) {
-		return sqlSessionTemplate.selectOne("RoomDAO.selectRoom_idBySerial", serialnumber);
+	public List<RoomVO> selectRoom_idBySerial(RoomVO vo) {
+		return sqlSessionTemplate.selectList("RoomDAO.selectRoom_idBySerial");
 	}
 }

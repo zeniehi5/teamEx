@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.finance.InvoiceVO;
 import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.hotel.HotelPaymentVO;
 import com.booqueen.partner.hotel.HotelPolicyVO;
@@ -12,6 +13,7 @@ import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.message.InquiryVO;
+import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -144,6 +146,16 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public HotelImageVO selectHotelImgByHotelSerial(int serialnumber) {
 		return hotelDAO.selectHotelImgByHotelSerial(serialnumber);
+	}
+
+	@Override
+	public List<InvoiceVO> selectInvoiceByHotelSerial(int serialnumber, PagingVO paging) {
+		return hotelDAO.selectInvoiceByHotelSerial(serialnumber, paging);
+	}
+
+	@Override
+	public int getListCount(int serialnumber) {
+		return hotelDAO.getListCount(serialnumber);
 	}
 
 }
