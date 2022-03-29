@@ -1,0 +1,106 @@
+@charset "UTF-8";
+.menu_title{
+	margin: 20px 400px;
+}
+.menu_body{
+	margin: 20px 400px;
+}
+.table_wrapper{
+    overflow-x: auto;
+    margin-bottom: 24px;
+}
+.room_table{
+    display: table;
+    border: solid #e0e0e0;
+    border-width: 1px 1px 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.table_head{
+    display: table-row-group;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-color: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.table_row{
+    background-color: #fff;
+    display: table-row;
+    border: none;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+}
+.table_cell{
+    padding: 16px 12px;
+    border-left: none;
+    border-right: none;
+    position: sticky;
+    top: -1px;
+    background-color: inherit! important;
+    z-index: 1;
+    text-align: left;    
+}
+.table_cell_head{
+    padding: 16px 12px;
+    border-left: none;
+    border-right: none;
+    display: table-cell;
+    vertical-align: top;
+    border-bottom: 1px slid #e0e0e0;
+    text-align: left;    
+}
+.column_sort{
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.table_body{
+    display: table-row-group;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.btn_primary{
+	color: #fff;
+	background-color: #07c;
+	border: 1px solid #07c;
+	border-radius: 2px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+	cursor: pointer;
+	text-decoration: none;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.5em;
+}

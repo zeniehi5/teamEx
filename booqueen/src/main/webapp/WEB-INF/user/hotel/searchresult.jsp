@@ -44,7 +44,7 @@
 								${unavailableHotelList.get(0).city }
 							</c:otherwise>	
 						</c:choose>--%>
-						${hotelList.get(0).city }
+						<span class="city_header"></span>
 					</a>
 				</li>
 				<li class="search">
@@ -76,7 +76,7 @@
 										<input type="search" class="searchbox-destination-input" value="${unavailableHotelList.get(0).city }" name="keyword">
 									</c:otherwise>	
 								</c:choose> --%>
-									<input type="search" class="searchbox-destination-input" value="${hotelList.get(0).city }" name="keyword">
+									<input type="search" class="searchbox-destination-input" value="" name="keyword">
 							</div>
 						</div>
 						<div class="searchbox-date">
@@ -113,7 +113,7 @@
 				</div>
 				<div class="filter">
 					<div class="filter-by"><h2>필터링 기준:</h2></div>
-					<div class="filters-group">
+					<!-- <div class="filters-group">
 						<div class="filters">
 							<button class="filters-button" id="filterBudgetBtn">
 								<span class="filters-title">
@@ -174,7 +174,7 @@
 							</div>
 						</div>
 					</div>
-					<hr>
+					<hr>-->
 					<div class="filters-group">
 						<div class="filters">
 							<button class="filters-button" id="filterGradeBtn">
@@ -424,7 +424,7 @@
 							</h2>
 						</c:otherwise>	
 					</c:choose>--%>
-						<h2>${hotelList.get(0).city }: 검색된 숙소 
+						<h2><span class="city_header"></span>: 검색된 숙소 
 							<span id="number_hotel">${fn:length(hotelList)}</span>개
 						</h2>
 					
@@ -435,9 +435,9 @@
 				<div class="content">
 					<div class="orderby">
 						<ul class="menubar">
-							<li class="menuitem popularity" data-value="3">
+							<li class="menuitem popularity" data-value="14">
 								<input type="radio" class="filter_radio" id="popularity_filter" name="order_filter" >
-								<label for="popularity_filter">최다 예약</label>
+								<label for="popularity_filter">리뷰(많은 순)</label>
 							</li>
 							<li class="menuitem price" data-value="15">
 								<input type="radio" class="filter_radio" id="price_filter" name="order_filter">
@@ -645,7 +645,7 @@
 												<div class="price">
 													<div class="option-info">1박, 성인 2명</div>
 													<div class="option-price">
-														<span class="fixed-price">\500,000</span>
+														<span class="fixed-price"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price*3.5 }" /></span>
 														<span class="sale-price"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price }" /></span>
 													</div>
 													<div class="price-info">세금 및 기타 요금 포함</div>
@@ -671,6 +671,10 @@
 						</c:forEach>
 						
 						</div><!-- end content_from_ajax -->
+						
+						<div id="content_from_ajax_available_without_review">
+						</div>
+						
 						<%-- </c:if> 
 							<c:if test="${!empty unavailableHotelList }"> 
 						<div id="content_from_ajax_unavailable">
@@ -858,7 +862,7 @@
 
 				<!-- 검색된 숙소, 번호 -->
 				<div class="container-bottom">
-					<div class="found-room">${hotelList.get(0).city}: 검색된 숙소 ${fn:length(hotelList)}개</div>
+					<div class="found-room"><span class="city_header"></span>: 검색된 숙소 ${fn:length(hotelList)}개</div>
 					<div class="showing">
 						<div class="pagination">
 							<a href="#">&laquo;</a>
@@ -1248,9 +1252,9 @@
 <script>
 var isEmpty = function(value){ 
 	if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ 
-		return true 
+		return true;
 	} else { 
-		return false 
+		return false; 
 	}
 };
 
@@ -1277,8 +1281,9 @@ function getParameterByName(name) {
 }
 
 var dateArr = new Array();
-var start_date, end_date;
+var start_date_url, end_date_url;
 
+function getDateFromUrl(){
 	if(!isEmpty(getParameterByName('daterange'))){
 		var dateRow = getParameterByName('daterange');
 		dateArr = dateRow.split('-');
@@ -1286,32 +1291,42 @@ var start_date, end_date;
 		var start_date_raw = dateArr[0].replace(/^\+|\s+$/gm,'');
 		var end_date_raw = dateArr[1].replace(/^\s+|\s+$/gm,'');
 		
-		start_date = start_date_raw.replaceAll("/", "-");
-		end_date = end_date_raw.replaceAll("/", "-");
+		start_date_url = start_date_raw.replaceAll("/", "-");
+		end_date_url = end_date_raw.replaceAll("/", "-");
 	} else {
-		start_date = getParameterByName('daterange1');
-		end_date = getParameterByName('daterange2');
+		start_date_url = getParameterByName('daterange1');
+		end_date_url = getParameterByName('daterange2');
 	}
-	
-	$(document).ready(function(){
-		
-		$('#startdate').val(start_date);
-		$('#enddate').val(end_date);
-				
-          $(".filter_radio").click(function(){
-        	  if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
-                $(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
-            	$(this.parentNode).toggleClass("filter_radio_checked");
-        	  } else {
-       		  	$(this.parentNode).toggleClass("filter_radio_checked");
-        	  }
-          });
-	});
+}
+
+var city_name_url;
+
+function getCityFromUrl(){
+	if(!isEmpty(getParameterByName('keyword'))){
+		city_name_url = getParameterByName('keyword');
+	} 
+}
+
+$(document).ready(function(){
+	getDateFromUrl();
+	$('#startdate').val(start_date_url);
+	$('#enddate').val(end_date_url);
+	getCityFromUrl();
+	$('.searchbox-destination-input').val(city_name_url);
+	$('.city_header').text(city_name_url);
+			
+    $(".filter_radio").click(function(){
+		if($(this.parentNode.parentNode).children().hasClass("filter_radio_checked")){
+          	$(this.parentNode.parentNode).children().removeClass("filter_radio_checked");
+			$(this.parentNode).toggleClass("filter_radio_checked");
+ 	  	} else {
+ 		  	$(this.parentNode).toggleClass("filter_radio_checked");
+ 	  	}
+    });
+});
 </script>
 
 <script>
-
-
 //필터 내용을 저장하는 배열
 var starArr = new Array(); 
 var cityArr = new Array();
@@ -1351,8 +1366,10 @@ $(function(){
 })
 
 var city = '';
-var start_date_pram = start_date.replaceAll("-", "");
-var end_date_pram = end_date.replaceAll("-", "");
+var start_date = '${hotelAvailableVO.start_date}';
+var end_date = '${hotelAvailableVO.end_date}';
+var start_date_param = start_date.replaceAll("-", "");
+var end_date_param = end_date.replaceAll("-", "");
 
 function getAvailableHotel() {    
 
@@ -1378,7 +1395,14 @@ function getAvailableHotel() {
    	 starArr = ['1', '2', '3', '4', '5'];
     }
 	
-	scoreArr.push(0);
+// 	scoreArr.push(0);
+	var check_scoreArr;
+	if(isEmpty(scoreArr)){
+		check_scoreArr = 'false';
+	} else {
+		check_scoreArr = 'true';
+	}
+
 	
 	orderArr.push('1');
 	var orderText = $('.filter_radio_checked').data('value');
@@ -1387,8 +1411,8 @@ function getAvailableHotel() {
 		orderArr.push(orderText);
 	}
 		
-	datesArr.push(start_date_pram);
-	datesArr.push(end_date_pram);
+	datesArr.push(start_date_param);
+	datesArr.push(end_date_param);
 	
     $.ajax({
         url:contextPath + '/availableHotelByFilter.do'
@@ -1396,59 +1420,125 @@ function getAvailableHotel() {
         , async:false
         , traditional : true
         , dataType: "JSON"
-        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr, datesArr: datesArr}
+        , data: {starArr: starArr, cityArr: cityArr, serviceArr: serviceArr, scoreArr: scoreArr, orderArr : orderArr, datesArr: datesArr, check_scoreArr : check_scoreArr}
         , success : function(data) {
         	
         	$('#content_from_ajax').empty();
+        	$('#content_from_ajax_available_without_review').empty();
         	
     		$.each(data, function(index, hotel){
-    		
-    			var text = '';
-        		text += "<a href='";
-        		text +=	contextPath;
-        		text += "/hotelInfo.do?serialNumber=";
-       			text += hotel.serialnumber;
-   				text += "' target='_blank'><div class='list'><div class='hotel-info'><div class='hotel-image'><a href='";
-				text += contextPath;
-				text += "/hotelInfo.do?serialNumber=";
-				text += hotel.serialnumber;
-        		text +=	"' target='_blank'><img class='s3-img' src=";
-//         		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
-        		text += hotel.hotelImgVO.file_url;
-        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
-   				text += contextPath;
-				text += "/hotelInfo.do?serialNumber=";
-				text +=	hotel.serialnumber;
-				text +=	"' target='_blank'><h3>";
-				text += hotel.hotelname;
-				text += "</h3></a><div class='star'>";
-				text += isNumber(hotel.star);
-				text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
-				text +=	hotel.city;
-				text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>";
-				text += scoreText(hotel.reviewAvgVO.scoreAvg);
-				text +=	"</div><div class='review-subtitle'>";
-				text +=	hotel.reviewAvgVO.count;
-				text += "개 이용 후기 </div></div><div class='grade'>";
-				text +=	hotel.reviewAvgVO.scoreAvg;
-				text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
-				text += "프리미어 트윈룸";
-				text += "</div><div class='bed-count'>";
-				text += "더블침대 2개";
-				text += "</div><div class='cancel'><div class='cancel1'>";
-				text += "무료취소 • 선결제 필요 없음";
-				text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
-				text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
-				text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
-				text += "1박, 성인 2명";
-				text += "</div><div class='option-price'><span class='fixed-price'>";
-				text += hotel.roomVO.price;
-				text += "</span><span class='sale-price'>";
-				text += hotel.roomVO.price;
-				text += "</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
-    		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
-    			
-        		$('#content_from_ajax').append(text);
+    			if(hotel.reviewAvgVO.count > 0){
+	    			var text = '';
+	        		text += "<a href='";
+	        		text +=	contextPath;
+	        		text += "/hotelInfo.do?serialNumber=";
+	       			text += hotel.serialnumber;
+	   				text += "' target='_blank'><div class='list'><div class='hotel-info'><div class='hotel-image'><a href='";
+					text += contextPath;
+					text += "/hotelInfo.do?serialNumber=";
+					text += hotel.serialnumber;
+	        		text +=	"&start_date=";
+	        		text += start_date;
+	        		text += "&end_date=";
+	        		text += end_date;
+	        		text +=	"' target='_blank'><img class='s3-img' src=";
+// 		       		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+	        		text += hotel.hotelImgVO.file_url;
+	        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+	   				text += contextPath;
+					text += "/hotelInfo.do?serialNumber=";
+					text +=	hotel.serialnumber;
+					text +=	"&start_date=";
+	        		text += start_date;
+	        		text += "&end_date=";
+	        		text += end_date;
+					text +=	"' target='_blank'><h3>";
+					text += hotel.hotelname;
+					text += "</h3></a><div class='star'>";
+					text += isNumber(hotel.star);
+					text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
+					text +=	hotel.city;
+					text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>";
+					text += scoreText(hotel.reviewAvgVO.scoreAvg);
+					text +=	"</div><div class='review-subtitle'>";
+					text +=	hotel.reviewAvgVO.count;
+					text += "개 이용 후기 </div></div><div class='grade'>";
+					text +=	hotel.reviewAvgVO.scoreAvg;
+					text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
+					text += "프리미어 트윈룸";
+					text += "</div><div class='bed-count'>";
+					text += "더블침대 2개";
+					text += "</div><div class='cancel'><div class='cancel1'>";
+					text += "무료취소 • 선결제 필요 없음";
+					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
+					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
+					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
+					text += "1박, 성인 2명";
+					text += "</div><div class='option-price'><span class='fixed-price'>\\";
+					var fixed_price = hotel.roomVO.price*3.5;
+					text += fixed_price.toLocaleString('ko-KR');
+					text += "  </span><span class='sale-price'>\\";
+					text += hotel.roomVO.price.toLocaleString('ko-KR');
+					text += "</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
+	    		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
+	    			
+	        		$('#content_from_ajax').append(text);
+    			} else {
+    				var text = '';
+	        		text += "<a href='";
+	        		text +=	contextPath;
+	        		text += "/hotelInfo.do?serialNumber=";
+	       			text += hotel.serialnumber;
+	   				text += "' target='_blank'><div class='list'><div class='hotel-info'><div class='hotel-image'><a href='";
+					text += contextPath;
+					text += "/hotelInfo.do?serialNumber=";
+					text += hotel.serialnumber;
+	        		text +=	"&start_date=";
+	        		text += start_date;
+	        		text += "&end_date=";
+	        		text += end_date;
+	        		text +=	"' target='_blank'><img class='s3-img' src=";
+//     	    		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+	        		text += hotel.hotelImgVO.file_url;
+	        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+	   				text += contextPath;
+					text += "/hotelInfo.do?serialNumber=";
+					text +=	hotel.serialnumber;
+					text +=	"&start_date=";
+	        		text += start_date;
+	        		text += "&end_date=";
+	        		text += end_date;
+					text +=	"' target='_blank'><h3>";
+					text += hotel.hotelname;
+					text += "</h3></a><div class='star'>";
+					text += isNumber(hotel.star);
+					text += "</div></div><div class='hotel-location'><a href='#'><span><span class='hotel-address'>";
+					text +=	hotel.city;
+					text += "</span><span class='hotel-map'>지도에서 표시</span></span></a></div></div><div class='reviews'><div class='review'><div class='review-title'>";
+					text += scoreText(hotel.reviewAvgVO.scoreAvg);
+					text +=	"</div><div class='review-subtitle'>";
+					text +=	hotel.reviewAvgVO.count;
+					text += "개 이용 후기 </div></div><div class='grade'>";
+					text +=	hotel.reviewAvgVO.scoreAvg;
+					text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
+					text += "프리미어 트윈룸";
+					text += "</div><div class='bed-count'>";
+					text += "더블침대 2개";
+					text += "</div><div class='cancel'><div class='cancel1'>";
+					text += "무료취소 • 선결제 필요 없음";
+					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
+					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
+					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
+					text += "1박, 성인 2명";
+					text += "</div><div class='option-price'><span class='fixed-price'>\\";
+					var fixed_price = hotel.roomVO.price*3.5;
+					text += fixed_price.toLocaleString('ko-KR');
+					text += "  </span><span class='sale-price'>\\";
+					text += hotel.roomVO.price.toLocaleString('ko-KR');
+					text += "</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
+	    		 	text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
+	    		 	$('#content_from_ajax_available_without_review').append(text);
+    			}	
     		});
         }
        	, error : function() {
@@ -1473,6 +1563,7 @@ function getAvailableHotel() {
     $('#number_hotel').text($('.list').length);
  }
 
+/* 선택된 날짜에 이용 불가능한 호텔 조회 
 function getUnavailableHotel() {    
 
 	var contextPath = '${contextPath}';
@@ -1506,8 +1597,8 @@ function getUnavailableHotel() {
 		orderArr.push(orderText);
 	}
 		
-	datesArr.push(start_date_pram);
-	datesArr.push(end_date_pram);
+	datesArr.push(start_date_param);
+	datesArr.push(end_date_param);
 	
     $.ajax({
         url:contextPath + '/unavailableHotelByFilter.do'
@@ -1532,7 +1623,7 @@ function getUnavailableHotel() {
 				text += "/hotelInfo.do?serialNumber=";
 				text += hotel.serialnumber;
         		text +=	"' target='_blank'><img class='s3-img' src=";
-//         		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+         		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
         		text += hotel.hotelImgVO.file_url;
         		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
    				text += contextPath;
@@ -1556,7 +1647,7 @@ function getUnavailableHotel() {
 				text += "'\402,770</span><span class='sale-price'>'\145,000</span></div><div class='price-info'>세금 및 기타 요금 포함</div></div><div class='see-availability'><a href='#'><span class='move-detail'>예약 가능 옵션 보기</span><span>";
 				text += "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg></span></a></div></div></div></div></div></div></div></a>";
     			
-    		 	$('#content_from_ajax_unavailable').append(text);
+    		 	$('#content_from_ajax_unavailable').append(text); 
     		});
         }
        	, error : function() {
@@ -1579,7 +1670,7 @@ function getUnavailableHotel() {
     orderArr = [];
     datesArr = [];
     $('#number_hotel').text($('.list').length);
- }
+ }*/ 
 </script>
 
 <script>
@@ -1736,8 +1827,6 @@ function getUnavailableHotel() {
 
 </script>
 <script>
-	// ---------------------------
-
 	// 지도보기, 닫기
 	var modalMap = document.getElementById("modalMap");
 	var mapBtn1 = document.getElementById("mapBtn1");
@@ -1761,11 +1850,14 @@ function getUnavailableHotel() {
     }
 	}
 
-	// 지도 ---------------------------
+	var cityLat = '${cityVO.latitude-0.0003}';
+	var cityLong = '${cityVO.longitude-0.0003}';
+	
+	// 지도 불러오기
 	var container = document.getElementById('mapApi');
 	var options = {
-		center: new kakao.maps.LatLng(37.56049052322909, 126.98053287039083),
-		level: 5
+		center: new kakao.maps.LatLng(cityLat, cityLong),
+		level: 8
 	};
 	var map = new kakao.maps.Map(container, options);
 	
@@ -1774,6 +1866,7 @@ function getUnavailableHotel() {
 	
 	kakao.maps.event.addListener(map, 'dragend', selectMap);
 	
+	// 지도 함수
 	function selectMap(){
         
 		var bounds = map.getBounds();
@@ -1786,15 +1879,17 @@ function getUnavailableHotel() {
 		var contextPath = '${contextPath}';
 		
         var sendData = {
-        				"wLatitude" : wLatitude,
-                        "eLatitude" : eLatitude,
-                        "sLongitude" : sLongitude,
-                        "nLongitude" : nLongitude
+	        				"wLatitude" : wLatitude,
+	                        "eLatitude" : eLatitude,
+	                        "sLongitude" : sLongitude,
+	                        "nLongitude" : nLongitude,
+                        	"start_date" : start_date_param,
+                        	"end_date" : end_date_param
                         }
        	
         	$.ajax({
                 method : "POST",
-                url : "/web/getMap.do",
+                url : contextPath + "/getMap.do",
                 async: false,
                 data : sendData,
                 dataType : "JSON",
@@ -1811,27 +1906,37 @@ function getUnavailableHotel() {
                 		text += "</svg><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='#c00' class='bi bi-heart-fill wishlist-heart-fill' id='wishlistFill5' viewBox='0 0 16 16'>";
                 		text += "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button></div>";
                 		text += "<div class='map-hotel-image' style='background-image: url(";
+//     		       		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
                 		text += hotel.hotelImgVO.file_url;
                 		text += ")'></div><div class='map-hotel-container'><div class='map-hotel-title'><a href='";
                 		text += contextPath;
                 		text += "/hotelInfo.do?serialNumber=";
                 		text += hotel.serialnumber;
+    	        		text +=	"&start_date=";
+    	        		text += start_date;
+    	        		text += "&end_date=";
+    	        		text += end_date;
                 		text += "' target='_blank'><span class='map-hotel-title-link'>";
                 		text += hotel.hotelname;
                 		text += "</span></a><div class='map-stars'><span>";
                			text += isNumber(hotel.star);
                 		text += "</span></div></div><div class='map-hotel-review'><div class='map-hotel-review-score'>";
                 		text += hotel.reviewAvgVO.scoreAvg;
-                		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>매우 좋음</div><div class='map-hotel-review-text'>";
+                		text += "</div><div class='map-hotel-review-content'><div class='map-hotel-review-title'>";
+                		text += scoreText(hotel.reviewAvgVO.scoreAvg);
+                		text += "</div><div class='map-hotel-review-text'>";
                 		text += hotel.reviewAvgVO.count;
                 		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>"
-                		text += "";
-                		text += "</span><span class='map-hotel-content-price-sale'>\79,200</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
+               			var fixed_price = hotel.roomVO.price*3.5;
+    					text += fixed_price.toLocaleString('ko-KR');
+                		text += "</span><span class='map-hotel-content-price-sale'>\\";
+                		text += hotel.roomVO.price.toLocaleString('ko-KR');
+                		text += "</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
             		 	
                 		$('#map_hotel_list').append(text);
                 		
                 		var contents = {
-                			content: '<div class="map-hotel-card" style="width: 300px; display: flex; margin: 0; flex-direction: row-reverse; border: 1px solid #000;"> <div class="map-hotel-image" style="background-image: url(' + hotel.hotelImgVO.file_url + ')"></div> <div class="map-hotel-container" style="padding: 10px;"> <div class="map-hotel-title"><span class="map-hotel-title-link">' + hotel.hotelname + '</span><div class="map-stars">' + isNumber(hotel.star) + '</div></div><div class="map-hotel-review"><div class="map-hotel-review-score">' + hotel.reviewAvgVO.scoreAvg + '</div><div class="map-hotel-review-content"><div class="map-hotel-review-title">' + scoreText(hotel.reviewAvgVO.scoreAvg) + '</div><div class="map-hotel-review-text">' + hotel.reviewAvgVO.count + '개 이용 후기' + '</div></div></div><div class="map-hotel-content"><div class="map-hotel-content-price"><div class="map-hotel-content-price-option">' + 1 + '박,' + 2 + '명</div><div class="map-hotel-content-price-price"><span class="map-hotel-content-price-fixed">\'' + '88,000' + '</span><span class="map-hotel-content-price-sale">\'' + '79,200' + '</span></div></div><div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단' + 3 + '개</div></div></div></div>',
+                			content: '<div class="map-hotel-card" style="width: 300px; display: flex; margin: 0; flex-direction: row-reverse; border: 1px solid #000;"> <div class="map-hotel-image" style="background-image: url(' + hotel.hotelImgVO.file_url + ')"></div> <div class="map-hotel-container" style="padding: 10px;"> <div class="map-hotel-title"><span class="map-hotel-title-link">' + hotel.hotelname + '</span><div class="map-stars">' + isNumber(hotel.star) + '</div></div><div class="map-hotel-review"><div class="map-hotel-review-score">' + hotel.reviewAvgVO.scoreAvg + '</div><div class="map-hotel-review-content"><div class="map-hotel-review-title">' + scoreText(hotel.reviewAvgVO.scoreAvg) + '</div><div class="map-hotel-review-text">' + hotel.reviewAvgVO.count + '개 이용 후기' + '</div></div></div><div class="map-hotel-content"><div class="map-hotel-content-price"><div class="map-hotel-content-price-option">' + 1 + '박,' + 2 + '명</div><div class="map-hotel-content-price-price"><span class="map-hotel-content-price-fixed">\\' + fixed_price.toLocaleString('ko-KR') + '</span><span class="map-hotel-content-price-sale">\\' + hotel.roomVO.price.toLocaleString('ko-KR') + '</span></div></div><div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단' + 3 + '개</div></div></div></div>',
                				latlng: new kakao.maps.LatLng(hotel.latitude, hotel.longitude)
                			};
                 		
@@ -1840,7 +1945,7 @@ function getUnavailableHotel() {
                			positions[index] = MapArray[index];
 
                			var imageSrc = contextPath + '/resources/user/images/hotelMaker.png', // 마커이미지의 주소입니다    
-               		    imageSize = new kakao.maps.Size(32, 32), // 마커이미지의 크기입니다
+               		    imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
                		    imageOption = {offset: new kakao.maps.Point(27, 69)};
                			
                			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -1864,10 +1969,11 @@ function getUnavailableHotel() {
                			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
                			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
                			kakao.maps.event.addListener(marker, 'click', function() {
-               				window.open(contextPath + '/hotelInfo.do?serialNumber=' +  serialnumber, '_blank');
+               				window.open(contextPath + '/hotelInfo.do?serialNumber=' +  serialnumber + '&start_date=' + start_date + '&end_date=' + end_date, '_blank');
                			});
                			
-               			
+               			// 명소 등록
+               			/* 
                			// 장소 검색 객체를 생성합니다
                			var ps = new kakao.maps.services.Places(map); 
 
@@ -1882,9 +1988,10 @@ function getUnavailableHotel() {
                			        }       
                			    }
                			}
-
+						*/
+               			
                			var imageSrc_attr = contextPath + '/resources/user/images/attractionMaker.png', // 마커이미지의 주소입니다    
-               		    imageSize_attr = new kakao.maps.Size(24, 24), // 마커이미지의 크기입니다
+               		    imageSize_attr = new kakao.maps.Size(36, 36), // 마커이미지의 크기입니다
                		    imageOption_attr = {offset: new kakao.maps.Point(27, 69)};
                			
                			var markerImage_for_attraction = new kakao.maps.MarkerImage(imageSrc_attr, imageSize_attr, imageOption_attr);
@@ -1908,14 +2015,15 @@ function getUnavailableHotel() {
                			}
                			
                 	});
-
+                	positions = [];
+                	MapArray = [];
                 },
                 error : function(){
                 	alert('error');
                 }
             })
        
-    }
+    } // end selectMap()
  	
 	// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
 	kakao.maps.event.addListener(map, 'center_changed', function() {

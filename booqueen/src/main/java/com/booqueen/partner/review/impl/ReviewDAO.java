@@ -31,4 +31,8 @@ public class ReviewDAO {
 		return sqlSessionTemplate.selectOne("reviewDAO.getReviewCount", serialnumber);
 	}
 
+	public List<ReviewVO> selectReviewListByHotelSerical(int serialnumber) {
+		return sqlSessionTemplate.selectList("reviewDAO.selectReviewListByHotelSerial", serialnumber);
+	}
+
 }

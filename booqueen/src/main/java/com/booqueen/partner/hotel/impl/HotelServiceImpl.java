@@ -139,8 +139,8 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
-		return hotelDAO.selectInquiryByHotelSerial(serialnumber);
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber, PagingVO paging) {
+		return hotelDAO.selectInquiryByHotelSerial(serialnumber, paging);
 	}
 
 	@Override

@@ -19,5 +19,6 @@ public class InquiryVO {
 	private boolean partner;
 	private boolean closed;
 	private int groupno;
+	private boolean complete;	//답변 완료
 
 }

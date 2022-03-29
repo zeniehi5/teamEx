@@ -21,5 +21,6 @@ public class ReservationVO {
 	private int price;
 	private double commission;
 	private int reservation_number;
+	private int use_status;
 	
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +25,7 @@ import com.booqueen.partner.common.S3Service;
 import com.booqueen.partner.message.MessageService;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
+import com.booqueen.partner.review.ReviewService;
 import com.booqueen.partner.room.FacilitiesAccessVO;
 import com.booqueen.partner.room.FacilitiesBasicVO;
 import com.booqueen.partner.room.FacilitiesBathVO;
@@ -35,6 +36,7 @@ import com.booqueen.partner.room.FacilitiesViewVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
 import com.booqueen.user.chat.vo.ChatVO;
+import com.booqueen.user.review.vo.ReviewVO;
 
 @Controller
 public class HotelController {
@@ -53,6 +55,9 @@ public class HotelController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value = "/basic.pdo", method = RequestMethod.POST)
 	public String setBasicInfo(HotelVO vo, HttpSession session) {
@@ -127,7 +132,7 @@ public class HotelController {
 	@GetMapping("picture.pdo")
 	@ResponseBody
 	public String pictureGet() {
-		System.out.println("get 諛⑹떇 �슂泥�");
+		System.out.println("get 방식 요청");
 		String message = "success";
 		return message;
 	}
@@ -143,7 +148,7 @@ public class HotelController {
 	    }
 	      
 	    int length = uploadFile.length;
-	    System.out.println("湲몄씠: " + length);
+	    System.out.println("길이: " + length);
 	    for(MultipartFile multipartFile : uploadFile) {
 	    	String uploadFileName = multipartFile.getOriginalFilename();
 	        uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
@@ -158,7 +163,7 @@ public class HotelController {
 	    	    		String contentType = multipartFile.getContentType();
 	    	    		long contentLength = multipartFile.getSize();
 	    	    		s3service.upload(is, "hotel/" + (int) session.getAttribute("serialnumber") + "/" + uploadFileName, contentType, contentLength);
-	    	    		System.out.println(count + ": �꽦怨�");
+	    	    		System.out.println(count + ": 성공");
 	    	    		System.out.println("https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/" + uploadFileName);
 	    	    		
 	    	    	} catch(Exception e) {
@@ -190,13 +195,13 @@ public class HotelController {
 				e.printStackTrace();
 			}
 		}
-		RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
-		model.addAttribute("room", room);
+		//RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
+		//model.addAttribute("room", room);
 		//return "payment";
 		return "add-room";
 	}
 	
-	//寃곗젣�젙蹂� �엯�젰 �솕硫�
+	//결제정보 입력 화면
 	@RequestMapping(value = "/setpayment.pdo", method = RequestMethod.GET)
 	public String getPaymentPage(HotelVO hotel, HttpSession session) {
 		try {
@@ -227,9 +232,16 @@ public class HotelController {
 			if(hotel != null) {
 				List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
 				List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
+				List<ReviewVO> reviewList = reviewService.selectReviewListByHotelSerial(hotel.getSerialnumber());
+				
+				//체크인 중인 호텔 목록
+				List<ReservationVO> checkInList = reservationService.selectCheckInListByHotelSerial(hotel.getSerialnumber());
+				
+				model.addAttribute("checkin", checkInList);
 				model.addAttribute("messageList", messageList);
 				model.addAttribute("hotel", hotel);
 				model.addAttribute("reservation", reservation);
+				model.addAttribute("review", reviewList);
 			}
 			
 		} catch(Exception e) {
@@ -268,7 +280,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('痍⑥냼 諛� �꽑寃곗젣 �젙梨낆쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('취소 및 선결제 정책을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -293,7 +305,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('�븘�룞 �젙梨낆쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('아동 정책을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -318,7 +330,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('諛섎젮�룞臾� �젙梨낆쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('반려동물 정책을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -343,7 +355,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('泥댄겕�씤/泥댄겕�븘�썐 �떆媛꾩쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('체크인/체크아웃 시간을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -368,7 +380,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('�씤�꽣�꽬 �궗�슜 �젙梨낆쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('인터넷 사용 정책을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -393,7 +405,7 @@ public class HotelController {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('�씉�뿰 �젙梨낆쓣 �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+			writer.println("alert('흡연 정책을 성공적으로 수정하였습니다.');");
 	        writer.println("</script>");
 	        writer.flush();
 		} catch(Exception e) {
@@ -403,71 +415,46 @@ public class HotelController {
 	}
 	
 	@RequestMapping(value = "/update-service.pdo", method = RequestMethod.POST)
-	public String updateHotelService(HotelVO hotel, HotelServiceVO service, FacilitiesBasicVO basic, 
+	public String updateHotelService(@RequestParam("room_id")int room_id,
+									HotelVO hotel, HotelServiceVO service, FacilitiesBasicVO basic, 
 									FacilitiesBathVO bath, FacilitiesMediaVO media, FacilitiesViewVO view,
 									FacilitiesAccessVO access, FacilitiesServiceVO room_service, 
-									HttpServletResponse response, HttpSession session) {
-		HashMap<String, Object> updateList = new HashMap<>();
-		HashMap<String, Object> updateBasic = new HashMap<>();
-		HashMap<String, Object> updateAccess = new HashMap<>();
-		HashMap<String, Object> updateMedia = new HashMap<>();
-		HashMap<String, Object> updateView = new HashMap<>();
-		HashMap<String, Object> updateBath = new HashMap<>();
-		HashMap<String, Object> updateService = new HashMap<>();
+									HttpServletResponse response, HttpSession session, Model model) {
  		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
-				//hotel_service �닔�젙媛� ���옣
-				updateList.put("serialnumber", hotel.getSerialnumber());
-				updateList.put("breakfast", service.isBreakfast());
-				updateList.put("front_desk", service.isFront_desk());
-				updateList.put("smoking", service.isSmoking());
-				updateList.put("parking", service.isParking());
-				updateList.put("sauna", service.isSauna());
-				updateList.put("swimming_pool", service.isSwimming_pool());
-				updateList.put("shuttle", service.isShuttle());
-				updateList.put("ac", service.isAc());
-				updateList.put("terras", service.isTerras());
-				updateList.put("fitnesscenter", service.isFitnesscenter());
-				updateList.put("aquapark", service.isAquapark());
-				updateList.put("jacuzzi", service.isJacuzzi());
-				roomService.updateHotelService(updateList);
-				//room_faclities_basic �닔�젙媛� ���옣
-				updateBasic.put("serialnumber", hotel.getSerialnumber());
-				updateBasic.put("heater", basic.isHeater());
-				roomService.updateFaciliteisBasic(updateBasic);
-				//room_facilities_access �닔�젙媛� ���옣
-				updateAccess.put("serialnumber", hotel.getSerialnumber());
-				updateAccess.put("elevator", access.isElevator());
-				roomService.updateFacilitiesAccess(updateAccess);
-				//room_facilities_media �닔�젙媛� ���옣
-				updateMedia.put("serialnumber", hotel.getSerialnumber());
-				updateMedia.put("tv", media.isTv());
-				roomService.updateFacilitiesMedia(updateMedia);
-				//room_facilities_view �닔�젙媛� ���옣
-				updateView.put("serialnumber", hotel.getSerialnumber());
-				updateView.put("balcony", view.isBalcony());
-				roomService.updateFacilitiesView(updateView);
-				//room_facilities_bath �닔�젙媛� ���옣
-				updateBath.put("serialnumber", hotel.getSerialnumber());
-				updateBath.put("bathtub", bath.isBathtub());
-				updateBath.put("spabath", bath.isSpabath());
-				roomService.updateFacilitiesBath(updateBath);
-				//room_facilities_service �닔�젙媛� ���옣
-				updateService.put("serialnumber", hotel.getSerialnumber());
-				updateService.put("lounge", room_service.isLounge());
-				roomService.updateFacilitiesService(updateService);
+				//hotel_service 수정값 저장
+				service.setSerialnumber(hotel.getSerialnumber());
+				roomService.updateHotelService(service);
+				//room_faclities_basic 수정값 저장
+				roomService.updateFaciliteisBasic(basic);
+				//room_facilities_access 수정값 저장
+				roomService.updateFacilitiesAccess(access);
+				//room_facilities_media 수정값 저장
+				roomService.updateFacilitiesMedia(media);
+				//room_facilities_view 수정값 저장
+				roomService.updateFacilitiesView(view);
+				//room_facilities_bath 수정값 저장
+				roomService.updateFacilitiesBath(bath);
+				//room_facilities_service 수정값 저장
+				roomService.updateFacilitiesService(room_service);
 				//alert
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter writer = response.getWriter();
 				writer.println("<script type='text/javascript'>");
-				writer.println("alert('�떆�꽕 諛� �꽌鍮꾩뒪�뿉 愿��븳 �젙蹂대�� �꽦怨듭쟻�쑝濡� �닔�젙�븯���뒿�땲�떎.');");
+				writer.println("alert('시설 및 서비스에 관한 정보를 성공적으로 수정하였습니다.');");
 		        writer.println("</script>");
 		        writer.flush();
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+ 		//객실 목록
+ 		List<RoomVO> roomList = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
+ 		model.addAttribute("roomList", roomList);
+		model.addAttribute("hotel", hotel);
+		return "manage";
+
+ 		
 	}
 }

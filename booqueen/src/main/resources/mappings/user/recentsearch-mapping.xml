@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booqueen.user.hotel.dao.recentsearchmapper">
+
+	<insert id="insertRecentSearch" parameterType="recentSearchVO">
+		<![CDATA[
+			INSERT INTO recent_search(userid, start_date, end_date, people, city) values(#{userid}, TO_DATE(#{start_date}, 'YYYYMMDD'), TO_DATE(#{end_date}, 'YYYYMMDD'), ${people}, #{city})
+		]]>
+	</insert>
+	
+	<select id="selectRecentSearch" resultType="recentSearchVO" parameterType="String">
+		<![CDATA[
+			SELECT * FROM
+				recent_search AS rs
+			FULL JOIN
+				city AS ci
+			ON
+				rs.city = ci.city
+			WHERE
+				rs.userid = #{userid}
+			ORDER BY timestamp DESC
+			LIMIT 3
+		]]>
+	</select>
+</mapper>

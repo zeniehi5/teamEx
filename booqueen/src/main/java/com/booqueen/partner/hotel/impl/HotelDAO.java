@@ -113,8 +113,10 @@ public class HotelDAO {
 		return sqlSessionTemplate.selectOne("HotelDAO.getHotelServiceByHotelSerial", serialnumber);
 	}
 
-	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber) {
-		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber);
+	public List<InquiryVO> selectInquiryByHotelSerial(int serialnumber, PagingVO paging) {
+		int offset = (paging.getCurrentPage() -1) * paging.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, paging.getBoardLimit());
+		return sqlSessionTemplate.selectList("HotelDAO.selectInquiryByHotelSerial", serialnumber, rowBounds);
 	}
 	
 	public void setHotelImage(HotelImageVO vo) {
