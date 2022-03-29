@@ -69,7 +69,7 @@ public class HotelController {
 	}
 	
 	@RequestMapping(value = "/searchResult.do", method = RequestMethod.GET)
-	public String getHotelList(@RequestParam("keyword") String keyword, @RequestParam("daterange") String date, Model model, HttpServletResponse response) throws IOException{
+	public String getHotelList(@RequestParam("keyword") String keyword, @RequestParam("daterange") String date, Model model, HttpServletResponse response, HttpSession session) throws IOException{
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
