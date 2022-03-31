@@ -39,4 +39,21 @@ public class ReservationService {
 		return reservationDAO.deleteDuplicatedReservation();
 	}
 	
+	public List<ReservationVO> selectComingReservationList(String userid) {
+		return reservationDAO.selectComingReservationList(userid);
+	}
+	
+	public List<ReservationVO> selectPastReservationList(String userid) {
+		return reservationDAO.selectPastReservationList(userid);
+	}
+	
+	public int updateReviewBoolean(Integer reservation_number) {
+		return reservationDAO.updateReviewBoolean(reservation_number);
+	}
+	
+	public List<ReservationVO> selectBestHotel() {
+		return reservationDAO.selectBestHotel();
+	}
+	
+	
 }

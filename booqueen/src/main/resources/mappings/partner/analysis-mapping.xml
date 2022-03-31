@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="analysisDAO">
+	<select id="selectTotalRevenue" resultType="analysis">		
+		SELECT
+			price * 0.85 as "total_revenue"
+		FROM 
+			reservation
+		WHERE serialnumber = #{serialnumber}
+		AND use_status = 2
+		AND checkout_date 
+		BETWEEN (SELECT date_trunc('month', current_date)::date) 
+		AND (SELECT (date_trunc('month', current_date) + INTERVAL '1 MONTH - 1DAY')::date)		
+	</select>
+	<select id="selectEstimatedRevenue" resultType="analysis">
+		SELECT
+			price * 0.85 as "total_revenue"
+		FROM
+			reservation
+		WHERE serialnumber = #{serialnumber}
+		AND checkout_date
+		BETWEEN (SELECT date_trunc('month', current_date)::date)
+		AND (SELECT (date_trunc('month', current_date) + INTERVAL '1 MONTH - 1DAY')::date)
+	</select>
+	<select id="selectDaysofStays" resultType="analysis">
+		SELECT
+			COUNT(checkout_date - checkin_date::date)
+		FROM
+			reservation
+		WHERE serialnumber = #{serialnumber}
+		AND use_status = 2
+		AND checkout_date 
+		BETWEEN (SELECT date_trunc('month', current_date)::date) 
+		AND (SELECT (date_trunc('month', current_date) + INTERVAL '1 MONTH - 1DAY')::date)
+	</select>
+	<select id="selectEstimatedDaysofStays" resultType="analysis">
+		SELECT
+			COUNT(checkout_date - checkin_date::date)
+		FROM
+			reservation
+		WHERE serialnumber = #{serialnumber}
+		AND checkout_date 
+		BETWEEN (SELECT date_trunc('month', current_date)::date) 
+		AND (SELECT (date_trunc('month', current_date) + INTERVAL '1 MONTH - 1DAY')::date)
+	</select>
+</mapper>

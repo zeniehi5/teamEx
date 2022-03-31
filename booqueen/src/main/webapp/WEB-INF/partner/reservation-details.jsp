@@ -76,6 +76,11 @@
 			alert("이용 완료 처리를 취소합니다.")
 		}
 	}
+	
+	function openModal(){
+		//$("#reportModal").addClass('bui-is-active')
+		alert("고민중")
+	}
 </script>
 </head>
 <body>
@@ -619,7 +624,7 @@
                                         </div>
                                         </c:if>
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide">
+                                            <button type="button" class="button button_secondary button_wide" onclick="openModal();">
                                                 <span class="button_text">
                                                     <span>투숙객 부정/불법 행위 신고하기</span>
                                                 </span>
@@ -700,10 +705,60 @@
                             </div>
                         </div>
                     </div>
-                </main>
-                <jsp:include page="/WEB-INF/partner/footer.jsp"/>
-            </div>
-        </div>
-    </div>
+                    <div class="bui-modal bui-modal-smoking" id="reportModal">
+   						<form action="${contextPath}/update-smoking-policies.pdo" method="post">
+    						<div class="bui-modal__wrapper">
+  	        					<div class="bui-modal__align">
+                					<aside class="bui-modal__content bui-f-depth-1">
+                    					<div class="bui-modal__body">
+                        					<div>
+                            					<h3 class="policy-form-title">투숙객 부정/불법 행위 신고하기</h3>
+                            						<div>
+                                						<div class="policy-form-section">
+                              
+                                    						<ul class="list-unstyled row clearfix list-smp-customized-condition">
+                                        						<li class="col-xs-12 col-sm-6">
+                                            						<div>
+                                                						<div class="form-group">
+                                                    						<label>신고 사유를 선택하세요.</label>
+                                                    							<select class="form-control" name="smoking">
+                                                        							<option value="no_show">노쇼</option>
+                                                        							<option value="false">아니오</option>
+                                                    							</select>
+                                                						</div>
+                                            						</div>
+                                        						</li>
+                                    						</ul>
+                                						</div>
+                            						</div>
+                        						</div>
+                    						</div>
+                    						<footer class="bui-modal__footer">
+                        						<div class="bui-group bui-group--inline">
+                            						<button type="submit" class="bui-button bui-button--primary">
+                                						<span class="bui-button__text"><span>저장</span></span>
+                            						</button>
+                            						<button type="button" id="btnCloseSmoking" class="bui-button bui-button--secondary">
+                                						<span class="bui-button__text"><span>취소</span></span>
+                            						</button>
+                        						</div>
+                    						</footer>
+                    						<button type="button" id="xCloseSmoking" class="bui-modal__close">
+                        						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                            						<path
+                                						d="M13 12l6.26-6.26a.73.73 0 0 0-1-1L12 11 5.74 4.71a.73.73 0 1 0-1 1L11 12l-6.29 6.26a.73.73 0 0 0 .52 1.24.73.73 0 0 0 .51-.21L12 13l6.26 6.26a.74.74 0 0 0 1 0 .74.74 0 0 0 0-1z">
+                            						</path>
+                        						</svg>
+                    						</button>
+                						</aside>
+            						</div>
+        						</div>
+    						</form>
+    					</div>
+                	</main>
+                	<jsp:include page="/WEB-INF/partner/footer.jsp"/>
+            	</div>
+        	</div>
+    	</div>
 </body>
 </html>

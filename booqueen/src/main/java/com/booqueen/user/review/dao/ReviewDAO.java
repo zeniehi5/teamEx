@@ -36,4 +36,8 @@ public class ReviewDAO {
 		return vo;
 	}
 	
+	public List<ReviewVO> selectReviewStatus(String userid) throws DataAccessException{
+		return sqlSession.selectOne("com.booqueen.user.review.dao.reviewmapper.selectReviewStatus", userid);
+	}
+	
 }

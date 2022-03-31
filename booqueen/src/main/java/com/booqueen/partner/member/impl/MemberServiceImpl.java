@@ -3,6 +3,7 @@ package com.booqueen.partner.member.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.member.MemberService;
 import com.booqueen.partner.member.MemberVO;
 
@@ -34,6 +35,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void changePassword(MemberVO vo) {
 		memberDAO.changePassword(vo);
+	}
+
+	@Override
+	public HotelVO selectSameHotelName(HotelVO vo) {
+		return memberDAO.selectSameHotelName(vo);
 	}
 
 }

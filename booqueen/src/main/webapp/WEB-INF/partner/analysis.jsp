@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -15,47 +16,31 @@
                     <div class="table">
                         <table>
                             <tr id="tr1">
-                                <td colspan="3"><h2>성과분석</h2></td>
+                                <td colspan="3"><h2>월별 성과분석</h2></td>
                             </tr>
                             <tr>
                                 <td>    </td>
                                 <td>
-                                    지난 예약 건 기준: <br>
-                                    <select>
-                                        <option>90일</option>
-                                        <option>14일</option>
-                                        <option>30일</option>
-                                        <option>60일</option>
-                                        <option>90일</option>
-                                        <option>365일</option>
-                                    </select>
+                                    이용 완료 건 기준: <br>
                                 </td>
                                 <td>
-                                    향후 예약 건 기준: <br>
-                                    <select>
-                                        <option>90일</option>
-                                        <option>14일</option>
-                                        <option>30일</option>
-                                        <option>60일</option>
-                                        <option>90일</option>
-                                        <option>365일</option>
-                                    </select>
+                                    전체 예약 건 기준: <br>
                                 </td>
                             </tr>
                             <tr>
                                 <td id="td1">숙박일 수</td>
-                                <td>0</td>
-                                <td>0</td>
+                                <td>${stays.count}</td>
+                                <td>${estimatedStays.count}</td>
                             </tr>
                             <tr>
                                 <td id="td1">객실 매출액</td>
-                                <td>\0</td>
-                                <td>\0</td>
+                                <td>&#8361;<fmt:formatNumber value="${analysis.total_revenue}" type="number"/></td>
+                                <td>&#8361;<fmt:formatNumber value="${estimated.total_revenue}" type="number"/></td>
                             </tr>
                             <tr>
                                 <td id="td1">일일 평균 요금</td>
-                                <td>\0</td>
-                                <td>\0</td>
+                                <td>&#8361;<fmt:formatNumber value="${analysis.total_revenue/stays.count}" type="number"/></td>
+                                <td>&#8361;<fmt:formatNumber value="${estimated.total_revenue/estimatedStays.count}" type="number"/></td>
                             </tr>
                             <tr id="last_tr">
                                 <td></td>

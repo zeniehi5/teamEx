@@ -87,6 +87,8 @@ public class ReservationController {
 		ReviewAvgVO reviewAvgVO = reviewService.getReviewAvg(reservationVO.getSerialnumber());
 		model.addAttribute("reviewAvgVO", reviewAvgVO);
 		
+		List<ReservationVO> bestHotelList = reservationService.selectBestHotel();
+
 		return "reservation/reservation";
 	}
 

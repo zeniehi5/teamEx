@@ -9,6 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
+import com.booqueen.user.hotel.vo.BestHotelVO;
+import com.booqueen.user.hotel.vo.CityCountVO;
 import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
@@ -83,7 +85,7 @@ public class HotelDAO {
 		return vo;
 	}
   
-  // 최근 검색
+	// 최근 검색
 	public int insertRecentSearch(RecentSearchVO recentSearchVO) throws DataAccessException{
 		return sqlSession.insert("com.booqueen.user.hotel.dao.recentsearchmapper.insertRecentSearch", recentSearchVO);
 	}
@@ -93,4 +95,27 @@ public class HotelDAO {
 		return recentSearchVO;
   }
 	
+	// index - city
+	public List<CityCountVO> selectCityList() throws DataAccessException{
+		List<CityCountVO> cityCountVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectCityList");
+		return cityCountVO;
+	}
+	
+	// index - best hotel
+	public List<BestHotelVO> selectBestHotelList() throws DataAccessException{
+		List<BestHotelVO> selectBestHotelVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectBestHotelList");
+		return selectBestHotelVO;
+	}
+	
+	// index - all city
+	public List<CityCountVO> selectCityListAll() throws DataAccessException{
+		List<CityCountVO> cityCountVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectCityListAll");
+		return cityCountVO;
+	}
+	
+	// index - random hotel
+	public List<BestHotelVO> selectRandomHotel() throws DataAccessException{
+		List<BestHotelVO> hotelVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectRandomHotel");
+		return hotelVO;
+	}
 }

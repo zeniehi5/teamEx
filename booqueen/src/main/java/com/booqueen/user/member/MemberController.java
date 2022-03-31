@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,18 +17,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.user.hotel.service.HotelService;
+import com.booqueen.user.hotel.vo.BestHotelVO;
+import com.booqueen.user.hotel.vo.CityCountVO;
+import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.member.service.MemberProfileService;
 import com.booqueen.user.member.vo.MemberProfileVO;
 import com.booqueen.user.member.vo.ReasonVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
+import com.booqueen.user.review.service.ReviewService;
 
 @Controller
 public class MemberController{
@@ -44,6 +50,9 @@ public class MemberController{
 	@Autowired
 	HotelService hotelService;
 	
+	@Autowired
+	ReviewService reviewService;
+	
 	KakaoAPI kakaoApi = new KakaoAPI();
 
 	@RequestMapping(value = "/member/loginForm.do", method = {RequestMethod.POST, RequestMethod.GET})
@@ -52,7 +61,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public String login(MemberVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String login(MemberVO vo, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		MemberVO user = memberService.getMember(vo);
 		
 		response.setContentType("text/html; charset=utf-8");
@@ -71,6 +80,33 @@ public class MemberController{
 			
 			List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
 			session.setAttribute("recentSearchList", recentSearchList);
+			
+			// 다가오는 여행
+			List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+			session.setAttribute("comingReservationList", comingReservationList);
+			
+			// 리뷰
+			List<ReservationVO> pastReservationList = reservationService.selectPastReservationList(user.getUserid());
+			session.setAttribute("pastReservationList", pastReservationList);
+			
+			Date now = new Date();
+			model.addAttribute("now", now);
+			
+			// index - city
+			List<CityCountVO> cityList = hotelService.selectCityList();
+			session.setAttribute("cityList", cityList);
+			
+			// index - hotel
+			List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+			session.setAttribute("bestHotelList", bestHotelList);
+			
+			// index - city
+			List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+			session.setAttribute("cityListAll", cityListAll);
+			
+			// index - random hotel
+			List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+			session.setAttribute("randomHotelList", randomHotelList);
 			
 			return "member/index";
 		} else {
@@ -281,6 +317,10 @@ public class MemberController{
 		if(user != null) {
 			List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
 			session.setAttribute("recentSearchList", recentSearchList);
+			
+			// 다가오는 여행
+			List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+			session.setAttribute("comingReservationList", comingReservationList);
 		}
 		
 		return "member/index";
@@ -388,6 +428,10 @@ public class MemberController{
 		
 		List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
 		session.setAttribute("recentSearchList", recentSearchList);
+		
+		// 다가오는 여행
+		List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+		session.setAttribute("comingReservationList", comingReservationList);
 		
 		return "member/index";
 	}

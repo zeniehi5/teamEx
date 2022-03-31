@@ -36,8 +36,8 @@ public class ReservationDAO {
 		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationDetailByRSVN", reservation_number);
 	}
 
-	public int getListCount() {
-		return sqlSessionTemplate.selectOne("reservationDAO.getListCount");
+	public int getListCount(int serialnumber) {
+		return sqlSessionTemplate.selectOne("reservationDAO.getListCount", serialnumber);
 	}
 
 	public List<ReservationVO> selectReservationListOnCondition(SearchVO search, PagingVO paging) {
@@ -64,6 +64,10 @@ public class ReservationDAO {
 
 	public ReservationVO selectReservationByRSVN(int searchKeyword) {
 		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationByRSVN", searchKeyword);
+	}
+	
+	public int updateReservationStatusToBilling(ReservationVO reservation) {
+		return sqlSessionTemplate.update("reservationDAO.updateReservationStatusToBilling", reservation);
 	}
 	
 }

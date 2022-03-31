@@ -3,27 +3,102 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>숙소 등록을 시작하세요!</title>
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/basic-info.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29b5f78cb856dc4d592f3c3f87388524&libraries=services"></script>
+<script type="text/javascript">
+
+	function checkForm(){
+		var hotelname = $("#hotel").val()
+		var star = $("#star").val()
+		var manager = $("#manager").val()
+		var phoneNum = $("#phoneNum").val()
+		var addr1 = $("#address1").val()
+		var city = $("#city").val()
+		var postal = $("#postal").val()
+		var lat = $("#latitude").val()
+		var lon = $("#longitude").val()
+		
+		if(hotelname == null || hotelname == "" || hotelname == undefined || hotelname == "undefined") {
+			alert("호텔 이름을 입력해 주세요.")
+			return;
+		} else {
+			var hotelname = $("#hotel").val()
+			var sendData = {"hotelname":hotelname}
+			
+			$.ajax({
+				method:"POST",
+				url:"avoidSameHotelName.pdo",
+				data:sendData,
+				success: function(result){
+					$("#alert").empty()
+					if(result.message == "SUCCESS"){
+						$("#alert").css('color', 'blue')
+						$("#alert").html("등록 가능한 호텔 이름입니다.")
+						return false;
+					} else {
+						$("#alert").css('color', 'red')
+						$("#alert").html("동일한 이름의 호텔이 이미 존재합니다.")
+						return false;
+					}
+				},
+				error: function(){
+					console.log("통신 실패")
+				}
+			})
+		}
+		if(star == null || star == "" || star == undefined || star == "undefined") {
+			alert("호텔의 성급을 선택해 주세요.")
+			return;
+		}
+		if(manager == null || manager == "" || manager == undefined || manager == "undefined") {
+			alert("담당자를 입력해 주세요.")
+			return;
+		}
+		if(phoneNum == null || phoneNum == "" || phoneNum == undefined || phoneNum == "undefined") {
+			alert("담당자의 연락처를 입력해 주세요.")
+			return;
+		} else {
+			var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+		      if (!regPhone.test(phoneNum)) {
+		          alert('올바른 전화번호를 입력해 주세요.');
+		          return;
+		      }
+		}
+		if(addr1 == null || addr1 == "" || addr1 == undefined || addr1 == "undefined") {
+			alert("호텔 주소를 입력해 주세요.")
+			return;
+		}
+		if(city == null || city == "" || city == undefined || city == "undefined") {
+			alert("도시를 입력해 주세요.")
+			return;
+		}
+		if(postal == null || postal == "" || postal == undefined || postal == "undefined") {
+			alert("우편번호를 입력해 주세요.")
+			return;
+		}
+		if(lat == null || lat == "" || lat == undefined || lat == "undefined") {
+			alert("정확한 숙소의 위치를 지도에서 클릭해 주세요.")
+			return;
+		}
+		if(lon == null || lon == "" || lon == undefined || lon == "undefined") {
+			alert("정확한 숙소의 위치를 지도에서 클릭해 주세요.")
+			return;
+		}
+		$("#myForm").submit();
+	}
+</script>
 </head>
 <body>
-<form action="basic.pdo" method="post">
    <div class="container">
       <header>
          <span id="logo"> <a href="#"> <img alt=""
                src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"
                class="header_logo"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-               	<li><a href="${contextPath}/#">${firstname} 님, 로그인!</a></li>
-               	<li><a href="${contextPath}/#">로그아웃</a></li>
-            </ul>
-         </nav>
-
       </header>
    </div>
    <main class="contents">
@@ -54,16 +129,17 @@
       <br>
       <h2>안녕하세요, ${firstname} 님!</h2>
       먼저 숙소 이름, 주소, 연락처를 알려주세요.
+      <form id="myForm" action="basic.pdo" method="post">
       <div class="input">
          <fieldset class="name">
             <div class="name-1">
                <p>숙소 이름은 무엇인가요?</p>
                <input type="hidden" name="member_email" value="${email}">
-               <input type="text" name="hotelname"><br> <span>숙소 검색 시 고객들이 보게
-                  되는 이름입니다.</span>
+               <input type="text" id="hotel" name="hotelname"><br>
+               <div class="alert" id="alert"></div>
             </div>
             <div class="star">
-               성급 <br> <select class="star-1" name="star">
+               성급 <br> <select class="star-1" id="star" name="star">
                   <option>해당없음</option>
                   <option value="1">1 ★</option>
                   <option value="2">2 ★★</option>
@@ -83,10 +159,10 @@
             <span id="name">담당자 성명</span>
          </div>
          <div class="contact-2">
-            <input type="text" name="manager"><br> <span id="name">연락처(귀사의
+            <input type="text" id="manager" name="manager"><br> <span id="name">연락처(귀사의
                숙소 등록 과정에서 지원이 필요할 경우 대비)</span>
             <div class="contact-2-1">
-               전화번호 <br> <input type="text" name="telephone">
+               전화번호 <br> <input type="text" id="phoneNum" name="telephone">
             </div>
             <div>
                <!-- <다른 전화번호> 나중에 필요시 추가 -->
@@ -110,11 +186,11 @@
                   </div>
                   <div>
                      <p id="name">도시</p>
-                     <input type="text" name="city" id="city" placeholder=" &nbsp;예) Samgo-ri">
+                     <input type="text" name="city" id="city" placeholder=" &nbsp;예) Samgeo-ri">
                   </div>
                   <div>
                      <p id="name">우편번호</p>
-                     <input type="text" name="postalcode" onchange="openMapModal();">
+                     <input type="text" id="postal" name="postalcode" onchange="openMapModal();">
                   </div>
                </div>
                <div class="location-1-1">
@@ -132,13 +208,13 @@
       </div>
 <div id="map" style="width:58%;height:350px;"></div>
 	<p><em>숙소의 정확한 위치를 지도에 표시해 주세요!</em></p> 
-<div id="clickLatlng"></div>
+<div id="clickLatlng"></div></form>
       <div>
-         <input type="submit" id="continue" value="계속">
+         <button type="button" id="continue" onclick="checkForm()">계속</button>
       </div>
 	
    </main>
-</form>
+
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
@@ -188,8 +264,8 @@ geocoder.addressSearch(fullAddress, function(result, status) {
       
       var message = '선택한 숙소위치의 위도는 ' + latlng.getLat() + ' 이고, ';
       message += '경도는 ' + latlng.getLng() + ' 입니다';
-      var input = '<input type="hidden" name="latitude" value="' + latlng.getLat() + '">';
-      input += '<input type="hidden" name="longitude" value="' + latlng.getLng() + '">';
+      var input = '<input type="hidden" id="latitude" name="latitude" value="' + latlng.getLat() + '">';
+      input += '<input type="hidden" id="longitude" name="longitude" value="' + latlng.getLng() + '">';
       
       var resultDiv = document.getElementById('clickLatlng'); 
       resultDiv.innerHTML = message;

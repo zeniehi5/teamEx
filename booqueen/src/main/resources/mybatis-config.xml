@@ -16,9 +16,11 @@
       <typeAlias type="com.booqueen.user.reservation.vo.ReservationVO" alias="uReservationVO"/>
       <typeAlias type="com.booqueen.user.payment.vo.PaymentVO" alias="paymentVO"/>
       <typeAlias type="com.booqueen.user.hotel.vo.CityVO" alias="cityVO"/>
-      <typeAlias type="com.booqueen.user.payment.vo.EmailVO" alias="emailVO"/>
+      <typeAlias type="com.booqueen.user.email.vo.EmailVO" alias="emailVO"/>
       <typeAlias type="com.booqueen.user.hotel.vo.RecentSearchVO" alias="recentSearchVO"/>
       <typeAlias type="com.booqueen.user.room.vo.RoomAvailableVO" alias="roomAvailableVO"/>
+      <typeAlias type="com.booqueen.user.hotel.vo.CityCountVO" alias="cityCountVO"/>
+      <typeAlias type="com.booqueen.user.hotel.vo.BestHotelVO" alias="bestHotelVO"/>
       
       <!-- shared -->
       <typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
@@ -44,13 +46,14 @@
       <typeAlias type="com.booqueen.partner.room.FacilitiesViewVO" alias="facilitiesView"/>
       <typeAlias type="com.booqueen.partner.room.FacilitiesAccessVO" alias="facilitiesAccess"/>
       <typeAlias type="com.booqueen.partner.room.RoomAvailableVO" alias="roomAvailable"/>
-       <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
-       <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
-       <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="pReservation"/>
-       <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>
-       <typeAlias type="com.booqueen.partner.reservation.SearchVO" alias="search"/>
-       <typeAlias type="com.booqueen.partner.room.UpdateImageVO" alias="roomImage"/>
-       <typeAlias type="com.booqueen.partner.finance.InvoiceVO" alias="invoice"/>
+      <typeAlias type="com.booqueen.partner.review.ReviewAvgVO" alias="myReviewAvg"/>
+      <typeAlias type="com.booqueen.partner.message.InquiryVO" alias="inquiry"/>
+      <typeAlias type="com.booqueen.partner.reservation.ReservationVO" alias="pReservation"/>
+      <typeAlias type="com.booqueen.partner.reservation.ReservationDetailVO" alias="details"/>
+      <typeAlias type="com.booqueen.partner.reservation.SearchVO" alias="search"/>
+      <typeAlias type="com.booqueen.partner.room.UpdateImageVO" alias="roomImage"/>
+      <typeAlias type="com.booqueen.partner.finance.InvoiceVO" alias="invoice"/>
+      <typeAlias type="com.booqueen.partner.analysis.AnalysisVO" alias="analysis"/>
     
       <!-- admin -->
       <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
@@ -62,6 +65,7 @@
       <!--<typeAlias type="com.booqueen.admin.partner.BlockPartnerVO" alias="blockPartner"/>-->
       <typeAlias type="com.booqueen.admin.hotel.ReservationVO" alias="aReservation"/>
       <typeAlias type="com.booqueen.admin.hotel.HotelDetailVO" alias="hotelDetail"/>
+      <typeAlias type="com.booqueen.admin.hotel.RoomDetailVO" alias="roomDetails"/>
    </typeAliases>
    <mappers>
       <mapper resource="mappings/user/member-mapping.xml"/>
@@ -88,5 +92,7 @@
        <mapper resource="mappings/partner/message-mapping.xml"/>
        <mapper resource="mappings/user/recentsearch-mapping.xml"/>
        <mapper resource="mappings/user/email-mapping.xml"/>
+       <mapper resource="mappings/partner/analysis-mapping.xml"/>
+       <mapper resource="mappings/admin/room-mapping.xml"/>
    </mappers>
 </configuration>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.booqueen.user.payment.dao.emailmapper">
+<mapper namespace="com.booqueen.user.email.dao.emailmapper">
+	
 	<select id="getReservationInfo" parameterType="String" resultType="emailVO">
 		<![CDATA[
 			SELECT * FROM reservation AS re
@@ -9,7 +10,7 @@
 			ON
 				re.serialnumber = po.serialnumber
 			LEFT JOIN 
-				emphotel AS ho
+				temphotel AS ho
 			ON
 				re.serialnumber = ho.serialnumber
 			LEFT JOIN

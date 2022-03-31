@@ -21,4 +21,5 @@ public class ReviewVO {
 	private String userid;
 	private Date writing;
 	private String username;
+	private Integer reservation_number;
 }

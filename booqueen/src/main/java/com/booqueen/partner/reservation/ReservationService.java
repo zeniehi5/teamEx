@@ -8,7 +8,7 @@ public interface ReservationService {
 
 	ReservationDetailVO selectReservationDetailByRSVN(int reservation_number);
 
-	int getListCount();
+	int getListCount(int serialnumber);
 
 	List<ReservationVO> selectReservationListByHotelSerial(int serialnumber);
 
@@ -23,5 +23,7 @@ public interface ReservationService {
 	List<ReservationVO> selectCheckInListByHotelSerial(int serialnumber);
 
 	ReservationVO selectReservationByRSVN(int searchKeyword);
+
+	int updateReservationStatusToBilling(ReservationVO reservation);
 
 }

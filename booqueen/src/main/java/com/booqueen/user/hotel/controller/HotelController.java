@@ -161,7 +161,7 @@ public class HotelController {
 			
 			hotelService.insertRecentSearch(recentSearchVO);
 		}
-			
+
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
 		if(!getByCity.isEmpty() && getByCity != null) {

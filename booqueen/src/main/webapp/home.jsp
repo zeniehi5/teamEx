@@ -71,7 +71,6 @@
                         </form>
                     </div>
                 </div>
-    
                 <div class="form-inner-third">
                     <div>
                         <input type="number" placeholder="인원" class="number-of-member" value="">
@@ -143,21 +142,25 @@
     </c:if>
 	
 	<c:choose>
-	<c:when test="${isLogOn == true  && member!= null}">
+	<c:when test="${isLogOn == true  && member!= null && !empty comingReservationList && comingReservationList != null}">
     <div class="section comming-trip">
         <h2>다가오는 여행</h2>
         <div class="recent-div comming-div">
             <ul class="recent-ul comming-ul">
+            	<c:forEach var="comingReservationList" items="${comingReservationList}" end="2">
                 <li>
-                    <h3>용인</h3>
-                    <span class="coming-li-span">1월 28일~1월 29일</span>
+                    <h3>${comingReservationList.city}</h3>
+                    <fmt:parseDate var="reservation_start_date" value="${comingReservationList.start_date}" pattern="yyyy-MM-dd" />
+					<fmt:parseDate var="reservation_end_date" value="${comingReservationList.end_date}" pattern="yyyy-MM-dd" />
+                    <span class="coming-li-span"><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/></span>
                     <a>
                         <div class="recent-ul-div comming-ul-div">
-                            <div><img class="recent-img" src="${contextPath}/resources/user/images/recent1.webp"></div>
-                            <div><span>리스본</span><span>2월 27일~3월 1일, 2명</span></div>
+                            <div class="comming-ul-div-div"><img class="recent-img" src="${comingReservationList.file_url}"></div>
+                            <div><span>${comingReservationList.hotelname}</span><span><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/>, ?명</span></div>
                         </div>
                     </a>
                 </li>
+                </c:forEach>
             </ul>
         </div>
     </div>
@@ -174,28 +177,28 @@
     </div>
 
 	<c:choose>
-	<c:when test="${isLogOn == true  && member!= null}">
+	<c:when test="${isLogOn == true  && member!= null && !empty pastReservationList && pastReservationList != null}">
     <div class="review-request">
+    	
+    	<c:forEach var="pastReservationList" items="${pastReservationList}" varStatus="status">
         <div id="myBanner2" class="bui-banner">
             <div class="bui-banner__image-container">
-                <img class="bui-banner__image" src="https://cf.bstatic.com/xdata/images/hotel/max400/21676156.webp?k=0e4e8c6647f2027d6cf3d67590e24aa9fed67000e4769bc79a063e93701630c2&amp;o=">
+                <img class="bui-banner__image" src="${pastReservationList.file_url}">
             </div>
             <div class="bui-banner__content">
                 <h4 class="bui-banner__title u-padding-left:0">
-                    <b>베스트웨스턴 군산호텔</b>, 어떠셨나요?
+                    <b>${pastReservationList.hotelname}</b>, 어떠셨나요?
                 </h4>
                 <p class="bui-banner__text">
-                    후기 작성에 남은 시간 단 79일! 잊지 말고 작성해주세요
+                    후기 작성에 남은 시간 단 ${pastReservationList.review_deadline}일! 잊지 말고 작성해주세요
                 </p>
-                <a
-                    class="bui-banner__button"
-                    href="${contextPath}/review/reviewForm.do" target="_blank"
-                    target="_blank">
+                <a class="bui-banner__button" href="${contextPath}/review/reviewForm.do?reservation_number=${pastReservationList.reservation_number}" target="_blank" target="_blank">
                     <span class="bui-button__text">숙박 경험을 평가해주세요</span>
                 </a>
             </div>
             <span class="x-button2"><i class="bi bi-x-lg"></i></span>
         </div>
+        </c:forEach>
     </div>
 	</c:when>
 	</c:choose>

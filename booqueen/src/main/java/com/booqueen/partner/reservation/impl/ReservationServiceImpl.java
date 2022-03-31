@@ -28,8 +28,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public int getListCount() {
-		return reservationDAO.getListCount();
+	public int getListCount(int serialnumber) {
+		return reservationDAO.getListCount(serialnumber);
 	}
 
 	@Override
@@ -65,6 +65,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public ReservationVO selectReservationByRSVN(int searchKeyword) {
 		return reservationDAO.selectReservationByRSVN(searchKeyword);
+	}
+
+	@Override
+	public int updateReservationStatusToBilling(ReservationVO reservation) {
+		return reservationDAO.updateReservationStatusToBilling(reservation);
 	}
 
 }

@@ -58,4 +58,8 @@ public interface RoomService {
 
 	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber);
 
+	public RoomVO getRoomAvailableByRoomType(RoomVO room);
+
+	public RoomAvailableVO selectRoomIdByType(RoomAvailableVO vo);
+
 }

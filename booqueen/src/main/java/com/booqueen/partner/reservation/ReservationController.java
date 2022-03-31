@@ -35,7 +35,7 @@ public class ReservationController {
 		
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
-			int listCount = reservationService.getListCount();	//전체 게시물 수
+			int listCount = reservationService.getListCount(hotel.getSerialnumber());	//전체 게시물 수
 			PagingVO paging = Pagination.getPagingVO(currentPage, listCount);
 			List<ReservationVO> reservation = reservationService.selectReservationPagingByHotelSerial(hotel.getSerialnumber(), paging);
 			model.addAttribute("paging", paging);
@@ -71,7 +71,7 @@ public class ReservationController {
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
-				int listCount = reservationService.getListCount();	//전체 게시물 수
+				int listCount = reservationService.getListCount(hotel.getSerialnumber());	//전체 게시물 수
 				System.out.println("총 게시글 수 : " + listCount);
 				PagingVO paging = Pagination.getPagingVO(currentPage, listCount);
 				System.out.println(paging.toString());
