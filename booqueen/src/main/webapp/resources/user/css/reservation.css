@@ -117,7 +117,7 @@ a:hover{
 }
 .div-of-first{
     border-right: 1px solid #e7e7e7;
-    padding-right: 10px;
+    padding-right: 20px;
 }
 .aside-main-second{
     margin-bottom: 15px;
@@ -196,7 +196,7 @@ a:hover{
     gap: 20px;
 }
 .detail-img{
-    width: 23%;
+    width: 27%;
 }
 .detail-img img{
     width: 100%;

@@ -161,7 +161,7 @@ public class HotelController {
 			
 			hotelService.insertRecentSearch(recentSearchVO);
 		}
-		
+
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
 		if(!getByCity.isEmpty() && getByCity != null) {
@@ -214,10 +214,10 @@ public class HotelController {
 		List<RoomVO> roomList = roomService.getRoomFacilities(hotelAvailableVO);
 			
 		if(roomList != null && !roomList.isEmpty()) {
-			model.addAttribute("available", true);
+			model.addAttribute("available_room", true);
 			
 		} else {
-			model.addAttribute("available", false);
+			model.addAttribute("available_room", false);
 		}
 		
 		model.addAttribute("roomList", roomList);

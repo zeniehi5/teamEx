@@ -1,3 +1,5 @@
+html { scroll-behavior: smooth; }
+
 *{
     margin: 0px;
     padding: 0px;
@@ -149,6 +151,7 @@
     color: #0071c2;
     font-weight: 600;
     font-size: 13px;
+    text-decoration: none;
 }
 .fa-map{
     color: #4c76b2;

@@ -9,8 +9,13 @@ public class ReservationVO {
 	private Integer room_id;
 	private Integer serialnumber;
 	private String type;
+	private String[] types;
 	private Integer price;
+	private int[] prices;
+	private String[] prices_s;
 	private Integer count_room;
+	private int[] count_rooms;
+	private String[] count_rooms_s;
 	private String start_date;
 	private String start_date_year;
 	private String start_date_month;
@@ -44,7 +49,9 @@ public class ReservationVO {
 	private String cancel_date;
 	private String cancel_reason;
 	private String imp_uid;
+	private int total;
 	private Integer review_deadline;
 	private boolean review;
 	private Integer count; // 호텔 예약 횟수
+
 }

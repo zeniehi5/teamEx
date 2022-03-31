@@ -31,8 +31,8 @@ public class ReservationDAO {
 		return sqlSession.update("com.booqueen.user.reservation.dao.reservationmapper.cancelReservation", reservationVO);
 	}
 	
-	public ReservationVO selectReservationByMerchant(String merchant) throws DataAccessException{
-		return sqlSession.selectOne("com.booqueen.user.reservation.dao.reservationmapper.selectReservationByMerchant", merchant);
+	public List<ReservationVO> selectReservationByMerchant(String merchant) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.selectReservationByMerchant", merchant);
 	}
 	
 	public int deleteDuplicatedReservation() throws DataAccessException{

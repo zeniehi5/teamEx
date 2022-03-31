@@ -40,7 +40,7 @@
             </ol>
         </div>
     </div>
-
+	<form action="${contextPath}/comfirmReservation.do" id="comfirm_reservation">
     <div class="container">
         <aside class="aside">
             <div class="aside-inner">
@@ -65,16 +65,34 @@
                         </div>
                     </div>
                     <div class="aside-main-second">
-                        <div>총 숙박 기간:</div>
-                        <div>${reservationVO.diffDays }박</div>
+                        <div style="display: flex; margin: 10px 0; justify-content: space-between;"><span>총 숙박 기간:</span><span style="font-style: italic; font-size: 17px;">${reservationVO.diffDays }박</span></div>
                     </div>
                     <div class="aside-main-thrid">
                         <a>혹시 여행 날짜가 변경되었나요?</a>
                     </div>
                     <hr class="line">
-                    <div style="display:flex; justify-content:space-between;"><div>선택 객실: </div><div>${reservationVO.type}</div></div>
+                    <div style="display:flex; justify-content:space-between; flex-direction: column;">
+                    
+                    <c:set var = "total" value = "0" />
+                     <c:forEach var="count_rooms" items="${reservationVO.count_rooms}" varStatus="status">
+                		<c:set var="types" value="${reservationVO.types[status.index]}"/>
+                		<input type="hidden" value="${count_rooms }" name="count_rooms">
+                		<input type="hidden" value="${types}" name="types">
+                		<c:set var="prices" value="${reservationVO.prices[status.index] }"/>
+                		<input type="hidden" value="${prices }" name="prices">
+                    	<c:if test="${count_rooms ne 0 }">
+                    		<div style="display:flex; justify-content:space-between;"><span>선택 객실:</span><span style="font-style: italic; font-size: 15px;">${types} x ${count_rooms}</span></div>   	
+                   			<div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span></span><span style="font-style: italic; font-size: 15px;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${prices * reservationVO.diffDays * count_rooms}" /></span></div>
+                   			<c:set var= "total" value="${total + (prices * reservationVO.diffDays * count_rooms)}"/>
+                   		</c:if>
+                   	</c:forEach>	                   	
+                    
+                    </div>
                     <c:set var="count_room" value="${reservationVO.count_room}"/>
-                    <div style="display:flex; justify-content:space-between;"><div>총 가격: </div><div style="font-style: italic;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price*count_room}" /></div></div>
+                    <div style="display:flex; justify-content:space-between; margin-top: 50px; ">
+                    	<div>총 가격: </div>
+                    	<div style="font-style: italic; font-size: 17px;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${total}" /></div>
+                    </div>
                     <div class="other-room-div"><a class="other-room-a">다른 객실 선택하기</a></div>
                 </div>
             </div>
@@ -92,7 +110,7 @@
                 <p>코로나19(COVID-19) 확산 방지를 위한 정부 지침에 따라, 이 숙소는 해당 지침이 적용되는 날짜의 경우 투숙객의 신원, 여행 일정, 기타 관련 정보를 확인하기 위해 추가 문서를 요청할 수 있습니다.</p>
                 <p>현재 이 숙소는 코로나19(COVID-19)에 대응하기 위해 추가 안전 및 위생 조치를 실시하고 있습니다.</p>
                 <p>이 숙소는 코로나19(COVID-19)와 관련하여 고객과 직원의 안전을 지키기 위한 조치를 시행 중입니다. 이에 따라 특정 서비스 제공 또는 편의시설 이용이 제한되거나 중단되었을 수 있습니다.</p>
-                <p>예상 도착 시간을 강릉관광호텔에 미리 알려주세요. 예약 시 별도 요청란에 기재하거나 예약 확인서에 기재된 숙소 연락처로 직접 연락하셔도 됩니다.</p>
+                <p>예상 도착 시간을 ${hotelVO.hotelname}에 미리 알려주세요. 예약 시 별도 요청란에 기재하거나 예약 확인서에 기재된 숙소 연락처로 직접 연락하셔도 됩니다.</p>
                 <p>모든 투숙객은 체크인 시 사진이 부착된 유효한 신분증과 신용카드를 제시하셔야 합니다. 모든 별도 요청 사항은 체크인 시 가능한 경우에 한해 제공되며, 추가 비용이 부과될 수도 있음을 안내드립니다.</p>
             </div>
         </aside>
@@ -116,15 +134,14 @@
                             <div class="detail-top">
                                 <div>호텔</div>
                                 <span class="detail-top-span">
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-                                        </svg></span>&nbsp;
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-                                        </svg></span>&nbsp;
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-                                    </svg></span>    
+                                    <c:set var="star" value="${hotelVO.star*1}"/>
+									<c:forEach begin="1" end="${star }">
+										<span>
+										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+											<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+										</svg>
+									</span>
+									</c:forEach>
                                 </span>
                             </div>
                             <h2>${hotelVO.hotelname}</h2>
@@ -144,7 +161,13 @@
                                 </c:choose>
                             </div>
                             <div class="review-row">
-                                <div>매우 좋음 &nbsp;</div>
+                                <c:choose>
+					                <c:when test="${reviewAvgVO.scoreAvg >= 9}"><span>최고&nbsp;</span></c:when>
+									<c:when test="${reviewAvgVO.scoreAvg >= 8}"><span>매우 좋음&nbsp;</span></c:when>
+									<c:when test="${reviewAvgVO.scoreAvg >= 7}"><span>좋음&nbsp;</span></c:when>
+									<c:when test="${reviewAvgVO.scoreAvg >= 6}"><span>만족&nbsp;</span></c:when>
+									<c:when test="${reviewAvgVO.scoreAvg < 6}"><span>보통&nbsp;</span></c:when>
+					           </c:choose>  
                                 <c:choose>
                             	<c:when test="${reviewAvgVO.count == null}">
                                 	<div>0개 이용 후기</div>
@@ -160,7 +183,7 @@
                 </div>
             </div>
 
-	<form action="${contextPath}/comfirmReservation.do" id="comfirm_reservation">
+	
             <div class="input-section">
                 <h3>상세 정보를 입력해 주세요.</h3>
                 <div class="required_fields_description">
@@ -169,13 +192,13 @@
                 <div class="name">
                     <div class="name-input">
                         <div class = "bp_form__field bp_form__field-- lastname">
-                            <label class = "bp_form__field__label"> 성(영문)</label>
+                            <label class = "bp_form__field__label"> 성</label>
                             <input type="text" name="lastname" id="lastname" required="" class="bp_input_text bp_form__field__input" placeholder="예 : Hong" size="20">
                         </div>
                     </div>
                     <div>
                         <div data-component="bp/personal-details-form/firstname" class="bp_form__field bp_form__field--firstname">
-                            <label for="firstname" class="bp_form__field__label">이름(영문)</label>
+                            <label for="firstname" class="bp_form__field__label">이름</label>
                             <input type="text" name="firstname" id="firstname" class="bp_input_text bp_form__field__input" placeholder="예 : Gildong" size="20">
                         </div>
                     </div>
@@ -289,23 +312,23 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="room_id" value=${reservationVO.room_id }>
-            <input type="hidden" name="serialnumber" value=${reservationVO.serialnumber }>
-            <input type="hidden" name="request_text" value=${reservationVO.request_text }>
-            <input type="hidden" name="type" value=${reservationVO.type }>
-            <input type="hidden" name="price" value=${reservationVO.price }>
-            <input type="hidden" name="count_room" value=${reservationVO.count_room }>
-            <input type="hidden" name="start_date" value=${reservationVO.start_date }>
-            <input type="hidden" name="start_date_year" value=${reservationVO.start_date_year }>
-            <input type="hidden" name="start_date_month" value=${reservationVO.start_date_month }>
-            <input type="hidden" name="start_date_day" value=${reservationVO.start_date_day }>
-            <input type="hidden" name="end_date" value=${reservationVO.end_date }>
-            <input type="hidden" name="end_date_year" value=${reservationVO.end_date_year }>
-            <input type="hidden" name="end_date_month" value=${reservationVO.end_date_month }>
-            <input type="hidden" name="end_date_day" value=${reservationVO.end_date_day }>
-            <input type="hidden" name="diffDays" value=${reservationVO.diffDays }>
-            <input type="hidden" name="start_day" value=${reservationVO.start_day }>
-            <input type="hidden" name="end_day" value=${reservationVO.end_day }>
+            <input type="hidden" name="room_id" value="${reservationVO.room_id }">
+            <input type="hidden" name="serialnumber" value="${reservationVO.serialnumber }">
+            <input type="hidden" name="request_text" value="${reservationVO.request_text }">
+            <input type="hidden" name="type" value="${reservationVO.type }">
+            <input type="hidden" name="price" value="${reservationVO.price }">
+            <input type="hidden" name="count_room" value="${reservationVO.count_room }">
+            <input type="hidden" name="start_date" value="${reservationVO.start_date }">
+            <input type="hidden" name="start_date_year" value="${reservationVO.start_date_year }">
+            <input type="hidden" name="start_date_month" value="${reservationVO.start_date_month }">
+            <input type="hidden" name="start_date_day" value="${reservationVO.start_date_day }">
+            <input type="hidden" name="end_date" value="${reservationVO.end_date }">
+            <input type="hidden" name="end_date_year" value="${reservationVO.end_date_year }">
+            <input type="hidden" name="end_date_month" value="${reservationVO.end_date_month }">
+            <input type="hidden" name="end_date_day" value="${reservationVO.end_date_day }">
+            <input type="hidden" name="diffDays" value="${reservationVO.diffDays }">
+            <input type="hidden" name="start_day" value="${reservationVO.start_day }">
+            <input type="hidden" name="end_day" value="${reservationVO.end_day }">
             <input type="hidden" name="check_in_start" value="${hotelPoclicyVO.check_in_start } ">
             <input type="hidden" name="check_in_end" value="${hotelPoclicyVO.check_in_end }">
             <input type="hidden" name="check_out_start" value="${hotelPoclicyVO.check_out_start }">
@@ -318,15 +341,18 @@
             <input type="hidden" name="address2" value="${hotelVO.address2}">
             <input type="hidden" name="scoreAvg" value="${reviewAvgVO.scoreAvg}">
             <input type="hidden" name="count" value="${reviewAvgVO.count}">
+
+			<input type="hidden" name="total" value="${total }">
             
-            </form>
+            
             <div class="button_box">
                 <button form="comfirm_reservation" id="last-button" class="next-step-button" type="submit" name="book" data-bui-component="Popover" data-popover-content-id="bp-submit-popover" data-popover-position="top end" aria-describedby="_ydtbmi19e"><span class="bui-button__text js-button__text"> 다음: 최종 단계 </span> <span class="bui-button__icon bui-button__icon--end js-button__icon">
                 <svg class="bk-icon -streamline-arrow_nav_right" height="24" role="presentation" width="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z"></path></svg>
                 </span> <span class="bui-button__loader"> <div class="bui-spinner bui-spinner--light "> <div class="bui-spinner__inner"></div> </div> </span> </button>
-                </div>
+            </div>
         </div><!-- end main-->
     </div>
+</form>
 
     <div class="footer">
         <div class="footer-inner">

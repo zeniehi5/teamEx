@@ -12,5 +12,8 @@ public class RoomVO {
    private Integer smoking;
    private Integer available;
    private Integer count_room;
+   private Integer quota;
+   private Integer bed;
+   RoomAvailableVO roomAvailableVO;
    RoomFacilitiesVO roomFacilitiesVO;
 }

@@ -55,10 +55,6 @@
                                 <label>체크아웃 날짜</label>
                                 <input type="date" placeholder="Add Date">
                             </div>
-                            <div>
-                                <label>1박 선택</label>
-                                <input type="text" placeholder="Add Geust">
-                            </div>
                             <button type="submit">검색</button>
                         </form>
                     </div> <!-- end searchbar-->
@@ -89,10 +85,10 @@
         </div>
         <div class="right-col">
             <div class="right-col-menu">
-                <a>옵션 정보 & 요금</a>
-                <a>시설</a>
-                <a>하우스 롤</a>
-                <a id="more-review">고객 후기(800개)</a>
+                <a href="#booking-table">옵션 정보 & 요금</a>
+                <a href="#surroundings">시설</a>
+                <a href="#house-rule">하우스 롤</a>
+                <a id="more-review">고객 후기(${fn:length(reviewList)}개)</a>
             </div>
             
             <div class="house-title">
@@ -291,8 +287,8 @@
     <hr class="line">
 
 	<c:choose>
-		<c:when test="${available == true }">
-
+		<c:when test="${available_room == true }">
+			<a name="booking-table"></a>
 		    <div class="booking">
 		        <div>
 		            <h2>예약 가능 여부</h2>
@@ -326,6 +322,7 @@
 		            </div>
 		        </div>
 		        
+		        
 		        <div class="booking-table">
 		            <div class="booking-table-left">
 		                <form id="reservation_form" action="${contextPath}/reservationProcess.do">
@@ -334,27 +331,27 @@
 		                        <tr class="booking-row">
 		                            <th style="width: 50%;">객실 유형</th>
 		                            <th style="width: 10%;">정원</th>
-		                            <th id="day-charge" style="width: 15%;">${hotelAvailableVO.diffDays}박 요금</th>
+		                            <th id="day-charge" style="width: 15%;">${hotelAvailableVO.diffDays }박 요금</th>
 		                            <th style="width: 15%;">선택사항</th>
 		                            <th style="width: 10%;">객실 선택</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
 		                    
-		                    	<c:forEach var="room" items="${roomList}">
+		                    	<c:forEach var="room" items="${roomList}" varStatus="varStatus">
 			                        <tr>
 			                            <td class="booking-table-frist-td">
 			                                <div class="booking-table-tbody-div">
 			                                    <div>
 			                                        <a class="tbody-div-a" onclick="on_hotelroom()"><span>${room.type }</span></a>
 			                                    </div>
-			                                    <div class="booking-warning">
-			                                        <i class="bi bi-circle-half"></i><span id="booking-warning-span">우리 사이트에 남은 객실 단 3개</span>
-			                                    </div>
+<!-- 			                                    <div class="booking-warning"> -->
+<!-- 			                                        <i class="bi bi-circle-half"></i><span id="booking-warning-span">우리 사이트에 남은 객실 단 3개</span> -->
+<!-- 			                                    </div> -->
 			                                    <div>
 			                                        <ul class="booking-table-bed">
 			                                            <li>
-			                                                <span>대형 더블침대 1개</span>&nbsp;<i class="fas fa-bed fa-lg"></i>
+			                                                <span>침대</span>&nbsp;<i class="fas fa-bed fa-lg"></i> <span>x ${room.bed}</span>
 			                                            </li>
 			                                        </ul>
 			                                    </div>
@@ -444,25 +441,30 @@
 			                                    </div>
 			                                </div>
 			                            </td>
-			                            <td class="booking-table-cell"><i class="bi bi-person-fill"></i><span>x ${room.available }</span></td>
-			                            <td class="booking-table-cell">₩ ${room.price }</td>
+			                            <td class="booking-table-cell"><i class="bi bi-person-fill"></i><span>x ${room.quota }</span></td>
+			                            <td class="booking-table-cell"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${room.price * hotelAvailableVO.diffDays}" /></td>
 			                            <td class="booking-table-cell booking-cancel-cell" >무료취소</td>
 			                            <td class="booking-table-cell">
-			                                <select name="count_room">
-			                                	<c:set var="count_room" value="${room.count_room }"/>
-			                                	<c:forEach begin="1" end="${count_room }" varStatus="status">
-			                                		<option value="${status.count}">${status.count }<span>&nbsp;&nbsp;&nbsp;&nbsp;(<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${room.price * status.count}" />)</span></option> 
+			                                <select name="count_rooms" class="count_room_select">
+			                                	<option value="0">0</option>
+			                                	<c:set var="room_available" value="${room.roomAvailableVO.available }"/>
+<%-- 			                                	<c:set var = "total" value = "0" /> --%>
+			                                	<c:forEach begin="1" end="${room_available }" varStatus="status">
+			                                		<option value="${status.count}">${status.count }<span>&nbsp;&nbsp;&nbsp;&nbsp;(<fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${room.price * hotelAvailableVO.diffDays * status.count }" />)</span></option> 
+<%-- 													<c:set var= "total" value="${total + (room.price*room_available)}"/> --%>
+<%-- 			                                		<input type="hidden" name="prices" value="${room.price}"> --%>
 			                                	</c:forEach>
 			                                </select>
 			                            </td>    
 			                        </tr>
+<%-- 			                        <input type="hidden" name="total" value="${total }"> --%>
 			                        <input type="hidden" name="sequence" value="${room.sequence }">
 			                        <input type="hidden" name="room_id" value="${room.room_id }">
 			                        <input type="hidden" name="serialnumber" value="${room.serialnumber }">
 			                        <input type="hidden" name="type" value="${room.type }">
 			                        <input type="hidden" name="start_date" value="${hotelAvailableVO.start_date }">
 			                        <input type="hidden" name="end_date" value="${hotelAvailableVO.end_date }">
-			                        <input type="hidden" name="price" value="${room.price }">
+			                        <input type="hidden" name="prices" value="${room.price }">
 			                        <input type="hidden" name="diffDays" value="${hotelAvailableVO.diffDays}">
 		                        </c:forEach>
 		                                 
@@ -496,7 +498,7 @@
 		
 		</c:when>
 
-		<c:when test="${available == false }">
+		<c:when test="${available_room == false }">
 			<div class="add">
 		        <i class="bi bi-info-circle"></i>
 		        <div>
@@ -768,11 +770,13 @@
         <div class="review-text2">
             <div id="score" class="review-score">${reviewAvg.scoreAvg }</div>
             <div>
-                <c:if test="${reviewAvg.scoreAvg >= 9}"><span>최고</span></c:if>
-				<c:if test="${reviewAvg.scoreAvg >= 8}"><span>매우 좋음</span></c:if>
-				<c:if test="${reviewAvg.scoreAvg >= 7}"><span>좋음</span></c:if>
-				<c:if test="${reviewAvg.scoreAvg >= 6}"><span>만족</span></c:if>
-				<c:if test="${reviewAvg.scoreAvg < 6}"><span>보통</span></c:if>
+            <c:choose>
+                <c:when test="${reviewAvg.scoreAvg >= 9}"><span>최고</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 8}"><span>매우 좋음</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 7}"><span>좋음</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 6}"><span>만족</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg < 6}"><span>보통</span></c:when>
+           </c:choose>     
                 <span id="reviewcount">
                 	<c:if test="${reviewAvg.scoreAvg == 0.0 }">
                 		0
@@ -884,8 +888,8 @@
     	<div class="review-empty-container">
             <div class="review-empty-box" style="margin: 0 18%; border: 1px solid #0071c2;" >
                <h3>아직 이용 후기 평점이 없습니다 😭</h3>
-               <p>정확한 평점 계산을 위해서는 최소 3개의 이용 후기가 필요합니다. 이 숙소를 예약하고 후기를 남기셔서 다뉴브 호텔 평가에 도움을 주세요.</p>
-               <button class="empty-write-review">후기쓰기</button>
+               <p>정확한 평점 계산을 위해서는 최소 3개의 이용 후기가 필요합니다. 이 숙소를 예약하고 후기를 남기셔서 ${hotelInfo.hotelname } 호텔 평가에 도움을 주세요.</p>
+<!--                <button class="empty-write-review">후기쓰기</button> -->
             </div>
          </div>
     </c:otherwise>
@@ -952,7 +956,7 @@
 		</c:choose>
 	</div>
 
-
+	<a name="surroundings"></a>
     <div class="surroundings">
         <div>
             <h2>호텔 주변 지역</h2>
@@ -1018,6 +1022,7 @@
         </div>
     </div>
 
+	<a name="house-rule"></a>
     <div class="house-rule">
         <div class="house-rule-div">
             <h2>하우스 룰</h2>
@@ -1756,8 +1761,8 @@
 		            <div class="review-empty-container">
 		               <div class="review-empty-box">
 		                  <h3>아직 이용 후기 평점이 없습니다 😭</h3>
-		                  <p>정확한 평점 계산을 위해서는 최소 3개의 이용 후기가 필요합니다. 이 숙소를 예약하고 후기를 남기셔서 다뉴브 호텔 평가에 도움을 주세요.</p>
-		                  <button class="empty-write-review">후기쓰기</button>
+		                  <p>정확한 평점 계산을 위해서는 최소 3개의 이용 후기가 필요합니다. 이 숙소를 예약하고 후기를 남기셔서 ${hotelInfo.hotelname } 호텔 평가에 도움을 주세요.</p>
+<!-- 		                  <button class="empty-write-review">후기쓰기</button> -->
 		               </div>
 		            </div>
 				</c:otherwise>
@@ -1874,6 +1879,12 @@
 		</div>
 	</div>
 
+	<script>
+// 	$('.count_room_select').on("change", function(){
+// 		alert(this.value);
+// 	})
+	
+	</script>
 	<script>
 	function disabled_btn(){
 		alert('로그인 후 예약을 진행해주세요!');

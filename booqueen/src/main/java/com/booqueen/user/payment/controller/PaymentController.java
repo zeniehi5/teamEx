@@ -94,9 +94,13 @@ public class PaymentController {
 		int result = paymentService.insertReservation(paymentVO);
 		
 		if(result > 0) {
-			// emailVO 왜 값 안넘어오냐고
+      /*
+      sendEmail.reservationEmail(paymentVO.getOrder_merchant_serial());
+       emailVO 왜 값 안넘어오냐고
 			EmailVO emailVO = emailService.getReservationInfo(paymentVO.getOrder_merchant_serial());
 			emailService.reservationEmail(emailVO);
+      */
+
 			return "success";
 		} else {
 			return "error";
