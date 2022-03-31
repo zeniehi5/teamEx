@@ -97,15 +97,17 @@ public class HotelController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 		
-		RecentSearchVO recentSearchVO = new RecentSearchVO();
-		
-		recentSearchVO.setUserid(user.getUserid());
-		recentSearchVO.setCity(keyword);
-		recentSearchVO.setStart_date(start_date);
-		recentSearchVO.setEnd_date(end_date);
-		recentSearchVO.setPeople(2); // 인원 설정 후 수정
-		
-		hotelService.insertRecentSearch(recentSearchVO);
+		if(user != null) {
+			RecentSearchVO recentSearchVO = new RecentSearchVO();
+			
+			recentSearchVO.setUserid(user.getUserid());
+			recentSearchVO.setCity(keyword);
+			recentSearchVO.setStart_date(start_date);
+			recentSearchVO.setEnd_date(end_date);
+			recentSearchVO.setPeople(2); // 인원 설정 후 수정
+			
+			hotelService.insertRecentSearch(recentSearchVO);
+		}
 		
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
@@ -148,16 +150,18 @@ public class HotelController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 		
-		RecentSearchVO recentSearchVO = new RecentSearchVO();
+		if(user != null) {
+			RecentSearchVO recentSearchVO = new RecentSearchVO();
+			
+			recentSearchVO.setUserid(user.getUserid());
+			recentSearchVO.setCity(keyword);
+			recentSearchVO.setStart_date(start_date);
+			recentSearchVO.setEnd_date(end_date);
+			recentSearchVO.setPeople(2); // 인원 설정 후 수정
+			
+			hotelService.insertRecentSearch(recentSearchVO);
+		}
 		
-		recentSearchVO.setUserid(user.getUserid());
-		recentSearchVO.setCity(keyword);
-		recentSearchVO.setStart_date(start_date);
-		recentSearchVO.setEnd_date(end_date);
-		recentSearchVO.setPeople(2); // 인원 설정 후 수정
-		
-		hotelService.insertRecentSearch(recentSearchVO);
-
 		CityVO cityVO = hotelService.getCityLocation(keyword);
 		
 		if(!getByCity.isEmpty() && getByCity != null) {

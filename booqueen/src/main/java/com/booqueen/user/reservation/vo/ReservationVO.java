@@ -44,4 +44,7 @@ public class ReservationVO {
 	private String cancel_date;
 	private String cancel_reason;
 	private String imp_uid;
+	private Integer review_deadline;
+	private boolean review;
+	private Integer count; // 호텔 예약 횟수
 }

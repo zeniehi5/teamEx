@@ -32,4 +32,8 @@ public class ReviewService {
 	public ReviewAvgVO getReviewAvg(Integer serialnumber) {
 		return reviewDAO.getReviewAvg(serialnumber);
 	}
+	
+	public List<ReviewVO> selectReviewStatus(String userid) {
+		return reviewDAO.selectReviewStatus(userid);
+	}
 }

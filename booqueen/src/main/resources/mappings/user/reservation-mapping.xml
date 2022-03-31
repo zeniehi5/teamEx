@@ -24,6 +24,9 @@
 		<result property="cancel_date" column="cancel_date"/>
 		<result property="cancel_reason" column="cancel_reason"/>
 		<result property="imp_uid" column="imp_uid"/>
+		<result property="review_deadline" column="review_deadline"/>
+		<result property="review" column="review"/>
+		<result property="count" column="count"/>
     </resultMap>
 
 
@@ -90,4 +93,75 @@
 		     FROM reservation) t
 		WHERE t.rnum > 1)]]>
 	</delete>
+	
+	<select id="selectComingReservationList" parameterType="String" resultMap="ReservationVOMap">
+		<![CDATA[SELECT 
+						current_date as today,
+						r.reservation_number, r.imp_uid, r.merchant, r.room_id, r.serialnumber, r.hotelname, r.userid, r.checkin_date,
+						r.checkout_date, r.reservation_date, r.lastname, r.status, r.cancel_date, r.cancel_reason,
+						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city
+				FROM 	
+						reservation as r
+				LEFT JOIN 
+						hotel_image as i 
+				ON 
+						r.serialnumber = i.serialnumber
+				LEFT JOIN
+						temphotel as h
+				ON
+						r.serialnumber = h.serialnumber
+				WHERE 
+						r.userid = #{userid} and r.checkin_date > current_date
+						
+				order by r.checkin_date desc
+		]]>
+	</select>
+	
+	<select id="selectPastReservationList" parameterType="String" resultMap="ReservationVOMap">
+		<![CDATA[SELECT 
+						current_date as today, (r.checkout_date + 30) - current_date as review_deadline,
+						r.reservation_number, r.imp_uid, r.merchant, r.room_id, r.serialnumber, r.hotelname, r.userid, r.checkin_date,
+						r.checkout_date, r.reservation_date, r.lastname, r.status, r.cancel_date, r.cancel_reason, r.use_status,
+						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city
+				FROM 	
+						reservation as r
+				LEFT JOIN 
+						hotel_image as i 
+				ON 
+						r.serialnumber = i.serialnumber
+				LEFT JOIN
+						temphotel as h
+				ON
+						r.serialnumber = h.serialnumber
+				WHERE 
+						r.userid = #{userid} and (r.checkout_date + 30) > current_date and r.use_status = 2  and review != true
+						
+				order by r.checkin_date desc
+		]]>
+	</select>
+	
+	<update id="updateReviewBoolean" parameterType="Integer">
+		<![CDATA[UPDATE reservation set review = true where reservation_number = #{reservation_number}]]>
+	</update>
+	
+	<select id="selectBestHotel" resultMap="ReservationVOMap">
+		<![CDATA[
+			SELECT
+				r.serialnumber, r.hotelname, t.city, t.star, hi.file_url, count(*)
+			FROM
+				reservation as r
+			LEFT JOIN
+				temphotel AS t
+			ON
+				r.serialnumber = t.serialnumber
+			LEFT JOIN
+				hotel_image AS hi
+			ON
+				r.serialnumber = hi.serialnumber
+			GROUP BY
+				r.serialnumber, r.hotelname, t.city, t.star, hi.file_url LIMIT 6
+		]]>
+	</select>
+	
+	
 </mapper>

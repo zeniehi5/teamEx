@@ -8,8 +8,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.reservation.service.ReservationService;
+import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
 import com.booqueen.user.review.vo.ReviewVO;
 
@@ -19,19 +22,32 @@ public class ReivewController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	ReservationService reservationService;
+	
 	@RequestMapping(value="/review/reviewForm.do")
-	public String reviewForm() {
+	public String reviewForm(@RequestParam("reservation_number") String reservation_number, HttpSession session) {
+		
+		Integer reservation_number_i = Integer.parseInt(reservation_number);
+		ReservationVO reservationVO = reservationService.getReservation(reservation_number_i);
+		
+		session.setAttribute("reservationVO", reservationVO);
+		
 		return "review/review";
 	}
 	
 	@RequestMapping(value="/review/insertReview.do")
 	public String insertReview(ReviewVO vo, HttpServletResponse response, HttpSession session) throws Exception {
 		
-		vo.setSerialnumber(1120); // 예약 테이블이 완성된 이후 수정
+		ReservationVO reservationVO = reservationService.getReservation(vo.getReservation_number());
+		
+		reservationService.updateReviewBoolean(reservationVO.getReservation_number());
 		
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		vo.setUsername(memberVO.getName());
+		
 		vo.setUserid(memberVO.getUserid());
+		vo.setUsername(memberVO.getName());
+		vo.setSerialnumber(reservationVO.getSerialnumber());
 
 		int result = 0;
 		result = reviewService.insertReview(vo);

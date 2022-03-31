@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.booqueen.user.payment.dao.PaymentDAO;
-import com.booqueen.user.payment.vo.EmailVO;
 import com.booqueen.user.payment.vo.PaymentVO;
 
 @Service
@@ -24,9 +23,4 @@ public class PaymentService {
 	public int updatePayment(PaymentVO paymentVO) {
 		return paymentDAO.updatePayment(paymentVO);
 	}
-	
-	public EmailVO getReservationInfo(String merchant) {
-		return paymentDAO.getReservationInfo(merchant);
-	}
-	
 }

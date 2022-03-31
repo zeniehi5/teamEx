@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -139,21 +139,25 @@
     </c:if>
 	
 	<c:choose>
-	<c:when test="${isLogOn == true  && member!= null}">
+	<c:when test="${isLogOn == true  && member!= null && !empty comingReservationList && comingReservationList != null}">
     <div class="section comming-trip">
         <h2>다가오는 여행</h2>
         <div class="recent-div comming-div">
             <ul class="recent-ul comming-ul">
+            	<c:forEach var="comingReservationList" items="${comingReservationList}" end="2">
                 <li>
-                    <h3>용인</h3>
-                    <span class="coming-li-span">1월 28일~1월 29일</span>
+                    <h3>${comingReservationList.city}</h3>
+                    <fmt:parseDate var="reservation_start_date" value="${comingReservationList.start_date}" pattern="yyyy-MM-dd" />
+					<fmt:parseDate var="reservation_end_date" value="${comingReservationList.end_date}" pattern="yyyy-MM-dd" />
+                    <span class="coming-li-span"><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/></span>
                     <a>
                         <div class="recent-ul-div comming-ul-div">
-                            <div><img class="recent-img" src="${contextPath}/resources/user/images/recent1.webp"></div>
-                            <div><span>리스본</span><span>2월 27일~3월 1일, 2명</span></div>
+                            <div class="comming-ul-div-div"><img class="recent-img" src="${comingReservationList.file_url}"></div>
+                            <div><span>${comingReservationList.hotelname}</span><span><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/>, ?명</span></div>
                         </div>
                     </a>
                 </li>
+                </c:forEach>
             </ul>
         </div>
     </div>
@@ -170,75 +174,78 @@
     </div>
 
 	<c:choose>
-	<c:when test="${isLogOn == true  && member!= null}">
+	<c:when test="${isLogOn == true  && member!= null && !empty pastReservationList && pastReservationList != null}">
     <div class="review-request">
+    	
+    	<c:forEach var="pastReservationList" items="${pastReservationList}" varStatus="status">
         <div id="myBanner2" class="bui-banner">
             <div class="bui-banner__image-container">
-                <img class="bui-banner__image" src="https://cf.bstatic.com/xdata/images/hotel/max400/21676156.webp?k=0e4e8c6647f2027d6cf3d67590e24aa9fed67000e4769bc79a063e93701630c2&amp;o=">
+                <img class="bui-banner__image" src="${pastReservationList.file_url}">
             </div>
             <div class="bui-banner__content">
                 <h4 class="bui-banner__title u-padding-left:0">
-                    <b>베스트웨스턴 군산호텔</b>, 어떠셨나요?
+                    <b>${pastReservationList.hotelname}</b>, 어떠셨나요?
                 </h4>
                 <p class="bui-banner__text">
-                    후기 작성에 남은 시간 단 79일! 잊지 말고 작성해주세요
+                    후기 작성에 남은 시간 단 ${pastReservationList.review_deadline}일! 잊지 말고 작성해주세요
                 </p>
-                <a
-                    class="bui-banner__button"
-                    href="${contextPath}/review/reviewForm.do" target="_blank"
-                    target="_blank">
+                <a class="bui-banner__button" href="${contextPath}/review/reviewForm.do?reservation_number=${pastReservationList.reservation_number}" target="_blank" target="_blank">
                     <span class="bui-button__text">숙박 경험을 평가해주세요</span>
                 </a>
             </div>
             <span class="x-button2"><i class="bi bi-x-lg"></i></span>
         </div>
+        </c:forEach>
     </div>
 	</c:when>
 	</c:choose>
-
+	
+	
     <div class="galleries">
         <div class="main-grid">
             <div class="main-grid-1">
                 <div class="gallery-text-box">
-                    <h1>부산</h1>
-                    <span>658개 숙소</span>
+                    <h1>${cityList[0].city}</h1>
+                    <span>${cityList[0].count} 숙소</span>
                 </div>
-                <img src="${contextPath}/resources/user/images/null.png">
+                <img src="${cityList[0].file_url}">
             </div>
             <div class="main-grid-2">
                 <div class="gallery-text-box">
-                    <h1>서울</h1>
-                    <span>2,304 숙소</span>
+                    <h1>${cityList[1].city}</h1>
+                    <span>${cityList[1].count} 숙소</span>
                 </div>
-                <img src="${contextPath}/resources/user/images/null.png">
+                <img src="${cityList[1].file_url}">
             </div>
             <div class="main-grid-3">
                 <div class="gallery-text-box">
-                    <h1>경주</h1>
-                    <span>188개 숙소</span>
+                    <h1>${cityList[2].city}</h1>
+                    <span>${cityList[2].count} 숙소</span>
                 </div>
-                <img src="${contextPath}/resources/user/images/null.png">
+                <img src="${cityList[2].file_url}">
             </div>
             <div class="main-grid-4">
                 <div class="gallery-text-box">
-                    <h1>제주</h1>
-                    <span>536개 숙소</span>
+                    <h1>${cityList[3].city}</h1>
+                    <span>${cityList[3].count} 숙소</span>
                 </div>
-                <img src="${contextPath}/resources/user/images/null.png">
+                <img src="${cityList[3].file_url}">
             </div>
             <div class="main-grid-5">
                 <div class="gallery-text-box">
-                    <h1>서귀포</h1>
-                    <span>495개 숙소</span>
+                    <h1>${cityList[4].city}</h1>
+                    <span>${cityList[4].count} 숙소</span>
                 </div>
-                <img src="${contextPath}/resources/user/images/null.png">
+                <img src="${cityList[4].file_url}">
             </div>
+            
+            
         </div>
     </div>
 
     <div class="section spot">
-        <h2>대한민국 여행지</h2>
-        <span>즐길 거리가 가득한 인기 여행지를 살펴보세요!</span>
+        <h2>💗 가장 사랑받는 호텔 💗</h2>
+        <span>대부분 빠르게 예약이 마감됩니다.</span>
         <!--
         <div class="korea-spot">
             <ul id="korea-spot-ul">
@@ -332,56 +339,62 @@
         <ul class="slider">
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot1.webp"></div>
+                    <div><img src="${bestHotelList[0].file_url}"></div>
                     <div>
-                        <span>제주</span>
-                        <div class="korea-span">숙소 1,035개</div>
+                        <span>${bestHotelList[0].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[0].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[0].star}</div>
                 </a>
             </li>
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot2.webp"></div>
+                    <div><img src="${bestHotelList[1].file_url}"></div>
                     <div>
-                        <span>서울</span>
-                        <div class="korea-span">숙소 735개</div>
+                        <span>${bestHotelList[1].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[1].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[1].star}</div>
                 </a>
             </li>
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot3.webp"></div>
+                    <div><img src="${bestHotelList[2].file_url}"></div>
                     <div>
-                        <span>서귀포</span>
-                        <div class="korea-span">숙소 561개</div>
+                        <span>${bestHotelList[2].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[2].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[2].star}</div>
                 </a>
             </li>
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot4.webp"></div>
+                    <div><img src="${bestHotelList[3].file_url}"></div>
                     <div>
-                        <span>부산</span>
-                        <div class="korea-span">숙소 1,856개</div>
+                        <span>${bestHotelList[3].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[3].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[3].star}</div>
                 </a>
             </li>
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot5.webp"></div>
+                    <div><img src="${bestHotelList[4].file_url}"></div>
                     <div>
-                        <span>강릉</span>
-                        <div class="korea-span">숙소 411개</div>
+                        <span>${bestHotelList[4].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[4].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[4].star}</div>
                 </a>
             </li>
             <li>
                 <a class="a">
-                    <div><img src="${contextPath}/resources/user/images/spot6.webp"></div>
+                    <div><img src="${bestHotelList[5].file_url}"></div>
                     <div>
-                        <span>양양</span>
-                        <div class="korea-span">숙소 652개</div>
+                        <span>${bestHotelList[5].hotelname}</span>
+                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[5].city}</span>
                     </div>
+                    <div class="korea-span">${bestHotelList[5].star}</div>
                 </a>
             </li>
           </ul>
@@ -389,175 +402,33 @@
     
     <div class="section">
         <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'location')" id="defaultOpen">지역</button>
-            <button class="tablinks" onclick="openCity(event, 'city')">도시</button>
-            <button class="tablinks" onclick="openCity(event, 'place')">관광 명소</button>
+            <button class="tablinks" onclick="openCity(event, 'location')" id="defaultOpen">전체 지역</button>
+            <button class="tablinks" onclick="openCity(event, 'city')">추천 숙소</button>
+           <!--  <button class="tablinks" onclick="openCity(event, 'place')">관광 명소</button> -->
         </div>
         
         <div id="location" class="tabcontent">
+        	<c:forEach var="cityListAll" items="${cityListAll}" varStatus="status">
             <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
+                <a>${cityListAll.city}</a>
+                <p>${cityListAll.count}개 숙소</p>
             </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>서울</a>
-                <p>722개 숙소</p>
-            </div>
+            </c:forEach>
+            
         </div>
         
         <div id="city" class="tabcontent">
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
+        	<c:forEach var="randomHotelList" items="${randomHotelList}" varStatus="status">
+            <div class="content-box randomImage">
+            	<div>
+            		<img class="randomHotelImage" src="${randomHotelList.file_url}">
+            	</div>
+            	<div>
+	                <a><div class="randomHotelname">${randomHotelList.hotelname}</div></a>
+	                <p class="randomHotelCity">${randomHotelList.city}</p>
+                </div>
             </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
-            <div class="content-box">
-                <a>인천</a>
-                <p>500개 숙소</p>
-            </div>
+            </c:forEach>
         </div>
         
         <div id="place" class="tabcontent">
@@ -815,6 +686,7 @@
 			input = $('#keywordInput').val(); // 입력된 값 저장
 			$('#keywordInput').autocomplete("search", Hangul.disassemble(input).join("").replace(/ /gi, "")); // 자음모음 분리 후 띄어쓰기 삭제
 		})
+		
 	});
     </script>
 

@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.booqueen.user.payment.SendEmail;
+import com.booqueen.user.email.service.EmailService;
+import com.booqueen.user.email.vo.EmailVO;
 import com.booqueen.user.payment.service.PaymentService;
 import com.booqueen.user.payment.vo.PaymentVO;
 import com.booqueen.user.reservation.service.ReservationService;
@@ -65,7 +66,8 @@ public class PaymentController {
 	@Autowired
 	ReservationService reservationService;
 	
-	SendEmail sendEmail;
+	@Autowired
+	EmailService emailService;
 
 	public PaymentController() {
 		this.api = new IamportClient("6299277095985667",
@@ -86,11 +88,15 @@ public class PaymentController {
 	@RequestMapping("/paymentSuccess.do")
 	@ResponseBody
 	public String insertPaymentDetail(@RequestBody PaymentVO paymentVO) throws Exception {
+		
 		paymentVO.getPayment_status();
+		
 		int result = paymentService.insertReservation(paymentVO);
 		
 		if(result > 0) {
-			sendEmail.reservationEmail(paymentVO.getMerchant());
+			// emailVO 왜 값 안넘어오냐고
+			EmailVO emailVO = emailService.getReservationInfo(paymentVO.getOrder_merchant_serial());
+			emailService.reservationEmail(emailVO);
 			return "success";
 		} else {
 			return "error";
