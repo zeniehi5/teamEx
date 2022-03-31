@@ -47,7 +47,7 @@
 
 						<div class="bui-group__item">
 							<a class="bui-button bui-button--light bui-traveller-header__product-action" href="#">
-								<button class="header-button">내 숙소 등록</button>
+								<button class="header-button" onclick="location.href='${contextPath}/login.jsp';">내 숙소 등록</button>
 							</a>
 						</div>
 

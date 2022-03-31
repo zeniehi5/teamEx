@@ -213,10 +213,10 @@
                 </div>
             </div>
 
-            <div class="room-detail">
+           <%--  <div class="room-detail">
                 <div class="room-header">
-                    <h4>스탠다드 더블룸</h4>
-                    <!--<div>
+                    <h4>${types}</h4>
+                    <div>
 					<div class="bui-inline-container__end">
                             <a class="x-button" role="button">
                                 <span class="bui-button__icon">
@@ -225,7 +225,7 @@
                                 <span class="choice-cancel">선택 취소</span>
                             </a>
                         </div> 
-                    </div> --> 
+                    </div>
                 </div>
                 <div class="room-top">
                     <ul>
@@ -237,7 +237,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>--%>
 
             
 

@@ -141,24 +141,34 @@ public class ReservationController {
 		reservationVO.setStatus(true);
 		reservationVO.setRequest_text(reservationVO.getRequest_text().replace(",", ""));
 			
-		for(int i = 0; i < count_rooms.length; i++) {
-			reservationVO.setCount_room(count_rooms[i]);
-			reservationVO.setPrice(prices[i]);
-			reservationVO.setType(types[i]);
+//		for(int i = 0; i < count_rooms.length; i++) {
+//			reservationVO.setCount_room(count_rooms[i]);
+//			reservationVO.setPrice(prices[i]);
+//			reservationVO.setType(types[i]);
+//			reservationService.insertReservation(reservationVO);
+//			roomService.updateRoomAvailable(reservationVO);
+
+			reservationVO.setCount_room(count_rooms[0]);
+			System.out.println(count_rooms[0]);
+			reservationVO.setPrice(prices[0]);
+			reservationVO.setType(types[0]);
 			reservationService.insertReservation(reservationVO);
 			roomService.updateRoomAvailable(reservationVO);
-
+		
+			
 			for(int j = 1; j < reservationVO.getDiffDays(); j++) {
+				System.out.println(reservationVO.getDiffDays());
 				String year =  reservationVO.getStart_date().substring(0, 4);
 				String month = reservationVO.getStart_date().substring(4, 6);
 				String day = reservationVO. getStart_date().substring(6);
 				String open_date = year + "-" + month + "-" + day;
 				reservationVO.setStart_date(LocalDate.parse(open_date).plusDays(j).toString().replaceAll("-", ""));
 				roomService.updateRoomAvailable(reservationVO);
+				System.out.println(reservationVO.getStart_date());
 			}	
-		}
-//			reservationService.deleteDuplicatedReservation();
-			
+//		}
+			reservationService.deleteDuplicatedReservation();
+			reservationService.modifyReservation();
 			List<ReservationVO> vo = reservationService.selectReservationByMerchant(reservationVO.getMerchant());
 			
 			ReservationVO vo1 = vo.get(0);

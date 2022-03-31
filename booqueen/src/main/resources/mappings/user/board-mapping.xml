@@ -6,7 +6,7 @@
 		<![CDATA[
 		select * from board where groupno in
 		(SELECT groupno FROM (SELECT groupno, row_number() over (partition by groupno) as row FROM board) a WHERE a.row > 1)
-		and serialnumber = #{serialnumber}
+		and serialnumber = #{serialnumber} order by groupno, board_seq
 		]]>
 	</select>
 	

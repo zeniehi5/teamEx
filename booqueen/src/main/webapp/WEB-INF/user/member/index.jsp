@@ -122,6 +122,7 @@
         <div class="recent-div">
             <ul class="recent-ul">
             	<c:forEach var="recentSearchList" items="${recentSearchList}" varStatus="status">
+                
                 <li>
                     <a>
                         <div class="recent-ul-div">
@@ -132,6 +133,7 @@
                         </div>
                     </a>
                 </li>
+                
                 </c:forEach>
             </ul>
         </div>

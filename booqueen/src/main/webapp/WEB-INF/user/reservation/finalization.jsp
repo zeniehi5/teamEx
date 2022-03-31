@@ -129,7 +129,7 @@
                                 <li class="mb-check--price bui_font_larger">
                                     <div class="mb-price mb-price--has-price-details">
                                         <span class="mb-price__unit mb-price__unit--primary marginBottom_3">
-                                            <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" />
+                                            <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" />
                                         </span>
                                     </div>
                                 </li>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-info mb-info__full_width mb-info__actions mb-info__with-separator bui_font_small">
+                    <%-- <div class="mb-info mb-info__full_width mb-info__actions mb-info__with-separator bui_font_small">
                         <div class="mb-info--content">
                             <ul class="mh-links">
                                 <li class="mb-conf-print" data-component="dropdown">
@@ -187,7 +187,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="mb-info mb-info__full_width mb-info__actions bui_font_small">
                         <div class="mb-info--content">
                             <div class="mh-links">
@@ -382,23 +382,25 @@
                     <div class="" data-testid="payment-status-statement">
                         <span class="_8ae9a3c91">이 예약에 대해
                         </span>
-                        <span class="_8ae9a3c91 f74643df3a"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" /></span>
+                        <span class="_8ae9a3c91 f74643df3a"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></span>
     
                         <span class="_8ae9a3c91">의 금액을 결제하셨습니다.</span>
                     </div>
                     <hr class="_b1c8687ff _dfc17cd2a">
                     <div>
-                        <div class="_e3ed6b426 d79b273389 _b7ed60b59">
-                            <div class="_729127938 _5636cb36e">
-                                <div role="heading" aria-level="1" class="ad59ca2c57">
-                                    <div data-testid="payment-transaction-title" class="_dc55ee131">2022년 1월 26일</div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div role="row">
                             <div class="_e3ed6b426 ad59ca2c57 d79b273389">
                                 <div class="_729127938 f21492b5ae">
-                                    <div>
+	                                <div class="_e3ed6b426 d79b273389 _b7ed60b59">
+			                            <div class="_729127938 _5636cb36e">
+			                                <div role="heading" aria-level="1" class="ad59ca2c57">
+			                                	<fmt:parseDate value="${reservationVO.reservation_date}" var="reservation_date" pattern="yyyy-MM-dd"/>
+			                                    <div data-testid="payment-transaction-title" class="_dc55ee131"><fmt:formatDate value="${reservation_date}" pattern="yyyy년 MM월 dd일"/></div>
+			                                </div>
+			                            </div>
+			                        </div>
+                                   <%--  <div>
                                         <span style="display: inline-block; vertical-align: middle;">
                                             <i
                                                 title="Visa"
@@ -410,7 +412,7 @@
                                             style="direction: ltr; display: inline-block; vertical-align: middle;"
                                             data-testid="payment-instrument"
                                             class="_dc55ee131">•••• 2165</span>
-                                    </div>
+                                    </div>--%>
                                 </div>
                                 <div class="_5e0f636ce _729127938 f21492b5ae">
                                     <div class="_40f62ffbd">
