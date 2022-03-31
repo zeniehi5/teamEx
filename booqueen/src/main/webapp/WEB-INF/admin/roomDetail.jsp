@@ -4,7 +4,6 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,6 @@
         crossorigin="anonymous"></script>
     <title>room상세정보</title>
 </head>
-
 <body>
     <div id="map" style="width: 0px; height:0px;"></div>
     <div id="layoutAuthentication">

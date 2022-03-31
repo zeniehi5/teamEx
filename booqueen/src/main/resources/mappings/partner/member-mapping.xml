@@ -5,4 +5,7 @@
 	<select id="getMember" resultType="myMember">SELECT email FROM pMember WHERE email = #{email}</select>
 	<select id="getPassword" resultType="myMember">SELECT * FROM pMember WHERE email = #{email} and password = #{password}</select>
 	<update id="updatePassword" parameterType="myMember">UPDATE pMember SET password = #{confirmpass} WHERE email = #{email}</update>
+	<select id="selectSameHotelName" resultType="myHotel">
+		SELECT * FROM temphotel where hotelname = #{hotelname}
+	</select>
 </mapper>

@@ -13,7 +13,11 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Override
 	public int partnerScheduleUpdate(RoomAvailableVO vo) {
-		
 		return calendarDAO.partnerScheduleUpdate(vo);
+	}
+
+	@Override
+	public int insertAvailableRoom(RoomAvailableVO vo) {
+		return calendarDAO.insertAvailableRoom(vo);
 	}
 }

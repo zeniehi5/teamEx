@@ -18,6 +18,86 @@
 <title>${hotel.hotelname}· 캘린더</title>
 <script type="text/javascript">
 
+	$(function(){
+		$("#insertAvailable").click(function(){
+			const result = confirm("선택하신 객실을 이용가능 설정하시겠습니까?")		
+			if(result) {
+				alert("잠시만")
+				const openDate = $("#openDate").val()
+             	const closeDate = $("#closeDate").val()
+             	const roomType = $("#typeOption").val()
+             	const available = $("#available").val()
+             	const standardPrice =$("#standardPrice").val()
+             	const nonRefundablePrice = $("#nonRefundablePrice").val()
+             	
+             	console.log("openDate : "+openDate +"closeDate : "+closeDate+"standardPrice : "
+             	   + standardPrice + "roomType: " + roomType + "available : " + available
+                   + "nonRefundablePrice : "+nonRefundablePrice)
+                   
+               	const roomAvailableVO ={
+               		"openDate":openDate,
+               		"closeDate":closeDate,
+                	"standard_price":standardPrice,
+                	"non_refundable_price":nonRefundablePrice,
+                	"type":roomType,
+                	"available":available,
+                }
+				
+				$.ajax({
+	                method:"POST",
+	                url:"insertAvailableRoom.pdo",
+	                contentType:"application/json",
+	                dataType:"json",
+	                data:JSON.stringify(roomAvailableVO),
+	                success:function(result){
+	                   if(result.msg == "SUCCESS"){
+	                      alert("저장이 완료되었습니다.")
+	                      location.reload()
+	                   }else{
+	                      alert("메렁")
+	                   }
+	                },
+	                error:function(){
+	                   console.log("통신실패")
+	                }
+				})
+			}	
+		})
+	})
+
+	function changeCount() {
+		var option = $("#typeOption").val()
+		var roomVO ={
+            "type": option
+         }
+		
+		$.ajax({
+			method:"POST",
+			url:"getRoomAvailable.pdo",
+			contentType:"application/json",
+            dataType:"json",
+            data:JSON.stringify(roomVO),
+            success:function(result){
+            	$("#available").empty()
+            	alert("성공?")
+            	for(let i=1; i<result.available+1;i++ ){
+            	const  option = $("<option>")
+            					.attr("value",i)
+            					.text("잔여수량 : " + i + "개")
+            			$("#available").append(option)
+            	}
+            	const hidden = $("<input type='hidden'")
+            					.attr("id", "selectedId")
+            					.attr("value", result.room_id)
+            				$("#hiddenSpace").append(hidden)
+            	
+            },
+            error:function(){
+               console.log("통신실패")
+            } 
+         })
+	}
+
     var count =0;
     var arr = new Array();
    function scheduleEvent(e) {
@@ -124,7 +204,7 @@
       console.log("endNum : "+endNum)
       
       if(count % 2 == 0){
-         alert("그만눌러!")
+         //alert("그만눌러!")
          console.log("(endNum-firstNum)- 1 :" + ((parseInt(endNum)-parseInt(firstNum))-1) )
          const result =  ((parseInt(endNum)-parseInt(firstNum))-1)
          const real = parseInt(result)+parseInt(firstNum)
@@ -153,6 +233,7 @@
          console.log(" arr 진짜: "+    arr)
          
          console.log("count1 " + count)
+         
       }else if(count % 3 == 0 ){ //굿 아이디어 ^^
          console.log("count2 " + count)
          const arrLength = parseInt(arr.length)
@@ -191,13 +272,12 @@
              
              const openDate = $("#openDate").val()
              const closeDate = $("#closeDate").val()
-              const standardPrice =$("#standardPrice").val()
-              const nonRefundablePrice = $("#nonRefundablePrice").val()
+             const standardPrice =$("#standardPrice").val()
+             const nonRefundablePrice = $("#nonRefundablePrice").val()
              const roomId = $("#hiddenId").val()
              
              console.log("openDate : "+openDate +"closeDate : "+closeDate+"standardPrice : "
                    +standardPrice+"nonRefundablePrice : "+nonRefundablePrice+"roomId : "+roomId)
-             
              
              const roomAvailableVo ={
                 "openDate":openDate,
@@ -714,12 +794,37 @@ li{
                                        <div>
                                           <div class="bui-spacer--medium">
                                              <div class="bui-spacer--medium bui-form__group">
-                                                <label><span>판매 수량 선택</span></label>
+                                                <label><span>객실 선택</span></label>
                                                 <div class="bui-input-select">
-                                                   <select name="available" class="bui-form__control">
-                                                      <option value=0>잔여 옵션 0개</option>
-                                                      <option value=1>잔여 옵션 1개</option>
+                                                   <select name="room" class="bui-form__control" onchange="changeCount();">
+                                                   <c:forEach var="roomList" items="${roomList}">
+                                                      <option id="typeOption" value="${roomList.type}">${roomList.type}</option>
+                                                   </c:forEach>
                                                    </select>
+                                                   <svg xmlns="http://www.w3.org/2000/svg"
+                                                      viewBox="0 0 24 24" class="bui-input-select__icon"
+                                                      style="user-select: auto;">
+                                                                        <path
+                                                         d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z"
+                                                         style="user-select: auto;"></path>
+                                                                    </svg>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div>
+                                          <div class="bui-spacer--medium">
+                                             <div class="bui-spacer--medium bui-form__group">
+                                                <label><span>판매 수량 선택<c:out value="${result.available}"/></span></label>
+                                                <div class="bui-input-select">
+                                                   <select id="available" name="available" class="bui-form__control">
+                                                      <option selected="selected">선택 불가</option>
+<%--                                                       <c:set var="room_available" value="${result.available }"/> --%>
+                                                      
+<%--                                                        <c:forEach begin="1" end="${room_available}" varStatus="status"> --%>
+<%--                                                       	<option value="${status.count}">잔여 옵션 ${status.count} 개</option> --%>
+<%--                                                       </c:forEach> --%>
+													</select>
                                                    <svg xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 24 24" class="bui-input-select__icon"
                                                       style="user-select: auto;">
@@ -848,13 +953,13 @@ li{
                                        </div>
                                        <div
                                           class="av-monthly__form-btn-wrap av-monthly-flex-inline__wrap">
-                                          <button type="button" disabled="disabled"
-                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--secondary bui-button--wide">
-                                             <span class="bui-button__text"><span>취소</span></span>
+                                          <button type="button" id="insertAvailable"
+                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--primary bui-button--wide">
+                                             <span class="bui-button__text"><span>등록</span></span>
                                           </button>
                                           <button type="button" id="partnerUpdate"
                                              class="av-monthly-flex-inline__item--equal bui-button bui-button--primary bui-button--wide">
-                                             <span class="bui-button__text"><span>저장</span></span>
+                                             <span class="bui-button__text"><span>수정</span></span>
                                           </button>
                                        </div>
                                     </div>
@@ -886,6 +991,7 @@ li{
             </main>
          </div>
          <input type="hidden" id="scheduleArr">
+         <div id="hiddenSpace"></div>
          <script>
                     //calendar에서 선택된 날짜 받아오기
                 </script>

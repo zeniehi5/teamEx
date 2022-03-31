@@ -1045,3 +1045,80 @@ button.link{
     right: 8px;
     top: 30%;
 }
+.bui-modal.bui-is-active{
+    display: block;
+}
+.bui-modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 200;
+    box-sizing: border-box;
+    text-align: center;
+    border: none;
+    padding: 0;
+    background: none;
+}
+.bui-modal__wrapper{
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+.bui-modal__align{
+    display: table-cell;
+    vertical-align: middle;
+}
+.bui-modal__content{
+    min-width: 768px;
+    max-width: 900px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    border-radius: 2px;
+    z-index: 400;
+    background: #fff;
+    box-shadow: 0 0 8px #000;
+    margin: 24px auto;
+    text-align: left;
+}
+.bui-f-depth-1{
+    border-color: transparent! important;
+}
+.bui-modal__body, .bui-modal__footer, .bui-modal__header{
+    display: block;
+    padding: 24px;
+}
+.bui-modal__close{
+    display: inline-block;
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    top: 16px;
+    right: 16px;
+    margin-bottom: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #707070;
+    opacity: .4;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    border: none;
+}
+.bui-modal.bui-is-active .bui-modal__overlay{
+    opacity: 1;
+}
+.bui-modal__overlay{
+    position: fixed;
+    z-index: 300;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .75);
+}

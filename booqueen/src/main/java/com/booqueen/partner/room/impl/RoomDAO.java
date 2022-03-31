@@ -128,4 +128,12 @@ public class RoomDAO {
 	public List<RoomVO> selectRoomListByHotelSerial(int serialnumber) {
 		return sqlSessionTemplate.selectList("RoomDAO.selectRoomListByHotelSerial", serialnumber);
 	}
+
+	public RoomVO getRoomAvailableByRoomType(RoomVO room) {
+		return sqlSessionTemplate.selectOne("RoomDAO.getRoomAvailableByRoomType", room);
+	}
+	
+	public RoomAvailableVO selectRoomIdByType(RoomAvailableVO vo) {
+		return sqlSessionTemplate.selectOne("RoomDAO.selectRoomIdByType", vo);
+	}
 }

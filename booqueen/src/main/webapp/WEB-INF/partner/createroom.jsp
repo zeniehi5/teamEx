@@ -9,18 +9,11 @@
 <title>구성 및 요금 · booqueen.com</title>
 </head>
 <body>
-<form action="roomlist.pdo" method="GET">
    <div class="container">
       <header>
          <span id="logo">
          	<a href="home.jsp"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png" class="header_logo"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-               <li><a href="/register/Register.html">로그인</a></li>
-               <li><a href="/register/Register.html">회원가입</a></li>
-            </ul>
-         </nav>
       </header>
    </div>
    <main class="contents">
@@ -62,7 +55,7 @@
             <div class="addroom">
                <p>숙소에 추가된 객실이 없습니다. 우선 객실을 추가한 뒤 침대 옵션, 구성, 요금에 관한 설명을 입력해주시기
                   바랍니다.</p>
-               <input type="button" value="객실 추가" onClick="location.href='${contextPath}/roomlist.pdo'">
+               <input type="button" value="객실 추가" onClick="location.href='${contextPath}/room.pdo'">
             </div>
             <c:choose>
             	<c:when test="${!room}">
@@ -78,6 +71,5 @@
          </div>
       </div>
    </main>
-</form>
 </body>
 </html>

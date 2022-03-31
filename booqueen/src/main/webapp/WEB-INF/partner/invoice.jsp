@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,42 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	
+	function chargeBill(e){
+		var answer = confirm("선택한 예약의 결제금 청구를 진행하시겠습니까?")
+		if(answer){
+			var reservationNumber = e
+			
+			const reservationVO = {
+					"reservation_number":reservationNumber
+			}
+			
+			$.ajax({
+				method:"POST",
+				url:"chargeBillingStateMent.pdo",
+				contentType:"application/json",
+				dataType:"json",
+				data:JSON.stringify(reservationVO),
+				success:function(result){
+					if(result.message == "SUCCESS"){
+						alert("결제금 청구가 접수되었습니다.")
+						location.reload()
+					} else {
+						alert("다시 시도해 주세요.")
+					}
+						
+				},
+				error:function(){
+					console.log("통신 실패")
+				}
+			})
+			
+		} else {
+			alert("결제대금 청구를 취소합니다.")
+		}
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/partner/header.jsp" />
@@ -64,41 +101,49 @@
 						</div>
 					</div>
 					<a href="#" class="finance-invoice-download" disabled="disabled">
-						<span class="button-text">2022 PDF 모두 다운로드</span>
+						<span class="button-text">PDF 다운로드</span>
 					</a>
 				</div>
 				<table class="finance-invoice-table">
 					<thead class="table-head">
 						<tr class="table-row">
 							<th class="table-cell-head">예약번호</th>
-							<th class="table-cell-head">room_id</th>
+							<th class="table-cell-head">객실 고유번호</th>
 							<th class="table-cell-head">아이디</th>
 							<th class="table-cell-head">체크인 날짜</th>
 							<th class="table-cell-head">체크아웃 날짜</th>
-							<th class="table-cell-head">이용금액</th>
-							<th class="table-cell-head">성</th>
+							<th class="table-cell-head">청구금액</th>
 							<th class="table-cell-head">이름</th>
-							<th class="table-cell-head">도착시간</th>
-							<th class="table-cell-head">이메일</th>
-							<th class="table-cell-head table-cell-head-end">핀코드</th>
+							<th class="table-cell-head">비고</th>
 						</tr>
 					</thead>
 					<tbody class="table-body">
 
 						<c:forEach items="${invoice}" var="InvoiceVO">
 							<tr class="table-row">
-								<th class="table-cell-head">${InvoiceVO.reservation_number}</th>
-								<th class="table-cell-head">${InvoiceVO.room_id}</th>
-								<th class="table-cell-head">${InvoiceVO.userid}</th>
-								<th class="table-cell-head">${InvoiceVO.checkin_date}</th>
-								<th class="table-cell-head">${InvoiceVO.checkout_date}</th>
-								<th class="table-cell-head">\ ${InvoiceVO.price}</th>
-								<th class="table-cell-head">${InvoiceVO.lastname}</th>
-								<th class="table-cell-head">${InvoiceVO.firstname}</th>
-								<th class="table-cell-head">${InvoiceVO.time_arrival}</th>
-								<th class="table-cell-head">${InvoiceVO.email}</th>
-								<th class="table-cell-head table-cell-head-end">${InvoiceVO.pincode}</th>
-
+								<td class="table-cell-head">${InvoiceVO.reservation_number}</td>
+								<td class="table-cell-head">${InvoiceVO.room_id}</td>
+								<td class="table-cell-head">${InvoiceVO.email}</td>
+								<td class="table-cell-head"><fmt:formatDate pattern="yyyy-MM-dd" value="${InvoiceVO.checkin_date}"/></td>
+								<td class="table-cell-head"><fmt:formatDate pattern="yyyy-MM-dd" value="${InvoiceVO.checkout_date}"/></td>
+								<td class="table-cell-head">&#8361;<fmt:formatNumber type="number"><c:out value="${InvoiceVO.billing}"/></fmt:formatNumber></td>
+								<td class="table-cell-head">${InvoiceVO.lastname}${InvoiceVO.firstname}</td>
+								<td class="table-cell-head">
+									<c:if test="${2 eq InvoiceVO.use_status || InvoiceVO.use_status == 2}">
+                                	<button type="button" class="button button_secondary button_wide" onclick="chargeBill('${InvoiceVO.reservation_number}')">
+                                		<span class="button_text">
+                                			<span>청구하기</span>
+                                		</span>
+                                	</button>
+                                	</c:if>
+                                	<c:if test="${3 eq InvoiceVO.use_status || InvoiceVO.use_status == 3}">
+                                	<button type="button" class="button button_secondary button_wide" disabled="disabled" onclick="chargeBill('${InvoiceVO.reservation_number}')">
+                                		<span class="button_text">
+                                			<span>정산 대기중</span>
+                                		</span>
+                                	</button>
+                                	</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -124,7 +169,7 @@
 					</li>
 				</c:if>
 				<c:if test="${paging.currentPage ne 1}">
-					<c:url var="before" value="/reservation.pdo">
+					<c:url var="before" value="/invoice.pdo">
 						<c:param name="currentPage" value="${paging.currentPage -1}" />
 					</c:url>
 					<li class="pagination_item pagination_prev pagination"><a
@@ -161,7 +206,7 @@
 					</li>
 				</c:if>
 				<c:if test="${paging.currentPage ne paging.maxPage}">
-					<c:url var="after" value="reservation.pdo">
+					<c:url var="after" value="invoice.pdo">
 						<c:param name="currentPage" value="${paging.currentPage + 1}" />
 					</c:url>
 					<li class="pagination_item pagination_next pagination"><a

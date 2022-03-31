@@ -70,7 +70,10 @@
 		where r.reservation_number = #{reservation_number}
 	</select>
 	<select id="getListCount" resultType="int">
-		SELECT COUNT(*) FROM reservation
+		SELECT COUNT(*) 
+		FROM 
+			reservation
+		WHERE serialnumber = #{serialnumber}
 	</select>
 	<select id="selectReservationListOnCondition" parameterType="search" resultType="pReservation">
 		SELECT
@@ -90,6 +93,9 @@
 		JOIN
 			room as h
 		ON r.room_id = h.room_id
+		WHERE r.use_status IS NULL 
+		OR r.use_status NOT IN (2)
+		AND r.serialnumber = #{serialnumber}
 		ORDER BY #{condition} DESC;
 	</select>
 	<select id="selectReservationDetailByUserId" parameterType="pReservation" resultType="pReservation">
@@ -130,4 +136,12 @@
 	<select id="selectReservationByRSVN" resultType="pReservation">
 		SELECT * FROM reservation where reservation_number = #{keyword}
 	</select>
+	<update id="updateReservationStatusToBilling">
+		UPDATE
+			reservation
+		SET
+			use_status = 3
+		WHERE
+			reservation_number = #{reservation_number}
+	</update>
 </mapper>

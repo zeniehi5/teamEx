@@ -33,5 +33,8 @@ public class InvoiceVO {
 	private String merchant;
 	private String imp_uid;
 	private int use_status;
+	
+	//option
+	private int billing;	//수수료 제외한 청구 금액
 
 }

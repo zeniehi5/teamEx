@@ -16,4 +16,8 @@ public class CalendarDAO {
 		return sqlSessionTemplate.update("RoomDAO.partnerScheduleUpdate",vo);
 		
 	}
+
+	public int insertAvailableRoom(RoomAvailableVO vo) {
+		return sqlSessionTemplate.insert("", vo);
+	}
 }

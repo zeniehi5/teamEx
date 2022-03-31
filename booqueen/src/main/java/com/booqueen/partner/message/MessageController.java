@@ -108,7 +108,7 @@ public class MessageController {
 			writer.println("alert('답변을 성공적으로 등록하였습니다.');");
 			writer.println("</script>");
 			writer.flush();
-			int listCount = reservationService.getListCount();	//전체 게시물 수
+			int listCount = reservationService.getListCount(hotel.getSerialnumber());	//전체 게시물 수
 			PagingVO paging = Pagination.getPagingVO(currentPage, listCount);
 			List<InquiryVO> inquiryList = hotelService.selectInquiryByHotelSerial(hotel.getSerialnumber(),paging);
 			model.addAttribute("paging", paging);

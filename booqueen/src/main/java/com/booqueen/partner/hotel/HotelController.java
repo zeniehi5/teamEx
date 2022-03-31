@@ -76,6 +76,13 @@ public class HotelController {
 			return "createroom";	
 	}
 	
+	@RequestMapping(value = "/room.pdo", method = RequestMethod.GET)
+	public String insertRoom(HttpSession session) {
+		HotelVO hotel = hotelService.findHotelByName(session.getAttribute("hotelname"));
+		
+		return "price";
+	}
+	
 	@RequestMapping(value = "/price.pdo", method = RequestMethod.POST)
 	public String setPrice(RoomVO vo, HttpSession session) {
 		HotelVO searchhotel = hotelService.findHotelByName(session.getAttribute("hotelname"));
@@ -90,6 +97,11 @@ public class HotelController {
 		session.setAttribute("availablitiy", vo.getAvailable());
 		session.setAttribute("price", vo.getPrice());
 		return "service";
+	}
+	
+	@RequestMapping(value= "/price.pdo", method = RequestMethod.GET)
+	public String addRoom() {
+		return "price";
 	}
 	
 	@RequestMapping(value = "/service.pdo", method = RequestMethod.POST)
@@ -195,10 +207,10 @@ public class HotelController {
 				e.printStackTrace();
 			}
 		}
-		//RoomVO room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
-		//model.addAttribute("room", room);
-		//return "payment";
-		return "add-room";
+		List<RoomVO> room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
+		model.addAttribute("room", room);
+		return "payment";
+		//return "createroom";
 	}
 	
 	//결제정보 입력 화면
@@ -222,6 +234,11 @@ public class HotelController {
 				e.printStackTrace();
 			}
 		}
+		return "thankyou";
+	}
+	
+	@RequestMapping(value = "/.pdo", method = RequestMethod.GET)
+	public String finishRegister() {
 		return "thankyou";
 	}
 	

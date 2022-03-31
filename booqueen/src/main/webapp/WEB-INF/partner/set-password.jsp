@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>booqueen.com 비밀번호 설정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/partner/css/set-password.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 function checkPassword(){
 	var pass = document.getElementById("pass").value;
@@ -22,22 +23,46 @@ function checkPassword(){
 		}
 	}
 }
+
+function passwordCheck(){
+	var pw = $("#pass").val()
+	var checkPw = $("#repass").val()
+	
+	if(pw != '' && checkPw != ''){
+		if(pw != checkPw) {
+			$("#passcheck").css('color', '#e21111')
+			$("#passcheck").html('비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+			return false;
+		} else {
+			$("#passcheck").css('color', '#545454')
+			$("#passcheck").html('비밀번호와 비밀번호 확인이 일치합니다.')
+		}
+	}
+}
+
+function submitForm(){
+	
+	var pass = $("#pass").val()
+	var passcheck = $("#repass").val()
+	
+	if(pass == null || pass == "" || pass == undefined || pass == "undefined") {
+		alert("비밀번호를 입력해 주세요.")
+		return;
+	}
+	if(passcheck == null || passcheck == "" || passcheck == undefined || passcheck == "undefined") {
+		alert("비밀번호 확인을 입력해 주세요.")
+		return;
+	}	
+	$("#myForm").submit();
+}
 </script>
 </head>
 <body>
-<form action="set-password.pdo" method="POST">
    <div class="container">
       <header>
          <span id="logo"> <a href="#"> <img alt=""
                src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-               <li><a href="${contextPath}/login.jsp">로그인</a></li>
-               <li><a href="${contextPath}/register.jsp">회원가입</a></li>
-            </ul>
-         </nav>
-
       </header>
    </div>
    <main class="contents">
@@ -45,16 +70,17 @@ function checkPassword(){
       <h4>비밀번호는 대문자, 소문자, 숫자를 포함하여 10자 이상이어야 합니다.</h4>
       <br />
       <h4>비밀번호</h4>
+      <form id="myForm" action="set-password.pdo" method="POST">
       <input type="hidden" name="email" value="${email}">
       <input type="hidden" name="firstname" value="${firstname}">
       <input type="hidden" name="lastname" value="${lastname}">
       <input type="hidden" name="telephone" value="${telephone}">
-      <input type="password" name="password" id="pass" class="text"><br>
+      <input type="password" name="password" id="pass" class="text"required><br>
       <h4>비밀번호 확인</h4>
-      <input type="password" name="repass" id="repass" class="text" onkeyup="checkPassword()"><br/>
+      <input type="password" name="repass" id="repass" class="text" onkeyup="passwordCheck()" required><br/>
       <span id="passcheck"></span>
-
-      <input type="submit" name="register" id="continue" value="다음"><br>
+	  </form>
+      <button type="button" name="register" id="continue" onclick="submitForm()">다음</button><br>
       <br>
       <hr>
       <br>
@@ -70,6 +96,6 @@ function checkPassword(){
          국가에서 Booqueen.com, LP의 상표 또는 등록 상표입니다. 기타 모든 상표는 해당 소유권자의 자산입니다.</H6>
 
    </main>
-</form>
+
 </body>
 </html>

@@ -13,7 +13,7 @@ a {
 	text-decoration: none;
 }
 .container {
-	height:670px;
+	height: 1000px;
 }
 .invoice-container {
 	margin: 0 auto;
@@ -95,7 +95,7 @@ a {
 	line-height: 33px;
 }
 .finance-invoice-banner {
-	margin-bottom: 16px;
+	margin-bottom: 24px;
 }
 .banner {
 	display: flex;
@@ -794,4 +794,45 @@ a {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5em;
+}
+.button{
+    border: 1px solid #07c;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+    vertical-align: center;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5em;    
+}
+.button[disabled]{
+    border-color: #b3b3b3;
+    cursor: not-allowed;
+}
+.button_primary{
+    color: #fff;
+    background-color: #07c;
+    border-color: #07c;
+}
+.button_secondary{
+    background-color: #fff;
+    color: #07c;
+    border-color: #07c;    
+}
+.button_secondary[disabled]{
+    background-color: #fff;
+    color: #b3b3b3;
+}
+.button_wide{
+    width: 100%;
+}
+.button_text{
+    vertical-align: baseline;
+    display: inline-block;
 }

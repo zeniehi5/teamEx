@@ -246,6 +246,7 @@ li{
     left: 0;
     box-shadow: 0 1px 4px 0 rgb(0, 0, 0, .3);
     width: 273px;
+    z-index: 1000;
 }
 .navigation_item:hover .submenu{
     display: block! important;
@@ -255,6 +256,7 @@ li{
     padding: 8px 0;
     list-style: none;
     background: #fff;
+    z-index: 1;
 }
 .submenu_item{
     border: none;

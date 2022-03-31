@@ -1,16 +1,15 @@
 package com.booqueen.partner.calendar;
 
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,13 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.room.RoomAvailableVO;
-import com.booqueen.partner.room.RoomPriceVO;
 import com.booqueen.partner.room.RoomService;
 import com.booqueen.partner.room.RoomVO;
 import com.google.gson.Gson;
@@ -55,7 +52,7 @@ public class CalendarController {
 		HotelVO hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
 		if(hotel != null) {
 			List<RoomVO> roomList = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
-			
+			System.out.println(roomList.toString());
 	
 			//예약 내역 가져오기
 			List<RoomAvailableVO> available = new ArrayList<RoomAvailableVO>();
@@ -105,7 +102,8 @@ public class CalendarController {
 				}
 
 			}
-//	
+	
+			model.addAttribute("roomList", roomList);
 			model.addAttribute("hotel", hotel);
 			model.addAttribute("available", availableReal);
 			System.out.println(available.toString());
@@ -193,6 +191,68 @@ public class CalendarController {
 				
 			}
 		return res;		
+	}
+	
+	@RequestMapping(value = "/getRoomAvailable.pdo", method=RequestMethod.POST)
+	@ResponseBody
+	public String getRoomAvailable(@RequestBody RoomVO room, HttpSession session, Model model) {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		room.setSerialnumber(hotel.getSerialnumber());
+		RoomVO result = roomService.getRoomAvailableByRoomType(room);
+		System.out.println(result.toString());
+//		if(result != null) {
+//			model.addAttribute("result", result);
+//		}
+		Gson gson = new Gson();
+		String roomVo = gson.toJson(result);
+		return roomVo;
+	}
+	
+	@RequestMapping(value = "/insertAvailableRoom.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertAvailableRoom(@RequestBody RoomAvailableVO vo, HttpSession session) {
+		System.out.println(vo.toString());
+		String startDate[] = vo.getOpenDate().split("-");
+		String endDate[] = vo.getCloseDate().split("-");
+		int startCount = Integer.parseInt(startDate[2]);
+        int lastCount = Integer.parseInt(endDate[2]);
+        
+        int updateCount = 0;
+        
+        for(int i = 0; i < lastCount - startCount; i++) {
+        	RoomAvailableVO insert = new RoomAvailableVO();
+        	insert.setOpen_date(Date.valueOf(LocalDate.parse(vo.getOpenDate())));
+        	insert.setClose_date(Date.valueOf(LocalDate.parse(vo.getOpenDate()).plusDays(1).toString()));
+        	insert.setAvailable(vo.getAvailable());
+        	insert.setStandard_price(vo.getStandard_price());
+        	insert.setNon_refundable_price(vo.getNon_refundable_price());
+        	insert.setType(vo.getType());
+        	insert.setRoom_id(vo.getRoom_id());
+        	int insertNumber = calendarService.insertAvailableRoom(insert);
+        	if(insertNumber != 0) {
+        		updateCount++;
+        	}
+        }
+		
+		//Date openDate = Date.valueOf(vo.getOpenDate());
+		//Date closeDate = Date.valueOf(vo.getCloseDate());
+		//vo.setClose_date(closeDate);
+		
+		
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		String result = "";
+			if(updateCount == 0) {
+				jsonObject.addProperty("msg", "FAIL");
+				result = gson.toJson(jsonObject);
+				
+			}else {
+				jsonObject.addProperty("msg", "SUCCESS");
+				 result = gson.toJson(jsonObject);
+				
+			}
+		return result;	
 	}
 	
 //	@RequestMapping(value = "/update-calendar.pdo", method = RequestMethod.POST)

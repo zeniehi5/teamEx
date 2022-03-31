@@ -81,7 +81,7 @@
                                 <div class="search_wrap">
                                     <div class="input_container">
                                         <div class="input wrap">
-                                            <input class="search_input" id="searchKeyWord" type="text" placeholder="예약 검색"
+                                            <input class="search_input" id="searchKeyWord" type="text" placeholder="예약 번호를 입력하세요"
                                                 autocomplete="off" onkeyup="openSearchMenu()">
                                             <button type="button" class="input_icon">
                                                 <svg focusable="false" viewBox="0 0 24 24" role="presentation"

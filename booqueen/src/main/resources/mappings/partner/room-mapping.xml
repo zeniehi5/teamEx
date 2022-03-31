@@ -70,4 +70,10 @@
 	<select id="selectRoomListByHotelSerial" resultType="myRoom">
 		SELECT * FROM room where serialnumber = #{serialnumber}
 	</select>
+	<select id="getRoomAvailableByRoomType" resultType="myRoom">
+		SELECT room_id, available FROM room where serialnumber = #{serialnumber} and type = #{type}
+	</select>
+	<select id="selectRoomIdByType" resultType="roomAvailable">
+		SELECT * FROM room where serialnumber = #{serialnumber} and type = #{type}
+	</select>
 </mapper>

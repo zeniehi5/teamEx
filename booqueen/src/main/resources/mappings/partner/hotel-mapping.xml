@@ -29,7 +29,16 @@
 		SELECT * FROM hotel_image where serialnumber = #{serialnumber}
 	</select>
 	<select id="selectInvoiceByHotelSerial" resultType="invoice">
-		SELECT * FROM reservation where serialnumber = #{serialnumber} and use_status = 2
+		SELECT
+			 reservation_number, room_id, email, checkin_date, checkout_date, use_status,
+			 price * 0.85 as billing,
+			 firstname, lastname
+		FROM
+			reservation
+		WHERE 
+			serialnumber = #{serialnumber}
+		AND
+			use_status >= 2
 	</select>
 	<select id="getListCount" resultType="int">
 		SELECT COUNT(*) FROM reservation where serialnumber = #{serialnumber} and use_status = 2

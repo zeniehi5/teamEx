@@ -67,14 +67,8 @@
                                                                                             <div class="form_group">
                                                                                                 <div class="input_select">
                                                                                                     <select class="form_control">
-                                                                                                        <option>지난 7일</option>
-                                                                                                        <option>어제</option>
                                                                                                         <option selected="selected">오늘</option>
                                                                                                         <option>내일</option>
-                                                                                                        <option>향후 7일</option>
-                                                                                                        <option>향후 30일</option>
-                                                                                                        <option>향후 60일</option>
-                                                                                                        <option>다른 날짜</option>    
                                                                                                     </select>
                                                                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="input_select_icon" style="user-select: auto;">
                                                                                                         <path d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z" style="user-select: auto;"></path>

@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.partner.hotel.HotelVO;
 import com.booqueen.partner.member.MemberVO;
 
 @Repository("memberDAO")
@@ -34,6 +35,10 @@ public class MemberDAO {
 	public void changePassword(MemberVO vo) {
 		sqlSessionTemplate.update("MemberDAO.updatePassword", vo);
 		
+	}
+
+	public HotelVO selectSameHotelName(HotelVO vo) {
+		return sqlSessionTemplate.selectOne("MemberDAO.selectSameHotelName", vo);
 	}
 
 }

@@ -15,12 +15,6 @@
 			<span id="logo">
 				<a href="#"><img alt="" src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
 			</span>
-         	<nav>
-         		<ul id="topMenu">
-         			<li><a href="${pageContext.request.contextPath}/login.jsp">로그인</a></li>
-               		<li><a href="${pageContext.request.contextPath}/register.jsp">회원가입</a></li>
-            	</ul>
-         	</nav>
 		</header>
 	</div>
 	<main class="contents">
