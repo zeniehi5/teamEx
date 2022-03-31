@@ -493,5 +493,41 @@
 				]]>
 		</if>			
 	</select>
-
+		
+	<select id="selectCityList" resultType="cityCountVO">
+		<![CDATA[
+			SELECT
+				hotel.city, count(*), city.file_url FROM temphotel AS hotel
+			LEFT JOIN
+				city AS city
+			ON
+				hotel.city = city.city
+			GROUP BY
+				hotel.city, city.file_url
+			ORDER BY
+				count DESC LIMIT 5
+		]]>
+	</select>
+	
+	<select id="selectBestHotelList" resultType="bestHotelVO">
+		SELECT r.serialnumber, r.hotelname, t.city, t.star, hi.file_url, count(*) FROM reservation AS r
+		LEFT JOIN temphotel AS t ON r.serialnumber = t.serialnumber
+		LEFT JOIN hotel_image AS hi ON r.serialnumber = hi.serialnumber
+		GROUP BY r.serialnumber, r.hotelname, t.city, t.star, hi.file_url LIMIT 6
+	</select>
+	
+	<select id="selectCityListAll" resultType="cityCountVO">
+		SELECT hotel.city, count(*) FROM temphotel AS hotel
+		LEFT JOIN city AS city
+		ON hotel.city = city.city
+		GROUP BY hotel.city, city.file_url
+		ORDER BY count DESC
+	</select>
+	
+	<select id="selectRandomHotel" resultType="bestHotelVO">
+		SELECT * FROM temphotel AS th
+		LEFT JOIN hotel_image AS hi
+		ON th.serialnumber = hi.serialnumber
+		ORDER BY random() LIMIT 5
+	</select>
 </mapper>

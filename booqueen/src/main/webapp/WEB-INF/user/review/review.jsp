@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />        
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>        
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,11 +20,15 @@
     <div class="top">
         <div class="c-cover " style="background-image: url(https://cf.bstatic.com/xdata/images/hotel/820x250/21676156.webp?k=0e4e8c6647f2027d6cf3d67590e24aa9fed67000e4769bc79a063e93701630c2&amp;o=)">
             <div class="c-cover__inner">
-                <h2 class="c-cover__title"><strong>베스트웨스턴 군산호텔</strong> 평가하기</h2> 
-                <span class="rf_stay-period">군산에서 2박
+                <h2 class="c-cover__title"><strong>${reservationVO.hotelname}</strong> 평가하기</h2> 
+                <fmt:parseDate var="start_date" value="${reservationVO.start_date}" pattern="yyyy-MM-dd"/>
+				<fmt:parseDate var="end_date" value="${reservationVO.end_date}" pattern="yyyy-MM-dd"/>
+                <fmt:parseNumber value="${start_date.time / (1000*60*60*24)}" integerOnly="true" var="start_date_number"></fmt:parseNumber>
+                <fmt:parseNumber value="${end_date.time / (1000*60*60*24)}" integerOnly="true" var="end_date_number"></fmt:parseNumber>
+                <span class="rf_stay-period">${reservationVO.city}에서 ${end_date_number - start_date_number}박
                     <br>
                         <span aria-label="1월 30일~2월 1일" role="text">
-                            <span aria-hidden="true">1월 30일&nbsp;-&nbsp;2월 1일</span>
+                            <span aria-hidden="true">${reservationVO.start_date}&nbsp;~&nbsp;${reservationVO.end_date}</span>
                         </span>
                     <br>
                 </span>
@@ -33,11 +38,12 @@
 
     <div class="c-form-container">
         <form action="${contextPath}/review/insertReview.do" method="post">
+        	<input type="hidden" name="reservation_number" value="${reservationVO.reservation_number}">
             <ol class="rf_questions">
                 <li class="rf-questions_items">
                     <h2>숙소 평가 : </h2>
                     <fieldset class="rf_score_range_fieldset">
-                        <h3 style="margin-bottom:8px">베스트웨스턴 군산호텔에서의 숙박은 어떠셨나요?</h3>
+                        <h3 style="margin-bottom:8px">${reservationVO.hotelname}에서의 숙박은 어떠셨나요?</h3>
                         <div data-component="ugcs/score-range" class="c-score-range c-score-range--simple c-score-range--js">
                             <div id="score" data-score="" class="c-score-range__numbers">
                                     <input type="radio" aria-label="형편없음" onchange="this.parentNode.setAttribute('data-score', this.value);" class="c-score-range__inp" name="score" id="hotel_average_score_input_1" value="1" label="1"> <label class="c-score-range__lbl" onclick="document.getElementById(this.getAttribute('for')).focus();" data-a="1,2,3,4,5,6,7,8,9,10," for="hotel_average_score_input_1"> <span class="c-score-range__span" aria-hidden="true">1</span></label>

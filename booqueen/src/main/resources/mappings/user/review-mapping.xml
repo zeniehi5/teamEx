@@ -3,7 +3,7 @@
 <mapper namespace="com.booqueen.user.review.dao.reviewmapper">
 	
 	<insert id="insertReview" parameterType="reviewVO"> 
-        <![CDATA[INSERT INTO review (serialnumber, score, staff, service, cleanness, comfort, effectiveness, place, strength, weakness, title, userid, username) VALUES (#{serialnumber}, #{score}, #{staff}, #{service}, #{cleanness}, #{comfort}, #{effectiveness}, #{place}, #{strength}, #{weakness}, #{title}, #{userid}, #{username})]]> 
+        <![CDATA[INSERT INTO review (serialnumber, score, staff, service, cleanness, comfort, effectiveness, place, strength, weakness, title, userid, username, reservation_number) VALUES (#{serialnumber}, #{score}, #{staff}, #{service}, #{cleanness}, #{comfort}, #{effectiveness}, #{place}, #{strength}, #{weakness}, #{title}, #{userid}, #{username}, ${reservation_number})]]> 
     </insert>
     
     <select id="selectReviews" resultType="reviewVO" parameterType="Integer">
@@ -34,6 +34,7 @@
     	<result property="userid" column="userid"/>
     	<result property="writing" column="writing"/>
     	<result property="username" column="username"/>
+    	<result property="reservation_number" column="reservation_number"/>
     </resultMap>
     
    	<resultMap type="memberProfileVO" id="memberProfileVOMap">
@@ -50,5 +51,10 @@
     <select id="selectReviewAndProfile" resultMap="reviewProfileResult" parameterType="Integer">
     	<![CDATA[SELECT * FROM review AS r FULL JOIN profile AS p ON r.userid = p.userid where serialnumber = #{serialnumber} order by writing desc]]>
     </select>
+    
+    <select id="selectReviewStatus" resultMap="reviewVOMap" parameterType="String">
+    	<![CDATA[SELECT * FROM review where userid = #{userid}]]>
+    </select>
+    
    
 </mapper>

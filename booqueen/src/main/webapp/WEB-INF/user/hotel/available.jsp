@@ -1881,7 +1881,6 @@
 	
 	$(document).ready(function () {
 		$('.see-closer').on("click", more_review);
-		$('#reservation_btn').on("click", )
 	 });
 	 
  	function more_review() {

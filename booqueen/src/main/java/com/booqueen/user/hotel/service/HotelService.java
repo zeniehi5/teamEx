@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.hotel.dao.HotelDAO;
+import com.booqueen.user.hotel.vo.BestHotelVO;
+import com.booqueen.user.hotel.vo.CityCountVO;
 import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
@@ -70,13 +71,33 @@ public class HotelService {
 		return hotelDAO.getCityLocation(city);
 	}
   
-  // 최근 검색
+	// 최근 검색
 	public int insertRecentSearch(RecentSearchVO recentSearchVO) {
 		return hotelDAO.insertRecentSearch(recentSearchVO);
 	}
 	
 	public List<RecentSearchVO> selectRecentSearch(String userid) {
 		return hotelDAO.selectRecentSearch(userid);
+	}
+	
+	// index - city
+	public List<CityCountVO> selectCityList() {
+		return hotelDAO.selectCityList();
+	}
+	
+	// index - best hotel
+	public List<BestHotelVO> selectBestHotelList() {
+		return hotelDAO.selectBestHotelList();
+	}
+	
+	// index - all city
+	public List<CityCountVO> selectCityListAll() {
+		return hotelDAO.selectCityListAll();
+	}
+	
+	// index - random hotel
+	public List<BestHotelVO> selectRandomHotel() {
+		return hotelDAO.selectRandomHotel(); 
 	}
   
 }

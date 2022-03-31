@@ -38,4 +38,20 @@ public class ReservationDAO {
 	public int deleteDuplicatedReservation() throws DataAccessException{
 		return sqlSession.delete("com.booqueen.user.reservation.dao.reservationmapper.deleteDuplicatedReservation");
 	}
+
+	public List<ReservationVO> selectComingReservationList(String userid) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.selectComingReservationList", userid);
+	}
+	
+	public List<ReservationVO> selectPastReservationList(String userid) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.selectPastReservationList", userid);
+	}
+	
+	public int updateReviewBoolean(Integer reservation_number) throws DataAccessException{
+		return sqlSession.update("com.booqueen.user.reservation.dao.reservationmapper.updateReviewBoolean", reservation_number);
+	}
+
+	public List<ReservationVO> selectBestHotel() throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.selectBestHotel");
+	}
 }

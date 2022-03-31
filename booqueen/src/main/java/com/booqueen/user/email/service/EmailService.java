@@ -1,8 +1,6 @@
-package com.booqueen.user.payment;
+package com.booqueen.user.email.service;
 
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -13,25 +11,29 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.booqueen.user.payment.service.PaymentService;
-import com.booqueen.user.payment.vo.EmailVO;
+import com.booqueen.user.email.dao.EmailDAO;
+import com.booqueen.user.email.vo.EmailVO;
 
-public class SendEmail {
+@Service
+public class EmailService {
 	
 	@Autowired
-	PaymentService paymentService;
+	EmailDAO emailDAO;
 	
-	public void reservationEmail(String merchant) throws Exception {
-		
-		EmailVO emailVO = paymentService.getReservationInfo(merchant);
+	public EmailVO getReservationInfo(String merchant) {
+		return emailDAO.getReservationInfo(merchant);
+	}
+	
+	public void reservationEmail(EmailVO emailVO) throws Exception {
 		
 		Properties properties = new Properties();
 		
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
 		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.port", "587"); // 465
 		
 		// 발신
 		String sender = "lsh01020@gmail.com";
@@ -46,17 +48,21 @@ public class SendEmail {
 		
 		Message message = prepareMessage(session, sender, emailVO);	
 		
+		message.saveChanges();
+		
 		// 메일 전송
 		Transport.send(message);
 		System.out.println("Message send successfully!");
 		
 	}
 	
-	private Message prepareMessage(Session session, String sender, EmailVO emailVO) {
+	public Message prepareMessage(Session session, String sender, EmailVO emailVO) {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(sender));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailVO.getEmail()));
+			String email_address = emailVO.getEmail();
+			message.setRecipient(Message.RecipientType.TO, 
+					new InternetAddress(email_address));
 			
 			String subject = "감사합니다!" + emailVO.getHotelname() + "예약이 확정되었습니다";
 			message.setSubject(subject);
@@ -144,7 +150,7 @@ public class SendEmail {
 			message.setContent(content, "text/html");
 			return message;
 		} catch (Exception ex) {
-			Logger.getLogger(SendEmail.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 		return null;
 	}
