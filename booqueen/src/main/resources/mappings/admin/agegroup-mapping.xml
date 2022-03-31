@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserAgeGroupDAO">
+	
+	<resultMap id="userAgeGroupList" type="userAgeGroupVO">
+		<result property="now_year" column="now_year"/>
+		<result property="user_birth_year" column="user_birth_year"/>
+		<result property="age" column="age"/>
+		<result property="twenty" column="twenty"/>
+		<result property="thirty" column="thirty"/>
+		<result property="forty" column="forty"/>
+		<result property="fifty" column="fifty"/>
+		<result property="sixty" column="sixty"/>
+	</resultMap>
+
+	<select id="selectUserAgeGroupList" resultMap="userAgeGroupList">
+		SELECT
+			cast(extract('year' from current_date) as integer) as now_year,
+			cast(birth_year as integer) as user_birth_year,
+			(cast(extract('year' from current_date) as integer) - cast(birth_year as integer) +1) as age
+		FROM u_member
+	</select>
+</mapper>
