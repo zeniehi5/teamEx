@@ -22,4 +22,5 @@ public class MemberVO {
 	private String rePasswd;
 	
 	private String type;
+
 }

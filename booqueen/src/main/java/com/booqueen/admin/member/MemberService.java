@@ -7,4 +7,8 @@ public interface MemberService {
 	public MemberVO getAdminMember(MemberVO vo);
 	
 	public List<com.booqueen.user.member.MemberVO> getUserMember();
+	
+	public List<UserAgeGroupVO> selectUserAgeGroupList();
+	
+	public List<UserVO> getUserGender();
 }

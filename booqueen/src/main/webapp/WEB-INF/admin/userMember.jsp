@@ -21,7 +21,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Booqueen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -153,7 +153,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        BooQueen
+                        Booqueen
                     </div>
                 </nav>
             </div>
@@ -209,7 +209,7 @@
                                         </h3>
                                     </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="reportedUser.html">신고 회원 목록</a>
+                                        <a class="small text-white stretched-link" href="${contextPath }/reportedUser.mdo">신고 회원 목록</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="reportedUser.html">차단 회원 목록</a>
+                                    <a class="small text-white stretched-link" href="${contextPath }/reportedUser.mdo">차단 회원 목록</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -263,6 +263,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>e-mail</th>
                                             <th>Gender</th>
                                             <th>Phone</th>
                                             <th>YY-MM-DD</th>
@@ -272,6 +273,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>e-mail</th>
                                             <th>Gender</th>
                                             <th>Phone</th>
                                             <th>YY-MM-DD</th>
@@ -282,7 +284,8 @@
                                     <c:forEach var="userList" items="${userList }" varStatus ="status">
                                         <tr>
                                             <th scope="row">${status.count }</th>
-                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=">${userList.name }</a></td>
+                                            <td>${userList.name }</td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=">${userList.userid }</a></td>
                                             <td>${userList.gender }</td>
                                             <td>${userList.phone1 } - ${userList.phone2 } - ${userList.phone3 }</td>
                                             <td>${userList.birth_year } - ${userList.birth_month } - ${userList.birth_day }</td>
@@ -296,74 +299,82 @@
                 </main>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/chart-area-demo.js"></script>
-		<!-- <script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script> -->
-		<!-- <script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script> -->
-
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-
-        <script>
-            // Pie Chart Example
-            var ctx = document.getElementById("myPieChart");
-            var myPieChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["남성", "여성"],
-                datasets: [{
-                //data: [45, 12, 11.25, 8.32],
-                data: [60, 40],
-                backgroundColor: ['#007bff', '#dc3545'],
-                }],
-            },
-            });
-        </script>
-        <script>
-     // Bar Chart Example
-        var ctx = document.getElementById("myBarChart");
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ["20대", "30대", "40대", "50대", "60대"],
-            datasets: [{
-              label: "가입수",
-              backgroundColor: "rgba(2,117,216,1)",
-              borderColor: "rgba(2,117,216,1)",
-              data: [14215, 12312, 6251, 7841, 4984],
-            }],
-          },
-          options: {
-            scales: {
-              xAxes: [{
-                time: {
-                  unit: 'age'
-                },
-                gridLines: {
-                  display: false
-                },
-                ticks: {
-                  maxTicksLimit: 5
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  min: 0,
-                  max: 15000,
-                  maxTicksLimit: 5
-                },
-                gridLines: {
-                  display: true
-                }
-              }],
-            },
-            legend: {
-              display: false
-            }
-          }
-        });
-</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/chart-area-demo.js"></script>
+	<!-- <script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script> -->
+	<!-- <script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script> -->
+	
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+	
+	<script>
+		// Pie Chart Example
+		var female = '${getUserGender.female_count}';
+		var male = '${getUserGender.male_count}';
+	            
+		var ctx = document.getElementById("myPieChart");
+		var myPieChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: ["남성", "여성"],
+			datasets: [{
+				data: [male, female],
+				backgroundColor: ['#007bff', '#dc3545'],
+				}],
+			},
+		});
+	</script>
+	
+	<script>
+		// Bar Chart Example
+		var twenty = '${userAgeGroup.twenty}';
+		var thirty = '${userAgeGroup.thirty}';
+		var forty = '${userAgeGroup.forty}';
+		var fifty = '${userAgeGroup.fifty}';
+		var sixty = '${userAgeGroup.sixty}';
+		var ctx = document.getElementById("myBarChart");
+		var myLineChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ["20대 이하", "30대", "40대", "50대", "60대 이상"],
+				datasets: [{
+					label: "가입수",
+					backgroundColor: "rgba(2,117,216,1)",
+					borderColor: "rgba(2,117,216,1)",
+					data: [twenty, thirty, forty, fifty, sixty],
+					}],
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						time: {
+							unit: 'age'
+						},
+						gridLines: {
+							display: false
+						},
+						ticks: {
+							maxTicksLimit: 5
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							min: 0,
+							max: 15,
+							maxTicksLimit: 5
+						},
+						gridLines: {
+							display: true
+						}
+					}],
+				},
+				legend: {
+					display: false
+				}
+			}
+		});
+	</script>
     </body>
 </html>

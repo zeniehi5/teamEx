@@ -5,7 +5,7 @@
 		<id property="userid" column="userid"/>
 		<result property="passwd" column="passwd"/>
 		<result property="name" column="name"/>
-		<result property="gedner" column="gender"/>
+		<result property="gender" column="gender"/>
 		<result property="phone1" column="phone1"/>
 		<result property="phone2" column="phone2"/>
 		<result property="phone3" column="phone3"/>
@@ -13,6 +13,7 @@
 		<result property="birth_month" column="birth_month"/>
 		<result property="birth_day" column="birth_day"/>
 		<result property="type" column="type"/>
+		<result property="since" column="since"/>
 	</resultMap>
 	
 	<select id="sel" resultType="userMemberVO" parameterType="userMemberVO">
