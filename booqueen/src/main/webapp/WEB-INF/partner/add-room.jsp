@@ -88,7 +88,7 @@
                         <tr>
                             <td><h3>${room.type}</h3></td>
                             <td>이 유형의 개수: ${room.available}</td>
-                            <td><div class="room_edit_delete"><a href="/hotel_reg/Price.html">삭제</a> <a href="#">수정</a></div></td>
+                            <td><div class="room_edit_delete"><a href="#">삭제</a> <a href="#">수정</a></div></td>
                         </tr>
                     </table> 
                     </div>
@@ -96,7 +96,8 @@
                     <div class="bottom_button">
                         <input type="button" href="${contextPath}/roomlist.pdo" id="other_room" value="다른 객실 추가">
                         <input type="button" href="${contextPath}/setpayment.pdo" id="continue" value="계속">
-                    </div></div>
+                    </div>
+                 </div>
                 <div class="right">
                     <p>숙소 등록 후에도 온라인으로 숙소 판매가 시작되기 전에 정보를 수정하실 수 있습니다.</p>
                 </div>

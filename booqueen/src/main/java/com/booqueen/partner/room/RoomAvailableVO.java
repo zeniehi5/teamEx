@@ -27,4 +27,7 @@ public class RoomAvailableVO {
 	private String day;
 	private Integer month;
 	private Integer year;
+	
+	//
+	private int serialnumber;
 }

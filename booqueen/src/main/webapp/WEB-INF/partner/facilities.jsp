@@ -7,9 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/facilities.css">
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
    $(document).ready(function() {
       for (let i = 1; i < 8; i++) {
          $('#flip' + i).click(function() {
@@ -17,23 +16,23 @@
          });
       }
    });
+   
+   function submitForm(){
+	   var answer = confirm("객실에 대한 정보를 저장하시겠습니까?")
+	   if(answer){
+		   alert("객실을 성공적으로 등록하였습니다.")
+	   }
+	   $("#myForm").submit()
+   }
 </script>
 </head>
 <body>
-<form action="facilities.pdo" method="post">
    <div class="container">
       <header>
          <span id="logo"> <a href="#"> <img alt=""
                src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"
                class="header_logo"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-               <li><a href="${contextPath}/login.jsp">로그인</a></li>
-               <li><a href="${contextPath}/register.jsp">회원가입</a></li>
-            </ul>
-         </nav>
-
       </header>
    </div>
    <main class="contents">
@@ -75,6 +74,7 @@
          <br> 거의 다 됐습니다! 이제 엑스트라 베드 옵션, 편의 시설 및 특징, 제공되는 서비스 등의 상세정보 입력이
          남았습니다.
       </div>
+      <form id="myForm" action="facilities.pdo" method="post">
       <div class="input">
          <fieldset class="facility">
             <h2>편의시설</h2>
@@ -570,11 +570,11 @@
          </div>
 
       </div>
+      </form>
       <div>
-         <input type="submit" id="continue" value="계속">
+         <button type="button" id="continue" onclick="submitForm()">계속</button>
       </div>
    </main>
-</form>
 </body>
 
 </html>

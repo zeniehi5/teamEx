@@ -18,7 +18,7 @@
    </div>
    <main class="contents">
       <div class="option">
-         <label> <a href="/hotel_reg/Basic_Info.html">
+         <label> <a href="#">
                <div class="basic">기본정보</div>
          </a>
          </label> <label> <a>
@@ -46,6 +46,7 @@
       <h2>구성 및 요금</h2>
       우선 객실에 대해 알려주세요. 필요한 정보를 모두 입력한 뒤 다음 객실로 진행하실 수 있습니다.
       <div class="input">
+        <c:if test="${empty room}">
          <div class="input-1">
             <div>
                <img
@@ -57,19 +58,29 @@
                   바랍니다.</p>
                <input type="button" value="객실 추가" onClick="location.href='${contextPath}/room.pdo'">
             </div>
-            <c:choose>
-            	<c:when test="${!room}">
-            		<p>객실 없음</p>
-            	</c:when>
-            	<c:when test="${room}">
-            		<p>객실 있음</p>
-            	</c:when>
-            </c:choose>
+          </div>
+          </c:if>
+          <c:if test="${!empty room}">
+           		<div class="input-1">
+                    <table class="table">
+                    	<c:forEach items="room" var="r">
+                        <tr>
+                            <td><h3>${r.type}</h3></td>
+                            <td>이 유형의 개수: ${r.available}</td>
+                            <td><div class="room_edit_delete"><a href="">삭제</a> <a href="#">수정</a></div></td>
+                        </tr>
+                        </c:forEach>
+                    </table> 
+                    </div>
+                    <div class="bottom_button">
+                        <input type="button" href="${contextPath}/room.pdo" id="other_room" value="다른 객실 추가">
+                        <input type="button" href="${contextPath}/setpayment.pdo" id="continue" value="계속">
+                    </div>
+            </c:if>
          </div>
          <div class="right">
             <p>숙소 등록 후에도 온라인으로 숙소 판매가 시작되기 전에 정보를 수정하실 수 있습니다.</p>
          </div>
-      </div>
    </main>
 </body>
 </html>

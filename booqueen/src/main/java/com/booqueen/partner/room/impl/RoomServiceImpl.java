@@ -160,6 +160,16 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.selectRoomIdByType(vo);
 	}
 
+	@Override
+	public List<RoomVO> getRoomListByHotelSerial(int searchSerial) {
+		return roomDAO.getRoomListByHotelSerial(searchSerial);
+	}
+
+	@Override
+	public RoomVO getRoomIdByRoomType(RoomVO search) {
+		return roomDAO.getRoomIdByRoomType(search);
+	}
+
 
 
 }

@@ -136,4 +136,12 @@ public class RoomDAO {
 	public RoomAvailableVO selectRoomIdByType(RoomAvailableVO vo) {
 		return sqlSessionTemplate.selectOne("RoomDAO.selectRoomIdByType", vo);
 	}
+
+	public List<RoomVO> getRoomListByHotelSerial(int searchSerial) {
+		return sqlSessionTemplate.selectList("RoomDAO.getRoomListByHotelSerial", searchSerial);
+	}
+
+	public RoomVO getRoomIdByRoomType(RoomVO search) {
+		return sqlSessionTemplate.selectOne("RoomDAO.getRoomIdByRoomType", search);
+	}
 }

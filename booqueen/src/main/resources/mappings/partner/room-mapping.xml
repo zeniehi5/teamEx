@@ -76,4 +76,13 @@
 	<select id="selectRoomIdByType" resultType="roomAvailable">
 		SELECT * FROM room where serialnumber = #{serialnumber} and type = #{type}
 	</select>
+	<select id="getRoomListByHotelSerial" resultType="myRoom">
+		SELECT * FROM room where serialnumber = #{serialnumber}
+	</select>
+	<insert id="insertAvailableRoom" parameterType="roomAvailable">
+		INSERT INTO room_available values(nextval('seq_room_price'), #{room_id}, #{open_date}, #{standard_price}, #{non_refundable_price}, #{available}, #{close_date})
+	</insert>
+	<select id="getRoomIdByRoomType" resultType="myRoom">
+		SELECT * FROM room where serialnumber = #{serialnumber} and type = #{type}
+	</select>
 </mapper>

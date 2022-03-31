@@ -222,7 +222,7 @@
     function insertChat(){
     	
     	var content_val = $('#message_textarea').val();
-    	var chatVO = {"userid": userid_shared, "serialnumber": ${hotel.serialnumber}, "content": content_val, "partner": true }
+    	var chatVO = {"userid": userid_shared, "serialnumber": ${hotel.serialnumber}, "reservation_number":${reservation_number}, "content": content_val, "partner": true }
     	var path = '${contextPath}';
     	
     	$.ajax({

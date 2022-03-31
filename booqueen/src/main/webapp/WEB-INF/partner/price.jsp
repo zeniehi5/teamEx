@@ -7,21 +7,45 @@
 <meta charset="UTF-8">
 <title>호텔 등록</title>
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/price.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script type="text/javascript">
+	
+	function submitForm(){
+		
+		var availableRoom = $("#availableRoom").val()
+		var quota = $("#quota").val()
+		var bed = $("#bed").val()
+		var price = $("#price").val()
+		
+		if(availableRoom == null || availableRoom == "" || availableRoom == undefined || availableRoom == "undefined") {
+			alert("객실 수를 입력해 주세요.")
+			return;
+		}
+		if(quota == null || quota == "" || quota == undefined || quota == "undefined") {
+			alert("객실 수용 인원을 입력해 주세요.")
+			return;
+		}
+		if(bed == null || bed == "" || bed == undefined || bed == "undefined") {
+			alert("보유하고 있는 침대의 개수를 입력해 주세요.")
+			return;
+		}
+		if(price == null || price == "" || price == undefined || price == "undefined") {
+			alert("금액을 입력해 주세요.")
+			return;
+		}
+		$("#myForm").submit();
+		
+	}
+</script>
 </head>
 <body>
-<form action="price.pdo" method="post">
+
    <div class="container">
       <header>
          <span id="logo"> <a href="#"> <img alt=""
                src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"
                class="header_logo"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-                <li><a href="${contextPath}/#">${firstname} 님, 로그인!</a></li>
-               	<li><a href="${contextPath}/#">로그아웃</a></li>
-            </ul>
-         </nav>
       </header>
    </div>
    <main class="contents">
@@ -56,6 +80,7 @@
       <br>
       <h2>구성 및 요금</h2>
       <br> 우선 첫 번째 객실에 대해 알려주세요. 필요한 정보를 모두 입력한 뒤 다음 객실로 진행하실 수 있습니다.
+      <form id="myForm" action="price.pdo" method="post">
       <div class="input">
          <fieldset class="roomtype">
             <p>선택하십시오.</p>
@@ -82,15 +107,15 @@
             </div>
             <div>
                <p id="name">이 유형에 해당하는 객실 수</p>
-               <br> <input type="number" name="available">
+               <br> <input type="number" id="availableRoom" name="available">
             </div>
             <div>
                <p id="name">객실 정원</p>
-               <br> <input type="number" name="quota">
+               <br> <input type="number" id="quota" name="quota">
             </div>
             <div>
                <p id="name">침대 수</p>
-               <br> <input type="number" name="bed">
+               <br> <input type="number" id="bed" name="bed">
             </div>
          </fieldset>
          <div class="right">
@@ -107,14 +132,15 @@
             <p id="name">1인 숙박 요금</p>
             <br>
             <div class="price-1">
-               <span class="input-group-addon">KRW/1박</span> <input type="number" name="price">
+               <span class="input-group-addon">KRW/1박</span> <input type="number" id="price" name="price">
             </div>
          </div>
       </fieldset>
+      </form>
       <div>
-      	<input type="submit" id="continue" value="계속">
+      	<button type="button" id="continue" onclick="submitForm()">계속</button>
       </div>
    </main>
-</form>
+
 </body>
 </html>

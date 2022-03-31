@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="HotelDAO">
-	<insert id="addHotel" parameterType="myHotel">INSERT INTO temphotel values(nextval('seq_hotel'), #{member_email}, #{hotelname}, #{address1}, #{address2}, #{postalcode}, #{city}, #{telephone}, #{manager}, #{longitude}, #{latitude}, #{star})</insert>
+	<insert id="addHotel" parameterType="myHotel">INSERT INTO temphotel values(nextval('seq_hotel'), #{member_email}, #{hotelname}, #{address1}, #{address2}, #{postalcode}, #{city}, #{telephone}, #{manager}, #{latitude}, #{longitude}, #{star})</insert>
 	<select id="getHotelByName" resultType="myHotel">SELECT * FROM temphotel where hotelname = #{hotelname}</select>
 	<insert id="setService" parameterType="myService">INSERT INTO hotel_service values(nextval('seq_service'), #{serialnumber}, #{parking}, #{breakfast}, #{language_spoken}, #{wifi}, #{smoking}, #{restaurant}, #{shuttle}, #{room_service}, #{family_room}, #{bar}, #{spa}, #{front_desk}, #{jacuzzi}, #{sauna}, #{ac}, #{fitnesscenter}, #{aquapark}, #{garden}, #{swimming_pool}, #{terras})</insert>
 	<insert id="setFacilitiesBasic" parameterType="facilitiesBasic">INSERT INTO room_facilities_basic values(nextval('seq_room_basic'), #{room_id}, #{hanger}, #{drying_rack}, #{folding_bed}, #{electric_kettle}, #{sofa_bed}, #{ac}, #{closet}, #{carpet_floor}, #{marble_floor}, #{wooden_floor}, #{dress_room}, #{fan}, #{heater}, #{private_entrance}, #{safety_box}, #{sofa}, #{sound_proof}, #{resting_area}, #{cleaning_tools})</insert>

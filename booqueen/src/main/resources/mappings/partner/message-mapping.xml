@@ -12,6 +12,7 @@
 			chat
 		WHERE
 			serialnumber = #{serialnumber}
+			and reservation_number is not null
 		ORDER BY userid,
 			send_date DESC,
 			send_time DESC

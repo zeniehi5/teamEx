@@ -7,21 +7,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/service.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function submitForm(){
+		$("#myForm").submit()	
+	}
+</script>
 </head>
 <body>
-<form action="service.pdo" method="post">
+
    <div class="container">
       <header>
          <span id="logo"> <a href="#"> <img alt=""
                src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"
                class="header_logo"></a>
          </span>
-         <nav>
-            <ul id="topMenu">
-               <li><a href="${contextPath}/#">${firstname} 님, 로그인!</a></li>
-               	<li><a href="${contextPath}/#">로그아웃</a></li>
-            </ul>
-         </nav>
 
       </header>
    </div>
@@ -43,6 +44,7 @@
       <h2>시설 및 서비스</h2>
       <br> 이제 숙소 전반에 관한 정보를 입력해주세요. (예시: 이용 가능한 시설, 인터넷, 주차, 직원이 응대 가능한
       언어)
+      <form id="myForm" action="service.pdo" method="post">
       <div class="input">
          <fieldset class="parking">
             <h2>주차</h2>
@@ -187,10 +189,10 @@
             </div>
          </div>
       </fieldset>
+      </form>
       <div>
-         <input type="submit" id="continue" value="계속">
+         <button type="button" id="continue" onclick="submitForm()">계속</button>
       </div>
    </main>
-</form>
 </body>
 </html>

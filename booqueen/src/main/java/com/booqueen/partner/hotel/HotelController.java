@@ -119,7 +119,7 @@ public class HotelController {
 	@RequestMapping(value = "/facilities.pdo", method = RequestMethod.POST)
 	public String setFacilities(FacilitiesBasicVO basic, FacilitiesBathVO bath, 
 			FacilitiesMediaVO media, FacilitiesFoodVO food, FacilitiesServiceVO service, 
-			FacilitiesViewVO view, FacilitiesAccessVO access, HttpSession session) {
+			FacilitiesViewVO view, FacilitiesAccessVO access, HttpSession session, Model model) {
 		int searchSerial = (int) session.getAttribute("serialnumber");
 		RoomVO room = roomService.getIdBySerial(searchSerial);
 		basic.setRoom_id(room.getRoom_id());
@@ -138,7 +138,12 @@ public class HotelController {
 			hotelService.setFacilitiesView(view);
 			hotelService.setFacilitiesAccess(access);
 		}
-		return "picture";
+		
+		//이미 등록된 객실이 있는지 검색
+		List<RoomVO> roomList = roomService.getRoomListByHotelSerial(searchSerial);
+		model.addAttribute("room", roomList);
+		
+		return "createroom";		//객실 추가 화면으로 이동
 	}
 	
 	@GetMapping("picture.pdo")

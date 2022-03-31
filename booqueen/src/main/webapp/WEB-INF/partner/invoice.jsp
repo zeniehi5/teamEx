@@ -143,6 +143,13 @@
                                 		</span>
                                 	</button>
                                 	</c:if>
+                                	<c:if test="${4 eq InvoiceVO.use_status || InvoiceVO.use_status == 4}">
+                                	<button type="button" class="button button_secondary button_wide" disabled="disabled" onclick="chargeBill('${InvoiceVO.reservation_number}')">
+                                		<span class="button_text">
+                                			<span>정산 완료</span>
+                                		</span>
+                                	</button>
+                                	</c:if>
 								</td>
 							</tr>
 						</c:forEach>

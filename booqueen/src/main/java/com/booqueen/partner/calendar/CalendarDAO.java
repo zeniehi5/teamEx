@@ -18,6 +18,6 @@ public class CalendarDAO {
 	}
 
 	public int insertAvailableRoom(RoomAvailableVO vo) {
-		return sqlSessionTemplate.insert("", vo);
+		return sqlSessionTemplate.insert("RoomDAO.insertAvailableRoom", vo);
 	}
 }

@@ -19,16 +19,50 @@
 <script type="text/javascript">
 
 	$(function(){
+		
+		$("#selectOption").change(function(){
+			var option = $("#typeOption").val($(this).val())
+		
+			var roomVO = {
+		            "type": option
+		         }
+				
+				$.ajax({
+					method:"POST",
+					url:"getRoomAvailable.pdo",
+					contentType:"application/json",
+		            dataType:"json",
+		            data:JSON.stringify(roomVO),
+		            success:function(result){
+		            	$("#available").empty()
+		            	for(let i=1; i<result.available+1;i++ ){
+		            	const  option = $("<option>")
+		            					.attr("value",i)
+		            					.text("잔여수량 : " + i + "개")
+		            			$("#available").append(option)
+		            	}
+		            	const hidden = $("<input type='hidden'")
+		            					.attr("id", "selectedId")
+		            					.attr("value", result.room_id)
+		            				$("#hiddenSpace").append(hidden)
+		            	
+		            },
+		            error:function(){
+		               console.log("통신실패")
+		            } 
+		         })
+					
+		})
+				
 		$("#insertAvailable").click(function(){
 			const result = confirm("선택하신 객실을 이용가능 설정하시겠습니까?")		
 			if(result) {
-				alert("잠시만")
-				const openDate = $("#openDate").val()
-             	const closeDate = $("#closeDate").val()
-             	const roomType = $("#typeOption").val()
-             	const available = $("#available").val()
-             	const standardPrice =$("#standardPrice").val()
-             	const nonRefundablePrice = $("#nonRefundablePrice").val()
+				var openDate = $("#openDate").val()
+             	var closeDate = $("#closeDate").val()
+             	var roomType = $("#typeOption").val()
+             	var available = $("#available").val()
+             	var standardPrice =$("#standardPrice").val()
+             	var nonRefundablePrice = $("#nonRefundablePrice").val()
              	
              	console.log("openDate : "+openDate +"closeDate : "+closeDate+"standardPrice : "
              	   + standardPrice + "roomType: " + roomType + "available : " + available
@@ -64,7 +98,7 @@
 			}	
 		})
 	})
-
+<%--
 	function changeCount() {
 		var option = $("#typeOption").val()
 		var roomVO ={
@@ -79,7 +113,6 @@
             data:JSON.stringify(roomVO),
             success:function(result){
             	$("#available").empty()
-            	alert("성공?")
             	for(let i=1; i<result.available+1;i++ ){
             	const  option = $("<option>")
             					.attr("value",i)
@@ -97,7 +130,7 @@
             } 
          })
 	}
-
+--%>
     var count =0;
     var arr = new Array();
    function scheduleEvent(e) {
@@ -113,9 +146,7 @@
       }else{
          if($("#date"+e).hasClass('classColor')&& $("#scheduleStyle"+e).hasClass('partner-seleted-able')){
             $("#scheduleStyle"+e).removeClass('partner-seleted-able')
-            $("#date"+e).removeClass('classColor')
-            
-            
+            $("#date"+e).removeClass('classColor')           
             
             arr.sort((a,b) => b.num-a.num);
          
@@ -648,23 +679,21 @@ li{
                            </td>
                            </a>
                         </c:when>
-                        <c:when test="${date_status.index%7==0}">
+                        
                </tr>
+               
                <tr>
+               <c:when test="${date_status.index%7==0}">
                            <td class="sun_day"  id="date${dateList.date}"  onclick="scheduleEvent('${dateList.date}')">
                               <ul class="sun"><span>${dateList.date}</span>
                                  <div id="scheduleStyle${dateList.date}">
                                     <span></span>
                                  </div>
                                  <c:forEach var="available" items="${available}">   
-                                    
                                      <c:if test="${available.year eq dateList.year}"> 
-                                       
                                        <c:if test="${available.month eq dateList.month+1}">
                                              <c:if test="${available.day eq dateList.date}">
-                                                
                                                    <li id="${available.sequence}">${available.type}: ${available.available}개</li>   
-                                                                  
                                              </c:if>                                          
                                        </c:if>
                                      </c:if> 
@@ -672,8 +701,8 @@ li{
                               </ul>
                               <div></div>
                            </td>
-                        </c:when>
-                        <c:otherwise>
+                </c:when>
+				<c:otherwise>
                            <td class="normal_day"  id="date${dateList.date}"  onclick="scheduleEvent('${dateList.date}')">
                               <ul class="date"><span>${dateList.date}</span>
                               <div id="scheduleStyle${dateList.date}">
@@ -698,8 +727,11 @@ li{
                               <div></div>
                            </td>
                         </c:otherwise>
+                       
                      </c:choose>
+                      </tr>
                   </c:forEach>
+                  
             </tbody>
 
          </table>
@@ -796,7 +828,7 @@ li{
                                              <div class="bui-spacer--medium bui-form__group">
                                                 <label><span>객실 선택</span></label>
                                                 <div class="bui-input-select">
-                                                   <select name="room" class="bui-form__control" onchange="changeCount();">
+                                                   <select name="room" id="selectOption" class="bui-form__control" onchange="changeCount();">
                                                    <c:forEach var="roomList" items="${roomList}">
                                                       <option id="typeOption" value="${roomList.type}">${roomList.type}</option>
                                                    </c:forEach>

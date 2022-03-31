@@ -19,6 +19,7 @@
 		JOIN
 			room as h
 		ON r.room_id = h.room_id
+		WHERE r.serialnumber = #{serialnumber}
 		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationPagingByHotelSerial" resultType="pReservation">

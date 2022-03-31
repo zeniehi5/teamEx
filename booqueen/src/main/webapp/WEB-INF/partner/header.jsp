@@ -354,8 +354,6 @@
                                                 <ul class="submenu_list">
                                                     <li class="submenu_item"><a class="submenu_link" href="${contextPath}/reviews.pdo"><span>고객
                                                                 이용 후기</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="#"><span>고객
-                                                                경험</span></a></li>
                                                 </ul>
                                             </div>
                                         </li>
