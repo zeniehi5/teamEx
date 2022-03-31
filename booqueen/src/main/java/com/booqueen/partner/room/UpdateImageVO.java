@@ -14,4 +14,6 @@ public class UpdateImageVO {
 	private String file_url;
 	private String type;
 	private int room_id;
+	
+
 }
