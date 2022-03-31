@@ -516,7 +516,15 @@
 											<div class="hotel-name">
 												<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank"><h3>${hotel.hotelname }</h3></a>								
 												<div class="star">
-													<c:if test="${hotel.star+0 == '5'}">
+													<c:set var="star" value="${hotel.star*1}"/>
+													<c:forEach begin="1" end="${star }">
+														<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+													</c:forEach>
+													<!--<c:if test="${hotel.star+0 == '5'}">
 													<span>
 														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
 															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
@@ -600,7 +608,7 @@
 															<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 														</svg>
 													</span>
-													</c:if>
+													</c:if>-->
 												</div>
 											</div>
 											<div class="hotel-location">
@@ -861,9 +869,9 @@
 				</div>
 
 				<!-- 검색된 숙소, 번호 -->
-				<div class="container-bottom">
+				<%--<div class="container-bottom">
 					<div class="found-room"><span class="city_header"></span>: 검색된 숙소 ${fn:length(hotelList)}개</div>
-					<div class="showing">
+					 <div class="showing">
 						<div class="pagination">
 							<a href="#">&laquo;</a>
 							<a class="active" href="#">1</a>
@@ -878,7 +886,7 @@
 							<span>1-25 페이지</span>
 						</div>
 					</div>
-				</div>
+				</div>--%>
 			</div>
 
 			

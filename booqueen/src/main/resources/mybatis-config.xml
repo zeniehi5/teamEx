@@ -18,7 +18,7 @@
       <typeAlias type="com.booqueen.user.hotel.vo.CityVO" alias="cityVO"/>
       <typeAlias type="com.booqueen.user.payment.vo.EmailVO" alias="emailVO"/>
       <typeAlias type="com.booqueen.user.hotel.vo.RecentSearchVO" alias="recentSearchVO"/>
-      
+      <typeAlias type="com.booqueen.user.room.vo.RoomAvailableVO" alias="roomAvailableVO"/>
       
       <!-- shared -->
       <typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>

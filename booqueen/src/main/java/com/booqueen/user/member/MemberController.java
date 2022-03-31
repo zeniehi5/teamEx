@@ -278,8 +278,10 @@ public class MemberController{
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 		
-		List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
-		session.setAttribute("recentSearchList", recentSearchList);
+		if(user != null) {
+			List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
+			session.setAttribute("recentSearchList", recentSearchList);
+		}
 		
 		return "member/index";
 	}

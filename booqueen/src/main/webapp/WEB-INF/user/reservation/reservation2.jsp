@@ -41,7 +41,9 @@
             </ol>
         </div>
     </div>
-
+    
+	<div class="main">
+	<form action="${contextPath}/reservation.do" id="last_reservation">
     <div class="container">
         <aside class="aside">
             <div class="aside-inner">
@@ -60,15 +62,14 @@
 		                            <div class="detail-top">
 		                            	<div>
 		                                <span class="detail-top-span">
-		                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-		                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-		                                        </svg></span>&nbsp;
-		                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-		                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-		                                        </svg></span>&nbsp;
-		                                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-		                                        <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-		                                    </svg></span>    
+		                                    <c:set var="star" value="${hotelVO.star*1}"/>
+											<c:forEach begin="1" end="${star }">
+												<span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+												</svg>
+											</span>
+											</c:forEach>
 		                                </span>
 		                                </div>
 		                                <div class="score-box">
@@ -81,7 +82,13 @@
 		                                </c:otherwise>	
 		                                </c:choose>
 		                            	</div>
-		                            	<div>매우 좋음</div>
+		                            	<c:choose>
+							                <c:when test="${reviewAvgVO.scoreAvg >= 9}"><span>최고</span></c:when>
+											<c:when test="${reviewAvgVO.scoreAvg >= 8}"><span>매우 좋음</span></c:when>
+											<c:when test="${reviewAvgVO.scoreAvg >= 7}"><span>좋음</span></c:when>
+											<c:when test="${reviewAvgVO.scoreAvg >= 6}"><span>만족</span></c:when>
+											<c:when test="${reviewAvgVO.scoreAvg < 6}"><span>보통</span></c:when>
+							           </c:choose>  
 		                            </div>
 		                        </div>
 		                        <div>
@@ -109,26 +116,29 @@
                             </time>
                         </div>
                     </div>
-                    <div class="aside-main-second">
+                    <div style="display: flex;flex-direction: column;margin: 0 20px;width: 100;width: 150px;">
+                    <div class="aside-main-second" style="display: flex; justify-content: space-between; ">
                         <div>총 숙박 기간:</div>
-                        <div>${reservationVO.diffDays }박</div>
+                        <div><span style="font-style: italic;">${reservationVO.diffDays }</span>박</div>
                     </div>
-                    <div class="aside-main-thrid">
-                        <a>혹시 여행 날짜가 변경되었나요?</a>
-                    </div>
-                    <hr class="line">
-                    <div style="display:flex; justify-content:space-between;"><div>선택 객실: </div><div>${reservationVO.type}</div></div>
-                    <c:set var="count_room" value="${reservationVO.count_room}"/>
-                    <div style="display:flex; justify-content:space-between;"><div>총 가격: </div><div style="font-style: italic;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price*reservationVO.count_room}" /></div></div>
-                    <div class="other-room-div"><a class="other-room-a">다른 객실 선택하기</a></div>
-                	<hr class="line">
-                	<div>
-                		<h4>예약 정보 확인</h4>
-                		<div>${reservationVO.lastname}</div>
-                		<div>${reservationVO.firstname }</div>
-                		<div>${reservationVO.email }</div>
+					<c:forEach var="count_rooms" items="${reservationVO.count_rooms}" varStatus="status">
+                     	<c:set var="types" value="${reservationVO.types[status.index]}"/>
+                     	<input type="hidden" name="types" value="${types}"/>
+                     	<c:set var="prices" value="${reservationVO.prices[status.index]}"/>
+                     	<input type="hidden" name="prices" value="${prices * reservationVO.diffDays * count_rooms }"/>
+                     	<input type="hidden" name="count_rooms" value="${count_rooms }"/>
+                     	
+                    	<c:if test="${count_rooms ne '0' }">
+                    		<div style="display:flex; justify-content:space-between; "><span></span><span style="font-style: italic; font-size: 15px;">${types} x ${count_rooms} </span></div>   	
+                   		</c:if>
+                   	</c:forEach>
+
+                    <div style="display:flex; justify-content:space-between; margin-top: 10px;"><div>총 가격: </div><div style="font-style: italic;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.total}" /></div></div>
+					</div>
+                	<div style="margin-left: 30px;">
+                		<div>이름</div><div><span>: ${reservationVO.lastname}${reservationVO.firstname}</span></div>
+                		<div style="margin-top: 15px;">이메일</div><div><span>${reservationVO.email}</span></div>
                 	</div>
-                	
                 </div>
             </div>
 
@@ -140,17 +150,9 @@
                 </div>
             </div> -->
 
-            <div class="information">
-                <h3>중요 정보</h3>
-                <p>현재 이 숙소는 코로나19(COVID-19)에 대응하기 위해 추가 안전 및 위생 조치를 실시하고 있습니다.</p>
-            </div>
         </aside>
         
-        <div class="main">
-            <div class="hotel-detail">
-                
-            </div>
-			<form action="${contextPath}/reservation.do" id="last_reservation">
+        
 				<input type="hidden" name="room_id" value=${reservationVO.room_id }>
 	            <input type="hidden" name="serialnumber" value=${reservationVO.serialnumber }>
 	            <input type="hidden" name="type" value=${reservationVO.type }>
@@ -187,7 +189,7 @@
 
             <div class="extra-info">
                 <p class="payment-details-t-and-c payment-method__extras-item js-payment-details-t-and-c">
-                    이 예약의 직접 당사자는 고객님과 Best Western Plus Jeonju이며, 이 예약을 완료함으로써 
+                    이 예약의 직접 당사자는 고객님과 ${hotelVO.hotelname}이며, 이 예약을 완료함으로써 
                     <a href="/bookcancel.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;checkin=2022-02-02;checkout=2022-02-03;general=295985256;hotel_id=7017459;is_family_search=0;is_group_search=0;persons=2;policygroup_room=2022-02-03%2C701745901%3A295985256%3A1%3AJiN4QzJBNDsmI3hEMEUwOyYjeEIyRTQ7JiN4QjREQzsgJiN4QjM1NDsmI3hCRTE0OyYjeEI4Rjg7%0A%3A701745901_295985256_2_0_0;refund_text_global=%20%EC%98%88%EC%95%BD%20%EC%B7%A8%EC%86%8C%20%EC%8B%9C%20%E2%82%A939%2C600%EC%9D%98%20%EA%B8%88%EC%95%A1%EC%9D%B4%20%ED%99%98%EB%B6%88%EB%90%A9%EB%8B%88%EB%8B%A4.;srpvid=4ee000ba74c400d2&amp;;popupit=1" target="_blank" class="popupit bui-link">
                     예약 조건</a>, 
                     <a href="/content/terms.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;address1=Old%20Christchurch%20Road;ap_ref=0;bp_from=standard;bp_travel_purpose=leisure;bpid=7F6E52D2-7429-4225-85B7-F766AA324A4F;cc1=kr;checkin=2022-02-02;checkout=2022-02-03;city=Bournemouth;dc_issue_number=0;dotd_fb=0;email=smin323%40naver.com;email_confirm=smin323%40naver.com;final_booking_price=79200;firstname=%EC%83%81%EB%AF%BC;full_cost=0;full_cost_plain=0;gpp=80000;gps=10;gsav=8000;guest_name_701745901_295985256_2_0_0=%EA%B9%80%20%EC%83%81%EB%AF%BC;hostname=www.booking.com;hotel_id=7017459;installment_count=1;interval=1;lastname=%EA%B9%80;nits_session_id=BB408031-0C6A-450C-94CF-FC8DE038A244;nr_guests_701745901_295985256_2_0_0=2;nr_rooms_701745901_295985256_2_0_0=1;pre_order_uuid=88ef4b4d-aca1-4233-8b67-296a8cd57167;promo=0;raf_cm_later=0;recommended_room_id=0;recp=0;remb=0a14164b1a3031b2a7b3a0b4a0b5a306b6a701b;rets=0;reub=0;room1=A%2CA;rt_num_blocks=6;rt_num_blocks_per_room=%7B%22701745903%22%3A1%2C%22701745905%22%3A1%2C%22701745906%22%3A1%2C%22701745901%22%3A1%2C%22701745908%22%3A1%2C%22701745904%22%3A1%7D;rt_num_rooms=6;rt_pageview_id=592e00be09b000c6;rt_pos_final=1.1;rt_pos_selected=1;rt_pos_selected_within_room=1;rt_relevance_metric_id=fc2a62ed-f10d-410b-bea0-3ffa9f6f4932;seen_ft_rvw=0;smoking_preference_701745901_295985256_2_0_0=no;srpvid=4ee000ba74c400d2;stage=2;total_cost=79200;trips_promo=%5B%5D;ufi=-706906;upgrade_to=0;zip=BH1%201EZ&amp;" target="_blank" class="popupit bui-link">
@@ -208,8 +210,9 @@
                     <span>예약 내용 재확인</span>
                 </button>
             </div>
-        </div><!-- end main-->
+        
     </div>
+    </div><!-- end main-->
 
     <div class="footer">
         <div class="footer-inner">
@@ -274,9 +277,9 @@
 		   var IMP = window.IMP; // 생략 가능
 		   IMP.init("imp09566797"); 
 		 
-		   var price = 100;
-	       var count_room = '${reservationVO.count_room}';
-		   var amount = price*count_room;
+// 		   var price = 100; 
+// 	       var count_room = '${reservationVO.count_room}';
+		   var amount = 100; /* '${reservationVO.total}'; */
 		   var address = '${reservationVO.address1}' + '${reservationVO.address2}';
 		   var name = '${reservationVO.lastname}' + '${reservationVO.firstname}';
 		   var phone = '${member.phone1}' + '${member.phone2}' + '${member.phone3}';
@@ -334,11 +337,9 @@
 	                        	var text = '';
 	                        	text += "<input type='hidden' value='";
 	                        	text += imp_uid_from_req;
-	                        	console.log(imp_uid_from_req);
 	                        	text += "' name='imp_uid'>";
 	                        	text += "<input type='hidden' value='";
 	                        	text += merchant;
-	                        	console.log(merchant);
 	                        	text += "' name='merchant'>";	                   
 	                        	$('#last_reservation').append(text);
 	                       		$('#last_reservation').submit();

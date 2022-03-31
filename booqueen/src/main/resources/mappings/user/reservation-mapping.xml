@@ -29,7 +29,8 @@
 
 	<insert id="insertReservation" parameterType="uReservationVO">
 		<![CDATA[INSERT INTO reservation (reservation_number, imp_uid, merchant, serialnumber, room_id, userid, checkin_date, checkout_date, price, count_room, lastname, firstname, special_request, time_arrival, status, email, pincode, hotelname) 
-				VALUES (nextval('seq_reservation'), #{imp_uid}, #{merchant}, ${serialnumber}, ${room_id}, #{userid}, TO_DATE(#{start_date}, 'YYYYMMDD'), TO_DATE(#{end_date}, 'YYYYMMDD'), #{price}, #{count_room}, #{lastname}, #{firstname}, #{request_text}, ${arrive_time}, ${status}, #{email}, #{pincode}, #{hotelname})]]>
+				VALUES (nextval('seq_reservation'), #{imp_uid}, #{merchant}, ${serialnumber}, (select room_id from room where type= #{type} and serialnumber = ${serialnumber}), #{userid}, TO_DATE(#{start_date}, 'YYYYMMDD'), TO_DATE(#{end_date}, 'YYYYMMDD'), #{price}, #{count_room}, #{lastname}, #{firstname}, #{request_text}, ${arrive_time}, ${status}, #{email}, #{pincode}, #{hotelname})
+		]]>
 	</insert>
 
 	<select id="selectReservationList" parameterType="String" resultMap="ReservationVOMap">

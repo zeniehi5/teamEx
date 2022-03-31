@@ -2,6 +2,7 @@ package com.booqueen.user.reservation.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,9 @@ public class ReservationController {
 
 		String start_day = roomService.getDateDay(start_date, "yyyyMMdd");
 		String end_day = roomService.getDateDay(end_date, "yyyyMMdd");
-
+		
+		String[] types = reservationVO.getType().split(",");
+		
 		reservationVO.setStart_date_year(start_date_year);
 		reservationVO.setStart_date_month(start_date_month);
 		reservationVO.setStart_date_day(start_date_day);
@@ -68,6 +71,7 @@ public class ReservationController {
 		reservationVO.setEnd_date_day(end_date_day);
 		reservationVO.setStart_day(start_day);
 		reservationVO.setEnd_day(end_day);
+		reservationVO.setTypes(types);
 
 		model.addAttribute("reservationVO", reservationVO);
 
@@ -82,7 +86,7 @@ public class ReservationController {
 
 		ReviewAvgVO reviewAvgVO = reviewService.getReviewAvg(reservationVO.getSerialnumber());
 		model.addAttribute("reviewAvgVO", reviewAvgVO);
-
+		
 		return "reservation/reservation";
 	}
 
@@ -90,6 +94,30 @@ public class ReservationController {
 	public String comfirmReservation(ReservationVO reservationVO, HotelPolicyVO hotelPoclicyVO, HotelImgVO imgVO,
 			ReviewAvgVO reviewAvgVO, HotelVO hotelVO, Model model) {
 
+//		String[] count_rooms_s = reservationVO.getCount_rooms_s();
+//		System.out.println(count_rooms_s[0].getClass().getName());
+//		int[] count_rooms = new int[count_rooms_s.length];
+//		for(int i = 0; i < count_rooms.length; i++) {
+//			count_rooms[i] = Integer.parseInt(count_rooms_s[i]);
+//			System.out.println(count_rooms[i]);
+//		}
+//		reservationVO.setCount_rooms(count_rooms);
+//		
+//		String[] prices_s = reservationVO.getPrices_s();
+//		int[] prices = new int[prices_s.length];
+//		for(int i = 0; i < prices.length; i++) {
+//			prices[i] = Integer.parseInt(prices_s[i]);
+//		}
+//		reservationVO.setPrices(prices);
+		
+//		String[] types = reservationVO.getTypes();
+//		for(int i = 0; i < types.length; i++) {
+//			System.out.println(types[i]);
+//		}
+		
+//		String[] types = reservationVO.getType().split(",");
+//		reservationVO.setTypes(types);
+		
 		model.addAttribute("reservationVO", reservationVO);
 		model.addAttribute("hotelPoclicyVO", hotelPoclicyVO);
 		model.addAttribute("hotelImg", imgVO);
@@ -102,18 +130,39 @@ public class ReservationController {
 	@RequestMapping(value = "/reservation.do")
 	public String reservation(ReservationVO reservationVO, Model model) throws Exception {
 
-			int pinCode = (int) (Math.random() * 9000) + 1000;
-			reservationVO.setPincode(pinCode);
-			reservationVO.setStatus(true);
+		int[] count_rooms = reservationVO.getCount_rooms();
+		int[] prices = reservationVO.getPrices();
+		String[] types =reservationVO.getTypes();
+		
+		int pinCode = (int) (Math.random() * 9000) + 1000;
+		reservationVO.setPincode(pinCode);
+		reservationVO.setStatus(true);
+		reservationVO.setRequest_text(reservationVO.getRequest_text().replace(",", ""));
 			
-			int result_insert = reservationService.insertReservation(reservationVO);
-			int result_delete = roomService.deleteRoomAvailable(reservationVO);
+		for(int i = 0; i < count_rooms.length; i++) {
+			reservationVO.setCount_room(count_rooms[i]);
+			reservationVO.setPrice(prices[i]);
+			reservationVO.setType(types[i]);
+			reservationService.insertReservation(reservationVO);
+			roomService.updateRoomAvailable(reservationVO);
 
-			reservationService.deleteDuplicatedReservation();
+			for(int j = 1; j < reservationVO.getDiffDays(); j++) {
+				String year =  reservationVO.getStart_date().substring(0, 4);
+				String month = reservationVO.getStart_date().substring(4, 6);
+				String day = reservationVO. getStart_date().substring(6);
+				String open_date = year + "-" + month + "-" + day;
+				reservationVO.setStart_date(LocalDate.parse(open_date).plusDays(j).toString().replaceAll("-", ""));
+				roomService.updateRoomAvailable(reservationVO);
+			}	
+		}
+//			reservationService.deleteDuplicatedReservation();
 			
-			ReservationVO vo = reservationService.selectReservationByMerchant(reservationVO.getMerchant());
+			List<ReservationVO> vo = reservationService.selectReservationByMerchant(reservationVO.getMerchant());
 			
-			model.addAttribute("reservationVO", vo);
+			ReservationVO vo1 = vo.get(0);
+			System.out.println(vo1.toString());
+			
+			model.addAttribute("reservationVO", vo1);
 
 			return "reservation/finalization";
 	}
@@ -209,4 +258,5 @@ public class ReservationController {
 		
 		return "reservation/confirmcancel";
 	}
+	
 }

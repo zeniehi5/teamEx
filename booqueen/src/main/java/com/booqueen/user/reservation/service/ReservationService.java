@@ -31,7 +31,7 @@ public class ReservationService {
 		return reservationDAO.cancelReservation(reservationVO);
 	}
 	
-	public ReservationVO selectReservationByMerchant(String merchant) {
+	public List<ReservationVO> selectReservationByMerchant(String merchant) {
 		return reservationDAO.selectReservationByMerchant(merchant);
 	}
 

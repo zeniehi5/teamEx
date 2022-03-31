@@ -24,11 +24,11 @@
     <jsp:include page="/WEB-INF/user/member/header.jsp"/>
     
     <div class="content-top">
-        <span class="_501928098">확정된 예약입니다: <span class="_e4a8213f6"><a href="https://www.booking.com/hotel/kr/best-western-gunsan.ko.html?label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB&amp;sid=bac1796509bc54b36dbc023726e3547c&amp;aid=304142" data-testid="name-archor" class="_8ce7bbbcf">베스트웨스턴 군산호텔</a><span class="_a11e76d75 _192b3a196"></span></span></span>
+        <span class="_501928098">확정된 예약입니다: <span class="_e4a8213f6">${reservationVO.hotelname }<span class="_a11e76d75 _192b3a196"></span></span></span>
         <div role="img" class="_bebcf8d60 b3a3ada19a"><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span></div>
     </div>
 
-    <div class="bui-alert" role="status">
+    <%--<div class="bui-alert" role="status">
         <span class="icon--hint" role="presentation">
             <svg class="-iconset-info_sign" height="24" role="presentation" width="24" viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path d="M49.4 85l4.2-17.2c.7-2.7.8-3.8 0-3.8a29 29 0 0 0-8.8 3.8l-1.8-3A48 48 0 0 1 66.7 53c3.7 0 4.3 4.3 2.5 11l-5 18c-.7 3.3-.3 4.3.5 4.3a19 19 0 0 0 8.2-4L75 85c-8.6 8.7-18.2 12-21.8 12s-6.4-2.3-3.8-12zM75 36a9.2 9.2 0 0 1-9.2 9c-4.4 0-7-2.7-6.8-7a9 9 0 0 1 9.1-9c4.6 0 6.9 3.2 6.9 7z"></path><path d="M62 16a48 48 0 1 1-48 48 48 48 0 0 1 48-48m0-8a56 56 0 1 0 56 56A56 56 0 0 0 62 8z"></path></svg>
         </span>
@@ -39,15 +39,14 @@
                 <div class="bui-group__item"><a type="button" class="assistant-entry-point"><span class="assistant-entry-point__text">숙소로 연락하기</span></a></div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
     <div class="content-table">
         <div class="masthead">
             <div class="masthead-inner-container">
                 <div class="mb-card__col mhead--property">
-                    <a href="#" aria-label="이 숙소의 사진 23개 보기" class="_03902938402">
                         <div id="mb-hotel-cover" class="mb-masthead__hotel-photo mb-hotel-photo js_pb_mb_hotel_gallery" style="background-image: url(${reservationVO.file_url});"></div>
-                    </a>
+
                     <div class="mb-info__reversed">
                         <div class="bui-inline-container mb-info">
                             <div class="bui-inline-container__main">
@@ -93,11 +92,11 @@
                             <div>
                                 <div class="_4eb31e16e">
                                     <div class="bfd86f8f11">
-                                        <p>예약 번호:<strong>
-                                                ${reservationVO.reservation_number }</strong>
+                                        <p>예약 번호:
+                                                <strong>${reservationVO.reservation_number }</strong>
                                         </p>
-                                        <p>PIN 코드:<strong>
-                                                ${reservationVO.pincode }</strong>
+                                        <p>PIN 코드:
+                                        <strong>${reservationVO.pincode }</strong>
                                         </p>
                                     </div>
                                     <div data-testid="PostBookingCheckinCheckout" class="_1e97201db">
@@ -105,13 +104,13 @@
                                         <time class="_ab5ecce54 a7c1636554">
                                         <fmt:parseDate value="${reservationVO.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
                                             <div class="ac6bdec376"><fmt:formatDate value="${start_date}" pattern="yyyy년 MM월 dd일"/></div>
-                                            <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_in_start}:00 - ${reservationVO.check_in_end}:00 </div>
+<%--                                             <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_in_start}:00 - ${reservationVO.check_in_end}:00 </div> --%>
                                         </time>
                                         <div class="_f807b8e8c">체크아웃</div>
                                         <time class="_ab5ecce54 a7c1636554">
                                         <fmt:parseDate var="end_date" value="${reservationVO.end_date}" pattern="yyyy-MM-dd" />
                                             <div class="ac6bdec376"><fmt:formatDate value="${end_date}" pattern="yyyy년 MM월 dd일"/></div>
-                                            <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_out_start}:00 - ${reservationVO.check_out_end}:00</div>
+<%--                                             <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_out_start}:00 - ${reservationVO.check_out_end}:00</div> --%>
                                         </time>
                                     </div>
                                 </div>
@@ -125,7 +124,7 @@
                                     요금
                                 </li>
                                 <li class="mb-check--value">
-                                    ${reservationVO.diffDays}박, 객실 ${reservationVO.count_room}개
+                                    <%--${reservationVO.diffDays}박--%> 객실 ${reservationVO.count_room}개
                                 </li>
                                 <li class="mb-check--price bui_font_larger">
                                     <div class="mb-price mb-price--has-price-details">
@@ -204,6 +203,7 @@
    <div class="mb_cancellation_timeline">
     <div class="room room--next">
         <a href="${reservationVO.file_url } class="preview" title="스탠다드 더블룸">
+    
             <img
                 src="${reservationVO.file_url }"
                 class="smll_roomphoto jqrt jq_tooltippex jq_tooltip round6"
@@ -213,7 +213,7 @@
                 id="b_tt_holder_1"
                 data-title="<img src='https://cf.bstatic.com/xdata/images/hotel/max300/47101212.webp?k=ac645580f8f772431e587e71a66f38e27c06b0593807ee55b96fe5db47343245&amp;o=' /><br /><strong>스탠다드 더블룸</strong>"
                 aria-describedby="materialized_tooltip_hj8fj">
-        </a>    
+        </a>
         <h3>스탠다드 더블룸</h3>
         <p class="pb_conf_room_descr">이 더블룸은 퀸 사이즈의 더블침대, 평면 TV와 냉장고를 갖추고 있습니다. 전용 Wi-Fi 라우터가 객실에 제공됩니다.</p>
         <table class="conf_align_table" style="clear:left;">
@@ -225,23 +225,15 @@
                         </div>
                     </th>
                     <td>
-                        <!-- ClickTaleExcludeBlock -->
                         <p>
                             ${reservationVO.lastname } ${reservationVO.firstname }
-                            <a
-                                class="conf_mb_inline js-custom-goal--edit-guest-name custom_track"
-                                data-trackname="pb_conf_inline_mybooking: Edit guest name"
-                                href="
-        /myreservations.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4Ar_es5AGwAIB0gIkYjRkMTMyMDAtZDY3Zi00NTM0LTkwNjQtOGRhZjFkN2M0MWI42AIE4AIB;sid=2067071b959ba231d5d5a379c9e4f0b2;auth_key=KCudvl63DxX8Tixo&amp;;label=from_conf_1;pbsource=email_changeInfo;rres_id=3513880578
-        #roomSection"
-                                data-et-click="customGoal:AEAFZMdLEFbMXSOONC:2">
+  -
                                 투숙객명 수정
                             </a>
                         </p>
-                        <!-- EndClickTaleExcludeBlock <p>XXX</p> -->
                     </td>
                 </tr>
-                <tr>
+    			<tr>
                     <th scope="row">
                         포함된 내역
                     </th>
@@ -391,6 +383,7 @@
                         <span class="_8ae9a3c91">이 예약에 대해
                         </span>
                         <span class="_8ae9a3c91 f74643df3a"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" /></span>
+    
                         <span class="_8ae9a3c91">의 금액을 결제하셨습니다.</span>
                     </div>
                     <hr class="_b1c8687ff _dfc17cd2a">
@@ -423,7 +416,7 @@
                                     <div class="_40f62ffbd">
                                         <span data-testid="payment-status" class="_4abc4c3d5">결제 완료</span>
                                     </div>
-                                    <span data-testid="payment-amount" class="ac6bdec376 _cce1d8a72"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" /></span>
+                                     <span data-testid="payment-amount" class="ac6bdec376 _cce1d8a72"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" /></span> 
                                 </div>
                             </div>
                         </div>
@@ -432,7 +425,6 @@
             </div>
         </div>
     </div>
-
     <hr class="mb-hr">
 
     <div class="house_rules_mybooking mb-section">

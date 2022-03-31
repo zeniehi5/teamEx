@@ -90,7 +90,7 @@ public class PaymentController {
 		int result = paymentService.insertReservation(paymentVO);
 		
 		if(result > 0) {
-			sendEmail.reservationEmail(paymentVO.getMerchant());
+//			sendEmail.reservationEmail(paymentVO.getOrder_merchant_serial());
 			return "success";
 		} else {
 			return "error";

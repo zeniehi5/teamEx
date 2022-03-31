@@ -7,11 +7,17 @@
     	<result property="sequence" column="sequence"/>
     	<result property="serialnumber" column="serialnumber"/>
 		<result property="type" column="type"/>
-		<result property="price" column="price"/>
+		<result property="price" column="standard_price"/>
 		<result property="smoking" column="smoking"/>
-		<result property="available" column="available"/>
 		<result property="count_room" column="count"/>
+		<result property="quota" column="quota"/>
+		<result property="bed" column="bed"/>
+		<collection property="roomAvailableVO" resultMap="RoomAvailableVOMap"/>
 		<collection property="roomFacilitiesVO" resultMap="RoomFacilitiesVOMap" />
+    </resultMap>
+    
+    <resultMap type="roomAvailableVO" id="RoomAvailableVOMap">
+    	<result property="available" column="available"/>
     </resultMap>
 
 	<resultMap type="roomFacilitiesVO" id="RoomFacilitiesVOMap">
@@ -99,7 +105,7 @@
 
 	<select id="selectRoomFacilities" resultMap="RoomVOMap" parameterType="hotelAvailableVO">
 		<![CDATA[
-				select 	r.room_id, count(a.open_date), a.open_date, r.serialnumber, r.type, r.price, r.smoking, r.available,
+				select 	r.room_id, count(r.type), a.open_date, r.serialnumber, r.type, a.standard_price, r.smoking, a.available, r.quota, r.bed,
 				access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
 				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
 				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
@@ -134,21 +140,46 @@
 				full join room_facilities_view as view
 				on r.room_id = view.room_id	
 
-				where r.serialnumber = #{serialnumber} and open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				where r.room_id in (
+					SELECT room_id FROM
+												(SELECT
+				        room_id, MIN(open_date) as open_date, MAX(close_date) as close_date
+				    FROM (
+				    SELECT
+				        *,
+				        ( ROW_NUMBER()
+				          OVER(PARTITION BY room_id
+				               ORDER BY
+				                   open_date
+				          ) ) AS rownum
+				    FROM
+				        room_available
+				    WHERE
+				            open_date >= TO_DATE(#{start_date}, 'YYYYMMDD')
+				        AND close_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				    ORDER BY
+				        room_id,
+				        open_date
+				) as a
+				        GROUP BY room_id, (open_date - cast(a.rownum as integer)), (close_date - cast(a.rownum as integer))
+				        ORDER BY room_id, Min(open_date), MAX(close_date)
+					) as b
+					WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')		
+				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and serialnumber = #{serialnumber}
 				
 				group by r.room_id, a.open_date, access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
 				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
 				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
 				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
 				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
-				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet, a.available, a.standard_price,
 				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view	
 		]]>
 	</select>
 	
 	<select id="selectRoomDetail" resultMap="RoomVOMap" parameterType="uReservationVO">
 		<![CDATA[
-				select 	r.room_id, count(a.open_date), a.open_date, r.serialnumber, r.type, r.price, r.smoking, r.available,
+				select 	r.room_id, count(a.open_date), a.open_date, r.serialnumber, r.type, a.standard_price, r.smoking, a.available, r.quota, r.bed,
 				access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
 				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
 				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
@@ -183,14 +214,39 @@
 				full join room_facilities_view as view
 				on r.room_id = view.room_id	
 
-				where r.serialnumber = #{serialnumber} and open_date >= TO_DATE(#{start_date}, 'YYYYMMDD') and open_date < TO_DATE(#{end_date}, 'YYYYMMDD')
+				where r.room_id in (
+					SELECT room_id FROM
+												(SELECT
+				        room_id, MIN(open_date) as open_date, MAX(close_date) as close_date
+				    FROM (
+				    SELECT
+				        *,
+				        ( ROW_NUMBER()
+				          OVER(PARTITION BY room_id
+				               ORDER BY
+				                   open_date
+				          ) ) AS rownum
+				    FROM
+				        room_available
+				    WHERE
+				            open_date >= TO_DATE(#{start_date}, 'YYYYMMDD')
+				        AND close_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+				    ORDER BY
+				        room_id,
+				        open_date
+				) as a
+				        GROUP BY room_id, (open_date - cast(a.rownum as integer)), (close_date - cast(a.rownum as integer))
+				        ORDER BY room_id, Min(open_date), MAX(close_date)
+					) as b
+					WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')		
+				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and serialnumber = #{serialnumber}
 				
 				group by r.room_id, a.open_date, access.ground_floor, access.wheelchair, access.elevator, access.stair_only, access.bathroom_handle,
 				basic.hanger, basic.drying_rack, basic.folding_bed, basic.electric_kettle, basic.sofa_bed, basic.ac, basic.closet, basic.carpet_floor, basic.marble_floor, basic.wooden_floor, basic.dress_room, basic.fan, basic.heater, basic.private_entrance, basic.safety_box, basic.sofa, basic.sound_proof, basic.resting_area, basic.cleaning_tools,
 				bath.restroom, bath.bathtub, bath.bidet, bath.bathrobe, bath.amenities, bath.hair_dryer, bath.spabath, bath.public_bathroom, bath.slipper,
 				food.dining_area, food.dining_table, food.barbeque, food.cooktop, food.toaster, food.coffee_pot, food.outdoor_dining, food.mini_bar, food.kitchenware, food.microwave, food.refridge, food.coffee_machine,
 				media.computer, media.game_console, media.laptop, media.tablet_pc, media.cable_channel, media.fax, media.ipad_docking_station, media.laptop_safebox, media.tv, media.pay_per_view, media.radio, media.satellite_channel, media.telephone, media.video_game,
-				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet,
+				service.lounge, service.alarm_clock, service.morning_call, service.towel, service.bathing_sheet, a.standard_price, a.available,
 				view.balcony, view.terras, view.city_view, view.garden_view, view.lake_view, view.attractions_view, view.mountain_view, view.pool_view, view.river_view, view.ocean_view	
 		]]>
 	</select>
@@ -214,5 +270,9 @@
 	<insert id="insertRoomAvailable" parameterType="uReservationVO">
 		insert into room_available(sequence, room_id, open_date, standard_price) values(nextval('seq_room_id'), #{room_id}, TO_DATE(#{start_date}, 'YYYYMMDD'), (select price from room where room_id = #{room_id}) )
 	</insert>
+	
+	<update id="updateRoomAvailable" parameterType="uReservationVO">
+		update room_available set available = (available - ${count_room}) where open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and room_id = (select room_id from room where type= #{type} and serialnumber = ${serialnumber})
+	</update>
 	
 </mapper>
