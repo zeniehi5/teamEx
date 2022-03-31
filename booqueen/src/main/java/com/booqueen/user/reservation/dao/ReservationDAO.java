@@ -54,4 +54,8 @@ public class ReservationDAO {
 	public List<ReservationVO> selectBestHotel() throws DataAccessException{
 		return sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.selectBestHotel");
 	}
+	
+	public void modifyReservation() throws DataAccessException{
+		sqlSession.selectList("com.booqueen.user.reservation.dao.reservationmapper.deletePriceZero");
+	}
 }

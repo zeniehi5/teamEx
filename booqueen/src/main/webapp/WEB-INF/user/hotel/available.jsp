@@ -139,14 +139,16 @@
                      리뷰</span>
                 </div>
                 <div>
-                	<c:choose>
+<%--                 	<c:choose>
                 	<c:when test="${isLogOn == true  && member!= null}">
-                    <p>고객님께서는 2021년 2월 9일에 이 호텔을 예약하셨습니다.</p>
+                	 <fmt:parseDate value="${reservationVO.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+                     
+                    <p>고객님께서는 <fmt:formatDate value="${start_date}" pattern="yyyy년 MM월 dd일"/>에 이 호텔을 이용하셨습니다.</p>
                     </c:when>
-                    </c:choose>
+                    </c:choose> --%>
                 </div>
                 <div style="position:relative;">
-                    <i class="fas fa-map"></i>&nbsp;<span><span id="city">${hotelInfo.city }</span>,<span id="address1"> ${hotelInfo.address1 }</span><span id="address2"> ${hotelInfo.address2 }</span></span>
+                    <i class="fas fa-map"></i>&nbsp;<span><span id="city" style="display: inline!important;">${hotelInfo.city }</span>,<span id="address1"> ${hotelInfo.address1 }</span><span id="address2"> ${hotelInfo.address2 }</span></span>
                     
                     <c:choose>
                     <c:when test="${!empty reviewList && reviewAvg.scoreAvg != 0.0}">
@@ -226,12 +228,12 @@
     <div class="details-hotel">
         <div class="description">
             <p>서울 내 종로구 구역에 자리한 에서 머물러보세요. 숙소는 에어컨, 위성 평면 TV 등이 구비된 객실을 보유하고 있습니다. 이 3성급 호텔의 각 객실에는 도시 전망과 무료 Wi-Fi가 구비되어 있습니다. 숙소는 투숙객을 위한 24시간 프런트 데스크, 수하물 보관소, 환전 서비스 등을 제공합니다.</p>
-            <P>의 각 객실에는 책상 등이 마련되어 있습니다. 숙소의 일부 객실에는 안전 금고가 구비되어 있으며, 각 객실에는 비데, 목욕 가운 등을 갖춘 전용 욕실이 마련되어 있습니다. 의 모든 객실에는 침대 린넨, 수건 등이 마련되어 있습니다.</P>
-            <p>근처에는 다음의 인기 관광지가 자리하고 있습니다: 동대문 시장, 창경궁, 광장시장. </p>
-            <p>커플들이 선호하는 지역 — 커플 투숙에 평점 <strong>8.2</strong>점을 획득하였습니다.</p>
+            <P>${hotelInfo.hotelname }의 각 객실에는 책상 등이 마련되어 있습니다. 숙소의 일부 객실에는 안전 금고가 구비되어 있으며, 각 객실에는 비데, 목욕 가운 등을 갖춘 전용 욕실이 마련되어 있습니다. 의 모든 객실에는 침대 린넨, 수건 등이 마련되어 있습니다.</P>
+          <!--  <p>근처에는 다음의 인기 관광지가 자리하고 있습니다: 동대문 시장, 창경궁, 광장시장. </p>
+             <p>커플들이 선호하는 지역 — 커플 투숙에 평점 <strong>8.2</strong>점을 획득하였습니다.</p> 
             <p><span>Glue Hotel에서는 2019년 10월 15일부터 Booking.com 고객을 맞이하고 있습니다.</span></p>
-            <p>숙소 설명에 표시된 거리는 © OpenStreetMap을 통해 산출되었습니다.</p>
-            <div>
+            <p>숙소 설명에 표시된 거리는 © OpenStreetMap을 통해 산출되었습니다.</p>-->
+<!--             <div> 
                 <h4 class="description-h4">최고 인기 시설</h4>
                 <div class="description-popular">
                     <div>
@@ -253,19 +255,19 @@
                         <i class="fas fa-coffee"></i><span>모든 객실에 차/커피 메이커 구비</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="reservation">
             <div class="highlight">
-                <h4>숙소 매력 포인트</h4>
+<!--                 <h4>숙소 매력 포인트</h4> -->
                 <div>
                     <div>
-                        <h5>1박 투숙에 적합!</h5>
+<!--                         <h5>1박 투숙에 적합!</h5> -->
                     </div>
                     <div>
-                        <p class="highlight-p">
+<!--                         <p class="highlight-p"> 
                             <span class="highlight-span">최고의 위치: 최근 고객들에게 높은 점수 획득</span>
-                        </p>
+                        </p>-->
                     </div>
                 </div>
                 <div class="highlight-footer">
@@ -276,7 +278,7 @@
       						<span id="fsave"></span>
                     	</button>
                     </p>
-                    <p id="test">리스트에 6102회 저장됨</p>
+<!--                     <p id="test">리스트에 6102회 저장됨</p> -->
                 </div>
             </div>
         </div>
@@ -909,7 +911,6 @@
 	                <div class="question-third-left">
 	                    <div>
 	                        <p><strong>${hotelInfo.hotelname }</strong></p>
-	                        <p>2016년 11월 8일부터 Booking.com 고객을 맞이하고 있어요</p>
 	                        <div>보통 몇 시간 안에 답변을 드려요</div>
 	                    </div>
 	                    <p><button class="button-white" id="question_button"><span>질문 남기기</span></button></p>
@@ -917,6 +918,7 @@
 	                <div class="question-third-right">
 	                    
 	                    <c:forEach var="boardList" items="${boardList }" varStatus="status" begin="0" end="3">
+	                    
 	                    <c:choose>
 	                    <c:when test="${!boardList.partner}">
 	                    <div class="question-third-right-row">
@@ -928,10 +930,11 @@
 	                        <div class="icon-text">
 	                            <i class="bi bi-chat"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
 	                        </div>
-                 	</div>
+	                        </div>
 	                    </c:when>
 	                    </c:choose>
                          </c:forEach>
+                         
 	                    <p class="question-more"><button class="button-white"><span>질문 더 보기(<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2-2 }"/>개)</span></button></p>
 	                </div>
 	            </div>

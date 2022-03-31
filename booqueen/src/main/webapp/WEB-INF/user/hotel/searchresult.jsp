@@ -646,7 +646,7 @@
 														<div class="cancel1">무료취소 • 선결제 필요 없음</div>
 														<div class="cancel2">나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div>
 													</div>
-													<div class="left">우리 사이트에 이 요금으로 남은 객실 단 3개</div>
+<!-- 													<div class="left">우리 사이트에 이 요금으로 남은 객실 단 3개</div> -->
 												</div>
 											</div>
 											<div class="room-right">
@@ -1479,7 +1479,7 @@ function getAvailableHotel() {
 					text += "</div><div class='cancel'><div class='cancel1'>";
 					text += "무료취소 • 선결제 필요 없음";
 					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
-					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
+// 					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
 					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
 					text += "1박, 성인 2명";
 					text += "</div><div class='option-price'><span class='fixed-price'>\\";
@@ -1535,7 +1535,7 @@ function getAvailableHotel() {
 					text += "</div><div class='cancel'><div class='cancel1'>";
 					text += "무료취소 • 선결제 필요 없음";
 					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
-					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
+// 					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
 					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
 					text += "1박, 성인 2명";
 					text += "</div><div class='option-price'><span class='fixed-price'>\\";
@@ -1865,7 +1865,7 @@ function getUnavailableHotel() {
 	var container = document.getElementById('mapApi');
 	var options = {
 		center: new kakao.maps.LatLng(cityLat, cityLong),
-		level: 8
+		level: 2
 	};
 	var map = new kakao.maps.Map(container, options);
 	
@@ -1981,7 +1981,7 @@ function getUnavailableHotel() {
                			});
                			
                			// 명소 등록
-               			/* 
+               			
                			// 장소 검색 객체를 생성합니다
                			var ps = new kakao.maps.services.Places(map); 
 
@@ -1996,7 +1996,7 @@ function getUnavailableHotel() {
                			        }       
                			    }
                			}
-						*/
+						
                			
                			var imageSrc_attr = contextPath + '/resources/user/images/attractionMaker.png', // 마커이미지의 주소입니다    
                		    imageSize_attr = new kakao.maps.Size(36, 36), // 마커이미지의 크기입니다

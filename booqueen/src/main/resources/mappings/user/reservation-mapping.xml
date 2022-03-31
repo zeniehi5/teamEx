@@ -164,5 +164,8 @@
 		]]>
 	</select>
 	
+	<delete id="deletePriceZero">
+		delete from reservation where price = 0
+	</delete>
 	
 </mapper>

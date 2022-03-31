@@ -206,35 +206,35 @@
     <div class="galleries">
         <div class="main-grid">
         	<%-- <c:forEach> --%>
-            <div class="main-grid-1">
+            <div class="main-grid-1" style="background-image: url('${contextPath}/resources/user/images/main1.webp');">
                 <div class="gallery-text-box">
                     <h1>부산</h1>
                     <span>658개 숙소</span>
                 </div>
                 <img src="${contextPath}/resources/user/images/null.png">
             </div>
-            <div class="main-grid-2">
+            <div class="main-grid-2" style="background-image: url('${contextPath}/resources/user/images/main2.webp');">
                 <div class="gallery-text-box">
                     <h1>서울</h1>
                     <span>2,304 숙소</span>
                 </div>
                 <img src="${contextPath}/resources/user/images/null.png">
             </div>
-            <div class="main-grid-3">
+            <div class="main-grid-3" style="background-image: url('${contextPath}/resources/user/images/main3.webp');">
                 <div class="gallery-text-box">
                     <h1>경주</h1>
                     <span>188개 숙소</span>
                 </div>
                 <img src="${contextPath}/resources/user/images/null.png">
             </div>
-            <div class="main-grid-4">
+            <div class="main-grid-4" style="background-image: url('${contextPath}/resources/user/images/main4.webp');">
                 <div class="gallery-text-box">
                     <h1>제주</h1>
                     <span>536개 숙소</span>
                 </div>
                 <img src="${contextPath}/resources/user/images/null.png">
             </div>
-            <div class="main-grid-5">
+            <div class="main-grid-5" style="background-image: url('${contextPath}/resources/user/images/main5.webp');">
                 <div class="gallery-text-box">
                     <h1>서귀포</h1>
                     <span>495개 숙소</span>
@@ -654,7 +654,7 @@
     </div>
 
 	<div class="footer-top1">
-        <p><button onclick="location.href='${contextPath}/login.pdo';">내 숙소 등록</button></p>
+        <p><button onclick="location.href='${contextPath}/login.jsp';">내 숙소 등록</button></p>
     </div>
 
     <div class="footer-top2">

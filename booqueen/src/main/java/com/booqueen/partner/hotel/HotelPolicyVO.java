@@ -9,14 +9,14 @@ import lombok.ToString;
 @ToString
 public class HotelPolicyVO {
 	
-	private int sequence;
-	private int serialnumber;
+	private Integer sequence;
+	private Integer serialnumber;
 	private String free_cancel_allowed;
-	private int check_in_start;
-	private int check_in_end;
-	private int check_out_start;
-	private int check_out_end;
-	private boolean kid_allowed;
-	private boolean pet_allowed;
+	private Integer check_in_start;
+	private Integer check_in_end;
+	private Integer check_out_start;
+	private Integer check_out_end;
+	private Boolean kid_allowed;
+	private Boolean pet_allowed;
 	
 }

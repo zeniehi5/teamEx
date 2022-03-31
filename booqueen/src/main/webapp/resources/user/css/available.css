@@ -238,6 +238,9 @@ html { scroll-behavior: smooth; }
     grid-area: second;
     background-color: #ebf3ff;
 }
+.highlight-footer{
+	padding: 30px;
+}
 .highlight-footer p{
     margin-top: 15px;
     text-align: center;

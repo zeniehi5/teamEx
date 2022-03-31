@@ -54,6 +54,9 @@ public class ReservationService {
 	public List<ReservationVO> selectBestHotel() {
 		return reservationDAO.selectBestHotel();
 	}
-	
+
+	public void modifyReservation() {
+		reservationDAO.modifyReservation();
+	}
 	
 }

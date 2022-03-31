@@ -270,10 +270,10 @@
 			success: function(data){
 				
 				if(data === 'success'){
-					alert(data);
+					alert("정상적으로 결제가 취소되었습니다.");
 					$('#cancel_reservation').submit();
 				} else{
-					alert(data);
+					alert("결제 취소가 정상적으로 이루어지지 않았습니다.");
 				}
 				
 			}

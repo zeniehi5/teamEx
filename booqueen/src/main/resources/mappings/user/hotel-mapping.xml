@@ -68,7 +68,8 @@
 				    COUNT(r.username),
 				    o.price,
 				    o.room_id,
-				    a.open_date
+				    a.open_date,
+				    a.available
 				FROM
 				    hotel_image as h 			
 				full join 
@@ -114,8 +115,8 @@
 					) as b
 					WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')
 									
-								) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD')
-								group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+								) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and a.available > 0
+								group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
 		]]>
 	</select>
 	
@@ -126,7 +127,7 @@
 	
 				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
 				
-				o.price, o.room_id, a.open_date
+				o.price, o.room_id, a.open_date, a.available
 				
 				from hotel_image as h 
 				
@@ -150,7 +151,7 @@
 				
 				on o.room_id = a.room_id
 				
-				where o.room_id in (
+				where a.available > 0 and o.room_id in (
 		]]>	
 				<foreach collection="room_id" item="room_id" separator=",">
 					<![CDATA[ #{room_id} ]]>	
@@ -221,7 +222,7 @@
 				</if>
 				
 		<![CDATA[	
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
 				]]>	
 				
 				<if test="scoreAvg != null">
@@ -290,7 +291,7 @@
 	
 				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
 				
-				o.price, o.room_id, a.open_date
+				o.price, o.room_id, a.open_date, a.available
 				
 				from hotel_image as h 
 				
@@ -322,9 +323,9 @@
 					<![CDATA[ #{room_id} ]]>	
 				</foreach>
 		<![CDATA[ 
-				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD')
+				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and a.available > 0
 		]]>		
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
 	</select>
 	
 	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">

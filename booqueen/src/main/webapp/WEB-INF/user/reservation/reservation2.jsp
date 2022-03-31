@@ -185,6 +185,7 @@
 	            <input type="hidden" name="firstname" value="${reservationVO.firstname}">
 	            <input type="hidden" name="arrive_time" value="${reservationVO.arrive_time}">
 	            <input type="hidden" name="email" value="${reservationVO.email }">
+	            <button id="availablebtn" type="submit" hidden></button>
 			</form>
 
             <div class="extra-info">
@@ -206,9 +207,11 @@
                     <svg class="bk-icon lock_closed" height="24" role="presentation" width="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 16.5v5.25a.75.75 0 0 1-.75.75H5.25a.75.75 0 0 1-.75-.75v-10.5a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 .75.75v5.25zm1.5 0v-5.25A2.25 2.25 0 0 0 18.75 9H5.25A2.25 2.25 0 0 0 3 11.25v10.5A2.25 2.25 0 0 0 5.25 24h13.5A2.25 2.25 0 0 0 21 21.75V16.5zM7.5 9.75V6a4.5 4.5 0 0 1 9 0v3.75a.75.75 0 0 0 1.5 0V6A6 6 0 0 0 6 6v3.75a.75.75 0 0 0 1.5 0zM12 15a1.125 1.125 0 1 0 .004 0h-.006a.75.75 0 0 0 .004 1.5H12a.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5z"></path></svg>
                     <span class="bui-button__text js-button__text"> 예약 완료 </span>
                 </button>
-                <button onclick="on()" class="recheck-button">
+<!--                 <button onclick="on()" class="recheck-button"> -->
+                <button class="recheck-button" disabled/>
                     <span>예약 내용 재확인</span>
                 </button>
+                
             </div>
         
     </div>
@@ -248,12 +251,12 @@
             $(".choice-cancel").click(function(){
                 $(".room-detail").css("display","none");
             });
-            $('#complete_btn').click(check_reservation);
+            $('#complete_btn').click(payment);
         });
 	
 	var path = '${contextPath}';
 	
-	/* 결제 전 예약 확인*/
+	/* 결제 전 예약 확인
 	function check_reservation(){
 		$.ajax({
 			type 	: 	"post",
@@ -272,8 +275,10 @@
 			}
 		});
 	}
-	
+	*/
+
 	function payment() {
+		
 		   var IMP = window.IMP; // 생략 가능
 		   IMP.init("imp09566797"); 
 		 
@@ -289,7 +294,7 @@
 		   var serialnumber = '${reservationVO.serialnumber}';
 		   var hotelname = '${reservationVO.hotelname}';
 		   var room_id = '${reservationVO.room_id}';
-		   
+		     
 		   IMP.request_pay({ // param
 		        pg: "html5_inicis",
 		        pay_method: "card",
@@ -342,7 +347,8 @@
 	                        	text += merchant;
 	                        	text += "' name='merchant'>";	                   
 	                        	$('#last_reservation').append(text);
-	                       		$('#last_reservation').submit();
+                       			$('#availablebtn').click();
+                       			$('#availablebtn').attr("disabled", true);
 	                        }
                         }); 
                      }

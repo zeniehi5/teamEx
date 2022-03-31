@@ -175,7 +175,8 @@ nav {
 	-webkit-tap-highlight-color: transparent; */
 }
 .chatting-list-panel-close {
-	right: 460px;
+	right: 475px;
+    height: 60px;
 	top: 70px;
 	padding: 12px 29px 12px 11px;
 	background: #0071c2;
@@ -729,6 +730,9 @@ nav {
 }
 .hotel-name, .hotel-region {
 	padding-bottom: 2px;
+}
+.hotel-name a, .hotel-region a{
+	text-decoration: none;
 }
 /* .hotel-dates {
 
