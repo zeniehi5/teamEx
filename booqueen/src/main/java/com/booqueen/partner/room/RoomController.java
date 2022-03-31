@@ -128,7 +128,7 @@ public class RoomController {
 		img.setType(vo.getType());
 		hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
 		int length = uploadFile.length;
-		System.out.println("���ε����� : " + length);
+		System.out.println("占쏙옙占싸듸옙占쏙옙占쏙옙 : " + length);
 		for (MultipartFile multipartFile : uploadFile) {
 
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -186,7 +186,7 @@ public class RoomController {
 		}
 		return "index";
 	}
-// 언니언니언니
+// �뼵�땲�뼵�땲�뼵�땲
 //	@RequestMapping(value = "/roomlist.pdo", method = RequestMethod.GET)
 //	public String roomList(Model model, HotelVO hotel, HttpSession session) {
 //		RoomVO room = null;
@@ -221,10 +221,10 @@ public class RoomController {
 //	@RequestMapping(value = "/remove-picture.pdo", method = RequestMethod.POST)
 //	public String removePicture(HotelVO hotel, Model model, @RequestParam("serialnumber") int serialnumber,
 //			@RequestParam("file_name") String file_name) {
-//		System.out.println("ȣ�ڸ�: " + file_name);
+//		System.out.println("호占쌘몌옙: " + file_name);
 //
 //		String key = "hotel/" + serialnumber + "/" + file_name;
-//		System.out.println("s3��� : " + key);
+//		System.out.println("s3占쏙옙占� : " + key);
 //		try {
 ////			s3Service.delete(file_name);
 ////			System.out.println(file_name);
