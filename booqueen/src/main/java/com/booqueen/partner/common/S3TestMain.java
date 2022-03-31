@@ -10,8 +10,8 @@ public class S3TestMain {
 		
 		S3TestMain main = new S3TestMain();
 		
-		File file = new File("C:\\Users\\jkho0\\OneDrive\\문서\\호텔사진\\제주\\제주오리엔탈호텔.jpg");
-		String key = "제주오리엔탈호텔.jpg";
+		File file = new File("C:\\Users\\jkho0\\OneDrive\\문서\\호텔사진\\부산\\해운대 센트럴호텔.jpg");
+		String key = "해운대 센트럴호텔.jpg";
 		
 		try {
 			main.upload(file, key);
