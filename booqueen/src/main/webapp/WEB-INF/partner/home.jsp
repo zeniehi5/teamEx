@@ -65,15 +65,6 @@
                                                                                         <div class="group_inline">
                                                                                             <span class="display_one"><span>예약 개요</span></span>
                                                                                             <div class="form_group">
-                                                                                                <div class="input_select">
-                                                                                                    <select class="form_control">
-                                                                                                        <option selected="selected">오늘</option>
-                                                                                                        <option>내일</option>
-                                                                                                    </select>
-                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="input_select_icon" style="user-select: auto;">
-                                                                                                        <path d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z" style="user-select: auto;"></path>
-                                                                                                    </svg>
-                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         
@@ -181,7 +172,7 @@
                                                                         <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty_state_icon">
                                                                             <path d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"></path>
                                                                         </svg>
-                                                                        <p class="empty_state_text"><span>지난 60일 간 접수된 예약이 없습니다.</span></p>    
+                                                                        <p class="empty_state_text"><span>접수된 예약이 없습니다.</span></p>    
                                                                     </div>
                                                                     </c:when>
                                                                     <c:otherwise>

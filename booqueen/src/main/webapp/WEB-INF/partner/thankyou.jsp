@@ -21,7 +21,7 @@
                             <div class="header-nav-item-top">
                                 <div>
                                     <a href="#">
-                                        <img src="images/booking_logo_retina.png">
+                                        <img src="${contextPath}/resources/partner/images/logo.png" class="header_logo">
                                     </a>
                                 </div>
                             </div>

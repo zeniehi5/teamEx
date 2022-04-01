@@ -29,7 +29,7 @@ public class ReservationDAO {
 	}
 	
 	public List<ReservationVO> selectReservationListByHotelSerial(int serialnumber) {
-		return sqlSessionTemplate.selectList("reservationDAO.selectReservationListByHotelSerial");
+		return sqlSessionTemplate.selectList("reservationDAO.selectReservationListByHotelSerial", serialnumber);
 	}
 
 	public ReservationDetailVO selectReservationDetailByRSVN(int reservation_number) {

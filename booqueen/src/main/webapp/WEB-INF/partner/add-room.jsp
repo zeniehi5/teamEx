@@ -6,31 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/partner/css/add-room.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <title>객실 추가</title>
+<script type="text/javascript">
+	function submitForm(){
+		$("#myForm").submit()
+	}
+</script>
 </head>
 <body>
 <div class="container">
             <header>
                 <span id="logo">
-                    <a href="#"><img alt="" src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png" class="header_logo"></a>
+                    <a href="#"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
                 </span>
-                <nav>
-                    <ul id="topMenu">
-                        <li>
-                            <a href="/register/Register.html">로그인</a>
-                        </li>
-                        <li>
-                            <a href="/register/Register.html">회원가입</a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </header>
+         </header>
         </div>
         <main class="contents">
             <div class="option">
                 <label>
-                    <a href="/hotel_reg/Basic_Info.html">
+                    <a href="#">
                         <div class="basic">기본정보</div>
                     </a>
                 </label>
@@ -83,19 +78,21 @@
             우선 객실에 대해 알려주세요. 필요한 정보를 모두 입력한 뒤 다음 객실로 진행하실 수 있습니다.
             <div class="input">
                 <div>
+                <form id="myForm" action="uploadPic.pdo">
                 <div class="input-1">
                     <table class="table">
+                    	<c:forEach var="room" items="${room}">
                         <tr>
                             <td><h3>${room.type}</h3></td>
                             <td>이 유형의 개수: ${room.available}</td>
-                            <td><div class="room_edit_delete"><a href="#">삭제</a> <a href="#">수정</a></div></td>
                         </tr>
+                        </c:forEach>
                     </table> 
                     </div>
-                
+                	</form>
                     <div class="bottom_button">
-                        <input type="button" href="${contextPath}/roomlist.pdo" id="other_room" value="다른 객실 추가">
-                        <input type="button" href="${contextPath}/setpayment.pdo" id="continue" value="계속">
+                        <input type="submit" href="${contextPath}/roomlist.pdo" id="other_room" value="다른 객실 추가">
+                        <button type="button" id="continue" onclick="submitForm()">계속</button>
                     </div>
                  </div>
                 <div class="right">

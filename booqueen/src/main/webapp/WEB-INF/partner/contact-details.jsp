@@ -40,7 +40,7 @@
 	<div class="container">
     	<header>
         	<span id="logo">
-        		<a href="#"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
+        		<a href="#"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
         	</span>
          	<nav>
          	</nav>

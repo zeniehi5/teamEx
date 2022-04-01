@@ -23,4 +23,6 @@ public class ReservationVO {
 	private int reservation_number;
 	private int use_status;
 	
+	private int serialnumber;
+	
 }

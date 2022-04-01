@@ -159,6 +159,9 @@
                                         		<c:if test="${0 eq ReservationVO.use_status}">
                                         			<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>예약 완료</span></td>
                                         		</c:if>
+                                        		<c:if test="${2 eq ReservationVO.use_status}">
+                                        			<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>이용 완료</span></td>
+                                        		</c:if>
                                         	</c:when>
                                         	<c:otherwise>
                                         		<td class="table_cell" data-heading="예약 상태"><div class="reservation_status"><span>예약 취소</span></td>

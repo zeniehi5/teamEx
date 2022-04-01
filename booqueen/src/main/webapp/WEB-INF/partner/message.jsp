@@ -151,7 +151,7 @@
     	userid_shared = userid;
     	RSVN = reservation_number;
     	
-    	var sendReply = {"userid": userid, "serialnumber": ${hotel.serialnumber}}
+    	var sendReply = {"userid": userid, "serialnumber": ${hotel.serialnumber}, "reservation_number": RSVN}
     	
 	    $.ajax({
 	        url:'/web/chat.do'
@@ -222,7 +222,7 @@
     function insertChat(){
     	
     	var content_val = $('#message_textarea').val();
-    	var chatVO = {"userid": userid_shared, "serialnumber": ${hotel.serialnumber}, "reservation_number":${reservation_number}, "content": content_val, "partner": true }
+    	var chatVO = {"userid": userid_shared, "serialnumber": ${hotel.serialnumber}, "reservation_number": RSVN, "content": content_val, "partner": true }
     	var path = '${contextPath}';
     	
     	$.ajax({

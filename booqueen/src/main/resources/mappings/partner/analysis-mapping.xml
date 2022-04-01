@@ -3,7 +3,7 @@
 <mapper namespace="analysisDAO">
 	<select id="selectTotalRevenue" resultType="analysis">		
 		SELECT
-			price * 0.85 as "total_revenue"
+			SUM(price * 0.85) as "total_revenue"
 		FROM 
 			reservation
 		WHERE serialnumber = #{serialnumber}
@@ -14,7 +14,7 @@
 	</select>
 	<select id="selectEstimatedRevenue" resultType="analysis">
 		SELECT
-			price * 0.85 as "total_revenue"
+			SUM(price * 0.85) as "total_revenue"
 		FROM
 			reservation
 		WHERE serialnumber = #{serialnumber}

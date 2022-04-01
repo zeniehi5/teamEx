@@ -16,11 +16,7 @@
     height: 150px;
 }
 .container span a img{
-    display: inline-block;
-    width: 150px;
     margin-left: 60px;
-    margin-top: 30px;
-    margin-bottom: -30px;
 }
 .container nav{
     text-align: right;
@@ -46,6 +42,10 @@
 .contents h4{   
     margin-top: 10px;
     margin-bottom: 5px;
+}
+.header_logo{
+    display: block;
+    height: 55px;
 }
 #help{
     color: #07c;

@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-	<select id="selectReservationListByHotelSerial" resultType="pReservation">
+	<select id="selectReservationListByHotelSerial" resultType="pReservation" parameterType="int">
 		SELECT
-			r.lastname,
-			r.firstname,
-			r.checkin_date,
-			r.checkout_date,
-			h.type,
-			r.reservation_date,
-			r.status,
-			r.price,
-			r.price * 0.15 as "commission",
-			r.reservation_number,
-			r.use_status
+			lastname,
+			firstname,
+			checkin_date,
+			checkout_date,
+			'type',
+			reservation_date,
+			status,
+			price,
+			price * 0.15 as "commission",
+			reservation_number,
+			use_status,
+			serialnumber
 		FROM 
-			reservation as r
-		JOIN
-			room as h
-		ON r.room_id = h.room_id
-		WHERE r.serialnumber = #{serialnumber}
+			reservation
+		WHERE (use_status IS NULL OR use_status NOT IN (2))
+		AND serialnumber = #{serialnumber}
 		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationPagingByHotelSerial" resultType="pReservation">
@@ -34,14 +33,14 @@
 			r.price,
 			r.price * 0.15 as "commission",
 			r.reservation_number,
-			r.use_status
+			r.use_status,
+			h.serialnumber
 		FROM 
 			reservation as r
 		JOIN
 			room as h
 		ON r.room_id = h.room_id
-		WHERE r.use_status IS NULL 
-		OR r.use_status NOT IN (2)
+		WHERE (r.use_status IS NULL OR r.use_status IN (0, 1))
 		AND r.serialnumber = #{serialnumber}
 		ORDER BY reservation_date DESC;
 	</select>

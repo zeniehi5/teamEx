@@ -19,11 +19,11 @@ body{
     height: 150px;
 }
 .container span a img{
-    display: inline-block;
-    width: 150px;
     margin-left: 60px;
-    margin-top: 30px;
-    margin-bottom: -30px;
+}
+.header_logo{
+    display: block;
+    height: 55px;
 }
 .container nav{
     text-align: right;

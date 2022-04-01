@@ -143,7 +143,14 @@ public class HotelController {
 		List<RoomVO> roomList = roomService.getRoomListByHotelSerial(searchSerial);
 		model.addAttribute("room", roomList);
 		
-		return "createroom";		//객실 추가 화면으로 이동
+		return "add-room";		//객실 추가 화면으로 이동
+	}
+	
+	@RequestMapping(value = "/uploadPic.pdo", method = RequestMethod.GET)
+	public String uploadMainPic(HttpSession session, Model model) {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		model.addAttribute("hotel", hotel);
+		return "picture";
 	}
 	
 	@GetMapping("picture.pdo")
@@ -252,12 +259,15 @@ public class HotelController {
 		try {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
+				System.out.println(hotel.getSerialnumber());
 				List<ReservationVO> reservation = reservationService.selectReservationListByHotelSerial(hotel.getSerialnumber());
 				List<ChatVO> messageList = messageService.selectMessageListByHotelSerial(hotel.getSerialnumber());
 				List<ReviewVO> reviewList = reviewService.selectReviewListByHotelSerial(hotel.getSerialnumber());
 				
 				//체크인 중인 호텔 목록
 				List<ReservationVO> checkInList = reservationService.selectCheckInListByHotelSerial(hotel.getSerialnumber());
+				
+				System.out.println("list: "+ reservation.toString());
 				
 				model.addAttribute("checkin", checkInList);
 				model.addAttribute("messageList", messageList);

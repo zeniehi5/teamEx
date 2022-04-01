@@ -11,16 +11,10 @@
 <body>
 <form action="login.pdo" method="post">
 	<div class="container">
-		<header>f
+		<header>
 			<span id="logo">
-				<a href="${contextPath}/home.jsp"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
+				<a href="${contextPath}/home.jsp"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
 			</span>
-			<nav>
-				<ul id="topMenu">
-					<li><a href="${contextPath}/login.jsp">로그인</a></li>
-					<li><a href="${contextPath}/register.jsp">회원가입</a></li>
-				</ul>
-			</nav>
 		</header>
 	</div>
 	<main class="contents">

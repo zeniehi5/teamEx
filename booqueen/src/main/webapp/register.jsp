@@ -62,14 +62,13 @@ function submitForm(){
 </script>
 </head>
 <body>
-
-	<div class="container">
+<div class="container">
 		<header>
-    		<span id="logo">
-        		<a href="${contextPath}/home.jsp"><img src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"></a>
-   			</span>
+			<span id="logo">
+				<a href="${contextPath}/home.jsp"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
+			</span>
 		</header>
- 	</div>
+	</div>
  	<main class="contents">
     	<h1>파트너 계정 등록</h1>
     	<h4>숙소를 등록하고 관리하려면 계정을 만들어주세요</h4><br/>

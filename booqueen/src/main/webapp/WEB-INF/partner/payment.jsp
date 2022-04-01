@@ -34,7 +34,7 @@
 			alert("약관에 모두 동의해 주세요.")
 		}
 		if(!checked2){
-			alert("약관에 모두 동의해 주세요.22")
+			alert("약관에 모두 동의해 주세요.")
 		}
 	  	$("#myForm").submit()
    }
@@ -45,9 +45,7 @@
 <body>
    <div class="container">
       <header>
-         <span id="logo"> <a href="#"> <img alt=""
-               src="https://s3.ap-northeast-2.amazonaws.com/booqueen.com/Booqueen.com.png"
-               class="header_logo"></a>
+         <span id="logo"> <a href="#"><img src="${contextPath}/resources/partner/images/logo.png" class="header_logo"></a>
          </span>
       </header>
    </div>

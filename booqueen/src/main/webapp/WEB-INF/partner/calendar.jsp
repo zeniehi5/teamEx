@@ -19,11 +19,11 @@
 <script type="text/javascript">
 
 	$(function(){
-		
+		var option = '';
 		$("#selectOption").change(function(){
-			var option = $("#typeOption").val($(this).val())
-		
-			var roomVO = {
+			option = $("#selectOption").val();
+			
+		var roomVO = {
 		            "type": option
 		         }
 				
@@ -50,16 +50,16 @@
 		            error:function(){
 		               console.log("통신실패")
 		            } 
-		         })
+		         });
 					
-		})
+		});
 				
 		$("#insertAvailable").click(function(){
 			const result = confirm("선택하신 객실을 이용가능 설정하시겠습니까?")		
 			if(result) {
 				var openDate = $("#openDate").val()
              	var closeDate = $("#closeDate").val()
-             	var roomType = $("#typeOption").val()
+             	var roomType = option
              	var available = $("#available").val()
              	var standardPrice =$("#standardPrice").val()
              	var nonRefundablePrice = $("#nonRefundablePrice").val()
@@ -175,8 +175,7 @@
             console.log("if arr : "+ arr)
          
          }else{
-            $("#date"+e).addClass('classColor')      
-            alert(" >>> "+e)
+            $("#date"+e).addClass('classColor')
          
             arr.push(e)               
          
@@ -421,7 +420,6 @@ A:active {
 
 A:hover {
    font-size: 9pt;
-   color: red;
    text-decoration: none;
 }
 
@@ -499,7 +497,7 @@ A:hover {
 .calendar_body .sat_day .sat {
    color: #529dbc;
    font-weight: 400;
-   font-size: 15px;
+   font-size: 9pt;
    padding-left: 3px;
    padding-top: 3px;
 }
@@ -515,7 +513,7 @@ A:hover {
 .calendar_body .sun_day .sun {
    color: red;
    font-weight: 400;
-   font-size: 15px;
+   font-size: 9pt;
    padding-left: 3px;
    padding-top: 3px;
 }ooi
@@ -548,6 +546,16 @@ li{
     height: 10px;
     background: aqua;
 }
+.button_primary{
+    color: #fff;
+    background-color: #07c;
+    border-color: #07c;
+}
+.button_text{
+    vertical-align: baseline;
+    display: inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -629,11 +637,11 @@ li{
                   <th class="day sat">토</th>
                </tr>
             </thead>
-            <tbody>
+<tbody>
                <tr>
                   <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
                      <c:choose>
-                        <c:when test="${dateList.value=='today'}">   
+                        <c:when test="${dateList.value=='today'}">
                            <a href="#">
                            <td class="today" id="date${dateList.date}" onclick="scheduleEvent('${dateList.date}')" >
                               <ul class="date">
@@ -656,10 +664,8 @@ li{
                               <div></div>
                               </td>
                               </a>
-                           
                         </c:when>
                         <c:when test="${date_status.index%7==6}">
-                        <a href="#">
                            <td class="sat_day" id="date${dateList.date}"  onclick="scheduleEvent('${dateList.date}')">
                               <ul class="sat"><span>${dateList.date}</span>
                               <div id="scheduleStyle${dateList.date}">
@@ -677,23 +683,24 @@ li{
                               </ul>
                               <div></div>
                            </td>
-                           </a>
                         </c:when>
-                        
+                        <c:when test="${date_status.index%7==0}">
                </tr>
-               
                <tr>
-               <c:when test="${date_status.index%7==0}">
                            <td class="sun_day"  id="date${dateList.date}"  onclick="scheduleEvent('${dateList.date}')">
                               <ul class="sun"><span>${dateList.date}</span>
                                  <div id="scheduleStyle${dateList.date}">
                                     <span></span>
                                  </div>
                                  <c:forEach var="available" items="${available}">   
+                                    
                                      <c:if test="${available.year eq dateList.year}"> 
+                                       
                                        <c:if test="${available.month eq dateList.month+1}">
                                              <c:if test="${available.day eq dateList.date}">
+                                                
                                                    <li id="${available.sequence}">${available.type}: ${available.available}개</li>   
+                                                                  
                                              </c:if>                                          
                                        </c:if>
                                      </c:if> 
@@ -701,8 +708,8 @@ li{
                               </ul>
                               <div></div>
                            </td>
-                </c:when>
-				<c:otherwise>
+                        </c:when>
+                        <c:otherwise>
                            <td class="normal_day"  id="date${dateList.date}"  onclick="scheduleEvent('${dateList.date}')">
                               <ul class="date"><span>${dateList.date}</span>
                               <div id="scheduleStyle${dateList.date}">
@@ -727,13 +734,9 @@ li{
                               <div></div>
                            </td>
                         </c:otherwise>
-                       
                      </c:choose>
-                      </tr>
                   </c:forEach>
-                  
             </tbody>
-
          </table>
       </div>
    </form>
@@ -828,7 +831,7 @@ li{
                                              <div class="bui-spacer--medium bui-form__group">
                                                 <label><span>객실 선택</span></label>
                                                 <div class="bui-input-select">
-                                                   <select name="room" id="selectOption" class="bui-form__control" onchange="changeCount();">
+                                                   <select name="room" id="selectOption" class="bui-form__control">
                                                    <c:forEach var="roomList" items="${roomList}">
                                                       <option id="typeOption" value="${roomList.type}">${roomList.type}</option>
                                                    </c:forEach>
@@ -986,11 +989,11 @@ li{
                                        <div
                                           class="av-monthly__form-btn-wrap av-monthly-flex-inline__wrap">
                                           <button type="button" id="insertAvailable"
-                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--primary bui-button--wide">
+                                             class="av-monthly-flex-inline__item--equal bui-button button_primary bui-button--wide">
                                              <span class="bui-button__text"><span>등록</span></span>
                                           </button>
                                           <button type="button" id="partnerUpdate"
-                                             class="av-monthly-flex-inline__item--equal bui-button bui-button--primary bui-button--wide">
+                                             class="av-monthly-flex-inline__item--equal bui-button button_primary bui-button--wide">
                                              <span class="bui-button__text"><span>수정</span></span>
                                           </button>
                                        </div>
