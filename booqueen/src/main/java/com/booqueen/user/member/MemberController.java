@@ -149,6 +149,11 @@ public class MemberController{
 		
 	}
 	
+	@RequestMapping(value="/questions.do")
+	public String questions() {
+		return "customer";
+	}
+	
 	@RequestMapping(value = "/member/registerForm.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String register() {
 		return "member/registerForm";
