@@ -73,7 +73,7 @@
     
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Booqueen.com</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -161,7 +161,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">파트너 계정 차단</a>
+									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -205,7 +205,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        BooQueen
+                        Booqueen.com
                     </div>
                 </nav>
             </div>
@@ -220,7 +220,7 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">금월 총 예약</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${monthReservation}건</a>
+                                    <a class="small text-white stretched-link" href="#">${monthReservation+0}건</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -229,7 +229,7 @@
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">금일 예약건 수</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${dayReservation}건</a>
+                                    <a class="small text-white stretched-link" href="#">${dayReservation+0}건</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -238,7 +238,7 @@
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">금일 예약취소</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${dayCancel}건</a>
+                                    <a class="small text-white stretched-link" href="#">${dayCancel+0}건</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -247,13 +247,14 @@
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">금월 이용완료</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${i }건</a>
+                                    <a class="small text-white stretched-link" href="#">${i+0}건</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
-                    </div>   
-                         <div class="row">
+                    </div>  
+                    	<%-- 차트 --%>
+                         <%-- <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -273,7 +274,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        </div> --%>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>

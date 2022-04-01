@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PaymentStatusDAO">
+
+	<select id="getPaymentStatusList" resultType="paymentStatusVO">
+		select * from reservation where use_status = 3 or use_status = 4 order by use_status asc, reservation_number
+	</select>
+	
+	<update id="updatePaymentStatus" parameterType="paymentStatusVO">
+		update reservation set use_status = ${use_status} where reservation_number = ${reservation_number}
+	</update>
+	
+</mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>    
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
     <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">BooQueen</a>
+		<a class="navbar-brand ps-3" href="${contextPath }/userMember.mdo">Booqueen.com</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -107,7 +108,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">파트너 계정 차단</a>
+									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -151,14 +152,14 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        BooQueen
+                        Booqueen.com
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1>대금 지급 관리</h1>
+                        <!-- <h1>대금 지급 관리</h1> -->
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -190,82 +191,33 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    	<c:forEach var="paymentStatusList" items="${paymentStatusList}" varStatus="status">
                                         <tr>
-                                            <td>1234</td>
-                                            <td>신라호텔</td>
-                                            <td>abc@abc.com</td>
-                                            <td>&#8361;100,000</td>
-                                            <td>&#8361;15,000</td>
-                                            <td>&#8361;85,000</td>
-                                            <td><div class="dataTable-dropdown">
+                                            <td>${paymentStatusList.serialnumber}</td>
+                                            <td>${paymentStatusList.hotelname}</td>
+                                            <td>${paymentStatusList.userid}</td>
+                                            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${paymentStatusList.price}"/></td>
+                                            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${paymentStatusList.price * 0.15}"/></td>
+                                            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${paymentStatusList.price * 0.85}"/></td>
+                                            <td><div class="dataTable-dropdown" style="display: flex; flex-direction: row;">
+                                            	<form action="${contextPath}/paymenStatusChange.mdo" method="post">
                                                 <label>
-                                                    <select class="dataTable-selector"><option value="Y">지급</option><option value="N" selected="">미지급</option></select>                                                        
+                                                    <select class="dataTable-selector" name="use_status">
+                                                    	<option value="3" <c:if test="${paymentStatusList.use_status == '3'}">selected</c:if>>미지급</option>
+														<option value="4" <c:if test="${paymentStatusList.use_status == '4'}">selected</c:if>>지급</option>
+                                                    </select>                                                        
                                                 </label>
-                                                <button id="correction" class="btn btn-primary" onclick="">확인</button>
+                                               	<input type="hidden" name="reservation_number" value="${paymentStatusList.reservation_number}">
+                                               	<input type="hidden" name="serialnumber" value="${paymentStatusList.serialnumber}">
+                                               	<input type="hidden" name="hotelname" value="${paymentStatusList.hotelname}">
+                                               	<input type="hidden" name="price" value="${paymentStatusList.price}">
+                                               	<button type="submit" id="correction" class="btn btn-primary"  onclick="">확인</button>
+                                                </form>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>신라호텔</td>
-                                            <td>abc@abc.com</td>
-                                            <td>&#8361;100,000</td>
-                                            <td>&#8361;15,000</td>
-                                            <td>&#8361;85,000</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">지급</option><option value="N" selected="">미지급</option></select>                                                        
-                                                </label>
-                                                <button id="correction" class="btn btn-primary" onclick="">확인</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>신라호텔</td>
-                                            <td>abc@abc.com</td>
-                                            <td>&#8361;100,000</td>
-                                            <td>&#8361;15,000</td>
-                                            <td>&#8361;85,000</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">지급</option><option value="N" selected="">미지급</option></select>                                                        
-                                                </label>
-                                                <button id="correction" class="btn btn-primary" onclick="">확인</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>신라호텔</td>
-                                            <td>abc@abc.com</td>
-                                            <td>&#8361;100,000</td>
-                                            <td>&#8361;15,000</td>
-                                            <td>&#8361;85,000</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">지급</option><option value="N" selected="">미지급</option></select>                                                        
-                                                </label>
-                                                <button id="correction" class="btn btn-primary" onclick="">확인</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>신라호텔</td>
-                                            <td>abc@abc.com</td>
-                                            <td>&#8361;100,000</td>
-                                            <td>&#8361;15,000</td>
-                                            <td>&#8361;85,000</td>
-                                            <td><div class="dataTable-dropdown">
-                                                <label>
-                                                    <select class="dataTable-selector"><option value="Y">지급</option><option value="N" selected="">미지급</option></select>                                                        
-                                                </label>
-                                                <button id="correction" class="btn btn-primary" onclick="">확인</button>
-                                                </div>
-                                            </td>    
-                                        </tr>  
-                                    </tbody> 
+                                        </c:forEach>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

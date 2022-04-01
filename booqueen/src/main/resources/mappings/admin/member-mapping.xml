@@ -7,7 +7,7 @@
 	</select>
 
 	<select id="selectUser" resultType="userMemberVO">
-		SELECT * FROM u_member
+		SELECT * FROM u_member order by since desc
 	</select>
 	
 </mapper>

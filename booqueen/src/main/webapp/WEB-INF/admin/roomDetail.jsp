@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <span>booqueen.com</span>
+                                    <span>Booqueen.com</span>
                                 </div>
                             </div>
                         </div>

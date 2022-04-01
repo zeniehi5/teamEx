@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>BooQueen Admin</title>
+<title>Admin</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	  rel="stylesheet" />
 <link href="${contextPath}/resources/admin/css/styles.css" rel="stylesheet" />
@@ -110,7 +110,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">파트너 계정 차단</a>
+									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -161,7 +161,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h2 class="mt-4">BooQueen</h2>
+					<h2 class="mt-4">Booqueen.com</h2>
 					<!-- <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol> -->

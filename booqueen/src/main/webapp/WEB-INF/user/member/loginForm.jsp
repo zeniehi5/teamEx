@@ -36,6 +36,8 @@
 				<div class="login-modal-button">
 					<button type="submit" class="login-btn-real" id="loginBtnReal">로그인</button>
 				</div>
+				<%-- 발표 이후 수정? --%>
+				<%-- 
 				<ul class="find-user">
 	                <li class="find-user-id">
 	                    <a id="id-search" href="#">아이디 찾기</a>
@@ -44,6 +46,7 @@
 	                    <a id="pw-search" href="#">비밀번호 찾기</a>
 	                </li>
                 </ul>
+                --%>
 				<div class="social-login-sepa">
 					<div class="social-login-line"></div>
 					<span class="social-login-text">&nbsp;OR&nbsp;</span>

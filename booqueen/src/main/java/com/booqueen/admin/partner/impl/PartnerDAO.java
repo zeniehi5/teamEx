@@ -20,10 +20,10 @@ public class PartnerDAO {
 	}
 	
 	public List<com.booqueen.admin.partner.PartnerVO> getPartnerMember() {
-		
 		List<com.booqueen.admin.partner.PartnerVO> partnerList = sqlSessionTemplate.selectList("PartnerDAO.selectPartner");
 		 return partnerList;
 	}
+	
 	public int blockPartner(PartnerVO vo) throws DataAccessException{
 		return sqlSessionTemplate.update("PartnerDAO.blockPartner", vo);
 	}
@@ -37,12 +37,10 @@ public class PartnerDAO {
 	}
 
 	public List<HotelVO> selectHotelByEmail(String email) {
-		
 		return sqlSessionTemplate.selectList("PartnerDAO.selectHotelByEmail", email);
 	}
 
 	public PartnerVO selectPartnerByEmail(String email) {
-		
 		return sqlSessionTemplate.selectOne("PartnerDAO.selectPartnerByEmail", email);
 	}
 }
