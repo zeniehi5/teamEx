@@ -346,7 +346,16 @@
                         <span>${bestHotelList[0].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[0].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[0].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[0].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
             <li>
@@ -356,7 +365,16 @@
                         <span>${bestHotelList[1].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[1].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[1].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[1].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
             <li>
@@ -366,7 +384,16 @@
                         <span>${bestHotelList[2].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[2].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[2].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[2].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
             <li>
@@ -376,7 +403,16 @@
                         <span>${bestHotelList[3].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[3].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[3].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[3].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
             <li>
@@ -386,7 +422,16 @@
                         <span>${bestHotelList[4].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[4].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[4].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[4].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
             <li>
@@ -396,7 +441,16 @@
                         <span>${bestHotelList[5].hotelname}</span>
                         <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[5].city}</span>
                     </div>
-                    <div class="korea-span">${bestHotelList[5].star}</div>
+                    <div class="korea-span">
+                    <c:set var="star" value="${bestHotelList[5].star*1}"/>
+					<c:forEach begin="1" end="${star }">
+						<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg>
+					</span>
+					</c:forEach>
+					</div>
                 </a>
             </li>
           </ul>

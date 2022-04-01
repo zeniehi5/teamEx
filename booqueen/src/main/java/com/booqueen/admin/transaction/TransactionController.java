@@ -8,8 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TransactionController {
-	@RequestMapping(value = "/transactionDetail.mdo", method=RequestMethod.GET)
+	
+	@RequestMapping(value = "/transactionHistory.mdo", method=RequestMethod.GET)
 	public String transactionHistory(HttpSession session) {
+		
+		
+		
+		return "transactionHistory";
+	}
+	
+	
+	@RequestMapping(value = "/transactionDetail.mdo", method=RequestMethod.GET)
+	public String transactionDetail(HttpSession session) {
 		return "transactionDetail";
 	}
 }

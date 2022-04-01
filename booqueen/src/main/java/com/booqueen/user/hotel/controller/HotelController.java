@@ -24,6 +24,8 @@ import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.board.service.BoardService;
 import com.booqueen.user.board.vo.BoardVO;
 import com.booqueen.user.hotel.service.HotelService;
+import com.booqueen.user.hotel.vo.BestHotelVO;
+import com.booqueen.user.hotel.vo.CityCountVO;
 import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
@@ -32,6 +34,8 @@ import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.reservation.service.ReservationService;
+import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
 import com.booqueen.user.review.vo.ReviewAvgVO;
 import com.booqueen.user.review.vo.ReviewProfileVO;
@@ -59,6 +63,9 @@ public class HotelController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	@RequestMapping(value = "/autocomplete.do", method = RequestMethod.GET)
 	@ResponseBody
@@ -106,6 +113,23 @@ public class HotelController {
 			recentSearchVO.setEnd_date(end_date);
 			recentSearchVO.setPeople(2); // 인원 설정 후 수정
 			
+			List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
+			session.setAttribute("reservationList", reservationList);
+			
+			List<RecentSearchVO> recentSearchList = hotelService.selectRecentSearch(user.getUserid());
+			session.setAttribute("recentSearchList", recentSearchList);
+			
+			// 다가오는 여행
+			List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+			session.setAttribute("comingReservationList", comingReservationList);
+			
+			// 리뷰
+			List<ReservationVO> pastReservationList = reservationService.selectPastReservationList(user.getUserid());
+			session.setAttribute("pastReservationList", pastReservationList);
+			
+			Date now = new Date();
+			model.addAttribute("now", now);
+			
 			hotelService.insertRecentSearch(recentSearchVO);
 		}
 		
@@ -120,6 +144,23 @@ public class HotelController {
 			out.print("<script>alert('해당 날짜에 가능한 호텔이 없습니다. 다른 날짜를 이용해주세요!');");
 			out.print("histroy.back();</script>");
 			out.flush();
+			
+			// index - city
+			List<CityCountVO> cityList = hotelService.selectCityList();
+			session.setAttribute("cityList", cityList);
+			
+			// index - hotel
+			List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+			session.setAttribute("bestHotelList", bestHotelList);
+			
+			// index - city
+			List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+			session.setAttribute("cityListAll", cityListAll);
+			
+			// index - random hotel
+			List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+			session.setAttribute("randomHotelList", randomHotelList);
+			
 			return "member/index";
 		}
 

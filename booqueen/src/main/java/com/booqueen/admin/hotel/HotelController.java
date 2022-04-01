@@ -60,14 +60,11 @@ public class HotelController {
 		System.out.println(model.toString());
 		return "reservationStatus";
 	}
-	@RequestMapping(value = "/transactionHistory.mdo", method=RequestMethod.GET)
-	public String transactionHistory(HttpSession session) {
-		return "transactionHistory";
-	}
-	@RequestMapping(value = "/payment.mdo", method=RequestMethod.GET)
-	public String payment(HttpSession session) {
-		return "payment";
-	}
+	
+//	@RequestMapping(value = "/transactionHistory.mdo", method=RequestMethod.GET)
+//	public String transactionHistory(HttpSession session) {
+//		return "transactionHistory";
+//	}
 	
 	@RequestMapping(value = "/reportedUser.mdo", method=RequestMethod.GET)
 	public String reportedUser(HttpSession session) {

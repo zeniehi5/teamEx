@@ -117,7 +117,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/logout.do" ,method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
+	public String logout(HttpSession session, Model model) throws Exception {
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 		
@@ -128,6 +128,22 @@ public class MemberController{
 			session.removeAttribute("member");
 			session.invalidate();
 		}
+		
+		// index - city
+		List<CityCountVO> cityList = hotelService.selectCityList();
+		model.addAttribute("cityList", cityList);
+		
+		// index - hotel
+		List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+		model.addAttribute("bestHotelList", bestHotelList);
+		
+		// index - city
+		List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+		model.addAttribute("cityListAll", cityListAll);
+		
+		// index - random hotel
+		List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+		model.addAttribute("randomHotelList", randomHotelList);
 		
 		return "member/index";
 		
@@ -170,7 +186,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value = "/member/register.do", method = RequestMethod.POST)
-	public String test(MemberVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String test(MemberVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -236,6 +252,22 @@ public class MemberController{
 		
 		out.flush();
 		
+		// index - city
+		List<CityCountVO> cityList = hotelService.selectCityList();
+		session.setAttribute("cityList", cityList);
+		
+		// index - hotel
+		List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+		session.setAttribute("bestHotelList", bestHotelList);
+		
+		// index - city
+		List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+		session.setAttribute("cityListAll", cityListAll);
+		
+		// index - random hotel
+		List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+		session.setAttribute("randomHotelList", randomHotelList);
+		
 		return "member/index";
 	}
 	
@@ -300,6 +332,23 @@ public class MemberController{
 				
 				out.println("<script>alert('회원탈퇴가 정상적으로 진행되었습니다.')</script>");
 				out.flush();
+				
+				// index - city
+				List<CityCountVO> cityList = hotelService.selectCityList();
+				session.setAttribute("cityList", cityList);
+				
+				// index - hotel
+				List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+				session.setAttribute("bestHotelList", bestHotelList);
+				
+				// index - city
+				List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+				session.setAttribute("cityListAll", cityListAll);
+				
+				// index - random hotel
+				List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+				session.setAttribute("randomHotelList", randomHotelList);
+				
 				return "member/index";
 			} else {
 				out.println("<script>alert('비밀번호가 일치하지 않습니다.')</script>");
@@ -310,7 +359,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/index.do")
-	public String index(HttpSession session) {
+	public String index(HttpSession session, Model model) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 		
@@ -321,6 +370,29 @@ public class MemberController{
 			// 다가오는 여행
 			List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
 			session.setAttribute("comingReservationList", comingReservationList);
+			
+			// 리뷰
+			List<ReservationVO> pastReservationList = reservationService.selectPastReservationList(user.getUserid());
+			session.setAttribute("pastReservationList", pastReservationList);
+			
+			Date now = new Date();
+			model.addAttribute("now", now);
+			
+			// index - city
+			List<CityCountVO> cityList = hotelService.selectCityList();
+			session.setAttribute("cityList", cityList);
+			
+			// index - hotel
+			List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+			session.setAttribute("bestHotelList", bestHotelList);
+			
+			// index - city
+			List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+			session.setAttribute("cityListAll", cityListAll);
+			
+			// index - random hotel
+			List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+			session.setAttribute("randomHotelList", randomHotelList);
 		}
 		
 		return "member/index";
@@ -360,7 +432,7 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/member/klogin.do")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
 		MemberVO vo = new MemberVO();
 		MemberVO user = new MemberVO();
@@ -433,6 +505,29 @@ public class MemberController{
 		List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
 		session.setAttribute("comingReservationList", comingReservationList);
 		
+		// 리뷰
+		List<ReservationVO> pastReservationList = reservationService.selectPastReservationList(user.getUserid());
+		session.setAttribute("pastReservationList", pastReservationList);
+		
+		Date now = new Date();
+		model.addAttribute("now", now);
+		
+		// index - city
+		List<CityCountVO> cityList = hotelService.selectCityList();
+		session.setAttribute("cityList", cityList);
+		
+		// index - hotel
+		List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+		session.setAttribute("bestHotelList", bestHotelList);
+		
+		// index - city
+		List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+		session.setAttribute("cityListAll", cityListAll);
+		
+		// index - random hotel
+		List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+		session.setAttribute("randomHotelList", randomHotelList);
+		
 		return "member/index";
 	}
 	
@@ -445,8 +540,6 @@ public class MemberController{
 		session.removeAttribute("accessToken");
 		session.removeAttribute("member");
 		session.invalidate();
-		
-		System.out.println("klogout.do");
 		
 		return "member/index";
 		
