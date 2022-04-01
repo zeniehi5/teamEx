@@ -34,7 +34,7 @@
 					<div class="bui-group">
 
 						<div class="bui-group__item">
-							<a><i class="bi bi-question-circle"></i></a>
+							<a href="${contextPath}/questions.do"><i class="bi bi-question-circle"></i></a>
 						</div>
 
 						<div class="bui-group__item" onclick="openChatting()">
@@ -269,7 +269,7 @@
 					<img src="${contextPath}/resources/user/images/logo1.png" class="logo"></a>
 					<div class="nav-links">
 						<div class="nav-top question">
-							<a href="#"><span><i class="bi bi-question-circle"></i></span></a>
+							<a href="${contextPath}/questions.do"><span><i class="bi bi-question-circle"></i></span></a>
 						</div>
 						<div class="nav-top">
 							<a href="#" class="register-btn">내 숙소 등록</a>

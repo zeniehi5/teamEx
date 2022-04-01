@@ -233,7 +233,7 @@
              <p>커플들이 선호하는 지역 — 커플 투숙에 평점 <strong>8.2</strong>점을 획득하였습니다.</p> 
             <p><span>Glue Hotel에서는 2019년 10월 15일부터 Booking.com 고객을 맞이하고 있습니다.</span></p>
             <p>숙소 설명에 표시된 거리는 © OpenStreetMap을 통해 산출되었습니다.</p>-->
-<!--             <div> 
+           <div> 
                 <h4 class="description-h4">최고 인기 시설</h4>
                 <div class="description-popular">
                     <div>
@@ -255,7 +255,7 @@
                         <i class="fas fa-coffee"></i><span>모든 객실에 차/커피 메이커 구비</span>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </div>
         <div class="reservation">
             <div class="highlight">
@@ -935,7 +935,7 @@
 	                    </c:choose>
                          </c:forEach>
                          
-	                    <p class="question-more"><button class="button-white"><span>질문 더 보기(<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2-2 }"/>개)</span></button></p>
+	                    <p class="question-more"><button class="button-white" id="more_board"><span>답변이 완료된 게시글 전체 보기</span></button></p> <!-- (<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2}"/>개) -->
 	                </div>
 	            </div>
 	        </div>
@@ -1603,13 +1603,13 @@
 								<span class="review-score-badge">${reviewAvg.scoreAvg }</span>
 								<span class="review-score-widget">
 									
-									
-										<c:if test="${reviewAvg.scoreAvg >= 9}"><span class="review-score-widget-text">최고</span></c:if>
-										<c:if test="${reviewAvg.scoreAvg >= 8}"><span class="review-score-widget-text">매우 좋음</span></c:if>
-										<c:if test="${reviewAvg.scoreAvg >= 7}"><span class="review-score-widget-text">좋음</span></c:if>
-										<c:if test="${reviewAvg.scoreAvg >= 6}"><span class="review-score-widget-text">만족</span></c:if>
-										<c:if test="${reviewAvg.scoreAvg < 6}"><span class="review-score-widget-text">보통</span></c:if>
-											
+										<c:choose>
+										<c:when test="${reviewAvg.scoreAvg >= 9}"><span class="review-score-widget-text">최고</span></c:when>
+										<c:when test="${reviewAvg.scoreAvg >= 8}"><span class="review-score-widget-text">매우 좋음</span></c:when>
+										<c:when test="${reviewAvg.scoreAvg >= 7}"><span class="review-score-widget-text">좋음</span></c:when>
+										<c:when test="${reviewAvg.scoreAvg >= 6}"><span class="review-score-widget-text">만족</span></c:when>
+										<c:when test="${reviewAvg.scoreAvg < 6}"><span class="review-score-widget-text">보통</span></c:when>
+										</c:choose>	
 									
 									<span class="review-score-widget-subtext">${fn:length(reviewList)}개 이용 후기</span>
 								</span>
@@ -1915,6 +1915,9 @@
 		$('#view-review').click(function(){
 			$('#reviewPanel').css("display", "block");
 		});
+		$('#more_board').click(function(){
+			
+		})
 		
 	</script>
 	
