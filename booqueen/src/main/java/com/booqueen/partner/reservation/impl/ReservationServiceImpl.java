@@ -63,8 +63,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationVO selectReservationByRSVN(int searchKeyword) {
-		return reservationDAO.selectReservationByRSVN(searchKeyword);
+	public ReservationVO selectReservationByRSVN(SearchVO search) {
+		return reservationDAO.selectReservationByRSVN(search);
 	}
 
 	@Override

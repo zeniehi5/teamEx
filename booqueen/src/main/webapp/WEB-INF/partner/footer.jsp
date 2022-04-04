@@ -14,9 +14,11 @@
                                 </div>
                                 <div class="footer_top_second">
                                     <div class="footer_cta">
-                                        <a href="#" class="footer_cta_button">
-                                            <span class="button_text">신규 객실 추가</span>
-                                        </a>
+                                        <div class="feedback_cta">
+                                            <button class="footer_cta_button" onclick="openModal()">
+                                                <span class="button_text">신규 객실 추가</span>
+                                            </button>
+                                        </div>
                                         <div class="feedback_cta">
                                             <button class="footer_cta_button">
                                                 <span class="button_text">의견 보내기</span>

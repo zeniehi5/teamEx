@@ -26,7 +26,7 @@
                                         <div class="welcome_message">
                                             <div class="message_container">
                                                <div class="message_body">
-                                                  <h1 class="welcome_h1">이제 Booking.com으로 <span>${hotel.hotelname}<span></span> 예약이 가능합니다.</h1>
+                                                  <h1 class="welcome_h1">이제 booqueen.com으로 <span>${hotel.hotelname}<span></span> 예약이 가능합니다.</h1>
                                                   <p class="welcome_p"><span>여기서 고객에게 제공될 정보부터 객실 재고까지 순소 운영 전반을 관리하실 수 있습니다.</span></p>
                                                   <p class="welcome_p"><span>빠른 시일 내로 예약을 접수하기 위해 처리되어야 할 사항을 이 페이지 우측에 표시해드렸습니다.</span></p>
                                                 </div> 

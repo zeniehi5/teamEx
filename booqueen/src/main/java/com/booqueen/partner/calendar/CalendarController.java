@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.partner.hotel.HotelService;
@@ -52,7 +53,7 @@ public class CalendarController {
 		HotelVO hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
 		if(hotel != null) {
 			List<RoomVO> roomList = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
-			System.out.println(roomList.toString());
+			//System.out.println(roomList.toString());
 	
 			//예약 내역 가져오기
 			List<RoomAvailableVO> available = new ArrayList<RoomAvailableVO>();
@@ -67,12 +68,12 @@ public class CalendarController {
 					
 					//일별 비교 
 					String formatDate = openDate.substring(8);
-					System.out.println("formatDate.substring(0,1) : "+formatDate.substring(0,1));
+					//System.out.println("formatDate.substring(0,1) : "+formatDate.substring(0,1));
 					
 					if(formatDate.substring(0,1).equals("0")) {
-						System.out.println("formatDate  : "+ formatDate);
+						//System.out.println("formatDate  : "+ formatDate);
 						
-						System.out.println("formatDate.substring(1,2) : "+formatDate.substring(1,2));
+						//System.out.println("formatDate.substring(1,2) : "+formatDate.substring(1,2));
 						
 						availVo.setDay(formatDate.substring(1,2));
 					}else {
@@ -106,7 +107,7 @@ public class CalendarController {
 			model.addAttribute("roomList", roomList);
 			model.addAttribute("hotel", hotel);
 			model.addAttribute("available", availableReal);
-			System.out.println(available.toString());
+			//System.out.println(available.toString());
 				
 	//////////////////////////////////////////////////////////////////
 			
@@ -154,7 +155,7 @@ public class CalendarController {
 			
 /////////////////////////////////////////////////////////////////////////
 			
-			System.out.println(dateList);
+			//System.out.println(dateList);
 					//배열에 담음
 			model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 			model.addAttribute("today_info", today_info);
@@ -165,7 +166,144 @@ public class CalendarController {
 		}
 		return "calendar";
 	}
+	@RequestMapping("/calendarDetail.pdo")
+	public String getMonthlyCalendar1(@RequestParam("room_id")int roomId,@RequestParam("year") String year, @RequestParam("month") int month, @RequestParam("day") String day, Model model, HttpSession session,DateVO vo) throws ParseException {
+		
+		HotelVO hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
+		if(hotel != null) {
+			List<RoomVO> roomList = roomService.getRoomByHotelSerial(hotel.getSerialnumber());
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String selectedDate = year + "-" + (month+1) + "-" + day;
+			System.out.println("selectedDate: " + selectedDate);
+			java.util.Date date = dateFormat.parse(selectedDate);
+			System.out.println("date: "+ date);
+			String dateReal = dateFormat.format(date);
+			System.out.println("dateReal: " + dateReal);
+			RoomAvailableVO selectedRoom = new RoomAvailableVO();
+			selectedRoom.setOpen_date(Date.valueOf(LocalDate.parse(dateReal)));
+			System.out.println("selectedRoom: " +selectedRoom.toString());
+			selectedRoom.setRoom_id(roomId);
+			RoomAvailableVO roomVo = calendarService.selectRoomByRoomId(selectedRoom);
+			//System.out.println(roomList.toString());
 	
+			//예약 내역 가져오기
+			List<RoomAvailableVO> available = new ArrayList<RoomAvailableVO>();
+			List<RoomAvailableVO> availableReal = new ArrayList<RoomAvailableVO>();
+			for(RoomVO room : roomList) {
+			
+				available = roomService.selectRoomAvailable(room.getRoom_id());
+				for(RoomAvailableVO availVo :available) {
+					availVo.setType(room.getType());
+					DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");	
+					String openDate = sdFormat.format(availVo.getOpen_date());
+					
+					//일별 비교 
+					String formatDate = openDate.substring(8);
+					//System.out.println("formatDate.substring(0,1) : "+formatDate.substring(0,1));
+					
+					if(formatDate.substring(0,1).equals("0")) {
+						//System.out.println("formatDate  : "+ formatDate);
+						
+						//System.out.println("formatDate.substring(1,2) : "+formatDate.substring(1,2));
+						
+						availVo.setDay(formatDate.substring(1,2));
+					}else {
+						availVo.setDay(formatDate);
+					}
+					
+					//월별 비교
+					String formatMonth = openDate.substring(5,7);
+					if(formatMonth.substring(0,1).equals("0")) {
+						//System.out.println("formatMonth  : "+ formatMonth);
+						
+						//System.out.println("formatMonth.substring(1,2) : "+formatMonth.substring(1,2));
+						int realMonth =Integer.parseInt(formatMonth.substring(1,2));
+						availVo.setMonth(realMonth);
+					}else {
+						int realMonth =Integer.parseInt(formatMonth.substring(1,2));
+						availVo.setMonth(realMonth);
+					}
+					
+					//년별 비교
+					String formatYear= openDate.substring(0,4);
+					int realYear = Integer.parseInt(formatYear);
+					availVo.setYear(realYear);
+					
+					
+					availableReal.add(availVo);
+				}
+
+			}
+	
+			model.addAttribute("roomList", roomList);
+			model.addAttribute("roomVo", roomVo);
+			model.addAttribute("year", year);
+			model.addAttribute("month", month);
+			model.addAttribute("day", day);
+			model.addAttribute("hotel", hotel);
+			model.addAttribute("available", availableReal);
+			//System.out.println(available.toString());
+				
+	//////////////////////////////////////////////////////////////////
+			
+			
+			Calendar cal = Calendar.getInstance();
+			DateVO calendarData;
+			//검색 날짜
+			if(vo.getDate().equals("")&&vo.getMonth().equals("")){
+				vo= new DateVO(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
+			}
+			//검색 날짜 end
+
+			Map<String, Integer> today_info =  vo.today_info(vo);
+			List<DateVO> dateList = new ArrayList<DateVO>();
+			
+			//실질적인 달력 데이터 리스트에 데이터 삽입 시작.
+			//일단 시작 인덱스까지 아무것도 없는 데이터 삽입
+			for(int i=1; i<today_info.get("start"); i++){
+				calendarData= new DateVO(null, null, null, null);
+				dateList.add(calendarData);
+			}
+			
+			//날짜 삽입
+			for (int i = today_info.get("startDay"); i <= today_info.get("endDay"); i++) {
+				if(i==today_info.get("today")){
+					calendarData= new DateVO(String.valueOf(vo.getYear()), String.valueOf(vo.getMonth()), String.valueOf(i), "today");
+				}else{
+					calendarData= new DateVO(String.valueOf(vo.getYear()), String.valueOf(vo.getMonth()), String.valueOf(i), "normal_date");
+				}
+				dateList.add(calendarData);
+			}
+
+			//달력 빈곳 빈 데이터로 삽입
+			int index = 7-dateList.size()%7;
+			
+			if(dateList.size()%7!=0){
+				
+				for (int i = 0; i < index; i++) {
+					calendarData= new DateVO(null, null, null, null);
+					dateList.add(calendarData);
+				}
+			}
+		
+			
+			
+/////////////////////////////////////////////////////////////////////////
+			
+			//System.out.println(dateList);
+					//배열에 담음
+			model.addAttribute("dateList", dateList);		//날짜 데이터 배열
+			model.addAttribute("today_info", today_info);
+			
+			
+			
+
+		}
+		return "calendarDetail";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////
 	@PostMapping("partnerScheduleUpdate.pdo")
 	@ResponseBody
 	public String partnerScheduleUpdate(@RequestBody RoomAvailableVO vo) throws ParseException{
@@ -191,6 +329,35 @@ public class CalendarController {
 				
 			}
 		return res;		
+	}
+	
+	@RequestMapping(value = "/deleteAvailableRoom.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteAvailableRoom(@RequestBody RoomAvailableVO roomAvailable) throws ParseException {
+				
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date selectedDate = dateFormat.parse(roomAvailable.getOpenDate());
+		String selected = dateFormat.format(selectedDate);
+		roomAvailable.setOpen_date(Date.valueOf(LocalDate.parse(selected)));
+		
+		int deleteNumber = 0;
+		System.out.println(roomAvailable.toString());
+		
+		deleteNumber = roomService.deleteRoomFromAvailable(roomAvailable);
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		String result = "";
+			if(deleteNumber == 0) {
+				jsonObject.addProperty("msg", "FAIL");
+				result = gson.toJson(jsonObject);
+				
+			}else {
+				jsonObject.addProperty("msg", "SUCCESS");
+				 result = gson.toJson(jsonObject);
+				
+			}
+		return result;
 	}
 	
 	@RequestMapping(value = "/getRoomAvailable.pdo", method=RequestMethod.POST)
@@ -246,9 +413,9 @@ public class CalendarController {
 		
         int updateCount = 0;
         
-        for(int i = 1; i < calDateDays + 1; i++) {
-        	vo.setOpen_date(Date.valueOf(LocalDate.parse(startReal).plusDays(i-1).toString()));
-        	vo.setClose_date(Date.valueOf(LocalDate.parse(startReal).plusDays(i).toString()));
+        for(int i = 0; i < calDateDays + 1; i++) {
+        	vo.setOpen_date(Date.valueOf(LocalDate.parse(startReal).plusDays(i).toString()));
+        	vo.setClose_date(Date.valueOf(LocalDate.parse(startReal).plusDays(i+1).toString()));
         	System.out.println("for문 내에서 vo: " + vo.toString());
         	int insertNumber = calendarService.insertAvailableRoom(vo);
         	if(insertNumber != 0) {

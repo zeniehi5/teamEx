@@ -242,7 +242,7 @@
                     </main>
                     <jsp:include page="/WEB-INF/partner/footer.jsp"/>
     </div>
-    <div class="bui-modal" id="cancellation-modal">
+    <div class="bui-modal bui-modal-base" id="cancellation-modal">
     	<form action="${contextPath}/update-policies.pdo" method="post">
         <div class="bui-modal__wrapper">
             <div class="bui-modal__align">
@@ -604,15 +604,15 @@
     <script type="text/javascript">
         const open = document.getElementById("btnEdit");
         const close = document.getElementById("btnClose");
-        const closeModal = document.getElementById("xClose");
-        const modal = document.querySelector(".bui-modal");
+        const closeBaseModal = document.getElementById("xClose");
+        const modal = document.querySelector(".bui-modal-base");
         open.addEventListener('click', () => {
            modal.style.display = 'block';
         });
         close.addEventListener('click', () => {
            modal.style.display = 'none';
         });
-        closeModal.addEventListener('click', () => {
+        closeBaseModal.addEventListener('click', () => {
         	modal.style.display = 'none';
         });
         const openKid = document.getElementById("btnKid");

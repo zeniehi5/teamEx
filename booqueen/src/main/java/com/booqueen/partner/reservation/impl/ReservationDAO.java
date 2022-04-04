@@ -62,8 +62,8 @@ public class ReservationDAO {
 		return sqlSessionTemplate.selectList("reservationDAO.selectCheckInListByHotelSerial", serialnumber);
 	}
 
-	public ReservationVO selectReservationByRSVN(int searchKeyword) {
-		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationByRSVN", searchKeyword);
+	public ReservationVO selectReservationByRSVN(SearchVO search) {
+		return sqlSessionTemplate.selectOne("reservationDAO.selectReservationByRSVN", search);
 	}
 	
 	public int updateReservationStatusToBilling(ReservationVO reservation) {

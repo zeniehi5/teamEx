@@ -144,4 +144,8 @@ public class RoomDAO {
 	public RoomVO getRoomIdByRoomType(RoomVO search) {
 		return sqlSessionTemplate.selectOne("RoomDAO.getRoomIdByRoomType", search);
 	}
+
+	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable) {
+		return sqlSessionTemplate.delete("RoomDAO.deleteRoomFromAvailable", roomAvailable);
+	}
 }

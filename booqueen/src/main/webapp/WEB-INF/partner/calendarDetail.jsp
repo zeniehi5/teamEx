@@ -18,6 +18,10 @@
 <title>${hotel.hotelname}· 캘린더</title>
 <script type="text/javascript">
 
+	$('.normal_day').toggle(function(){
+		$(this).css("background-color", "black");
+	});
+
 	$(function(){
 		var option = '';
 		$("#selectOption").change(function(){
@@ -289,57 +293,100 @@
    }// close scheduleEvent(e)
    
    
-   $(function(){
-      
+   $(function(){      
                
-      $( "input[name='open_date_start']" ).datepicker();
-      $( "input[name='open_date_end']" ).datepicker();
+//      $("input[name='open_date_start']").datepicker();
+//      $("input[name='open_date_end']").datepicker();
       
       $("#partnerUpdate").click(function(){
-         const result = confirm("정말로 수정하시겠습니까??")
+    	  
+    	 const deleteRadio = $("#availableDelete").is(":checked");
          
-          if(result){
-             
-             const openDate = $("#openDate").val()
-             const closeDate = $("#closeDate").val()
-             const standardPrice =$("#standardPrice").val()
-             const nonRefundablePrice = $("#nonRefundablePrice").val()
-             const roomId = $("#hiddenId").val()
-             
-             console.log("openDate : "+openDate +"closeDate : "+closeDate+"standardPrice : "
-                   +standardPrice+"nonRefundablePrice : "+nonRefundablePrice+"roomId : "+roomId)
-             
-             const roomAvailableVo ={
-                "openDate":openDate,
-                "closeDate":closeDate,
-                "standard_price": standardPrice,
-                "non_refundable_price": nonRefundablePrice,
-                "room_id":roomId
-             }
-              
-             $.ajax({
-                method:"POST",
-                url:"partnerScheduleUpdate.pdo",
-                contentType:"application/json",
-                dataType:"json",
-                data:JSON.stringify(roomAvailableVo),
-                success:function(result){
-                  // const msg = JSON.parse(result)
-                   if(result.msg == "SUCCESS"){
-                      alert("저장이 완료되었습니다.")
-                      location.reload()
-                   }else{
-                      alert("메렁")
-                   }
-                },
-                error:function(){
-                   console.log("통신실패")
-                }
-                
-             })
-             
-             
-          }
+         if(deleteRadio){
+        	
+        	const answer = confirm("선택하신 객실을 예약불가 처리하시겠습니까?")
+        	
+        	if(answer){
+        		
+        		
+        		var deleteDate = $("#openDate").val()
+        		var roomId = $("#hiddenId").val()
+        		
+        		const roomAvailableVO = {
+        			"openDate" : deleteDate,
+        			"room_id" : roomId
+        		}
+        		
+        		$.ajax({
+        			method:"POST",
+        			url:"deleteAvailableRoom.pdo",
+        			contentType:"application/json",
+        			dataType:"json",
+        			data:JSON.stringify(roomAvailableVO),
+        			success:function(result){
+        				if(result.msg == "SUCCESS"){
+        					alert("예약 불가 처리가 완료되었습니다.")
+        					location.reload()
+        				} else {
+        					alert("error")
+        				}
+        			},
+        			error:function(){
+        				console.log("통신 실패")
+        			}
+        		})
+        	} else {
+        		alert("예약불가 처리를 취소합니다.")
+        	}
+         } else {
+        	 const result = confirm("변경 사항을 수정하시겠습니가?")
+        	 
+             if(result){
+                 
+                 const openDate = $("#openDate").val()
+                 const closeDate = $("#closeDate").val()
+                 const standardPrice =$("#standardPrice").val()
+                 const nonRefundablePrice = $("#nonRefundablePrice").val()
+                 const roomId = $("#hiddenId").val()
+                 
+                 console.log("openDate : "+openDate +"closeDate : "+closeDate+"standardPrice : "
+                       +standardPrice+"nonRefundablePrice : "+nonRefundablePrice+"roomId : "+roomId)
+                 
+                 const roomAvailableVo ={
+                    "openDate":openDate,
+                    "closeDate":closeDate,
+                    "standard_price": standardPrice,
+                    "non_refundable_price": nonRefundablePrice,
+                    "room_id":roomId
+                 }
+                  
+                 $.ajax({
+                    method:"POST",
+                    url:"partnerScheduleUpdate.pdo",
+                    contentType:"application/json",
+                    dataType:"json",
+                    data:JSON.stringify(roomAvailableVo),
+                    success:function(result){
+                      // const msg = JSON.parse(result)
+                       if(result.msg == "SUCCESS"){
+                          alert("저장이 완료되었습니다.")
+                          location.reload()
+                       }else{
+                          alert("메렁")
+                       }
+                    },
+                    error:function(){
+                       console.log("통신실패")
+                    }
+                    
+                 })
+                 
+                 
+              }
+        	 
+         }
+		
+
       })
       
    })
@@ -652,10 +699,10 @@ li{
                                  <c:forEach var="available" items="${available}">   
                                      <c:if test="${available.year eq dateList.year}">       
                                        <c:if test="${available.month eq dateList.month+1}">
-                                             <c:if test="${available.day eq dateList.date}">   
-                                                   <a href="calendarDetail.pdo?year=${available.year}&month=${available.month-1}&day=${available.day}&room_id=${available.room_id}">
-                                                   		<input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type}: ${available.available}개</li>                           
+                                             <c:if test="${available.day eq dateList.date}">
+                                                   <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
+                                                   <input type="hidden" id="hiddenId" value="${available.room_id}">
+                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
                                                 </a>      
                                                 </c:if>                           
                                              </c:if>                                          
@@ -677,10 +724,10 @@ li{
                                      <c:if test="${available.year eq dateList.year}">                                        
                                        <c:if test="${available.month eq dateList.month+1}">
                                              <c:if test="${available.day eq dateList.date}">
-                                                <a href="calendarDetail.pdo?year=${available.year}&month=${available.month-1}&day=${available.day}&room_id=${available.room_id}">
+                                                <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type}: ${available.available}개</li>                           
-                                                </a>                                
+                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                </a>                              
                                              </c:if>                                          
                                        </c:if>
                                     </c:if>
@@ -703,10 +750,10 @@ li{
                                        
                                        <c:if test="${available.month eq dateList.month+1}">
                                              <c:if test="${available.day eq dateList.date}">
-                                                <a href="calendarDetail.pdo?year=${available.year}&month=${available.month-1}&day=${available.day}&room_id=${available.room_id}">
+                                                <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type}: ${available.available}개</li>                           
-                                                </a>             
+                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                </a>         
                                              </c:if>                                          
                                        </c:if>
                                      </c:if> 
@@ -728,9 +775,9 @@ li{
                                        <c:if test="${available.month eq dateList.month+1}">
                                           
                                              <c:if test="${available.day eq dateList.date}">
-                                                <a href="calendarDetail.pdo?year=${available.year}&month=${available.month-1}&day=${available.day}&room_id=${available.room_id}">
+                                                <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type}: ${available.available}개</li>                           
+                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
                                                 </a>
                                              </c:if>                                          
                                        </c:if>
@@ -773,7 +820,7 @@ li{
                                                                     </svg>
                                                    </div>
                                                    <input class="form-control bui-form__control" id="openDate"
-                                                      placeholder="2022년 3월 9일" name="open_date_start">
+                                                      placeholder="${year}년 ${month+1}월 ${day}일" name="open_date_start" value="${year}-${month+1}-${day}">
                                                 </div>
                                              </div>
                                           </div>
@@ -797,7 +844,7 @@ li{
                                                                     </svg>
                                                    </div>
                                                    <input class="form-control bui-form__control" id="closeDate"
-                                                      placeholder="2022년 3월 1일" name="open_date_end">
+                                                      placeholder="${year}년 ${month+1}월 ${day}일" name="open_date_end" value="${year}-${month+1}-${day}">
                                                 </div>
                                              </div>
                                           </div>
@@ -812,17 +859,19 @@ li{
                                        <div class="bui-spacer--large">
                                           <div class="bui-group bui-group--inline bui-group--large">
                                              <div class="bui-form__group">
-                                                <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="open"> <span
-                                                   class="bui-radio__label"> <span>예약 가능</span>
-                                                </span>
+                                                <label class="bui-radio"> 
+                                                	<input type="radio" class="bui-radio__input" name="open" value="yes"> 
+                                                	<span class="bui-radio__label"> 
+                                                		<span>예약 가능</span>
+                                               		</span>
                                                 </label>
                                              </div>
-                                             <div class="bui-form__group">
-                                                <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="open"> <span
-                                                   class="bui-radio__label"> <span>예약 불가</span>
-                                                </span>
+                                             <div class="bui-form__group" >
+                                                <label class="bui-radio"> 
+                                                	<input type="radio" class="bui-radio__input" id="availableDelete" name="open" value="no"> 
+                                                	<span class="bui-radio__label"> 
+                                                		<span>예약 불가</span>
+                                               		</span>
                                                 </label>
                                              </div>
                                           </div>
@@ -838,9 +887,7 @@ li{
                                                 <label><span>객실 선택</span></label>
                                                 <div class="bui-input-select">
                                                    <select name="room" id="selectOption" class="bui-form__control">
-                                                   <c:forEach var="roomList" items="${roomList}">
-                                                      <option id="typeOption" value="${roomList.type}">${roomList.type}</option>
-                                                   </c:forEach>
+                                                      <option id="typeOption" value="${roomVo.type}">${roomVo.type}</option>
                                                    </select>
                                                    <svg xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 24 24" class="bui-input-select__icon"
@@ -859,7 +906,7 @@ li{
                                                 <label><span>판매 수량 선택<c:out value="${result.available}"/></span></label>
                                                 <div class="bui-input-select">
                                                    <select id="available" name="available" class="bui-form__control">
-                                                      <option selected="selected">선택 불가</option>
+                                                      <option selected="${roomVo.available}">판매수량 : ${roomVo.available} 개</option>
 <%--                                                       <c:set var="room_available" value="${result.available }"/> --%>
                                                       
 <%--                                                        <c:forEach begin="1" end="${room_available}" varStatus="status"> --%>
@@ -890,14 +937,14 @@ li{
                                              class="bui-spacer--small bui-group bui-group bui-group--inline bui-group--large">
                                              <div class="bui-form__group">
                                                 <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="standard"> <span
+                                                   class="bui-radio__input" name="standard" value="yes"> <span
                                                    class="bui-radio__label"> <span>예약 가능</span>
                                                 </span>
                                                 </label>
                                              </div>
                                              <div class="bui-form__group">
                                                 <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="standard"> <span
+                                                   class="bui-radio__input" name="standard" value="no"> <span
                                                    class="bui-radio__label"> <span>예약 불가</span>
                                                 </span>
                                                 </label>
@@ -908,7 +955,7 @@ li{
                                                 <div
                                                    class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
                                                    <div class="bui-input__addon">KRW</div>
-                                                   <input type="text" value="0" id="standardPrice"
+                                                   <input type="text" value="${roomVo.standard_price}" id="standardPrice"
                                                       name="standard_price"
                                                       class="bui-form__control av-monthly__segmented--middle">
                                                    <div
@@ -941,14 +988,14 @@ li{
                                              class="bui-spacer--small bui-group bui-group--inline bui-group--large">
                                              <div class="bui-form__group">
                                                 <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="non_refund"> <span
+                                                   class="bui-radio__input" name="non_refund" value="yes"> <span
                                                    class="bui-radio__label"> <span>예약 가능</span>
                                                 </span>
                                                 </label>
                                              </div>
                                              <div class="bui-form__group">
                                                 <label class="bui-radio"> <input type="radio"
-                                                   class="bui-radio__input" name="non_refund"> <span
+                                                   class="bui-radio__input" name="non_refund" value="no"> <span
                                                    class="bui-radio__label"> <span>예약 불가</span>
                                                 </span>
                                                 </label>
@@ -960,7 +1007,7 @@ li{
                                                    class="bui-input__group bui-text-input__group bui-text-input__group--prepend">
                                                    <div class="bui-input__addon">KRW</div>
                                                    <input type="text" name="non_refundable_price" id="nonRefundablePrice"
-                                                      class="bui-form__control av-monthly__segmented--middle">
+                                                      class="bui-form__control av-monthly__segmented--middle" value="${roomVo.non_refundable_price}">
                                                    <div
                                                       class="bui-input__addon av-monthly__right-bui-addon">
                                                       <button type="button"
@@ -1045,10 +1092,23 @@ li{
                    $("input:radio[name='non_refund']:radio[value='yes']").prop('checked', true);
                    $("input:radio[name='non_refund']:radio[value='no']").prop('checked', false);
                    
-                   //(미완성) 예약 불가 선택시 textfield disabled 적용
-//                    if("input:radio[name='standard']:radio[value='no']").prop('checked', false) {
-//                       $('input[name="refundable"]').setAttribute('disabled', disabled);
-//                    }
+	$("input:radio[name='open']").click(function(){
+		
+		if($("input[name='open']:checked").val() =="no"){
+			
+			$("select[name='available']").attr("disabled", true);
+			$("input:text[name='standard_price']").attr("disabled", true);
+			$("input:text[name='non_refundable_price']").attr("disabled", true);
+			$("input:radio[name='standard']:radio[value='no']").prop("checked", true);
+			$("input:radio[name='non_refund']:radio[value='no']").prop("checked", true);
+			
+			$("#insertAvailable").attr("disabled", true);
+		
+		}
+	
+	})
+	
+           
                                  
        </script>
          <jsp:include page="/WEB-INF/partner/footer.jsp" />

@@ -167,8 +167,8 @@ public class ReservationController {
 				System.out.println(reservationVO.getStart_date());
 			}	
 //		}
-			reservationService.deleteDuplicatedReservation();
-			reservationService.modifyReservation();
+//			reservationService.deleteDuplicatedReservation();
+//			reservationService.modifyReservation();
 			List<ReservationVO> vo = reservationService.selectReservationByMerchant(reservationVO.getMerchant());
 			
 			ReservationVO vo1 = vo.get(0);

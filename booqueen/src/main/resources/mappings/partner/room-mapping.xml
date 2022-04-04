@@ -65,7 +65,7 @@
 		SELECT DISTINCT type, room_id FROM room where serialnumber = #{serialnumber}
 	</select>
 	<update id="partnerScheduleUpdate">
-		UPDATE room_available SET standard_price = #{standard_price} , non_refundable_price =#{non_refundable_price} WHERE room_id = #{room_id}
+		UPDATE room_available SET standard_price = #{standard_price} , non_refundable_price =#{non_refundable_price} WHERE room_id = #{room_id} and open_date = #{open_date}
 	</update>
 	<select id="selectRoomListByHotelSerial" resultType="myRoom">
 		SELECT * FROM room where serialnumber = #{serialnumber}
@@ -85,4 +85,23 @@
 	<select id="getRoomIdByRoomType" resultType="myRoom">
 		SELECT * FROM room where serialnumber = #{serialnumber} and type = #{type}
 	</select>
+	<select id="selectRoomByRoomId" resultType="roomAvailable">
+		SELECT
+			a.room_id,
+			a.open_date,
+			a.close_date,
+			a.standard_price,
+			a.non_refundable_price,
+			a.available,
+			r.type
+		FROM room_available as a
+		JOIN room as r
+		ON r.room_id = a.room_id
+		WHERE a.room_id = #{room_id}
+		AND open_date = #{open_date}
+	</select>
+	<delete id="deleteRoomFromAvailable" parameterType="roomAvailable">
+		DELETE FROM room_available WHERE room_id = #{room_id} and open_date = #{open_date}
+	</delete>
+	
 </mapper>

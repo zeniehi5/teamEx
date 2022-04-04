@@ -141,8 +141,12 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/selectReservationByRSVN.pdo", method = RequestMethod.GET)
 	@ResponseBody
-	public ReservationVO selectReservationByRSVN(@RequestParam("searchKeyword")int searchKeyword) {
-		ReservationVO searchResult = reservationService.selectReservationByRSVN(searchKeyword);
+	public ReservationVO selectReservationByRSVN(@RequestParam("searchKeyword")int searchKeyword, HttpSession session) {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		SearchVO search = new SearchVO();
+		search.setSerialnumber(hotel.getSerialnumber());
+		search.setReservation_number(searchKeyword);
+		ReservationVO searchResult = reservationService.selectReservationByRSVN(search);
 		return searchResult;
 	}
 }

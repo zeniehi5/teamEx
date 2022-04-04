@@ -134,7 +134,7 @@
 		ORDER BY reservation_date DESC;
 	</select>
 	<select id="selectReservationByRSVN" resultType="pReservation">
-		SELECT * FROM reservation where reservation_number = #{keyword}
+		SELECT * FROM reservation where reservation_number = #{reservation_number} and serialnumber = #{serialnumber}
 	</select>
 	<update id="updateReservationStatusToBilling">
 		UPDATE

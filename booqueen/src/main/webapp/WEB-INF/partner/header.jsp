@@ -11,6 +11,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <title>${hotel.hotelname}</title>
 <script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#addNewRoom").click(function(){
+			var room = document.getElementById("roomModal");
+			if(room.style.display === "none") {
+				room.style.display = "block";
+			} else {
+				room.style.display = "block";
+			}
+		})
+	})
+
+	function submitForm() {
+		alert("about to submit!")
+		//$("#myForm").submit()
+	}
+
+	function closeModal(){
+		var room = document.getElementById("roomModal");
+		if(room.style.display === "block"){
+			room.style.display = "none";
+		}
+	}
+
+	function openModal(){
+		var room = document.getElementById("roomModal");
+		if(room.style.display === "none") {
+			room.style.display = "block";
+		} else {
+			room.style.display = "block";
+		}
+	}
+
 	function dropdown() {
     	var menu = document.getElementById("ext-action-dropdown__menu");
         if (menu.style.display === "none") {
@@ -39,7 +72,15 @@
 					contentType:"application.json",
 					dataType:"json",
 					error: function(){
-						alert("검색 도중 오류가 발생하였습니다.")
+						var noresult = '';
+						noresult += "<ul class='submenu_list' style='z-index:999'>";
+						noresult += "<li class='submenu_item'><span";
+						noresult += " class='submenu_link'>검색 결과</span></li>";
+						noresult += "<li class='submenu_item'>";
+						noresult += "<span class='submenu_link'>검색 결과가 없습니다.</span>";
+						noresult += "</li>";
+						noresult += "</ul>";
+						$('#searchList').html(noresult);
 					},
 					success: function(resp) {
 						var result = '';
@@ -176,7 +217,7 @@
                                             <hr class="bui-divider">
                                             <h4 class="ext-action-dropdown__paragraph"><span>계정에 숙소 추가하기</span></h4>
                                             <ul class="ext-action-dropdown__content">
-                                                <li><a href="${contextPath}/addHotel.pdo" class="ext-action-dropdown__item"><svg width="20" height="20"
+                                                <li><a id="addNewRoom" class="ext-action-dropdown__item"><svg width="20" height="20"
                                                             fill="currentColor" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"
                                                             class="ext-action-dropdown__icon bk-icon -streamline-plus_circle" slot="icon">
                                                             <path
@@ -425,5 +466,89 @@
             </div>
         </div>
     </div>
+    <div class="bui-modal" id="roomModal">
+    	<div class="bui-modal__wrapper">
+            <div class="bui-modal__align">
+                <aside class="bui-modal__content bui-f-depth-1">
+                	<form id="myForm" action="####">
+                    <div class="bui-modal__body">
+                        <div>
+                            <h3 class="policy-form-title">신규 객실 추가</h3>
+                            <div>
+                                <div class="policy-form-section">
+                                    <h4 class="policy-form-section-title">
+                                        <span>객실 유형</span>
+                                    </h4>
+                                    <ul class="list-unstyled row clearfix list-smp-customized-condition">
+                                        <li class="col-xs-12 col-sm-6">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label>객실 유형을 선택하십시오.</label>
+                                                    <select class="form-control" name="free_cancel_allowed">
+                                                        <option value="디럭스 싱글룸">디럭스 싱글룸</option>
+                                                        <option value="수페리어 싱글룸">수페리어 싱글룸</option>
+                                                        <option value="디럭스 더블룸">디럭스 더블룸</option>
+                                                        <option value="수페리어 더블룸">수페리어 더블룸</option>
+                                                        <option value="디럭스 트리플룸">디럭스 트리플룸</option>
+                                                        <option value="수페리어 트리플룸">수페리어 트리플룸</option>
+                                                        <option value="주니어 스위트룸">주니어 스위트룸</option>
+                                                        <option value="이그제큐티브 스위트룸">이그제큐티브 스위트룸</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>흡연 정책</label>
+                                                    <select class="form-control" name="refund_policy">
+                                                        <option value="0">금연</option>
+                                                        <option value="1">흡연</option>
+                                                        <option value="2">이 객실유형은 흡연/금연 둘 다 설정 가능합니다.</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>이 유형에 해당하는 객실 수</label>
+                                                    <input type="number" class="form-control" id="availableRoom">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>객실 정원</label>
+                                                    <input type="number" class="form-control" id="quota">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>침대 수</label>
+                                                    <input type="number" class="form-control" id="bed">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>1박 최저가</label>
+                                                    <input type="number" class="form-control" id="price">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                    </form>
+                    <div class="bui-modal__footer">
+                        <div class="bui-group bui-group--inline">
+                            <button type="button" class="bui-button bui-button--primary" onclick="submitForm()">
+                                <span class="bui-button__text"><span>저장</span></span>
+                            </button>
+                            <button type="button" class="bui-button bui-button--secondary" onclick="closeModal()">
+                                <span class="bui-button__text"><span>취소</span></span>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="bui-modal__close" onclick="closeModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                d="M13 12l6.26-6.26a.73.73 0 0 0-1-1L12 11 5.74 4.71a.73.73 0 1 0-1 1L11 12l-6.29 6.26a.73.73 0 0 0 .52 1.24.73.73 0 0 0 .51-.21L12 13l6.26 6.26a.74.74 0 0 0 1 0 .74.74 0 0 0 0-1z">
+                            </path>
+                        </svg>
+                    </button>
+                </aside>
+            </div>
+            <div class="bui-modal__overlay"></div>
+        </div>
+	</div>
 </body>
 </html>

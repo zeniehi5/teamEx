@@ -22,7 +22,7 @@ public interface ReservationService {
 
 	List<ReservationVO> selectCheckInListByHotelSerial(int serialnumber);
 
-	ReservationVO selectReservationByRSVN(int searchKeyword);
+	ReservationVO selectReservationByRSVN(SearchVO search);
 
 	int updateReservationStatusToBilling(ReservationVO reservation);
 

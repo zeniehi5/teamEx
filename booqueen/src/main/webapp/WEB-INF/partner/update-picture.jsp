@@ -156,13 +156,14 @@
 										<br> <img src="${image.file_url}">
 									</div>
 								</a>
+								<div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
 								<c:forEach items="${room_image}" var="UpdateImageVO" varStatus="vs">
 										<div onclick="document.getElementById('modalId${vs.index}').style.display='block'">
 											<h3>${UpdateImageVO.file_name}</h3>
 											<br> <img src="${UpdateImageVO.file_url}">
 										</div>
 								</c:forEach>
-
+								</div>
 							</div>
 						</div>
 					</div>
@@ -208,37 +209,19 @@
 						<input type="submit" id="delete" value="삭제">
 
 					</div>
-					<script>
-                                $(document).ready(function () {
-                                    $("#delete").on("click", function () {
-                                        var formData = new FormData();
-                                        var files = deleteFile[0].files;
-                                        console.log(files);
-                                        for (var i = 0; i < files.length; i++) {
-                                            formData.append("deleteFile", files[i]);
-                                        }
-                                        $.ajax({
-                                            url: 'update-picture.pdo',
-                                            processData: false,
-                                            contentType: false,
-                                            data: formData,
-                                            TYPE: 'GET',
-                                            success: function (result) {
-                                                alert("삭제 성공");
-                                            }
-                                        });
-                                    });
-                                });
-                                
-                    
-                            </script>
+					
 				</div>
 				<div class="close">
 					<input type="button" id="close" value="닫기">
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
+		</div>
+		</div>
+	</form>
+	<jsp:include page="/WEB-INF/partner/footer.jsp" />
+	
+	<script type="text/javascript">
              const popup = document.getElementById("popup");
              const close = document.getElementById("close");
              const modal = document.querySelector(".modal-wrapper");
@@ -250,21 +233,41 @@
                    modal.style.display = 'none';
                    }); 
 		</script>
-		<!--
-		<script type="text/javascript">
+		<script>
+            $(document).ready(function () {
+                $("#delete").on("click", function () {
+                    var formData = new FormData();
+                    var files = deleteFile[0].files;
+                    console.log(files);
+                    for (var i = 0; i < files.length; i++) {
+                        formData.append("deleteFile", files[i]);
+                    }
+                    $.ajax({
+                        url: 'update-picture.pdo',
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        TYPE: 'GET',
+                        success: function (result) {
+                            alert("삭제 성공");
+                        }
+                    });
+                });
+            });
+                                
+         
+        </script>
+	<!--
+	<script type="text/javascript">
 
-        
-        function open_url(e) {
-        	const popup1 = document.getElementById("popup1");
-            const close = document.getElementById("close");
-            const modal = document.querySelector(".modal-wrapper");
-              		if(modal.style.display == 'none'){
-              			modal.style.display = 'block'
-              		}
-		</script> -->
-		</div>
-		</div>
-	</form>
-	<jsp:include page="/WEB-INF/partner/footer.jsp" />
+       
+       function open_url(e) {
+       	const popup1 = document.getElementById("popup1");
+           const close = document.getElementById("close");
+           const modal = document.querySelector(".modal-wrapper");
+             		if(modal.style.display == 'none'){
+             			modal.style.display = 'block'
+             		}
+	</script> -->
 </body>
 </html>

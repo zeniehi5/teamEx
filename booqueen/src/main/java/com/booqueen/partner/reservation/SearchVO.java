@@ -6,6 +6,7 @@ import lombok.Data;
 public class SearchVO {
 	
 	private int serialnumber;
+	private int reservation_number;
 	private String condition;
 
 }

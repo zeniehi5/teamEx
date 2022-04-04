@@ -66,4 +66,6 @@ public interface RoomService {
 
 	public RoomVO getRoomIdByRoomType(RoomVO search);
 
+	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable);
+
 }

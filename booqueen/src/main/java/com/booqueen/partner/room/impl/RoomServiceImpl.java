@@ -170,6 +170,11 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.getRoomIdByRoomType(search);
 	}
 
+	@Override
+	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable) {
+		return roomDAO.deleteRoomFromAvailable(roomAvailable);
+	}
+
 
 
 }
