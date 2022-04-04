@@ -66,7 +66,7 @@
 				    h.file_url,
 				    round(AVG(r.score), 1) AS score,
 				    COUNT(r.username),
-				    o.price,
+				    a.standard_price as price,
 				    o.room_id,
 				    a.open_date,
 				    a.available
@@ -116,7 +116,7 @@
 					WHERE open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and close_date = TO_DATE(#{end_date}, 'YYYYMMDD')
 									
 								) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and a.available > 0
-								group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
+								group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available, a.standard_price
 		]]>
 	</select>
 	
@@ -127,7 +127,7 @@
 	
 				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
 				
-				o.price, o.room_id, a.open_date, a.available
+				a.standard_price as price, o.room_id, a.open_date, a.available
 				
 				from hotel_image as h 
 				
@@ -222,7 +222,7 @@
 				</if>
 				
 		<![CDATA[	
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available, a.standard_price
 				]]>	
 				
 				<if test="scoreAvg != null">
@@ -291,7 +291,7 @@
 	
 				t.telephone, t.star, t.longitude, t.latitude, h.file_name, h.file_url, round(avg(r.score), 1) as score, count(r.username),
 				
-				o.price, o.room_id, a.open_date, a.available
+				a.standard_price as price, o.room_id, a.open_date, a.available
 				
 				from hotel_image as h 
 				
@@ -325,7 +325,7 @@
 		<![CDATA[ 
 				) and open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and a.available > 0
 		]]>		
-				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available
+				group by t.serialnumber, h.file_name, h.file_url, o.room_id, a.open_date, a.available, a.standard_price
 	</select>
 	
 	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">

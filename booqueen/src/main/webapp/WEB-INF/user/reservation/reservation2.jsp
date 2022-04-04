@@ -43,7 +43,7 @@
     </div>
     
 	<div class="main">
-	<form action="${contextPath}/reservation.do" id="last_reservation">
+	<form action="${contextPath}/reservation.do" id="last_reservation" method="post">
     <div class="container">
         <aside class="aside">
             <div class="aside-inner">
@@ -123,13 +123,12 @@
                     </div>
 					<c:forEach var="count_rooms" items="${reservationVO.count_rooms}" varStatus="status">
                      	<c:set var="types" value="${reservationVO.types[status.index]}"/>
-                     	<input type="hidden" name="types" value="${types}"/>
                      	<c:set var="prices" value="${reservationVO.prices[status.index]}"/>
-                     	<input type="hidden" name="prices" value="${prices * reservationVO.diffDays * count_rooms }"/>
-                     	<input type="hidden" name="count_rooms" value="${count_rooms }"/>
-                     	
-                    	<c:if test="${count_rooms ne '0' }">
+                     	<c:if test="${count_rooms ne '0' }">
                     		<div style="display:flex; justify-content:space-between; "><span></span><span style="font-style: italic; font-size: 15px;">${types} x ${count_rooms} </span></div>   	
+                   			<input type="hidden" name="types" value="${types}"/>
+                   			<input type="hidden" name="prices" value="${prices * reservationVO.diffDays * count_rooms }"/>
+                   			<input type="hidden" name="count_rooms" value="${count_rooms }"/>
                    		</c:if>
                    	</c:forEach>
 
@@ -151,13 +150,11 @@
             </div> -->
 
         </aside>
-        
-        
 				<input type="hidden" name="room_id" value=${reservationVO.room_id }>
 	            <input type="hidden" name="serialnumber" value=${reservationVO.serialnumber }>
-	            <input type="hidden" name="type" value=${reservationVO.type }>
-	            <input type="hidden" name="price" value=${reservationVO.price }>
-	            <input type="hidden" name="count_room" value=${reservationVO.count_room }>
+<%-- 	            <input type="hidden" name="type" value=${reservationVO.type }> --%>
+<%-- 	            <input type="hidden" name="price" value=${reservationVO.price }> --%>
+<%-- 	            <input type="hidden" name="count_room" value=${reservationVO.count_room }> --%>
 	            <input type="hidden" name="start_date" value=${reservationVO.start_date }>
 	            <input type="hidden" name="start_date_year" value=${reservationVO.start_date_year }>
 	            <input type="hidden" name="start_date_month" value=${reservationVO.start_date_month }>
@@ -185,7 +182,7 @@
 	            <input type="hidden" name="firstname" value="${reservationVO.firstname}">
 	            <input type="hidden" name="arrive_time" value="${reservationVO.arrive_time}">
 	            <input type="hidden" name="email" value="${reservationVO.email }">
-	            <button id="availablebtn" type="submit" hidden></button>
+	            <input id="availablebtn" type="submit" style="display: none;">
 			</form>
 
             <div class="extra-info">
@@ -251,7 +248,14 @@
             $(".choice-cancel").click(function(){
                 $(".room-detail").css("display","none");
             });
-            $('#complete_btn').click(payment);
+//          $('#complete_btn').click(payment);
+            $('#complete_btn').one('click', function(event){
+	       		 event.preventDefault();
+	       		 payment();
+	       		 $(this).prop('disabled', true);
+	       		 $(this).attr('disabled', true);
+	       		 $(this).off("click").attr('href', "javascript: void(0);");
+       		});
         });
 	
 	var path = '${contextPath}';
@@ -347,8 +351,7 @@
 	                        	text += merchant;
 	                        	text += "' name='merchant'>";	                   
 	                        	$('#last_reservation').append(text);
-                       			$('#availablebtn').click();
-                       			$('#availablebtn').attr("disabled", true);
+	                        	$('#availablebtn').click();
 	                        }
                         }); 
                      }

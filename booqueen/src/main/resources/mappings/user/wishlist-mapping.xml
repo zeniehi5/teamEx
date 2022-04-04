@@ -3,7 +3,8 @@
 <mapper namespace="com.booqueen.user.wishlist.dao.wishlistmapper">
 	
 	<insert id="insertwishlist" parameterType="wishlistVO"> 
-        <![CDATA[INSERT INTO wishlist VALUES (#{userid}, #{serialnumber}, #{hotelname}, #{address1}, #{address2}, #{star}, #{hotelimgpath}, #{score}, #{city}, #{reviewcount})]]> 
+        <![CDATA[INSERT INTO wishlist (userid, serialnumber, hotelname) VALUES (#{userid}, #{serialnumber}, #{hotelname})]]> 
+    	<!-- <![CDATA[INSERT INTO wishlist VALUES (#{userid}, #{serialnumber}, #{hotelname}, #{address1}, #{address2}, #{star}, #{hotelimgpath}, #{score}, #{city}, #{reviewcount})]]>  -->
     </insert>
     
     <select id="selectwishlist" resultType="wishlistVO" parameterType="wishlistVO">
@@ -11,7 +12,30 @@
 	</select>
 	
 	<select id="selectwishlistByUserid" resultType="wishlistVO" parameterType="wishlistVO">
-		<![CDATA[SELECT * FROM wishlist where userid = #{userid}]]>
+		select
+				t.serialnumber,
+				t.hotelname,
+				t.star,
+				t.address1,
+				t.city,
+				round(AVG (r.score), 1) as score,
+				count(r.score) as reviewcount,
+				i.file_url as hotelimgpath
+		from 	
+				temphotel as t
+		left join 
+				hotel_image as i
+		on 
+				t.serialnumber = i.serialnumber
+		left join 
+				review as r
+		on 
+				t.serialnumber = r.serialnumber
+		where t.serialnumber in
+								(SELECT serialnumber FROM wishlist where userid = #{userid})
+		group by t.serialnumber, t.hotelname, t.star, t.city, i.file_url
+		
+		<!-- <![CDATA[SELECT * FROM wishlist where userid = #{userid}]]> -->
 	</select>
     
     <delete id="deletewishlist" parameterType="wishlistVO">

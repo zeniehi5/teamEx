@@ -196,7 +196,7 @@
                     </c:choose>    
                 </div>
                 <div class="now-booking">
-                    <button>지금 예약</button>
+                    <a href="#booking-table"><button>지금 예약</button></a>
                 </div>
                 <div>
                     <div></div>
@@ -271,7 +271,7 @@
                     </div>
                 </div>
                 <div class="highlight-footer">
-                    <p><button class="button-blue"><span>지금 예약</span></button></p>
+                    <a href="#booking-table"><p><button class="button-blue"><span>지금 예약</span></button></p></a>
                     <p>
                     	<button onclick="mySnackbar()" id="mySnackbar" class="button-white">
                     		<i id="fheart" class="bi bi-heart"></i>
@@ -766,20 +766,20 @@
    <div class="review">
         <h2>이용후기</h2>
         <div class="now-booking">
-            <button>지금 예약</button>
+            <a href="#booking-table"><button>지금 예약</button></a>
         </div>
         
         <div class="review-text2">
             <div id="score" class="review-score">${reviewAvg.scoreAvg }</div>
             <div>
             <c:choose>
-                <c:when test="${reviewAvg.scoreAvg >= 9}"><span>최고</span></c:when>
-				<c:when test="${reviewAvg.scoreAvg >= 8}"><span>매우 좋음</span></c:when>
-				<c:when test="${reviewAvg.scoreAvg >= 7}"><span>좋음</span></c:when>
-				<c:when test="${reviewAvg.scoreAvg >= 6}"><span>만족</span></c:when>
-				<c:when test="${reviewAvg.scoreAvg < 6}"><span>보통</span></c:when>
+                <c:when test="${reviewAvg.scoreAvg >= 9}"><span style="font-size: 18px;">최고</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 8}"><span style="font-size: 18px;">매우 좋음</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 7}"><span style="font-size: 18px;">좋음</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg >= 6}"><span style="font-size: 18px;">만족</span></c:when>
+				<c:when test="${reviewAvg.scoreAvg < 6}"><span style="font-size: 18px;">보통</span></c:when>
            </c:choose>     
-                <span id="reviewcount">
+                <span id="reviewcount" style="margin-left: 10px;">
                 	<c:if test="${reviewAvg.scoreAvg == 0.0 }">
                 		0
                 	</c:if>
@@ -789,7 +789,7 @@
                 	</span><span>개 이용 후기</span>
             </div>
             <div class="reveiw-text-smaller">
-                <span>이용후기 모두 보기</span>
+<!--                 <span>이용후기 모두 보기</span> -->
             </div>
         </div>
         <h3>항목별 점수</h3>
@@ -904,7 +904,7 @@
 	        <h2>궁금하신 점이 있나요?</h2>
 	        <p>Q&A에서 더 많은 정보를 찾아보세요. 원하는 정보가 없다면 아래에서 숙소에 직접 질문을 남기세요.</p>
 	        <div class="now-booking" id="question-booking">
-	            <button>지금 예약</button>
+	            <a href="#booking-table"><button>지금 예약</button></a>
 	        </div>
 	        <div>
 	            <div class="question-third">
@@ -923,19 +923,25 @@
 	                    <c:when test="${!boardList.partner}">
 	                    <div class="question-third-right-row">
 	                        <div class="icon-text">
-	                            <i class="bi bi-person"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
+	                            <i class="bi bi-person"></i>&nbsp;&nbsp;
+	                            <div>
+	                            <p class="question-inner-text">${boardList.content}</p>
+	                            <span class="board_send_date">${boardList.send_date }</span></div>
 	                        </div>
 	                    </c:when>
 	                    <c:when test="${boardList.partner}">
 	                        <div class="icon-text">
-	                            <i class="bi bi-chat"></i>&nbsp;&nbsp;<p class="question-inner-text">${boardList.content}</p>
+	                            <i class="bi bi-chat"></i>&nbsp;&nbsp;
+	                            <div>
+	                            <p class="question-inner-text">${boardList.content}</p>
+	                        	<span class="board_send_date">${boardList.send_date }</span></div>
 	                        </div>
 	                        </div>
 	                    </c:when>
 	                    </c:choose>
                          </c:forEach>
-                         
-	                    <p class="question-more"><button class="button-white" id="more_board"><span>답변이 완료된 게시글 전체 보기</span></button></p> <!-- (<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2}"/>개) -->
+                         <c:set value="${fn:length(boardList)/2 }" var="boardList_length"/>
+	                    <p class="question-more"><button class="button-white" id="more_board"><span>답변이 완료된 게시글 전체 보기(<fmt:formatNumber type="number" maxFractionDigits="0"  value="${boardList_length}" />개)</span></button></p> <!-- (<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2}"/>개) -->
 	                </div>
 	            </div>
 	        </div>
@@ -965,7 +971,7 @@
             <h2>호텔 주변 지역</h2>
             <span>투숙객들이 숙소 근처 산책이 좋았다고 답했어요!</span>
             <div class="now-booking">
-                <button>지금 예약</button>
+                <a href="#booking-table"><button>지금 예약</button></a>
             </div>
         </div>
         <div class="list-columns">
@@ -1030,7 +1036,7 @@
         <div class="house-rule-div">
             <h2>하우스 룰</h2>
             <div class="now-booking">
-                <button>지금 예약</button>
+                <a href="#booking-table"><button>지금 예약</button></a>
             </div>
         </div>
 
@@ -1776,6 +1782,76 @@
 		</div>
 	</div>
 	
+	<div class="board-list" id="boardPanel">
+		<div class="board-list-panel" id="boardClose">
+			<div class="board-list-panel-close" id="reviewClose">
+				<span>x</span>
+			</div>
+		
+			<div class="board-list-panel-content">
+				<div id="question_board2">
+		<c:choose>
+		<c:when test = "${!empty boardList }">
+		 <div class="question2">
+	        <h2>궁금하신 점이 있나요?</h2>
+	        <p>Q&A에서 더 많은 정보를 찾아보세요. 원하는 정보가 없다면 아래에서 숙소에 직접 질문을 남기세요.</p>
+	       	<c:set value="${fn:length(boardList)/2 }" var="boardList_length"/>
+            <div class="question-more2">답변이 완료된 게시글: <fmt:formatNumber type="number" maxFractionDigits="0"  value="${boardList_length}" />개</div> <!-- (<fmt:formatNumber type="number" maxFractionDigits="0"  value="${fn:length(boardList)/2}"/>개) -->
+	                
+	        <div>
+	            <div class="question-third2">
+
+	                <div class="question-third-right2">
+	                    
+	                    <c:forEach var="boardList" items="${boardList }" varStatus="status">
+	                    
+	                    <c:choose>
+	                    <c:when test="${!boardList.partner}">
+	                    <div class="question-third-right-row2">
+	                        <div class="icon-text">
+	                            <i class="bi bi-person"></i>&nbsp;&nbsp;
+	                            <div>
+	                            <p class="question-inner-text2">${boardList.content}</p>
+	                            <span class="board_send_date">${boardList.send_date }</span></div>
+	                        </div>
+	                    </c:when>
+	                    <c:when test="${boardList.partner}">
+	                        <div class="icon-text">
+	                            <i class="bi bi-chat"></i>&nbsp;&nbsp;
+	                            <div>
+	                            <p class="question-inner-text2">${boardList.content}</p>
+	                        	<span class="board_send_date">${boardList.send_date }</span></div>
+	                        </div>
+	                        </div>
+	                    </c:when>
+	                    </c:choose>
+                         </c:forEach>
+                    </div>
+	            </div>
+	        </div>
+	    </div>
+	    </c:when>
+	    
+    	<c:otherwise>
+	    <div class="question-answer">
+			<div class="qna-card">
+				<div class="qna-icon">
+					<svg class="bk-icon -streamline-chat_bubbles" fill="#0071C2" height="36" width="36" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"><path d="M24 13.5a6 6 0 0 0-6-6h-3a6 6 0 0 0 0 12h.75l-.53-.22 4.5 4.5a.75.75 0 0 0 1.28-.53v-5.024l-.43.678A5.989 5.989 0 0 0 24 13.502zm-1.5-.002a4.489 4.489 0 0 1-2.57 4.05.75.75 0 0 0-.43.678v5.024l1.28-.53-4.5-4.5a.75.75 0 0 0-.53-.22H15a4.5 4.5 0 1 1 0-9h3a4.5 4.5 0 0 1 4.5 4.5zM6.22 12.22l-3 3 1.28.53v-5.024a.75.75 0 0 0-.43-.678A4.489 4.489 0 0 1 5.998 1.5H9a4.502 4.502 0 0 1 4.313 3.214.75.75 0 0 0 1.438-.428A6.002 6.002 0 0 0 9 0H6a5.988 5.988 0 0 0-2.57 11.404L3 10.726v5.024a.75.75 0 0 0 1.28.53l3-3a.75.75 0 1 0-1.06-1.06z"></path></svg>
+				</div>
+				<div class="qna-text">
+					<h3>숙소 관련 Q&A</h3>
+					<div>더 알고 싶은 정보가 있으신가요? 숙소에 질문을 남겨보세요.</div>
+				</div>
+				<button class="make-question" id="makeQuestion">문의하기</button>
+			</div>
+		</div>
+		</c:otherwise>
+		</c:choose>
+	</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id="overlay-review">
 		<div class="bui-overlay__content" data-bui-ref="overlay-content"><div class="bui-modal bui-modal--size-large bui-modal--active" id="review-snippet-drawer">
 	        <div class="bui-modal__inner">
@@ -1895,6 +1971,21 @@
 	
 	$(document).ready(function () {
 		$('.see-closer').on("click", more_review);
+		$('#reviewClose').click(function() {
+			$('#reviewPanel').css("display", "none");
+		});
+		$('#more-review').click(function(){
+			$('#reviewPanel').css("display", "block");
+		});
+		$('#view-review').click(function(){
+			$('#reviewPanel').css("display", "block");
+		});
+		$('#more_board').click(function(){
+			$('.board-list').css('display', 'block');
+		});	
+		$('#boardClose').click(function(){
+			$('.board-list').css('display', 'none');
+		});
 	 });
 	 
  	function more_review() {
@@ -1903,23 +1994,6 @@
 		$('#c-review-strenght').html(more_strength);
 	}
     </script>
-
-	<script>
-		$('#reviewClose').click(function() {
-			$('#reviewPanel').css("display", "none");
-		});
-		
-		$('#more-review').click(function(){
-			$('#reviewPanel').css("display", "block");
-		});
-		$('#view-review').click(function(){
-			$('#reviewPanel').css("display", "block");
-		});
-		$('#more_board').click(function(){
-			
-		})
-		
-	</script>
 	
 	<script>
 		var contextPath = '${contextPath}';
@@ -2083,14 +2157,15 @@
 
             var sendData = {"userid" : userid,
                             "serialnumber" : serialnumber,
-                            "hotelname" : hotelname,
-                            "address1" : address1,
+                            "hotelname" : hotelname}
+                            
+            			/*	"address1" : address1,
                             "address2" : address2,
                             "star" : star,
                             "hotelimgpath" : hotelimgpath,
                             "score" : score,
                             "city" : city,
-                            "reviewcount" : reviewcount}
+                            "reviewcount" : reviewcount */
            	
             if(userid != ''){
             	$.ajax({
@@ -2375,7 +2450,7 @@
 	                
 	                var result = '';
 	                        result += "<div class='question'><h2>궁금하신 점이 있나요?</h2><p>Q&A에서 더 많은 정보를 찾아보세요. 원하는 정보가 없다면 아래에서 숙소에 직접 질문을 남기세요.</p>";
-	                        result += "<div class='now-booking' id='question-booking'><button>지금 예약</button></div><div><div class='question-third'><div class='question-third-left'><div><p><strong>소개</strong></p><p>반갑습니다.";
+	                        result += "<div class='now-booking' id='question-booking'><a href="#booking-table"><button>지금 예약</button></a></div><div><div class='question-third'><div class='question-third-left'><div><p><strong>소개</strong></p><p>반갑습니다.";
 	                        result += hotelname;
 	                        result += "입니다.</p>";
 	                        result += "<div>보통 몇 시간 안에 답변을 드려요</div></div><p><button class='button-white' id='question_button'><span>질문 남기기</span></button></p></div>";

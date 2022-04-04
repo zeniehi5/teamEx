@@ -39,5 +39,9 @@ public class RoomDAO {
 		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateRoomAvailable", reservationVO);
 	}
 	
+	public int updateRoomAvailablePlus(ReservationVO reservationVO) throws DataAccessException{
+		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateRoomAvailablePlus", reservationVO);
+	}
+	
 	
 }

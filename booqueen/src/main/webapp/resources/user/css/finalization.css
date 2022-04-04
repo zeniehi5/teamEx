@@ -180,7 +180,6 @@
     display: flex;
 }
 .bui-inline-container__start{
-    margin-right: 16px;
     flex-shrink: 0;
     display: flex;
 }
@@ -188,6 +187,7 @@
     height: 24px;
     display: inline-block;
     fill: currentColor;
+    margin: 7px;
 }
 .-streamline-question_mark_circle{
     display: inline-block;
