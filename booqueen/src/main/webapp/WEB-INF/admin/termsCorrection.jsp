@@ -26,15 +26,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -72,9 +71,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -158,16 +156,16 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">약관 수정</h1>
+                        <!-- <h1 class="mt-4">약관 수정</h1> -->
                         <div class="card mb-4">
                         </div>
                         <div class="card mb-4">
                        
-                            <div class="card-header">
+                            <div class="card-header" style="font-size: 20px;">
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 약관 수정
                             </div>
                              <form action="updateTerms.mdo" method="POST">
-                            <table style="width: 90%;"> 
+                            <table style="width: 90%; margin-top: 24px;"> 
                             <tbody>
                             <tr>
                                 <td style="text-align: center">제목<input type="hidden" name="seq" value="${TermsVO.seq }"></td>
@@ -182,7 +180,7 @@
                             </tr>
                         </tbody></table>
                        
-                                <div style="float:right">
+                                <div style="float:right; margin: 14px;">
                                     <input id="submit" type="submit" class="btn btn-primary" value="수정하기">
                                     <c:set var="seq" value="${TermsVO.seq}"/>
                                     <a class="btn btn-danger" href="${contextPath }/deleteTerms.mdo?seq=${seq}">삭제하기</a>

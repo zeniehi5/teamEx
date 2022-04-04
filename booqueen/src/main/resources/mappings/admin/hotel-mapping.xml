@@ -2,34 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="HotelDAO">
 	<select id="selectHotel" resultType="adminHotel">
-		<![CDATA[SELECT * FROM tempHotel]]>
+		SELECT * FROM tempHotel
 	</select>
-	<select id="selectReservationList" resultType="aReservation">
-		<![CDATA[SELECT
-         r.lastname,
-         r.firstname,
-         r.checkin_date,
-         r.checkout_date,
-         r.cancel_date,
-         r.userid,
-         r.price,
-         h.type,
-         r.status,
-         r.reservation_number,
-         r.reservation_date,
-         r.special_request,
-         r.time_arrival,
-         r.price * 0.15 as "commission",
-         r.hotelname
-      FROM
-         reservation as r
-      JOIN
-         room as h
-      ON r.room_id = h.room_id
-      
-      order by reservation_number desc
-      ]]>
-	</select>
+	
 	<select id="selectHotelDetail" resultType="hotelDetail">
 		<![CDATA[SELECT
 		t.serialnumber,
@@ -50,4 +25,7 @@
 		t.serialnumber = #{serialnumber}				
 		]]>
 	</select>
+	
+	
+	
 </mapper>

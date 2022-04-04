@@ -5,4 +5,5 @@ import java.util.List;
 public interface HotelService {
 
 	public List<com.booqueen.admin.hotel.HotelVO> getHotelMember();
+	public HotelDetailVO selectHotelDetail(int serialnumber);
 }

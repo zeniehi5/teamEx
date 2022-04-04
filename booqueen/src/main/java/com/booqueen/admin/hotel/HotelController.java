@@ -51,20 +51,6 @@ public class HotelController {
 		model.addAttribute("details", details);
 		return "roomDetail";
 	}
-	@RequestMapping(value = "/reservationStatus.mdo", method=RequestMethod.GET)
-	public String reservationStatus(Model model, HttpSession session) {
-		List<ReservationVO> reservation = hotelServiceImpl.selectReservationList();
-		model.addAttribute("reservation", reservation);
-		Date now = new Date();
-		model.addAttribute("now", now);
-		System.out.println(model.toString());
-		return "reservationStatus";
-	}
-	
-//	@RequestMapping(value = "/transactionHistory.mdo", method=RequestMethod.GET)
-//	public String transactionHistory(HttpSession session) {
-//		return "transactionHistory";
-//	}
 	
 	@RequestMapping(value = "/reportedUser.mdo", method=RequestMethod.GET)
 	public String reportedUser(HttpSession session) {
@@ -113,9 +99,6 @@ public class HotelController {
 	public String index2(HttpSession session) {
 		return "index2";
 	}
-	@RequestMapping(value = "/userMemberDetail.mdo", method=RequestMethod.GET)
-	public String userMemberDetail(HttpSession session) {
-		return "userMemberDetail";
-	}
+	
 	
 }

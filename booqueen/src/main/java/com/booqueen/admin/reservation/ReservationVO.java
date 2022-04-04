@@ -1,4 +1,4 @@
-package com.booqueen.admin.hotel;
+package com.booqueen.admin.reservation;
 
 import java.sql.Date;
 
@@ -14,6 +14,7 @@ public class ReservationVO {
 	private Date checkout_date;
 	private Date reservation_date;
 	private Date cancel_date;
+	private String cancel_reason;
 	private int price;
 	private String lastname;
 	private String firstname;
@@ -23,4 +24,12 @@ public class ReservationVO {
 	private String type;
 	private int commission;
 	private String hotelname;
+	private int use_status;
+	private int serialnumber;
+	private Date commission_date;
+	private int commission_count;
+	private int count_room;
+	private String name;
+	private int reservation_count;
+	
 }

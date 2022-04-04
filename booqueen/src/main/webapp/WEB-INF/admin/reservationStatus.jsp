@@ -80,15 +80,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -126,9 +125,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -220,8 +218,8 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">금월 총 예약</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${monthReservation+0}건</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <a class="small text-white stretched-link">${total_reservation_month+0}건</a>
+                                    <div class="small text-white"><!-- <i class="fas fa-angle-right"></i> --></div>
                                 </div>
                             </div>
                         </div>
@@ -229,8 +227,8 @@
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">금일 예약건 수</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${dayReservation+0}건</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <a class="small text-white stretched-link">${total_reservation_day+0}건</a>
+                                    <div class="small text-white"><!-- <i class="fas fa-angle-right"></i> --></div>
                                 </div>
                             </div>
                         </div>
@@ -238,8 +236,8 @@
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">금일 예약취소</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${dayCancel+0}건</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <a class="small text-white stretched-link">${total_reservation_cancel+0}건</a>
+                                    <div class="small text-white"><!-- <i class="fas fa-angle-right"></i> --></div>
                                 </div>
                             </div>
                         </div>
@@ -247,8 +245,8 @@
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">금월 이용완료</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">${i+0}건</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <a class="small text-white stretched-link">${total_complete+0}건</a>
+                                    <div class="small text-white"><!-- <i class="fas fa-angle-right"></i> --></div>
                                 </div>
                             </div>
                         </div>
@@ -276,29 +274,28 @@
                             </div>
                         </div> --%>
                     <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            예약 현황
+                        <div class="card-header" style="font-size: 20px;">
+                            <i class="fas fa-table me-1"></i>예약 현황
                             <div style="float:right;">
                   
-                    <h5>누적 예약금:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8361;<fmt:formatNumber type="number" value="${sumprice}"/></h5>
-                    <h5>수수료:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8361;<fmt:formatNumber type="number" value="${sumcommission}"/></h5>
+                    <h6>누적 예약금:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8361;<fmt:formatNumber type="number" value="${sumprice}"/></h5>
+                    <h6>수수료:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8361;<fmt:formatNumber type="number" value="${sumcommission}"/></h5>
                     </div>
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
+                                    	<th>예약번호</th>
+                                    	<th>예약 날짜</th>
                                         <th>투숙객 이름</th>
-                                        <th>호텔이름</th>
+                                        <th>호텔명</th>
+                                        <th>객실</th>
                                         <th>체크인</th>
                                         <th>체크아웃</th>
-                                        <th>객실</th>
-                                        <th>예약 날짜</th>
                                         <th>예약 상태</th>
                                         <th>요금</th>
                                         <th>수수료</th>
-                                        <th>예약번호</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -307,23 +304,23 @@
                                 
 								<c:forEach  var="ReservationVO" items="${reservation }" varStatus ="status">
                                         <tr> 
-                                            <td> <a href="reservationStatusDetail.mdo">${ReservationVO.lastname }${ReservationVO.firstname }</a></td>
-                                            <td>${ReservationVO.hotelname }</td>
-                                            <td>${ReservationVO.checkin_date }</td>
-                                            <td>${ReservationVO.checkout_date }</td>
-                                            <td>${ReservationVO.type }</td>
-                                            <td>${ReservationVO.reservation_date }</td>
+                                        	<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_number }</a></td>
+                                        	<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_date }</a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.lastname}${ReservationVO.firstname}</a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.hotelname }</a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.type }</a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkin_date }</a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkout_date }</a></td>
                                             <c:choose>
                                                 	<c:when test="${ReservationVO.status == true }">
-                                                		<td>정상</td>
+                                                		<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">정상</a></td>
                                                 	</c:when>
                                                 	<c:otherwise>
-                                                		<td>취소</td>
+                                                		<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">취소</a></td>
                                                 	</c:otherwise>
                                                </c:choose>
-                                            <td>&#8361;<fmt:formatNumber type="number" value="${ReservationVO.price }"/></td>
-                                            <td>&#8361;<fmt:formatNumber type="number" value="${ReservationVO.commission}"/></td>
-                                            <td>${ReservationVO.reservation_number }</td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.price }"/></a></td>
+                                            <td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.commission}"/></a></td>
                                         </tr>
                                         
                                         <c:set var="sum_price" value="${sum_price + ReservationVO.price }"/>

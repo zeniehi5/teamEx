@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.booqueen.admin.hotel.HotelDetailVO;
 import com.booqueen.admin.hotel.HotelService;
-import com.booqueen.admin.hotel.ReservationVO;
+import com.booqueen.admin.reservation.ReservationVO;
 
 @Service("HotelService")
 public class HotelServiceImpl implements HotelService {
@@ -19,14 +19,11 @@ public class HotelServiceImpl implements HotelService {
 	public List<com.booqueen.admin.hotel.HotelVO> getHotelMember(){
 		return hotelDAO.getHotelMember();
 	}
-
-	public List<ReservationVO> selectReservationList() {
-		return hotelDAO.selectReservationList();
-	}
-
+	
+	@Override
 	public HotelDetailVO selectHotelDetail(int serialnumber) {
-		
 		return hotelDAO.selectHotelDetail(serialnumber);
 	}
+	
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TransactionDAO">
+
+	<select id="selectTransactionHistory" resultType="aReservation">
+		SELECT serialnumber, hotelname, sum(price) as price, count(price) as commission_count, max(commission_date) as commission_date FROM reservation where use_status = 4
+		GROUP BY serialnumber, hotelname
+		ORDER BY commission_date desc, serialnumber desc
+	</select>
+	
+	<select id="selectTransactionGraph" resultType="aReservation">
+		SELECT commission_date FROM reservation where use_status = 4
+	</select>
+	
+	<select id="selectTransactionDetail" parameterType="Integer" resultType="aReservation">
+		SELECT re.serialnumber, re.hotelname, ro.room_id, ro.type, sum(re.price) AS price, count(re.reservation_number) AS reservation_count
+		FROM reservation AS re
+		LEFT JOIN room AS ro
+		ON re.room_id = ro.room_id
+		WHERE re.serialnumber = ${serialnumber}
+		GROUP BY re.serialnumber, re.hotelname, ro.room_id, ro.type
+		ORDER BY ro.room_id
+	</select>
+
+</mapper>

@@ -27,6 +27,20 @@ public class PaymentController {
 		List<PaymentStatusVO> paymentStatusList = paymentService.getPaymentStatusList();
 		model.addAttribute("paymentStatusList", paymentStatusList);
 		
+		int non_payment_count = 0;
+		int payment_count = 0;
+		
+		for (int i=0; i<paymentStatusList.size(); i++) {
+			if (paymentStatusList.get(i).getUse_status() == 3) {
+				non_payment_count += 1;
+			} else if (paymentStatusList.get(i).getUse_status() == 4) {
+				payment_count += 1;
+			}
+		}
+		
+		model.addAttribute("non_payment_count", non_payment_count);
+		model.addAttribute("payment_count", payment_count);
+		
 		return "payment";
 	}
 	
@@ -53,6 +67,20 @@ public class PaymentController {
 		
 		List<PaymentStatusVO> paymentStatusList = paymentService.getPaymentStatusList();
 		model.addAttribute("paymentStatusList", paymentStatusList);
+		
+		int non_payment_count = 0;
+		int payment_count = 0;
+		
+		for (int i=0; i<paymentStatusList.size(); i++) {
+			if (paymentStatusList.get(i).getUse_status() == 3) {
+				non_payment_count += 1;
+			} else if (paymentStatusList.get(i).getUse_status() == 4) {
+				payment_count += 1;
+			}
+		}
+		
+		model.addAttribute("non_payment_count", non_payment_count);
+		model.addAttribute("payment_count", payment_count);
 		
 		return "payment";
 	}
