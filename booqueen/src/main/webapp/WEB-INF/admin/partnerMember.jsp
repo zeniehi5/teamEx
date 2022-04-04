@@ -27,15 +27,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -73,9 +72,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -159,21 +157,22 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <div class="card-body">
+                        <!-- <h2 class="mt-4">파트너 목록</h2> -->
+                		<br>
                             <div class="card mb-4">
-                                <div class="card-header">
+                                <div class="card-header" style="font-size: 20px;">
                                     <i class="fas fa-table me-1"></i>
-                                    파트너 회원 목록
+                                    파트너 목록
                                 </div>
                                 <div class="card-body">
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
-                                                <th>lastname</th>
-                                                <th>firstname</th>
-                                                <th>Phone</th>
-                                                <th>email</th>
-                                                <th>active</th>
+                                                <th>성</th>
+                                                <th>이름</th>
+                                                <th>연락처</th>
+                                                <th>이메일</th>
+                                                <th>차단 여부</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -200,7 +199,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                     
                     <div id="deleteMyAccount" class="delete-modal">
@@ -213,17 +212,17 @@
 					<div class="delete-hr"><div></div></div>
 					<div class="modal-delete-reason">
 						<div class=reason-title>차단 사유</div>
-						<select id="delete-account" name="whyblock">
+						<select id="delete-account" name="whyblock" style="padding: 8px;">
 							<option value="">선택</option>
 							<option value="잦은 신고">잦은 신고</option>
 							<option value="규칙 위반">규칙 위반</option>
-							<option value="허위 사실 기제">허위 사실 기제</option>
+							<option value="허위 사실 기재">허위 사실 기재</option>
 							<option value="기타">기타</option>
 						</select>
 					</div>
 					<div class="delete-hr"><div></div></div>
-					<div class="modal-delete-button">
-						<button type="submit" class="delete-btn-real" id="deleteBtnReal">회원 차단하기</button>
+					<div class="modal-delete-button" style="text-align: center;">
+						<button type="submit" class="delete-btn-real" id="deleteBtnReal" style="width: 100%;">회원 차단하기</button>
 					</div>
 				</form>
 			</div>

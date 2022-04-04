@@ -29,15 +29,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -75,9 +74,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -161,10 +159,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">FAQ</h1>
+                        <!-- <h2 class="mt-4">문의 게시판</h2> -->
+                        <br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com --> FAQ
+                            <div class="card-header" style="font-size: 20px;">
+                                <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com -->
+                                문의 게시판
                             </div>
                             <div class="card-body">
                             <a class="btn btn-primary" href="faqUpload.mdo">등록하기</a>
@@ -175,7 +175,7 @@
                                             <label>
                                             <select class="dataTable-selector">
                                                 <option value="5">5</option>
-                                                <option value="10" selected="">10</option>
+                                                <option value="10" selected>10</option>
                                                 <option value="15">15</option>
                                                 <option value="20">20</option>
                                                 <option value="25">25</option>
@@ -188,10 +188,10 @@
                                 <table id="datatablesSimple" class="dataTable-table">
                                     <thead>
                                         <tr>
-                                            <th data-sortable="" style="width: 3.25815%;">
-                                                <a href="#" class="dataTable-sorter">번호</a>
+                                            <th data-sortable="" style="width: 5.25815%;">
+                                                <a href="#" class="dataTable-sorter">No.</a>
                                             </th>
-                                            <th data-sortable="" style="width: 22.6817%;">
+                                            <th data-sortable="" style="width: 21.6817%;">
                                                 <a href="#" class="dataTable-sorter">제목</a>
                                             </th>
                                             <th data-sortable="" style="width: 60.9875%;">
@@ -210,7 +210,7 @@
                                             <td>택시 예약은 승차 24시간 전까지 '내 예약 관리하기'에서 취소할 수 있습니다.
                                                 대부분의 택시 예약은 쉽게 취소가 가능하나, 충분한 시간적 여유를 두고 운전기사에게 취소 의사를 전달해 주셔야 합니다. 얼마나 미리 취소 의사를 밝혀야 하는지 알아보려면 예약 확인서를 참고해 주시기 바랍니다.
                                                 이 답변이 유용했나요?</td>
-                                                <td>&nbsp;&nbsp; <button id="faqCorrection" class="btn btn-danger" onclick="location.href='faqCorrection.mdo';">수정 및 삭제</button></td>
+                                                <td>&nbsp;&nbsp;<button id="faqCorrection" class="btn btn-danger" onclick="location.href='faqCorrection.mdo';">수정 및 삭제</button></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>

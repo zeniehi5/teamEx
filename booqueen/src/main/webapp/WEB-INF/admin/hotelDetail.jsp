@@ -70,15 +70,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -116,9 +115,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -203,15 +201,14 @@
             	<main>
             		<div class="container-fluid px-4">
                         <!-- 여기만 수정해서 사용하세요!! -->
-                        <h1 class="mt-4">호텔 상세 정보</h1>
+                        <!-- <h2 class="mt-4">호텔 상세 정보</h2> -->
+                        <br>
                         <c:choose>
             			<c:when test="${empty hotelDatail && hotelDetail == null}">          
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
-                                        호텔 정보
-                                    </div>							
+                                    <div style="font-size: 20px; font-weight: bold;">호텔 정보</div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -253,9 +250,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
-                                        호텔 정보
-                                    </div>							
+                                    <div style="font-size: 20px; font-weight: bold;">호텔 정보</div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -270,15 +265,15 @@
                                                 <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.hotelname}"></td>
                                             </tr>
                                             <tr>
-                                                <th>대표자</th>
+                                                <th>담당자</th>
                                                 <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.manager}"></td>
                                             </tr> 
                                             <tr>    
-                                                <th>대표자 이메일</th>
+                                                <th>담당자 이메일</th>
                                                 <td><input type="text" name="partner_email" readonly value="${hotelDetail.member_email}"></td>
                                             </tr> 
                                             <tr>
-                                                <th>주소</th>
+                                                <th>위치</th>
                                                 <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${hotelDetail.address1}${hotelDetail.address2}"></td>
                                             </tr>                                      
                                             <tr>
@@ -298,9 +293,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
-                                        객실 정보
-                                    </div>							
+                                    <div style="font-size: 20px; font-weight: bold;">객실 정보</div>							
                                 </div>
                             </div>
                             <div class="card-body">
@@ -336,9 +329,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #1636c7; font-weight: bold; ">
-                                        객실 정보
-                                    </div>							
+                                    <div style="font-size: 20px; font-weight: bold;">객실 정보</div>					
                                 </div>
                             </div>
                             <div class="card-body">
@@ -365,9 +356,9 @@
                                             <c:forEach var="roomList" items="${roomList}">
                                                 <tr>
                                                     <td>
-                                                        <span><a href="roomDetail.mdo?room_id=${roomList.room_id}"><strong>${roomList.type}</strong></a></span>
+                                                        <span><a href="roomDetail.mdo?room_id=${roomList.room_id}">${roomList.type}</a></span>
                                                     </td>
-                                                    <td><strong>&#8361;${roomList.price}</strong></td>
+                                                    <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${roomList.price}"/></td>
                                                     <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
                                                     <td></td>
                                                 </tr>

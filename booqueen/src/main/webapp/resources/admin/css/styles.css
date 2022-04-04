@@ -73,6 +73,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
+    overflow-y: scroll;
   }
 }
 
@@ -11895,4 +11896,10 @@ body {
 }
 #UpdateModal {
 	display: none; /* Hidden by default */	
+}
+
+
+
+.view_all {
+	color: #fff;
 }

@@ -67,7 +67,7 @@
       <typeAlias type="com.booqueen.admin.payment.PaymentStatusVO" alias="paymentStatusVO"/>
             
       <!--<typeAlias type="com.booqueen.admin.partner.BlockPartnerVO" alias="blockPartner"/>-->
-      <typeAlias type="com.booqueen.admin.hotel.ReservationVO" alias="aReservation"/>
+      <typeAlias type="com.booqueen.admin.reservation.ReservationVO" alias="aReservation"/>
       <typeAlias type="com.booqueen.admin.hotel.HotelDetailVO" alias="hotelDetail"/>
       <typeAlias type="com.booqueen.admin.hotel.RoomDetailVO" alias="roomDetails"/>
    </typeAliases>
@@ -101,5 +101,7 @@
        <mapper resource="mappings/admin/agegroup-mapping.xml"/>
        <mapper resource="mappings/admin/user-mapping.xml"/>
        <mapper resource="mappings/admin/paymentstatus-mapping.xml"/>
+       <mapper resource="mappings/admin/reservation-mapping.xml"/>
+       <mapper resource="mappings/admin/transaction-mapping.xml"/>
    </mappers>
 </configuration>

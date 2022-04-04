@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +29,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -74,9 +74,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -159,110 +158,57 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <h1 class="mt-4">예약</h1>
+                    <!-- <h2 class="mt-4">예약</h2> -->
+                    <br><br>
                     <div class="container-fluid px-4">
-                        
-				
-				
-				<div class="card mb-4">
-					<div class="card-header">
-						<div style="font-size: 25px; color: #4c1fe0; font-weight: bold; ">
-							예약 상세 페이지
+					<div class="card mb-4">
+						<div class="card-header">
+							<div style="font-size: 25px; font-weight: bold;">예약 상세 정보</div>
 						</div>
+						<div class="card-body">
+							<div class="table01"> 
+								<div class="left">
+									<fmt:parseDate value="${reservationVO.checkin_date}" var="checkin_date" pattern="yyyy-MM-dd"/>
+									<fmt:parseDate value="${reservationVO.checkout_date}" var="checkout_date" pattern="yyyy-MM-dd"/>
+									<%-- <fmt:parseNumber value="${checkin_date / (1000*60*60*24)}" integerOnly="true" var="checkin_date_number" scope="request"/>
+									<fmt:parseNumber value="${checkout_date / (1000*60*60*24)}" integerOnly="true" var="checkout_date_number" scope="request" /> --%>
+									<div>체크인<br><h4><fmt:formatDate value="${reservationVO.checkin_date}" pattern="yyyy년 MM월 dd일 (E)"/></h4></div>
+									<div>체크아웃<br><h4><fmt:formatDate value="${reservationVO.checkout_date}" pattern="yyyy년 MM월 dd일 (E)"/></h4></div>
+									<div>숙박기간<br>1박</div>
+									<div>총 투숙객:<br>2</div>
+									<div>총 객실 수<br>${reservationVO.count_room}</div>
+									<div>총 요금<br><h6><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></h6></div>
+								</div>
+								<div class="right">
+									<div>투숙객 이름:<br>${reservationVO.name}</div>
+									<div>예약자 ID:<br>${reservationVO.userid}</div> 
+									<div class="abc">   
+										<div><div>예약자 이름:<br>${reservationVO.lastname}${reservationVO.firstname}</div></div> 
+										<div>
+											<div>채널<br>Booqueen.com</div>
+	                                        <div id="as">수수료 부과 대상 금액:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></div>
+										</div> 
+										<div>
+											<div>예약번호:<br>${reservationVO.reservation_number}</div>
+	                                        <div>수수료:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price * 0.15}" /></div>
+										</div> 
+										<div>예약일<br><fmt:formatDate value="${reservationVO.reservation_date}" pattern="yyyy년 MM월 dd일 (E)"/></div>
+									</div>                               
+								</div>
+							</div>
+	                    </div>
+					</div> 
+					<div class="payment">
+						<h4>결제</h4>
+							<div>결제현황<br>
+								<select class="dataTable-selector">
+									<option value="Y">결제 완료</option>
+									<option value="N">결제 미완료</option>
+								</select>
+							</div>
+						</div>       
 					</div>
-                    
-					<div class="card-body">
-						
-							
-                            <div class="table01"> 
-                                <div class="left">
-                                    <div>
-                                        체크인<br>
-                                        <h4>2022년 7월 15일(금)</h4>
-                                    </div>
-                                    <div>
-                                        체크아웃<br>
-                                        <h4>2022년 7월 16일(토)</h4>
-                                    </div>
-                                    <div>
-                                        숙박기간<br>
-                                        1박
-                                    </div>
-                                    <div>
-                                        총 투숙객:<br>
-                                        2
-                                    </div>
-                                    <div>
-                                        총 객실 수<br>
-                                        1
-                                    </div>
-                                    <div>
-                                        총 요금<br>
-                                        <h6>&#8361;180,000</h6>
-                                    </div>
-                                </div>
-                                    <div class="right">
-                                        <div>
-                                            투숙객 이름:<br>
-                                            예약자명
-                                        </div>
-                                        <div>
-                                            투숙객 ID:<br>
-                                            xxxxx@xxxxx.com
-                                        </div> 
-                                    <div class="abc">   
-                                       <div>    
-                                        <div>
-                                            사용언어:<br>
-                                            한국어
-                                        </div>
-                                        <div>
-                                             예약자 이름:<br>
-                                             강호동
-                                        </div>
-                                       </div> 
-                                       <div>
-                                        <div>
-                                            채널<br>
-                                            Booking.com
-                                        </div>
-                                        <div id="as">
-                                            수수료 부과 대상 금액:<br>
-                                            &#8361;180,000
-                                        </div>
-                                       </div> 
-                                       <div>
-                                        <div>
-                                            예약번호:<br>
-                                            2299035596
-                                        </div>
-                                        <div>
-                                            수수료:<br>
-                                            &#8361;27,000
-                                        </div>
-                                       </div> 
-                                        <div>
-                                            예약일<br>
-                                            2022년 1월 21일(금)
-                                        </div>   
-                                       
-                                    </div>                               
-                                    </div>
-                            </div>
-                            
-                        </div>
-                        </div> 
-                        <div class="payment">
-                            <h4>결제</h4>
-                            <div>결제현황 <br>
-                                <select class="dataTable-selector">
-                                    <option value="Y">결제 완료</option>
-                                    <option value="N" selected="">결제 미완료</option>
-                                </select>
-                            </div>
-                        </div>       
-                    </div>
-                </main>
+				</main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

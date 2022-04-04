@@ -1,14 +1,21 @@
 package com.booqueen.admin.member;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.booqueen.admin.member.impl.MemberServiceImpl;
+import com.booqueen.user.member.vo.MemberProfileVO;
 
 @Controller
 public class MemberController {
@@ -21,6 +28,22 @@ public class MemberController {
 	
 		List<com.booqueen.user.member.MemberVO> userList = memberServiceImpl.getUserMember();
 		model.addAttribute("userList", userList);
+		
+		// 전날 가입자 수
+		int today = Calendar.getInstance().get(Calendar.DATE); // 오늘 일
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		int user_since_day = 0;
+		int joined_yesterday = 0;
+		
+		for (int i=0; i<userList.size(); i++) {
+			user_since_day = Integer.parseInt(dateFormat.format(userList.get(i).getSince()).substring(8));
+			if ((user_since_day+1) == today) {
+				joined_yesterday += 1;
+			}
+		}
+		
+		model.addAttribute("joined_yesterday", joined_yesterday);
+		
 		
 		Integer twenty = 0;
 		Integer thirty = 0;
@@ -78,6 +101,23 @@ public class MemberController {
 		model.addAttribute("getUserGender", userVO);
 		
 		return "userMember";
+	}
+	
+	public MemberProfileVO getProfile(String userid) throws Exception {
+		MemberProfileVO profile = memberServiceImpl.getProfileByUserid(userid);
+		return profile;
+	}
+	
+	@RequestMapping(value = "/userMemberDetail.mdo", method=RequestMethod.GET)
+	public String userMemberDetail(HttpSession session, @RequestParam("userid") String userid, Model model) throws Exception {
+		
+		List<UserVO> userVO = memberServiceImpl.getUserInfoDetail(userid);
+		model.addAttribute("userVO", userVO);
+		
+		MemberProfileVO profile = getProfile(userid);
+		model.addAttribute("profile", profile);
+		
+		return "userMemberDetail";
 	}
 	
 }

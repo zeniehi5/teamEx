@@ -70,15 +70,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -116,9 +115,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -204,7 +202,8 @@
                     <div class="container-fluid px-4">
         
                         <!-- 여기만 수정해서 사용하세요!! -->
-                        <h1 class="mt-4">파트너 정보</h1>
+                        <h2 class="mt-4">파트너 정보</h2>
+                        <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
@@ -233,11 +232,11 @@
                                             <th>활성화</th>
                                             <td>
                                             <c:choose>
-                                                	<c:when test="${partner.active == 1 }">
-                                                <input type="text" readonly value="활성화">
+                                                <c:when test="${partner.active == 1 }">
+                                                	<input type="text" readonly value="활성화">
                                                 </c:when>
                                                 <c:otherwise>
-                                                <input type="text" readonly value="비활성화">
+                                                	<input type="text" readonly value="비활성화">
                                                 </c:otherwise>
                                                 </c:choose>
                                             </td>
@@ -252,7 +251,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                파트너님의 호텔
+                                ${partner.lastname}${partner.firstname} 님의 호텔
                             </div>
                             <div class="card-body">
                             <form action="" name="goodsForm" method="POST" enctype="multipart/form-data">
@@ -260,8 +259,8 @@
                                     <!--#   시리얼넘버      호텔이름      담당자      연락처       주소      활성화 여부-->
                                     <thead>
                                         <tr>
-                                            <th>시리얼넘버</th>
-                                            <th>호텔이름</th>
+                                            <th>Serial No.</th>
+                                            <th>호텔명</th>
                                             <th>담당자</th>                                              
                                             <th>연락처</th>
                                             <th>도시</th>

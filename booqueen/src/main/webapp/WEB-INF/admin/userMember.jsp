@@ -28,16 +28,17 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
+		
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -61,22 +62,16 @@
 						
 						<div class="sb-sidenav-menu-heading">Interface</div>
 						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts2" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 회원 관리
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+							회원 관리
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -160,7 +155,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h2 class="mt-4">회원 분석 및 목록</h2>
+                        <!-- <h2 class="mt-4">회원 분석 및 목록</h2> -->
                         <br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
@@ -170,13 +165,13 @@
                                         </div>
                                         <p class="card-category">총 가입자 수</p>
                                         <h3 class="card-title"><fmt:formatNumber type="number" value= />
-                                            <small> ${fn:length(userList)}명</small>
+                                            <small>${fn:length(userList)}명</small>
 
                                         </h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <a href="#datatablesSimple">total</a> 
+                                            <a href="#datatablesSimple" class="view_all" style="font-size: 0.875em;">전체보기</a> 
                                         </div>
                                     </div>   
                                 </div>
@@ -188,12 +183,12 @@
                                         </div>
                                         <p class="card-category">전날 가입자수</p>
                                         <h3 class="card-title"><!-- ${regCount == null ? 0 : regCount} -->
-                                            <small>2명</small>
+                                            <small>${joined_yesterday+0}명</small>
                                         </h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                        <i class="material-icons">date_range</i> Last 24 Hours
+                                        <i class="material-icons" style="font-size: 0.875em;">매일 0시 초기화</i>
                                         </div>
                                     </div>
                                 </div>
@@ -261,34 +256,36 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>e-mail</th>
-                                            <th>Gender</th>
-                                            <th>Phone</th>
-                                            <th>YY-MM-DD</th>
+                                            <th>No.</th>
+                                            <th>이름</th>
+                                            <th>이메일</th>
+                                            <th>성별</th>
+                                            <th>연락처</th>
+                                            <th>생년월일</th>
+                                            <th>가입일</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>e-mail</th>
-                                            <th>Gender</th>
-                                            <th>Phone</th>
-                                            <th>YY-MM-DD</th>
+                                            <th>No.</th>
+                                            <th>이름</th>
+                                            <th>이메일</th>
+                                            <th>성별</th>
+                                            <th>연락처</th>
+                                            <th>생년월일</th>
+                                            <th>가입일</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-
                                     <c:forEach var="userList" items="${userList }" varStatus ="status">
                                         <tr>
-                                            <th scope="row">${status.count }</th>
-                                            <td>${userList.name }</td>
-                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=">${userList.userid }</a></td>
-                                            <td>${userList.gender }</td>
-                                            <td>${userList.phone1 } - ${userList.phone2 } - ${userList.phone3 }</td>
-                                            <td>${userList.birth_year } - ${userList.birth_month } - ${userList.birth_day }</td>
+                                            <td scope="row"><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${status.count }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.name }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.userid }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.gender }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.phone1 } - ${userList.phone2 } - ${userList.phone3 }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.birth_year } - ${userList.birth_month } - ${userList.birth_day }</a></td>
+                                            <td><a href="${contextPath}/userMemberDetail.mdo?userid=${userList.userid}">${userList.since }</a></td>
                                         </tr> 
                                     </c:forEach>            
                                     </tbody>
@@ -303,8 +300,8 @@
 	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/admin/javascript/chart-area-demo.js"></script>
-	<!-- <script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script> -->
-	<!-- <script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script> -->
+	<%-- <script src="${contextPath}/resources/admin/javascript/chart-bar-demo.js"></script> --%>
+	<%-- <script src="${contextPath}/resources/admin/javascript/chart-pie-demo.js"></script> --%>
 	
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>

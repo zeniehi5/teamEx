@@ -27,15 +27,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -73,9 +72,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -158,8 +156,11 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                	<div class="container-fluid px-4">
+                		<!-- <h2 class="mt-4">호텔 목록</h2> -->
+                		<br>
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <div class="card-header" style="font-size: 20px;">
                                 <i class="fas fa-table me-1"></i>
                                 호텔 목록
                             </div>
@@ -167,12 +168,12 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>호텔 이름</th>
+                                            <th>호텔명</th>
                                             <th>주소</th>
-                                            <th>호텔 매니저</th>
-                                            <th>호텔 전화번호</th>
+                                            <th>담당자</th>
+                                            <th>연락처</th>
                                             <th>성급</th>
-                                            <th>상세정보 보기</th>
+                                            <th>자세히 보기</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -199,6 +200,7 @@
                                 </table>
                             </div>
                         </div>
+					</div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +27,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -73,9 +72,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -158,94 +156,54 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            거래
-                        </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>룸</th>
-                                        <th>가격</th>
-                                        <th>수수료</th>
-                                        <th style="width: 200px;">누적 예약수</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>룸</th>
-                                        <th>가격</th>
-                                        <th>수수료</th>
-                                        <th>누적 예약수</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>디럭스 싱글룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>수페리어 싱글룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>디럭스 더블룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>수페리어 더블룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>디럭스 트리플룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>수페리어 트리플룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>주니어 스위트룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        <td>이그제큐티브 스위트룸</td>
-                                        <td>10,000</td>
-                                        <td>1,000</td>
-                                        <td>101건</td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td colspan="4" style="text-align: right; padding-right: 210px;">
-                                            
-                                            <span id="ca">
-                                                총 금액 :
-                                            </span>
-                                            <span>
-                                                총 수수료:
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
+                	<div class="container-fluid px-4">
+                		<br>
+	                    <div class="card mb-4">
+	                        <div class="card-header" style="font-size: 20px;">
+	                            <i class="fas fa-table me-1"></i>상세 거래 내역 - ${transactionList.get(0).hotelname}
+	                        </div>
+	                        <div class="card-body">
+	                            <table id="datatablesSimple">
+	                                <thead>
+	                                    <tr>
+	                                    	<th>No.</th>
+	                                        <th>객실 타입</th>
+	                                        <th>가격</th>
+	                                        <th>수수료</th>
+	                                        <th style="width: 200px;">누적 예약 수</th>
+	                                    </tr>
+	                                </thead>
+	                                <tfoot>
+	                                    <tr>
+	                                    	<th>No.</th>
+	                                        <th>객실 타입</th>
+	                                        <th>가격</th>
+	                                        <th>수수료</th>
+	                                        <th>누적 예약수</th>
+	                                    </tr>
+	                                </tfoot>
+	                                <tbody>
+	                                	<c:forEach var="transactionList" items="${transactionList}" varStatus="status">
+	                                    <tr>
+	                                    	<th>${status.index+1}</th>
+	                                        <td>${transactionList.type}</td>
+	                                        <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${transactionList.price}"/></td>
+	                                        <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${transactionList.price * 0.15}"/></td>
+	                                        <td>${transactionList.reservation_count}건</td>
+	                                    </tr>
+	                                    <c:set var="total_price" value="${total_price + transactionList.price}"/>
+	                                    </c:forEach>
+	                                    <tr>
+											<td colspan="5" style="text-align: right; padding-right: 100px;">
+	                                            <span id="ca">총 금액 : <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${total_price}"/></span>
+	                                            <span>총 수수료 : <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${total_price * 0.15}"/></span>
+											</td>
+	                                    </tr>
+	                                    
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                    </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

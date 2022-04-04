@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
-	<resultMap id="genderResult" type="userVO">
-		<result property="gender" column="gender"/>
-		<result property="female_count" column="female_count"/>
-		<result property="male_count" column="male_count"/>
-	</resultMap>
 	
-	<select id="getUserGender" resultMap="genderResult">
+	<select id="getUserGender" resultType="userVO">
 		SELECT gender FROM u_member
 	</select>
+	
+	<select id="getUserInfoDetail" parameterType="String" resultType="userVO">
+		SELECT * FROM u_member AS u
+		LEFT JOIN reservation AS r ON u.userid = r.userid
+		WHERE u.userid=#{userid}
+	</select>
+	
+	
 </mapper>

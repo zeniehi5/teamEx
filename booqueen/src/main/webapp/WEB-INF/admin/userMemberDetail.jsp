@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,15 +71,14 @@
 			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<!-- <div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..."
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+			</div> -->
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -116,9 +116,8 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 및 이용이 제한된 회원
-									관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -201,15 +200,14 @@
             </div>
             <div id="layoutSidenav_content"> 
                 <main>
-                    <div class="container-fluid px-4">
-        
+                    <div class="container-fluid px-4" style="padding-top: 1.5rem;">
                         <!-- 여기만 수정해서 사용하세요!! -->
-                        <h1 class="mt-4">유저 정보</h1>        
-                        <div class="card mb-4">
+                        <!-- <h2 class="mt-4">회원 정보</h2> -->     
+                        <div class="card mb-4" style="border: none;">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #5f0080; font-weight: bold; ">
-                                        유저 정보
+                                    <div style="font-size: 20px; font-weight: bold;">
+                                        회원 정보
                                     </div>							
                                 </div>
                             </div>
@@ -217,28 +215,28 @@
                                 <form action="" name="goodsForm" method="POST" enctype="multipart/form-data">
                                         <table class="type02">
                                             <tr style="margin: 100px;">
-                                                <th>이미지</th>
-                                                <td><img name="img" style="width: 30%; height: 30%" src="assets/img/KakaoTalk_20220130_224455383.jpg" /></td>
+                                                <th>프로필 이미지</th>
+                                                <td><img name="img" style="width: 30%; height: 30%" img src="data:${profile.profile_type};base64, ${profile.profile_data}" style="height: 50px; width: 50px;"></td>
                                             </tr>
                                             <tr>
                                                 <th>이름</th>
-                                                <td><input type="text" name="partner_name" style="width: 100%; height: 100%" readonly value="장진아"></td>
+                                                <td><input type="text" name="partner_name" style="width: 100%; height: 100%" readonly value="${userVO.get(0).name}"></td>
                                             </tr>
                                             <tr>    
                                                 <th scope="row">이메일</th>
-                                                <td><input type="text" name="partner_email" readonly value="abc@def.com"></td>
+                                                <td><input type="text" name="partner_email" readonly value="${userVO.get(0).userid}"></td>
                                             </tr> 
                                             <tr>
                                                 <th>성별</th>
-                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="female"></td>
+                                                <td><input type="text" name="hotel_name" style="width: 100%; height: 100%" readonly value="${userVO.get(0).gender}"></td>
                                             </tr>                                      
                                             <tr>
                                                 <th>전화번호</th>
-                                                <td><input type="text" name="partner_Phone"  readonly value="010-1234-1234"></td>
+                                                <td><span>${userVO.get(0).phone1}</span>-<span>${userVO.get(0).phone2 }</span>-<span>${userVO.get(0).phone3 }</span></td>
                                             </tr>
                                             <tr>    
                                                 <th scope="row">생년월일</th>
-                                                <td><input type="text" name="partner_email" readonly value="1991-01-01"></td>
+                                                <td><span>${userVO.get(0).birth_year}</span>-<span>${userVO.get(0).birth_month}</span>-<span>${userVO.get(0).birth_day}</span></td>
                                             </tr>                                             
                                         </table>
                                         <br>
@@ -259,41 +257,36 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>신라호텔</td>
-                                                            <td>22-01-01 ~ 22-01-02</td>
-                                                            <td>11만원</td>
-                                                            <td>이용 완료</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>신라호텔</td>
-                                                            <td>22-01-01 ~ 22-01-02</td>
-                                                            <td>11만원</td>
-                                                            <td>이용 완료</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>신라호텔</td>
-                                                            <td>22-01-01 ~ 22-01-02</td>
-                                                            <td>11만원</td>
-                                                            <td>이용 완료</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>신라호텔</td>
-                                                            <td>22-01-01 ~ 22-01-02</td>
-                                                            <td>11만원</td>
-                                                            <td>이용 완료</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>신라호텔</td>
-                                                            <td>22-01-01 ~ 22-01-02</td>
-                                                            <td>11만원</td>
-                                                            <td>이용 완료</td>
-                                                        </tr>
+                                                    	<c:forEach var="userVO" items="${userVO}" varStatus="status">
+                                                    	<c:choose>
+	                                                    	<c:when test="${!empty userVO.reservation_number || userVO.reservation_number != null}">
+	                                                        <tr>
+	                                                            <th scope="row">${userVO.reservation_number}</th>
+	                                                            <td>${userVO.hotelname}</td>
+	                                                            <td><fmt:formatDate value="${userVO.checkin_date}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${userVO.checkout_date}" pattern="yyyy-MM-dd"/></td>
+	                                                            <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${userVO.price}"/></td>
+	                                                            <c:choose>
+	                                                            	<c:when test="${userVO.use_status eq 1}">
+	                                                            		<td>체크인 중</td>
+	                                                            	</c:when>
+	                                                            	<c:when test="${userVO.use_status eq 2}">
+	                                                            		<td>이용 완료</td>
+	                                                            	</c:when>
+	                                                            	<c:otherwise>
+	                                                            		<td>예약 완료</td>
+	                                                            	</c:otherwise>
+	                                                            </c:choose>
+	                                                        </tr>
+                                                       		</c:when>
+                                                       		<c:otherwise>
+                                                       		<tr>
+			                                            		<td colspan='5' style="border: none;">
+			                                            			<span><strong>호텔 이용 내역이 없습니다</strong></span>
+			                                            		</td>
+			                                            	</tr>
+                                                       		</c:otherwise>
+                                                        </c:choose>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>

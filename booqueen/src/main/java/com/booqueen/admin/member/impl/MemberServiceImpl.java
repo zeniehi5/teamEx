@@ -9,6 +9,7 @@ import com.booqueen.admin.member.MemberService;
 import com.booqueen.admin.member.MemberVO;
 import com.booqueen.admin.member.UserAgeGroupVO;
 import com.booqueen.admin.member.UserVO;
+import com.booqueen.user.member.vo.MemberProfileVO;
 
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
@@ -34,6 +35,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<UserVO> getUserGender() {
 		return memberDAO.getUserGender();
+	}
+	
+	@Override
+	public List<UserVO> getUserInfoDetail(String userid) {
+		return memberDAO.getUserInfoDetail(userid);
+	}
+	
+	@Override
+	public MemberProfileVO getProfileByUserid(String userid) {
+		return memberDAO.getProfileByUserid(userid);
 	}
 
 	

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.booqueen.admin.member.UserAgeGroupVO;
 import com.booqueen.admin.member.UserVO;
+import com.booqueen.user.member.vo.MemberProfileVO;
 
 @Repository("MemberDAO")
 public class MemberDAO {
@@ -36,5 +38,12 @@ public class MemberDAO {
 		return sqlSessionTemplate.selectList("UserDAO.getUserGender");
 	}
 	
+	public List<UserVO> getUserInfoDetail(String userid) {
+		return sqlSessionTemplate.selectList("UserDAO.getUserInfoDetail", userid);
+	}
+	
+	public MemberProfileVO getProfileByUserid(String userid) throws DataAccessException{
+		return (MemberProfileVO) sqlSessionTemplate.selectOne("com.booqueen.user.member.dao.memberProfilemapper.selectProfileByUserid", userid);
+	}
 	
 }
