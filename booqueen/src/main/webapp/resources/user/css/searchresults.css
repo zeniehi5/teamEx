@@ -405,6 +405,8 @@
 }
 .ranking-text {
 	height: 20px;
+    font-size: 15px;
+    font-weight: 600;
 }
 .ranking-text a {
 	text-decoration: none;

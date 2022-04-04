@@ -779,6 +779,7 @@ time > a{
 }
 .question-third{
     display: flex;
+    gap: 5%;
 }
 .question-third-left div:first-child{
     width: 33.3333%;
@@ -793,9 +794,11 @@ time > a{
 .question-third-left p{
     margin-bottom: 10px;
 }
+.question-third-left{
+    width: 30%;
+}
 .question-third-right{
-    width: 66.66666%;
-    margin-left: 20px;
+    width: 65%;
 }
 .question-third-right-row {
     width: 33.3333%;
@@ -1752,4 +1755,8 @@ border-radius: 2px 0 0 2px;
 .more-review-detail{
 	margin-top: 20px;
     margin-left: 10px;
+}
+.board_send_date{
+    color: #0071c2;
+    font-size: 12px;
 }

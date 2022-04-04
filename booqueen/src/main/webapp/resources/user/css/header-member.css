@@ -174,34 +174,15 @@ nav {
 	/* -webkit-font-smoothing: subpixel-antialiased;
 	-webkit-tap-highlight-color: transparent; */
 }
-.chatting-list-panel-close {
-	right: 475px;
-    height: 60px;
-	top: 70px;
-	padding: 12px 29px 12px 11px;
-	background: #0071c2;
-	width: 62px;
-	border-radius: 5px 0 0 5px;
-	display: inline-block;
-	color: #fff;
-	cursor: pointer;
-	text-align: center;
-	box-shadow: 0 0 14px #444;
-	position: fixed;
-	transform: translateX(0) translateZ(0);
-	/* z-index: 2; */
-	animation: sliding-panel-close-button-in .4s forwards;
-	animation-delay: .3s;
-}
-.chatting-list-panel-close:hover{
-	background-color: #013680;
-}
+
 .bi-x-lg {
 	color: #fff;
 	cursor: pointer;
 	text-align: center;
 	font-size: 20px;
 	line-height: 20px;
+	right: 28px;
+    top: 15px;
 }
 .chatting-list-panel-content {
 	display: flex;
@@ -337,10 +318,16 @@ nav {
 	color: #707070;
 	transition: opacity .25s ease;
 	word-break: break-word;
-	margin-top: 8px;	
+	margin: 8px 0 5px 0;	
 }
 .msg-cancel-image {
 	opacity: .65;
+}
+.meg-status{
+	font-size: 12px;
+    border: 1px solid red;
+    border-radius: 3px;
+    color: red;
 }
 .msg-cancel {
 	font-size: 12px;
@@ -942,6 +929,7 @@ nav {
    -webkit-tap-highlight-color: transparent; */
 }
 .chatting-list-panel-close {
+   height: 47px;
    right: 460px;
    top: 70px;
    padding: 12px 29px 12px 11px;
@@ -962,13 +950,7 @@ nav {
 .chatting-list-panel-close:hover{
    background-color: #013680;
 }
-.bi-x-lg {
-   color: #fff;
-   cursor: pointer;
-   text-align: center;
-   font-size: 20px;
-   line-height: 20px;
-}
+
 .chatting-list-panel-content {
    display: flex;
    width: 480px;

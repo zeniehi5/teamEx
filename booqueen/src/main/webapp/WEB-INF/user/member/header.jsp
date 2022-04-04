@@ -53,14 +53,10 @@
 
 						<div id="dropdown" class="bui-group__item" onclick="dropDown()">
 							<div class="bui-dropdown bui-dropdown--end">
-								<a
-									href="#"
-									type="button"> <span class="bui-button__text">
+								<a type="button"> <span class="bui-button__text">
 										<div class="bui-avatar-block">
-											<div
-												class="bui-avatar bui-avatar--accent bui-avatar--outline-accent">
-												<img class="bui-avatar__image"
-													img src="data:${user_profile.profile_type};base64, ${user_profile.profile_data}" style="height: 50px; width: 50px;">
+											<div class="bui-avatar bui-avatar--accent bui-avatar--outline-accent">
+												<img class="bui-avatar__image" img src="data:${user_profile.profile_type};base64, ${user_profile.profile_data}" style="height: 50px; width: 50px;">
 											</div>
 											<div class="bui-avatar-block__text">
 												<span class="bui-avatar-block__title"
@@ -145,11 +141,14 @@
 			             	  <input class="input_for_end_date" type="hidden" value="${reservationList.end_date}">
 			             	  <input class="input_for_serialnumber" type="hidden" value="${reservationList.serialnumber}">
 			                     <div class="msg-entry-point">
-			                        <div class="msg-entry-point-link" onclick="entryChatting()">
+			                        <div class="msg-entry-point-link" id="${reservationList.reservation_number}" onclick="entryChatting()">
 			                           <img src="${reservationList.file_url}" alt="" class="msg-entry-point-image">
 			                           <div class="msg-entry-point-thumbnail">
 			                              <div class="msg-title">${reservationList.hotelname}</div>
 			                              <div class="msg-trip-dates">${reservationList.start_date} | ${reservationList.end_date}</div>
+			                              <c:if test="${!reservationList.status}">
+			                              	<span class="meg-status">취소됨</span>
+			                              </c:if>
 			                           </div>
 			                        </div>
 			                     </div>

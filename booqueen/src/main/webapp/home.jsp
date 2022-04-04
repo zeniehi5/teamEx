@@ -823,6 +823,9 @@
 			input = $('#keywordInput').val(); // 입력된 값 저장
 			$('#keywordInput').autocomplete("search", Hangul.disassemble(input).join("").replace(/ /gi, "")); // 자음모음 분리 후 띄어쓰기 삭제
 		})
+		$('#keywordInput').on("focus", function() {
+			$('#keywordInput').autocomplete("search", Hangul.disassemble('ㅇ').join("").replace(/ /gi, ""));
+		})
 	});
 
     </script>

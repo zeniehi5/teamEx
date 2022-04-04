@@ -162,7 +162,7 @@ body {
 }
 .hotel-card {
 	display: flex;
-	height: 456px;
+	height: 440px;
 	width: 265px;
 	background-color: #fff;
 	flex-direction: column;
@@ -185,6 +185,7 @@ body {
 	border: 0;
 	flex-shrink: 0;
 	display: block;
+	max-height: 170px;
 }
 .hotel-card-content {
 	padding: 16px;
@@ -327,6 +328,7 @@ body {
 	max-width: 256px;
 	max-height: 256px;
 	overflow: hidden;
+	color: #fff;
 }
 .hotel-card-remove {
 	display: none;

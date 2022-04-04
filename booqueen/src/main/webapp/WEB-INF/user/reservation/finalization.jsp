@@ -23,8 +23,16 @@
 <body>
     <jsp:include page="/WEB-INF/user/member/header.jsp"/>
     
+    <fmt:parseDate value="${reservationVO.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+    <fmt:parseDate var="end_date" value="${reservationVO.end_date}" pattern="yyyy-MM-dd" />
+    <c:set var="now" value="<%=new java.util.Date()%>" />
+	<c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set> 
+	<c:set var="tomorrow" value="<%=new java.util.Date(new java.util.Date().getTime() + 60*60*24*1000)%>"/>
+	<c:set var="tomorrowDate"><fmt:formatDate value="${tomorrow}" pattern="yyyyMMdd" /></c:set> 
+	
     <div class="content-top">
-        <span class="_501928098">확정된 예약입니다: <span class="_e4a8213f6">${reservationVO.hotelname }<span class="_a11e76d75 _192b3a196"></span></span></span>
+        <span class="_501928098">확정된 예약입니다: <a href="${contextPath}/hotelInfo.do?serialNumber=${reservationVO.serialnumber}&start_date=${nowDate }&end_date=${tomorrowDate}" target="_blank">
+                        	<span class="_e4a8213f6">${reservationVO.hotelname }<span class="_a11e76d75 _192b3a196"></span></span></a></span>
         <div role="img" class="_bebcf8d60 b3a3ada19a"><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span></div>
     </div>
 
@@ -45,8 +53,9 @@
         <div class="masthead">
             <div class="masthead-inner-container">
                 <div class="mb-card__col mhead--property">
-                        <div id="mb-hotel-cover" class="mb-masthead__hotel-photo mb-hotel-photo js_pb_mb_hotel_gallery" style="background-image: url(${reservationVO.file_url});"></div>
-
+                        <a href="${contextPath}/hotelInfo.do?serialNumber=${reservationVO.serialnumber}&start_date=${nowDate }&end_date=${tomorrowDate}" target="_blank">
+                        	<div id="mb-hotel-cover" class="mb-masthead__hotel-photo mb-hotel-photo js_pb_mb_hotel_gallery" style="background-image: url(${reservationVO.file_url});"></div>
+						</a>
                     <div class="mb-info__reversed">
                         <div class="bui-inline-container mb-info">
                             <div class="bui-inline-container__main">
@@ -57,7 +66,7 @@
                                 <div class="bui-spacer--medium"></div>
                                 <div role="group" class="bui-group bui-group--vertical-align-middle">
                                     <div class="bui-group__item">
-                                        <a type="button" class="assistant-entry-point bui-button bui-button--primary bui-u-inline mybooking-block__assistant-cta-btn">
+                                        <a type="button" class="assistant-entry-point bui-button bui-button--primary bui-u-inline mybooking-block__assistant-cta-btn" onclick="sendMsgToHotel();">
                                             <span class="assistant-entry-point__text">숙소에 메시지 보내기</span>
                                         </a>
                                     </div>
@@ -102,13 +111,13 @@
                                     <div data-testid="PostBookingCheckinCheckout" class="_1e97201db">
                                         <div>체크인</div>
                                         <time class="_ab5ecce54 a7c1636554">
-                                        <fmt:parseDate value="${reservationVO.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+                                        
                                             <div class="ac6bdec376"><fmt:formatDate value="${start_date}" pattern="yyyy년 MM월 dd일"/></div>
 <%--                                             <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_in_start}:00 - ${reservationVO.check_in_end}:00 </div> --%>
                                         </time>
                                         <div class="_f807b8e8c">체크아웃</div>
                                         <time class="_ab5ecce54 a7c1636554">
-                                        <fmt:parseDate var="end_date" value="${reservationVO.end_date}" pattern="yyyy-MM-dd" />
+                                        
                                             <div class="ac6bdec376"><fmt:formatDate value="${end_date}" pattern="yyyy년 MM월 dd일"/></div>
 <%--                                             <div class="_dc55ee131 _1e6021d2f">${reservationVO.check_out_start}:00 - ${reservationVO.check_out_end}:00</div> --%>
                                         </time>
@@ -136,16 +145,8 @@
                             </ul>
                         </div>
                         <p class="bui_font_smaller _39823795">
-                            <a
-                                class="mb-link--basic custom_track hasSlideBox"
-                                data-slidebox-additional-class="pb-price-breakdown-lightbox"
-                                data-slidebox-title="요금 포함 사항"
-                                data-slidebox-target="#slidebox-price-details"
-                                data-slidebox-preopen-callback="showPriceDetailsCallback"
-                                data-slidebox-load="mybooking.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;auth_key=gq6e9NxzOfdrsvVA;do=show_price_details"
-                                data-trackname="price-details"
-                                href="#">
-                                요금 포함 사항
+                            <a>
+                                세금(VAT) 포함 
                             </a>
                         </p>
                     </div>
@@ -157,17 +158,17 @@
                         <div>
                             <div class="_66d2783ed">
                                 <div class="_475f10c6a">
-                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
+                                    <a class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
                                         <span>예약 날짜 변경</span>
                                     </a>
                                 </div>
                                 <div class="_475f10c6a ed7d481e46">
-                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398">
+                                    <a class="_4310f7077 _45807dae0 _f7538b398">
                                         <span>호텔 정책 확인</span>
                                     </a>
                                 </div>
                                 <div class="_475f10c6a">
-                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398">
+                                    <a class="_4310f7077 _45807dae0 _f7538b398">
                                         <span>예약 확인서 보기</span>
                                     </a>
                                 </div>
@@ -191,7 +192,7 @@
                     <div class="mb-info mb-info__full_width mb-info__actions bui_font_small">
                         <div class="mb-info--content">
                             <div class="mh-links">
-                                <a class="mb-btn mb-cancel custom_track hasSlideBox js-cancel-request-btn" data-slidebox-preopen-callback="cancelOpenCallback" data-slidebox-load="mybooking_cancelsummary.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;auth_key=gq6e9NxzOfdrsvVA;do=cancel" data-slidebox-submit-callback="cancelButtonSubmitCallback" data-slidebox-target="#slidebox-cancel-booking" data-slidebox-ajax-failure-feedback="true" href="${contextPath}/cancelPage.do?reservation_number=${reservationVO.reservation_number}" role="button" data-slidebox-reload-on-close-after-action="true" data-slidebox-close-callback="CancelClose_cxp_abu_trips_cancel_flow_free_cancel" data-trackname="Cancel booking, ">예약 취소</a> 
+                                <a class="mb-btn mb-cancel custom_track hasSlideBox js-cancel-request-btn" href="${contextPath}/cancelPage.do?reservation_number=${reservationVO.reservation_number}" role="button">예약 취소</a> 
                             </div>
                         </div>
                     </div>
@@ -226,10 +227,7 @@
                     </th>
                     <td>
                         <p>
-                            ${reservationVO.lastname } ${reservationVO.firstname }
-  -
-                                투숙객명 수정
-                            </a>
+                            ${reservationVO.lastname } ${reservationVO.firstname }                            </a>
                         </p>
                     </td>
                 </tr>
@@ -418,7 +416,7 @@
                                     <div class="_40f62ffbd">
                                         <span data-testid="payment-status" class="_4abc4c3d5">결제 완료</span>
                                     </div>
-                                     <span data-testid="payment-amount" class="ac6bdec376 _cce1d8a72"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.count_room*reservationVO.price}" /></span> 
+                                     <span data-testid="payment-amount" class="ac6bdec376 _cce1d8a72"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></span> 
                                 </div>
                             </div>
                         </div>
@@ -665,6 +663,14 @@
             </div>
         </div>
     </div>
+
+	<script>
+	var reservation_number = '${reservationVO.reservation_number}';
+	function sendMsgToHotel(){
+		openChatting();
+		document.getElementById(reservation_number).click();
+	}
+	</script>
 
     <script>
          function on() {

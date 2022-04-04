@@ -279,7 +279,7 @@
 			}
 		})
 	}
-	/* 아임포트 환불
+	/* 아임포트 환불(version2)
 	function cancelPay() {
 	    $.ajax({
 	      url: path + "/checkPayment.do", // 예: http://www.myservice.com/payments/cancel

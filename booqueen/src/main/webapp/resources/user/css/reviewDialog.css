@@ -534,3 +534,127 @@
 .empty-write-review:hover {
    background-color: #D7E8FA;
 }
+
+/* board */
+.board-list {
+	opacity: 1;
+	display: none;
+	background: rgba(0,0,0,0.2);
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 2;
+	padding: 0;
+}
+.board-list-panel {
+	width: 600px;
+	box-shadow: 0 0 14px #444;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	overflow-y: auto;
+	box-shadow: 0 0 50px rgb(0 0 0 / 20%);
+}
+.board-list-panel-close {
+	right: 587px;
+	top: 40px;
+	position: fixed;
+	padding: 15px 30px 15px 10px;
+	background: #0071c2;
+	width: 20px;
+	border-radius: 5px 0 0 5px;
+	display: inline-block;
+	color: #fff;
+	cursor: pointer;
+	text-align: center;
+	font-size: 16px;
+	line-height: 16px;
+	box-shadow: 0 0 14px #444;
+	z-index: -1;
+	animation-delay: .3s;
+}
+.board-list-panel-close:hover {
+	background: #003580;
+}
+.board-close {
+	cursor: pointer;
+	text-align: center;
+}
+.board-list-panel-content {
+	background: #fff; 
+	padding: 15px 25px 0 25px;
+	z-index: 100;
+	right: 0;
+	min-height: 100%;
+	overflow: visible;
+}
+
+/* question */
+.question2{
+    position: relative;
+}
+.question-third2{
+    display: block;
+}
+.question-third-left2 div:first-child{
+    width: 33.3333%;
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    padding: 20px
+}
+.question-third-left2 div:last-child button{
+    margin-top: 20px;
+    width: 100%;
+}
+.question-third-left2 p{
+    margin-bottom: 10px;
+}
+.question-third-left2{
+    width: 30%;
+}
+.question-third-right2{
+    width: 100%;
+}
+.question-third-right-row2 {
+    width: 33.3333%;
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    padding: 20px
+}
+.question-third-right2 div{
+    margin-bottom: 20px;
+}
+.question-third-right2 div:last-child{
+    margin-bottom: 0;
+}
+.question-more2{
+	font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+.icon-text2{
+    display: flex;
+}
+.question2 h2{
+    margin-bottom: 15px;
+}
+.question2 > p{
+    margin-bottom: 20px;
+}
+.question-third-left2 p:last-child{
+    margin-top: 20px;
+    text-align: center;
+}
+#question-button2{
+    color: #fff;
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+}
+#question-booking2{
+    right: 18%;
+}

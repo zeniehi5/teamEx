@@ -78,5 +78,9 @@ public class RoomService {
 	public int updateRoomAvailable(ReservationVO reservationVO) {
 		return roomDAO.updateRoomAvailable(reservationVO);
 	}
+	
+	public int updateRoomAvailablePlus(ReservationVO reservationVO) {
+		return roomDAO.updateRoomAvailablePlus(reservationVO);
+	}
 
 }

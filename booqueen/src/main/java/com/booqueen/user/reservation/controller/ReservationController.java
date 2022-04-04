@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,42 +130,42 @@ public class ReservationController {
 		return "reservation/reservation2";
 	}
 
-	@RequestMapping(value = "/reservation.do")
+	@PostMapping(value = "/reservation.do")
 	public String reservation(ReservationVO reservationVO, Model model) throws Exception {
+
+		int pinCode = (int) (Math.random() * 9000) + 1000;
+		reservationVO.setPincode(pinCode);
+		reservationVO.setStatus(true);
+		reservationVO.setRequest_text(reservationVO.getRequest_text().replace(",", ""));
 
 		int[] count_rooms = reservationVO.getCount_rooms();
 		int[] prices = reservationVO.getPrices();
 		String[] types =reservationVO.getTypes();
 		
-		int pinCode = (int) (Math.random() * 9000) + 1000;
-		reservationVO.setPincode(pinCode);
-		reservationVO.setStatus(true);
-		reservationVO.setRequest_text(reservationVO.getRequest_text().replace(",", ""));
-			
-//		for(int i = 0; i < count_rooms.length; i++) {
-//			reservationVO.setCount_room(count_rooms[i]);
-//			reservationVO.setPrice(prices[i]);
-//			reservationVO.setType(types[i]);
-//			reservationService.insertReservation(reservationVO);
-//			roomService.updateRoomAvailable(reservationVO);
-
+		/* 방을 여러 개 선택했을 경우
+		for(int i = 0; i < count_rooms.length; i++) {
+			reservationVO.setCount_room(count_rooms[i]);
+			reservationVO.setPrice(prices[i]);
+			reservationVO.setType(types[i]);
+			reservationService.insertReservation(reservationVO);
+			roomService.updateRoomAvailable(reservationVO);
+		 */
 			reservationVO.setCount_room(count_rooms[0]);
 			System.out.println(count_rooms[0]);
 			reservationVO.setPrice(prices[0]);
 			reservationVO.setType(types[0]);
 			reservationService.insertReservation(reservationVO);
 			roomService.updateRoomAvailable(reservationVO);
+			String orgin_start_date = reservationVO.getStart_date();
 		
-			
 			for(int j = 1; j < reservationVO.getDiffDays(); j++) {
-				System.out.println(reservationVO.getDiffDays());
 				String year =  reservationVO.getStart_date().substring(0, 4);
 				String month = reservationVO.getStart_date().substring(4, 6);
 				String day = reservationVO. getStart_date().substring(6);
 				String open_date = year + "-" + month + "-" + day;
 				reservationVO.setStart_date(LocalDate.parse(open_date).plusDays(j).toString().replaceAll("-", ""));
 				roomService.updateRoomAvailable(reservationVO);
-				System.out.println(reservationVO.getStart_date());
+				reservationVO.setStart_date(orgin_start_date);
 			}	
 //		}
 //			reservationService.deleteDuplicatedReservation();
@@ -215,7 +216,7 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value="/confirmation.do")
-	public String confirmPage(@RequestParam("reservation_number") String reservation_number, Model model) {
+	public String confirmPage(@RequestParam("reservation_number") String reservation_number, @RequestParam("room_id") int room_id, @RequestParam("serialnumber") int serialnumber, Model model) {
 		
 		int reservation_number_i = Integer.parseInt(reservation_number);
 		ReservationVO reservation = reservationService.getReservation(reservation_number_i);
@@ -252,21 +253,32 @@ public class ReservationController {
 		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("reservationVO", cancelVO);
 		
+		/* 여러 방 선택했을때
 		for(int i=0; i<reservationList.size(); i++) {
 			String start_day = roomService.getDateDay(reservationList.get(i).getStart_date(), "yyyy-MM-dd");
 			String end_day = roomService.getDateDay(reservationList.get(i).getEnd_date(), "yyyy-MM-dd");
 			reservationList.get(i).setStart_day(start_day);
 			reservationList.get(i).setEnd_day(end_day);
-		}
+		}*/
 		
 		Date now = new Date();
 		model.addAttribute("now", now);
 		
-		// 다시 room_available에 가능한 방 insert
-		ReservationVO reservationVO_available = new ReservationVO();
-		reservationVO_available.setRoom_id(reservationVO.getRoom_id());
-		reservationVO_available.setStart_date(reservationVO.getStart_date());
-		roomService.insertRoomAvailable(reservationVO_available);
+		// 다시 room_available에 가능한 방 update
+		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(cancelVO.getStart_date());
+        Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(cancelVO.getEnd_date());
+        long diffSec = (format2.getTime() - format1.getTime()) / 1000;
+        long diffDays = diffSec / (24*60*60);
+        System.out.println("diffDays: " + diffDays); 
+        
+		roomService.updateRoomAvailablePlus(cancelVO);
+		String orgin_start_date = cancelVO.getStart_date();
+		
+		for(int j = 1; j < diffDays; j++) {
+			cancelVO.setStart_date(LocalDate.parse(cancelVO.getStart_date()).plusDays(j).toString());
+			roomService.updateRoomAvailablePlus(cancelVO);
+			cancelVO.setStart_date(orgin_start_date);
+		}
 		
 		return "reservation/confirmcancel";
 	}

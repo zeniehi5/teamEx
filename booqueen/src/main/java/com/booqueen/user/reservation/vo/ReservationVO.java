@@ -53,5 +53,6 @@ public class ReservationVO {
 	private Integer review_deadline;
 	private boolean review;
 	private Integer count; // 호텔 예약 횟수
+	private Integer use_status;
 
 }

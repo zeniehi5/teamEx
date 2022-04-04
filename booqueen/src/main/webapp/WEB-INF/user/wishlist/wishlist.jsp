@@ -55,19 +55,22 @@
 							</a>
 							<div class="hotel-card" id="hotelCard${status.count }">
 								<div class="hotel-card-image">
-									<img src="${contextPath}/resources/user/images/house-${status.count }.png" alt="">
+									<img src="${wishlist.hotelimgpath }" alt="">
 								</div>
 								<div class="hotel-card-content">
-									<div class="card-header">
-										<h1 class="card-title">${wishlist.hotelname }</h1>
-										<div>
-											<i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-fill"></i>
+<!-- 									<div class="card-header"> -->
+										<h3 class="card-title">${wishlist.hotelname }</h3>
+										<div style="margin-top: 10px;">
+											<c:set var="star" value="${wishlist.star*1}"/>
+											<c:forEach begin="1" end="${star }">
+												<span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
+													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+												</svg>
+											</span>
+											</c:forEach>
 										</div>	
-									</div>
+<!-- 									</div> -->
 									<div class="card-location">
 										<div class="location-name">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z"/></svg>
@@ -78,7 +81,13 @@
 									<div class="card-score">
 										<span class="review-score">${wishlist.score }</span>
 										<span class="review-content">
-											<span class="review-title">매우 좋음</span>
+										<c:choose>
+							                <c:when test="${wishlist.score >= 9}"><span class="review-title">최고</span></c:when>
+											<c:when test="${wishlist.score >= 8}"><span class="review-title">매우 좋음</span></c:when>
+											<c:when test="${wishlist.score >= 7}"><span class="review-title">좋음</span></c:when>
+											<c:when test="${wishlist.score >= 6}"><span class="review-title">만족</span></c:when>
+											<c:when test="${wishlist.score < 6}"><span class="review-title">보통</span></c:when>
+							           </c:choose>   
 											<span class="review-text">${wishlist.reviewcount }개 이용 후기</span>
 										</span>
 									</div>

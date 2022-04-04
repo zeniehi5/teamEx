@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import com.booqueen.user.payment.service.PaymentService;
 import com.booqueen.user.payment.vo.PaymentVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
+import com.booqueen.user.room.service.RoomService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -68,6 +70,9 @@ public class PaymentController {
 	
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	RoomService roomService;
 
 	public PaymentController() {
 		this.api = new IamportClient("6299277095985667",
@@ -171,7 +176,10 @@ public class PaymentController {
 	      reservationVO.setCancel_reason(paymentVO.getCancel_reason());
 	      
 	      reservationService.cancelReservation(reservationVO);
-
+//	      List<ReservationVO> reservationVOFromDB = reservationService.selectReservationByMerchant(paymentVO.getMerchant());
+//	      
+//	      roomService.updateRoomAvailablePlus(reservationVOFromDB.get(0));
+	      
 	      if (num == 0)
 	         return "fali";
 	      return "success";

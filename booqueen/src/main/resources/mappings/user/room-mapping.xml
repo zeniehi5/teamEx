@@ -275,4 +275,8 @@
 		update room_available set available = (available - ${count_room}) where open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and room_id = (select room_id from room where type= #{type} and serialnumber = ${serialnumber})
 	</update>
 	
+	<update id="updateRoomAvailablePlus" parameterType="uReservationVO">
+		update room_available set available = (available + ${count_room}) where open_date = TO_DATE(#{start_date}, 'YYYY-MM-DD') and room_id = ${room_id}
+	</update>
+	
 </mapper>

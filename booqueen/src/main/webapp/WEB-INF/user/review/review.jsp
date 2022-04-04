@@ -18,7 +18,7 @@
 	<jsp:include page="/WEB-INF/user/member/header.jsp"/>
 
     <div class="top">
-        <div class="c-cover " style="background-image: url(https://cf.bstatic.com/xdata/images/hotel/820x250/21676156.webp?k=0e4e8c6647f2027d6cf3d67590e24aa9fed67000e4769bc79a063e93701630c2&amp;o=)">
+        <div class="c-cover " style="background-image: url(${reservationVO.file_url})">
             <div class="c-cover__inner">
                 <h2 class="c-cover__title"><strong>${reservationVO.hotelname}</strong> 평가하기</h2> 
                 <fmt:parseDate var="start_date" value="${reservationVO.start_date}" pattern="yyyy-MM-dd"/>
