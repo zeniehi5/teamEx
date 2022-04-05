@@ -103,5 +103,7 @@
 	<delete id="deleteRoomFromAvailable" parameterType="roomAvailable">
 		DELETE FROM room_available WHERE room_id = #{room_id} and open_date = #{open_date}
 	</delete>
-	
+	<select id="selectRoomByRoomType" parameterType="myRoom" resultType="myRoom">
+		SELECT * FROM room WHERE serialnumber = #{serialnumber} and type = #{type}
+	</select>
 </mapper>

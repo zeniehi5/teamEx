@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booqueen.partner.common.S3Service;
@@ -20,6 +22,8 @@ import com.booqueen.partner.hotel.HotelImageVO;
 import com.booqueen.partner.hotel.HotelService;
 import com.booqueen.partner.hotel.HotelServiceVO;
 import com.booqueen.partner.hotel.HotelVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Controller
 public class RoomController {
@@ -246,4 +250,40 @@ public class RoomController {
 		model.addAttribute("roomList", roomList);
 		return "manage";
 	}
+	
+	@RequestMapping(value = "/selectHoldingRoom.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String selectHoldingRoom(@RequestBody RoomVO room) {
+		
+		String result = "";
+		System.out.println(room.toString());
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		RoomVO roomresult = roomService.selectRoomByRoomType(room);
+		
+		if(roomresult != null) {
+			System.out.println(roomresult.toString());
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		} else {
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);
+		}
+				
+		return result;
+	}
+	
+	@RequestMapping(value = "/insertNewRoom.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertNewRoom(@RequestBody RoomVO room) {
+		System.out.println(room.toString());
+		String result = "";
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		return result;
+	}
+
 }

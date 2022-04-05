@@ -26,4 +26,8 @@ public interface ReservationService {
 
 	int updateReservationStatusToBilling(ReservationVO reservation);
 
+	int reportUser(ReportUserVO reportUser);
+
+	ReportUserVO selectReportedUser(ReportUserVO search);
+
 }

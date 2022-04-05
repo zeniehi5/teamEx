@@ -68,4 +68,6 @@ public interface RoomService {
 
 	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable);
 
+	public RoomVO selectRoomByRoomType(RoomVO room);
+
 }

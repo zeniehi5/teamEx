@@ -11,6 +11,7 @@ import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.reservation.ReservationDetailVO;
 import com.booqueen.partner.reservation.ReservationVO;
 import com.booqueen.partner.reservation.SearchVO;
+import com.booqueen.partner.reservation.ReportUserVO;
 
 @Repository("reservationDAO")
 public class ReservationDAO {
@@ -68,6 +69,14 @@ public class ReservationDAO {
 	
 	public int updateReservationStatusToBilling(ReservationVO reservation) {
 		return sqlSessionTemplate.update("reservationDAO.updateReservationStatusToBilling", reservation);
+	}
+
+	public int reportUser(ReportUserVO reportUser) {
+		return sqlSessionTemplate.insert("reservationDAO.reportUser", reportUser);
+	}
+
+	public ReportUserVO selectReportedUser(ReportUserVO search) {
+		return sqlSessionTemplate.selectOne("reservationDAO.selectReportedUser", search);
 	}
 	
 }

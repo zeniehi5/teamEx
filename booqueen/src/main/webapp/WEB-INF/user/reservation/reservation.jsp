@@ -73,7 +73,7 @@
                     <hr class="line">
                     <div style="display:flex; justify-content:space-between; flex-direction: column;">
                     
-                    <c:set var = "total" value = "0" />
+                    <c:set var="total" value="0"/>
                      <c:forEach var="count_rooms" items="${reservationVO.count_rooms}" varStatus="status">
                 		<c:set var="types" value="${reservationVO.types[status.index]}"/>
                 		<input type="hidden" value="${count_rooms }" name="count_rooms">

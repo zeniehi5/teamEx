@@ -148,4 +148,8 @@ public class RoomDAO {
 	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable) {
 		return sqlSessionTemplate.delete("RoomDAO.deleteRoomFromAvailable", roomAvailable);
 	}
+
+	public RoomVO selectRoomByRoomType(RoomVO room) {
+		return sqlSessionTemplate.selectOne("RoomDAO.selectRoomByRoomType", room);
+	}
 }

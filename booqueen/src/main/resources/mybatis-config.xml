@@ -54,6 +54,7 @@
       <typeAlias type="com.booqueen.partner.room.UpdateImageVO" alias="roomImage"/>
       <typeAlias type="com.booqueen.partner.finance.InvoiceVO" alias="invoice"/>
       <typeAlias type="com.booqueen.partner.analysis.AnalysisVO" alias="analysis"/>
+      <typeAlias type="com.booqueen.partner.reservation.ReportUserVO" alias="reportUser"/>
     
       <!-- admin -->
       <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>

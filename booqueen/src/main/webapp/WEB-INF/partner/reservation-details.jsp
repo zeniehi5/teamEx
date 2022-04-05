@@ -77,9 +77,60 @@
 		}
 	}
 	
-	function openModal(){
-		//$("#reportModal").addClass('bui-is-active')
-		alert("고민중")
+	function blockUser(){
+		var reportModal = document.getElementById("reportModal");
+		
+		if(reportModal.style.display === "none"){
+			reportModal.style.display = "block";
+		} else {
+			reportModal.style.display = "block";
+		}
+	}
+	
+	function cancel(){
+		var reportModal = document.getElementById("reportModal");
+		
+		if(reportModal.style.display === "block"){
+			reportModal.style.display = "none";
+		}
+	}
+	
+	function submitReport(){
+		var answer = confirm("신고를 진행하시겠습니까?")
+		
+		if(answer){	
+			var id = $("#guestid").text();
+			var name = $("#guestname").text();
+			var whyblock = $("#whyblock").val();
+			
+			const reportUserVO = {
+					"userid":id,
+					"name":name,
+					"whyblock":whyblock
+			}
+			
+			$.ajax({
+				method:"POST",
+				url:"reportUser.pdo",
+				contentType:"application/json",
+				dataType:"json",
+				data:JSON.stringify(reportUserVO),
+				success:function(result){
+					if(result.msg == "SUCCESS"){
+						alert("신고가 완료되었습니다.")
+						location.reload()
+					} else {
+						alert("다시 시도해 주세요.")
+					}
+				},
+				error:function(){
+					console.log("통신 실패")
+				}
+			})
+			
+		} else {
+			alert("신고를 취소합니다.")
+		}
 	}
 </script>
 </head>
@@ -164,8 +215,7 @@
                                                             <p class="reservation_content_label">
                                                                 <span>투숙객 이름:</span>
                                                             </p>
-                                                            <div
-                                                                class="reservation_content_info reservation_content_info_emphasized">
+                                                            <div class="reservation_content_info reservation_content_info_emphasized">
                                                                 <div class="inline">
                                                                     <button class="link link_primary">
                                                                         <span>${details.lastname}${details.firstname}</span>
@@ -180,7 +230,7 @@
                                                             </div>
                                                             <p class="font_featured">
                                                                 <a href="#"
-                                                                    class="link link_primary">${details.userid}</a>
+                                                                    class="link link_primary" id="guestid">${details.userid}</a>
                                                                 <br>
                                                             </p>
                                                         </address>
@@ -200,7 +250,7 @@
                                                                         <p class="reservation_content_label">
                                                                             <span>예약자 이름:</span>
                                                                         </p>
-                                                                        <p class="reservation_content_info">${details.lastname}${details.firstname}</p>
+                                                                        <p id="guestname" class="reservation_content_info">${details.lastname}${details.firstname}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -623,13 +673,26 @@
                                             </button>
                                         </div>
                                         </c:if>
+                                        <c:choose>
+                                        <c:when test="${empty report}">
                                         <div class="group">
-                                            <button type="button" class="button button_secondary button_wide" onclick="openModal();">
+                                            <button type="button" class="button button_secondary button_wide" onclick="blockUser()">
                                                 <span class="button_text">
                                                     <span>투숙객 부정/불법 행위 신고하기</span>
                                                 </span>
                                             </button>
                                         </div>
+                                        </c:when>
+                                        <c:when test="${!empty report}">
+                                        <div class="group">
+                                            <button type="button" class="button button_secondary button_wide" disabled="disabled">
+                                                <span class="button_text">
+                                                    <span>투숙객 신고완료</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        </c:when>
+                                        </c:choose>
                                         <button type="button" class="button button_secondary button_wide" onClick="window.print()">
                                             <span class="button_text">
                                                 <span>이 페이지 인쇄하기</span>
@@ -705,8 +768,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bui-modal bui-modal-smoking" id="reportModal">
-   						<form action="${contextPath}/update-smoking-policies.pdo" method="post">
+                    <div class="bui-modal bui-modal-report" id="reportModal">
     						<div class="bui-modal__wrapper">
   	        					<div class="bui-modal__align">
                 					<aside class="bui-modal__content bui-f-depth-1">
@@ -715,16 +777,12 @@
                             					<h3 class="policy-form-title">투숙객 부정/불법 행위 신고하기</h3>
                             						<div>
                                 						<div class="policy-form-section">
-                              
                                     						<ul class="list-unstyled row clearfix list-smp-customized-condition">
                                         						<li class="col-xs-12 col-sm-6">
                                             						<div>
                                                 						<div class="form-group">
                                                     						<label>신고 사유를 선택하세요.</label>
-                                                    							<select class="form-control" name="smoking">
-                                                        							<option value="no_show">노쇼</option>
-                                                        							<option value="false">아니오</option>
-                                                    							</select>
+                                                    							<input type="text" class="form-control" id="whyblock" name="whyblock">
                                                 						</div>
                                             						</div>
                                         						</li>
@@ -735,15 +793,15 @@
                     						</div>
                     						<footer class="bui-modal__footer">
                         						<div class="bui-group bui-group--inline">
-                            						<button type="submit" class="bui-button bui-button--primary">
+                            						<button type="button" class="bui-button bui-button--primary" onclick="submitReport()">
                                 						<span class="bui-button__text"><span>저장</span></span>
                             						</button>
-                            						<button type="button" id="btnCloseSmoking" class="bui-button bui-button--secondary">
+                            						<button type="button" class="bui-button bui-button--secondary" onclick="cancel()">
                                 						<span class="bui-button__text"><span>취소</span></span>
                             						</button>
                         						</div>
                     						</footer>
-                    						<button type="button" id="xCloseSmoking" class="bui-modal__close">
+                    						<button type="button" class="bui-modal__close" onclick="cancel()">
                         						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             						<path
                                 						d="M13 12l6.26-6.26a.73.73 0 0 0-1-1L12 11 5.74 4.71a.73.73 0 1 0-1 1L11 12l-6.29 6.26a.73.73 0 0 0 .52 1.24.73.73 0 0 0 .51-.21L12 13l6.26 6.26a.74.74 0 0 0 1 0 .74.74 0 0 0 0-1z">
@@ -753,7 +811,6 @@
                 						</aside>
             						</div>
         						</div>
-    						</form>
     					</div>
                 	</main>
                 	<jsp:include page="/WEB-INF/partner/footer.jsp"/>
