@@ -43,4 +43,10 @@
 		BETWEEN (SELECT date_trunc('month', current_date)::date) 
 		AND (SELECT (date_trunc('month', current_date) + INTERVAL '1 MONTH - 1DAY')::date)
 	</select>
+	<select id="selectTransactionCountByMonth" parameterType="myHotel" resultType="int">
+		SELECT count(reservation_number) FROM reservation
+		WHERE serialnumber = #{serialnumber}
+		AND use_status = 2
+		AND (SELECT EXTRACT(month from checkout_date)as billingmonth) = #{count};
+	</select>
 </mapper>

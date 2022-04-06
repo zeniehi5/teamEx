@@ -33,6 +33,16 @@ public class AnalysisController {
 				AnalysisVO totalStays = analysisService.selectDaysofStays(hotel.getSerialnumber());
 				//이번달 예약건의 총 숙박일 수
 				AnalysisVO estimatedStays = analysisService.selectEstimatedDaysofStays(hotel.getSerialnumber());
+				
+				int[] count = new int[12];
+				
+				for(int i = 0; i < count.length; i++) {
+					hotel.setCount(i+1);
+					count[i] = analysisService.selectTransactionCountByMonth(hotel);
+					System.out.println("count: " + count[i]);
+				}
+				
+				model.addAttribute("count", count);
 				model.addAttribute("analysis", analysis);
 				model.addAttribute("estimated", estimatedRevenue);
 				model.addAttribute("stays", totalStays);

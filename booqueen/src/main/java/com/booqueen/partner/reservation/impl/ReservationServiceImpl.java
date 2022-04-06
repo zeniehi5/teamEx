@@ -10,6 +10,7 @@ import com.booqueen.partner.reservation.ReservationDetailVO;
 import com.booqueen.partner.reservation.ReservationService;
 import com.booqueen.partner.reservation.ReservationVO;
 import com.booqueen.partner.reservation.SearchVO;
+import com.booqueen.partner.reservation.ReportUserVO;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -70,6 +71,16 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public int updateReservationStatusToBilling(ReservationVO reservation) {
 		return reservationDAO.updateReservationStatusToBilling(reservation);
+	}
+
+	@Override
+	public int reportUser(ReportUserVO reportUser) {
+		return reservationDAO.reportUser(reportUser);
+	}
+
+	@Override
+	public ReportUserVO selectReportedUser(ReportUserVO search) {
+		return reservationDAO.selectReportedUser(search);
 	}
 
 }

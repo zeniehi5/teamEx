@@ -689,6 +689,7 @@
                 $('input[name="daterange"]').daterangepicker({
                     "startDate": dateString,
                     "endDate": dateString_2,
+                    "minDate": dateString,
                     opens: 'center',
                     locale: {
                         format: 'YYYY/MM/DD'

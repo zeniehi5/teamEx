@@ -148,4 +148,41 @@ public class RoomDAO {
 	public int deleteRoomFromAvailable(RoomAvailableVO roomAvailable) {
 		return sqlSessionTemplate.delete("RoomDAO.deleteRoomFromAvailable", roomAvailable);
 	}
+
+	public RoomVO selectRoomByRoomType(RoomVO room) {
+		return sqlSessionTemplate.selectOne("RoomDAO.selectRoomByRoomType", room);
+	}
+
+	public int insertNewRoom(RoomVO room) {
+		return sqlSessionTemplate.selectOne("RoomDAO.insertNewRoom", room);
+	}
+
+	public void insertRoomBasic(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomBasic", room_id);		
+	}
+
+	public void insertRoomAccess(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomAccess", room_id);
+	}
+
+	public void insertRoomService(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomService", room_id);
+	}
+
+	public void insertRoomBath(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomBath", room_id);
+	}
+
+	public void insertRoomFood(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomFood", room_id);
+	}
+
+	public void insertRoomMedia(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomMedia", room_id);
+	}
+
+	public void insertRoomView(int room_id) {
+		sqlSessionTemplate.insert("RoomDAO.insertRoomView", room_id);
+	}
+
 }

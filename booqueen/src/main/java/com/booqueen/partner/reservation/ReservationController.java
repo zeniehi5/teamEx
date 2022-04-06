@@ -54,9 +54,20 @@ public class ReservationController {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 			if(hotel != null) {
 				ReservationDetailVO details = reservationService.selectReservationDetailByRSVN(reservation_number);
-				System.out.println(details.toString());
+				
+				ReportUserVO search = new ReportUserVO();
+				search.setSerialnumber(hotel.getSerialnumber());
+				search.setUserid(details.getUserid());
+				try {
+					ReportUserVO report = reservationService.selectReportedUser(search);
+					model.addAttribute("report", report);
+				} catch(Exception e) {
+					System.out.println("no report record");
+				}
+				
 				model.addAttribute("details", details);
 				model.addAttribute("hotel", hotel);
+				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -148,5 +159,33 @@ public class ReservationController {
 		search.setReservation_number(searchKeyword);
 		ReservationVO searchResult = reservationService.selectReservationByRSVN(search);
 		return searchResult;
+	}
+	
+	@RequestMapping(value = "reportUser.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String reportUser(@RequestBody ReportUserVO reportUser, HttpSession session) {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		reportUser.setSerialnumber(hotel.getSerialnumber());
+		reportUser.setHotelname(hotel.getHotelname());
+		System.out.println(reportUser.toString());
+		
+		int insertNumber = 0;
+		String result = "";
+		
+		insertNumber = reservationService.reportUser(reportUser);
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		if(insertNumber == 0) {
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);
+		} else {
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		}
+		
+		
+		return result;
 	}
 }

@@ -54,5 +54,6 @@ public class ReservationVO {
 	private boolean review;
 	private Integer count; // 호텔 예약 횟수
 	private Integer use_status;
-
+	private String telephone;
+	private String member_email;
 }

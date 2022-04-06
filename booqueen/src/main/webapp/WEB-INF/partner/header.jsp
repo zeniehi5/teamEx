@@ -12,6 +12,40 @@
 <title>${hotel.hotelname}</title>
 <script type="text/javascript">
 
+	$(function(){
+		var serialnumber = $("#serial").val();
+		var option = '';
+		
+		$("#roomOption").change(function(){
+			option = $("#roomOption").val();
+			
+			var newRoomVO = {
+					"serialnumber":serialnumber,
+					"type":option
+			}
+			
+			$.ajax({
+				method:"POST",
+				url:"selectHoldingRoom.pdo",
+				contentType:"application/json",
+				dataType:"json",
+				data:JSON.stringify(newRoomVO),
+				success:function(result){
+					if(result.msg == "SUCCESS"){
+						alert("선택한 유형의 객실이 이미 존재합니다.")
+					} else {
+						
+					}
+				},
+				error:function(){
+					console.log("통신 실패")
+				}
+			})
+			
+			
+		})
+	})
+
 	$(document).ready(function(){
 		$("#addNewRoom").click(function(){
 			var room = document.getElementById("roomModal");
@@ -24,7 +58,43 @@
 	})
 
 	function submitForm() {
-		alert("about to submit!")
+		
+		var serialnumber = $("#serial").val()
+		var type = $("#roomOption").val()
+		var price = $("#price").val()
+		var smoking = $("#smoking").val()
+		var available = $("#availableRoom").val()
+		var quota = $("#quota").val()
+		var bed = $("#bed").val()
+		
+		const newRoomVO = {
+			"serialnumber":serialnumber,
+			"type":type,
+			"price":price,
+			"smoking": smoking,
+			"available": available,
+			"quota":quota,
+			"bed":bed
+		}
+		
+		$.ajax({
+			method:"POST",
+			url:"insertNewRoom.pdo",
+			contentType:"application/json",
+			dataType:"json",
+			data:JSON.stringify(newRoomVO),
+			success:function(result){
+				if(result.msg == "SUCCESS"){
+					alert("새로운 객실이 추가되었습니다.")
+					location.reload()
+				} else {
+					alert("다시 시도해 주세요.")
+				}
+			},
+			error:function(){
+				console.log("통신 실패")
+			}
+		})
 		//$("#myForm").submit()
 	}
 
@@ -470,7 +540,6 @@
     	<div class="bui-modal__wrapper">
             <div class="bui-modal__align">
                 <aside class="bui-modal__content bui-f-depth-1">
-                	<form id="myForm" action="####">
                     <div class="bui-modal__body">
                         <div>
                             <h3 class="policy-form-title">신규 객실 추가</h3>
@@ -484,20 +553,20 @@
                                             <div>
                                                 <div class="form-group">
                                                     <label>객실 유형을 선택하십시오.</label>
-                                                    <select class="form-control" name="free_cancel_allowed">
-                                                        <option value="디럭스 싱글룸">디럭스 싱글룸</option>
-                                                        <option value="수페리어 싱글룸">수페리어 싱글룸</option>
-                                                        <option value="디럭스 더블룸">디럭스 더블룸</option>
-                                                        <option value="수페리어 더블룸">수페리어 더블룸</option>
-                                                        <option value="디럭스 트리플룸">디럭스 트리플룸</option>
-                                                        <option value="수페리어 트리플룸">수페리어 트리플룸</option>
-                                                        <option value="주니어 스위트룸">주니어 스위트룸</option>
-                                                        <option value="이그제큐티브 스위트룸">이그제큐티브 스위트룸</option>
+                                                    <select class="form-control" id="roomOption" name="free_cancel_allowed">
+                                                        <option value="디럭스싱글">디럭스 싱글룸</option>
+                                                        <option value="수페리어싱글">수페리어 싱글룸</option>
+                                                        <option value="디럭스더블">디럭스 더블룸</option>
+                                                        <option value="수페리어더블">수페리어 더블룸</option>
+                                                        <option value="디럭스트리플">디럭스 트리플룸</option>
+                                                        <option value="수페리어트리플">수페리어 트리플룸</option>
+                                                        <option value="주니어스위트">주니어 스위트룸</option>
+                                                        <option value="이그제큐티브스위트">이그제큐티브 스위트룸</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>흡연 정책</label>
-                                                    <select class="form-control" name="refund_policy">
+                                                    <select class="form-control" id="smoking" name="refund_policy">
                                                         <option value="0">금연</option>
                                                         <option value="1">흡연</option>
                                                         <option value="2">이 객실유형은 흡연/금연 둘 다 설정 가능합니다.</option>
@@ -524,10 +593,9 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div></div>
+                            <div><input type="hidden" id="serial" value="${hotel.serialnumber}"></div>
                         </div>
                     </div>
-                    </form>
                     <div class="bui-modal__footer">
                         <div class="bui-group bui-group--inline">
                             <button type="button" class="bui-button bui-button--primary" onclick="submitForm()">

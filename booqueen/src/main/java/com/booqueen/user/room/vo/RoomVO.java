@@ -14,6 +14,7 @@ public class RoomVO {
    private Integer count_room;
    private Integer quota;
    private Integer bed;
+   private String file_url;
    RoomAvailableVO roomAvailableVO;
    RoomFacilitiesVO roomFacilitiesVO;
 }

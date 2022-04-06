@@ -144,4 +144,17 @@
 		WHERE
 			reservation_number = #{reservation_number}
 	</update>
+	<insert id="reportUser" parameterType="reportUser">
+		INSERT INTO
+			block_user
+		values(nextval('block_user_sequence_seq'), #{userid}, #{name}, #{serialnumber}, #{hotelname}, #{whyblock}, true)
+	</insert>
+	<select id="selectReportedUser" parameterType="reportUser" resultType="reportUser">
+		SELECT
+			*
+		FROM
+			block_user
+		WHERE serialnumber = #{serialnumber}
+		AND userid = #{userid}
+	</select>
 </mapper>

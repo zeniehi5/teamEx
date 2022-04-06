@@ -21,6 +21,7 @@
       <typeAlias type="com.booqueen.user.room.vo.RoomAvailableVO" alias="roomAvailableVO"/>
       <typeAlias type="com.booqueen.user.hotel.vo.CityCountVO" alias="cityCountVO"/>
       <typeAlias type="com.booqueen.user.hotel.vo.BestHotelVO" alias="bestHotelVO"/>
+      <typeAlias type="com.booqueen.user.map.vo.DistanceVO" alias="distanceVO"/>
       
       <!-- shared -->
       <typeAlias type="com.booqueen.user.hotel.vo.HotelVO" alias="hotelVO"/>
@@ -54,6 +55,7 @@
       <typeAlias type="com.booqueen.partner.room.UpdateImageVO" alias="roomImage"/>
       <typeAlias type="com.booqueen.partner.finance.InvoiceVO" alias="invoice"/>
       <typeAlias type="com.booqueen.partner.analysis.AnalysisVO" alias="analysis"/>
+      <typeAlias type="com.booqueen.partner.reservation.ReportUserVO" alias="reportUser"/>
     
       <!-- admin -->
       <typeAlias type="com.booqueen.admin.member.MemberVO" alias="adminMember"/>
@@ -106,5 +108,6 @@
        <mapper resource="mappings/admin/transaction-mapping.xml"/>
        <mapper resource="mappings/admin/blockuser-mapping.xml"/>
        <mapper resource="mappings/admin/faq-mapping.xml"/>
+       <mapper resource="mappings/user/map-mapping.xml"/>
    </mappers>
 </configuration>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />    
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,12 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/d2826a4f92.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${contextPath}/resources/user/css/finalization.css">
-
-    <!-- datepicker -->
-    <link rel="stylesheet" href="css/datepicker.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="js/daterangepicker.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>	
     <title>finalization</title>
 </head>
 <body>
@@ -88,7 +83,7 @@
                                 <span class="bui-f-font-strong">도움이 필요하세요?</span>
                             </div>
                             <div class="bui-spacer--medium">
-                                <a class="bui-link bui-link--primary" href="https://secure.booking.com/help.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;label=from_conf_1#/reservation?source=mb_contact_block&amp;reservation_id=2811192897&amp;res_auth_key=gq6e9NxzOfdrsvVA">고객 서비스팀에 문의</a>
+                                <a class="bui-link bui-link--primary" href="${contextPath}/questions.do">고객 서비스팀에 문의</a>
                             </div>
                         </div>
                     </div>
@@ -157,21 +152,21 @@
                         data-capla-namespace="b-post-booking-web-mfeEQFGSCHP">
                         <div>
                             <div class="_66d2783ed">
-                                <div class="_475f10c6a">
-                                    <a class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
+<!--                                 <div class="_475f10c6a"> 
+                                    <a class="_4310f7077 _45807dae0 _f7538b398" >
                                         <span>예약 날짜 변경</span>
                                     </a>
-                                </div>
+                                </div>-->
                                 <div class="_475f10c6a ed7d481e46">
-                                    <a class="_4310f7077 _45807dae0 _f7538b398">
-                                        <span>호텔 정책 확인</span>
-                                    </a>
-                                </div>
-                                <div class="_475f10c6a">
-                                    <a class="_4310f7077 _45807dae0 _f7538b398">
+                                    <a class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
                                         <span>예약 확인서 보기</span>
                                     </a>
                                 </div>
+<!--                                 <div class="_475f10c6a"> 
+                                    <a class="_4310f7077 _45807dae0 _f7538b398" >
+                                        <span></span>
+                                    </a>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -203,20 +198,18 @@
    
    <div class="mb_cancellation_timeline">
     <div class="room room--next">
-        <a href="${reservationVO.file_url } class="preview" title="스탠다드 더블룸">
-    
+        <a href="${roomImg}" class="preview" title="${reservationVO.type }">
             <img
-                src="${reservationVO.file_url }"
+                src="${roomImg}"
                 class="smll_roomphoto jqrt jq_tooltippex jq_tooltip round6"
                 width="90"
                 height="90"
-                alt="스탠다드 더블룸"
                 id="b_tt_holder_1"
-                data-title="<img src='https://cf.bstatic.com/xdata/images/hotel/max300/47101212.webp?k=ac645580f8f772431e587e71a66f38e27c06b0593807ee55b96fe5db47343245&amp;o=' /><br /><strong>스탠다드 더블룸</strong>"
+                data-title="<img src='${roomImg}'/><br /><strong>${reservationVO.type }</strong>"
                 aria-describedby="materialized_tooltip_hj8fj">
         </a>
-        <h3>스탠다드 더블룸</h3>
-        <p class="pb_conf_room_descr">이 더블룸은 퀸 사이즈의 더블침대, 평면 TV와 냉장고를 갖추고 있습니다. 전용 Wi-Fi 라우터가 객실에 제공됩니다.</p>
+        <h3>${room.type} x ${reservationVO.count_room }</h3>
+        <p class="pb_conf_room_descr">해당 객실은 퀸 사이즈의 더블침대, 평면 TV와 냉장고를 갖추고 있습니다. 전용 Wi-Fi 라우터가 객실에 제공됩니다.</p>
         <table class="conf_align_table" style="clear:left;">
             <tbody>
                 <tr>
@@ -356,7 +349,7 @@
                     <th scope="row">정원</th>
                     <td class="conf_room_occupancy_info">
                         <p>
-                            성인 2명
+                            성인 ${room.quota }명
                         </p>
                     </td>
                 </tr>
@@ -425,8 +418,8 @@
             </div>
         </div>
     </div>
-    <hr class="mb-hr">
-
+    
+<%--<hr class="mb-hr">
     <div class="house_rules_mybooking mb-section">
         <div class="mb-section__icon1">
             <i class="bicon bicon-p2g-checkin"></i>
@@ -439,7 +432,7 @@
             <a target="_blank" href="bookcancel.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;hotel_id=727821;policygroup_room=2022-02-01,72782102:214714667,72782103:214714667;bn=2811192897;general=214714667;checkin=2022-01-30;checkout=2022-02-01;persons=2;default_price_mode=3">어린이 및 엑스트라 베드 정책</a>을 확인하시기 바랍니다.
         </p>
         <p class="important-info"><strong>질문 혹은 급한 문제가 있을 경우, 숙소로 직접 연락하시기 바랍니다: <strong class="phone_number">+82634691234</strong>.</strong></p>
-    </div>
+    </div> --%>
 
     <hr class="mb-hr">
 
@@ -474,9 +467,10 @@
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
                                             <a
-                                                href="mailto:2811192897-ckeu.u4zy.kpbt.eykf@property.booking.com"
-                                                class="_4310f7077 _45807dae0 _f7538b398">
-                                                <span>이메일 보내기</span>
+                                                href="mailto:${reservationVO.member_email}"
+                                                class="_4310f7077 _45807dae0 _f7538b398" id="hotel_email">
+                                                <input id="hotel_email_input" value="${reservationVO.member_email}" type="hidden">
+                                                ${reservationVO.member_email}
                                             </a>
                                         </div>
                                     </div>
@@ -495,11 +489,11 @@
                             <div class="_0fd59361b">
                                 <div class="_84f6fd780 _f98eca565">
                                     <div class="_29c344764">
-                                        <div class="ac6bdec376">전화로 문의</div>
+                                        <div class="ac6bdec376">호텔 연락처</div>
                                     </div>
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
-                                            <a href="tel:+82 63-469-1234" class="_4310f7077 fcb26725ff">+82 63-469-1234</a>
+                                            <a href="tel:+82 63-469-1234" class="_4310f7077 fcb26725ff" id="hotel_tel"><input id="hotel_tel_input" value="${reservationVO.telephone}" type="hidden">+82 ${reservationVO.telephone}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -540,8 +534,8 @@
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
                                             <a
-                                                href="https://secure.booking.com/help/reservation/?label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB&amp;sid=bac1796509bc54b36dbc023726e3547c&amp;aid=304142&amp;source=d_mb_generic_ep&amp;res_auth_key=gq6e9NxzOfdrsvVA&amp;reservation_id=2811192897"
-                                                class="_4310f7077 _45807dae0 _f7538b398">
+                                                 href="${contextPath}/questions.do"
+                                                 class="_4310f7077 _45807dae0 _f7538b398">
                                                 <span>고객 서비스팀에 문의하기</span>
                                             </a>
                                         </div>
@@ -636,35 +630,42 @@
     <div class="slideBoxOverlay slidebox--open" id="overlay" aria-hidden="true">
         <i class="bi bi-x-lg" onclick="off()"></i>
         <div class="slideBoxWrapper">
-            <h1 class="slideBoxWrapperTitle">날짜 변경</h1>
-            <form>
-                <div class="form-inner">
-                    <div class="form-inner-second">
-                        <div>
-                            <input type="text" id="check_date" name="daterange">
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <jsp:include page="/WEB-INF/user/reservation/checkReservation.jsp"/>
             <div class="change-dates__footer">
-                <button class="bui-button bui-button--secondary MyBookingOptionsCancel" type="button">
+                <button class="bui-button bui-button--secondary MyBookingOptionsCancel" type="button" onclick="off()">
                     <span class="bui-button__text">
                     취소
                     </span>
                 </button>
-                <button class="bui-button bui-button--primary1" type="submit">
+                <a onClick="window.print()"><button class="bui-button bui-button--primary1" type="submit">
                     <span class="bui-button__loader">
                         <div class="bui-spinner bui-spinner--light bui-spinner--size-small">
                             <div class="bui-spinner__inner"></div>
                         </div>
                     </span>
-                    <span class="bui-button__text">예약 가능 여부 확인</span>
-                </button>
+                   	<span class="bui-button__text">인쇄 하기</span>
+                </button></a>
             </div>
         </div>
     </div>
 
 	<script>
+	$("#hotel_tel").click(function(){ 
+		$("#hotel_tel_input").attr('type', 'text');
+		$("#hotel_tel_input").select();
+		document.execCommand('copy');
+		$("#hotel_tel_input").attr('type', 'hidden');
+		alert("연락처가 복사되었습니다.");
+	});
+	
+	$('#hotel_email').click(function(){
+		$("#hotel_email_input").attr('type', 'text');
+		$("#hotel_email_input").select();
+		document.execCommand('copy');
+		$("#hotel_email_input").attr('type', 'hidden');
+		alert("이메일이 복사되었습니다.");
+	})
+	
 	var reservation_number = '${reservationVO.reservation_number}';
 	function sendMsgToHotel(){
 		openChatting();
@@ -684,7 +685,7 @@
     </script>
 
 <script>
-    this.imagePreview = function(){	
+	this.imagePreviewPreview = function(){	
         /* CONFIG */
             
             xOffset = 10;
@@ -716,16 +717,6 @@
     };
 
     $(document).ready(function () {
-        $(function () {
-            $('input[name="daterange"]').daterangepicker({
-                "startDate": "01/01/2022",
-                "endDate": "17/01/2022",
-                opens: 'center',
-                locale: {
-                    format: 'DD/MM/YYYY'
-                }
-            });
-        });
         imagePreview();
     });
 </script>

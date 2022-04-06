@@ -71,9 +71,9 @@
 							</div>
 							<a href="${contextPath}/confirmation.do?reservation_number=${reservationList.reservation_number}&serialnumber=${reservationList.serialnumber}&room_id=${reservationList.room_id}" class="card-link"></a>
 							<span class="reservation-context">
-								<button class="reservation-context-btn" id="bookingContextBtn"><i class="bi bi-three-dots-vertical"></i></button>
+<!-- 								<button class="reservation-context-btn" class="bookingContextBtn"><i class="bi bi-three-dots-vertical"></i></button> -->
 								<div class="dropdown-content">
-									<div class="dropdown-menu" id="bookingDropdownMenu">
+									<div class="dropdown-menu" class="bookingDropdownMenu">
 										<ul>
 											<li class="dropdown-item">
 												<button><span>숙박 예정일 변경</span></button>
@@ -129,13 +129,12 @@
 							<div class="content-right">
 								<div class="price"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationList.price}" /></div>
 							</div>
-							
-							<a href="${contextPath}/confirmation.do?reservation_number=${reservationList.reservation_number}&start_date=${reservationList.start_date}&room_id=${reservationList.room_id}  class="card-link"></a>
+							<a href="${contextPath}/confirmation.do?reservation_number=${reservationList.reservation_number}&start_date=${reservationList.start_date}&room_id=${reservationList.room_id}"  class="card-link"></a>
 							
 							<span class="reservation-context">
-								<button class="reservation-context-btn" id="contextBtn"><i class="bi bi-three-dots-vertical"></i></button>
+<!-- 								<button class="reservation-context-btn" class="contextBtn"><i class="bi bi-three-dots-vertical"></i></button> -->
 								<div class="dropdown-content">
-									<div class="dropdown-menu" id="dropdownMenu">
+									<div class="dropdown-menu" class="dropdownMenu">
 										<ul>
 											<li class="dropdown-item">
 												<button><span>다시 예약</span></button>
@@ -304,18 +303,18 @@
 				$(".review").remove();
 			});
 			// (숙박전) ... 열고 닫기
-			$("#bookingContextBtn").click(function(){
-				$("#bookingDropdownMenu").toggle();
+			$(".bookingContextBtn").click(function(){
+				$(".bookingDropdownMenu").toggle();
 			});
 			// (숙박후) ... 열고 닫기
-			$("#contextBtn").click(function(){
-				$("#dropdownMenu").toggle();
+			$(".contextBtn").click(function(){
+				$(".dropdownMenu").toggle();
 			});
-			$("#contextBtn1").click(function(){
-				$("#dropdownMenu1").toggle();
+			$(".contextBtn1").click(function(){
+				$(".dropdownMenu1").toggle();
 			});
-			$("#contextBtn2").click(function(){
-				$("#dropdownMenu2").toggle();
+			$(".contextBtn2").click(function(){
+				$(".dropdownMenu2").toggle();
 			});
 
 			// 예약 내역 찾기 열고 닫기

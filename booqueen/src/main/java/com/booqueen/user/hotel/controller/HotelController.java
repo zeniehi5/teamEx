@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,8 @@ import com.booqueen.user.hotel.vo.HotelMapVO;
 import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
+import com.booqueen.user.map.service.MapService;
+import com.booqueen.user.map.vo.DistanceVO;
 import com.booqueen.user.member.MemberVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
@@ -66,6 +69,9 @@ public class HotelController {
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	MapService mapService;
 	
 	@RequestMapping(value = "/autocomplete.do", method = RequestMethod.GET)
 	@ResponseBody
@@ -283,6 +289,14 @@ public class HotelController {
 			model.addAttribute("wishlistVO2", "wishlistVO2");
 		}
 		
+		List<DistanceVO> distanceVO = mapService.selectAttraction(vo.getCity());
+		for(int i = 0; i < distanceVO.size(); i++) {
+			double distanceKiloMeter = distance(vo.getLatitude(), vo.getLongitude(), distanceVO.get(i).getLatitude(), distanceVO.get(i).getLongitude(), "kilometer");
+			distanceVO.get(i).setDistance(distanceKiloMeter);
+		}
+		
+		model.addAttribute("distanceVO", distanceVO);
+		
 		return "hotel/available";
 	}
 	
@@ -419,6 +433,17 @@ public class HotelController {
 	}
 	*/
 	
+	@PostMapping(value="/getReservationList.do")
+	@ResponseBody
+	public String getReservationList(HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("member");
+	
+		List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
+		session.setAttribute("reservationList", reservationList);
+		
+		return "success";
+	}
+	
 	@RequestMapping(value="/getMap.do")
 	@ResponseBody
 	public List<HotelVO> getMap(HotelMapVO vo) throws Exception{
@@ -441,5 +466,44 @@ public class HotelController {
 
 		return hotelListByMap;
 	}
+	
+	/**
+     * 두 지점간의 거리 계산
+     *
+     * @param lat1 지점 1 위도
+     * @param lon1 지점 1 경도
+     * @param lat2 지점 2 위도
+     * @param lon2 지점 2 경도
+     * @param unit 거리 표출단위
+     * @return
+     */
+    private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+         
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+         
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+         
+        if (unit == "kilometer") {
+            dist = dist * 1.609344;
+        } else if(unit == "meter"){
+            dist = dist * 1609.344;
+        }
+ 
+        return (dist);
+    }
+     
+ 
+    // This function converts decimal degrees to radians
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+     
+    // This function converts radians to decimal degrees
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
+    }
 	
 }

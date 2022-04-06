@@ -175,6 +175,49 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.deleteRoomFromAvailable(roomAvailable);
 	}
 
+	@Override
+	public RoomVO selectRoomByRoomType(RoomVO room) {
+		return roomDAO.selectRoomByRoomType(room);
+	}
 
+	@Override
+	public int insertNewRoom(RoomVO room) {
+		return roomDAO.insertNewRoom(room);
+	}
+
+	@Override
+	public void insertRoomBasic(int room_id) {
+		roomDAO.insertRoomBasic(room_id);
+	}
+
+	@Override
+	public void insertRoomAccess(int room_id) {
+		roomDAO.insertRoomAccess(room_id);
+	}
+
+	@Override
+	public void insertRoomService(int room_id) {
+		roomDAO.insertRoomService(room_id);
+	}
+
+	@Override
+	public void insertRoomBath(int room_id) {
+		roomDAO.insertRoomBath(room_id);
+	}
+
+	@Override
+	public void insertRoomFood(int room_id) {
+		roomDAO.insertRoomFood(room_id);
+	}
+
+	@Override
+	public void insertRoomMedia(int room_id) {
+		roomDAO.insertRoomMedia(room_id);
+	}
+
+	@Override
+	public void insertRoomView(int room_id) {
+		roomDAO.insertRoomView(room_id);
+	}
 
 }
