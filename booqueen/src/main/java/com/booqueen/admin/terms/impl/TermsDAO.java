@@ -22,15 +22,16 @@ public class TermsDAO {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
+	public List<com.booqueen.admin.terms.TermsVO> getTermsList() {
+		List<com.booqueen.admin.terms.TermsVO> termsList = sqlSessionTemplate.selectList("termsDAO.selectTerms");
+		return termsList;
+	}
+	
 	public int insertTerms(TermsVO vo) {
-		
 		return sqlSessionTemplate.insert("termsDAO.insertTerms", vo);
 	}
-	public List<com.booqueen.admin.terms.TermsVO> getTermsList() {
-		
-		List<com.booqueen.admin.terms.TermsVO> termsList = sqlSessionTemplate.selectList("termsDAO.selectTerms");
-		 return termsList;
-	}
+	
+	
 
 	public TermsVO getTerms(int seq) {
 		

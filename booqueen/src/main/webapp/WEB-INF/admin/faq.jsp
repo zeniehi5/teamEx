@@ -191,10 +191,13 @@
                                             <th data-sortable="" style="width: 5.25815%;">
                                                 <a href="#" class="dataTable-sorter">No.</a>
                                             </th>
-                                            <th data-sortable="" style="width: 21.6817%;">
+                                            <th data-sortable="" style="width: 10.25815%;">
+                                                <a href="#" class="dataTable-sorter">구분</a>
+                                            </th>
+                                            <th data-sortable="" style="width: 19.6817%;">
                                                 <a href="#" class="dataTable-sorter">제목</a>
                                             </th>
-                                            <th data-sortable="" style="width: 60.9875%;">
+                                            <th data-sortable="" style="width: 54.9875%;">
                                                 <a href="#" class="dataTable-sorter">내용</a>
                                             </th>
                                             <th data-sortable="" style="width: 13.07268%;">
@@ -204,21 +207,15 @@
                                     </thead>
 
                                     <tbody>
+                                    	<c:forEach var="faqList" items="${faqList}" varStatus="status">
                                         <tr>
-                                            <td>1</td>
-                                            <td>예약을 취소할 수 있나요?</td>
-                                            <td>택시 예약은 승차 24시간 전까지 '내 예약 관리하기'에서 취소할 수 있습니다.
-                                                대부분의 택시 예약은 쉽게 취소가 가능하나, 충분한 시간적 여유를 두고 운전기사에게 취소 의사를 전달해 주셔야 합니다. 얼마나 미리 취소 의사를 밝혀야 하는지 알아보려면 예약 확인서를 참고해 주시기 바랍니다.
-                                                이 답변이 유용했나요?</td>
-                                                <td>&nbsp;&nbsp;<button id="faqCorrection" class="btn btn-danger" onclick="location.href='faqCorrection.mdo';">수정 및 삭제</button></td>
+                                            <td>${status.index+1}</td>
+                                            <td>${faqList.category}</td>
+                                            <td>${faqList.title}</td>
+                                            <td>${faqList.contents}</td>
+											<td style="vertical-align: middle; text-align: center;"><button id="faqCorrection" class="btn btn-danger" onclick="location.href='faqCorrection.mdo?seq=${faqList.seq}';">수정 및 삭제</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>예약을 변경할 수 있나요?</td>
-                                            <td>네, 예약은 온라인으로 쉽게 변경 가능합니다. '내 예약 관리하기'를 이용하면 승차 시간, 항공편명, 승/하차 장소, 탑승객 정보를 변경하실 수 있습니다.
-                                                이 답변이 유용했나요?</td>
-                                                <td>&nbsp;&nbsp;<a class="btn btn-danger" href="faqCorrection.mdo">수정 및 삭제</a></td>
-                                        </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

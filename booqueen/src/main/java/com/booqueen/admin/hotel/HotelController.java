@@ -1,6 +1,5 @@
 package com.booqueen.admin.hotel;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,10 +51,7 @@ public class HotelController {
 		return "roomDetail";
 	}
 	
-	@RequestMapping(value = "/reportedUser.mdo", method=RequestMethod.GET)
-	public String reportedUser(HttpSession session) {
-		return "reportedUser";
-	}
+	
 	@RequestMapping(value = "/reportContent.mdo", method=RequestMethod.GET)
 	public String reportContent(HttpSession session) {
 		return "reportContent";
@@ -69,31 +65,11 @@ public class HotelController {
 	public String blockPartner(HttpSession session) {
 		return "blockPartner";
 	}
-	@RequestMapping(value = "/faq.mdo", method=RequestMethod.GET)
-	public String fap(HttpSession session) {
-		return "faq";
-	}
-	@RequestMapping(value = "/faqCorrection.mdo", method=RequestMethod.GET)
-	public String faqCorrection(HttpSession session) {
-		return "faqCorrection";
-	}
-	@RequestMapping(value = "/faqUpload.mdo", method=RequestMethod.GET)
-	public String faqUpload(HttpSession session) {
-		return "faqUpload";
-	}
 	
-	@RequestMapping(value = "/terms.mdo", method=RequestMethod.GET)
-	public String terms(HttpSession session, Model model) {
-		List<TermsVO> termsList = termsServiceImpl.termsList();
-		if(termsList != null) {
-			model.addAttribute("termsList", termsList);
-		}
-		return "terms";
-	}
-	@RequestMapping(value = "/termsUpload.mdo", method=RequestMethod.GET)
-	public String termsUpload(HttpSession session) {
-		return "termsUpload";
-	}
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/index2.mdo", method=RequestMethod.GET)
 	public String index2(HttpSession session) {

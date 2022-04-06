@@ -181,7 +181,7 @@
                                     <div class="card-header card-header-info card-header-icon">
                                         <div class="card-icon">
                                         </div>
-                                        <p class="card-category">전날 가입자수</p>
+                                        <p class="card-category">전날 가입자 수</p>
                                         <h3 class="card-title"><!-- ${regCount == null ? 0 : regCount} -->
                                             <small>${joined_yesterday+0}명</small>
                                         </h3>
@@ -198,14 +198,15 @@
                                     <div class="card-header card-header-info card-header-icon">
                                         <div class="card-icon">
                                         </div>
-                                        <p class="card-category">신고된 회원 수</p>
+                                        <p class="card-category">오늘 가입자 수</p>
                                         <h3 class="card-title">
-                                            <small>1명</small>
+                                            <small>${joined_today+0}명</small>
                                         </h3>
                                     </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="${contextPath }/reportedUser.mdo">신고 회원 목록</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                        <i class="material-icons" style="font-size: 0.875em;">매일 0시 초기화</i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -214,14 +215,16 @@
                                 <div class="card-header card-header-info card-header-icon">
                                     <div class="card-icon">
                                     </div>
-                                    <p class="card-category">차단된 회원 수</p>
+                                    <p class="card-category">신고된 회원 수</p>
                                     <h3 class="card-title">
                                         <small>1명</small>
                                     </h3>
                                 </div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="${contextPath }/reportedUser.mdo">차단 회원 목록</a>
+                                <div class="card-footer" style="padding: 0.6rem 1rem;">
+                                    <div class="stats" style="display: flex; justify-content: space-between;">
+                                    <a class="small text-white stretched-link" href="${contextPath }/reportedUser.mdo">신고 회원 목록</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
                                 </div>
                             </div>
                             </div>  
