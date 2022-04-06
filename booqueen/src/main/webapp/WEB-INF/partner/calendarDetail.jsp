@@ -396,7 +396,7 @@
 <style type="text/css">
 
 .classColor{
-      /*background-color: red!important;*/
+ background-color: #DDECF3!important;
 }
 table.scheduleTable {
    width: 100%;
@@ -520,7 +520,7 @@ A:hover {
 .calendar_body .today {
    border: 1px solid white;
    height: 120px;
-   background-color: #c9c9c9;
+/*    background-color: #009fe161; */
    text-align: left;
    vertical-align: top;
 }
@@ -538,13 +538,14 @@ A:hover {
    height: 120px;
    background-color: #EFEFEF;
    text-align: left;
+   border-top: 0;
    vertical-align: top;
 }
 
 .calendar_body .sat_day .sat {
    color: #529dbc;
    font-weight: 400;
-   font-size: 9pt;
+   font-size: 11pt;
    padding-left: 3px;
    padding-top: 3px;
 }
@@ -554,22 +555,24 @@ A:hover {
    height: 120px;
    background-color: #EFEFEF;
    text-align: left;
+   border-top: 0;
    vertical-align: top;
 }
 
 .calendar_body .sun_day .sun {
    color: red;
    font-weight: 400;
-   font-size: 9pt;
+   font-size: 11pt;
    padding-left: 3px;
    padding-top: 3px;
-}ooi
+}
 
 .calendar_body .normal_day {
    border: 1px solid white;
    height: 120px;
-   background-color: #EFEFEF;
+   background-color: white;
    vertical-align: top;
+   border-top: 0;
    text-align: left;
 }
 
@@ -590,8 +593,8 @@ li{
 }
 .partner-seleted-able{
    margin: 0!important;
-    height: 10px;
-    background: aqua;
+ /*    height: 10px;
+    background: aqua; */
 }
 .button_primary{
     color: #fff;
@@ -603,6 +606,18 @@ li{
     display: inline-block;
 }
 
+.cal_navi{
+	display: flex! important;
+	align-items: center;
+	justify-content: center;
+}
+.today-circle{
+	background: #003b95;
+	color: #fff;
+	width: 21px;
+	border-radius: 50%;
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -635,7 +650,7 @@ li{
       <div class="calendar">
 
          <!--날짜 네비게이션  -->
-         <div class="navigation">
+         <div class="navigation cal_navi">
             <a class="before_after_year"
                href="calendar.pdo?year=${today_info.search_year-1}&month=${today_info.search_month}">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
@@ -695,14 +710,14 @@ li{
                               <div id="scheduleStyle${dateList.date}">
                                     <span></span>
                                  </div>
-                                 <span>${dateList.date}</span>   
+                                 <div class="today-circle">${dateList.date}</div>   
                                  <c:forEach var="available" items="${available}">   
                                      <c:if test="${available.year eq dateList.year}">       
                                        <c:if test="${available.month eq dateList.month+1}">
                                              <c:if test="${available.day eq dateList.date}">
                                                    <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                   <li id="${available.room_id}">${available.type}(${available.available})</li>                           
                                                 </a>      
                                                 </c:if>                           
                                              </c:if>                                          
@@ -726,7 +741,7 @@ li{
                                              <c:if test="${available.day eq dateList.date}">
                                                 <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                   <li id="${available.room_id}">${available.type}(${available.available})</li>                           
                                                 </a>                              
                                              </c:if>                                          
                                        </c:if>
@@ -752,7 +767,7 @@ li{
                                              <c:if test="${available.day eq dateList.date}">
                                                 <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                   <li id="${available.room_id}">${available.type}(${available.available})</li>                           
                                                 </a>         
                                              </c:if>                                          
                                        </c:if>
@@ -777,7 +792,7 @@ li{
                                              <c:if test="${available.day eq dateList.date}">
                                                 <a href="calendar.pdo?year=${available.year}&month=${available.month-1}&room_id=${available.room_id}">
                                                    <input type="hidden" id="hiddenId" value="${available.room_id}">
-                                                   <li id="${available.room_id}">${available.type} : ${available.available}개</li>                           
+                                                   <li id="${available.room_id}">${available.type}(${available.available})</li>                           
                                                 </a>
                                              </c:if>                                          
                                        </c:if>

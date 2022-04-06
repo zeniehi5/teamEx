@@ -3,6 +3,8 @@ package com.booqueen.partner.analysis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.hotel.HotelVO;
+
 @Service
 public class AnalysisServiceImpl implements AnalysisService {
 	
@@ -27,6 +29,11 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Override
 	public AnalysisVO selectEstimatedDaysofStays(int serialnumber) {
 		return analysisDAO.selectEstimatedDaysofStays(serialnumber);
+	}
+
+	@Override
+	public int selectTransactionCountByMonth(HotelVO hotel) {
+		return analysisDAO.selectTransactionCountByMonth(hotel);
 	}
 
 }

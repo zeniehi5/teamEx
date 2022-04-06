@@ -17,7 +17,7 @@
                     <div class="table">
                         <table>
                             <tr id="tr1">
-                                <td colspan="3"><h2>월별 성과분석</h2></td>
+                                <td colspan="3"><h2>금월 성과분석</h2></td>
                             </tr>
                             <tr>
                                 <td>    </td>
@@ -43,11 +43,6 @@
                                 <td>&#8361;<fmt:formatNumber value="${analysis.total_revenue/stays.count}" type="number"/></td>
                                 <td>&#8361;<fmt:formatNumber value="${estimated.total_revenue/estimatedStays.count}" type="number"/></td>
                             </tr>
-                            <tr id="last_tr">
-                                <td></td>
-                                <td> <a href="#"><input type="button" value="판매 통계"></a></td>
-                                <td> <a href="#"><input type="button" value="예약 현황 | 온북"></a></td>
-                            </tr>
                         </table>
                     </div>
 <div id="chart"></div>
@@ -55,23 +50,14 @@
 <jsp:include page="/WEB-INF/partner/footer.jsp"/>
 <script type="text/javascript">
 
-$(document).ready
-
-var arr = new Array();
-
-for(var i = 0; i <12; i++){
-	arr.push(i);
-}
-
-console.log(arr)
-
 var options = {
 		chart: {
 			type: 'line'
 		},
 		series: [{
 			name: 'sales',
-			data: [30, 40, 35, 50, 49, 60, 70, 91, 125, 60, 65, 60]
+			data: ['${count[0]}', '${count[1]}', '${count[2]}', '${count[3]}', '${count[4]}', 
+				'${count[5]}', '${count[6]}', '${count[7]}', '${count[8]}', '${count[9]}', '${count[10]}', '${count[11]}']
 		}],
 		xaxis: {
 			categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]

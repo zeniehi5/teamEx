@@ -70,4 +70,20 @@ public interface RoomService {
 
 	public RoomVO selectRoomByRoomType(RoomVO room);
 
+	public int insertNewRoom(RoomVO room);
+
+	public void insertRoomBasic(int room_id);
+
+	public void insertRoomAccess(int room_id);
+
+	public void insertRoomService(int room_id);
+
+	public void insertRoomBath(int room_id);
+
+	public void insertRoomFood(int room_id);
+
+	public void insertRoomMedia(int room_id);
+
+	public void insertRoomView(int room_id);
+
 }

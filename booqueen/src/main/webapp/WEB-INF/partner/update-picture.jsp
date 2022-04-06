@@ -16,23 +16,60 @@
 	function saveRoomType(){
 		var roomType = $("#roomType option:selected").val();
 		var roomId = roomType.split(':');
-		alert(roomId[0]);
-		alert(roomId[1]);
 		$("#room_id").attr("value", roomId[0]);
 		$("#type").attr("value", roomId[1]);
+	}
+	
+	function saveForm(){
+		
+		alert("working!")
+		
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		for(var i = 0; i < inputFile.length; i++){
+			var file = inputFile[i];
+			formData.append("file", file);
+		}
+		
+		$.ajax({
+			url:"editPic.pdo",
+			processData:false,
+			contentType:false,
+			data: formData,
+			type:"POST",
+			success: function(result){
+				
+				if(result.msg == "SUCCESS"){
+					alert("working!")
+				} else {
+					alert("not working!")
+				}
+			},
+			error: function(){
+				alert("not working!")
+			}
+			
+		})
+		
+		//$("#myForm").submit()
+	}
+	
+	function deletePic(){
+		alert("delete button is working!")
+		//$("#deleteForm").submit()
 	}
 </script>
 
 <body>
-	<jsp:include page="/WEB-INF/partner/header.jsp" />
-	<form action="update-picture.pdo" method="post"
-		enctype="multipart/form-data">
+	<jsp:include page="/WEB-INF/partner/header.jsp"/>	
 		<div class="main">
 			<h1>숙박 시설 사진</h1>
 			<div class="body">
+				
 				<div class="gallery">
 					<h2>메인 갤러리</h2>
 					<div class="upload__box">
+					<form id="myForm" action="update-picture.pdo" method="post" enctype="multipart/form-data">
 						<div class="upload__btn-box">
 							<div class="pics">
 								<label class="upload__btn"> <input id="image"
@@ -50,7 +87,7 @@
 						</div>
 
 						<script>
-                                $(document).ready(function () {
+                          <%--      $(document).ready(function () {
                                     $("#continue").on("click", function () {
                                         var formData = new FormData();
                                         var inputFile = $("input[name='uploadFile']");
@@ -70,7 +107,7 @@
                                             }
                                         });
                                     });
-                                });
+                                }); --%>
                             </script>
 						<script type="text/javascript">
                                 jQuery(document).ready(function () {
@@ -166,20 +203,15 @@
 								</div>
 							</div>
 						</div>
+					</form>
 					</div>
 					<div class="bottom">
 
-						<input type="submit" id="continue" value="저장">
+						<button type="button" id="continue" value="저장" onclick="saveForm()">저장</button>
 					</div>
 				</div>
-	</form>
-	
-	
-		
-	<form
-		action="remove-picture.pdo?serialnumber=${UpdateImageVO.serialnumber}&&file_name=${UpdateImageVO.file_name}"
-		method="POST">
 		<div class="modal-wrapper" id="modal">
+		<form id="deleteForm" action="remove-picture.pdo?serialnumber=${UpdateImageVO.serialnumber}&&file_name=${UpdateImageVO.file_name}" method="POST">
 			<div class="modal">
 				<div class="explain">
 					<div class="change-pic">
@@ -206,19 +238,20 @@
 					</div>
 					<div>
 
-						<input type="submit" id="delete" value="삭제">
+						<button type="button" id="delete" onclick="deletePic()">삭제</button>
 
 					</div>
 					
 				</div>
 				<div class="close">
-					<input type="button" id="close" value="닫기">
+					<button type="button" id="close">닫기</button>
 				</div>
 			</div>
+			</form>
 		</div>
 		</div>
 		</div>
-	</form>
+	
 	<jsp:include page="/WEB-INF/partner/footer.jsp" />
 	
 	<script type="text/javascript">

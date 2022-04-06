@@ -106,4 +106,28 @@
 	<select id="selectRoomByRoomType" parameterType="myRoom" resultType="myRoom">
 		SELECT * FROM room WHERE serialnumber = #{serialnumber} and type = #{type}
 	</select>
+	<select id="insertNewRoom" parameterType="myRoom" resultType="Integer">
+		INSERT INTO room values(nextval('seq_room_id'), #{serialnumber}, #{type}, #{price}, #{smoking}, #{available}, #{quota}, #{bed}) RETURNING room_id
+	</select>
+	<insert id="insertRoomBasic" parameterType="int">
+		INSERT INTO room_facilities_basic(sequence, room_id) values(nextval('seq_room_basic'), #{room_id})
+	</insert>
+	<insert id="insertRoomAccess" parameterType="int">
+		INSERT INTO room_facilities_access(sequence, room_id) values(nextval('seq_room_access'), #{room_id})
+	</insert>
+	<insert id="insertRoomService" parameterType="int">
+		INSERT INTO room_facilities_service(sequence, room_id) values(nextval('seq_room_service'), #{room_id})
+	</insert>
+	<insert id="insertRoomBath" parameterType="int">
+		INSERT INTO room_facilities_bath(sequence, room_id) values(nextval('seq_room_bath'), #{room_id})
+	</insert>
+	<insert id="insertRoomFood" parameterType="int">
+		INSERT INTO room_facilities_food(sequence, room_id) values(nextval('seq_room_food'), #{room_id})
+	</insert>
+	<insert id="insertRoomMedia" parameterType="int">
+		INSERT INTO room_facilities_media(sequence, room_id) values(nextval('seq_room_media'), #{room_id})
+	</insert>
+	<insert id="insertRoomView" parameterType="int">
+		INSERT INTO room_facilities_view(sequence, room_id) values(nextval('seq_room_view'), #{room_id})
+	</insert>
 </mapper>

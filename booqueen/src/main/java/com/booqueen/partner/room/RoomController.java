@@ -115,8 +115,7 @@ public class RoomController {
 	}
 
 	@RequestMapping(value = "/update-picture.pdo", method = RequestMethod.POST)
-	public String updatepicturePost(HotelVO hotel, MultipartFile[] uploadFile, HttpSession session, Model model,
-			RoomVO vo) {
+	public String updatepicturePost(HotelVO hotel, MultipartFile[] uploadFile, HttpSession session, Model model, RoomVO vo) {
 		String uploadFolder = "C:\\upload";
 		File uploadPath = new File(uploadFolder);
 		System.out.println(vo.toString());
@@ -155,7 +154,6 @@ public class RoomController {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					System.out.println("1");
 
 					img.setSerialnumber(hotel.getSerialnumber());
 					img.setFile_name(uploadFileName);
@@ -277,11 +275,52 @@ public class RoomController {
 	@RequestMapping(value = "/insertNewRoom.pdo", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertNewRoom(@RequestBody RoomVO room) {
-		System.out.println(room.toString());
 		String result = "";
 		
 		Gson gson = new Gson();
 		JsonObject jsonObject = new JsonObject();
+		
+		int room_id = roomService.insertNewRoom(room);		//room table insert
+		System.out.println("room_id : " + room_id);
+		if(room_id == 0) {
+			
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);					
+		
+		} else {
+			
+			roomService.insertRoomBasic(room_id);
+			roomService.insertRoomAccess(room_id);
+			roomService.insertRoomService(room_id);
+			roomService.insertRoomBath(room_id);
+			roomService.insertRoomFood(room_id);
+			roomService.insertRoomMedia(room_id);
+			roomService.insertRoomView(room_id);
+			
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/editPic.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String editPic(MultipartFile[] uploadFile) {
+		String result = "";
+		int editNumber = 0;
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		//editNumber = roomService.updatePicture();
+		
+		if(editNumber == 0) {
+			jsonObject.addProperty("msg", "FAIL");
+			result = gson.toJson(jsonObject);
+		} else {
+			jsonObject.addProperty("msg", "SUCCESS");
+			result = gson.toJson(jsonObject);
+		}
 		
 		return result;
 	}

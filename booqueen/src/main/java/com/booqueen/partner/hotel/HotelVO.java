@@ -22,4 +22,7 @@ public class HotelVO {
 	private double longitude = 0.0;
 	private double latitude = 0.0;
 	
+	//analysis(monthly transaction count)
+	private int count;
+	
 }
