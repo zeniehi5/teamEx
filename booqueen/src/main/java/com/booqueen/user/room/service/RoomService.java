@@ -82,5 +82,12 @@ public class RoomService {
 	public int updateRoomAvailablePlus(ReservationVO reservationVO) {
 		return roomDAO.updateRoomAvailablePlus(reservationVO);
 	}
+	
+	public RoomVO selectSimpleRoom(Integer room_id) {
+		return roomDAO.selectSimpleRoom(room_id);
+	}
 
+	public List<RoomVO> selectRoomImgs(String type){
+		return roomDAO.selectRoomImgs(type);
+	}
 }

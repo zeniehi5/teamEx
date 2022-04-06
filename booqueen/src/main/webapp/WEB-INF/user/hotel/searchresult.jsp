@@ -1774,8 +1774,8 @@ function getUnavailableHotel() {
     }
 	}
 
-	var cityLat = '${cityVO.latitude-0.0003}';
-	var cityLong = '${cityVO.longitude-0.0003}';
+	var cityLat = '${cityVO.latitude+0.00365817254223}';
+	var cityLong = '${cityVO.longitude-0.0083004425474}';
 	
 	// 지도 불러오기
 	var container = document.getElementById('mapApi');
@@ -1945,7 +1945,7 @@ function getUnavailableHotel() {
                 error : function(){
                 	alert('error');
                 }
-            })
+            });
        
     } // end selectMap()
  	
@@ -1960,7 +1960,6 @@ function getUnavailableHotel() {
 	});
 	   
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-	
 
 	for (var i = 0; i < positions.length; i ++) {
 		// 마커를 생성합니다

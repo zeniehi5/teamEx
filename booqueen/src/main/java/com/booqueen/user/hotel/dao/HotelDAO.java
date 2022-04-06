@@ -15,6 +15,7 @@ import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
+import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 
@@ -117,5 +118,10 @@ public class HotelDAO {
 	public List<BestHotelVO> selectRandomHotel() throws DataAccessException{
 		List<BestHotelVO> hotelVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectRandomHotel");
 		return hotelVO;
+	}
+	
+	public List<HotelServiceVO> selectHotelService(int serialnumber) throws DataAccessException{
+		List<HotelServiceVO> hotelServiceVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectRandomHotel", serialnumber);
+		return hotelServiceVO;
 	}
 }

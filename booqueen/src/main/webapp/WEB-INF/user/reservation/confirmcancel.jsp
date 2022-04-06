@@ -23,8 +23,15 @@
 <body>
     <jsp:include page="/WEB-INF/user/member/header.jsp"/>
     
+    <fmt:parseDate value="${reservationVO.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+    <fmt:parseDate var="end_date" value="${reservationVO.end_date}" pattern="yyyy-MM-dd" />
+    <c:set var="now" value="<%=new java.util.Date()%>" />
+	<c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set> 
+	<c:set var="tomorrow" value="<%=new java.util.Date(new java.util.Date().getTime() + 60*60*24*1000)%>"/>
+	<c:set var="tomorrowDate"><fmt:formatDate value="${tomorrow}" pattern="yyyyMMdd" /></c:set> 
+    
     <div class="content-top">
-        <span class="_501928098">예약이 취소되었습니다.&nbsp;<span class="_e4a8213f6"><a href="https://www.booking.com/hotel/kr/best-western-gunsan.ko.html?label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB&amp;sid=bac1796509bc54b36dbc023726e3547c&amp;aid=304142" data-testid="name-archor" class="_8ce7bbbcf">${reservationVO.hotelname }</a><span class="_a11e76d75 _192b3a196"></span></span></span>
+        <span class="_501928098">예약이 취소되었습니다.&nbsp;<span class="_e4a8213f6"><a href="${contextPath}/hotelInfo.do?serialNumber=${reservationVO.serialnumber}&start_date=${nowDate }&end_date=${tomorrowDate}" target="_blank">${reservationVO.hotelname }</a><span class="_a11e76d75 _192b3a196"></span></span></span>
         <div role="img" class="_bebcf8d60 b3a3ada19a"><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span><span aria-hidden="true" class="_617879812"><svg viewBox="0 0 24 24"><path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z"></path></svg></span></div>
     </div>
 
@@ -67,7 +74,7 @@
                                 <span class="bui-f-font-strong">도움이 필요하세요?</span>
                             </div>
                             <div class="bui-spacer--medium">
-                                <a class="bui-link bui-link--primary" href="https://secure.booking.com/help.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;label=from_conf_1#/reservation?source=mb_contact_block&amp;reservation_id=2811192897&amp;res_auth_key=gq6e9NxzOfdrsvVA">고객 서비스팀에 문의</a>
+                                <a class="bui-link bui-link--primary" href="${contextPath}/questions.do">고객 서비스팀에 문의</a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +152,7 @@
                         <div>
                             <div class="_66d2783ed">
                                 <div class="_475f10c6a">
-                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
+                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398" >
                                         <span>예약 날짜 변경</span>
                                     </a>
                                 </div>
@@ -155,7 +162,7 @@
                                     </a>
                                 </div>
                                 <div class="_475f10c6a">
-                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398">
+                                    <a href="#" class="_4310f7077 _45807dae0 _f7538b398" onclick="on()">
                                         <span>예약 확인서 보기</span>
                                     </a>
                                 </div>
@@ -166,8 +173,8 @@
                         <div class="mb-info--content">
                             <ul class="mh-links">
                                 <li class="mb-conf-print" data-component="dropdown">
-                                    <a class="mb-conf-print__link custom_track pb_conf_print_page js-custom-goal--print-conf  mb-btn" href="#" data-trackname="Print confirmation redesign" data-component="myreservations-print prevent-default-helper" data-print-url="/confirmation.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;auth_key=gq6e9NxzOfdrsvVA&amp;">
-                                        예약 확인서 출력
+                                    <a class="mb-conf-print__link custom_track pb_conf_print_page js-custom-goal--print-conf  mb-btn" onclick="on()" >
+                                        취소 확인서 출력
                                     </a>
                                 </li>
                             </ul>
@@ -176,7 +183,7 @@
                     <div class="mb-info mb-info__full_width mb-info__actions bui_font_small">
                         <div class="mb-info--content">
                             <div class="mh-links">
-                                <a class="mb-btn mb-cancel custom_track hasSlideBox js-cancel-request-btn" data-slidebox-preopen-callback="cancelOpenCallback" data-slidebox-load="mybooking_cancelsummary.ko.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;auth_key=gq6e9NxzOfdrsvVA;do=cancel" data-slidebox-submit-callback="cancelButtonSubmitCallback" data-slidebox-target="#slidebox-cancel-booking" data-slidebox-ajax-failure-feedback="true" href="${contextPath}/cancelPage.do?reservation_number=${reservationVO.reservation_number}" role="button" data-slidebox-reload-on-close-after-action="true" data-slidebox-close-callback="CancelClose_cxp_abu_trips_cancel_flow_free_cancel" data-trackname="Cancel booking, ">다시 예약하기</a> 
+                                <a class="mb-btn mb-cancel custom_track hasSlideBox js-cancel-request-btn" href="${contextPath}/hotelInfo.do?serialNumber=${reservationVO.serialnumber}&start_date=${nowDate }&end_date=${tomorrowDate}" target="_blank">다시 예약하기</a> 
                             </div>
                         </div>
                     </div>
@@ -279,9 +286,10 @@
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
                                             <a
-                                                href="mailto:2811192897-ckeu.u4zy.kpbt.eykf@property.booking.com"
-                                                class="_4310f7077 _45807dae0 _f7538b398">
-                                                <span>이메일 보내기</span>
+                                                href="mailto:${reservationVO.member_email}"
+                                                class="_4310f7077 _45807dae0 _f7538b398" id="hotel_email">
+                                                <input id="hotel_email_input" value="${reservationVO.member_email}" type="hidden">
+                                                ${reservationVO.member_email}
                                             </a>
                                         </div>
                                     </div>
@@ -300,11 +308,11 @@
                             <div class="_0fd59361b">
                                 <div class="_84f6fd780 _f98eca565">
                                     <div class="_29c344764">
-                                        <div class="ac6bdec376">전화로 문의</div>
+                                        <div class="ac6bdec376">호텔 연락처</div>
                                     </div>
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
-                                            <a href="tel:+82 63-469-1234" class="_4310f7077 fcb26725ff">+82 63-469-1234</a>
+                                            <a href="tel:+82 63-469-1234" class="_4310f7077 fcb26725ff" id="hotel_tel"><input id="hotel_tel_input" value="${reservationVO.telephone}" type="hidden">+82 ${reservationVO.telephone}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -345,7 +353,7 @@
                                     <div class="_29c344764">
                                         <div class="_a11e76d75">
                                             <a
-                                                href="https://secure.booking.com/help/reservation/?label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4ArPlrpAGwAIB0gIkZWEyYjg5YzYtODhhMi00NThlLWJmNWQtMDk5NWNiNDMzNjdj2AIE4AIB&amp;sid=bac1796509bc54b36dbc023726e3547c&amp;aid=304142&amp;source=d_mb_generic_ep&amp;res_auth_key=gq6e9NxzOfdrsvVA&amp;reservation_id=2811192897"
+                                                href="${contextPath}/questions.do"
                                                 class="_4310f7077 _45807dae0 _f7538b398">
                                                 <span>고객 서비스팀에 문의하기</span>
                                             </a>
@@ -441,35 +449,42 @@
     <div class="slideBoxOverlay slidebox--open" id="overlay" aria-hidden="true">
         <i class="bi bi-x-lg" onclick="off()"></i>
         <div class="slideBoxWrapper">
-            <h1 class="slideBoxWrapperTitle">날짜 변경</h1>
-            <form>
-                <div class="form-inner">
-                    <div class="form-inner-second">
-                        <div>
-                            <input type="text" id="check_date" name="daterange">
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <jsp:include page="/WEB-INF/user/reservation/checkReservation.jsp"/>
             <div class="change-dates__footer">
-                <button class="bui-button bui-button--secondary MyBookingOptionsCancel" type="button">
+                <button class="bui-button bui-button--secondary MyBookingOptionsCancel" type="button" onclick="off()">
                     <span class="bui-button__text">
                     취소
                     </span>
                 </button>
-                <button class="bui-button bui-button--primary1" type="submit">
+                <a onClick="window.print()"><button class="bui-button bui-button--primary1" type="submit">
                     <span class="bui-button__loader">
                         <div class="bui-spinner bui-spinner--light bui-spinner--size-small">
                             <div class="bui-spinner__inner"></div>
                         </div>
                     </span>
-                    <span class="bui-button__text">예약 가능 여부 확인</span>
-                </button>
+                   	<span class="bui-button__text">인쇄 하기</span>
+                </button></a>
             </div>
         </div>
     </div>
 
 	<script>
+	$("#hotel_tel").click(function(){ 
+		$("#hotel_tel_input").attr('type', 'text');
+		$("#hotel_tel_input").select();
+		document.execCommand('copy');
+		$("#hotel_tel_input").attr('type', 'hidden');
+		alert("연락처가 복사되었습니다.");
+	});
+	
+	$('#hotel_email').click(function(){
+		$("#hotel_email_input").attr('type', 'text');
+		$("#hotel_email_input").select();
+		document.execCommand('copy');
+		$("#hotel_email_input").attr('type', 'hidden');
+		alert("이메일이 복사되었습니다.");
+	})
+	
 	var reservation_number = '${reservationVO.reservation_number}';
 	function sendMsgToHotel(){
 		openChatting();

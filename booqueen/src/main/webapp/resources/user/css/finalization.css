@@ -275,9 +275,14 @@
 }
 ._66d2783ed ._475f10c6a a {
     font-weight: 700;
+    color: #0071c2;
+    cursor: pointer;
 }
 a{
     text-decoration: none;
+}
+a:visited {
+    color: #0071c2;
 }
 .mb-info.mb-info__actions.mb-info__with-separator {
     border-bottom: 1px solid #bdbdbd;
@@ -304,6 +309,7 @@ a{
 }
 .hasSlideBox{
     color: #0071c2;
+/* 	color: blue; */
 }
 
 /* */
@@ -599,7 +605,6 @@ a{
 .slideBoxWrapper{
     z-index: 400;
     border: 1px solid #fff;
-    border-radius: 10px;
     background: #fff;
     padding: 16px 20px 20px 20px;
     position: absolute;
@@ -607,8 +612,9 @@ a{
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    width: 30%;
-    height: 25%;
+ 	width: 48%;
+    height: 85%;
+/*     overflow: scroll; */
 }
 .slideBoxWrapper h1 {
     margin-bottom: 10px;

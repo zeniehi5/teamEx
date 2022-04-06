@@ -88,47 +88,27 @@
                 <a href="#booking-table">옵션 정보 & 요금</a>
                 <a href="#surroundings">시설</a>
                 <a href="#house-rule">하우스 롤</a>
-                <a id="more-review">고객 후기(${fn:length(reviewList)}개)</a>
+                <a id="more-review">고객 후기(
+                <c:if test="${reviewAvg.scoreAvg == 0.0 }">
+                		0
+                	</c:if>
+                	<c:if test="${reviewAvg.scoreAvg != 0.0}">
+                		${fn:length(reviewList)}
+                	</c:if>
+                		개)</a>
             </div>
             
             <div class="house-title">
                 <div class="row">
                     <h2 id="hotelname">${hotelInfo.hotelname }</h2>
-                    <c:if test="${hotelInfo.star+0 == '5'}">
-						<div>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        </div>
-					</c:if>
-                    <c:if test="${hotelInfo.star+0 == '4'}">
-						<div>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        </div>
-					</c:if>
-                    <c:if test="${hotelInfo.star+0 == '3'}">
-						<div>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        </div>
-					</c:if>
-                    <c:if test="${hotelInfo.star+0 == '2'}">
-						<div>
-                        	<i class="fas fa-star fa-xs"></i>
-                        	<i class="fas fa-star fa-xs"></i>
-                        </div>
-					</c:if>
-                    <c:if test="${hotelInfo.star+0 == '1'}">
-						<div>
-                        	<i class="fas fa-star fa-xs"></i>
-                        </div>
-					</c:if>
+                    <c:set var="star" value="${hotelInfo.star*1}"/>
+					<div>
+					<c:forEach begin="1" end="${star }">
+						<i class="fas fa-star fa-xs"></i>
+					</c:forEach>
+					</div>
+					
+					
                      <span>
                      <c:if test="${reviewAvg.scoreAvg == 0.0 }">
                 		0
@@ -345,7 +325,7 @@
 			                            <td class="booking-table-frist-td">
 			                                <div class="booking-table-tbody-div">
 			                                    <div>
-			                                        <a class="tbody-div-a" onclick="on_hotelroom()"><span>${room.type }</span></a>
+			                                        <a class="tbody-div-a" onclick="on_hotelroom('${room.type}')"><span>${room.type }</span></a>
 			                                    </div>
 <!-- 			                                    <div class="booking-warning"> -->
 <!-- 			                                        <i class="bi bi-circle-half"></i><span id="booking-warning-span">우리 사이트에 남은 객실 단 3개</span> -->
@@ -978,21 +958,12 @@
             <div>
                 <div><i class="bi bi-shop"></i>&nbsp;&nbsp;<h3 class="list-columns-title">주변 장소</h3></div>
                 <ul>
-                    <li><div class="list-columns-li-inner"><div>남포동건어물도매시장</div><div>0.6km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>광복동</div><div>0.8 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>자갈치 시장</div><div>0.8 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>신동아시장</div><div>0.9 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>용두산 공원</div><div>1 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>충무공동상</div><div>1 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>부산영화체험박물관</div><div>1 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>부산 타워</div><div>1 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>갤러리604</div><div>1 km</div></div></li>
-                    <li><div class="list-columns-li-inner"><div>BIFF 광장</div><div>0.6km</div></div></li>
-                    <li><div id="end"><div>BIFF 광장</div><div>0.6km</div></div></li>
-                    
+                	<c:forEach var="distanceVO" items="${distanceVO }" begin="1" end="23">
+                    <li><div class="list-columns-li-inner"><div>${distanceVO.name }</div><div><fmt:formatNumber value="${distanceVO.distance }" pattern="0.0"/>km</div></div></li>
+                    </c:forEach> 
                 </ul>
             </div>
-            <div>
+<!--             <div> 
                 <div><i class="bi bi-egg-fried"></i>&nbsp;&nbsp;<h3 class="list-columns-title2">인기 명소</h3></div>
                 <ul>
                     <li><div class="list-columns-li-inner"><div>남포동건어물도매시장</div><div>0.6km</div></div></li>
@@ -1006,8 +977,8 @@
                     <li><div class="list-columns-li-inner"><div>갤러리604</div><div>1 km</div></div></li>
                     <li><div class="list-columns-li-inner"><div>BIFF 광장</div><div>0.6km</div></div></li>
                 </ul>
-            </div>
-            <div>
+            </div>-->
+<!--             <div> 
                 <div>&nbsp;</div>
                 <div><i class="bi bi-geo-alt"></i>&nbsp;&nbsp;<h3 class="list-columns-title">근처 해변</h3></div>
                 <ul>
@@ -1017,8 +988,8 @@
                     <li><div class="list-columns-li-inner"><div>Gwangalli Beach</div><div>0.8 km</div></div></li>
                     <li><div class="list-columns-li-inner"><div>Songdo Beach</div><div>0.6km</div></div></li>
                 </ul>
-            </div>
-            <div>
+            </div>-->
+<!--             <div> 
                 <div><i class="bi bi-flag"></i>&nbsp;&nbsp;<h3 class="list-columns-title">가장 가까운 공항</h3></div>
                 <ul>
                     <li><div class="list-columns-li-inner"><div>김해국제공항</div><div>0.6km</div></div></li>
@@ -1027,7 +998,7 @@
                     <li><div class="list-columns-li-inner"><div>김해국제공항</div><div>0.6km</div></div></li>
                     <li><div class="list-columns-li-inner"><div>김해국제공항</div><div>0.6km</div></div></li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -1274,54 +1245,59 @@
             <div class="map-info">
                 <div class="info-inner">
                     <div class="info-top">
-                        <button class="maps_iw__close js-maps_iw__close iw-close" aria-label="Close info window">
+<!--                         <button class="maps_iw__close js-maps_iw__close iw-close" aria-label="Close info window"> 
                             <svg width="128" height="128" viewBox="0 0 128 128" class="bk-icon -iconset-close_bold"><path d="M75.3 64l26.4-26.3a8 8 0 0 0-11.4-11.4L64 52.7 37.7 26.3a8 8 0 0 0-11.4 11.4L52.7 64 26.3 90.3a8 8 0 0 0 11.3 11.4L64 75.3l26.3 26.4a8 8 0 0 0 11.4-11.4z"></path></svg>
-                        </button>
+                        </button>-->
                         <div class="top-header">
                             <div class="picture-wrapper">
-                                <div class="header_element--picture"></div>
+                                <div class="header_element--picture" style="background-image: url(${hotelImg.file_url});"></div>
                             </div>
                             <div>
                                 <div class="maps_iw__header_element"> 
                                     <div>
-                                        <a href="/searchresults.html?aid=304142;label=gen173nr-1DCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQPoAQGIAgGoAgS4AsWwkZAGwAIB0gIkZWVmZjY0NGItNmQzNy00ZWUyLWIyNzAtYjY5MDI4ZmFjYjBh2AIE4AIB;sid=bac1796509bc54b36dbc023726e3547c;dest_id=-716583;dest_type=city;highlighted_hotels=5663963&amp;;room1=A,A;homd=1;atlas_nodate=1;atlas_src=hp_iw_title" class="maps_iw__header--link js-map-hotel__link" target="_blank">
-                                            Glue Hotel
+                                        <a class="maps_iw__header--link js-map-hotel__link">
+                                            ${hotelInfo.hotelname }
                                         </a>
                                         <span class="c-accommodation-classification-rating">
                                             <span class="c-accommodation-classification-rating__badge c-accommodation-classification-rating__badge--stars ">
                                                 <span class="bui-rating bui-rating--smaller" role="img" aria-label="3 out of 5">
-                                                    <span aria-hidden="true" class="bui-icon bui-rating__item bui-icon--medium" role="presentation">
+                                                    <c:set var="star" value="${hotelInfo.star*1}"/>
+													<c:forEach begin="1" end="${star }">
+													<span aria-hidden="true" class="bui-icon bui-rating__item bui-icon--medium" role="presentation">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
                                                             <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
                                                         </svg>
                                                     </span>
-                                                    <span aria-hidden="true" class="bui-icon bui-rating__item bui-icon--medium" role="presentation">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-                                                            <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-                                                        </svg>
-                                                    </span>
-                                                    <span aria-hidden="true" class="bui-icon bui-rating__item bui-icon--medium" role="presentation">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" role="img">
-                                                            <path d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"></path>
-                                                        </svg>
-                                                    </span>
+													</c:forEach>
                                                 </span>
                                             </span>
                                         </span>
                                     </div>
-                                   <div class="maps_iw__header_wishlist_heart js-wishlist-container">
+<!--                                    <div class="maps_iw__header_wishlist_heart js-wishlist-container">
                                         <button type="button" data-hotel-id="5663963" data-ga-label="small" data-sr-comparison-mode="true" class="map_wishlist-heart-button js-wl-dropdown-handle wl_improvement " role="button" aria-live="assertive">
                                             <svg aria-hidden="true" focusable="false" role="presentation" size="large" width="17" height="17" viewBox="0 0 24 24" class="bk-icon -streamline-heart_outline"><path d="M12.541 21.325l-9.588-10a4.923 4.923 0 1 1 6.95-6.976l1.567 1.566a.75.75 0 0 0 1.06 0l1.566-1.566a4.923 4.923 0 0 1 6.963 6.962l-9.6 10.014h1.082zm-1.082 1.038a.75.75 0 0 0 1.082 0l9.59-10.003a6.418 6.418 0 0 0-.012-9.07 6.423 6.423 0 0 0-9.083-.001L11.47 4.854h1.06l-1.566-1.566a6.423 6.423 0 1 0-9.082 9.086l9.577 9.99z"></path></svg>
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="detail-bottom">
                                     <div class="score-box">
-                                        8.5
+                                        ${reviewAvg.scoreAvg}
                                     </div>
                                     <div class="review-row">
-                                        <div>매우 좋음</div>
-                                        <div>1,416개 이용 후기</div>
+                                        <c:choose>
+							                <c:when test="${reviewAvg.scoreAvg >= 9}"><div>최고</div></c:when>
+											<c:when test="${reviewAvg.scoreAvg >= 8}"><div>매우 좋음</div></c:when>
+											<c:when test="${reviewAvg.scoreAvg >= 7}"><div>좋음</div></c:when>
+											<c:when test="${reviewAvg.scoreAvg >= 6}"><div>만족</div></c:when>
+											<c:when test="${reviewAvg.scoreAvg < 6}"><div>보통</div></c:when>
+							           </c:choose>     
+                                        <div><c:if test="${reviewAvg.scoreAvg == 0.0 }">
+						                		0
+						                	</c:if>
+						                	<c:if test="${reviewAvg.scoreAvg != 0.0}">
+						                		${fn:length(reviewList)}
+						                	</c:if>
+              								개 이용 후기</div>
                                     </div>
                                 </div>
                             </div>
@@ -1329,8 +1305,8 @@
                         <div class="maps_iw__price_container">
                             <div class="
                                 txp-map-cta-contain txp-map-cta-contain__extend">
-                                <a href="/searchresults.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4AoOhrZAGwAIB0gIkZDljNmVhNzQtZDcxYi00YTMyLTgxMDMtNzExNDA5YTA3Mjc02AIG4AIB;sid=bac1796509bc54b36dbc023726e3547c;dest_id=-716583;dest_type=city;highlighted_hotels=5663963&amp;;room1=A,A;homd=1;atlas_nodate=1;atlas_src=hp_iw_btn" class="txp-map-cta" target="_blank">
-                                    <span class="bui-button__text2">날짜 입력하여 요금 확인</span>
+                                <a href="#booking-table" class="txp-map-cta" onclick="off()">
+                                    <span class="bui-button__text2">호텔 요금 확인하기</span>
                                     <span class="bui-button__icon">
                                         <svg class="txp-btn-arr" fill="#FFFFFF" height="16" width="16" viewBox="0 0 128 128"><path d="M48 104a8 8 0 0 1-5.7-13.7L68.7 64 42.3 37.7a8 8 0 0 1 11.4-11.4L91.3 64l-37.6 37.7A8 8 0 0 1 48 104z"></path></svg>
                                     </span>
@@ -1338,7 +1314,7 @@
                             </div>
                         </div>   
                         <div class="maps_iw__address maps_iw_text_style__light">
-                            서울, 종로구 율곡로 228
+                            ${hotelInfo.city}, ${hotelInfo.address1}
                         </div>
                     </div>
                     <div class="info-bottom">
@@ -1348,49 +1324,16 @@
                                     인기 명소
                                 </div>
                                 <ul class="maps_iw_landmarks__list-container">
-                                    <li class="maps_iw_landmarks__list-item">
+                                   <c:forEach var="distanceVO" items="${distanceVO }" begin="1" end="5">
+				                   <li class="maps_iw_landmarks__list-item">
                                             <div class="maps_iw_landmarks__landmark">
-                                                명동성당
+                                               ${distanceVO.name }
                                             </div>
                                             <div class="maps_iw_landmarks__distance">
-                                                2 km
+                                                <fmt:formatNumber value="${distanceVO.distance }" pattern="0.0"/> km
                                             </div>
                                     </li>
-                                    <li class="maps_iw_landmarks__list-item">
-                                        <div class="maps_iw_landmarks__landmark">
-                                            광화문
-                                        </div>
-                                        <div class="maps_iw_landmarks__distance">
-                                            2.4 km
-                                        </div>
-                                    </li>
-                                
-                                    <li class="maps_iw_landmarks__list-item">
-                                        <div class="maps_iw_landmarks__landmark">
-                                            경복궁
-                                        </div>
-                                        <div class="maps_iw_landmarks__distance">
-                                            2.4 km
-                                        </div>
-                                    </li>
-                                
-                                    <li class="maps_iw_landmarks__list-item">
-                                        <div class="maps_iw_landmarks__landmark">
-                                            N 서울 타워
-                                        </div>
-                                        <div class="maps_iw_landmarks__distance">
-                                            3.1 km
-                                        </div>
-                                    </li>
-                                
-                                    <li class="maps_iw_landmarks__list-item">
-                                        <div class="maps_iw_landmarks__landmark">
-                                            코엑스
-                                        </div>
-                                        <div class="maps_iw_landmarks__distance">
-                                            8.7 km
-                                        </div>
-                                    </li>
+				                   </c:forEach>  
                                 </ul>
                             </div>
                         </div>
@@ -1409,22 +1352,20 @@
 
 		<div class="modal-wrapper">
 			<div class="modal-container-top">
-				<div class="hotel-slides">
-					<img src="${contextPath}/resources/user/images/main1.webp">
-				</div>
+				<div id="hotel-slides"></div>
+				
 				
 				<a class="prev" onclick="plusSlides(-1)">❮</a>
   				<a class="next" onclick="plusSlides(1)">❯</a>
 
 				<div class="image-list">
-					<div class="hotel-image">
-						<img class="demo cursor" src="${contextPath}/resources/user/images/main1.webp" onclick="currentSlide(1)" alt="">
-					</div>
+					<div id="hotel-image"></div>
+					
 				</div>
 			</div>
 
 
-			<div class="modal-container-bottom">
+			<div class="modal-container-bottom" style="display: none;">
 				<div class="room-info room-info-first">
 					<h1 class="room-name">스탠다드 더블룸</h1>
 					<div class="room-facility">
@@ -1550,7 +1491,7 @@
 				</div> <!-- room-info -->
 			</div> <!-- modal-container-bottom -->
 			</div>
-			<div class="lightbox-book">
+			<div class="lightbox-book" style="display: none;">
 				<div class="lightbox-book-top">
 					<div class="lightbox-book-conditions">
 						<div class="lightbox-title">
@@ -1584,7 +1525,6 @@
 						<div class="lightbox-cta-ticker-item">즉시 예약 확정</div>
 						<div class="lightbox-cta-ticker-item">예약 수수료, 신용카드 수수료 없음!</div>
 					</div>
-
 			</div>
 		</div>
 		</div>
@@ -1996,17 +1936,25 @@
     </script>
 	
 	<script>
-		var contextPath = '${contextPath}';
 	
+		const contextPath = '${contextPath}';
+		const hotel_latitude = '${hotelInfo.latitude}';
+		const hotel_longitude = '${hotelInfo.longitude}';
+		const hotel_latitude_plus = '${hotelInfo.latitude+0.00365817254223}';
+		const hotel_longitude_plus = '${hotelInfo.longitude-0.0083004425474}';
+			
+		var MapArray = new Array();
+		var positions = [];
+		
 		var container = document.getElementById('map');
 		var options = {
-			center: new kakao.maps.LatLng(37.570619065148335, 126.99217813486882),
+			center: new kakao.maps.LatLng(hotel_latitude_plus, hotel_longitude_plus),
 			level: 3
 		};
 
 		var map = new kakao.maps.Map(container, options);
 
-        var markerPosition  = new kakao.maps.LatLng(37.570619065148335, 126.99217813486882);
+        var markerPosition = new kakao.maps.LatLng(hotel_latitude, hotel_longitude);
 
         var imageSrc = contextPath + '/resources/user/images/internet.png', // 마커이미지의 주소입니다    
 		    imageSize = new kakao.maps.Size(64, 64), // 마커이미지의 크기입니다
@@ -2014,15 +1962,85 @@
 			
 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 		
+		
+		var city = '${hotelInfo.city}';
+		
+		function getAttractions(){
+			$.ajax({
+				method: "POST",
+				url: contextPath + "/getAttractions.do",
+				data: {city: city},
+				dataType: "JSON",
+				success: function(data){
+					
+					$.each(data, function(index, attraction){
+						
+						var contents = {
+								content: '<div>' + attraction.name + '</div>',
+								latlng: new kakao.maps.LatLng(attraction.latitude, attraction.longitude) 
+						};
+						
+						MapArray.push(contents);
+						
+						positions[index] = MapArray[index];
+						
+				        var imageSrc = contextPath + '/resources/user/images/attractionMaker.png', // 마커이미지의 주소입니다    
+						    imageSize = new kakao.maps.Size(36, 36), // 마커이미지의 크기입니다
+						    imageOption = {offset: new kakao.maps.Point(27, 69)};
+							
+						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+						
+						var marker = new kakao.maps.Marker({
+							map: map, // 마커를 표시할 지도
+							position: positions[index].latlng,
+							image: markerImage
+						});
+						
+						var infowindow = new kakao.maps.InfoWindow({
+					        content: positions[index].content // 인포윈도우에 표시할 내용
+					    });
+
+					    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+					    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+					    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+					    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+					    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+						
+					});
+				}
+			})
+		}
+		
 		var marker = new kakao.maps.Marker({
 			map: map, // 마커를 표시할 지도
 			position: markerPosition,
 			image: markerImage
 		});
-        
-        marker.setMap(map);
 
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
+		
+// 		marker.setMap(map);
+		
+		
+	</script>
+	
+   	<script>
+	var path = '${contextPath}';
+   	
        function on() {
+    	 getAttractions();
          document.getElementById("overlay").style.display = "block";
          map.relayout();
        }
@@ -2030,9 +2048,38 @@
        function off() {
          document.getElementById("overlay").style.display = "none";
        }
-	    function on_hotelroom() {
+	    function on_hotelroom(type) {
+	    	
+	    	$.ajax({
+	    		url: path + '/selectRoomImgs.do',
+	    		method: 'POST',
+	    		data: {type: type},
+	    		dataType: 'JSON',
+	    		success: function(data){
+	    			$('#hotel-slides').empty();
+	    			$('#hotel-image').empty();
+	    			
+	    			$.each(data, function(index, room){
+	    				var text = '';
+	    				text += "<div class='hotel-slides'><img src='";
+	    				text += room.file_url;
+	    				text += "'></div>";
+	    				$('#hotel-slides').append(text);
+	    		
+	    				var str = '';
+	    				str += "<div class='hotel-image'><img class='demo cursor' src='";
+	    				str += room.file_url;
+	    				str += "' onclick='currentSlide("
+    					str += index + 1;
+	    				str += ")' ></div>";
+	    				$('#hotel-image').append(str);
+	    			});
+	    			currentSlide(1);
+	    		}
+	    	});
+	    	
 	        document.getElementById("modalMask").style.display = "block";
-	        map.relayout();
+	        document.getElementById("modalDetail").style.display = "block";
 	      }
 	
 	    function off_hotelroom() {
@@ -2282,7 +2329,7 @@
 		</script>
 
 	<script>
-	var image_path = '${contextPath}'
+	var image_path = '${contextPath}';
 	
 	function test(imageName) {
 	    LoadingWithMask(image_path/resources/user/images/spinner.gif);
