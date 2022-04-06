@@ -14,6 +14,7 @@ import com.booqueen.user.hotel.vo.CityVO;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelMapVO;
+import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 
@@ -98,6 +99,10 @@ public class HotelService {
 	// index - random hotel
 	public List<BestHotelVO> selectRandomHotel() {
 		return hotelDAO.selectRandomHotel(); 
+	}
+	
+	public  List<HotelServiceVO> selectHotelService(int serialnumber) {
+		return hotelDAO.selectHotelService(serialnumber);
 	}
   
 }

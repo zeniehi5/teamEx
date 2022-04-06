@@ -181,7 +181,7 @@
 				                     <div class="msg-header-title-heading"></div>
 				                     <div class="msg-header-title-caption"></div>
 				                  </div>
-				                  <button class="msg-header-right" onclick="entryHelp()">도움말</button>
+				                  <button class="msg-header-right">도움말</button>
 				               </div>
 				            </div>
 				            <div class="msg-app-content">
@@ -219,7 +219,7 @@
 				                     </div>
 				                     <div class="help-content">
 				                        <div class="content-card">
-				                           <div class="card-hotel-image"><img src="images/hotel1.jpg" alt=""></div>
+				                           <div class="card-hotel-image"><img src="#" alt=""></div>
 				                           <div class="card-hotel-description">
 				                              <div class="hotel-name"></div>
 				                              <div class="hotel-dates"></div>
@@ -390,11 +390,12 @@
 	   })
 	}
     
+    var path = '${contextPath}';
+    
     function insertChat(reservation_number, serialnumber){
     	
     	var content_val = $('.msg-text-input').val();
     	var chatVO = {"userid": '${member.userid}', "reservation_number": reservation_number, "content": content_val, "partner": false, "serialnumber": serialnumber}
-    	var path = '${contextPath}';
     	
     	$.ajax({
     		url: path + "/insertChat.do"
@@ -475,7 +476,16 @@
 	<script>
 	// 채팅 열기
     function openChatting() {
-       document.getElementById("myChatting").style.display = "block";
+       
+// 		$.ajax({
+// 			url: path + "/getReservationList.do",
+// 			method: 'POST',
+// 			success: function(data){
+// 				console.log(data);
+// 			}
+// 		});
+		
+	   document.getElementById("myChatting").style.display = "block";
        document.getElementById("msg-footer-wrap").style.zIndex = -1;
     }
     // 채팅 닫기

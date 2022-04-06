@@ -1,0 +1,209 @@
+.show_for_print{
+    margin-top: 30px;
+}
+.main-content {
+    border: 0.5mm solid #3e4853;
+    border-top: 0;
+}
+.main-content__item {
+    border-top: 0.5mm solid #3e4853;
+    padding: 10px;
+    page-break-inside: avoid;
+}
+.summary {
+    text-align: center;
+}
+.table {
+    border-collapse: collapse;
+    display: table;
+    width: 100%;
+}
+.table-row {
+    display: table-row;
+    width: 100%;
+}
+.hotel-map{
+	display: none;
+}
+.table-cell {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 10px;
+}
+.hotel-details__photo {
+    float: left;
+    clear: both;
+    display: block;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.summary-layout-redesign .hotel-details__address:not(.bhpb_print_property_name_address) {
+    padding-left: 100px;
+}
+.summary-layout-redesign .hotel-details__address {
+    background-color: inherit!important;
+    text-align: left;
+    padding: 0;
+}
+.marginTop5 {
+    margin-top: 5px;
+}
+.summary-layout-redesign .dates {
+    max-width: none;
+}
+
+[class*="col-"] {
+    float: left;
+    margin: 0 3.84615384615% 0 0;
+    list-style: none;
+    position: relative;
+    zoom: 1;
+}
+.summary-layout-redesign .dates__border {
+    border-right: 1px solid #cecece!important;
+    padding-right: 10px;
+}
+.summary__title {
+    text-transform: uppercase;
+    font-size: 7px;
+    height: 10px;
+    line-height: 1;
+}
+.summary__big-num {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 3px;
+}
+.dates__month {
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.8;
+}
+.dates__week {
+    font-family: Georgia,serif;
+    font-style: italic;
+}
+.marginTop3 {
+    margin-top: 3px;
+}
+.rooms-nights {
+    max-width: 150px;
+    min-width: 80px;
+}
+.row {
+    clear: both;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.col-5 {
+    width: 39.4230769231%;
+}
+.summary__big-num {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 3px;
+}
+.col-1 {
+    width: 4.8076923077%;
+}
+.row:after {
+    clear: both;
+}
+.txt-right {
+    text-align: right;
+}
+.inline-block {
+    display: inline-block;
+}
+.txt-left {
+    text-align: left;
+}
+.table-cell--with-border {
+    border-left: 0.5mm solid #cecece;
+    min-width: 205px;
+}
+.price-table {
+    padding: 15px;
+    margin-top: 10px;
+    border-top: 1px solid #cecece;
+}
+.is-print .pb-pricebreakdown--tbl-outerbox, .is-print .pb-pricebreakdown--tbl-outerbox:first-child, .is-print .pb-pricebreakdown--tbl-outerbox:last-child {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+}
+.pb-pricebreakdown--tbl {
+    width: 100%;
+}
+.is-print.is-print-mod2 .pb-pricebreakdown--tbl-outerbox {
+    text-align: left;
+}
+.is-print .pb-pricebreakdown--tbl-outerbox, .is-print .pb-pricebreakdown--tbl-outerbox:first-child, .is-print .pb-pricebreakdown--tbl-outerbox:last-child {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}  
+.pb-pricebreakdown--tbl-outerbox .room-price {
+    font-size: 20px;
+    line-height: 28px;
+    color: #003580;
+}
+.is-print.is-print-mod2 .pb-pricebreakdown--tbl-outerbox .room-price {
+    color: #000;
+}
+.is-print .pb-pricebreakdown--tbl-outerbox.filled {
+    background-color: transparent;
+}
+.price-table .is-print.is-print-mod2 .pb-pricebreakdown--additional-info:first-child {
+    padding-top: 5px;
+}
+.is-print.is-print-mod2 .pb-pricebreakdown--additional-info {
+    padding-bottom: 5px;
+}
+.is-print.is-print-mod2 .pb-pricebreakdown--additional-info {
+    border-bottom: 1px solid #cecece;
+}
+.is-print.is-print-mod2 .pb-pricebreakdown--additional-info:last-child {
+    border: 0;
+}
+.main-content__item {
+    border-top: 0.5mm solid #3e4853;
+    padding: 10px;
+    page-break-inside: avoid;
+}
+.room__facilities, .room__beds {
+    font-size: 9px;
+}
+ol, ul {
+    list-style: none;
+}
+.room__facilities li {
+    display: inline;
+}
+.pb-pricebreakdown--additional-info-header {
+    line-height: 24px;
+    font-size: 14px;
+    margin: 0;
+}
+.book-num {
+    text-transform: uppercase;
+    font-size: 9px;
+    text-align: right;
+}
+.book-num__digits {
+    color: #0896ff;
+    font-weight: bold;
+    font-size: 13px;
+}
+h2 {
+    font-size: 13px;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: 1000;
+}

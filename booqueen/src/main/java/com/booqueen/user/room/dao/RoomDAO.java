@@ -43,5 +43,11 @@ public class RoomDAO {
 		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateRoomAvailablePlus", reservationVO);
 	}
 	
+	public RoomVO selectSimpleRoom(Integer room_id) throws DataAccessException{
+		return sqlSession.selectOne("com.booqueen.user.room.dao.roomapper.selectSimpleRoom", room_id);
+	}
 	
+	public List<RoomVO> selectRoomImgs(String type) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRoomImgs", type);
+	}
 }

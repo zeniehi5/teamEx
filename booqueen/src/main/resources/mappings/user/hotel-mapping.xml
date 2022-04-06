@@ -329,11 +329,15 @@
 	</select>
 	
 	<select id="selectHotelPolicy" resultType="policy" parameterType="Integer">
-		<![CDATA[select * from hotel_policy where serialnumber = #{serialnumber} ]]>
+		<![CDATA[select distinct * from hotel_policy where serialnumber = #{serialnumber} ]]>
 	</select>
 	
 	<select id="getCityLocation" resultType="cityVO" parameterType="String">
 		select * from city where city = #{city}
+	</select>
+	
+	<select id="selectHotelService" resultType="hotelServiceVO" parameterType="Integer">
+		select distinct * from hotel_service where serialnumber = #{serialnumber}
 	</select>
 	
 	<!-- unavailableHotel -->
@@ -531,4 +535,5 @@
 		ON th.serialnumber = hi.serialnumber
 		ORDER BY random() LIMIT 5
 	</select>
+	
 </mapper>

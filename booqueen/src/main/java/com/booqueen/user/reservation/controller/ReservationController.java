@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.hotel.service.HotelService;
 import com.booqueen.user.hotel.vo.HotelImgVO;
+import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.member.MemberVO;
 import com.booqueen.user.reservation.service.ReservationService;
@@ -170,14 +171,52 @@ public class ReservationController {
 //		}
 //			reservationService.deleteDuplicatedReservation();
 //			reservationService.modifyReservation();
+			
+			/*
 			List<ReservationVO> vo = reservationService.selectReservationByMerchant(reservationVO.getMerchant());
 			
 			ReservationVO vo1 = vo.get(0);
 			System.out.println(vo1.toString());
 			
 			model.addAttribute("reservationVO", vo1);
-
+			
+			RoomVO roomVO = roomService.selectSimpleRoom(vo1.getRoom_id());
+			
+			model.addAttribute("room", roomVO);
+			
+			HotelPolicyVO hotelPoilcyVO = hotelService.selectHotelPolicy(roomVO.getSerialnumber());
+			
+			model.addAttribute("hotelPoilcyVO", hotelPoilcyVO);
+			
+			 List<HotelServiceVO> hotelServiceVO = hotelService.selectHotelService(roomVO.getSerialnumber());
+			
+			model.addAttribute("hotelServiceVO", hotelServiceVO);
+			
 			return "reservation/finalization";
+			*/
+			
+			return "redirect:bookingPage.do";
+	}
+	
+	@RequestMapping(value="/bookingPage.do")
+	public String bookingPage(HttpSession session, Model model) throws Exception {
+		
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
+		model.addAttribute("reservationList", reservationList);
+		session.setAttribute("reservationList", reservationList);
+		
+		for(int i=0; i<reservationList.size(); i++) {
+			String start_day = roomService.getDateDay(reservationList.get(i).getStart_date(), "yyyy-MM-dd");
+			String end_day = roomService.getDateDay(reservationList.get(i).getEnd_date(), "yyyy-MM-dd");
+			reservationList.get(i).setStart_day(start_day);
+			reservationList.get(i).setEnd_day(end_day);
+		}
+		
+		Date now = new Date();
+		model.addAttribute("now", now);
+		
+		return "reservation/bookings";
 	}
 	
 	@ResponseBody
@@ -194,43 +233,66 @@ public class ReservationController {
 			return "true";
 		}
 	}
-	
-	@RequestMapping(value="/bookingPage.do")
-	public String bookingPage(HttpSession session, Model model) throws Exception {
-		
-		MemberVO user = (MemberVO)session.getAttribute("member");
-		List<ReservationVO> reservationList = reservationService.selectReservation(user.getUserid());
-		model.addAttribute("reservationList", reservationList);
-		
-		for(int i=0; i<reservationList.size(); i++) {
-			String start_day = roomService.getDateDay(reservationList.get(i).getStart_date(), "yyyy-MM-dd");
-			String end_day = roomService.getDateDay(reservationList.get(i).getEnd_date(), "yyyy-MM-dd");
-			reservationList.get(i).setStart_day(start_day);
-			reservationList.get(i).setEnd_day(end_day);
-		}
-		
-		Date now = new Date();
-		model.addAttribute("now", now);
-		
-		return "reservation/bookings";
-	}
 
 	@RequestMapping(value="/confirmation.do")
-	public String confirmPage(@RequestParam("reservation_number") String reservation_number, @RequestParam("room_id") int room_id, @RequestParam("serialnumber") int serialnumber, Model model) {
+	public String confirmPage(@RequestParam("reservation_number") String reservation_number, @RequestParam("room_id") int room_id, Model model) throws Exception {
 		
 		int reservation_number_i = Integer.parseInt(reservation_number);
 		ReservationVO reservation = reservationService.getReservation(reservation_number_i);
 		
+		String start_date = reservation.getStart_date();
+		String start_date_year = start_date.substring(0, 4);
+		String start_date_month = start_date.substring(5, 7);
+		String start_date_day = start_date.substring(8, 10);
+
+		String end_date = reservation.getEnd_date();
+		String end_date_year = end_date.substring(0, 4);
+		String end_date_month = end_date.substring(5, 7);
+		String end_date_day = end_date.substring(8, 10);
+
+		String start_day = roomService.getDateDay(start_date, "yyyy-MM-dd");
+		String end_day = roomService.getDateDay(end_date, "yyyy-MM-dd");
+		
+		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(reservation.getStart_date());
+        Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(reservation.getEnd_date());
+        long diffSec = (format2.getTime() - format1.getTime()) / 1000;
+        long diffDays = diffSec / (24*60*60);
+		
+		reservation.setStart_date_year(start_date_year);
+		reservation.setStart_date_month(start_date_month);
+		reservation.setStart_date_day(start_date_day);
+		reservation.setEnd_date_year(end_date_year);
+		reservation.setEnd_date_month(end_date_month);
+		reservation.setEnd_date_day(end_date_day);
+		reservation.setStart_day(start_day);
+		reservation.setEnd_day(end_day);
+		reservation.setDiffDays((int) diffDays);
+	
 		model.addAttribute("reservationVO", reservation);
+
+		RoomVO roomVO = roomService.selectSimpleRoom(reservation.getRoom_id());
+		
+		model.addAttribute("room", roomVO);
+		
+		HotelPolicyVO hotelPoilcyVO = hotelService.selectHotelPolicy(roomVO.getSerialnumber());
+		
+		model.addAttribute("hotelPoilcyVO", hotelPoilcyVO);
+		
+		List<HotelServiceVO> hotelServiceVO = hotelService.selectHotelService(roomVO.getSerialnumber());
+		
+		model.addAttribute("hotelServiceVO", hotelServiceVO);
+		
+		List<RoomVO> roomImg = roomService.selectRoomImgs(roomVO.getType());
+		
+		model.addAttribute("roomImg", roomImg.get(0).getFile_url());
 		
 		if(reservation.isStatus()) {
 			return "reservation/finalization"; 
 		} else {
 			return "reservation/confirmcancel";
 		}
-		
 	}
-	
+	 
 	@RequestMapping(value="/cancelPage.do")
 	public String cancelPage(@RequestParam("reservation_number") String reservation_number, Model model) {
 		
@@ -269,7 +331,6 @@ public class ReservationController {
         Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(cancelVO.getEnd_date());
         long diffSec = (format2.getTime() - format1.getTime()) / 1000;
         long diffDays = diffSec / (24*60*60);
-        System.out.println("diffDays: " + diffDays); 
         
 		roomService.updateRoomAvailablePlus(cancelVO);
 		String orgin_start_date = cancelVO.getStart_date();
