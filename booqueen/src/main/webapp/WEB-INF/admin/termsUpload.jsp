@@ -101,16 +101,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a>
+								<a class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false"aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 사이트 관리
@@ -118,12 +115,11 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
-									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
-									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a>
+								<a class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a>
+								<a class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
 						
@@ -137,12 +133,11 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a>
+								<a class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a>
+								<a class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
                         </div>
@@ -156,18 +151,17 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">약관 등록</h1>
-                        <ol class="breadcrumb mb-4">
+                        <!-- <h1 class="mt-4">약관 등록</h1> -->
+                        <!-- <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">약관 등록</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                BooQueen약관 등록
-                            </div>
-                        </div>
+                        </ol> -->
+                        <!-- <div class="card mb-4">
+                            <div class="card-body">Booqueen.com 약관 등록</div>
+                        </div> -->
+                        <br>
                         <div class="card mb-4">
                         <form action="${contextPath}/insertTerms.mdo" method="post" id="addterm">
-                            <div class="card-header">
+                            <div class="card-header" style="font-size: 20px;">
                             <div>
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com --> 약관 등록</div>
                                 <div style="float: right; margin-top: -20px;">
@@ -175,12 +169,21 @@
                                 </div>
                             </div>
                             <div style="margin-left: 100px;">
-                            
-                                <table style="width: 90%;"> 
-                                    <tbody>	
+                                <table style="width: 90%; margin-top: 24px;">
+                                    <tbody>
+                                    <tr>
+		                            	<td style="text-align: center">구분코드</td>
+		                            	<td>
+		                            		<select name="category" style="padding: 10px; margin-bottom: 8px; width: 90%;">
+												<option value="A">모든 여행 상품</option>
+												<option value="B">숙소</option>
+												<option value="Booqueen.com 용어 설명">Booqueen.com 용어 설명</option>
+											</select>
+		                            	</td>
+		                            </tr>
                                     <tr>
                                         <td style="text-align: center">제목</td>
-                                        <td><input type="text" class="form-control" name="title" id="term_title"> </td>
+                                        <td><input type="text" class="form-control" name="title" id="term_title"></td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">약관내용</td>

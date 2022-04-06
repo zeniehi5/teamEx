@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="faqDAO">
-	<select id="selectFaq" resultType="faq">
-		<![CDATA[SELECT * FROM faq order by seq asc]]>
+	<select id="getFaqList" resultType="faqVO">
+		SELECT * FROM faq ORDER BY seq ASC
 	</select>
+	
+	<select id="selectFaqVO" parameterType="Integer" resultType="faqVO">
+		SELECT * FROM faq WHERE seq=${seq}
+	</select>
+	
+	<insert id="insertFaqVO" parameterType="faqVO">
+		INSERT INTO faq(category, title, contents) VALUES(#{category}, #{title}, #{contents})
+	</insert>
+	
+	<update id="updateFaqVO" parameterType="faqVO">
+		UPDATE faq SET category = #{category}, title = #{title}, contents = #{contents} WHERE seq = ${seq}
+	</update>
+	
+	<delete id="deleteFaqVO" parameterType="Integer">
+		DELETE FROM faq WHERE seq = ${seq}
+	</delete>
+	
 </mapper>

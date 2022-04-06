@@ -19,9 +19,23 @@ public class FaqDAO {
 	}
 	
 	public List<FaqVO> getFaqList() {
-		
-		List<FaqVO> faqList = sqlSessionTemplate.selectList("FaqDAO.getFaq");
-		
+		List<FaqVO> faqList = sqlSessionTemplate.selectList("faqDAO.getFaqList");
 		return faqList; 
+	}
+	
+	public FaqVO selectFaqVO(int seq) {
+		return sqlSessionTemplate.selectOne("faqDAO.selectFaqVO", seq);
+	}
+	
+	public int insertFaqVO(FaqVO faqVO) {
+		return sqlSessionTemplate.insert("faqDAO.insertFaqVO", faqVO);
+	}
+	
+	public int updateFaqVO(FaqVO faqVO) {
+		return sqlSessionTemplate.update("faqDAO.updateFaqVO", faqVO);
+	}
+	
+	public int deleteFaqVO(int seq) {
+		return sqlSessionTemplate.delete("faqDAO.deleteFaqVO", seq);
 	}
 }

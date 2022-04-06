@@ -17,16 +17,17 @@ public class TermsServiceImpl implements TermsService {
 	private TermsDAO termsDAO;
 
 	@Override
+	public List<com.booqueen.admin.terms.TermsVO> termsList() {
+		return termsDAO.getTermsList();
+	}
+	
+	@Override
 	public int insertTerms(TermsVO vo) {
-		
 		return termsDAO.insertTerms(vo);
 	}
 	
 	
-	@Override
-	public List<com.booqueen.admin.terms.TermsVO> termsList() {
-		return termsDAO.getTermsList();
-	}
+	
 
 
 	public TermsVO getTerms(int seq) {

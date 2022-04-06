@@ -1,10 +1,12 @@
 package com.booqueen.admin.member;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.booqueen.admin.member.impl.MemberServiceImpl;
+import com.booqueen.admin.payment.PaymentStatusVO;
 import com.booqueen.user.member.vo.MemberProfileVO;
 
 @Controller
@@ -34,15 +37,19 @@ public class MemberController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		int user_since_day = 0;
 		int joined_yesterday = 0;
+		int joined_today = 0;
 		
 		for (int i=0; i<userList.size(); i++) {
 			user_since_day = Integer.parseInt(dateFormat.format(userList.get(i).getSince()).substring(8));
 			if ((user_since_day+1) == today) {
 				joined_yesterday += 1;
+			} else if ((user_since_day) == today) {
+				joined_today += 1;
 			}
 		}
 		
 		model.addAttribute("joined_yesterday", joined_yesterday);
+		model.addAttribute("joined_today", joined_today);
 		
 		
 		Integer twenty = 0;
@@ -118,6 +125,41 @@ public class MemberController {
 		model.addAttribute("profile", profile);
 		
 		return "userMemberDetail";
+	}
+	
+	@RequestMapping(value = "/reportedUser.mdo", method=RequestMethod.GET)
+	public String reportedUser(HttpSession session, Model model) {
+		
+		List<BlockUserVO> blockUserList = memberServiceImpl.selectBlockUserList();
+		model.addAttribute("blockUserList", blockUserList);
+		
+		return "reportedUser";
+	}
+	
+	@RequestMapping(value = "/unblockUser.mdo")
+	public String unblockUser(HttpSession session, HttpServletResponse response, Model model, @RequestParam("sequence") String sequence) throws Exception {
+		
+		int seq = Integer.parseInt(sequence);
+		
+		int result = 0;
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		result = memberServiceImpl.updateBlockUser(seq);
+		
+		if (result > 0) {
+			BlockUserVO blockUserVO = memberServiceImpl.selectBlockUserVO(seq);
+			out.println("<script>alert('"+ blockUserVO.getUserid() + " 님의 "+ blockUserVO.getHotelname() + " 호텔 이용제한이 해제되었습니다.')</script>");
+		} else {
+			out.println("<script>alert('제한 해제에 실패하였습니다. 다시 시도해 주시기 바랍니다.')</script>");
+		}
+		out.flush();
+		
+		List<BlockUserVO> blockUserList = memberServiceImpl.selectBlockUserList();
+		model.addAttribute("blockUserList", blockUserList);
+		
+		return "reportedUser";
 	}
 	
 }

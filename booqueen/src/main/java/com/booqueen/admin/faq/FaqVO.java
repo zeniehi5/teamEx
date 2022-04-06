@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class FaqVO {
 	private int seq;
+	private String category;
 	private String title;
 	private String contents;
 }

@@ -12,5 +12,8 @@ public interface MemberService {
 	public List<UserVO> getUserGender();
 	public List<UserVO> getUserInfoDetail(String userid);
 	public MemberProfileVO getProfileByUserid(String userid);
+	public List<BlockUserVO> selectBlockUserList();
+	public int  updateBlockUser(int sequence);
+	public BlockUserVO selectBlockUserVO(int sequence);
 	
 }

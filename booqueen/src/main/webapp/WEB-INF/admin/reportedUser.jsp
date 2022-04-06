@@ -169,31 +169,21 @@
                                             <th>회원 아이디</th>
                                             <th>이름</th>
                                             <th>신고 호텔</th>
+                                            <th>신고 사유</th>
                                             <th>이용제한 설정</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    	<c:forEach var="blockUserList" items="${blockUserList}" varStatus="status">
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="userMemberDetail.mdo">abc@abc.com</a></td>
-                                            <td>장진아</td>
-                                            <td><a href="hotelDetail.mdo">신라호텔</a></td>
-                                            <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>
+                                            <td>${status.index+1}</td>
+                                            <td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.userid}</a></td>
+                                            <td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.name}</a></td>
+                                            <td><a href="hotelDetail.mdo?serialnumber=${blockUserList.serialnumber}">${blockUserList.hotelname}</a></td>
+                                            <td>${blockUserList.whyblock}</td>
+                                            <td><a id="block" class="btn btn-info" href="unblockUser.mdo?sequence=${blockUserList.sequence}">제한해제</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="userMemberDetail.mdo">bbc@abc.com</a></td>
-                                            <td>최태원</td>
-                                            <td>신라호텔</td>
-                                            <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="userMemberDetail.mdo">ccc@abc.com</a></td>
-                                            <td>김상민</td>
-                                            <td>신라호텔</td>
-                                            <td><button id="block" class="btn btn-info" onclick="blockUser();">제한해제</button></td>                                           
-                                        </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

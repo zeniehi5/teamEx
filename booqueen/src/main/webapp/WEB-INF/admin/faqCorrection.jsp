@@ -164,25 +164,41 @@
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg>
                                 FAQ 수정 및 삭제
                             </div>
-                            <table style="width: 90%;"> 
-                            <tbody>
-                            <tr>
-                                <td style="text-align: center">제목<input type="hidden" name="faq_seq" value="1"></td>
-                                <td>
-                                    <textarea id="faq_title" name="faq_title" style="width: 90%;"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">공지내용</td>
-                                <td style="">
-                                <textarea id="faq_content" name="faq_content" style="width: 90%; height: 200px;"></textarea></td>
-                            </tr>
-                        </tbody></table>
-                                <div style="float:right">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="수정하기">
-                                    <button class="btn btn-danger" onclick="deleteFaq();">삭제하기</button>
-                                    <a href="faq.mdo" class="btn btn-warning">돌아가기</a>
-                                </div>
+                            <form action="${contextPath}/updateFaq.mdo" method="post" id="updateFaq" >
+                            <table style="width: 90%; margin-top: 25px;"> 
+	                            <tbody>
+		                            <tr>
+		                            	<td style="text-align: center">구분</td>
+		                            	<td>
+		                            		<select name="category" style="padding: 10px; margin-bottom: 8px; width: 90%;">
+												<option value="선택" <c:if test="${faqVO.category eq '선택'}">selected</c:if>>선택</option>
+												<option value="코로나19(COVID-19) 관련 지원" <c:if test="${faqVO.category eq '코로나19(COVID-19) 관련 지원'}">selected</c:if>>코로나19(COVID-19) 관련 지원</option>
+												<option value="예약 취소" <c:if test="${faqVO.category eq '예약 취소'}">selected</c:if>>예약 취소</option>
+												<option value="예약 상세 정보" <c:if test="${faqVO.category eq '예약 상세 정보'}">selected</c:if>>예약 상세 정보</option>
+												<option value="커뮤니케이션" <c:if test="${faqVO.category eq '커뮤니케이션'}">selected</c:if>>커뮤니케이션</option>
+												<option value="요금" <c:if test="${faqVO.category eq '요금'}">selected</c:if>>요금</option>
+												<option value="숙소 정책" <c:if test="${faqVO.category eq '숙소 정책'}">selected</c:if>>숙소 정책</option>
+												<option value="보안의식" <c:if test="${faqVO.category eq '보안의식'}">selected</c:if>>보안의식</option>
+											</select>
+		                            	</td>
+		                            </tr>
+		                            <tr>
+		                                <td style="text-align: center">제목<input type="hidden" name="faq_seq" value="1"></td>
+		                                <td><textarea id="faq_title" name="title" style="width: 90%; padding: 11px;">${faqVO.title}</textarea></td>
+		                            </tr>
+		                            <tr>
+		                                <td style="text-align: center">공지내용</td>
+		                                <td><textarea id="faq_content" name="contents" style="width: 90%; height: 200px; padding: 11px;">${faqVO.contents}</textarea></td>
+		                            </tr>
+		                        </tbody>
+	                        </table>
+	                        <input type="hidden" name="seq" value="${faqVO.seq}"/>
+	                        </form>
+                            <div style="text-align: center; margin: 12px 0 24px;">
+                                <button form="updateFaq" type="submit" id="submit" class="btn btn-primary">수정하기</button>
+                                <a href="${contextPath}/deleteFaq.mdo?seq=${faqVO.seq}" class="btn btn-danger">삭제하기</a>
+                                <a href="faq.mdo" class="btn btn-warning">돌아가기</a>
+                            </div>
                         </div>
                     </div>
                 </main>

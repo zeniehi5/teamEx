@@ -65,8 +65,9 @@
       <typeAlias type="com.booqueen.admin.banner.BannerVO" alias="banner"/>
       <typeAlias type="com.booqueen.admin.member.UserAgeGroupVO" alias="userAgeGroupVO"/>
       <typeAlias type="com.booqueen.admin.member.UserVO" alias="userVO"/>
-      <typeAlias type="com.booqueen.admin.faq.FaqVO" alias="faq"/>
+      <typeAlias type="com.booqueen.admin.faq.FaqVO" alias="faqVO"/>
       <typeAlias type="com.booqueen.admin.payment.PaymentStatusVO" alias="paymentStatusVO"/>
+      <typeAlias type="com.booqueen.admin.member.BlockUserVO" alias="blockUserVO"/>
             
       <!--<typeAlias type="com.booqueen.admin.partner.BlockPartnerVO" alias="blockPartner"/>-->
       <typeAlias type="com.booqueen.admin.reservation.ReservationVO" alias="aReservation"/>
@@ -105,6 +106,8 @@
        <mapper resource="mappings/admin/paymentstatus-mapping.xml"/>
        <mapper resource="mappings/admin/reservation-mapping.xml"/>
        <mapper resource="mappings/admin/transaction-mapping.xml"/>
+       <mapper resource="mappings/admin/blockuser-mapping.xml"/>
+       <mapper resource="mappings/admin/faq-mapping.xml"/>
        <mapper resource="mappings/user/map-mapping.xml"/>
    </mappers>
 </configuration>

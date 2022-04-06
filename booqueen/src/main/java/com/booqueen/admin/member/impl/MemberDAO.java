@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.admin.member.BlockUserVO;
 import com.booqueen.admin.member.UserAgeGroupVO;
 import com.booqueen.admin.member.UserVO;
 import com.booqueen.user.member.vo.MemberProfileVO;
@@ -44,6 +45,19 @@ public class MemberDAO {
 	
 	public MemberProfileVO getProfileByUserid(String userid) throws DataAccessException{
 		return (MemberProfileVO) sqlSessionTemplate.selectOne("com.booqueen.user.member.dao.memberProfilemapper.selectProfileByUserid", userid);
+	}
+	
+	public List<BlockUserVO> selectBlockUserList() {
+		List<BlockUserVO> blockUserList = sqlSessionTemplate.selectList("blockUserDAO.selectBlockUserList");
+		return blockUserList;
+	}
+	
+	public int  updateBlockUser(int sequence) {
+		return sqlSessionTemplate.update("blockUserDAO.updateBlockUser", sequence);
+	}
+	
+	public BlockUserVO selectBlockUserVO(int sequence) {
+		return sqlSessionTemplate.selectOne("blockUserDAO.selectBlockUserVO", sequence);
 	}
 	
 }

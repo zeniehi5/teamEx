@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.admin.member.BlockUserVO;
 import com.booqueen.admin.member.MemberService;
 import com.booqueen.admin.member.MemberVO;
 import com.booqueen.admin.member.UserAgeGroupVO;
@@ -46,6 +47,20 @@ public class MemberServiceImpl implements MemberService {
 	public MemberProfileVO getProfileByUserid(String userid) {
 		return memberDAO.getProfileByUserid(userid);
 	}
-
+	
+	@Override
+	public List<BlockUserVO> selectBlockUserList() {
+		return memberDAO.selectBlockUserList();
+	}
+	
+	@Override
+	public int  updateBlockUser(int sequence) {
+		return memberDAO.updateBlockUser(sequence);
+	}
+	
+	@Override
+	public BlockUserVO selectBlockUserVO(int sequence) {
+		return memberDAO.selectBlockUserVO(sequence);
+	}
 	
 }

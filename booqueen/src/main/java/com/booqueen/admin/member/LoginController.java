@@ -1,5 +1,8 @@
 package com.booqueen.admin.member;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +34,25 @@ public class LoginController {
 			session = request.getSession();
 			List<com.booqueen.user.member.MemberVO> userList = memberService.getUserMember();
 			model.addAttribute("userList", userList);
+			
+			// 전날 가입자 수
+			int today = Calendar.getInstance().get(Calendar.DATE); // 오늘 일
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			int user_since_day = 0;
+			int joined_yesterday = 0;
+			int joined_today = 0;
+			
+			for (int i=0; i<userList.size(); i++) {
+				user_since_day = Integer.parseInt(dateFormat.format(userList.get(i).getSince()).substring(8));
+				if ((user_since_day+1) == today) {
+					joined_yesterday += 1;
+				} else if ((user_since_day) == today) {
+					joined_today += 1;
+				}
+			}
+			
+			model.addAttribute("joined_yesterday", joined_yesterday);
+			model.addAttribute("joined_today", joined_today);
 			
 			Integer twenty = 0;
 			Integer thirty = 0;

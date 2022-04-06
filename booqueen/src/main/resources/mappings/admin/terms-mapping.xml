@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="termsDAO">
+	
+	<select id="getTerms" resultType="terms">
+		<![CDATA[SELECT * FROM terms WHERE seq = #{seq}]]>
+	</select>
+	
 	<insert id="insertTerms" parameterType="terms">
-		<![CDATA[insert into terms(seq, title, contents) values (nextval('seq_terms'), #{title}, #{contents})]]>
+		INSERT INTO terms(code, category, title, contents
+		<if test="sub_contents != null">
+		,sub_contents
+		</if>
+		) VALUES (#{code}, #{category}, #{title}, #{contents}
+		<if test="sub_contents != null">
+		,
+		<foreach collection="sub_contents" item="item" separator="\n">
+		#{sub_contents}
+		</foreach>
+		</if>
+		)
 	</insert>
+	
 	<select id="selectTerms" resultType="terms">
 		<![CDATA[SELECT * FROM terms order by seq asc]]>
 	</select>
-	<select id="getTerms" resultType="terms">
-		<![CDATA[SELECT * FROM terms where seq = #{seq}]]>
-	</select>
+	
 	<update id="updateTerms" parameterType="terms">
 		<![CDATA[UPDATE terms set title = #{title}, contents = #{contents} where seq=#{seq}]]>
 	</update>
