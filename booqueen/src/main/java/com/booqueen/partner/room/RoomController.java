@@ -1,6 +1,7 @@
 package com.booqueen.partner.room;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -77,36 +79,16 @@ public class RoomController {
 			hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 
 			if (hotel != null) {
-				HotelImageVO image = roomService.selectImageBySerial(hotel.getSerialnumber());
+				HotelImageVO pic = roomService.selectImageBySerial(hotel.getSerialnumber());
 				List<UpdateImageVO> room_image = roomService.selectRoomImageBySerial(hotel.getSerialnumber());
 				List<UpdateImageVO> type = roomService.selectTypeBySerial(hotel.getSerialnumber());
 				
 				System.out.println(room.toString());
 
-//				RoomVO room = new RoomVO();
-//				room.setSerialnumber(hotel.getSerialnumber());
-//				room.setType(null)
-//				System.out.println(img.toString());
-//				System.out.println(hotel.toString());
-//				vo.setSerialnumber(vo.getSerialnumber());
-//				vo.setType(vo.getType());		
-//				vo.setRoom_id(vo.getRoom_id());
-//				
-//				
-//				System.out.println(vo.getSerialnumber());
-//				System.out.println(vo.getType());
-//				System.out.println(vo.getRoom_id());
-//				
-
-//				System.out.println(img.getRoom_id());
-//				System.out.println(image.toString());
-//				System.out.println(room_image.toString());
 				model.addAttribute("hotel", hotel);
-				model.addAttribute("image", image);
+				model.addAttribute("pic", pic);
 				model.addAttribute("room_image", room_image);
 				model.addAttribute("type", type);
-//				model.addAttribute("room_id", vo);
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,6 +102,8 @@ public class RoomController {
 		File uploadPath = new File(uploadFolder);
 		System.out.println(vo.toString());
 		UpdateImageVO img = new UpdateImageVO();
+		
+		
 		
 		int count = 0;
 
@@ -306,21 +290,37 @@ public class RoomController {
 	
 	@RequestMapping(value = "/editPic.pdo", method = RequestMethod.POST)
 	@ResponseBody
-	public String editPic(MultipartFile[] uploadFile) {
+	public String editPic(@RequestPart("files") MultipartFile files, @RequestPart("vo") UpdateImageVO vo,HttpSession session) throws IllegalStateException, IOException {
+			
 		String result = "";
 		int editNumber = 0;
 		Gson gson = new Gson();
 		JsonObject jsonObject = new JsonObject();
-		
-		//editNumber = roomService.updatePicture();
-		
+		HotelVO	hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+
+		try {
+			InputStream is = files.getInputStream();
+			String contentType = files.getContentType();
+			long contentLength = files.getSize();
+			s3Service.upload(is, "hotel/" + hotel.getSerialnumber() + "/" + vo.getFile_name(), contentType, contentLength);
+	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		vo.setSerialnumber(hotel.getSerialnumber());
+		vo.setFile_name(vo.getFile_name());
+		vo.setFile_url("https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/" + vo.getSerialnumber()+ "/" + vo.getFile_name());
+		editNumber= roomService.insertRoomImage(vo);
+
 		if(editNumber == 0) {
 			jsonObject.addProperty("msg", "FAIL");
-			result = gson.toJson(jsonObject);
 		} else {
 			jsonObject.addProperty("msg", "SUCCESS");
-			result = gson.toJson(jsonObject);
 		}
+		
+		result = gson.toJson(jsonObject);
 		
 		return result;
 	}

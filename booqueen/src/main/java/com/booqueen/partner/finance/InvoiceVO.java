@@ -36,5 +36,6 @@ public class InvoiceVO {
 	
 	//option
 	private int billing;	//수수료 제외한 청구 금액
+	private int searchOption; 		//search by month
 
 }

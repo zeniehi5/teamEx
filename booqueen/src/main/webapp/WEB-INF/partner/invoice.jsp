@@ -14,8 +14,7 @@
 	href="${contextPath}/resources/partner/css/invoice.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/fdb0bc6f32.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/fdb0bc6f32.js" crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dcdb98d53fde6c7a197566a8729281a3"></script>
 <script
@@ -56,6 +55,33 @@
 			alert("결제대금 청구를 취소합니다.")
 		}
 	}
+	
+	$(function(){
+		var option = '';
+		$("#selectMonth").change(function(){
+			option = $("#selectMonth").val();
+		})
+		
+		var invoiceVO = {
+			"searchOption": option
+		}
+		
+		$.ajax({
+			method:"POST",
+			url:"searchInvoiceByMonth.pdo",
+			contentType:"application/json",
+			dataType:"json",
+			data:JSON.stringify(invoiceVO),
+			success:function(result){
+				alert("working?")
+			},
+			error:function(){
+				console.log("response error")
+			}
+		})
+		
+		
+	})
 </script>
 </head>
 <body>
@@ -74,33 +100,23 @@
 			<div class="finance-invoice">
 				<div class="finance-invoice-table-header">
 					<div class="finance-invoice-table-header-filter">
-						<span class="table-header-title">연도별 검색</span>
-						<div class="dropdown">
-							<button class="dropdown-btn">
-								<span>4월</span> <i class="bi bi-chevron-expand"></i>
-							</button>
-
-							<div class="dropdown-menu">
-								<ul class="dropdown-content">
-									<li>
-										<button class="dropdown-item">
-											<span>2월</span>
-										</button>
-										<button class="dropdown-item">
-											<span>3월</span>
-										</button>
-										<button class="dropdown-item">
-											<span>4월</span>
-										</button>
-										<button class="dropdown-item">
-											<span>5월</span>
-										</button>
-									</li>
-								</ul>
-							</div>
-						</div>
+						<span class="table-header-title">월별 검색</span>
+						<select id="selectMonth" class="dropdown dropdown-btn">
+							<option class="dropdown-content dropdown-item" value="1">1월</option>
+							<option class="dropdown-content dropdown-item" value="2">2월</option>
+							<option class="dropdown-content dropdown-item" value="3">3월</option>
+							<option class="dropdown-content dropdown-item" value="4" selected="selected">4월</option>
+							<option class="dropdown-content dropdown-item" value="5">5월</option>
+							<option class="dropdown-content dropdown-item" value="6">6월</option>
+							<option class="dropdown-content dropdown-item" value="7">7월</option>
+							<option class="dropdown-content dropdown-item" value="8">8월</option>
+							<option class="dropdown-content dropdown-item" value="9">9월</option>
+							<option class="dropdown-content dropdown-item" value="10">10월</option>
+							<option class="dropdown-content dropdown-item" value="11">11월</option>
+							<option class="dropdown-content dropdown-item" value="12">12월</option>
+						</select>
 					</div>
-					<a href="#" class="finance-invoice-download" disabled="disabled">
+					<a href="#" class="finance-invoice-download">
 						<span class="button-text">PDF 다운로드</span>
 					</a>
 				</div>
@@ -233,40 +249,6 @@
 	</div>
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/partner/footer.jsp" />
-
-	<script>
-		// 연도별 검색 토굴
-		$(document).ready(function() {
-			$(".dropdown-btn").click(function() {
-				$(".dropdown-menu").toggle();
-			});
-			$("#guideBannerClose").click(function() {
-				$("#guideBanner").remove();
-			});
-			$("#invoiceBannerClose").click(function() {
-				$("#invoiceBanner").remove();
-			});
-			$("#modifyInfoBtn").click(function() {
-				$("#invoiceModal").toggle();
-			})
-		});
-
-		// 청구서 상세 정보 열고 닫기
-		var modalInvoice = document.getElementById("invoiceModal");
-		var modalClose = document.getElementsByClassName("modal-close")[0];
-		var invoiceModalClose = document.getElementById("invoiceModalClose");
-		window.onclick = function(event) {
-			if (event.target == modalInvoice) {
-				modalInvoice.style.display = "none";
-			}
-			modalClose.onclick = function() {
-				modalInvoice.style.display = "none";
-			}
-			invoiceModalClose.onclick = function() {
-				modalInvoice.style.display = "none";
-			}
-		}
-	</script>
+	<jsp:include page="/WEB-INF/partner/footer.jsp"/>
 </body>
 </html>

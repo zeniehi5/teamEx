@@ -293,7 +293,7 @@ a {
 	vertical-align: middle;
 }
 .dropdown-btn {
-	display: flex;
+	/* display: flex; */
 	align-items: center;
 	background-color: #fff;
 	color: #07c;
@@ -381,13 +381,13 @@ a {
 .finance-invoice-download {
 	pointer-events: none;
 	background-color: #fff;
-	color: #b3b3b3;
-	border-color: #b3b3b3;
+	color: #07c;
+	border-color: #07c;
 	cursor: not-allowed;
 	white-space: nowrap;
 	display: inline-block;
 	margin-bottom: 16px;
-	border: 1px solid #b3b3b3;
+	border: 1px solid #07c;
 	border-radius: 2px;
 	align-items: center;
 	justify-content: center;

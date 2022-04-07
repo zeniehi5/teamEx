@@ -90,5 +90,19 @@ public class InvoiceController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/searchInvoiceByMonth.pdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String searchInvoiceByMonth(@RequestBody InvoiceVO invoice) {
+		String result = "";
+		System.out.println(invoice.toString());
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject= new JsonObject();
+		
+		jsonObject.addProperty("message", "SUCCESS");
+		result = gson.toJson(jsonObject);
+		return result;
+	}
 
 }

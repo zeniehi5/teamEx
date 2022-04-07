@@ -126,8 +126,8 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.deleteImageBySerial(serialnumber);
 	}
 	@Override
-	public void insertRoomImage(UpdateImageVO vo) {
-		roomDAO.insertRoomImage(vo);	
+	public int insertRoomImage(UpdateImageVO vo) {
+		return roomDAO.insertRoomImage(vo);	
 	}
 
 	@Override

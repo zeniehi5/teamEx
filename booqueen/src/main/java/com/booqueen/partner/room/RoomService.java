@@ -50,7 +50,7 @@ public interface RoomService {
 
 	public List<UpdateImageVO> selectRoomImageBySerial(int serialnumber);
 	
-	public void insertRoomImage(UpdateImageVO vo);
+	public int insertRoomImage(UpdateImageVO vo);
 	
 	public List<UpdateImageVO> selectTypeBySerial(int serialnumber);
 	

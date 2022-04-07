@@ -112,8 +112,8 @@ public class RoomDAO {
 		return sqlSessionTemplate.selectList("RoomDAO.deleteImageBySerial", serialnumber);
 	}
 
-	public void insertRoomImage(UpdateImageVO vo) {
-		sqlSessionTemplate.insert("RoomDAO.insertRoomImage", vo);
+	public int insertRoomImage(UpdateImageVO vo) {
+		return sqlSessionTemplate.insert("RoomDAO.insertRoomImage", vo);
 	}
 	public List<UpdateImageVO> selectRoomImageBySerial(int serialnumber){
 		return sqlSessionTemplate.selectList("RoomDAO.selectRoomImageBySerial", serialnumber);

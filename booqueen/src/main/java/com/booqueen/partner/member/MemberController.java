@@ -8,8 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.booqueen.partner.hotel.HotelService;
+import com.booqueen.partner.hotel.HotelVO;
 
 @Controller
 public class MemberController {
@@ -17,13 +21,19 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private HotelService hotelService;
+	
 	@RequestMapping(value = "/password.pdo", method = RequestMethod.GET)
-	public String password(HttpSession session) {
+	public String password(HttpSession session, Model model) {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
+		model.addAttribute("hotel", hotel);
 		return "change-password";
 	}
 	
 	@RequestMapping(value = "/change-password.pdo", method = RequestMethod.POST)
-	public String changePasswd(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {
+	public String changePasswd(MemberVO vo, HttpSession session, HttpServletResponse response, Model model) throws IOException {
+		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 		if(vo.getPassword() == "" && vo.getConfirmpass() == "") {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
@@ -54,7 +64,8 @@ public class MemberController {
 				writer.flush();
 			}
 		}
-		return "home";
+		model.addAttribute("hotel", hotel);
+		return "change-password";
 	}
 
 }

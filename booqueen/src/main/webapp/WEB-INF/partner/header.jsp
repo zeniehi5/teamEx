@@ -499,8 +499,6 @@
                                                 <ul class="submenu_list">
                                                     <li class="submenu_item"><a class="submenu_link"
                                                             href="${contextPath}/invoice.pdo"><span>청구서</span></a></li>
-                                                    <li class="submenu_item"><a class="submenu_link" href="${contextPath}/statement.pdo"><span>예약
-                                                                명세서</span></a></li>
                                                 </ul>
                                             </div>
                                         </li>

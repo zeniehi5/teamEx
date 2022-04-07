@@ -222,7 +222,6 @@ public class HotelController {
 		List<RoomVO> room = roomService.getRoomByHotelSerial(policy.getSerialnumber());
 		model.addAttribute("room", room);
 		return "payment";
-		//return "createroom";
 	}
 	
 	//결제정보 입력 화면
