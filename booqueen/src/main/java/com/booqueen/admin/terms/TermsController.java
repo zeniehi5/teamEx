@@ -24,7 +24,7 @@ public class TermsController {
 	
 	@RequestMapping(value = "/terms.mdo", method=RequestMethod.GET)
 	public String terms(HttpSession session, Model model) {
-		List<TermsVO> termsList = termsServiceImpl.termsList();
+		List<TermsVO> termsList = termsServiceImpl.getTermsList();
 		if(termsList != null) {
 			model.addAttribute("termsList", termsList);
 		}
@@ -41,7 +41,7 @@ public class TermsController {
 		
 		int result = 0;
 		result = termsServiceImpl.insertTerms(vo);
-		List<TermsVO> termsList = termsServiceImpl.termsList();
+		List<TermsVO> termsList = termsServiceImpl.getTermsList();
 		response.setContentType("text/html; charset=utf-8");
 	      PrintWriter out = response.getWriter();
 	      
@@ -61,7 +61,7 @@ public class TermsController {
 	public String getTerms(@RequestParam("seq")int seq, Model model, HttpSession session) {
 		
 		TermsVO vo = termsServiceImpl.getTerms(seq);
-		model.addAttribute("TermsVO", vo);
+		model.addAttribute("termsVO", vo);
 		
 		return "termsCorrection";
 	}
@@ -79,7 +79,7 @@ public class TermsController {
 		if (result > 0) {
 			out.println("<script>alert('이용약관이 성공적으로 수정되었습니다.')</script>");
 			out.flush();
-			List<TermsVO> termsList = termsServiceImpl.termsList();
+			List<TermsVO> termsList = termsServiceImpl.getTermsList();
 			if (termsList != null) {
 				model.addAttribute("termsList", termsList);
 			}
@@ -106,10 +106,10 @@ public class TermsController {
 		}
 		out.flush();
 		
-		TermsVO vo = termsServiceImpl.getTerms(seq_parse);
-		model.addAttribute("TermsVO", vo);
+		List<TermsVO> termsList = termsServiceImpl.getTermsList();
+		model.addAttribute("termsList", termsList);
 		
-		return "redirect:terms.mdo";
+		return "terms";
 	}
 	
 }

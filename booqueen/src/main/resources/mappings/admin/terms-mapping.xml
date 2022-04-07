@@ -3,31 +3,21 @@
 <mapper namespace="termsDAO">
 	
 	<select id="getTerms" resultType="terms">
-		<![CDATA[SELECT * FROM terms WHERE seq = #{seq}]]>
+		SELECT * FROM terms WHERE seq = #{seq}
 	</select>
 	
 	<insert id="insertTerms" parameterType="terms">
-		INSERT INTO terms(code, category, title, contents
-		<if test="sub_contents != null">
-		,sub_contents
-		</if>
-		) VALUES (#{code}, #{category}, #{title}, #{contents}
-		<if test="sub_contents != null">
-		,
-		<foreach collection="sub_contents" item="item" separator="\n">
-		#{sub_contents}
-		</foreach>
-		</if>
-		)
+		INSERT INTO terms(category, title, contents) VALUES (#{category}, #{title}, #{contents})
 	</insert>
 	
 	<select id="selectTerms" resultType="terms">
-		<![CDATA[SELECT * FROM terms order by seq asc]]>
+		SELECT * FROM terms ORDER BY category, seq, title
 	</select>
 	
 	<update id="updateTerms" parameterType="terms">
-		<![CDATA[UPDATE terms set title = #{title}, contents = #{contents} where seq=#{seq}]]>
+		UPDATE terms set category = #{category}, title = #{title}, contents = #{contents} where seq=#{seq}
 	</update>
+	
 	<delete id="deleteTerms" parameterType="Integer">
 		<![CDATA[DELETE from terms where seq=#{seq}]]>
 	</delete>

@@ -1,8 +1,12 @@
-package com.booqueen.admin.banner;
+package com.booqueen.admin.banner.impl;
+
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.booqueen.admin.banner.BannerVO;
 
 @Repository("bannerDAO")
 public class BannerDAO {
@@ -16,6 +20,11 @@ public class BannerDAO {
 
 	public void uploadBanner(BannerVO banner) {
 		sqlSessionTemplate.insert("BannerDAO.uploadBanner", banner);
+	}
+	
+	public List<BannerVO> getBannerList() {
+		List<BannerVO> bannerList = sqlSessionTemplate.selectList("BannerDAO.getBannerList");
+		return bannerList;
 	}
 	
 }

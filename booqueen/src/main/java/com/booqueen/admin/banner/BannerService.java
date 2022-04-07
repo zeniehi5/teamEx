@@ -1,7 +1,9 @@
 package com.booqueen.admin.banner;
 
+import java.util.List;
+
 public interface BannerService {
 
-	void uploadBanner(BannerVO banner);
-
+	public void uploadBanner(BannerVO banner);
+	public List<BannerVO> getBannerList();
 }

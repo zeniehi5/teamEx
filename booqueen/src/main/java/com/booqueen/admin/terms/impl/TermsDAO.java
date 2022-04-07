@@ -31,16 +31,12 @@ public class TermsDAO {
 		return sqlSessionTemplate.insert("termsDAO.insertTerms", vo);
 	}
 	
-	
-
-	public TermsVO getTerms(int seq) {
-		
-		return sqlSessionTemplate.selectOne("termsDAO.getTerms", seq);
-	}
-	
 	public int updateTerms(TermsVO vo) throws DataAccessException{
 		return sqlSessionTemplate.update("termsDAO.updateTerms", vo);
+	}
 	
+	public TermsVO getTerms(int seq) {
+		return sqlSessionTemplate.selectOne("termsDAO.getTerms", seq);
 	}
 	
 	public int deleteTerms(int seq) throws DataAccessException{
