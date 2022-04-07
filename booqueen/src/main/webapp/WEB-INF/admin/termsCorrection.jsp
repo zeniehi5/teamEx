@@ -37,30 +37,25 @@
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="logout.mdo">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+						<li><a class="dropdown-item" href="#!">Settings</a></li>
+						<li><a class="dropdown-item" href="#!">Activity Log</a></li>
+						<li><hr class="dropdown-divider" /></li>
+						<li><a class="dropdown-item" href="logout.mdo">Logout</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
        	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						
-						
 						<div class="sb-sidenav-menu-heading">Interface</div>
-						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts2" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" varia-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 회원 관리
@@ -68,16 +63,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts2"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
 								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts5" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 호텔 관리
@@ -85,15 +77,12 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts5"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 파트너 관리
@@ -101,16 +90,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a>
+								<a class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 사이트 관리
@@ -118,18 +104,15 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
-									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
-									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a>
+								<a class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a>
+								<a class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
 						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 재무
@@ -137,12 +120,11 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a>
+								<a class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a>
+								<a class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
                         </div>
@@ -157,36 +139,42 @@
                 <main>
                     <div class="container-fluid px-4">
                         <!-- <h1 class="mt-4">약관 수정</h1> -->
+                        <br>
                         <div class="card mb-4">
-                        </div>
-                        <div class="card mb-4">
-                       
                             <div class="card-header" style="font-size: 20px;">
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 약관 수정
                             </div>
-                             <form action="updateTerms.mdo" method="POST">
-                            <table style="width: 90%; margin-top: 24px;"> 
-                            <tbody>
-                            <tr>
-                                <td style="text-align: center">제목<input type="hidden" name="seq" value="${TermsVO.seq }"></td>
-                                <td>
-                                    <textarea id="terms_title" name="title" style="width: 90%;">${TermsVO.title }</textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">약관내용</td>
-                                <td style="">
-                                <textarea id="terms_content" name="contents" style="width: 90%; height: 200px;">${TermsVO.contents }</textarea></td>
-                            </tr>
-                        </tbody></table>
-                       
-                                <div style="float:right; margin: 14px;">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="수정하기">
-                                    <c:set var="seq" value="${TermsVO.seq}"/>
-                                    <a class="btn btn-danger" href="${contextPath }/deleteTerms.mdo?seq=${seq}">삭제하기</a>
-                                    <a href="terms.mdo" class="btn btn-warning">돌아가기</a>
-                                </div>
-                         </form>
+							<form action="updateTerms.mdo" method="POST" id="updateTerms">
+	                            <table style="width: 90%; margin-top: 24px;"> 
+		                            <tbody>
+		                            	<tr>
+			                            	<td style="text-align: center">구분</td>
+			                            	<td>
+			                            		<select name="category" style="padding: 10px; margin-bottom: 8px; width: 100%; padding: 8px;">
+													<option value="A. 모든 여행 상품" <c:if test="${termsVO.category eq 'A. 모든 여행 상품'}">selected</c:if>>A. 모든 여행 상품</option>
+													<option value="B. 숙소" <c:if test="${termsVO.category eq 'B. 숙소'}">selected</c:if>>B. 숙소</option>
+													<option value="Booqueen.com 용어 설명" <c:if test="${termsVO.category eq 'Booqueen.com 용어 설명'}">selected</c:if>>Booqueen.com 용어 설명</option>
+												</select>
+			                            	</td>
+		                            	</tr>
+			                            <tr>
+			                                <td style="text-align: center">제목<input type="hidden" name="seq" value="${termsVO.seq }"></td>
+			                                <td><textarea id="terms_title" name="title" style="width: 100%;">${termsVO.title }</textarea></td>
+			                            </tr>
+			                            <tr>
+			                                <td style="text-align: center">약관내용</td>
+			                                <td><textarea id="terms_content" name="contents" style="width: 100%; height: 200px;">${termsVO.contents }</textarea></td>
+			                            </tr>
+			                        </tbody>
+								</table>
+								<input type="hidden" name="seq" value="${termsVO.seq}"/>
+                         	</form>
+                         	<div style="align-self: center; margin: 12px 0 24px;">
+								<button form="updateTerms" type="submit" id="submit" class="btn btn-primary">수정하기</button>
+								<c:set var="seq" value="${termsVO.seq}"/>
+								<a class="btn btn-danger" href="${contextPath }/deleteTerms.mdo?seq=${seq}">삭제하기</a>
+								<a href="terms.mdo" class="btn btn-warning">돌아가기</a>
+                           </div>
                         </div>
                     </div>
                 </main>

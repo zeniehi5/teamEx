@@ -71,13 +71,11 @@
 						<div class="collapse" id="collapseLayouts2"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts5" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 호텔 관리
@@ -85,15 +83,12 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts5"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 파트너 관리
@@ -101,16 +96,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a>
+								<a class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 사이트 관리
@@ -118,18 +110,15 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
-									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
-									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a>
+								<a class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a>
+								<a class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
 						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 재무
@@ -140,9 +129,9 @@
 						<div class="collapse" id="collapseLayouts"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a>
+								<a class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a>
+								<a class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
                         </div>
@@ -179,30 +168,20 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>배너이름</th>
-                                            <th>이미지 링크</th>
+                                            <th>도시명</th>
+                                            <th>이미지 링크 <span style="color: #adb5bd;">(URL 클릭 시 이미지 확인 가능)</span></th>
                                             <th>비고</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    	<c:forEach var="bannerList" items="${bannerList}" varStatus="status">
                                         <tr>
-                                            <th>1</th>
-                                            <th>서울</th>
-                                            <th>www.naver.com</th>
-                                            <td>&nbsp;&nbsp;<a class="btn btn-danger" href="bannerCorrection.mdo">수정 및 삭제</a></td>
+                                            <th>${status.index+1}</th>
+                                            <th>${bannerList.city}</th>
+                                            <th><a href="${bannerList.file_url}">${bannerList.file_url}</a></th>
+                                            <td><a class="btn btn-danger" href="bannerCorrection.mdo?seq_city=${bannerList.seq_city}">수정 및 삭제</a></td>
                                         </tr>
-                                        <tr>
-                                            <th>2</th>
-                                            <th>대구</th>
-                                            <th>www.google.com</th>
-                                            <td>&nbsp;&nbsp;<a class="btn btn-danger" href="bannerCorrection.mdo">수정 및 삭제</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th>3</th>
-                                            <th>부산</th>
-                                            <th>www.daum.net</th>
-                                            <td>&nbsp;&nbsp;<a class="btn btn-danger" href="bannerCorrection.mdo">수정 및 삭제</a></td>
-                                        </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

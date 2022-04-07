@@ -68,53 +68,37 @@
             <main>
                 <div class="container1" style="max-width:100%;">
                     <div class="row justify-content-center">
-                        <div class="col-lg-7">
+                        <div class="col-lg-7" style="width: 40%;">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4">배너 등록</h3></div>
-                                <div class="card-body">
+                                <div class="card-body" style="padding: 3rem 3rem;">
                                     <form action="bannerRegister.mdo" method="post" id="addBanner" enctype="multipart/form-data">
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
+                                        <div class="row mb-3" style="margin-bottom: 0!important;">
+                                            <div class="col-md-6" style="width: 100%;">
                                                 <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="banner_title" name="file_name" type="text" placeholder="Enter your first name" style="height: calc(3.5rem + 20px);">
-                                                    <label for="banner_title">배너 제목</label>
+                                                    <input class="form-control" id="banner_title" name="city" type="text" placeholder="Enter your first name">
+                                                    <label for="banner_title">도시명</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="form-floating">
                                                     <input class="form-control" id="banner_content" name="banner_content" type="text" placeholder="Enter your first name" style="height: calc(3.5rem + 20px);">
-                                                    <label for="banner_content">배너 내용</label>
+                                                    <label for="banner_content">위도</label>
                                                 </div>
-                                            </div>
+                                            </div> -->
+                                            
                                         </div>
-                                        <div style="display: inline-flex; margin-top: 10px;">
-                                            <button type="button" id="slideBtn" onclick="slideButton();" class="btn btn-primary">미리보기</button>	
-                                            <span id="content" style="display:none; color:red; margin:10px 15px;"></span>
-                                        </div>
-                                        <div class="banner_slideshow-container" id="banner_container" style="display:none;">
-                                            <!-- 배너 내용 여기 들어감-->
-                                                
-                                        </div>
-                                        <div style="text-align:center; margin:10px;">                                          
-                                        </div>
-                                       <div class="mb-3">
-					  						<label for="formFileMultiple" class="form-label"></label>
-					  						<input name="uploadFile" class="form-control" type="file" id="formFileMultiple" multiple>
-                                           
-                                            </div>
-                                        <div class="d-grid gap-2">
-										  <button class="btn btn-primary" type="submit">전송하기</button>
-										  <button class="btn btn-primary" type="button">Button</button>
+										<div class="mb-3">
+											<label for="formFileMultiple" class="form-label"></label>
+											<input name="uploadFile" class="form-control" type="file" id="formFileMultiple" multiple>
 										</div>
-                                        <div class="mt-4 mb-0">
-                                            <div class="d-grid"><a class="btn btn-danger btn-block" id="submit" style="background-color: #0d6efd; border:solid 1px #0d6efd;" href="${contextPath}/bannerRegister.mdo">배너 등록</a></div>
-                                            <div class="d-grid" style="padding-top: 5px"><a class="btn btn-danger btn-block" id="cancle" style="background-color: #0d6efd; border:solid 1px #0d6efd;" href="banner.mdo">취	소</a></div>
-                                        </div>
+										<div class="d-grid gap-2" style="display: flex!important; justify-content: center; margin-top: 38px;">
+											<button class="btn btn-primary" type="submit" style="padding: 8px 20px; min-width: 14%;">배너 등록</button>
+											<div class="d-grid" style="min-width: 14%;">
+												<a class="btn btn-danger btn-block" id="cancle" style="background-color: #dc3545; border:solid 1px #dc3545; width: 100%; padding: 8px 20px;" href="banner.mdo">취	소</a>
+											</div>
+										</div>
                                     </form>
-                                </div>
-                                <div class="card-footer text-center py-3">
-
-                                    
                                 </div>
                             </div>
                         </div>

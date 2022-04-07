@@ -18,6 +18,7 @@
 
 </head>
 <body>
+	<a href="${contextPath}/terms.do">이용약관</a>
 	<c:choose>
 		<c:when test="${isLogOn == true  && member != null}">
 			<header

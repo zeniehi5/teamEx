@@ -174,11 +174,11 @@
 	                            </tr>
 	                      		</tbody>
 	                      	</table>
-                                <div style="float:right; margin: 14px;">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="등록">
-                                    <a href="${contextPath}/faq.mdo" class="btn btn-warning">돌아가기</a>
-                                </div>
                             </form>
+                            <div style="align-self: end; margin: 12px 23px 24px;">
+	                            <button form="insertFaq" type="submit" id="submit" class="btn btn-primary" style="min-width: 110px;">등록</button>
+	                            <a href="${contextPath}/faq.mdo" class="btn btn-warning" style="min-width: 110px;">돌아가기</a>
+	                        </div>
                         </div>
                     </div>
                 </main>

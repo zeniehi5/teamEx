@@ -52,17 +52,11 @@
         </nav>
        	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						
-						
 						<div class="sb-sidenav-menu-heading">Interface</div>
-						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts2" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 회원 관리
@@ -70,16 +64,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts2"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a> <a
-									class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
+								<a class="nav-link" href="${contextPath }/userMember.mdo">회원 목록</a>
+								<a class="nav-link" href="${contextPath }/reportedUser.mdo">신고 회원 관리</a> 
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts5" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 호텔 관리
@@ -87,15 +78,12 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts5"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="${contextPath }/hotelList.mdo">호텔 목록</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 파트너 관리
@@ -103,16 +91,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a> <a
-									class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
+								<a class="nav-link" href="${contextPath }/PartnerMember.mdo">파트너 목록</a>
+								<a class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 사이트 관리
@@ -120,18 +105,15 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a> <a
-									class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a> <a
-									class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
+								<a class="nav-link" href="${contextPath }/faq.mdo">문의 게시판</a>
+								<a class="nav-link" href="${contextPath }/banner.mdo">추천 여행지(배너)</a>
+								<a class="nav-link" href="${contextPath }/terms.mdo">이용 약관 관리</a>
 							</nav>
 						</div>
 						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 재무
@@ -139,12 +121,11 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a> <a
-									class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a> <a
-									class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
+								<a class="nav-link" href="${contextPath }/reservationStatus.mdo">예약 현황 관리</a>
+								<a class="nav-link" href="${contextPath }/transactionHistory.mdo">거래 내역 리스트</a>
+								<a class="nav-link" href="${contextPath }/payment.mdo">대금 지급 관리</a>
 							</nav>
 						</div>
                         </div>
@@ -160,39 +141,27 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Banner</h1>
                         <div class="card mb-4">
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 배너수정
-                            </div>
-                            <table style="width: 90%;"> 
+					</div>
+					<div class="card mb-4">
+						<div class="card-header"><svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 배너수정</div>
+						<table style="width: 90%; margin: 24px; align-self: center;"> 
                             <tbody>
                             <tr>
                                 <td style="text-align: center">제목<input type="hidden" name="banner_seq" value="1"></td>
-                                <td>
-                                    <textarea id="faq_title" name="faq_title" style="width: 90%;"></textarea>
-                                </td>
+                                <td><textarea id="faq_title" name="faq_title" style="width: 90%;"></textarea></td>
                             </tr>
-                            
-                                
-                        
-                        </tbody></table>
-                        <div class="row mb-3">
-                            <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    Upload <input type="file" name="uploadFile" id="file" style="display: none;" multiple="">
-                                </span>
-                            </label>
-                            <input type="text" id="banner_img" class="form-control"  readonly="">
-                            </div>
+                            <tr>
+								<td><label for="formFileMultiple" class="form-label"></label></td>
+								<td><input name="uploadFile" class="form-control" style="width: 90%;" type="file" id="formFileMultiple" multiple></td>
+                            </tr>
+                        	</tbody>
+                        </table>
+                        <div style="text-align: center; margin: 0 0 24px;">
+                            <button form="" type="submit" id="submit" class="btn btn-primary">수정하기</button>
+                            <a href="${contextPath}/deleteFaq.mdo?seq=${faqVO.seq}" class="btn btn-danger">삭제하기</a>
+                            <a href="banner.mdo" class="btn btn-warning">돌아가기</a>
                         </div>
-                                <div style="float:right">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="수정하기">
-                                    <button class="btn btn-danger" onclick="deleteBanner();">삭제하기</button>
-                                    <a href="banner.mdo" class="btn btn-warning">돌아가기</a>
-                                </div>
-                        </div>
+                    </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

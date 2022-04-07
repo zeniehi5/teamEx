@@ -162,11 +162,11 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
-                                            <th>구분</th>
-                                            <th>제목</th>
-                                            <th>내용</th>
-                                            <th>비고</th>                                            
+											<th style="width: 5.25815%!important;">No.</th>
+											<th style="width: 10.25815%!important;">구분</th>
+											<th style="width: 19.6817%!important;">제목</th>
+											<th style="width: 54.9875%!important;">내용</th>
+											<th style="width: 13.07268%!important;">비고</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -176,7 +176,7 @@
                                             <td>${termsVO.category}</td>
                                             <td>${termsVO.title}</td>
                                             <td style="width:70%">${termsVO.contents}</td>
-                                            <td><button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
+                                            <td style="vertical-align: middle;"><button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

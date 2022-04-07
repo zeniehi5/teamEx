@@ -188,24 +188,13 @@
                                 <table id="datatablesSimple" class="dataTable-table">
                                     <thead>
                                         <tr>
-                                            <th data-sortable="" style="width: 5.25815%;">
-                                                <a href="#" class="dataTable-sorter">No.</a>
-                                            </th>
-                                            <th data-sortable="" style="width: 10.25815%;">
-                                                <a href="#" class="dataTable-sorter">구분</a>
-                                            </th>
-                                            <th data-sortable="" style="width: 19.6817%;">
-                                                <a href="#" class="dataTable-sorter">제목</a>
-                                            </th>
-                                            <th data-sortable="" style="width: 54.9875%;">
-                                                <a href="#" class="dataTable-sorter">내용</a>
-                                            </th>
-                                            <th data-sortable="" style="width: 13.07268%;">
-                                                <a href="#" class="dataTable-sorter">비고</a>
-                                            </th>
+                                            <th style="width: 5.25815%;">No.</th>
+                                            <th style="width: 10.25815%;">구분</th>
+                                            <th style="width: 19.6817%;">제목</th>
+                                            <th style="width: 54.9875%;">내용</th>
+                                            <th style="width: 13.07268%;">비고</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                     	<c:forEach var="faqList" items="${faqList}" varStatus="status">
                                         <tr>
