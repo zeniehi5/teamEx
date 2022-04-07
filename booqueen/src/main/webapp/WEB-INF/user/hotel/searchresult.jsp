@@ -1365,10 +1365,15 @@ function getAvailableHotel() {
 	        		text += start_date;
 	        		text += "&end_date=";
 	        		text += end_date;
-	        		text +=	"' target='_blank'><img class='s3-img' src=";
-// 		       		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
-	        		text += hotel.hotelImgVO.file_url;
-	        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+	        		text +=	"' target='_blank'><img class='s3-img' src='";
+		       		
+	        		if(isEmpty(hotel.hotelImgVO)){
+	        			text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+	        		} else{
+	        			text += hotel.hotelImgVO.file_url;
+	        		}
+	        		
+	        		text += "'></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
 	   				text += contextPath;
 					text += "/hotelInfo.do?serialNumber=";
 					text +=	hotel.serialnumber;
@@ -1421,10 +1426,15 @@ function getAvailableHotel() {
 	        		text += start_date;
 	        		text += "&end_date=";
 	        		text += end_date;
-	        		text +=	"' target='_blank'><img class='s3-img' src=";
-//     	    		text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
-	        		text += hotel.hotelImgVO.file_url;
-	        		text += "></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
+	        		text +=	"' target='_blank'><img class='s3-img' src='";
+    	    		
+	        		if(isEmpty(hotel.hotelImgVO)){
+	        			text += "https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png";
+	        		} else{
+	        			text += hotel.hotelImgVO.file_url;
+	        		}
+	        		
+	        		text += "'></a></div><div class='hotel-content'><div class='hotel-top'><div class='hotel-title'><div class='hotel-name'><a href='";
 	   				text += contextPath;
 					text += "/hotelInfo.do?serialNumber=";
 					text +=	hotel.serialnumber;

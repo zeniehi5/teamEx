@@ -78,6 +78,7 @@ public class HotelService {
 	}
 	
 	public List<RecentSearchVO> selectRecentSearch(String userid) {
+		hotelDAO.deleteDuplicatedRecentSearch();
 		return hotelDAO.selectRecentSearch(userid);
 	}
 	

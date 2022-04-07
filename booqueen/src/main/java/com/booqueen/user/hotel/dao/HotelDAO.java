@@ -124,4 +124,8 @@ public class HotelDAO {
 		List<HotelServiceVO> hotelServiceVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectRandomHotel", serialnumber);
 		return hotelServiceVO;
 	}
+	
+	public void deleteDuplicatedRecentSearch() throws DataAccessException{
+		sqlSession.delete("com.booqueen.user.hotel.dao.recentsearchmapper.deleteDuplicatedRecentSearch");
+	}
 }

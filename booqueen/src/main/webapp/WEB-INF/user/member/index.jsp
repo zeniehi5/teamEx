@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/></c:set>
+<c:set var="nnow" value="<%=new java.util.Date(new java.util.Date().getTime() + 60*60*24*1000)%>"/>
+<c:set var="tomorrow"><fmt:formatDate value="${nnow}" pattern="yyyy-MM-dd"/></c:set>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -122,13 +126,13 @@
         <div class="recent-div">
             <ul class="recent-ul">
             	<c:forEach var="recentSearchList" items="${recentSearchList}" varStatus="status">
-                
+            	<fmt:parseDate var="start_date" value="${recentSearchList.start_date}" pattern="yyyy-MM-dd" />
+                <fmt:parseDate var="end_date" value="${recentSearchList.end_date}" pattern="yyyy-MM-dd" />
                 <li>
-                    <a>
+                     <a href="${contextPath}/searchResultInBox.do?keyword=${recentSearchList.city}&daterange1=<fmt:formatDate value="${start_date}" pattern="yyyy-MM-dd"/>&daterange2=<fmt:formatDate value="${end_date}" pattern="yyyy-MM-dd"/>" style="text-decoration: none; color: #000">
                         <div class="recent-ul-div">
                             <div><img class="recent-img" src="${recentSearchList.file_url}"></div>
-                            <fmt:parseDate var="start_date" value="${recentSearchList.start_date}" pattern="yyyy-MM-dd" />
-                            <fmt:parseDate var="end_date" value="${recentSearchList.end_date}" pattern="yyyy-MM-dd" />
+                            
                             <div><span>${recentSearchList.city}</span><span><fmt:formatDate value="${start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${end_date}" pattern="M월 dd일"/>, ${recentSearchList.people}명</span></div>
                         </div>
                     </a>
@@ -148,14 +152,17 @@
             <ul class="recent-ul comming-ul">
             	<c:forEach var="comingReservationList" items="${comingReservationList}" end="2">
                 <li>
-                    <h3>${comingReservationList.city}</h3>
+                    <h3>${comingReservationList.city}<c:if test="${!comingReservationList.status}">
+                           		<span class="meg-status">취소됨</span>
+                           	</c:if></h3>
                     <fmt:parseDate var="reservation_start_date" value="${comingReservationList.start_date}" pattern="yyyy-MM-dd" />
 					<fmt:parseDate var="reservation_end_date" value="${comingReservationList.end_date}" pattern="yyyy-MM-dd" />
                     <span class="coming-li-span"><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/></span>
-                    <a>
+                    <a href="${contextPath}/confirmation.do?reservation_number=${comingReservationList.reservation_number}&serialnumber=${comingReservationList.serialnumber}&room_id=${comingReservationList.room_id}" style="text-decoration: none; color: #000">
                         <div class="recent-ul-div comming-ul-div">
                             <div class="comming-ul-div-div"><img class="recent-img" src="${comingReservationList.file_url}"></div>
                             <div><span>${comingReservationList.hotelname}</span><span><fmt:formatDate value="${reservation_start_date}" pattern="M월 dd일"/> ~ <fmt:formatDate value="${reservation_end_date}" pattern="M월 dd일"/>, ?명</span></div>
+                        	
                         </div>
                     </a>
                 </li>
@@ -202,7 +209,6 @@
 	</c:when>
 	</c:choose>
 	
-	
     <div class="galleries">
         <div class="main-grid">
             <div class="main-grid-1">
@@ -210,146 +216,72 @@
                     <h1>${cityList[0].city}</h1>
                     <span>${cityList[0].count} 숙소</span>
                 </div>
+                <a href="${contextPath}/searchResultInBox.do?keyword=${cityList[0].city}&daterange1=${today}&daterange2=${tomorrow}">
                 <img src="${cityList[0].file_url}">
+                </a>
             </div>
+            
             <div class="main-grid-2">
                 <div class="gallery-text-box">
                     <h1>${cityList[1].city}</h1>
                     <span>${cityList[1].count} 숙소</span>
                 </div>
+                 <a href="${contextPath}/searchResultInBox.do?keyword=${cityList[1].city}&daterange1=${today}&daterange2=${tomorrow}">
                 <img src="${cityList[1].file_url}">
+                </a>
             </div>
             <div class="main-grid-3">
                 <div class="gallery-text-box">
                     <h1>${cityList[2].city}</h1>
                     <span>${cityList[2].count} 숙소</span>
                 </div>
+                 <a href="${contextPath}/searchResultInBox.do?keyword=${cityList[2].city}&daterange1=${today}&daterange2=${tomorrow}">
                 <img src="${cityList[2].file_url}">
+                </a>
             </div>
             <div class="main-grid-4">
                 <div class="gallery-text-box">
                     <h1>${cityList[3].city}</h1>
                     <span>${cityList[3].count} 숙소</span>
                 </div>
+                 <a href="${contextPath}/searchResultInBox.do?keyword=${cityList[3].city}&daterange1=${today}&daterange2=${tomorrow}">
                 <img src="${cityList[3].file_url}">
+                </a>
             </div>
             <div class="main-grid-5">
                 <div class="gallery-text-box">
                     <h1>${cityList[4].city}</h1>
                     <span>${cityList[4].count} 숙소</span>
                 </div>
+                 <a href="${contextPath}/searchResultInBox.do?keyword=${cityList[4].city}&daterange1=${today}&daterange2=${tomorrow}">
                 <img src="${cityList[4].file_url}">
+                </a>
             </div>
-            
-            
         </div>
     </div>
 
     <div class="section spot">
         <h2>💗 가장 사랑받는 호텔 💗</h2>
         <span>대부분 빠르게 예약이 마감됩니다.</span>
-        <!--
-        <div class="korea-spot">
-            <ul id="korea-spot-ul">
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot1.webp"></div>
-                        <div>
-                            <span>제주</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot2.webp"></div>
-                        <div>
-                            <span>서울</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot3.webp"></div>
-                        <div>
-                            <span>제주</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot4.webp"></div>
-                        <div>
-                            <span>부산</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot5.webp"></div>
-                        <div>
-                            <span>강릉</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot6.webp"></div>
-                        <div>
-                            <span>속초</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot1.webp"></div>
-                        <div>
-                            <span>서귀포</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot2.webp"></div>
-                        <div>
-                            <span>서울</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="korea-spot-a">
-                        <div><img src="resources/images/spot3.webp"></div>
-                        <div>
-                            <span>제주</span>
-                            <span>숙소 1,035개</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        -->
     </div>
 
     <div class="new-spot">
         <ul class="slider">
+        	<c:forEach var="bestHotelList" items="${bestHotelList}" begin="1" end="6" varStatus="status">
+        	<c:set var="todayv"><fmt:formatDate value="${now}" pattern="yyyyMMdd"/></c:set>
+        	<c:set var="tomorrowv"><fmt:formatDate value="${nnow}" pattern="yyyyMMdd"/></c:set>
             <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[0].file_url}"></div>
+                <a class="a" href="${contextPath}/hotelInfo.do?serialNumber=${bestHotelList.serialnumber}&start_date=${todayv }&end_date=${tomorrowv}" target="_blank">
+                    <div><img src="${bestHotelList.file_url}"></div>
                     <div>
-                        <span>${bestHotelList[0].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[0].city}</span>
+                        <span>${bestHotelList.hotelname}</span>
+                        
                     </div>
                     <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[0].star*1}"/>
+                    <i class="bi bi-geo-alt-fill"></i><span class="hotel-city" style="font-size: 13px; color: #383838; font-weight: 600; margin-right: 5px;">${bestHotelList.city}</span>
+                    <c:set var="star" value="${bestHotelList.star*1}"/>
 					<c:forEach begin="1" end="${star }">
-						<span>
+					<span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
 							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 						</svg>
@@ -358,101 +290,7 @@
 					</div>
                 </a>
             </li>
-            <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[1].file_url}"></div>
-                    <div>
-                        <span>${bestHotelList[1].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[1].city}</span>
-                    </div>
-                    <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[1].star*1}"/>
-					<c:forEach begin="1" end="${star }">
-						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-						</svg>
-					</span>
-					</c:forEach>
-					</div>
-                </a>
-            </li>
-            <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[2].file_url}"></div>
-                    <div>
-                        <span>${bestHotelList[2].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[2].city}</span>
-                    </div>
-                    <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[2].star*1}"/>
-					<c:forEach begin="1" end="${star }">
-						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-						</svg>
-					</span>
-					</c:forEach>
-					</div>
-                </a>
-            </li>
-            <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[3].file_url}"></div>
-                    <div>
-                        <span>${bestHotelList[3].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[3].city}</span>
-                    </div>
-                    <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[3].star*1}"/>
-					<c:forEach begin="1" end="${star }">
-						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-						</svg>
-					</span>
-					</c:forEach>
-					</div>
-                </a>
-            </li>
-            <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[4].file_url}"></div>
-                    <div>
-                        <span>${bestHotelList[4].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[4].city}</span>
-                    </div>
-                    <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[4].star*1}"/>
-					<c:forEach begin="1" end="${star }">
-						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-						</svg>
-					</span>
-					</c:forEach>
-					</div>
-                </a>
-            </li>
-            <li>
-                <a class="a">
-                    <div><img src="${bestHotelList[5].file_url}"></div>
-                    <div>
-                        <span>${bestHotelList[5].hotelname}</span>
-                        <span class="hotel-city" style="font-size: 16px; color: #383838; font-weight: 600;">${bestHotelList[5].city}</span>
-                    </div>
-                    <div class="korea-span">
-                    <c:set var="star" value="${bestHotelList[5].star*1}"/>
-					<c:forEach begin="1" end="${star }">
-						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-						</svg>
-					</span>
-					</c:forEach>
-					</div>
-                </a>
-            </li>
+           </c:forEach>
           </ul>
     </div>
     
@@ -466,7 +304,7 @@
         <div id="location" class="tabcontent">
         	<c:forEach var="cityListAll" items="${cityListAll}" varStatus="status">
             <div class="content-box">
-                <a>${cityListAll.city}</a>
+                <a href="${contextPath}/searchResultInBox.do?keyword=${cityListAll.city}&daterange1=${today}&daterange2=${tomorrow}" style="text-decoration: none; color: #000;">${cityListAll.city}</a>
                 <p>${cityListAll.count}개 숙소</p>
             </div>
             </c:forEach>
@@ -477,10 +315,20 @@
         	<c:forEach var="randomHotelList" items="${randomHotelList}" varStatus="status">
             <div class="content-box randomImage">
             	<div>
-            		<img class="randomHotelImage" src="${randomHotelList.file_url}">
+            	<a href="${contextPath}/hotelInfo.do?serialNumber=${randomHotelList.serialnumber}&start_date=${todayv }&end_date=${tomorrowv}" target="_blank"  style="text-decoration: none; color: #000;">
+            		<c:choose>
+            		<c:when test="${empty randomHotelList.file_url}">
+            			<img class="randomHotelImage" src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png">
+            		</c:when>
+            		<c:otherwise>
+            			<img class="randomHotelImage" src="${randomHotelList.file_url}">
+            		</c:otherwise>
+            		</c:choose>
+            	</a>	
             	</div>
             	<div>
-	                <a><div class="randomHotelname">${randomHotelList.hotelname}</div></a>
+	                <a href="${contextPath}/hotelInfo.do?serialNumber=${randomHotelList.serialnumber}&start_date=${todayv }&end_date=${tomorrowv}" target="_blank"  style="text-decoration: none; color: #000;">
+	                <div class="randomHotelname">${randomHotelList.hotelname}</div></a>
 	                <p class="randomHotelCity">${randomHotelList.city}</p>
                 </div>
             </div>
