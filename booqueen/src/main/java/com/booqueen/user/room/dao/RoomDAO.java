@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.reservation.vo.ReservationVO;
+import com.booqueen.user.room.vo.RoomAvailableVO;
 import com.booqueen.user.room.vo.RoomVO;
 
 @Repository
@@ -49,5 +50,9 @@ public class RoomDAO {
 	
 	public List<RoomVO> selectRoomImgs(String type) throws DataAccessException{
 		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRoomImgs", type);
+	}
+	
+	public List<RoomAvailableVO> selectRooms(Integer serialnumber) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRooms", serialnumber);
 	}
 }

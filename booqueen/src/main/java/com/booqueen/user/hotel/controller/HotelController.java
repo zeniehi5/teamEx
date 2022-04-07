@@ -44,6 +44,7 @@ import com.booqueen.user.review.vo.ReviewAvgVO;
 import com.booqueen.user.review.vo.ReviewProfileVO;
 import com.booqueen.user.review.vo.ReviewVO;
 import com.booqueen.user.room.service.RoomService;
+import com.booqueen.user.room.vo.RoomAvailableVO;
 import com.booqueen.user.room.vo.RoomVO;
 import com.booqueen.user.wishlist.service.WishlistService;
 import com.booqueen.user.wishlist.vo.WishlistVO;
@@ -227,7 +228,7 @@ public class HotelController {
 	}
 	
 	@RequestMapping(value = "/hotelInfo.do", method = RequestMethod.GET)
-	public String hotelDetail(@RequestParam("serialNumber") String serialNumber, Model model, HttpSession session, @RequestParam("start_date") String start_date, @RequestParam("end_date") String end_date ) throws ParseException {
+	public String hotelDetail(@RequestParam("serialNumber") String serialNumber, Model model, HttpSession session, @RequestParam("start_date") String start_date, @RequestParam("end_date") String end_date ) throws Exception {
 		Integer serialNumber2 = Integer.parseInt(serialNumber);
 		
 		HotelVO vo = hotelService.getHotelBySerialnumber(serialNumber2);
@@ -254,8 +255,13 @@ public class HotelController {
         Date format2 = new SimpleDateFormat("yyyyMMdd").parse(end_date);
         long diffSec = (format2.getTime() - format1.getTime()) / 1000;
         long diffDays = diffSec / (24*60*60);
-        
         hotelAvailableVO.setDiffDays(diffDays);
+        
+        String start_date_day = roomService.getDateDay(start_date, "yyyyMMdd");
+        String end_date_day = roomService.getDateDay(end_date, "yyyyMMdd");
+        hotelAvailableVO.setStart_date_day(start_date_day);
+        hotelAvailableVO.setEnd_date_day(end_date_day);
+        
         model.addAttribute("hotelAvailableVO", hotelAvailableVO);
 		
 		List<RoomVO> roomList = roomService.getRoomFacilities(hotelAvailableVO);
@@ -296,6 +302,9 @@ public class HotelController {
 		}
 		
 		model.addAttribute("distanceVO", distanceVO);
+		
+		List<RoomAvailableVO> availableRooms = roomService.selectRooms(serialNumber2);
+		model.addAttribute("availableRooms", availableRooms);
 		
 		return "hotel/available";
 	}

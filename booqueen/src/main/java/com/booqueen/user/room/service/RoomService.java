@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.room.dao.RoomDAO;
+import com.booqueen.user.room.vo.RoomAvailableVO;
 import com.booqueen.user.room.vo.RoomVO;
 
 @Service
@@ -89,5 +90,9 @@ public class RoomService {
 
 	public List<RoomVO> selectRoomImgs(String type){
 		return roomDAO.selectRoomImgs(type);
+	}
+	
+	public List<RoomAvailableVO> selectRooms(Integer serialnumber){
+		return roomDAO.selectRooms(serialnumber);
 	}
 }

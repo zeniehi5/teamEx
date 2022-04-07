@@ -42,19 +42,22 @@
                 <div class="left-col-search-frist">
                     <h2>검색</h2>
                     <div class="search-bar">
-                        <form>
+                        <form action="${contextPath}/hotelInfo.do" method="get">
                             <div class="location-input">
                                 <label>여행자/숙소 이름</label>
-                                <input type="text" placeholder="어디로 가시나요?">
+                                <input type="text" value="${hotelInfo.hotelname}" disabled>
                             </div>
                             <div>
                                 <label>체크인 날짜</label>
-                                <input type="date" placeholder="Add Date">
+                                <input type="date" id="startdate">
+                               	<input type="hidden" id="startdateParm" name="start_date">
                             </div>
                             <div>
                                 <label>체크아웃 날짜</label>
-                                <input type="date" placeholder="Add Date">
+                                <input type="date" id="enddate">
+                                <input type="hidden" id="enddateParm" name="end_date">
                             </div>
+                            <input type="hidden" name="serialNumber" value="${hotelInfo.serialnumber}">
                             <button type="submit">검색</button>
                         </form>
                     </div> <!-- end searchbar-->
@@ -193,14 +196,25 @@
 						<img class="hotel_img_path"  src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></a>
 					</c:if>
                 </div>
-                <div class="gallery-img-2"><img src="${contextPath}/resources/user/images/house-2.png"></div>
-                <div class="gallery-img-3"><img src="${contextPath}/resources/user/images/house-3.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-4.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-5.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
-                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
+                <c:choose>
+                <c:when test="${empty hotelImg.file_url }">
+                	<div class="gallery-img-2"><img src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></div>
+               		<div class="gallery-img-3"><img src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></div>
+                	<c:forEach begin="1" end="6">
+                		<div><img src="https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png"></div>
+                	</c:forEach>
+                </c:when>
+                <c:otherwise>
+	                <div class="gallery-img-2"><img src="${contextPath}/resources/user/images/house-2.png"></div>
+	                <div class="gallery-img-3"><img src="${contextPath}/resources/user/images/house-3.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-4.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-5.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
+	                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
+	            </c:otherwise>    
+            	</c:choose>
             </div>
         </div>
     </div>
@@ -298,7 +312,7 @@
 		                    </div>
 		                    <div>
 		                        <div>
-		                            <button>검색변경</button>
+		                            <button class="change_search_data">검색변경</button>
 		                        </div>
 		                    </div>
 		            </div>
@@ -481,21 +495,28 @@
 		</c:when>
 
 		<c:when test="${available_room == false }">
-			<div class="add">
+			<h2 style="padding: 10px 18%; margin-bottom: 10px;">검색 변경</h2>
+			<div class="add" style="position: relative; margin-top: 0px;">
 		        <i class="bi bi-info-circle"></i>
 		        <div>
-		            <span>
-		                2022년 1월 14일 (금)~2022년 1월 15일 (토)에 예약 가능한 객실 없음
+		            <span style="font-size: 18px;font-weight: 700;">
+		            	<fmt:parseDate var="start_date" value="${hotelAvailableVO.start_date }" pattern="yyyyMMdd"/>
+		            	<fmt:parseDate var="end_date" value="${hotelAvailableVO.end_date }" pattern="yyyyMMdd"/>
+		                <fmt:formatDate value="${start_date }" pattern="yyyy년 M월 dd일"/>(${hotelAvailableVO.start_date_day}) ~ <fmt:formatDate value="${end_date }" pattern="yyyy년 M월 dd일"/>(${hotelAvailableVO.end_date_day})에 예약 가능한 객실 없음
 		            </span>
-		            <p>
+		            <p style="font-size: 16px;">
 		                죄송합니다. 선택된 기간에 이 호텔에 예약 가능한 객실이 없습니다
 		            </p>
 		        </div>
+		        <div class="now-booking" style="right: 40px;top: 26px;">
+                    <button style="width: 300px;background: #fc5454; border: 0.5px solid #fc5454; height: 40px;" class="change_search_data">검색 변경</button>
+                	</div>
 		    </div>
 		    
 		    <div class="change-date">
-		        <h4>날짜 바꾸기</h4>
-		        <form class="change-date-form">
+		    	
+		        <h4 style="display: none;">날짜 바꾸기</h4>
+		        <form class="change-date-form" style="display: none;">
 		            
 		                <div class="form-col form-col-1">
 		                    <label>체크인 날짜</label>
@@ -517,7 +538,7 @@
 		                </div>
 		        </form>
 		
-		        <div class="u-clearfix" data-render="">
+		        <div class="u-clearfix" data-render="" style="display: none;">
 		            <div class="sb-group__field sb-group__field-rooms">
 		                <label class="sb-searchbox__label sb-group__field__label -inline -small " for="no_rooms">객실</label>
 		                <select name="no_rooms" id="no_rooms" data-group-rooms-count="" aria-label="객실 수">
@@ -612,110 +633,22 @@
 		
 		            <div>
 		                <ul class="reservation-date">
+		                    <c:forEach var="availableRooms" items="${availableRooms}">
 		                    <li>
 		                        <a>
 		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
+		                            <div>${availableRooms.open_date} ~ ${availableRooms.close_date}</div>
 		                            <div>1박</div>
-		                            <div>₩75,088~</div>
+		                            <div><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${availableRooms.standard_price}" />~</div>
 		                        </div>
 		                        </a>
 		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
-		                    <li>
-		                        <a>
-		                        <div class="reservation-flex">
-		                            <div>1월 16일 - 1월 17일</div>
-		                            <div>1박</div>
-		                            <div>₩75,088~</div>
-		                        </div>
-		                        </a>
-		                    </li>
+		                    </c:forEach>
 		                </ul>
 		            </div>
 		    </div>
 		
-			<div class="add">
+			<div class="add" style="display: none;">
 		        <i class="bi bi-alarm"></i>
 		        <div>
 		            <span>선택 날짜에 서울 숙소 완판 임박:  </span>
@@ -735,7 +668,7 @@
                 <div class="hospital-inner">
                     <div><h3>보건 & 안전 관련 특별 조치</h3></div>
                     <div>이 숙소는 투숙객의 안전을 최우선에 두고 보건 및 위생에 관해 특별한 조치를 취하고 있습니다.</div>
-                    <span>자세히 알아보기</span>
+<!--                     <span>자세히 알아보기</span> -->
                 </div>
             </div>
         </a>
@@ -1250,7 +1183,13 @@
                         </button>-->
                         <div class="top-header">
                             <div class="picture-wrapper">
-                                <div class="header_element--picture" style="background-image: url(${hotelImg.file_url});"></div>
+                            <c:if test="${!empty hotelImg.file_url }">
+								<div class="header_element--picture" style="background-image: url(${hotelImg.file_url});"></div>
+							</c:if>
+							<c:if test="${empty hotelImg.file_url }">
+								<div class="header_element--picture" style="background-image: url(https://booqueen.s3.ap-northeast-2.amazonaws.com/hotel/default-hotel-img.png);"></div>
+							</c:if>
+                                
                             </div>
                             <div>
                                 <div class="maps_iw__header_element"> 
@@ -1899,9 +1838,36 @@
 	</div>
 
 	<script>
-// 	$('.count_room_select').on("change", function(){
-// 		alert(this.value);
-// 	})
+	function getParameterByName(name) { 
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
+		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
+	}
+	
+	$(document).ready(function(){
+		var start_date_raw = getParameterByName('start_date');
+		var end_date_raw = getParameterByName('end_date');
+		var start_date_url = start_date_raw.slice(0, 4) + '-' + start_date_raw.slice(4, 6) + '-' + start_date_raw.slice(6);
+		var end_date_url = end_date_raw.slice(0, 4) + '-' + end_date_raw.slice(4, 6) + '-' + end_date_raw.slice(6);
+		$('#startdate').val(start_date_url);
+		$('#enddate').val(end_date_url);
+		
+		var startdate = $('#startdate').val().replaceAll('-','');
+	    $('#startdateParm').val(startdate);
+		
+	    var enddate = $('#enddate').val().replaceAll('-','');
+	    $('#enddateParm').val(enddate);
+	    
+		$('#startdate').on('change', function(){
+		    var startdate = this.value.replaceAll('-','');
+		    $('#startdateParm').val(startdate);
+		});
+		$('#enddate').on('change', function(){
+		    var enddate = this.value.replaceAll('-','');
+		    $('#enddateParm').val(enddate);
+		});
+	});
+	
 	
 	</script>
 	<script>
@@ -1925,6 +1891,9 @@
 		});	
 		$('#boardClose').click(function(){
 			$('.board-list').css('display', 'none');
+		});
+		$('.change_search_data').click(function(){
+			 window.scrollTo(0, 0);
 		});
 	 });
 	 

@@ -22,4 +22,11 @@
 			LIMIT 3
 		]]>
 	</select>
+	
+	<delete id="deleteDuplicatedRecentSearch">
+		delete from recent_search where seq in(
+			(select seq FROM 
+			 		(SELECT ROW_NUMBER() OVER (PARTITION BY city, start_date, end_date ORDER BY city) AS num, seq FROM recent_search)as a 
+			 WHERE a.num >= 2) )
+	</delete>
 </mapper>

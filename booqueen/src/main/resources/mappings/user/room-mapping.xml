@@ -323,4 +323,8 @@
 		select distinct * from room_image where type = #{type}
 	</select>
 	
+	<select id="selectRooms" parameterType="Integer" resultType="roomAvailableVO">
+		select * from room_available where room_id in (select room_id from room where serialnumber = #{serialnumber}) order by open_date, room_id
+	</select>
+	
 </mapper>
