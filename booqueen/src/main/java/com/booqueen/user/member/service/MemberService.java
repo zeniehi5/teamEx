@@ -1,9 +1,12 @@
-package com.booqueen.user.member;
+package com.booqueen.user.member.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.admin.member.BlockUserVO;
+import com.booqueen.user.member.dao.MemberDAO;
 import com.booqueen.user.member.vo.MemberProfileVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.member.vo.ReasonVO;
 
 @Service
@@ -50,5 +53,9 @@ public class MemberService {
 	
 	public int insertReason(ReasonVO vo) {
 		return memberDAO.insertReason(vo);
+	}
+	
+	public BlockUserVO selectBlockedUser(BlockUserVO vo) {
+		return memberDAO.selectBlockedUser(vo);
 	}
 }

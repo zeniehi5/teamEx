@@ -95,4 +95,8 @@ public class RoomService {
 	public List<RoomAvailableVO> selectRooms(Integer serialnumber){
 		return roomDAO.selectRooms(serialnumber);
 	}
+	
+	public List<RoomVO> selectRoomImgsBySerialnumber(Integer serialnumber){
+		return roomDAO.selectRoomImgsBySerialnumber();
+	}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.wishlist.service.WishlistService;
 import com.booqueen.user.wishlist.vo.WishlistVO;
 

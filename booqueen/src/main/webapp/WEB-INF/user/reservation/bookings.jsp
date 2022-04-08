@@ -149,7 +149,8 @@
 						</div>
 					</div>
 					
-					<c:if test="${reservationList.status eq true or reservationList.status eq 'true' }">
+					<c:if test="${reservationList.status eq true && reservationList.review eq false}">
+					
 					<a href="${contextPath}/review/reviewForm.do?reservation_number=${reservationList.reservation_number}" class="review">
 						<span class="star"><i class="bi bi-star"></i></span>
 						<div class="review-text">숙소를 평가하고 후기를 남겨주세요</div>
@@ -160,6 +161,7 @@
 							</svg>
 						</button>
 					</a>
+					
 					</c:if>
 				</div>
 			</div>

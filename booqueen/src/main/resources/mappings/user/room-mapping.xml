@@ -324,7 +324,11 @@
 	</select>
 	
 	<select id="selectRooms" parameterType="Integer" resultType="roomAvailableVO">
-		select * from room_available where room_id in (select room_id from room where serialnumber = #{serialnumber}) order by open_date, room_id
+		select * from room_available where room_id in (select room_id from room where serialnumber = #{serialnumber}) and open_date >= current_date order by open_date, room_id
+	</select>
+	
+	<select id="selectRoomImgsBySerialnumber" resultType="roomVO">
+		select * from room_image where type in (select type from room) ORDER BY random()
 	</select>
 	
 </mapper>

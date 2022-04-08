@@ -29,6 +29,7 @@
 		<result property="star" column="star"/>
 		<result property="longitude" column="longitude"/>
 		<result property="latitude" column="latitude"/>
+		<result property="available" column="available"/>
 		<collection property="hotelImgVO" resultMap="HotelImgVOMap" />
 		<collection property="reviewAvgVO"	resultMap="ReviewAvgVOMap"/>
 		<collection property="roomVO" resultMap="RoomVOMap"/>
@@ -206,7 +207,7 @@
 				</if>
 				
 				<if test= "hotelServiceVO.smoking == true">
-					<![CDATA[and smoking = #{hotelServiceVO.smoking}]]>	
+					<![CDATA[and s.smoking = #{hotelServiceVO.smoking}]]>	
 				</if>
 				
 				<if test= "hotelServiceVO.bar == true">
@@ -452,7 +453,7 @@
 				</if>
 				
 				<if test= "hotelServiceVO.smoking == true">
-					<![CDATA[and smoking = #{hotelServiceVO.smoking}]]>	
+					<![CDATA[and s.smoking = #{hotelServiceVO.smoking}]]>	
 				</if>
 				
 				<if test= "hotelServiceVO.bar == true">

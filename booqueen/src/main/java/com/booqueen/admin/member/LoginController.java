@@ -32,7 +32,7 @@ public class LoginController {
 		MemberVO member = memberService.getAdminMember(vo);
 		if(member != null) {
 			session = request.getSession();
-			List<com.booqueen.user.member.MemberVO> userList = memberService.getUserMember();
+			List<com.booqueen.user.member.vo.MemberVO> userList = memberService.getUserMember();
 			model.addAttribute("userList", userList);
 			
 			// 전날 가입자 수

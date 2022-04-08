@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
@@ -60,9 +60,10 @@ public class ReivewController {
 			out.flush();
 			return "redirect:/review/insertReview.do";
 		} else {
+			reviewService.updateReview(vo);
 			out.println("<script>alert('리뷰가 정상적으로 등록되었습니다.')</script>");
 			out.flush();
-			return "member/index";
+			return "redirect:/index.do";
 		}	
 	}
 }

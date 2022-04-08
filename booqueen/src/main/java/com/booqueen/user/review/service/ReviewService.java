@@ -36,4 +36,8 @@ public class ReviewService {
 	public List<ReviewVO> selectReviewStatus(String userid) {
 		return reviewDAO.selectReviewStatus(userid);
 	}
+	
+	public void updateReview(ReviewVO vo) {
+		reviewDAO.updateReview(vo);
+	}
 }

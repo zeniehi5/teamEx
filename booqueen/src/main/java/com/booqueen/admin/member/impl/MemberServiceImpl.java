@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<com.booqueen.user.member.MemberVO> getUserMember() {
+	public List<com.booqueen.user.member.vo.MemberVO> getUserMember() {
 		return memberDAO.getUserMember();
 	}
 	

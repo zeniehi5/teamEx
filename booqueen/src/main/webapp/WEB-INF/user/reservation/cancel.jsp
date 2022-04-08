@@ -54,7 +54,7 @@
 							<div class="content-reason">
 								<form action="${contextPath}/cancelReservation.do" id="cancel_reservation" method="post">
 									<select name="cancel_reason" id="cancel_reason" class="content-reason-select">
-										<option value="">이유를 선택하세요(필수)</option>
+										<option value="선택안함">이유를 선택하세요(필수)</option>
 										<option value="여행 인원, 또는 필요한 사항이 변경됨">여행 인원, 또는 필요한 사항이 변경됨</option>
 										<option value="일정 또는 여행지 변경">일정 또는 여행지 변경</option>
 										<option value="개인 사정 / 여행이 취소됨">개인 사정 / 여행이 취소됨</option>
@@ -241,19 +241,20 @@
 			$("#cancelModal").css('display', 'none');
 		});
 
-		$('#realCancelBtn').on("click", cancelPay);
+		
 		
 		
 	});
 	</script>
 	<script>
+	$(document).ready(function() {
 	const path = '${contextPath}';
 	var merchant_number = '${reservationVO.merchant}';
 	
 // 	var amount = '${reservationVO.price}';
 	var amount = 100;
 	var imp_uid = '${reservationVO.imp_uid}';
-	var cancel_reason;
+	var cancel_reason = '';
 	
 	$('#cancel_reason').on("change", function(){
 		cancel_reason = $('#cancel_reason option:selected').text();
@@ -279,6 +280,10 @@
 			}
 		})
 	}
+	
+	$('#realCancelBtn').on("click", cancelPay);
+	
+	});
 	/* 아임포트 환불(version2)
 	function cancelPay() {
 	    $.ajax({

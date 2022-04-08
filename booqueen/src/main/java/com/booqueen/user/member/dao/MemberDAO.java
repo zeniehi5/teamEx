@@ -1,11 +1,13 @@
-package com.booqueen.user.member;
+package com.booqueen.user.member.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.admin.member.BlockUserVO;
 import com.booqueen.user.member.vo.MemberProfileVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.member.vo.ReasonVO;
 
 @Repository
@@ -52,6 +54,10 @@ public class MemberDAO {
 	
 	public int insertReason(ReasonVO vo) throws DataAccessException{
 		return sqlSession.insert("com.booqueen.user.member.dao.reasonmapper.insertReason", vo);
+	}
+	
+	public BlockUserVO selectBlockedUser(BlockUserVO vo) throws DataAccessException{
+		return sqlSession.selectOne("sql.selectBlocked", vo);
 	}
 }
  

@@ -6,6 +6,10 @@
         <![CDATA[INSERT INTO review (serialnumber, score, staff, service, cleanness, comfort, effectiveness, place, strength, weakness, title, userid, username, reservation_number) VALUES (#{serialnumber}, #{score}, #{staff}, #{service}, #{cleanness}, #{comfort}, #{effectiveness}, #{place}, #{strength}, #{weakness}, #{title}, #{userid}, #{username}, ${reservation_number})]]> 
     </insert>
     
+    <update id="updateReview" parameterType="reviewVO">
+    	update reservation set review = true where reservation_number = #{reservation_number}
+    </update>
+    
     <select id="selectReviews" resultType="reviewVO" parameterType="Integer">
 		<![CDATA[SELECT * FROM review where serialnumber = #{serialnumber}]]>
 	</select>
