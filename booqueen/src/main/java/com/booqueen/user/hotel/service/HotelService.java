@@ -102,7 +102,7 @@ public class HotelService {
 		return hotelDAO.selectRandomHotel(); 
 	}
 	
-	public  List<HotelServiceVO> selectHotelService(int serialnumber) {
+	public List<HotelServiceVO> selectHotelService(int serialnumber) {
 		return hotelDAO.selectHotelService(serialnumber);
 	}
   

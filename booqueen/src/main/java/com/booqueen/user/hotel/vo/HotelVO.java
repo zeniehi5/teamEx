@@ -17,6 +17,7 @@ public class HotelVO {
 	private String star;
 	private Double longitude;
 	private Double latitude;
+	private Integer available;
 	HotelImgVO hotelImgVO;
 	ReviewAvgVO reviewAvgVO;
 	RoomVO roomVO;

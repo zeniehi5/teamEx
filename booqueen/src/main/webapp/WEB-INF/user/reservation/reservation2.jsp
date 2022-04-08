@@ -125,7 +125,7 @@
                      	<c:set var="types" value="${reservationVO.types[status.index]}"/>
                      	<c:set var="prices" value="${reservationVO.prices[status.index]}"/>
                      	<c:if test="${count_rooms ne '0' }">
-                    		<div style="display:flex; justify-content:space-between; "><span></span><span style="font-style: italic; font-size: 15px;">${types} x ${count_rooms} </span></div>   	
+                    		<div style="display:flex; justify-content:space-between; "><span style="font-style: italic; font-size: 15px;">${types}</span><span style="font-style: italic; font-size: 15px;"> x ${count_rooms} </span></div>   	
                    			<input type="hidden" name="types" value="${types}"/>
                    			<input type="hidden" name="prices" value="${prices * reservationVO.diffDays * count_rooms }"/>
                    			<input type="hidden" name="count_rooms" value="${count_rooms }"/>
@@ -187,15 +187,10 @@
 
             <div class="extra-info">
                 <p class="payment-details-t-and-c payment-method__extras-item js-payment-details-t-and-c">
-                    이 예약의 직접 당사자는 고객님과 ${hotelVO.hotelname}이며, 이 예약을 완료함으로써 
-                    <a href="/bookcancel.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;checkin=2022-02-02;checkout=2022-02-03;general=295985256;hotel_id=7017459;is_family_search=0;is_group_search=0;persons=2;policygroup_room=2022-02-03%2C701745901%3A295985256%3A1%3AJiN4QzJBNDsmI3hEMEUwOyYjeEIyRTQ7JiN4QjREQzsgJiN4QjM1NDsmI3hCRTE0OyYjeEI4Rjg7%0A%3A701745901_295985256_2_0_0;refund_text_global=%20%EC%98%88%EC%95%BD%20%EC%B7%A8%EC%86%8C%20%EC%8B%9C%20%E2%82%A939%2C600%EC%9D%98%20%EA%B8%88%EC%95%A1%EC%9D%B4%20%ED%99%98%EB%B6%88%EB%90%A9%EB%8B%88%EB%8B%A4.;srpvid=4ee000ba74c400d2&amp;;popupit=1" target="_blank" class="popupit bui-link">
-                    예약 조건</a>, 
-                    <a href="/content/terms.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;address1=Old%20Christchurch%20Road;ap_ref=0;bp_from=standard;bp_travel_purpose=leisure;bpid=7F6E52D2-7429-4225-85B7-F766AA324A4F;cc1=kr;checkin=2022-02-02;checkout=2022-02-03;city=Bournemouth;dc_issue_number=0;dotd_fb=0;email=smin323%40naver.com;email_confirm=smin323%40naver.com;final_booking_price=79200;firstname=%EC%83%81%EB%AF%BC;full_cost=0;full_cost_plain=0;gpp=80000;gps=10;gsav=8000;guest_name_701745901_295985256_2_0_0=%EA%B9%80%20%EC%83%81%EB%AF%BC;hostname=www.booking.com;hotel_id=7017459;installment_count=1;interval=1;lastname=%EA%B9%80;nits_session_id=BB408031-0C6A-450C-94CF-FC8DE038A244;nr_guests_701745901_295985256_2_0_0=2;nr_rooms_701745901_295985256_2_0_0=1;pre_order_uuid=88ef4b4d-aca1-4233-8b67-296a8cd57167;promo=0;raf_cm_later=0;recommended_room_id=0;recp=0;remb=0a14164b1a3031b2a7b3a0b4a0b5a306b6a701b;rets=0;reub=0;room1=A%2CA;rt_num_blocks=6;rt_num_blocks_per_room=%7B%22701745903%22%3A1%2C%22701745905%22%3A1%2C%22701745906%22%3A1%2C%22701745901%22%3A1%2C%22701745908%22%3A1%2C%22701745904%22%3A1%7D;rt_num_rooms=6;rt_pageview_id=592e00be09b000c6;rt_pos_final=1.1;rt_pos_selected=1;rt_pos_selected_within_room=1;rt_relevance_metric_id=fc2a62ed-f10d-410b-bea0-3ffa9f6f4932;seen_ft_rvw=0;smoking_preference_701745901_295985256_2_0_0=no;srpvid=4ee000ba74c400d2;stage=2;total_cost=79200;trips_promo=%5B%5D;ufi=-706906;upgrade_to=0;zip=BH1%201EZ&amp;" target="_blank" class="popupit bui-link">
-                    일반 약관</a>, 
-                    <a target="_blank" rel="nofollow" href="/content/privacy.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;address1=Old%20Christchurch%20Road;ap_ref=0;bp_from=standard;bp_travel_purpose=leisure;bpid=7F6E52D2-7429-4225-85B7-F766AA324A4F;cc1=kr;checkin=2022-02-02;checkout=2022-02-03;city=Bournemouth;dc_issue_number=0;dotd_fb=0;email=smin323%40naver.com;email_confirm=smin323%40naver.com;final_booking_price=79200;firstname=%EC%83%81%EB%AF%BC;full_cost=0;full_cost_plain=0;gpp=80000;gps=10;gsav=8000;guest_name_701745901_295985256_2_0_0=%EA%B9%80%20%EC%83%81%EB%AF%BC;hostname=www.booking.com;hotel_id=7017459;installment_count=1;interval=1;lastname=%EA%B9%80;nits_session_id=BB408031-0C6A-450C-94CF-FC8DE038A244;nr_guests_701745901_295985256_2_0_0=2;nr_rooms_701745901_295985256_2_0_0=1;pre_order_uuid=88ef4b4d-aca1-4233-8b67-296a8cd57167;promo=0;raf_cm_later=0;recommended_room_id=0;recp=0;remb=0a14164b1a3031b2a7b3a0b4a0b5a306b6a701b;rets=0;reub=0;room1=A%2CA;rt_num_blocks=6;rt_num_blocks_per_room=%7B%22701745903%22%3A1%2C%22701745905%22%3A1%2C%22701745906%22%3A1%2C%22701745901%22%3A1%2C%22701745908%22%3A1%2C%22701745904%22%3A1%7D;rt_num_rooms=6;rt_pageview_id=592e00be09b000c6;rt_pos_final=1.1;rt_pos_selected=1;rt_pos_selected_within_room=1;rt_relevance_metric_id=fc2a62ed-f10d-410b-bea0-3ffa9f6f4932;seen_ft_rvw=0;smoking_preference_701745901_295985256_2_0_0=no;srpvid=4ee000ba74c400d2;stage=2;total_cost=79200;trips_promo=%5B%5D;ufi=-706906;upgrade_to=0;zip=BH1%201EZ&amp;" class="popupit bui-link">
-                    개인정보 보호정책</a>, 
-                    <a target="_blank" rel="nofollow" href="/content/wallet-terms.ko.html?aid=304142;label=gen173nr-1FCAEoggI46AdIM1gEaH2IAQGYARe4ARjIAQzYAQHoAQH4AQuIAgGoAgS4Ao-R548GwAIB0gIkNmNkNzYwZWUtZTRlZS00NGU0LTg3OWMtNmU0ZDIzYjFkZmQ32AIG4AIB;sid=62a13e359b6273f62369b2a74709d770;address1=Old%20Christchurch%20Road;ap_ref=0;bp_from=standard;bp_travel_purpose=leisure;bpid=7F6E52D2-7429-4225-85B7-F766AA324A4F;cc1=kr;checkin=2022-02-02;checkout=2022-02-03;city=Bournemouth;dc_issue_number=0;dotd_fb=0;email=smin323%40naver.com;email_confirm=smin323%40naver.com;final_booking_price=79200;firstname=%EC%83%81%EB%AF%BC;full_cost=0;full_cost_plain=0;gpp=80000;gps=10;gsav=8000;guest_name_701745901_295985256_2_0_0=%EA%B9%80%20%EC%83%81%EB%AF%BC;hostname=www.booking.com;hotel_id=7017459;installment_count=1;interval=1;lastname=%EA%B9%80;nits_session_id=BB408031-0C6A-450C-94CF-FC8DE038A244;nr_guests_701745901_295985256_2_0_0=2;nr_rooms_701745901_295985256_2_0_0=1;pre_order_uuid=88ef4b4d-aca1-4233-8b67-296a8cd57167;promo=0;raf_cm_later=0;recommended_room_id=0;recp=0;remb=0a14164b1a3031b2a7b3a0b4a0b5a306b6a701b;rets=0;reub=0;room1=A%2CA;rt_num_blocks=6;rt_num_blocks_per_room=%7B%22701745903%22%3A1%2C%22701745905%22%3A1%2C%22701745906%22%3A1%2C%22701745901%22%3A1%2C%22701745908%22%3A1%2C%22701745904%22%3A1%7D;rt_num_rooms=6;rt_pageview_id=592e00be09b000c6;rt_pos_final=1.1;rt_pos_selected=1;rt_pos_selected_within_room=1;rt_relevance_metric_id=fc2a62ed-f10d-410b-bea0-3ffa9f6f4932;seen_ft_rvw=0;smoking_preference_701745901_295985256_2_0_0=no;srpvid=4ee000ba74c400d2;stage=2;total_cost=79200;trips_promo=%5B%5D;ufi=-706906;upgrade_to=0;zip=BH1%201EZ&amp;" class="popupit bui-link">
-                    Wallet 이용약관</a>에 동의하시게 됩니다.
+                    이 예약의 직접 당사자는 고객님과 <strong>${hotelVO.hotelname}</strong>이며, 이 예약을 완료함으로써
+                    <a href="${contextPath }/terms.do" target="_blank" class="popupit bui-link">
+                    일반 약관</a>
+                  	에 동의하시게 됩니다.
                     </p>
             </div>
             
@@ -205,7 +200,7 @@
                     <span class="bui-button__text js-button__text"> 예약 완료 </span>
                 </button>
 <!--                 <button onclick="on()" class="recheck-button"> -->
-                <button class="recheck-button" disabled/>
+                <button class="recheck-button" style="display: none;">
                     <span>예약 내용 재확인</span>
                 </button>
                 
@@ -214,28 +209,8 @@
     </div>
     </div><!-- end main-->
 
-    <div class="footer">
-        <div class="footer-inner">
-            <div class="inner-box">
-                <div class="inner-inner">
-                    <ul>
-                        <li>
-                            <a>Bookqueen.com 소개</a>
-                        </li>
-                        <li>
-                            <a>고객 서비스팀에 문의</a>
-                        </li>
-                        <li>
-                            <a>이용 약관</a>
-                        </li>
-                        <li>
-                            <a>개인정보 보호정책 & 쿠키 정책</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<%-- 	<jsp:include page="/WEB-INF/user/member/footer.jsp"/> --%>
 
     <div id="overlay" onclick="off()">
     	<div style="width: 500px; height: 500px; background-color: #fff; margin: 10% 40%;">

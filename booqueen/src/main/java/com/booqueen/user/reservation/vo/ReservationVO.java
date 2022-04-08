@@ -30,7 +30,7 @@ public class ReservationVO {
 	private String lastname;
 	private String firstname;
 	private String email;
-	private String request_text;
+	private String request_text = "요청사항 없음";
 	private String arrive_time;
 	private boolean status;
 	private String userid;
@@ -49,7 +49,7 @@ public class ReservationVO {
 	private String cancel_date;
 	private String cancel_reason;
 	private String imp_uid;
-	private int total;
+	private Integer total;
 	private Integer review_deadline;
 	private boolean review;
 	private Integer count; // 호텔 예약 횟수

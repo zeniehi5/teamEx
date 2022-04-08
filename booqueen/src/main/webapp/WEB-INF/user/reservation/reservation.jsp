@@ -354,28 +354,7 @@
     </div>
 </form>
 
-    <div class="footer">
-        <div class="footer-inner">
-            <div class="inner-box">
-                <div class="inner-inner">
-                    <ul>
-                        <li>
-                            <a>Booqueen.com 소개</a>
-                        </li>
-                        <li>
-                            <a>고객 서비스팀에 문의</a>
-                        </li>
-                        <li>
-                            <a>이용 약관</a>
-                        </li>
-                        <li>
-                            <a>개인정보 보호정책 & 쿠키 정책</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
     <script>
         $(document).ready(function(){

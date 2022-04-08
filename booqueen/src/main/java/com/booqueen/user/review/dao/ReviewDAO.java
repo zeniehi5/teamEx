@@ -40,4 +40,8 @@ public class ReviewDAO {
 		return sqlSession.selectOne("com.booqueen.user.review.dao.reviewmapper.selectReviewStatus", userid);
 	}
 	
+	public void updateReview(ReviewVO vo) throws DataAccessException{
+		sqlSession.update("com.booqueen.user.review.dao.reviewmapper.updateReview", vo);
+	}
+	
 }

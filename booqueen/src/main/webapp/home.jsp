@@ -653,85 +653,8 @@
         </div>
     </div>
 
-	<div class="footer-top1">
-        <p><button onclick="location.href='${contextPath}/login.jsp';">내 숙소 등록</button></p>
-    </div>
-
-    <div class="footer-top2">
-        <div>
-            <ul>
-                <li>
-                    <a>스마트폰 버전</a>
-                </li>
-                <li>
-                    <a>내 예약 관리</a>
-                </li>
-                <li>
-                    <a>고객 서비스팀 문의</a>
-                </li>
-                <li>
-                    <a>제휴 협력사 등록</a>
-                </li>
-                <li>
-                    <a>Boouen.com 비즈니스 계정</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div>
-            <div class="footer-inner-box">
-               <div class="ul-wrapper-box">
-                    <ul>
-                       <li><a>지역</a></li>
-                       <li><a>도시</a></li>
-                       <li><a>공항</a></li>
-                       <li><a>호텔</a></li>
-                       <li><a>관광 명소</a></li>
-                   </ul>
-               </div>
-               <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">&nbsp;</div>
+	<jsp:include page="/WEB-INF/user/member/footer.jsp"/>
+	
     <script>
         document.getElementById("defaultOpen").click();
     </script>

@@ -229,44 +229,7 @@
                         포함된 내역
                     </th>
                     <td>
-                        <div
-                            class="pb_facilities--badge"
-                            data-name-en="room size"
-                            data-facility-id="0"
-                            data-facility-type="0">
-                            <span class="">
-                                <svg
-                                    class="bk-icon -streamline-room_size"
-                                    fill="#008009"
-                                    height="16"
-                                    width="16"
-                                    viewBox="0 0 24 24"
-                                    role="presentation"
-                                    aria-hidden="true"
-                                    focusable="false">
-                                    <path
-                                        d="M3.75 23.25V7.5a.75.75 0 0 0-1.5 0v15.75a.75.75 0 0 0 1.5 0zM.22 21.53l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 1 0-1.06-1.06l-2.25 2.25h1.06l-2.25-2.25a.75.75 0 0 0-1.06 1.06zM5.78 9.22L3.53 6.97a.75.75 0 0 0-1.06 0L.22 9.22a.75.75 0 1 0 1.06 1.06l2.25-2.25H2.47l2.25 2.25a.75.75 0 1 0 1.06-1.06zM7.5 3.75h15.75a.75.75 0 0 0 0-1.5H7.5a.75.75 0 0 0 0 1.5zM9.22.22L6.97 2.47a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.03 2.47v1.06l2.25-2.25A.75.75 0 1 0 9.22.22zm12.31 5.56l2.25-2.25a.75.75 0 0 0 0-1.06L21.53.22a.75.75 0 1 0-1.06 1.06l2.25 2.25V2.47l-2.25 2.25a.75.75 0 0 0 1.06 1.06zM10.5 13.05v7.2a2.25 2.25 0 0 0 2.25 2.25h6A2.25 2.25 0 0 0 21 20.25v-7.2a.75.75 0 0 0-1.5 0v7.2a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1-.75-.75v-7.2a.75.75 0 0 0-1.5 0zm13.252 2.143l-6.497-5.85a2.25 2.25 0 0 0-3.01 0l-6.497 5.85a.75.75 0 0 0 1.004 1.114l6.497-5.85a.75.75 0 0 1 1.002 0l6.497 5.85a.75.75 0 0 0 1.004-1.114z"></path>
-                                </svg>30 제곱미터</span>
-                        </div>
-                        <div
-                            class="pb_facilities--badge"
-                            data-name-en=""
-                            data-facility-id="112"
-                            data-facility-type="1">
-                            <span class="">
-                                <svg
-                                    class="bk-icon -streamline-mountains"
-                                    fill="#008009"
-                                    height="16"
-                                    width="16"
-                                    viewBox="0 0 128 128"
-                                    role="presentation"
-                                    aria-hidden="true"
-                                    focusable="false">
-                                    <path
-                                        d="M127.5 104.38l-45.33-82a4.323 4.323 0 0 0-.33-.5 10.858 10.858 0 0 0-2-2c-4.7-3.567-11.398-2.674-15 2a3.61 3.61 0 0 0-.33.5l-25.44 46-7.87-10.47a4 4 0 0 0-6.75.55l-24 46A4 4 0 0 0 4 110.31h120a4 4 0 0 0 3.5-5.93zM71.32 26.57a2.73 2.73 0 0 1 3.68-.32c.128.093.246.2.35.32L89 51.35l-7.33 6.87-2.54-2.84a7.85 7.85 0 0 0-5.83-2.68 7.88 7.88 0 0 0-5.87 2.68l-2.54 2.83-7.24-6.91zM28.61 67.79l6.21 8.28-14.51 26.24H10.6zm.84 34.52L42.83 78.1c.196-.265.358-.554.48-.86l10.34-18.7 5.86 5.6a7.78 7.78 0 0 0 5.71 2.17 7.89 7.89 0 0 0 5.56-2.67l2.52-2.83 2.53 2.83a7.85 7.85 0 0 0 5.55 2.67h.32a7.75 7.75 0 0 0 5.37-2.17l6-5.58 24.19 43.74z"></path>
-                                </svg>산 전망</span>
-                        </div>
+                        
                         <div
                             class="pb_facilities--badge"
                             data-name-en=""
@@ -549,83 +512,7 @@
         </div>    
     </div>
 
-    <div class="footer-top1">
-        <p><button>내 숙소 등록</button></p>
-    </div>
-
-    <div class="footer-top2">
-        <div>
-            <ul>
-                <li>
-                    <a>스마트폰 버전</a>
-                </li>
-                <li>
-                    <a>내 예약 관리</a>
-                </li>
-                <li>
-                    <a>고객 서비스팀 문의</a>
-                </li>
-                <li>
-                    <a>제휴 협력사 등록</a>
-                </li>
-                <li>
-                    <a>Boouen.com 비즈니스 계정</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div>
-            <div class="footer-inner-box">
-               <div class="ul-wrapper-box">
-                    <ul>
-                       <li><a>지역</a></li>
-                       <li><a>도시</a></li>
-                       <li><a>공항</a></li>
-                       <li><a>호텔</a></li>
-                       <li><a>관광 명소</a></li>
-                   </ul>
-               </div>
-               <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="/WEB-INF/user/member/footer.jsp"/>
 
     <div class="slideBoxOverlay slidebox--open" id="overlay" aria-hidden="true">
         <i class="bi bi-x-lg" onclick="off()"></i>

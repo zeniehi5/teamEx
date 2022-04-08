@@ -31,6 +31,7 @@
 		<result property="member_email" column="member_email"/>
 		<result property="address1" column="address1"/>
 		<result property="address2" column="address2"/>
+		<result property="use_status" column="use_status"/>
     </resultMap>
 
 
@@ -44,7 +45,7 @@
 		<![CDATA[SELECT 	
 						r.reservation_number, r.imp_uid, r.merchant, r.room_id, r.serialnumber, r.hotelname, r.userid, r.checkin_date,
 						r.checkout_date, r.reservation_date, r.lastname, r.status, r.cancel_date, r.cancel_reason,
-						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city
+						r.firstname, r.price, r.pincode, r.time_arrival, r.count_room, i.file_url, h.city, r.review
 				FROM 	
 						reservation as r
 				LEFT JOIN 
@@ -117,7 +118,7 @@
 				ON
 						r.serialnumber = h.serialnumber
 				WHERE 
-						r.userid = #{userid} and r.checkin_date > current_date
+						r.userid = #{userid} and r.checkin_date >= current_date	and status = true
 						
 				order by r.checkin_date desc
 		]]>
@@ -140,7 +141,7 @@
 				ON
 						r.serialnumber = h.serialnumber
 				WHERE 
-						r.userid = #{userid} and (r.checkout_date + 30) > current_date and r.use_status = 2  and review != true
+						r.userid = #{userid} and (r.checkout_date + 30) > current_date and r.use_status = 2  and review != true and r.checkout_date <= current_date and r.status = true
 						
 				order by r.checkin_date desc
 		]]>

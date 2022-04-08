@@ -3,7 +3,7 @@
 <configuration>
    <typeAliases>
       <!-- user -->
-      <typeAlias type="com.booqueen.user.member.MemberVO" alias="userMemberVO"/>
+      <typeAlias type="com.booqueen.user.member.vo.MemberVO" alias="userMemberVO"/>
       <typeAlias type="com.booqueen.user.review.vo.ReviewVO" alias="reviewVO"/>
       <typeAlias type="com.booqueen.user.review.vo.ReviewAvgVO" alias="reviewAvgVO"/>
       <typeAlias type="com.booqueen.user.wishlist.vo.WishlistVO" alias="wishlistVO"/>

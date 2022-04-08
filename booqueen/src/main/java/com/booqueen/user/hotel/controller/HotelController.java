@@ -2,7 +2,6 @@ package com.booqueen.user.hotel.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.booqueen.admin.member.BlockUserVO;
 import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.board.service.BoardService;
 import com.booqueen.user.board.vo.BoardVO;
@@ -36,7 +36,8 @@ import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.map.service.MapService;
 import com.booqueen.user.map.vo.DistanceVO;
-import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.member.service.MemberService;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
@@ -73,6 +74,9 @@ public class HotelController {
 	
 	@Autowired
 	MapService mapService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@RequestMapping(value = "/autocomplete.do", method = RequestMethod.GET)
 	@ResponseBody
@@ -305,6 +309,29 @@ public class HotelController {
 		
 		List<RoomAvailableVO> availableRooms = roomService.selectRooms(serialNumber2);
 		model.addAttribute("availableRooms", availableRooms);
+		
+		List<RoomVO> roomImgsRandom = roomService.selectRoomImgsBySerialnumber(serialNumber2);
+		model.addAttribute("roomImgsRandom", roomImgsRandom);
+		
+		List<HotelServiceVO> hotelServiceVO = hotelService.selectHotelService(serialNumber2);
+		if(!hotelServiceVO.isEmpty() && hotelService != null) {
+			model.addAttribute("hotelServiceVO", hotelServiceVO.get(0));
+		} else {
+			model.addAttribute("hotelServiceVO", new HotelServiceVO());
+		}
+		
+		if(memberVO != null) {
+			BlockUserVO blockUserVO = new BlockUserVO();
+			blockUserVO.setSerialnumber(serialNumber2);
+			blockUserVO.setUserid(memberVO.getUserid());
+			BlockUserVO blockedUser = memberService.selectBlockedUser(blockUserVO);
+			if(blockedUser != null) {
+				model.addAttribute("blocked", true);
+				model.addAttribute("blockedUser", blockedUser);
+			} else {
+				model.addAttribute("blocked", false);
+			}
+		}
 		
 		return "hotel/available";
 	}

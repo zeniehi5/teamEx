@@ -198,7 +198,7 @@
                                             <div
                                                 class="pb-pricebreakdown--additional-info-text"
                                                 data-et-view="bQbYSCZFceHEVJdYJNdDaXFCVCGXT:1">
-                                                Bookqueen.com은 예약, 행정 및 기타 수수료를 고객님께 청구하지 않습니다.<br>
+                                                Booqueen.com은 예약, 행정 및 기타 수수료를 고객님께 청구하지 않습니다.<br>
                                             </div>
                                         </div>
 <!--                                    <div

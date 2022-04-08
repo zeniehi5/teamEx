@@ -634,6 +634,9 @@
 	padding-top: 2px;
 	width: 100%;
 }
+.room_info > div{
+	margin-bottom: 10px;
+}
 .room-name {
 	font-size: 12px;
 	line-height: 18px;
@@ -651,6 +654,10 @@
 }
 .cancel1 {
 	font-weight: 700;
+	margin-top: 10px;
+}
+.cancel2{
+	margin-bottom: 20px;
 }
 .left {
 	font-size: 12px;

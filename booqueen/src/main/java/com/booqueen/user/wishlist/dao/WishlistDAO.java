@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.wishlist.vo.WishlistVO;
 
 @Repository

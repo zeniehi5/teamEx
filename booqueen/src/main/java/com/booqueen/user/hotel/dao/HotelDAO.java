@@ -121,7 +121,7 @@ public class HotelDAO {
 	}
 	
 	public List<HotelServiceVO> selectHotelService(int serialnumber) throws DataAccessException{
-		List<HotelServiceVO> hotelServiceVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectRandomHotel", serialnumber);
+		List<HotelServiceVO> hotelServiceVO = sqlSession.selectList("com.booqueen.user.hotel.dao.hotelmapper.selectHotelService", serialnumber);
 		return hotelServiceVO;
 	}
 	

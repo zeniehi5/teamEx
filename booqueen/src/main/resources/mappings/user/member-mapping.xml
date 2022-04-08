@@ -48,4 +48,8 @@
         <![CDATA[INSERT INTO u_member (userid, name, gender, type) VALUES (#{userid}, #{name}, #{gender}, #{type})]]> 
     </insert>
     
+    <select id="selectBlocked" parameterType="blockUserVO" resultType="blockUserVO">
+    	select * from block_user where userid = #{userid} and serialnumber = #{serialnumber}
+    </select>
+    
 </mapper>	

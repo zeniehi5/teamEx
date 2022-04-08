@@ -23,7 +23,7 @@
 <body>
     <jsp:include page="/WEB-INF/user/member/header.jsp"/>
 
-    <div class="container">
+    <div class="container" style="display:none;">
             <div class="details-corona">
                 <a class="corona-icon"><i class="bi bi-info-circle"></i></a>
                 <p class="sub-title">코로나19(COVID-19) 관련 안내</p>
@@ -42,7 +42,7 @@
                 <div class="left-col-search-frist">
                     <h2>검색</h2>
                     <div class="search-bar">
-                        <form action="${contextPath}/hotelInfo.do" method="get">
+                        <form action="${contextPath}/hotelInfo.do#searchRoomLine" method="get">
                             <div class="location-input">
                                 <label>여행자/숙소 이름</label>
                                 <input type="text" value="${hotelInfo.hotelname}" disabled>
@@ -205,14 +205,20 @@
                 	</c:forEach>
                 </c:when>
                 <c:otherwise>
-	                <div class="gallery-img-2"><img src="${contextPath}/resources/user/images/house-2.png"></div>
-	                <div class="gallery-img-3"><img src="${contextPath}/resources/user/images/house-3.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-4.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-5.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-2.png"></div>
-	                <div><img src="${contextPath}/resources/user/images/house-3.png"></div>
+                	<c:forEach var="roomImgsRandom" items="${roomImgsRandom}" begin="1" end="8" varStatus="status">
+                		<c:choose>
+                		<c:when test="${status.index == 2}">
+                			<div class="gallery-img-2"><img src="${roomImgsRandom.file_url}"></div>
+                		</c:when>
+                		<c:when test="${status.index == 3}">
+                			<div class="gallery-img-3"><img src="${roomImgsRandom.file_url}"></div>
+                		</c:when>
+                		<c:otherwise>
+                			<div><img src="${roomImgsRandom.file_url}"></div>
+                		</c:otherwise>
+                		</c:choose>
+                	</c:forEach>
+	                
 	            </c:otherwise>    
             	</c:choose>
             </div>
@@ -221,33 +227,71 @@
 
     <div class="details-hotel">
         <div class="description">
-            <p>서울 내 종로구 구역에 자리한 에서 머물러보세요. 숙소는 에어컨, 위성 평면 TV 등이 구비된 객실을 보유하고 있습니다. 이 3성급 호텔의 각 객실에는 도시 전망과 무료 Wi-Fi가 구비되어 있습니다. 숙소는 투숙객을 위한 24시간 프런트 데스크, 수하물 보관소, 환전 서비스 등을 제공합니다.</p>
-            <P>${hotelInfo.hotelname }의 각 객실에는 책상 등이 마련되어 있습니다. 숙소의 일부 객실에는 안전 금고가 구비되어 있으며, 각 객실에는 비데, 목욕 가운 등을 갖춘 전용 욕실이 마련되어 있습니다. 의 모든 객실에는 침대 린넨, 수건 등이 마련되어 있습니다.</P>
-          <!--  <p>근처에는 다음의 인기 관광지가 자리하고 있습니다: 동대문 시장, 창경궁, 광장시장. </p>
-             <p>커플들이 선호하는 지역 — 커플 투숙에 평점 <strong>8.2</strong>점을 획득하였습니다.</p> 
-            <p><span>Glue Hotel에서는 2019년 10월 15일부터 Booking.com 고객을 맞이하고 있습니다.</span></p>
+        	
+            <p><strong>${hotelInfo.city}</strong>에 위치한 <strong>${hotelInfo.hotelname }</strong>에서 머물러보세요. 숙소는 에어컨, 위성 평면 TV 등이 구비된 객실을 보유하고 있습니다. 이 <strong>${hotelInfo.star}</strong>성급 호텔의 각 객실에는 도시 전망과 무료 Wi-Fi가 구비되어 있습니다. 숙소는 투숙객을 위한 24시간 프런트 데스크, 수하물 보관 서비스 등을 제공합니다.</p>
+            <P><strong>${hotelInfo.hotelname }</strong>의 각 객실에는 책상 등이 마련되어 있습니다. 숙소의 일부 객실에는 안전 금고가 구비되어 있으며, 각 객실에는 비데, 목욕 가운 등을 갖춘 전용 욕실이 마련되어 있습니다. <strong>${hotelInfo.hotelname }</strong>의 모든 객실에는 침대 린넨, 수건 등이 마련되어 있습니다.</P>
+            <p>근처에는 다음의 인기 관광지가 자리하고 있습니다: 
+            
+            	<c:forEach var="distanceVO" items="${distanceVO }" begin="1" end="5" varStatus="status">
+                    <c:if test="${status.index == 5 }">
+                    	<strong><span>${distanceVO.name }. </span></strong>
+                    </c:if>
+                    <c:if test="${status.index != 5 }">
+                    	<strong><span>${distanceVO.name }, </span></strong>
+                    </c:if>
+                </c:forEach>
+            
+            </p>
+        <p>평점 <strong>${reviewAvg.scoreAvg }</strong>점을 획득하였습니다.</p> 
+             <!--    <p><span>Glue Hotel에서는 2019년 10월 15일부터 Booking.com 고객을 맞이하고 있습니다.</span></p>
             <p>숙소 설명에 표시된 거리는 © OpenStreetMap을 통해 산출되었습니다.</p>-->
            <div> 
-                <h4 class="description-h4">최고 인기 시설</h4>
+                <h4 class="description-h4">호텔 시설</h4>
                 <div class="description-popular">
-                    <div>
-                        <i class="fas fa-ban"></i><span>금연 객실</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-wifi"></i><span>전구역 Wi-Fi</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-wheelchair"></i><span>장애인 편의시설</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-wifi"></i><span>무료 Wi-Fi</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-clock"></i><span>24시간 프런트 데스크</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-coffee"></i><span>모든 객실에 차/커피 메이커 구비</span>
-                    </div>
+	                    
+	                    <c:if test="${hotelServiceVO.parking}">
+		                    <div>
+		                    	<i class="fas fa-parking"></i><span> 주차</span>
+		                    </div>
+	                    </c:if>
+	                    <c:if test="${hotelServiceVO.wifi}">
+		                    <div>
+		                        <i class="fas fa-wifi"></i><span> 전구역 Wi-Fi</span>
+		                    </div>
+	                    </c:if>
+	                    <c:if test="${!hotelServiceVO.smoking}">
+		                    <div>
+		                        <i class="fas fa-ban"></i><span> 금연 객실</span>
+		                    </div>
+		                </c:if>    
+	                    <c:if test="${hotelServiceVO.restaurant}"> 
+		                    <div>
+		                        <i class="fas fa-utensils"></i><span> 식당</span>
+		                    </div>
+		                </c:if>
+		                <c:if test="${hotelServiceVO.bar}">    
+		                    <div>
+		                        <i class="fas fa-wine-glass"></i><span> 라운지 바</span>
+		                    </div>
+		                </c:if>
+		                <c:if test="${hotelServiceVO.front_desk}">     
+		                    <div>
+		                        <i class="fas fa-clock"></i><span> 24시간 프런트 데스크</span>
+		                    </div>
+		                </c:if>
+		                <c:if test="${hotelServiceVO.swimming_pool}">    
+		                    <div>
+		                        <i class="fas fa-water"></i><span> 수영장</span>
+		                    </div>
+		                </c:if>
+		                <c:if test="${hotelServiceVO.fitnesscenter}">    
+		                    <div>
+		                        <i class="fas fa-bicycle"></i><span> 피트니스 센터</span>
+		                    </div>
+		                </c:if>
+		                    <div>
+		                    	<i class="fas fa-wind"></i><span> 에어컨</span>
+		                    </div>
                 </div>
             </div>
         </div>
@@ -280,7 +324,7 @@
 
     <div id="snackbar"></div>
 
-    <hr class="line">
+    <hr class="line" id="searchRoomLine">
 
 	<c:choose>
 		<c:when test="${available_room == true }">
@@ -476,7 +520,12 @@
 		                    
 		                    <c:choose>
 		                    <c:when test="${isLogOn == true  && member != null}">
-		                    	<button id="reservation_btn" form="reservation_form" type="submit">예약하기</button>
+		                    	<c:if test="${!blocked}">
+		                    		<button id="reservation_btn" form="reservation_form" type="submit">예약하기</button>
+		                    	</c:if>
+		                    	<c:if test="${blocked}">
+		                    		<button id="reservation_btn" onclick="blocked_btn('${blockedUser.whyblock}')">예약하기</button>
+		                    	</c:if>
 		                    </c:when>
 		                    <c:otherwise>
 		                    	<button id="reservation_btn" onclick="disabled_btn()">예약하기</button>
@@ -634,12 +683,15 @@
 		            <div>
 		                <ul class="reservation-date">
 		                    <c:forEach var="availableRooms" items="${availableRooms}">
+		                    <c:set var="open_date" value="${availableRooms.open_date}"/>
+		                    <c:set var="close_date" value="${availableRooms.close_date}"/>
+		                    
 		                    <li>
-		                        <a>
+		                        <a href="${contextPath}/hotelInfo.do?start_date=${fn:substring(open_date, 0, 4)}${fn:substring(open_date, 5, 7)}${fn:substring(open_date, 8, 10)}&end_date=${fn:substring(close_date, 0, 4)}${fn:substring(close_date, 5, 7)}${fn:substring(close_date, 8, 10)}&serialNumber=${hotelInfo.serialnumber}#searchRoomLine">
 		                        <div class="reservation-flex">
 		                            <div>${availableRooms.open_date} ~ ${availableRooms.close_date}</div>
 		                            <div>1박</div>
-		                            <div><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${availableRooms.standard_price}" />~</div>
+		                            <div style="font-weight: 600;"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${availableRooms.standard_price}" />~</div>
 		                        </div>
 		                        </a>
 		                    </li>
@@ -1022,8 +1074,7 @@
 				</p>
 				<div>
 				<p>
-					숙소 유형에 따라 취소 및 선결제 정책이 달라집니다.</p> <p><a href="#availability_target"
-						id="rm_cond_link_enter_dates">숙박 날짜를 입력</a> 한 다음 원하는 객실 조건을
+					숙소 유형에 따라 취소 및 선결제 정책이 달라집니다.</p> <p><a style="color: blue;text-decoration: underline;" onclick="window.scrollTo(0, 0)">숙박 날짜를 입력</a> 한 다음 원하는 객실 조건을
 					확인하십시오.
 				</p>
 				</div>
@@ -1092,85 +1143,7 @@
 		</div>
 	</div>
 
-    <div class="footer-top1">
-        <p><button>내 숙소 등록</button></p>
-    </div>
-
-    <div class="footer-top2">
-        <div>
-            <ul>
-                <li>
-                    <a>스마트폰 버전</a>
-                </li>
-                <li>
-                    <a>내 예약 관리</a>
-                </li>
-                <li>
-                    <a>고객 서비스팀 문의</a>
-                </li>
-                <li>
-                    <a>제휴 협력사 등록</a>
-                </li>
-                <li>
-                    <a>Boouen.com 비즈니스 계정</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div>
-            <div class="footer-inner-box">
-               <div class="ul-wrapper-box">
-                    <ul>
-                       <li><a>지역</a></li>
-                       <li><a>도시</a></li>
-                       <li><a>공항</a></li>
-                       <li><a>호텔</a></li>
-                       <li><a>관광 명소</a></li>
-                   </ul>
-               </div>
-               <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-                <div class="ul-wrapper-box">
-                    <ul>
-                        <li><a>지역</a></li>
-                        <li><a>도시</a></li>
-                        <li><a>공항</a></li>
-                        <li><a>호텔</a></li>
-                        <li><a>관광 명소</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">&nbsp;</div>
+    <jsp:include page="/WEB-INF/user/member/footer.jsp"/>
 
     <div id="overlay">
         <i class="bi bi-x-lg" onclick="off()"></i>
@@ -1873,6 +1846,9 @@
 	<script>
 	function disabled_btn(){
 		alert('로그인 후 예약을 진행해주세요!');
+	}
+	function blocked_btn(reason){
+		alert('죄송합니다.\n\n고객님은 다음과 같은 사유로 해당 호텔을 예약하실 수 없습니다.\n\n사유: ' + reason);
 	}
 	
 	$(document).ready(function () {
