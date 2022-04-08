@@ -368,9 +368,6 @@ public class CalendarController {
 		room.setSerialnumber(hotel.getSerialnumber());
 		RoomVO result = roomService.getRoomAvailableByRoomType(room);
 		System.out.println(result.toString());
-//		if(result != null) {
-//			model.addAttribute("result", result);
-//		}
 		Gson gson = new Gson();
 		String roomVo = gson.toJson(result);
 		return roomVo;

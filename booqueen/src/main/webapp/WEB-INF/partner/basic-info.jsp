@@ -138,7 +138,7 @@
             </div>
             <div class="star">
                성급 <br> <select class="star-1" id="star" name="star">
-                  <option>해당없음</option>
+                  <option value="0">해당없음</option>
                   <option value="1">1 ★</option>
                   <option value="2">2 ★★</option>
                   <option value="3">3 ★★★</option>

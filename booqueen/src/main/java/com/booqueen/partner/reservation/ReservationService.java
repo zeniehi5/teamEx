@@ -2,6 +2,8 @@ package com.booqueen.partner.reservation;
 
 import java.util.List;
 
+import com.booqueen.partner.finance.InvoiceVO;
+
 public interface ReservationService {
 
 	List<ReservationVO> selectReservationPagingByHotelSerial(int serialnumber, PagingVO paging);
@@ -29,5 +31,7 @@ public interface ReservationService {
 	int reportUser(ReportUserVO reportUser);
 
 	ReportUserVO selectReportedUser(ReportUserVO search);
+
+	List<InvoiceVO> selectInvoiceListByMonth(InvoiceVO invoice);
 
 }

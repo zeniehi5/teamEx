@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.partner.finance.InvoiceVO;
 import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.reservation.ReservationDetailVO;
 import com.booqueen.partner.reservation.ReservationService;
@@ -81,6 +82,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public ReportUserVO selectReportedUser(ReportUserVO search) {
 		return reservationDAO.selectReportedUser(search);
+	}
+
+	@Override
+	public List<InvoiceVO> selectInvoiceListByMonth(InvoiceVO invoice) {
+		return reservationDAO.selectInvoiceListByMonth(invoice);
 	}
 
 }
