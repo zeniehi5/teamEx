@@ -33,7 +33,9 @@
 					<div class="container-label"><h2>아이디</h2></div>
 					<div class="container-element">
 						<div class="element">
-							<input type="text" placeholder="booqueen@bq.com" name="userid" id="userid" onkeyup="useridCheck(this)">
+							<input type="text" placeholder="booqueen@booqueen.com" name="userid" id="userid" onkeyup="useridCheck(this)">
+							<input type="hidden" name="checkUserid" id="checkUserid"/>
+							<!-- <input type="hidden" name="duplicateUserid" id="duplicateUserid"/> -->
 							<div id="useridCheck"></div>
 						</div>
 					</div>
@@ -47,6 +49,7 @@
 					<div class="container-element">
 						<div class="element">
 							<input type="password" id="password" name="passwd" onkeyup="passwdCheck(this)">
+							<input type="hidden" name="checkPassword" id="checkPassword"/>
 							<div id="passwdCheck"></div>
 						</div>
 					</div>
@@ -131,7 +134,8 @@
 <script>
 function useridCheck() {
 	var userid = $('#userid').val();
-	var sendData = {"userid" : userid}
+	var sendData = {"userid" : userid};
+	
 	$.ajax({
 		method : 'POST',
 		url : 'useridCheck.do',
@@ -141,17 +145,20 @@ function useridCheck() {
 				$('#userid').css('border', '1px solid #e21111')
 				$('#useridCheck').css('color', 'red')
 				$('#useridCheck').html("이미 존재하는 이메일 계정입니다.")
-				flag = false;
+				flag = 1;
+				$('#checkUserid').val(flag);
 			} else if (resp == 'err') {
 				$('#userid').css('border', '1px solid #e21111')
 				$('#useridCheck').css('color', 'red')
 				$('#useridCheck').html("이메일 형식이 잘못되었습니다.")
-				flag = false;
+				flag = 0;
+				$('#checkUserid').val(flag);
 			} else {
 				$('#userid').css('border', '1px solid #545454')
 				$('#useridCheck').css('color', '#0071c2')
 				$('#useridCheck').html("사용 가능한 이메일 주소입니다.")
-				flag = true;
+				flag = 2;
+				$('#checkUserid').val(flag);
 			}
 		}
 	})
@@ -164,11 +171,13 @@ function passwdCheck() {
 		$('#passwdCheck').css('color', 'red')
 		$('#passwdCheck').html("비밀번호는 영문/숫자/특수문자(!@#$%^&*)를 포함하여 8~16자로 입력해야 합니다.")
 		flag = false;
+		$('#checkPassword').val(flag);
 	} else {
 		$('#passwd').css('border', '1px solid #545454')
 		$('#passwdCheck').css('color', '#0071c2')
 		$('#passwdCheck').html("사용 가능합니다.")
 		flag = true;
+		$('#checkPassword').val(flag);
 	}
 }
 

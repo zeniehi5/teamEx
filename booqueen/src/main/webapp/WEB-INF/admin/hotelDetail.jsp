@@ -314,13 +314,13 @@
                                                         <span><a href="roomDetail.mdo"><strong>준비중입니다</strong></a></span>
                                                     </td>
                                                     <td><strong>&#8361;</strong></td>
-                                                    <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
+                                                    <td>조식 포함<br>무료취소</td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>    
-                                        <br>
+									<br>
                                 </form>
                             </div>
                         </div>
@@ -356,10 +356,10 @@
                                             <c:forEach var="roomList" items="${roomList}">
                                                 <tr>
                                                     <td>
-                                                        <span><a href="roomDetail.mdo?room_id=${roomList.room_id}">${roomList.type}</a></span>
+                                                        <span>${roomList.type}</span>
                                                     </td>
                                                     <td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${roomList.price}"/></td>
-                                                    <td>조식 포함<br>무료취소<br>선결제 필요없음</td>
+                                                    <td>조식 포함<br>무료취소</td>
                                                     <td></td>
                                                 </tr>
                                             </c:forEach>

@@ -1,10 +1,13 @@
 package com.booqueen.user.member;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.admin.faq.FaqVO;
 import com.booqueen.user.member.vo.MemberProfileVO;
 import com.booqueen.user.member.vo.ReasonVO;
 
@@ -52,6 +55,11 @@ public class MemberDAO {
 	
 	public int insertReason(ReasonVO vo) throws DataAccessException{
 		return sqlSession.insert("com.booqueen.user.member.dao.reasonmapper.insertReason", vo);
+	}
+	
+	public List<FaqVO> getFaqList() {
+		List<FaqVO> faqList = sqlSession.selectList("faqDAO.getFaqList");
+		return faqList; 
 	}
 }
  

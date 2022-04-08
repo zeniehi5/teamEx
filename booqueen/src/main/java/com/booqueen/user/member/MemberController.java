@@ -23,10 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.booqueen.admin.faq.FaqVO;
+import com.booqueen.admin.faq.impl.FaqServiceImpl;
 import com.booqueen.user.hotel.service.HotelService;
 import com.booqueen.user.hotel.vo.BestHotelVO;
 import com.booqueen.user.hotel.vo.CityCountVO;
-import com.booqueen.user.hotel.vo.HotelVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
 import com.booqueen.user.member.service.MemberProfileService;
 import com.booqueen.user.member.vo.MemberProfileVO;
@@ -150,7 +151,11 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/questions.do")
-	public String questions() {
+	public String questions(Model model) {
+		
+		List<FaqVO> faqList = memberService.getFaqList();
+		model.addAttribute("faqList", faqList);
+		
 		return "customer";
 	}
 	
@@ -191,20 +196,35 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value = "/member/register.do", method = RequestMethod.POST)
-	public String test(MemberVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String test(MemberVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response, @RequestParam("checkUserid") String checkUserid, @RequestParam("checkPassword") String checkPassword) throws Exception {
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		int result = 0;
 		
+		// userid
 		if (vo.getUserid() == null || vo.getUserid().isEmpty()) {
 			out.println("<script>alert('아이디를 입력해 주세요');");
 			out.println("history.back();</script>");
-		} else if (vo.getPasswd() == null || vo.getPasswd().isEmpty()) {
+		} else if (checkUserid == "0" || checkUserid.equals("0")) {
+			out.println("<script>alert('이메일 형식이 잘못되었습니다. 이메일을 확인해 주세요.');");
+			out.println("history.back();</script>");
+		} else if (checkUserid == "1" || checkUserid.equals("1")) {
+			out.println("<script>alert('중복된 아이디 입니다. 다른 아이디를 입력해 주세요.');");
+			out.println("history.back();</script>");
+		}
+		
+		// password
+		else if (vo.getPasswd() == null || vo.getPasswd().isEmpty()) {
 			out.println("<script>alert('비밀번호를 입력해 주세요');");
 			out.println("history.back();</script>");
-		} else if (vo.getName() == null || vo.getName().isEmpty()) {
+		} else if (checkPassword == "false" || checkPassword.equals("false")) {
+			out.println("<script>alert('비밀번호 형식이 잘못되었습니다. 비밀번호는 영문/숫자/특수문자(!@#$%^&*)를 포함하여 8~16자로 입력해야 합니다.');");
+			out.println("history.back();</script>");
+		}
+		
+		else if (vo.getName() == null || vo.getName().isEmpty()) {
 			out.println("<script>alert('이름을 입력해 주세요');");
 			out.println("history.back();</script>");
 		} else if (vo.getGender() == null || vo.getGender().isEmpty()) {

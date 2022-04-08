@@ -6,6 +6,24 @@
 	</insert>
 	
 	<select id="getBannerList" resultType="banner">
-		SELECT * from city ORDER BY seq_city
+		SELECT * FROM city ORDER BY seq_city
 	</select>
+	
+	<select id="selectBannerBySeq" parameterType="Integer" resultType="banner">
+		SELECT * FROM city WHERE seq_city = #{seq_city}
+	</select>
+	
+	<select id="selectBannerByCity" parameterType="String" resultType="banner">
+		SELECT * FROM city WHERE city = #{city}
+	</select>
+	
+	<update id="updateBanner" parameterType="banner">
+		UPDATE city SET city = #{city}, file_url = #{file_url} WHERE seq_city = ${seq_city}
+	</update>
+	
+	<delete id="deleteBanner" parameterType="Integer">
+		DELETE FROM city WHERE seq_city = ${seq_city}
+	</delete>
+	
+	
 </mapper>

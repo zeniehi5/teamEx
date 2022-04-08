@@ -27,4 +27,20 @@ public class BannerDAO {
 		return bannerList;
 	}
 	
+	public BannerVO selectBannerBySeq(int seq) {
+		return sqlSessionTemplate.selectOne("BannerDAO.selectBannerBySeq", seq);
+	}
+	
+	public BannerVO selectBannerByCity(String city) {
+		return sqlSessionTemplate.selectOne("BannerDAO.selectBannerByCity", city);
+	}
+	
+	public int updateBanner(BannerVO banner) {
+		return sqlSessionTemplate.update("BannerDAO.updateBanner", banner);
+	}
+	
+	public int deleteBanner(int seq) {
+		return sqlSessionTemplate.delete("BannerDAO.deleteBanner", seq);
+	}
+	
 }

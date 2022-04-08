@@ -202,12 +202,12 @@
                     <div class="container-fluid px-4">
         
                         <!-- 여기만 수정해서 사용하세요!! -->
-                        <h2 class="mt-4">파트너 정보</h2>
+                        <!-- <h2 class="mt-4">파트너 정보</h2> -->
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="col three">
-                                    <div style="font-size: 25px; color: #5f0080; font-weight: bold; ">
+                                    <div style="font-size: 20px; font-weight: bold; ">
                                         파트너 정보
                                     </div>							
                                 </div>

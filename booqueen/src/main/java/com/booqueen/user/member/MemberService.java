@@ -1,8 +1,11 @@
 package com.booqueen.user.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booqueen.admin.faq.FaqVO;
 import com.booqueen.user.member.vo.MemberProfileVO;
 import com.booqueen.user.member.vo.ReasonVO;
 
@@ -50,5 +53,9 @@ public class MemberService {
 	
 	public int insertReason(ReasonVO vo) {
 		return memberDAO.insertReason(vo);
+	}
+	
+	public List<FaqVO> getFaqList() {
+		return memberDAO.getFaqList();
 	}
 }
