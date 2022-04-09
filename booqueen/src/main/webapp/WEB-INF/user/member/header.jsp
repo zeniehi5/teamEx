@@ -41,8 +41,31 @@
 							<i class="bi bi-chat"></i>
 						</div>
 
-						<div class="bui-group__item">
+						<div class="bui-group__item" style="position: relative;" id="alarm_btn">
 							<i class="bi bi-bell"></i>
+							<div class="bell-alarm">1</div>
+							<div class="header-dropdown-content" id="alarm_dropdown" style="top: 40px; left: 0; min-width: 300px;">
+<!-- 							<div class="bui-popover__arrow"></div> -->
+								<ul class="header-dropdown-menu-items">
+									<li class="header-dropdown-menu-item" style="display: flex; gap: 10px; padding: 10px;">
+										<div class="bui-inline-container__start">
+											<div class="bui-avatar bui-avatar--large">
+												<span role="presentation" class="bui-icon bui-avatar__icon bui-icon--medium" style="display: inline-block; fill: currentColor;">
+													<svg class="bk-icon -streamline-bell_normal" height="24" width="24" viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"><path d="M9.28 21.961a2.837 2.837 0 0 0 5.445 0 .75.75 0 1 0-1.44-.422 1.337 1.337 0 0 1-2.565 0 .75.75 0 1 0-1.44.422zM12.75 3V.75a.75.75 0 0 0-1.5 0V3a.75.75 0 0 0 1.5 0zm-.75.75a6.75 6.75 0 0 1 6.75 6.75c0 3.154.29 5.436.785 6.994.323 1.02.684 1.59.995 1.84L21 18H3l.59 1.212c.248-.315.572-.958.88-2 .49-1.66.78-3.872.78-6.712A6.75 6.75 0 0 1 12 3.75zm0-1.5a8.25 8.25 0 0 0-8.25 8.25c0 2.702-.272 4.772-.72 6.288-.254.864-.493 1.336-.62 1.5A.75.75 0 0 0 3 19.5h18c.708 0 1.022-.892.47-1.335.019.016-.008-.015-.07-.113-.14-.223-.29-.553-.435-1.012-.443-1.396-.715-3.529-.715-6.54A8.25 8.25 0 0 0 12 2.25z"></path></svg>
+												</span>
+											</div>
+										</div>
+										<div style="justify-content: center; display: flex;">
+											<div>
+											<a href="#" style="text-decoration: none; color: black;">	
+												<span class="header-dropdown-menu-text">쉐라톤 인천 호텔 예약이 완료되었습니다.</span>
+											</a>
+											</div>
+										</div>	
+									</li>
+									
+								</ul>
+							</div>
 						</div>
 
 						<div class="bui-group__item">
@@ -51,7 +74,7 @@
 							</a>
 						</div>
 
-						<div id="dropdown" class="bui-group__item" onclick="dropDown()">
+						<div id="dropdown" class="bui-group__item">
 							<div class="bui-dropdown bui-dropdown--end">
 								<a type="button"> <span class="bui-button__text">
 										<div class="bui-avatar-block">
@@ -288,6 +311,8 @@
 		</c:otherwise>
 	</c:choose>
 	
+	
+	
 	<script>
     $(function(){
     	var reservation_number = 0;
@@ -316,9 +341,16 @@
     	$("#chat_send_button").click(function(){
     		insertChat(reservation_number, serialnumber);
     	});
+    	
+    	$('#alarm_btn').click(function(){
+    		$('#alarm_dropdown').toggle();
+    	});
+    	
+    	$('#dropdown').click(function(){
+    		$('#myAccount').toggle();
+    	})
+    	
     });
-    
-    
     
     function reqList(reservation_number, serialnumber) {    
     	
@@ -462,17 +494,7 @@
     }
   
     </script>
-	
-	<script>
-	function dropDown() {
-		  var x = document.getElementById("myAccount");
-		  if (x.style.display === "none") {
-		    x.style.display = "block";
-		  } else {
-		    x.style.display = "none";
-		  }
-		}
-	</script>		
+		
 	<script>
 	// 채팅 열기
     function openChatting() {

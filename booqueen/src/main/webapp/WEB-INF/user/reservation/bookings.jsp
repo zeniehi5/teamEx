@@ -22,7 +22,7 @@
 		<div class="container-inner">
 			<div class="timeline-header"><h1>예약</h1></div>
 			<div class="find-booking">
-				<button class="find-booking-btn">예약 내역을 찾으실 수 없나요?</button>
+<!-- 				<button class="find-booking-btn">예약 내역을 찾으실 수 없나요?</button> -->
 			</div>
 			
 			<c:forEach var="reservationList" items="${reservationList}" varStatus="status">
