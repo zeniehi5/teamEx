@@ -170,4 +170,16 @@
 			use_status >= 2
 		AND (SELECT EXTRACT(month from checkout_date)as billingmonth) = #{searchOption}
 	</select>
+	<select id="selectInvoiceListByHotelSerial" parameterType="int" resultType="invoice">
+		SELECT
+			 reservation_number, room_id, email, checkin_date, checkout_date, use_status,
+			 price * 0.85 as billing,
+			 firstname, lastname
+		FROM
+			reservation
+		WHERE 
+			serialnumber = #{serialnumber}
+		AND
+			use_status >= 2
+	</select>
 </mapper>

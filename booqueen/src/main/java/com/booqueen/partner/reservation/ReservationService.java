@@ -34,4 +34,6 @@ public interface ReservationService {
 
 	List<InvoiceVO> selectInvoiceListByMonth(InvoiceVO invoice);
 
+	List<InvoiceVO> selectInvoiceListByHotelSerial(int serialnumber);
+
 }

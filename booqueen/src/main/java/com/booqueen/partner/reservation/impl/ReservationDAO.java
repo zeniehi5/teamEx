@@ -83,5 +83,9 @@ public class ReservationDAO {
 	public List<InvoiceVO> selectInvoiceListByMonth(InvoiceVO invoice) {
 		return sqlSessionTemplate.selectList("reservationDAO.selectInvoiceListByMonth", invoice);
 	}
+
+	public List<InvoiceVO> selectInvoiceListByHotelSerial(int serialnumber) {
+		return sqlSessionTemplate.selectList("reservationDAO.selectInvoiceListByHotelSerial", serialnumber);
+	}
 	
 }

@@ -265,6 +265,8 @@ public class HotelController {
 				
 				//체크인 중인 호텔 목록
 				List<ReservationVO> checkInList = reservationService.selectCheckInListByHotelSerial(hotel.getSerialnumber());
+				HotelImageVO image = hotelService.selectHotelImgByHotelSerial(hotel.getSerialnumber());
+				session.setAttribute("image", image.getFile_url());
 				
 				System.out.println("list: "+ reservation.toString());
 				

@@ -89,4 +89,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.selectInvoiceListByMonth(invoice);
 	}
 
+	@Override
+	public List<InvoiceVO> selectInvoiceListByHotelSerial(int serialnumber) {
+		return reservationDAO.selectInvoiceListByHotelSerial(serialnumber);
+	}
+
 }

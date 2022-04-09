@@ -168,7 +168,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/calendarDetail.pdo")
-	public String getMonthlyCalendar1(@RequestParam("room_id")int roomId,@RequestParam("year") String year, @RequestParam("month") int month, @RequestParam("day") String day, Model model, HttpSession session,DateVO vo) throws ParseException {
+	public String getMonthlyCalendarDetail(@RequestParam("room_id")int roomId,@RequestParam("year") String year, @RequestParam("month") int month, @RequestParam("day") String day, Model model, HttpSession session,DateVO vo) throws ParseException {
 		
 		HotelVO hotel = hotelService.getHotelByMemberEmail((String) session.getAttribute("email"));
 		if(hotel != null) {

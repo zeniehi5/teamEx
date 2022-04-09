@@ -57,4 +57,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>-->
 	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+       <property name="order" value="0" />
+   </bean>
+   
+   <!-- pdf라는 뷰 이름이 왔을 때 출력할 뷰를 설정 -->
+   <bean id="pdf" class="com.booqueen.partner.common.PDFView"/>
+	
 </beans>

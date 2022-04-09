@@ -23,7 +23,8 @@
 <script type="text/javascript">
 
 	function download() {
-		alert("working!")
+		alert("excel 파일을 다운로드합니다.")
+		$("#myForm").submit()
 	}
 	
 	function chargeBill(e){
@@ -177,6 +178,7 @@
 						<span class="button-text">PDF 다운로드</span>
 					</button>
 				</div>
+				<form id="myForm" action="excelConvert.pdo" method="GET"></form>
 				<table class="finance-invoice-table">
 					<thead class="table-head">
 						<tr class="table-row">
