@@ -199,7 +199,11 @@
 				</div>
 			</c:if>
 		</c:forEach>
-		
+		<div class="terms-footer" style="margin-top: 25px; color: #6b6b6b; font-size: 14px;">
+			<div>버전: 1.0</div>
+			<div>날짜: 2022년 4월 06일</div>
+			<div>본 서비스 약관은 정기적(연 1~2회)으로 갱신됩니다.</div>
+		</div>
 	</div>
 </body>
 </html>

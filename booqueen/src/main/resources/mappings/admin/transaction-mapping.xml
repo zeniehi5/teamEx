@@ -13,13 +13,24 @@
 	</select>
 	
 	<select id="selectTransactionDetail" parameterType="Integer" resultType="aReservation">
-		SELECT re.serialnumber, re.hotelname, ro.room_id, ro.type, sum(re.price) AS price, count(re.reservation_number) AS reservation_count
+		<![CDATA[
+		SELECT re.serialnumber, re.hotelname, ro.room_id, ro.type, sum(re.price) AS price, count(re.reservation_number) AS reservation_count, re.use_status
+		FROM reservation AS re
+		LEFT JOIN room AS ro
+		ON re.room_id = ro.room_id
+		WHERE re.serialnumber = ${serialnumber} and re.use_status >= 3
+		GROUP BY re.serialnumber, re.hotelname, ro.room_id, ro.type, re.use_status
+		ORDER BY ro.room_id
+		]]>
+	</select>
+	
+	<select id="selectTransactionDetailInfo" parameterType="Integer" resultType="aReservation">
+		SELECT re.serialnumber, re.room_id, ro.type, re.price, re.use_status
 		FROM reservation AS re
 		LEFT JOIN room AS ro
 		ON re.room_id = ro.room_id
 		WHERE re.serialnumber = ${serialnumber}
-		GROUP BY re.serialnumber, re.hotelname, ro.room_id, ro.type
-		ORDER BY ro.room_id
+		ORDER BY checkout_date DESC
 	</select>
 
 </mapper>

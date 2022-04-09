@@ -58,9 +58,11 @@ public class ReservationController {
 				total_reservation_day += 1;
 			}
 			// 금일 예약취소
-			cancel_today = dateFormat_ymd.format(reservation.get(i).getCancel_date());
-			if (cancel_today.equals(today) && reservation.get(i).getCancel_reason() != null) {
-				total_reservation_cancel += 1;
+			if (reservation.get(i).getCancel_date() != null) {
+				cancel_today = dateFormat_ymd.format(reservation.get(i).getCancel_date());
+				if (cancel_today.equals(today) && reservation.get(i).getCancel_reason() != null) {
+					total_reservation_cancel += 1;
+				}
 			}
 			// 금월 이용완료
 			complete = dateFormat_ym.format(reservation.get(i).getCheckout_date());

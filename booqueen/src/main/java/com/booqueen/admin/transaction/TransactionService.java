@@ -9,5 +9,6 @@ public interface TransactionService {
 	public List<ReservationVO> selectTransactionHistory();
 	public List<ReservationVO> selectTransactionGraph();
 	public List<ReservationVO> selectTransactionDetail(int serialnumber);
+	public List<ReservationVO> selectTransactionDetailInfo(int serialnumber);
 	
 }

@@ -28,5 +28,10 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<ReservationVO> selectTransactionDetail(int serialnumber) {
 		return transactionDAO.selectTransactionDetail(serialnumber);
 	}
+	
+	@Override
+	public List<ReservationVO> selectTransactionDetailInfo(int serialnumber) {
+		return transactionDAO.selectTransactionDetailInfo(serialnumber);
+	}
 
 }
