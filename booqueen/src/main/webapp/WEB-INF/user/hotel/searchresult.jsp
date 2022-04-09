@@ -572,13 +572,13 @@
 										<div class="room">
 											<div class="room-left">
 												<div class="room-info">
-													<div class="room-name">프리미어 트윈룸</div>
-													<div class="bed-count">더블침대 2개</div>
+													<div class="room-name">${hotel.address1 }</div>
+<%-- 													<div class="bed-count">${hotel.address2}</div> --%>
 													<div class="cancel">
 														<div class="cancel1">무료취소 • 선결제 필요 없음</div>
 														<div class="cancel2">나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div>
 													</div>
-<!-- 													<div class="left">우리 사이트에 이 요금으로 남은 객실 단 3개</div> -->
+													<div class="left">우리 사이트에 이 요금으로 남은 객실 단 ${hotel.available }개</div>
 												</div>
 											</div>
 											<div class="room-right">
@@ -838,7 +838,7 @@
 			<div class="map-list">
 				<!-- <div class="sorter-hotellist"> -->
 				<div id="map_result"></div>
-				<div class="map-sorter">
+				<div class="map-sorter" style="display: none;">
 					<div class="map-dropdown">
 						<button class="dropdown-btn" id="dropdownBtn">
 							<span>저희가 추천하는 숙소</span>
@@ -887,113 +887,43 @@
 						
 						<div class="map-hotel-container">
 							<div class="map-hotel-title">
-								<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}" target="_blank"><span class="map-hotel-title-link">${hotel.hotelname }</span></a>
+								<a href="${contextPath}/hotelInfo.do?serialNumber=${hotel.serialnumber}&start_date=${hotelAvailableVO.start_date}&end_date=${hotelAvailableVO.end_date}" target="_blank"><span class="map-hotel-title-link">${hotel.hotelname }</span></a>
 								<div class="map-stars">
 									<span>
-										<c:if test="${hotel.star+0 == '5'}">
+									<c:set var="star" value="${hotel.star*1}"/>
+										<c:forEach begin="1" end="${star }">
 										<span>
 											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
 												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 											</svg>
 										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										</c:if>	
-										<c:if test="${hotel.star+0 == '4'}">
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										</c:if>
-										<c:if test="${hotel.star+0 == '3'}">
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										</c:if>
-										<c:if test="${hotel.star+0 == '2'}">
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										</c:if>
-										<c:if test="${hotel.star+0 == '1'}">
-										<span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#febb02" class="bi bi-star-fill" viewBox="0 0 16 16">
-												<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-											</svg>
-										</span>
-										</c:if>
+										</c:forEach>
 									</span>		
 								</div>
 							</div>
 							<div class="map-hotel-review">
 								<div class="map-hotel-review-score">${hotel.reviewAvgVO.scoreAvg }</div>
 								<div class="map-hotel-review-content">
-									<div class="map-hotel-review-title">매우 좋음</div>
+								<c:choose>
+					                <c:when test="${hotel.reviewAvgVO.scoreAvg >= 9}"><div class="map-hotel-review-title">최고</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 8}"><div class="map-hotel-review-title">매우 좋음</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 7}"><div class="map-hotel-review-title">좋음</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg >= 6}"><div class="map-hotel-review-title">만족</div></c:when>
+									<c:when test="${hotel.reviewAvgVO.scoreAvg < 6}"><div class="map-hotel-review-title">보통</div></c:when>
+					           </c:choose>
+									
 									<div class="map-hotel-review-text">${hotel.reviewAvgVO.count }개 이용 후기</div>
 								</div>
 							</div>
 							<div class="map-hotel-content">
 								<div class="map-hotel-content-info">
-									<div class="map-hotel-content-info-name">디럭스 더블룸</div>
-									<div class="map-hotel-content-info-configuration">침대 1개</div>
+									<div class="map-hotel-content-info-name">${hotel.address1}</div>
+<%-- 									<div class="map-hotel-content-info-configuration">${hotel.address2}</div> --%>
 								</div>
 								<div class="map-hotel-content-price">
 									<div class="map-hotel-content-price-option">1박, 성인 2명</div>
 									<div class="map-hotel-content-price-price">
-										<span class="map-hotel-content-price-fixed">\88,000</span>
+										<span class="map-hotel-content-price-fixed"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price *3.5 }" /></span>
 										<span class="map-hotel-content-price-sale"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${hotel.roomVO.price }" /></span>
 									</div>
 									<div class="map-hotel-content-price-fees">
@@ -1001,7 +931,7 @@
 									</div>
 								</div>
 								<div class="map-hotel-content-message">무료 취소</div>
-								<div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단 3개</div>
+								<div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단 ${hotel.available }개</div>
 							</div>
 
 						</div>
@@ -1411,14 +1341,15 @@ function getAvailableHotel() {
 					text += "개 이용 후기 </div></div><div class='grade'>";
 					text +=	hotel.reviewAvgVO.scoreAvg;
 					text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
-					text += "프리미어 트윈룸";
+					text += hotel.address1;
 					text += "</div><div class='bed-count'>";
-					text += "더블침대 2개";
+// 					text += "더블침대 2개";
 					text += "</div><div class='cancel'><div class='cancel1'>";
 					text += "무료취소 • 선결제 필요 없음";
 					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
-// 					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
-					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
+					text += "우리 사이트에 이 요금으로 남은 객실 단 "
+					text += hotel.available;
+					text += "개</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
 					text += "1박, 성인 2명";
 					text += "</div><div class='option-price'><span class='fixed-price'>\\";
 					var fixed_price = hotel.roomVO.price*3.5;
@@ -1472,14 +1403,15 @@ function getAvailableHotel() {
 					text += "개 이용 후기 </div></div><div class='grade'>";
 					text +=	hotel.reviewAvgVO.scoreAvg;
 					text += "</div></div></div><div class='hotel-bottom'><div class='room'><div class='room-left'><div class='room-info'><div class='room-name'>";
-					text += "프리미어 트윈룸";
+					text += hotel.address1;
 					text += "</div><div class='bed-count'>";
-					text += "더블침대 2개";
+// 					text += "더블침대 2개";
 					text += "</div><div class='cancel'><div class='cancel1'>";
 					text += "무료취소 • 선결제 필요 없음";
 					text += "</div><div class='cancel2'>나중에 취소 가능한 최저가를 지금 잡아놓으세요.</div></div><div class='left'>";
-// 					text += "우리 사이트에 이 요금으로 남은 객실 단 3개";
-					text += "</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
+					text += "우리 사이트에 이 요금으로 남은 객실 단 "
+					text += hotel.available;
+					text += "개</div></div></div><div class='room-right'><div class='price'><div class='option-info'>";
 					text += "1박, 성인 2명";
 					text += "</div><div class='option-price'><span class='fixed-price'>\\";
 					var fixed_price = hotel.roomVO.price*3.5;
@@ -1877,17 +1809,22 @@ function getUnavailableHotel() {
                 		text += scoreText(hotel.reviewAvgVO.scoreAvg);
                 		text += "</div><div class='map-hotel-review-text'>";
                 		text += hotel.reviewAvgVO.count;
-                		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>디럭스 더블룸</div><div class='map-hotel-content-info-configuration'>침대 1개</div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>"
+                		text += "개 이용 후기</div></div></div><div class='map-hotel-content'><div class='map-hotel-content-info'><div class='map-hotel-content-info-name'>";
+                		text += hotel.address1;
+                		text += "</div><div class='map-hotel-content-info-configuration'></div></div><div class='map-hotel-content-price'><div class='map-hotel-content-price-option'>1박, 성인 2명</div><div class='map-hotel-content-price-price'><span class='map-hotel-content-price-fixed'>"
                			var fixed_price = hotel.roomVO.price*3.5;
     					text += fixed_price.toLocaleString('ko-KR');
                 		text += "</span><span class='map-hotel-content-price-sale'>\\";
                 		text += hotel.roomVO.price.toLocaleString('ko-KR');
-                		text += "</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>우리 사이트에 이 요금으로 남은 옵션 단 3개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
+                		text += "</span></div><div class='map-hotel-content-price-fees'>세금 및 기타 요금 포함</div></div><div class='map-hotel-content-message'>무료 취소</div><div class='map-hotel-urgency-scarcity'>";
+                		text += "우리 사이트에 이 요금으로 남은 객실 단 "
+       					text += hotel.available;
+                		text += "개</div></div></div><div class='map-hotel-card-arrow'><i class='bi bi-chevron-right'></i></div></div></div>";
             		 	
                 		$('#map_hotel_list').append(text);
                 		
                 		var contents = {
-                			content: '<div class="map-hotel-card" style="width: 300px; display: flex; margin: 0; flex-direction: row-reverse; border: 1px solid #000;"> <div class="map-hotel-image" style="background-image: url(' + hotel.hotelImgVO.file_url + ')"></div> <div class="map-hotel-container" style="padding: 10px;"> <div class="map-hotel-title"><span class="map-hotel-title-link">' + hotel.hotelname + '</span><div class="map-stars">' + isNumber(hotel.star) + '</div></div><div class="map-hotel-review"><div class="map-hotel-review-score">' + hotel.reviewAvgVO.scoreAvg + '</div><div class="map-hotel-review-content"><div class="map-hotel-review-title">' + scoreText(hotel.reviewAvgVO.scoreAvg) + '</div><div class="map-hotel-review-text">' + hotel.reviewAvgVO.count + '개 이용 후기' + '</div></div></div><div class="map-hotel-content"><div class="map-hotel-content-price"><div class="map-hotel-content-price-option">' + 1 + '박,' + 2 + '명</div><div class="map-hotel-content-price-price"><span class="map-hotel-content-price-fixed">\\' + fixed_price.toLocaleString('ko-KR') + '</span><span class="map-hotel-content-price-sale">\\' + hotel.roomVO.price.toLocaleString('ko-KR') + '</span></div></div><div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단' + 3 + '개</div></div></div></div>',
+                			content: '<div class="map-hotel-card" style="width: 300px; display: flex; margin: 0; flex-direction: row-reverse; border: 1px solid #000;"> <div class="map-hotel-image" style="background-image: url(' + hotel.hotelImgVO.file_url + ')"></div> <div class="map-hotel-container" style="padding: 10px;"> <div class="map-hotel-title"><span class="map-hotel-title-link">' + hotel.hotelname + '</span><div class="map-stars">' + isNumber(hotel.star) + '</div></div><div class="map-hotel-review"><div class="map-hotel-review-score">' + hotel.reviewAvgVO.scoreAvg + '</div><div class="map-hotel-review-content"><div class="map-hotel-review-title">' + scoreText(hotel.reviewAvgVO.scoreAvg) + '</div><div class="map-hotel-review-text">' + hotel.reviewAvgVO.count + '개 이용 후기' + '</div></div></div><div class="map-hotel-content"><div class="map-hotel-content-price"><div class="map-hotel-content-price-option">' + 1 + '박,' + 2 + '명</div><div class="map-hotel-content-price-price"><span class="map-hotel-content-price-fixed">\\' + fixed_price.toLocaleString('ko-KR') + '</span><span class="map-hotel-content-price-sale">\\' + hotel.roomVO.price.toLocaleString('ko-KR') + '</span></div></div><div class="map-hotel-urgency-scarcity">우리 사이트에 이 요금으로 남은 옵션 단 ' + hotel.available + '개</div></div></div></div>',
                				latlng: new kakao.maps.LatLng(hotel.latitude, hotel.longitude)
                			};
                 		

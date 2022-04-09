@@ -191,7 +191,14 @@
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.5.5</version>
 		</dependency>
-    
+		
+		<!-- https://mvnrepository.com/artifact/com.itextpdf/html2pdf -->
+		<dependency>
+    		<groupId>com.itextpdf</groupId>
+    		<artifactId>html2pdf</artifactId>
+    		<version>4.0.1</version>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

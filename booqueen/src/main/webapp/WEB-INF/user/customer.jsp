@@ -113,30 +113,37 @@
         </div>
     </div>
 
-    <hr class="customer-hr">
+ <!--    <hr class="customer-hr">
 
-    <div class="footer">
+    <div class="footer"> 
         <div class="footer-inner">
             <div class="inner-box">
                 <div class="inner-inner">
                     <ul>
                         <li>
-                            <a class="inner-a">Bookqueen.com 소개</a>
+                            <a href="${contextPath}/member/loginForm.do">로그인</a>
                         </li>
                         <li>
-                            <a class="inner-a">고객 서비스팀에 문의</a>
+                            <c:choose>
+							<c:when test="${isLogOn == true  && member!= null}">
+			            		<a href="${contextPath}/bookingPage.do">내 예약 관리</a>
+			            	</c:when>
+			            	<c:otherwise>
+		                    	<a onclick="login_check_btn()">내 예약 관리</a>
+			            	</c:otherwise>
+			            	</c:choose>
                         </li>
                         <li>
-                            <a class="inner-a">이용 약관</a>
+                            <a href="${contextPath}/terms.do">이용약관</a>
                         </li>
                         <li>
-                            <a class="inner-a">개인정보 보호정책 & 쿠키 정책</a>
+                            <a href="${contextPath}/login.jsp">Booqueen.com 비즈니스 계정</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <script>
         $(document).ready(function(){
@@ -172,5 +179,6 @@
         	
         });
     </script>
+
 </body>
 </html>

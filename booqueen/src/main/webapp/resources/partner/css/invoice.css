@@ -379,11 +379,11 @@ a {
 	height: 24px;
 }
 .finance-invoice-download {
-	pointer-events: none;
+/* 	pointer-events: none; */
 	background-color: #fff;
 	color: #07c;
 	border-color: #07c;
-	cursor: not-allowed;
+ 	cursor: pointer;
 	white-space: nowrap;
 	display: inline-block;
 	margin-bottom: 16px;

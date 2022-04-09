@@ -1,4 +1,4 @@
-package com.booqueen.user.member;
+package com.booqueen.user.member.vo;
 
 import java.sql.Date;
 

@@ -158,7 +158,13 @@
 				</div>
 			</div>
 			<div class="delete-button">
-				<button class="delete-btn" id="deleteBtn">회원 탈퇴</button>
+				<c:if test="${hasReservation}">
+					<button class="delete-btn" onclick="disabled_Btn()">회원 탈퇴</button>
+				</c:if>
+				<c:if test="${!hasReservation}">
+					<button class="delete-btn" id="deleteBtn">회원 탈퇴</button>
+				</c:if>
+				
 			</div>
 		</div>
 	</div>
@@ -446,6 +452,9 @@ function passwdCheck() {
 	}
 }
 
+function disabled_Btn(){
+	alert("다가올 예약이 있는 경우 탈퇴가 불가능합니다.");
+}
 	
 </script>
 </body>

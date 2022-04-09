@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.booqueen.partner.finance.InvoiceVO;
 import com.booqueen.partner.reservation.PagingVO;
 import com.booqueen.partner.reservation.ReservationDetailVO;
 import com.booqueen.partner.reservation.ReservationVO;
@@ -77,6 +78,10 @@ public class ReservationDAO {
 
 	public ReportUserVO selectReportedUser(ReportUserVO search) {
 		return sqlSessionTemplate.selectOne("reservationDAO.selectReportedUser", search);
+	}
+
+	public List<InvoiceVO> selectInvoiceListByMonth(InvoiceVO invoice) {
+		return sqlSessionTemplate.selectList("reservationDAO.selectInvoiceListByMonth", invoice);
 	}
 	
 }

@@ -26,8 +26,8 @@ public class MemberDAO {
 		return sqlSessionTemplate.selectOne("MemberDAO.getAdminMember", vo);
 	}
 	
-	public List<com.booqueen.user.member.MemberVO> getUserMember() {
-		 List<com.booqueen.user.member.MemberVO> userList = sqlSessionTemplate.selectList("MemberDAO.selectUser");
+	public List<com.booqueen.user.member.vo.MemberVO> getUserMember() {
+		 List<com.booqueen.user.member.vo.MemberVO> userList = sqlSessionTemplate.selectList("MemberDAO.selectUser");
 		 return userList;
 	}
 	

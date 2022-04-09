@@ -21,6 +21,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
+
+	function download() {
+		alert("working!")
+	}
 	
 	function chargeBill(e){
 		var answer = confirm("선택한 예약의 결제금 청구를 진행하시겠습니까?")
@@ -56,14 +60,15 @@
 		}
 	}
 	
-	$(function(){
-		var option = '';
-		$("#selectMonth").change(function(){
-			option = $("#selectMonth").val();
-		})
+	var option = '';
+	var list = new Array();
+	
+	function search(){
+		option = $("#selectMonth").val();
 		
 		var invoiceVO = {
-			"searchOption": option
+				"serialnumber": '${hotel.serialnumber}',
+				"searchOption": option
 		}
 		
 		$.ajax({
@@ -73,15 +78,67 @@
 			dataType:"json",
 			data:JSON.stringify(invoiceVO),
 			success:function(result){
-				alert("working?")
+				$("#invoice-table").empty()
+				list = result;
+				console.log("result length: " + list.length);
+				for(var i = 0; i < list.length; i++){
+					const in_date = new Date(list[i].checkin_date);
+					const out_date = new Date(list[i].checkout_date);
+					const billing = list[i].billing;
+					
+					var button = "";
+					
+					if(list[i].use_status == 2) {
+						button += "<button type='button' class='button button_secondary button_wide' onclick='chargeBill('";
+						button += list[i].reservation_number;
+						button += "')'><span class='button_text'><span>청구하기</span></span></button>";
+					} else if(list[i].use_status == 3) {
+						button += "<button type='button' class='button button_secondary button_wide' disabled='disabled' onclick='chargeBill('";
+						button += list[i].reservation_number;
+						button += "')'><span class='button_text'><span>정산 대기중</span></span></button>";
+					} else if(list[i].use_status == 4) {
+						button += "<button type='button' class='button button_secondary button_wide' disabled='disabled' onclick='chargeBill('";
+						button += list[i].reservation_number;
+						button += "')'><span class='button_text'><span>정산 완료</span></span></button>";
+					}
+					
+					var table = "<tr class='table-row'><td class='table-cell-head'>";
+						table += list[i].reservation_number;
+						table += "</td><td class='table-cell-head'>";
+						table += list[i].room_id;
+						table += "</td><td class='table-cell-head'>";
+						table += list[i].email;
+						table += "</td><td class='table-cell-head'>";
+						table += in_date.getFullYear()
+						table += "-";
+						table += in_date.getMonth()+1
+						table += "-";
+						table += in_date.getDate()
+						table += "</td><td class='table-cell-head'>";
+						table += out_date.getFullYear()
+						table += "-";
+						table += out_date.getMonth()+1
+						table += "-";
+						table += out_date.getDate()
+						table += "</td><td class='table-cell-head'>";
+						table += new Intl.NumberFormat('ko-KR', {style:'currency', currency: 'KRW'}).format(billing);
+						table += "</td><td class='table-cell-head'>";
+						table += list[i].lastname;
+						table += list[i].firstname;
+						table += "</td><td class='table-cell-head'>";
+						table += button;
+						table += "</td></tr>";
+						$("#invoice-table").append(table);
+				}
+				
 			},
 			error:function(){
 				console.log("response error")
 			}
 		})
 		
-		
-	})
+	}
+			
 </script>
 </head>
 <body>
@@ -101,7 +158,7 @@
 				<div class="finance-invoice-table-header">
 					<div class="finance-invoice-table-header-filter">
 						<span class="table-header-title">월별 검색</span>
-						<select id="selectMonth" class="dropdown dropdown-btn">
+						<select id="selectMonth" class="dropdown dropdown-btn" onchange="search()">
 							<option class="dropdown-content dropdown-item" value="1">1월</option>
 							<option class="dropdown-content dropdown-item" value="2">2월</option>
 							<option class="dropdown-content dropdown-item" value="3">3월</option>
@@ -116,9 +173,9 @@
 							<option class="dropdown-content dropdown-item" value="12">12월</option>
 						</select>
 					</div>
-					<a href="#" class="finance-invoice-download">
+					<button type="button" class="finance-invoice-download" onclick="download()">
 						<span class="button-text">PDF 다운로드</span>
-					</a>
+					</button>
 				</div>
 				<table class="finance-invoice-table">
 					<thead class="table-head">
@@ -133,8 +190,7 @@
 							<th class="table-cell-head">비고</th>
 						</tr>
 					</thead>
-					<tbody class="table-body">
-
+					<tbody id="invoice-table" class="table-body">
 						<c:forEach items="${invoice}" var="InvoiceVO">
 							<tr class="table-row">
 								<td class="table-cell-head">${InvoiceVO.reservation_number}</td>

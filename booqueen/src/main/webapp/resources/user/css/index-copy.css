@@ -437,6 +437,7 @@ a:hover{
     border: 1px solid #e7e7e7;
     padding: 16px;
     border-radius: 2px;
+    margin-bottom: 25px;
 }
 .bui-banner__image {
     width: 100%;
@@ -555,6 +556,7 @@ a:hover{
 .footer-top2 div ul{
     list-style: none;
     display: flex;
+    gap: 30px;
 }
 .footer-top2 div ul li{
     color: #fff;
@@ -565,6 +567,7 @@ a:hover{
     font-size: 15px;
     font-weight: 700;
     text-decoration: underline;
+    color: #fff;
 }
 
 /* */

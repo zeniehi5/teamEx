@@ -1,4 +1,4 @@
-package com.booqueen.user.member;
+package com.booqueen.user.member.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -29,8 +29,11 @@ import com.booqueen.user.hotel.service.HotelService;
 import com.booqueen.user.hotel.vo.BestHotelVO;
 import com.booqueen.user.hotel.vo.CityCountVO;
 import com.booqueen.user.hotel.vo.RecentSearchVO;
+import com.booqueen.user.member.KakaoAPI;
 import com.booqueen.user.member.service.MemberProfileService;
+import com.booqueen.user.member.service.MemberService;
 import com.booqueen.user.member.vo.MemberProfileVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.member.vo.ReasonVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
@@ -297,12 +300,22 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		
+		List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+		
+		if(!comingReservationList.isEmpty() && comingReservationList != null) {
+			model.addAttribute("hasReservation", true);
+		} else {
+			model.addAttribute("hasReservation", false);
+		}
+		
 		return "member/mypage";
 	}
 	
 	@RequestMapping(value="/mypageUpdate.do", method = RequestMethod.POST)
-	public String mypageUpdate(MemberVO vo, HttpSession session, HttpServletResponse response) throws Exception {
+	public String mypageUpdate(MemberVO vo, HttpSession session, HttpServletResponse response, Model model) throws Exception {
 		
 		int result = 0;
 		response.setContentType("text/html; charset=utf-8");
@@ -310,6 +323,14 @@ public class MemberController{
 		
 		MemberVO user = (MemberVO)session.getAttribute("member");
 
+		List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+		
+		if(!comingReservationList.isEmpty() && comingReservationList != null) {
+			model.addAttribute("hasReservation", true);
+		} else {
+			model.addAttribute("hasReservation", false);
+		}
+		
 		if(vo.getPasswd().equals(user.getPasswd())) {
 			result = memberService.updateMember(vo);
 			session.setAttribute("member", vo);
@@ -319,6 +340,7 @@ public class MemberController{
 			out.println("<script>alert('비밀번호가 일치하지 않습니다.')</script>");
 			out.flush();
 		}
+	
 		return "member/mypage";
 	}
 	
@@ -399,26 +421,26 @@ public class MemberController{
 			// 리뷰
 			List<ReservationVO> pastReservationList = reservationService.selectPastReservationList(user.getUserid());
 			session.setAttribute("pastReservationList", pastReservationList);
-			
-			Date now = new Date();
-			model.addAttribute("now", now);
-			
-			// index - city
-			List<CityCountVO> cityList = hotelService.selectCityList();
-			session.setAttribute("cityList", cityList);
-			
-			// index - hotel
-			List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
-			session.setAttribute("bestHotelList", bestHotelList);
-			
-			// index - city
-			List<CityCountVO> cityListAll = hotelService.selectCityListAll();
-			session.setAttribute("cityListAll", cityListAll);
-			
-			// index - random hotel
-			List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
-			session.setAttribute("randomHotelList", randomHotelList);
 		}
+		
+		Date now = new Date();
+		model.addAttribute("now", now);
+		
+		// index - city
+		List<CityCountVO> cityList = hotelService.selectCityList();
+		session.setAttribute("cityList", cityList);
+		
+		// index - hotel
+		List<BestHotelVO> bestHotelList = hotelService.selectBestHotelList();
+		session.setAttribute("bestHotelList", bestHotelList);
+		
+		// index - city
+		List<CityCountVO> cityListAll = hotelService.selectCityListAll();
+		session.setAttribute("cityListAll", cityListAll);
+		
+		// index - random hotel
+		List<BestHotelVO> randomHotelList = hotelService.selectRandomHotel();
+		session.setAttribute("randomHotelList", randomHotelList);
 		
 		return "member/index";
 	}

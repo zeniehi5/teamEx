@@ -29,7 +29,7 @@ public class MemberController {
 	@RequestMapping(value = "/userMember.mdo", method=RequestMethod.GET)
 	public String userMember(Model model) {
 	
-		List<com.booqueen.user.member.MemberVO> userList = memberServiceImpl.getUserMember();
+		List<com.booqueen.user.member.vo.MemberVO> userList = memberServiceImpl.getUserMember();
 		model.addAttribute("userList", userList);
 		
 		// 전날 가입자 수

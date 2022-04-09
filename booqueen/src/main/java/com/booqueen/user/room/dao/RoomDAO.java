@@ -52,6 +52,10 @@ public class RoomDAO {
 		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRoomImgs", type);
 	}
 	
+	public List<RoomVO> selectRoomImgsBySerialnumber() throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRoomImgsBySerialnumber");
+	}
+	
 	public List<RoomAvailableVO> selectRooms(Integer serialnumber) throws DataAccessException{
 		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRooms", serialnumber);
 	}

@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.booqueen.partner.hotel.HotelPolicyVO;
 import com.booqueen.user.hotel.service.HotelService;
+import com.booqueen.user.hotel.vo.HotelAvailableVO;
 import com.booqueen.user.hotel.vo.HotelImgVO;
 import com.booqueen.user.hotel.vo.HotelServiceVO;
 import com.booqueen.user.hotel.vo.HotelVO;
-import com.booqueen.user.member.MemberVO;
+import com.booqueen.user.member.vo.MemberVO;
 import com.booqueen.user.reservation.service.ReservationService;
 import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
@@ -216,6 +217,10 @@ public class ReservationController {
 		Date now = new Date();
 		model.addAttribute("now", now);
 		
+		// 다가오는 여행
+		List<ReservationVO> comingReservationList = reservationService.selectComingReservationList(user.getUserid());
+		session.setAttribute("comingReservationList", comingReservationList);
+		
 		return "reservation/bookings";
 	}
 	
@@ -240,24 +245,34 @@ public class ReservationController {
 		int reservation_number_i = Integer.parseInt(reservation_number);
 		ReservationVO reservation = reservationService.getReservation(reservation_number_i);
 		
+		HotelAvailableVO hotelAvailableVO = new HotelAvailableVO();
+		hotelAvailableVO.setSerialnumber(reservation_number_i);
+		
 		String start_date = reservation.getStart_date();
 		String start_date_year = start_date.substring(0, 4);
 		String start_date_month = start_date.substring(5, 7);
 		String start_date_day = start_date.substring(8, 10);
-
+		String start_date_sum = start_date_year + start_date_month + start_date_day;
+		hotelAvailableVO.setStart_date(start_date_sum);
+		
 		String end_date = reservation.getEnd_date();
 		String end_date_year = end_date.substring(0, 4);
 		String end_date_month = end_date.substring(5, 7);
 		String end_date_day = end_date.substring(8, 10);
+		String end_date_sum = end_date_year + end_date_month + end_date_day;
+		hotelAvailableVO.setEnd_date(end_date_sum);
 
 		String start_day = roomService.getDateDay(start_date, "yyyy-MM-dd");
 		String end_day = roomService.getDateDay(end_date, "yyyy-MM-dd");
+		hotelAvailableVO.setStart_date_day(start_day);
+		hotelAvailableVO.setEnd_date_day(end_day);
 		
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(reservation.getStart_date());
         Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(reservation.getEnd_date());
         long diffSec = (format2.getTime() - format1.getTime()) / 1000;
         long diffDays = diffSec / (24*60*60);
-		
+        hotelAvailableVO.setDiffDays(diffDays);
+        
 		reservation.setStart_date_year(start_date_year);
 		reservation.setStart_date_month(start_date_month);
 		reservation.setStart_date_day(start_date_day);
@@ -286,6 +301,8 @@ public class ReservationController {
 		
 		model.addAttribute("roomImg", roomImg.get(0).getFile_url());
 		
+		model.addAttribute("hotelAvailableVO", hotelAvailableVO);
+				
 		if(reservation.isStatus()) {
 			return "reservation/finalization"; 
 		} else {
@@ -298,7 +315,7 @@ public class ReservationController {
 		
 		int reservation_number_i = Integer.parseInt(reservation_number);
 		ReservationVO reservation = reservationService.getReservation(reservation_number_i);
-		System.out.println(reservation.toString());
+
 		model.addAttribute("reservationVO", reservation);
 		
 		return "reservation/cancel";

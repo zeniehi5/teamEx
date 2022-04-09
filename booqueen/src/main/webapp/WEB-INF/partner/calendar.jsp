@@ -791,7 +791,7 @@ li{
                                                                     </svg>
                                                    </div>
                                                    <input class="form-control bui-form__control" id="openDate"
-                                                      placeholder="2022년 3월 9일" name="open_date_start">
+                                                      placeholder="2022년 4월 1일" name="open_date_start">
                                                 </div>
                                              </div>
                                           </div>
@@ -815,7 +815,7 @@ li{
                                                                     </svg>
                                                    </div>
                                                    <input class="form-control bui-form__control" id="closeDate"
-                                                      placeholder="2022년 3월 1일" name="open_date_end">
+                                                      placeholder="2022년 4월 1일" name="open_date_end">
                                                 </div>
                                              </div>
                                           </div>

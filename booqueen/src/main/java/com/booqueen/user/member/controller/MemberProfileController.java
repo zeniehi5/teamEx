@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.booqueen.user.member.MemberService;
-import com.booqueen.user.member.MemberVO;
 import com.booqueen.user.member.service.MemberProfileService;
+import com.booqueen.user.member.service.MemberService;
 import com.booqueen.user.member.vo.MemberProfileVO;
+import com.booqueen.user.member.vo.MemberVO;
 
 @Controller
 public class MemberProfileController {
