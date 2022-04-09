@@ -48,9 +48,12 @@ public class MemberController {
 			}
 		}
 		
+		List<BlockUserVO> blockUserList = memberServiceImpl.selectBlockUserList();
+		int block_user = blockUserList.size();
+		
 		model.addAttribute("joined_yesterday", joined_yesterday);
 		model.addAttribute("joined_today", joined_today);
-		
+		model.addAttribute("block_user", block_user);
 		
 		Integer twenty = 0;
 		Integer thirty = 0;

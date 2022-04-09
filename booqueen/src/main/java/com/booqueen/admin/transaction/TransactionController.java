@@ -43,6 +43,9 @@ public class TransactionController {
 		List<ReservationVO> transactionList = transactionServiceImpl.selectTransactionDetail(serialnumber_int);
 		model.addAttribute("transactionList", transactionList);
 		
+		List<ReservationVO> transactionVO = transactionServiceImpl.selectTransactionDetailInfo(serialnumber_int);
+		model.addAttribute("transactionVO", transactionVO);
+		
 		return "transactionDetail";
 	}
 	

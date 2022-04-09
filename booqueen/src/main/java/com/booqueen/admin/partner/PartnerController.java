@@ -22,26 +22,30 @@ public class PartnerController {
 	@Autowired
 	PartnerServiceImpl partnerServiceImpl;
 	
-	@RequestMapping(value = "/PartnerMember.mdo", method=RequestMethod.GET)
+	@RequestMapping(value = "/partnerMember.mdo", method=RequestMethod.GET)
 	public String partnerMember(Model model) {
 	
 		List<com.booqueen.admin.partner.PartnerVO> partnerList = partnerServiceImpl.getPartnerMember();
 		model.addAttribute("partnerList", partnerList);
-		System.out.println("¼º°ø");
 		return "partnerMember";
 	}
 	
 	@RequestMapping(value = "/blockPartner.mdo", method=RequestMethod.POST)
 	public String blockPartner(Model model, PartnerVO vo, HttpServletResponse response) throws Exception {
+		
 		int result = 0;
+		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		result = partnerServiceImpl.blockPartner(vo);
-		System.out.println(vo.toString());
 		
-		out.println("<script>alert('ÆÄÆ®³Ê Â÷´Ü ¿Ï·á')</script>");
-		out.flush();
+		PartnerVO partnerVO = partnerServiceImpl.selectPartnerByEmail(vo.getEmail());
+		
+		if (result > 0) {
+			out.println("<script>alert('" + partnerVO.getLastname() + partnerVO.getFirstname() + "(" + partnerVO.getEmail() +") íŒŒíŠ¸ë„ˆë¥¼ ì°¨ë‹¨í•˜ì˜€ìŠµë‹ˆë‹¤.')</script>");
+			out.flush();
+		}
 		
 		List<com.booqueen.admin.partner.PartnerVO> partnerList = partnerServiceImpl.getPartnerMember();
 		model.addAttribute("partnerList", partnerList);
@@ -51,33 +55,45 @@ public class PartnerController {
 	
 	@RequestMapping(value = "/blockPartnerList.mdo", method=RequestMethod.GET)
 	public String blockPartnerList(Model model, PartnerVO vo) {
+		
 		List<PartnerVO> blockedList = partnerServiceImpl.selectBlockPartnerList();
-		if(blockedList != null) {
+		
+		if (blockedList != null) {
 			model.addAttribute("blockedList", blockedList);
-			System.out.println(model.toString());
 		}
 		
 		return "blockPartner";
 	}
+	
 	@RequestMapping(value = "/unblock.mdo", method=RequestMethod.POST)
 	public String unblock(Model model, PartnerVO vo, HttpServletResponse response) throws Exception {
+		
 		int result = 0;
+		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		result = partnerServiceImpl.unblockPartner(vo);
-		if(result == 1) {
-			out.println("<script>alert('ÆÄÆ®³Ê °èÁ¤ È°¼ºÈ­ ¿Ï·á')</script>");
+		
+		PartnerVO partnerVO = partnerServiceImpl.selectPartnerByEmail(vo.getEmail());
+		
+		if (result == 1) {
+			out.println("<script>alert('" + partnerVO.getLastname() + partnerVO.getFirstname() + "(" + partnerVO.getEmail() +") íŒŒíŠ¸ë„ˆ ì°¨ë‹¨ì„ í•´ì œí•˜ì˜€ìŠµë‹ˆë‹¤.')</script>");
 			out.flush();
 		}
+		
 		List<PartnerVO> blockedList = partnerServiceImpl.selectBlockPartnerList();
 		model.addAttribute("blockedList", blockedList);
+		
 		return "blockPartner";
 	}
+	
 	@RequestMapping(value = "/partnerMemberDetail.mdo", method=RequestMethod.GET)
 	public String partnerMemberDetail(HttpSession session, @RequestParam("email")String email, Model model) {
+		
 		PartnerVO partner = partnerServiceImpl.selectPartnerByEmail(email);
 		List<HotelVO> hotel = partnerServiceImpl.selectHotelByEmail(email);
+		
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("partner", partner);
 		

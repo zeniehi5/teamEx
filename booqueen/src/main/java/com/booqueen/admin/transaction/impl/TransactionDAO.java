@@ -25,5 +25,9 @@ public class TransactionDAO {
 	public List<ReservationVO> selectTransactionDetail(int serialnumber) {
 		return sqlSessionTemplate.selectList("TransactionDAO.selectTransactionDetail", serialnumber);
 	}
+	
+	public List<ReservationVO> selectTransactionDetailInfo(int serialnumber) {
+		return sqlSessionTemplate.selectList("TransactionDAO.selectTransactionDetailInfo", serialnumber);
+	}
 
 }
