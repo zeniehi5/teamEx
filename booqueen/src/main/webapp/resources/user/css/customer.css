@@ -138,6 +138,9 @@ body{
 ._3df3e08e2 ._eb63e28ca button:focus, ._3df3e08e2 div[role=button] {
     outline: none;
 }
+[class~='_eb63e28ca']:last-of-type  {
+    border: 0;
+}
 ._eb63e28ca {
     border-bottom: 1px solid #e6e6e6;
     cursor: pointer;

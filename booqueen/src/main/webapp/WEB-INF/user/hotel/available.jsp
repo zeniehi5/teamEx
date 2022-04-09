@@ -557,9 +557,11 @@
 		                죄송합니다. 선택된 기간에 이 호텔에 예약 가능한 객실이 없습니다
 		            </p>
 		        </div>
+		        <c:if test="${!empty availableRooms}">
 		        <div class="now-booking" style="right: 40px;top: 26px;">
                     <button style="width: 300px;background: #fc5454; border: 0.5px solid #fc5454; height: 40px;" class="change_search_data">검색 변경</button>
-                	</div>
+               	</div>
+               	</c:if>
 		    </div>
 		    
 		    <div class="change-date">
@@ -677,7 +679,8 @@
 		                </select>
 		            </div>
 		            </div>
-		
+					
+					<c:if test="${!empty availableRooms}">
 		            <div class="bui-text">다음 날짜는 아직 예약 가능하지만 금방 매진될 수 있어요</div>
 		
 		            <div>
@@ -698,6 +701,10 @@
 		                    </c:forEach>
 		                </ul>
 		            </div>
+		            </c:if>
+		            <c:if test="${empty availableRooms }">
+		            	<div class="bui-text">죄송합니다. 해당 호텔은 현재 준비중이므로 예약 가능한 객실이 존재하지 않습니다. 다른 호텔을 이용 부탁드립니다.</div>
+		            </c:if>
 		    </div>
 		
 			<div class="add" style="display: none;">

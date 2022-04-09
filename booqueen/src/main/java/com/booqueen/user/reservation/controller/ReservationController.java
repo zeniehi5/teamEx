@@ -1,6 +1,7 @@
 package com.booqueen.user.reservation.controller;
 
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +32,7 @@ import com.booqueen.user.reservation.vo.ReservationVO;
 import com.booqueen.user.review.service.ReviewService;
 import com.booqueen.user.review.vo.ReviewAvgVO;
 import com.booqueen.user.room.service.RoomService;
+import com.booqueen.user.room.vo.RoomAvailableVO;
 import com.booqueen.user.room.vo.RoomVO;
 
 
@@ -153,7 +156,6 @@ public class ReservationController {
 			roomService.updateRoomAvailable(reservationVO);
 		 */
 			reservationVO.setCount_room(count_rooms[0]);
-			System.out.println(count_rooms[0]);
 			reservationVO.setPrice(prices[0]);
 			reservationVO.setType(types[0]);
 			reservationService.insertReservation(reservationVO);
@@ -226,16 +228,43 @@ public class ReservationController {
 	
 	@ResponseBody
 	@RequestMapping(value= "/check_reservation.do")
-	public String checkReservation(ReservationVO reservationVO) {
+	public String checkReservation(@RequestBody ReservationVO reservationVO) throws ParseException {	
 		
-		reservationVO.setRequest_text(reservationVO.getRequest_text().replace(",", ""));
+		List<RoomAvailableVO> lockList = roomService.checkIsLocked(reservationVO);
 		
-		List<RoomVO> roomList = roomService.getRoomDetail(reservationVO);
-		
-		if (roomList == null && roomList.isEmpty()) {
-			return "false";
+		if (lockList != null && !lockList.isEmpty()) {
+			return "unavailable";
 		} else {
-			return "true";
+			// 해당 날짜 lock = true로 update
+			String start_date = reservationVO.getStart_date();
+			String start_date_year = start_date.substring(0, 4);
+			String start_date_month = start_date.substring(4, 6);
+			String start_date_day = start_date.substring(6, 8);
+			String start_date_sum = start_date_year + "-" + start_date_month + "-" +  start_date_day;
+			reservationVO.setStart_date(start_date_sum);
+
+			String end_date = reservationVO.getEnd_date();
+			String end_date_year = end_date.substring(0, 4);
+			String end_date_month = end_date.substring(4, 6);
+			String end_date_day = end_date.substring(6, 8);
+			String end_date_sum = end_date_year + "-" + end_date_month + "-" + end_date_day;
+			reservationVO.setEnd_date(end_date_sum);
+			
+			Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(reservationVO.getStart_date());
+	        Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(reservationVO.getEnd_date());
+	        long diffSec = (format2.getTime() - format1.getTime()) / 1000;
+	        long diffDays = diffSec / (24*60*60);
+	        
+	        roomService.updateLock(reservationVO);
+			String orgin_start_date = reservationVO.getStart_date();
+			
+			for(int j = 1; j < diffDays; j++) {
+				reservationVO.setStart_date(LocalDate.parse(reservationVO.getStart_date()).plusDays(j).toString());
+				roomService.updateLock(reservationVO);
+				reservationVO.setStart_date(orgin_start_date);
+			}
+	        
+			return "available";
 		}
 	}
 
@@ -358,7 +387,7 @@ public class ReservationController {
 			cancelVO.setStart_date(orgin_start_date);
 		}
 		
-		return "reservation/confirmcancel";
+		return "redirect:bookingPage.do";
 	}
 	
 }

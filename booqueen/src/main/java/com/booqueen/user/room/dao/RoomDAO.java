@@ -44,6 +44,14 @@ public class RoomDAO {
 		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateRoomAvailablePlus", reservationVO);
 	}
 	
+	public int updateLock(ReservationVO reservationVO) throws DataAccessException{
+		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateLock", reservationVO);
+	}
+	
+	public int updateLockEnd(ReservationVO reservationVO) throws DataAccessException{
+		return sqlSession.update("com.booqueen.user.room.dao.roomapper.updateLockEnd", reservationVO);
+	}
+	
 	public RoomVO selectSimpleRoom(Integer room_id) throws DataAccessException{
 		return sqlSession.selectOne("com.booqueen.user.room.dao.roomapper.selectSimpleRoom", room_id);
 	}
@@ -58,5 +66,9 @@ public class RoomDAO {
 	
 	public List<RoomAvailableVO> selectRooms(Integer serialnumber) throws DataAccessException{
 		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.selectRooms", serialnumber);
+	}
+	
+	public List<RoomAvailableVO> checkIsLocked(ReservationVO reservationVO) throws DataAccessException{
+		return sqlSession.selectList("com.booqueen.user.room.dao.roomapper.checkIsLocked", reservationVO);
 	}
 }

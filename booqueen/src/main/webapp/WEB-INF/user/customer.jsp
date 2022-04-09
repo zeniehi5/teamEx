@@ -103,15 +103,22 @@
                         </div>
                     </div>
                     <div class="know-detail" id="not-found">
-                        <div class="map-hide-button">
-                            <i class="bi bi-chevron-left"></i>
-                            <i class="bi bi-chevron-right map-show"></i>
-                         </div>
+                        <div class="map-hide-button" style="display: flex; gap: 15px;">
+                           <div style="display: flex; align-items: center;" ><svg class="bk-icon -iconset-review_poor" fill="#6B6B6B" height="32" width="32" viewBox="0 0 128 128" role="presentation" aria-hidden="true" focusable="false"><path d="M64 8a56 56 0 1 0 56 56A56 56 0 0 0 64 8zm0 104a48 48 0 1 1 48-48 48 48 0 0 1-48 48zM44 64a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm48-8a8 8 0 1 1-8-8 8 8 0 0 1 8 8zm-5.2 30.2a4 4 0 1 1-5.6 5.6c-10.5-10.4-24-10.4-34.4 0a4 4 0 0 1-5.6-5.6c13.6-13.7 32-13.7 45.6 0z"></path></svg></div>
+                         
+                           <div>
+                           서비스 이용에 불편을 드려 죄송합니다.<br>
+                           원활한 서비스 이용을 위해 booqueen.com 고객센터로 연락해주시길 바랍니다.<br>
+                           고객센터: <strong>02-1234-5678</strong>
+                           </div>
+                           </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+<%--     <jsp:include page="/WEB-INF/user/member/footer.jsp"/> --%>
 
  <!--    <hr class="customer-hr">
 

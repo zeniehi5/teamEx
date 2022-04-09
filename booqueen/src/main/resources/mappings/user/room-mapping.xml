@@ -273,11 +273,19 @@
 	</insert>
 	
 	<update id="updateRoomAvailable" parameterType="uReservationVO">
-		update room_available set available = (available - ${count_room}) where open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and room_id = (select room_id from room where type= #{type} and serialnumber = ${serialnumber})
+		update room_available set available = (available - ${count_room}), lock = false where open_date = TO_DATE(#{start_date}, 'YYYYMMDD') and room_id = (select room_id from room where type= #{type} and serialnumber = ${serialnumber})
 	</update>
 	
 	<update id="updateRoomAvailablePlus" parameterType="uReservationVO">
 		update room_available set available = (available + ${count_room}) where open_date = TO_DATE(#{start_date}, 'YYYY-MM-DD') and room_id = ${room_id}
+	</update>
+	
+	<update id="updateLock" parameterType="uReservationVO">
+		update room_available set lock = true where room_id = #{room_id} and open_date = TO_DATE(#{start_date}, 'YYYY-MM-DD')
+	</update>
+	
+	<update id="updateLockEnd" parameterType="uReservationVO">
+		update room_available set lock = false where room_id = #{room_id} and open_date = TO_DATE(#{start_date}, 'YYYY-MM-DD')
 	</update>
 	
 	<select id="selectSimpleRoom" parameterType="Integer" resultMap="RoomVOMap">
@@ -331,4 +339,34 @@
 		select * from room_image where type in (select type from room) ORDER BY random()
 	</select>
 	
+	<select id="checkIsLocked" parameterType="uReservationVO" resultType="roomAvailableVO">
+		<![CDATA[
+			SELECT lock FROM
+				(SELECT
+					room_id, MIN(open_date) as open_date, MAX(close_date) as close_date, lock
+				FROM (
+						SELECT
+							*,
+							( ROW_NUMBER()
+							  OVER(PARTITION BY room_id
+								   ORDER BY
+									   open_date
+							  ) ) AS rownum
+						FROM
+							room_available
+						WHERE
+							 open_date >= TO_DATE(#{start_date}, 'YYYYMMDD')
+				             AND close_date <= TO_DATE(#{end_date}, 'YYYYMMDD')
+						ORDER BY
+							room_id,
+							open_date
+						) as a
+				WHERE room_id = #{room_id}
+				GROUP BY room_id, (open_date - cast(a.rownum as integer)), (close_date - cast(a.rownum as integer)), lock
+				ORDER BY room_id, Min(open_date), MAX(close_date)
+				) as b
+			WHERE lock = true
+		]]>
+	</select>
+	 
 </mapper>

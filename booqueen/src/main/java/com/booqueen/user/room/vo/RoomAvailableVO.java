@@ -10,4 +10,5 @@ public class RoomAvailableVO {
 	private String open_date;
 	private String close_date;
 	private Integer standard_price;
+	private boolean lock;
 }

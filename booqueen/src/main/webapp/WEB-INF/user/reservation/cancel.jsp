@@ -119,7 +119,7 @@
 							<hr class="cancel-hr">
 							<div class="contact">
 								모든 결제 건은 숙소에서 처리합니다. 궁금하신 점이 있을 경우
-								<a href="#" class="contact-link">숙소로 직접 문의</a>
+								<a onclick="sendMsgToHotel()" class="contact-link" >숙소로 직접 문의</a>
 								하시기 바랍니다.
 							</div>
 						</div>
@@ -178,7 +178,7 @@
 							<div class="policy-content">
 								<div class="policy-text">도착 1일 전까지 예약 취소 또는 변경 시 부과되는 수수료가 없습니다.</div>
 								<div class="policy-view">
-									<button class="policy-btn">취소 정책 보기</button>
+									<a href="${contextPath}/terms.do#terms_definitions_B6.%20변경,%20취소%20및%20환불" target="blank"><button class="policy-btn">취소 정책 보기</button></a>
 								</div>
 							</div>
 						</div>
@@ -206,7 +206,7 @@
 					<div class="exit-page-text">취소 절차가 완료되지 않았습니다. 이 페이지에서 정말 나가시겠습니까?</div>
 					<div class="exit-page-button">
 						<button class="view-page" id="viewPage">이 페이지 계속 보기</button>
-						<button class="exit-page">나가기</button>
+						<a href="${contextPath}/bookingPage.do"><button class="exit-page">나가기</button></a>
 					</div>
 				</div>
 			</div>
@@ -234,6 +234,7 @@
 		$("#keepBtn").click(function() {
 			$("#cancelModal").css('display', 'flex');
 		});
+	
 		$("#exitXBtn").click(function() {
 			$("#cancelModal").css('display', 'none');
 		});
@@ -241,10 +242,13 @@
 			$("#cancelModal").css('display', 'none');
 		});
 
-		
-		
-		
 	});
+	
+	var reservation_number = '${reservationVO.reservation_number}';
+	function sendMsgToHotel(){
+		openChatting();
+		document.getElementById(reservation_number).click();
+	}
 	</script>
 	<script>
 	$(document).ready(function() {
@@ -254,13 +258,13 @@
 // 	var amount = '${reservationVO.price}';
 	var amount = 100;
 	var imp_uid = '${reservationVO.imp_uid}';
-	var cancel_reason = '';
+	var cancel_reason_s = '';
 	
 	$('#cancel_reason').on("change", function(){
-		cancel_reason = $('#cancel_reason option:selected').text();
+		cancel_reason_s = $('#cancel_reason option:selected').text();
 	});
 	
-	var paymentVO = {"imp_uid" : imp_uid, "price" : amount, "cancel_reason" : cancel_reason, "merchant" : merchant_number, "payment_status" : 'canceled'}
+	var paymentVO = {"imp_uid" : imp_uid, "price" : amount, "cancel_reason" : cancel_reason_s, "merchant" : merchant_number, "payment_status" : 'canceled'}
 	
 	function cancelPay(){
 		$.ajax({

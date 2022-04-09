@@ -84,6 +84,14 @@ public class RoomService {
 		return roomDAO.updateRoomAvailablePlus(reservationVO);
 	}
 	
+	public int updateLock(ReservationVO reservationVO) {
+		return roomDAO.updateLock(reservationVO);
+	}
+	
+	public int updateLockEnd(ReservationVO reservationVO) {
+		return roomDAO.updateLockEnd(reservationVO);
+	}
+	
 	public RoomVO selectSimpleRoom(Integer room_id) {
 		return roomDAO.selectSimpleRoom(room_id);
 	}
@@ -98,5 +106,9 @@ public class RoomService {
 	
 	public List<RoomVO> selectRoomImgsBySerialnumber(Integer serialnumber){
 		return roomDAO.selectRoomImgsBySerialnumber();
+	}
+	
+	public List<RoomAvailableVO> checkIsLocked(ReservationVO reservationVO){
+		return roomDAO.checkIsLocked(reservationVO);
 	}
 }

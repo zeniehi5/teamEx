@@ -226,27 +226,40 @@
 //          $('#complete_btn').click(payment);
             $('#complete_btn').one('click', function(event){
 	       		 event.preventDefault();
-	       		 payment();
+	       		 check_reservation();
 	       		 $(this).prop('disabled', true);
 	       		 $(this).attr('disabled', true);
 	       		 $(this).off("click").attr('href', "javascript: void(0);");
        		});
         });
 	
-	var path = '${contextPath}';
+	var path = '${contextPath}'; 
+	var start_date_for = '${reservationVO.start_date}';
+	var end_date_for = '${reservationVO.end_date}';
+	var serialnumber_for = '${reservationVO.serialnumber}';
+	var room_id_for = '${reservationVO.room_id }';
 	
-	/* 결제 전 예약 확인
+	/* 결제 전 예약 확인 */
 	function check_reservation(){
+			
+		var reservationVO = {
+								"start_date": start_date_for,
+								"end_date": end_date_for,
+								"serialnumber": serialnumber_for,
+								"room_id": room_id_for
+							}
+		
 		$.ajax({
-			type 	: 	"post",
-			url 	: 	path + "/check_reservation.do",
-			data 	: 	$("#last_reservation").serialize(),
+			type: "post",
+			url: path + "/check_reservation.do",
+			contentType: 'application/json',
+			data: JSON.stringify(reservationVO),
 			success : 	function(data) {
-				if (data === "true") {
+				if (data === "available") {
 					alert('예약이 가능합니다. 결제를 계속 진행해주세요.');
 					payment();
 				} else {
-					alert('예약이 이미 완료되었습니다. 다른 날짜나 객실을 이용해주시기 바랍니다.');
+					alert('죄송합니다.\n\n다른 고객님이 해당 객실을 예약하고 있는 중입니다.\n\n다른 날짜나 객실을 이용해주시기 바랍니다.');
 				}
 			},
 			error	:	function(data){
@@ -254,7 +267,7 @@
 			}
 		});
 	}
-	*/
+	
 
 	function payment() {
 		
