@@ -111,6 +111,7 @@
 						</button>
 					</div>
 				</div>
+				<c:if test="${!empty hotelList}">
 				<div class="filter">
 					<div class="filter-by"><h2>필터링 기준:</h2></div>
 					<!-- <div class="filters-group">
@@ -407,7 +408,8 @@
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
+				</c:if>
 			</div>
 			<!-- ------------------------- 호텔 목록 -------------------------  -->
 			<div class="container-right">
@@ -492,6 +494,20 @@
 							<c:when test="${!empty hotelList || !empty unavailableHotelList}">
 							<c:if test="${!empty hotelList }"> --%>
 						<div id="content_from_ajax">
+						
+						<c:choose>
+						<c:when test="${empty hotelList}">
+						<div class="list list-none">
+							<div class="list-none-info">
+								<span><svg class="bk-icon -iconset-review_poor" fill="#383838" height="60" width="60" viewBox="0 0 128 128" role="presentation" aria-hidden="true" focusable="false"><path d="M64 8a56 56 0 1 0 56 56A56 56 0 0 0 64 8zm0 104a48 48 0 1 1 48-48 48 48 0 0 1-48 48zM44 64a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm48-8a8 8 0 1 1-8-8 8 8 0 0 1 8 8zm-5.2 30.2a4 4 0 1 1-5.6 5.6c-10.5-10.4-24-10.4-34.4 0a4 4 0 0 1-5.6-5.6c13.6-13.7 32-13.7 45.6 0z"></path></svg></span>
+								<div class="list-none-content">
+									<div class="list-none-en">Not available</div>
+									<div class="list-none-ko">검색 조건에 맞는 객실이 없습니다.</div>
+								</div>
+							</div>
+						</div>
+						</c:when>
+						<c:otherwise>
 						<c:set var="hotelAvailableVO" value="${hotelAvailableVO }"/>
 						<c:forEach var="hotel" items="${hotelList}" varStatus="status">
 						
@@ -593,7 +609,8 @@
 						</a>
 						<!-- list end -->
 						</c:forEach>
-						
+						</c:otherwise>
+						</c:choose>
 						</div><!-- end content_from_ajax -->
 						
 						<div id="content_from_ajax_available_without_review">

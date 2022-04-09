@@ -144,21 +144,26 @@
 					</div>
 					<div class="card mb-4">
 						<div class="card-header"><svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg> 배너수정</div>
+						<form action="${contextPath}/bannerRegister.mdo" method="post" id="bannerRegister" method="post" enctype="multipart/form-data">
 						<table style="width: 90%; margin: 24px; align-self: center;"> 
                             <tbody>
                             <tr>
                                 <td style="text-align: center">제목<input type="hidden" name="banner_seq" value="1"></td>
-                                <td><textarea id="faq_title" name="faq_title" style="width: 90%;"></textarea></td>
+                                <td><textarea id="faq_title" name="city" style="width: 90%;">${bannerVO.city}</textarea></td>
                             </tr>
                             <tr>
 								<td><label for="formFileMultiple" class="form-label"></label></td>
-								<td><input name="uploadFile" class="form-control" style="width: 90%;" type="file" id="formFileMultiple" multiple></td>
+								<td>
+									수정 전 파일 : <a href="${bannerVO.file_url}">${bannerVO.file_url}</a>
+									<input name="uploadFile" class="form-control" style="width: 90%;" type="file" id="formFileMultiple" multiple>
+								</td>
                             </tr>
                         	</tbody>
                         </table>
+                        </form>
                         <div style="text-align: center; margin: 0 0 24px;">
-                            <button form="" type="submit" id="submit" class="btn btn-primary">수정하기</button>
-                            <a href="${contextPath}/deleteFaq.mdo?seq=${faqVO.seq}" class="btn btn-danger">삭제하기</a>
+                            <button form="bannerRegister" type="submit" id="submit" class="btn btn-primary">수정하기</button>
+                            <a href="${contextPath}/deleteBanner.mdo?seq_city=${bannerVO.seq_city}" class="btn btn-danger">삭제하기</a>
                             <a href="banner.mdo" class="btn btn-warning">돌아가기</a>
                         </div>
                     </div>

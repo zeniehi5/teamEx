@@ -194,7 +194,6 @@
                                             <td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a>
                                             </td>
                                         </tr>
-
                                         </c:forEach>
                                     </tbody>
                                 </table>

@@ -313,7 +313,6 @@
 		// Pie Chart Example
 		var female = '${getUserGender.female_count}';
 		var male = '${getUserGender.male_count}';
-	            
 		var ctx = document.getElementById("myPieChart");
 		var myPieChart = new Chart(ctx, {
 		type: 'doughnut',

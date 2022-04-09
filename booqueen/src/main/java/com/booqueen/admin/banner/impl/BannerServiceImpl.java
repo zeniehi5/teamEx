@@ -23,5 +23,25 @@ public class BannerServiceImpl implements BannerService {
 	public List<BannerVO> getBannerList() {
 		return bannerDAO.getBannerList();
 	}
-
+	
+	@Override
+	public BannerVO selectBannerBySeq(int seq) {
+		return bannerDAO.selectBannerBySeq(seq);
+	}
+	
+	@Override
+	public BannerVO selectBannerByCity(String city) {
+		return bannerDAO.selectBannerByCity(city);
+	}
+	
+	@Override
+	public int updateBanner(BannerVO banner) {
+		return bannerDAO.updateBanner(banner);
+	}
+	
+	@Override
+	public int deleteBanner(int seq) {
+		return bannerDAO.deleteBanner(seq);
+	}
+	
 }
