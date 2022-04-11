@@ -20,7 +20,7 @@
 	<!-- properties -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="classpath:config/database.properties" />
-        <property name="fileEncoding" value="UTF-8" />
+        <property name="fileEncoding" value="UTF-8"/>
     </bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> 
@@ -48,14 +48,6 @@
 			<value>50000000</value>
 		</property>
 	</bean>
-	
-<!--  	<bean id="memberService" class="com.booqueen.partner.member.impl.MemberServiceImpl">
-		<property name="memberDAO" ref="memberDAO"/>
-	</bean>
-	
-	<bean id="memberDAO" class="com.booqueen.partner.member.impl.MemberDAOImpl">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>-->
 	
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
        <property name="order" value="0" />
