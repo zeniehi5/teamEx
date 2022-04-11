@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/></c:set>
+<c:set var="nnow" value="<%=new java.util.Date(new java.util.Date().getTime() + 60*60*24*1000)%>"/>
+<c:set var="tomorrow"><fmt:formatDate value="${nnow}" pattern="yyyy-MM-dd"/></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +32,7 @@
 					<div class="controls-group">
 						<div class="save-num">
 							<i class="bi bi-heart-fill"></i>
-							<span>저장된 숙소 <span id="wishlist_length">${fn:length(wishlist)}</span>개</span>
+							<span>저장된 숙소 <strong><span id="wishlist_length">${fn:length(wishlist)}</span></strong>개</span>
 						</div>
 					</div>
 				</div>
@@ -92,7 +97,9 @@
 										</span>
 									</div>
 									<div class="card-action">
-										<a href="#" class="view-hotel-btn">
+									<c:set var="todayv"><fmt:formatDate value="${now}" pattern="yyyyMMdd"/></c:set>
+        							<c:set var="tomorrowv"><fmt:formatDate value="${nnow}" pattern="yyyyMMdd"/></c:set>
+										<a href="${contextPath}/hotelInfo.do?serialNumber=${wishlist.serialnumber}&start_date=${todayv}&end_date=${tomorrowv}" target="_blank" class="view-hotel-btn">
 											<span class="view-hotel-text">숙소보기</span>
 										</a>
 									</div>

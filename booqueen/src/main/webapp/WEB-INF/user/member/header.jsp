@@ -43,7 +43,7 @@
 
 						<div class="bui-group__item" style="position: relative;" id="alarm_btn">
 							<i class="bi bi-bell"></i>
-							<div class="bell-alarm">1</div>
+<!-- 							<div class="bell-alarm">1</div> -->
 							<div class="header-dropdown-content" id="alarm_dropdown" style="top: 40px; left: 0; min-width: 300px;">
 <!-- 							<div class="bui-popover__arrow"></div> -->
 								<ul class="header-dropdown-menu-items">
@@ -58,7 +58,7 @@
 										<div style="justify-content: center; display: flex;">
 											<div>
 											<a href="#" style="text-decoration: none; color: black;">	
-												<span class="header-dropdown-menu-text">쉐라톤 인천 호텔 예약이 완료되었습니다.</span>
+												<span class="header-dropdown-menu-text">새로운 소식이 없습니다.</span>
 											</a>
 											</div>
 										</div>	
@@ -344,10 +344,12 @@
     	
     	$('#alarm_btn').click(function(){
     		$('#alarm_dropdown').toggle();
+    		$('#myAccount').css("display", "none");
     	});
     	
     	$('#dropdown').click(function(){
     		$('#myAccount').toggle();
+    		$('#alarm_dropdown').css("display", "none");
     	})
     	
     });
