@@ -1,11 +1,13 @@
 package com.booqueen.admin.member;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/login.mdo", method = RequestMethod.POST)
-	public String userId(Model model, MemberVO vo, HttpSession session, HttpServletRequest request) {
+	public String userId(Model model, MemberVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
 		
 		MemberVO member = memberService.getAdminMember(vo);
 		if(member != null) {
@@ -51,8 +56,12 @@ public class LoginController {
 				}
 			}
 			
+			List<BlockUserVO> blockUserList = memberServiceImpl.selectBlockUserList();
+			int block_user = blockUserList.size();
+			
 			model.addAttribute("joined_yesterday", joined_yesterday);
 			model.addAttribute("joined_today", joined_today);
+			model.addAttribute("block_user", block_user);
 			
 			Integer twenty = 0;
 			Integer thirty = 0;
@@ -111,8 +120,13 @@ public class LoginController {
 			
 			return "userMember";
 			
+		} else {
+			
+			out.println("<script>alert('아이디 또는 비밀번호가 올바르지 않습니다.')</script>");
+			out.flush();
+			
+			return "admin_login";
 		}
-		return "admin_login";
 		
 	}
 	

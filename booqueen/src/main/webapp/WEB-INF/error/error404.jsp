@@ -11,7 +11,7 @@
 </head>
 <style>
 .error-container {
-	
+    height: 690px;
 }
 .error-top {
 	height: 80px;
@@ -30,12 +30,12 @@
 	font-weight: 700;
 }
 .error-main {
-	/* background-image: url(https:\2f\2f cc-prod.scene7.com\2fis\2fimage\2f CCProdAuthor\2f 404-1440x612_edge2?$pjpeg$\26jpegSize=100\26wid=599); */
-	/* background-size: cover; */
+	background-image: url(https:\2f\2f cc-prod.scene7.com\2fis\2fimage\2f CCProdAuthor\2f 404-1440x612_edge2?$pjpeg$\26jpegSize=100\26wid=599);
+	background-size: cover;
+    height: 100%;
 }
 .error-main-img {
-	padding: 50px 80px;
-	height: 526px;
+	padding: 78px 100px;
 }
 .error-main-title {
 	font-size: 36px;
@@ -51,7 +51,21 @@
 	font-weight: 400;
 	line-height: 1.5;
 	font-style: italic;
-
+}
+.homepage-div {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.homepage-btn {
+	color: #1f4e8f;
+	text-decoration: none;
+}
+.footer-top1 {
+	margin-top: 0!important;
+}
+.section {
+	display: none!important;
 }
 </style>
 <body>
@@ -66,8 +80,12 @@
 			<div class="error-main-img">
 				<div class="error-main-title">These are uncharted waters.</div>
 				<div class="error-main-sub">Sorry, that page can't be found</div>
+				<div class="homepage-div"><a class="homepage-btn" href="${contextPath}/index.do">Go to homepage ></a></div>
 			</div>
 		</div>
 	</div>
+	
+	<jsp:include page="/WEB-INF/user/member/footer.jsp"/>
+	
 </body>
 </html>

@@ -54,6 +54,6 @@
    </bean>
    
    <!-- pdf라는 뷰 이름이 왔을 때 출력할 뷰를 설정 -->
-   <bean id="pdf" class="com.booqueen.partner.common.PDFView"/>
+   <!-- <bean id="pdf" class="com.booqueen.partner.common.PDFView"/> -->
 	
 </beans>

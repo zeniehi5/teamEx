@@ -18,16 +18,13 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 </head>
 <body class="sb-nav-fixed">
-	
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-	
 	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<!-- <h2 class="mt-4">차단된 파트너</h2> -->
-               		<br>
+					<br>
 					<div class="card mb-4">
 						<div class="card-header" style="font-size: 20px;"><i class="fas fa-table me-1"></i>차단된 파트너</div>
 						<div class="card-body">
@@ -45,17 +42,15 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${blockedList}" var="PartnerVO">
-										<tr>
-											<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.lastname }</a></td>
-											<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.firstname}</a></td>
-											<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.telephone }</a></td>
-											<th><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.email }</a></th>
-											<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">신라호텔</a></td>
-											<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.whyblock }</a></td>
-											<td>
-												<button id="infoDelete" class="btn btn-danger" onclick="activate('${PartnerVO.email}', '${PartnerVO.lastname}', '${PartnerVO.firstname}')" data-email="${PartnerVO.email}" data-firstname="${PartnerVO.firstname}" data-lastname="${PartnerVO.lastname}">제한해제</button>
-											</td>
-										</tr>
+									<tr>
+										<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.lastname }</a></td>
+										<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.firstname}</a></td>
+										<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.telephone }</a></td>
+										<th><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.email }</a></th>
+										<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">신라호텔</a></td>
+										<td><a href="partnerMemberDetail.mdo?email=${PartnerVO.email}">${PartnerVO.whyblock }</a></td>
+										<td><button id="infoDelete" class="btn btn-danger" onclick="activate('${PartnerVO.email}', '${PartnerVO.lastname}', '${PartnerVO.firstname}')" data-email="${PartnerVO.email}" data-firstname="${PartnerVO.firstname}" data-lastname="${PartnerVO.lastname}">제한해제</button></td>
+									</tr>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -63,39 +58,21 @@
 					</div>
 					<div id="ActivateAccount" class="delete-modal">
 						<!-- Modal content -->
-						<form class="delete-modal-content" action="unblock.mdo"
-							method="post">
+						<form class="delete-modal-content" action="unblock.mdo" method="post">
 							<span class="close">&times;</span>
 							<div class="modal-title"></div>
-
-							<div class="delete-hr">
-								<div></div>
-							</div>
-							<div class="modal-delete-reason">
-								<div class=activate-title>선택된 계정을 활성화하시겠습니까?</div>
-							</div>
-							<div class="delete-hr">
-								<div></div>
-							</div>
+							<div class="delete-hr"><div></div></div>
+							<div class="modal-delete-reason"><div class=activate-title>선택된 계정을 활성화하시겠습니까?</div></div>
+							<div class="delete-hr"><div></div></div>
 							<div class="modal-delete-button">
 								<button type="submit" class="delete-btn-real" id="deleteBtnReal">확인</button>
 								<button type="button" class="delete-btn-fake" id="deleteBtnReal">취소</button>
 							</div>
 						</form>
 					</div>
-			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2021</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
 				</div>
-			</footer>
+			</main>
+			<jsp:include page="/WEB-INF/admin/footer.jsp"/>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

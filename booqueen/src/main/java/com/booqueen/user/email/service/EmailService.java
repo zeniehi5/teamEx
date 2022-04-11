@@ -36,8 +36,8 @@ public class EmailService {
 		properties.put("mail.smtp.port", "587"); // 465
 		
 		// 발신
-		String sender = "lsh01020@gmail.com";
-		String password = "rbrzfeijlyfdshqy";
+		String sender = "";
+		String password = "";
 		
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override

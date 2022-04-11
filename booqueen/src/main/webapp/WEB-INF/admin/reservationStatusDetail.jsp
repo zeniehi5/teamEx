@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,16 +19,15 @@
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-       	<div id="layoutSidenav">
+	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
-            <div id="layoutSidenav_content">
-                <main>
-                    <!-- <h2 class="mt-4">예약</h2> -->
-                    <br><br>
-                    <div class="container-fluid px-4">
+		<div id="layoutSidenav_content">
+			<main>
+				<br>
+				<div class="container-fluid px-4">
 					<div class="card mb-4">
 						<div class="card-header">
-							<div style="font-size: 25px; font-weight: bold;">예약 상세 정보</div>
+							<div style="font-size: 20px; font-weight: bold;">예약 상세 정보</div>
 						</div>
 						<div class="card-body">
 							<div class="table01"> 
@@ -48,55 +46,42 @@
 								<div class="right">
 									<div>투숙객 이름:<br>${reservationVO.name}</div>
 									<div>예약자 ID:<br>${reservationVO.userid}</div> 
-									<div class="abc">   
+									<div class="abc">
 										<div><div>예약자 이름:<br>${reservationVO.lastname}${reservationVO.firstname}</div></div> 
 										<div>
 											<div>채널<br>Booqueen.com</div>
-	                                        <div id="as">수수료 부과 대상 금액:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></div>
-										</div> 
+											<div id="as">수수료 부과 대상 금액:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price}" /></div>
+										</div>
 										<div>
 											<div>예약번호:<br>${reservationVO.reservation_number}</div>
-	                                        <div>수수료:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price * 0.15}" /></div>
-										</div> 
+											<div>수수료:<br><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${reservationVO.price * 0.15}" /></div>
+										</div>
 										<div>예약일<br><fmt:formatDate value="${reservationVO.reservation_date}" pattern="yyyy년 MM월 dd일 (E)"/></div>
-									</div>                               
+									</div>
 								</div>
 							</div>
-	                    </div>
-					</div> 
+						</div>
+					</div>
 					<div class="payment">
 						<h4>결제</h4>
-							<div>결제현황<br>
-								<select class="dataTable-selector">
-									<option value="Y">결제 완료</option>
-									<option value="N">결제 미완료</option>
-								</select>
-							</div>
-						</div>       
+						<div>결제현황<br>
+							<select class="dataTable-selector">
+								<option value="Y">결제 완료</option>
+								<option value="N">결제 미완료</option>
+							</select>
+						</div>
 					</div>
-				</main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-
-        
-    </body>
+				</div>
+			</main>
+			<jsp:include page="/WEB-INF/admin/footer.jsp"/>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+</body>
 </html>

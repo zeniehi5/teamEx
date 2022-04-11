@@ -153,7 +153,7 @@ public class MemberController {
 		
 		if (result > 0) {
 			BlockUserVO blockUserVO = memberServiceImpl.selectBlockUserVO(seq);
-			out.println("<script>alert('"+ blockUserVO.getUserid() + " 님의 "+ blockUserVO.getHotelname() + " 호텔 이용제한이 해제되었습니다.')</script>");
+			out.println("<script>alert('"+ blockUserVO.getUserid() + " 님의 "+ blockUserVO.getHotelname() + " 이용제한이 해제되었습니다.')</script>");
 		} else {
 			out.println("<script>alert('제한 해제에 실패하였습니다. 다시 시도해 주시기 바랍니다.')</script>");
 		}
