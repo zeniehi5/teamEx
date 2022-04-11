@@ -56,10 +56,10 @@
 								<tbody>
 									<c:forEach var="commissionList" items="${commissionList}" varStatus="status">
 									<tr>
-										<td><a href="transactionDetail.mdo?serialnumber=${commissionList.serialnumber}">${commissionList.serialnumber}</a></td>
-										<td><a href="transactionDetail.mdo?serialnumber=${commissionList.serialnumber}"">${commissionList.hotelname}</a></td>
-										<td><a href="transactionDetail.mdo?serialnumber=${commissionList.serialnumber}""><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${commissionList.price * 0.15}"/></a></td>
-										<td><a href="transactionDetail.mdo?serialnumber=${commissionList.serialnumber}"">${commissionList.commission_date}</a></td>
+										<td><a href="${contextPath}/transactionDetail.mdo?serialnumber=${commissionList.serialnumber}">${commissionList.serialnumber}</a></td>
+										<td><a href="${contextPath}/transactionDetail.mdo?serialnumber=${commissionList.serialnumber}">${commissionList.hotelname}</a></td>
+										<td><a href="${contextPath}/transactionDetail.mdo?serialnumber=${commissionList.serialnumber}"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${commissionList.price * 0.15}"/></a></td>
+										<td><a href="${contextPath}/transactionDetail.mdo?serialnumber=${commissionList.serialnumber}">${commissionList.commission_date}</a></td>
 									<tr>
 									</c:forEach>
 								</tbody>

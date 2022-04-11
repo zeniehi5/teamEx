@@ -44,7 +44,7 @@
 										<td>${partnerList.lastname }</td>
 										<td>${partnerList.firstname }</td>
 										<td>${partnerList.telephone }</td>
-										<th><a href="partnerMemberDetail.mdo?email=${partnerList.email }">${partnerList.email }</a></th>
+										<th><a href="${contextPath}/partnerMemberDetail.mdo?email=${partnerList.email }">${partnerList.email }</a></th>
 										<td>
 											<c:choose>
 											<c:when test="${partnerList.active == 1 }">
@@ -64,7 +64,7 @@
 				</div>
 				<div id="deleteMyAccount" class="delete-modal">
 					<!-- Modal content -->
-					<form class="delete-modal-content" action="blockPartner.mdo" method="post">
+					<form class="delete-modal-content" action="${contextPath}/blockPartner.mdo" method="post">
 						<span class="close">&times;</span>
 						<div class="modal-title"></div>
 						<div class="delete-hr"><div></div></div>

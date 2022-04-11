@@ -44,7 +44,7 @@
 						<div style="text-align: center; margin: 0 0 24px;">
 							<button form="bannerRegister" type="submit" id="submit" class="btn btn-primary">수정하기</button>
 							<a href="${contextPath}/deleteBanner.mdo?seq_city=${bannerVO.seq_city}" class="btn btn-danger">삭제하기</a>
-							<a href="banner.mdo" class="btn btn-warning">돌아가기</a>
+							<a href="${contextPath}/banner.mdo" class="btn btn-warning">돌아가기</a>
 						</div>
 					</div>
 				</div>

@@ -42,11 +42,11 @@
 									<c:forEach var="blockUserList" items="${blockUserList}" varStatus="status">
 									<tr>
 										<td>${status.index+1}</td>
-										<td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.userid}</a></td>
-										<td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.name}</a></td>
-										<td><a href="hotelDetail.mdo?serialnumber=${blockUserList.serialnumber}">${blockUserList.hotelname}</a></td>
+										<td><a href="${contextPath}/userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.userid}</a></td>
+										<td><a href="${contextPath}/userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.name}</a></td>
+										<td><a href="${contextPath}/hotelDetail.mdo?serialnumber=${blockUserList.serialnumber}">${blockUserList.hotelname}</a></td>
 										<td>${blockUserList.whyblock}</td>
-										<td><a id="block" class="btn btn-info" href="unblockUser.mdo?sequence=${blockUserList.sequence}">제한해제</a></td>
+										<td><a id="block" class="btn btn-info" href="${contextPath}/unblockUser.mdo?sequence=${blockUserList.sequence}">제한해제</a></td>
 									</tr>
 									</c:forEach>
 								</tbody>

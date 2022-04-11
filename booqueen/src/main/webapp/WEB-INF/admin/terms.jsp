@@ -29,7 +29,7 @@
 						<div class="col-xl-3 col-md-6">
 							<div class="card bg-primary text-white mb-4">
 								<div class="card-body" style="text-align:center;">약관 등록</div>
-								<a class="small text-white stretched-link" href="termsUpload.mdo"></a>
+								<a class="small text-white stretched-link" href="${contextPath}/termsUpload.mdo"></a>
 							</div>
 						</div>
 					</div>
@@ -53,7 +53,7 @@
 										<td>${termsVO.category}</td>
 										<td>${termsVO.title}</td>
 										<td style="width:70%">${termsVO.contents}</td>
-										<td style="vertical-align: middle;"><button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
+										<td style="vertical-align: middle;"><button id="termsCorrection" class="btn btn-danger" onclick="location.href='${contextPath}/termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
 									</tr>
 									</c:forEach>
 								</tbody>
