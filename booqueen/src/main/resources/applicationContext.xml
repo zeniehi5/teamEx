@@ -16,10 +16,16 @@
 		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<context:property-placeholder location="classpath:config/database.properties"/>
+	<context:property-placeholder location="classpath:config/s3service.properties"/>
 	
 	<!-- properties -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:config/database.properties" />
+        <property name="locations">
+        	<list>
+        		<value>classpath:config/database.properties</value>
+        		<value>classpath:config/s3service.properties</value>
+        	</list>
+        </property>
         <property name="fileEncoding" value="UTF-8"/>
     </bean>
 	

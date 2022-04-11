@@ -122,6 +122,10 @@ ehthumbs_vista.db
 # Dump file
 *.stackdump
 
+# ignore properties file
+s3service.properties
+database.properties
+
 # Folder config file
 [Dd]esktop.ini
 
