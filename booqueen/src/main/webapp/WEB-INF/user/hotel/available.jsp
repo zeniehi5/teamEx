@@ -1818,6 +1818,8 @@
 	</div>
 
 	<script>
+	var path = '${contextPath}';
+	
 	function getParameterByName(name) { 
 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
@@ -1989,7 +1991,6 @@
 	</script>
 	
    	<script>
-	var path = '${contextPath}';
    	
        function on() {
     	 getAttractions();
@@ -2169,7 +2170,7 @@
             if(userid != ''){
             	$.ajax({
                     method : "POST",
-                    url : "/web/wishlist.do",
+                    url : path + "/wishlist.do",
                     data : sendData,
                     success : function(resp){
                     
@@ -2434,7 +2435,7 @@
 		var hotelname = '${hotelInfo.hotelname}';
 		
 	    $.ajax({
-	        url:'/web/getBoardList.do'
+	        url: path + '/getBoardList.do'
 	        , method : 'POST'
 	        , data: JSON.stringify(sendReply)
 	        , dataType: 'json'

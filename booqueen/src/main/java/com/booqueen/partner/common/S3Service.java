@@ -24,7 +24,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 public class S3Service {
 	
 	private AmazonS3 s3Client;
-
+  
 	private Regions clientRegion = Regions.AP_NORTHEAST_2;
 	private String bucket = "booqueen";
 	
