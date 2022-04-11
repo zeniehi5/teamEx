@@ -3,13 +3,14 @@ package com.booqueen.partner.common;
 import java.io.File;
 import java.io.InputStream;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -18,18 +19,16 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+@Configuration
 @Service
 public class S3Service {
 	
 	private AmazonS3 s3Client;
-	
-	private String accessKey = "#";
-	private String secretKey = "#";
 
 	private Regions clientRegion = Regions.AP_NORTHEAST_2;
 	private String bucket = "booqueen";
 	
-	private S3Service() {
+	public S3Service() {
 		createS3Client();
 	}
 	
@@ -43,8 +42,9 @@ public class S3Service {
 		}
 	}
 	
-	private void createS3Client() {
-		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+	public void createS3Client() {
+		ClasspathPropertiesFileCredentialsProvider credentialsProvider = new ClasspathPropertiesFileCredentialsProvider("config/s3service.properties");
+		AWSCredentials credentials = credentialsProvider.getCredentials();
 		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(clientRegion).build();
 	}
 	
