@@ -259,7 +259,7 @@
                                                                     <span>채널</span>
                                                                 </p>
                                                                 <p class="reservation_content_info">
-                                                                    <span>Booking.com</span>
+                                                                    <span>booqueen.com</span>
                                                                 </p>
                                                             </div>
                                                             <div class="grid_column_full grid_column_half_medium">

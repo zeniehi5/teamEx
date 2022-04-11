@@ -43,7 +43,7 @@
 					<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link" href="${contextPath }/partnerMember.mdo">파트너 목록</a>
-							<a class="nav-link" href="${contextPath }/blockPartnerList.mdo">차단된 파트너</a>
+							<a class="nav-link" href="${contextPath }/blockPartner.mdo">차단된 파트너</a>
 						</nav>
 					</div>
 					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">

@@ -20,7 +20,7 @@
 	<!-- properties -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="classpath:config/database.properties" />
-        <property name="fileEncoding" value="UTF-8" />
+        <property name="fileEncoding" value="UTF-8"/>
     </bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> 
@@ -49,19 +49,11 @@
 		</property>
 	</bean>
 	
-<!--  	<bean id="memberService" class="com.booqueen.partner.member.impl.MemberServiceImpl">
-		<property name="memberDAO" ref="memberDAO"/>
-	</bean>
-	
-	<bean id="memberDAO" class="com.booqueen.partner.member.impl.MemberDAOImpl">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>-->
-	
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
        <property name="order" value="0" />
    </bean>
    
    <!-- pdf라는 뷰 이름이 왔을 때 출력할 뷰를 설정 -->
-   <bean id="pdf" class="com.booqueen.partner.common.PDFView"/>
+   <!-- <bean id="pdf" class="com.booqueen.partner.common.PDFView"/> -->
 	
 </beans>

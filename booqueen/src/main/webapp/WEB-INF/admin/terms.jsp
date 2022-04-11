@@ -19,76 +19,58 @@
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-       	<div id="layoutSidenav">
+	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <!-- <h2 class="mt-4">이용약관 관리</h2> -->
-                        <br>                  
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body" style="text-align:center;">약관 등록</div>
-                                    <!-- <div class="card-footer d-flex align-items-center justify-content-between"> -->
-                                        <a class="small text-white stretched-link" href="termsUpload.mdo"></a>
-                                        <!-- <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        <div class="card mb-4">
-                            <div class="card-header" style="font-size: 20px;">
-                                <i class="fas fa-table me-1"></i>약관 리스트
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-											<th style="width: 5.25815%!important;">No.</th>
-											<th style="width: 10.25815%!important;">구분</th>
-											<th style="width: 19.6817%!important;">제목</th>
-											<th style="width: 54.9875%!important;">내용</th>
-											<th style="width: 13.07268%!important;">비고</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="termsVO" items="${termsList }" varStatus="status">
-                                        <tr>
-                                        	<td>${status.index+1}</td>
-                                            <td>${termsVO.category}</td>
-                                            <td>${termsVO.title}</td>
-                                            <td style="width:70%">${termsVO.contents}</td>
-                                            <td style="vertical-align: middle;"><button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-    </body>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<br>
+					<div class="row">
+						<div class="col-xl-3 col-md-6">
+							<div class="card bg-primary text-white mb-4">
+								<div class="card-body" style="text-align:center;">약관 등록</div>
+								<a class="small text-white stretched-link" href="termsUpload.mdo"></a>
+							</div>
+						</div>
+					</div>
+					<div class="card mb-4">
+						<div class="card-header" style="font-size: 20px;"><i class="fas fa-table me-1"></i>약관 리스트</div>
+						<div class="card-body">
+							<table id="datatablesSimple">
+								<thead>
+									<tr>
+										<th style="width: 5.25815%!important;">No.</th>
+										<th style="width: 10.25815%!important;">구분</th>
+										<th style="width: 19.6817%!important;">제목</th>
+										<th style="width: 54.9875%!important;">내용</th>
+										<th style="width: 13.07268%!important;">비고</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="termsVO" items="${termsList }" varStatus="status">
+									<tr>
+										<td>${status.index+1}</td>
+										<td>${termsVO.category}</td>
+										<td>${termsVO.title}</td>
+										<td style="width:70%">${termsVO.contents}</td>
+										<td style="vertical-align: middle;"><button id="termsCorrection" class="btn btn-danger" onclick="location.href='termsCorrection.mdo?seq=${termsVO.seq}'" >수정 및 삭제</button></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</main>
+			<jsp:include page="/WEB-INF/admin/footer.jsp"/>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+</body>
 </html>

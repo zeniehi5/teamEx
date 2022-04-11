@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.booqueen.admin.banner.BannerVO;
 
-@Repository("bannerDAO")
+@Repository("BannerDAO")
 public class BannerDAO {
 	
 	@Autowired

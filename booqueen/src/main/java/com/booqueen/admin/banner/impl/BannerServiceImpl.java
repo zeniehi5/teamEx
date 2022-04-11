@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.booqueen.admin.banner.BannerService;
 import com.booqueen.admin.banner.BannerVO;
 
-@Service("BannerService")
+@Service("BannerServiceImpl")
 public class BannerServiceImpl implements BannerService {
 	
 	@Autowired

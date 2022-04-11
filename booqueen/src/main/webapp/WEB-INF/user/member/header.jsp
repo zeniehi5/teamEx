@@ -354,12 +354,14 @@
     	
     });
     
+    var path = '${contextPath}';
+    
     function reqList(reservation_number, serialnumber) {    
     	
     	var sendReply = {"userid": '${member.userid}', "reservation_number": reservation_number, "serialnumber": serialnumber}
     	
 	    $.ajax({
-	        url:'/web/chat.do'
+	        url: path + '/chat.do'
 	        , method : 'POST'
 	        , data: JSON.stringify(sendReply)
 	        , dataType: 'json'
@@ -423,8 +425,6 @@
 			}
 	   })
 	}
-    
-    var path = '${contextPath}';
     
     function insertChat(reservation_number, serialnumber){
     	

@@ -18,80 +18,58 @@
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-       	<div id="layoutSidenav">
-			<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <!-- <h1 class="mt-4">약관 등록</h1> -->
-                        <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">약관 등록</li>
-                        </ol> -->
-                        <!-- <div class="card mb-4">
-                            <div class="card-body">Booqueen.com 약관 등록</div>
-                        </div> -->
-                        <br>
-                        <div class="card mb-4">
-	                        <form action="${contextPath}/insertTerms.mdo" method="post" id="addterm">
-	                            <div class="card-header" style="font-size: 20px;">
-		                            <div><svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com --> 약관 등록</div>
-								</div>
-	                            <div style="margin-left: 100px;">
-	                                <table style="width: 90%; margin-top: 24px;">
-	                                    <tbody>
-		                                    <tr>
-				                            	<td style="text-align: center">구분</td>
-				                            	<td>
-				                            		<select name="category" style="padding: 10px; margin-bottom: 8px; width: 100%;">
-														<option value="A. 모든 여행 상품">A. 모든 여행 상품</option>
-														<option value="B. 숙소">B. 숙소</option>
-														<option value="Booqueen.com 용어 설명">Booqueen.com 용어 설명</option>
-													</select>
-				                            	</td>
-				                            </tr>
-		                                    <tr>
-		                                        <td style="text-align: center">제목</td>
-		                                        <td><input id="term_title" name="title" style="margin-bottom: 8px; padding: 8px; width: 100%;"/></td>
-		                                    </tr>
-		                                    <tr>
-		                                        <td style="text-align: center">약관내용</td>
-		                                        <td style="">
-		                                            <textarea style="width: 100%; height: 500px; padding: 8px;" id="term_content" name="contents"></textarea>
-		                                        </td>
-		                                    </tr>
-	                                	</tbody>
-	                            	</table>
-	                           	</div>
-							</form>
-	                        <div style="align-self: end; margin: 12px 23px 24px;">
-	                            <button form="addterm" type="submit" id="submit" class="btn btn-primary" style="min-width: 110px;">등록</button>
-	                            <a href="${contextPath}/terms.mdo" class="btn btn-warning" style="min-width: 110px;">돌아가기</a>
-	                        </div>
+	<div id="layoutSidenav">
+		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<br>
+					<div class="card mb-4">
+						<form action="${contextPath}/insertTerms.mdo" method="post" id="addterm">
+							<div class="card-header" style="font-size: 20px;">
+								<div><svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com --> 약관 등록</div>
+							</div>
+							<div style="margin-left: 100px;">
+								<table style="width: 90%; margin-top: 24px;">
+									<tbody>
+										<tr>
+											<td style="text-align: center">구분</td>
+											<td>
+												<select name="category" style="padding: 10px; margin-bottom: 8px; width: 100%;">
+													<option value="A. 모든 여행 상품">A. 모든 여행 상품</option>
+													<option value="B. 숙소">B. 숙소</option>
+													<option value="Booqueen.com 용어 설명">Booqueen.com 용어 설명</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: center">제목</td>
+											<td><input id="term_title" name="title" style="margin-bottom: 8px; padding: 8px; width: 100%;"/></td>
+										</tr>
+										<tr>
+											<td style="text-align: center">약관내용</td>
+											<td style=""><textarea style="width: 100%; height: 500px; padding: 8px;" id="term_content" name="contents"></textarea></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</form>
+						<div style="align-self: end; margin: 12px 23px 24px;">
+							<button form="addterm" type="submit" id="submit" class="btn btn-primary" style="min-width: 110px;">등록</button>
+							<a href="${contextPath}/terms.mdo" class="btn btn-warning" style="min-width: 110px;">돌아가기</a>
 						</div>
 					</div>
-				</main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-    </body>
+				</div>
+			</main>
+           <jsp:include page="/WEB-INF/admin/footer.jsp"/>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+</body>
 </html>
-
-

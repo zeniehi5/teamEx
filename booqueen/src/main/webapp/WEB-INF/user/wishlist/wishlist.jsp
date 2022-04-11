@@ -189,7 +189,7 @@
 	</div>
 
 	<script>
-	
+	var path = '${contextPath}';
 	
 	 $(function(){
 		$(".removeButton").on("click", function(){
@@ -204,7 +204,7 @@
 			
 			$.ajax({
 	            method : "POST",
-	            url : "/web/deleteWishlist.do",
+	            url : path + "/deleteWishlist.do",
 	            data : sendData,
 	            success : function(resp){
 	            	$("#wishlist_length").text(wishlist_length-1);
