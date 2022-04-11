@@ -53,7 +53,7 @@ public class PartnerController {
 		return "partnerMember";
 	}
 	
-	@RequestMapping(value = "/blockPartnerList.mdo", method=RequestMethod.GET)
+	@RequestMapping(value = "/blockPartner.mdo", method=RequestMethod.GET)
 	public String blockPartnerList(Model model, PartnerVO vo) {
 		
 		List<PartnerVO> blockedList = partnerServiceImpl.selectBlockPartnerList();

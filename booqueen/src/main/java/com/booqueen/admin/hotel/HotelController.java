@@ -23,9 +23,6 @@ public class HotelController {
 	HotelServiceImpl hotelServiceImpl;
 	
 	@Autowired
-	TermsServiceImpl termsServiceImpl;
-	
-	@Autowired
 	private RoomService roomService;
 	
 	@RequestMapping(value = "/hotelList.mdo", method=RequestMethod.GET)
@@ -36,6 +33,7 @@ public class HotelController {
 		
 		return "hotelList";
 	}
+	
 	@RequestMapping(value = "/hotelDetail.mdo", method=RequestMethod.GET)
 	public String hotelDetail(HttpSession session, @RequestParam("serialnumber")int serialnumber, Model model) {
 		HotelDetailVO hotelDetail = hotelServiceImpl.selectHotelDetail(serialnumber);
@@ -44,37 +42,17 @@ public class HotelController {
 		model.addAttribute("hotelDetail", hotelDetail);
 		return "hotelDetail";
 	}
-	@RequestMapping(value = "/roomDetail.mdo", method=RequestMethod.GET)
-	public String roomDetail(@RequestParam("room_id")int room_id, HttpSession session, Model model) {
-		RoomDetailVO details = roomService.selectRoomDetailsByRoomId(room_id);
-		model.addAttribute("details", details);
-		return "roomDetail";
-	}
-	
 	
 	@RequestMapping(value = "/reportContent.mdo", method=RequestMethod.GET)
 	public String reportContent(HttpSession session) {
 		return "reportContent";
 	}
-
-	/*
-	 * @RequestMapping(value = "/PartnerMember.mdo", method=RequestMethod.GET)
-	 * public String partnerMember(HttpSession session) { return "partnerMember"; }
-	 */
-	@RequestMapping(value = "/blockPartner.mdo", method=RequestMethod.GET)
-	public String blockPartner(HttpSession session) {
-		return "blockPartner";
-	}
 	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "/index2.mdo", method=RequestMethod.GET)
-	public String index2(HttpSession session) {
-		return "index2";
-	}
-	
+//	@RequestMapping(value = "/roomDetail.mdo", method=RequestMethod.GET)
+//	public String roomDetail(@RequestParam("room_id")int room_id, HttpSession session, Model model) {
+//		RoomDetailVO details = roomService.selectRoomDetailsByRoomId(room_id);
+//		model.addAttribute("details", details);
+//		return "roomDetail";
+//	}
 	
 }

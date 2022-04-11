@@ -17,78 +17,61 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 </head>
-    <body class="sb-nav-fixed">
+<body class="sb-nav-fixed">
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-       	<div id="layoutSidenav">
-		
-			<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
-            <div id="layoutSidenav_content">
-                <main>
-                	<div class="container-fluid px-4">
-                		<!-- <h2 class="mt-4">호텔 목록</h2> -->
-                		<br>
-                        <div class="card mb-4">
-                            <div class="card-header" style="font-size: 20px;">
-                                <i class="fas fa-table me-1"></i>
-                                호텔 목록
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>호텔명</th>
-                                            <th>주소</th>
-                                            <th>담당자</th>
-                                            <th>연락처</th>
-                                            <th>성급</th>
-                                            <th>자세히 보기</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="hotelList" items="${hotelList }" varStatus="status">
-                                    	<input type ="hidden" value="${hotelList.serialnumber }">
-                                        <tr>
-                                            <td>${hotelList.hotelname }</td>
-                                            <td>${hotelList.city }</td>
-                                            <td>${hotelList.manager}</td>
-                                            <td>${hotelList.telephone}</td>
-                                            <td>
-	                                            <c:if test="${hotelList.star+0 == '5'}">★★★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '4'}">★★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '3'}">★★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '2'}">★★</c:if>
-	                                            <c:if test="${hotelList.star+0 == '1'}">★</c:if>
-                                            </td>
-                                            <td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a>
-                                            </td>
-                                        </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+	<div id="layoutSidenav">
+		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<br>
+					<div class="card mb-4">
+						<div class="card-header" style="font-size: 20px;"><i class="fas fa-table me-1"></i>호텔 목록</div>
+						<div class="card-body">
+							<table id="datatablesSimple">
+								<thead>
+									<tr>
+										<th>호텔명</th>
+										<th>주소</th>
+										<th>담당자</th>
+										<th>연락처</th>
+										<th>성급</th>
+										<th>자세히 보기</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="hotelList" items="${hotelList }" varStatus="status">
+									<input type ="hidden" value="${hotelList.serialnumber }">
+									<tr>
+										<td>${hotelList.hotelname }</td>
+										<td>${hotelList.city }</td>
+										<td>${hotelList.manager}</td>
+										<td>${hotelList.telephone}</td>
+										<td>
+											<c:if test="${hotelList.star+0 == '5'}">★★★★★</c:if>
+											<c:if test="${hotelList.star+0 == '4'}">★★★★</c:if>
+											<c:if test="${hotelList.star+0 == '3'}">★★★</c:if>
+											<c:if test="${hotelList.star+0 == '2'}">★★</c:if>
+											<c:if test="${hotelList.star+0 == '1'}">★</c:if>
+										</td>
+										<td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 					</div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-    </body>
+				</div>
+			</main>
+			<jsp:include page="/WEB-INF/admin/footer.jsp"/>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+</body>
 </html>

@@ -18,66 +18,52 @@
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="/WEB-INF/admin/header.jsp"/>
-	
 	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/admin/menubar.jsp"/>
-            <div id="layoutSidenav_content">
-                <main>
-                	<br>
-                    <div class="container-fluid px-4">
-                        <div class="card mb-4">
-                            <div class="card-header" style="font-size: 20px;">
-                                <i class="fas fa-table me-1"></i>신고 회원 관리
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>회원 아이디</th>
-                                            <th>이름</th>
-                                            <th>신고 호텔</th>
-                                            <th>신고 사유</th>
-                                            <th>이용제한 설정</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    	<c:forEach var="blockUserList" items="${blockUserList}" varStatus="status">
-                                        <tr>
-                                            <td>${status.index+1}</td>
-                                            <td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.userid}</a></td>
-                                            <td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.name}</a></td>
-                                            <td><a href="hotelDetail.mdo?serialnumber=${blockUserList.serialnumber}">${blockUserList.hotelname}</a></td>
-                                            <td>${blockUserList.whyblock}</td>
-                                            <td><a id="block" class="btn btn-info" href="unblockUser.mdo?sequence=${blockUserList.sequence}">제한해제</a></td>
-                                        </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
-    </body>
+		<div id="layoutSidenav_content">
+			<main>
+				<br>
+				<div class="container-fluid px-4">
+					<div class="card mb-4">
+						<div class="card-header" style="font-size: 20px;"><i class="fas fa-table me-1"></i>신고 회원 관리</div>
+						<div class="card-body">
+							<table id="datatablesSimple1">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>회원 아이디</th>
+										<th>이름</th>
+										<th>신고 호텔</th>
+										<th>신고 사유</th>
+										<th>이용제한 설정</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="blockUserList" items="${blockUserList}" varStatus="status">
+									<tr>
+										<td>${status.index+1}</td>
+										<td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.userid}</a></td>
+										<td><a href="userMemberDetail.mdo?userid=${blockUserList.userid}">${blockUserList.name}</a></td>
+										<td><a href="hotelDetail.mdo?serialnumber=${blockUserList.serialnumber}">${blockUserList.hotelname}</a></td>
+										<td>${blockUserList.whyblock}</td>
+										<td><a id="block" class="btn btn-info" href="unblockUser.mdo?sequence=${blockUserList.sequence}">제한해제</a></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</main>
+			<jsp:include page="/WEB-INF/admin/footer.jsp"/>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="${contextPath}/resources/admin/javascript/datatables-simple-demo.js"></script>
+</body>
 </html>
