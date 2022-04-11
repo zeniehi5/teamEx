@@ -144,23 +144,23 @@
 									<c:set var="sum_commision" value="0"/>
 									<c:forEach  var="ReservationVO" items="${reservation }" varStatus ="status">
 									<tr> 
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_number }</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_date }</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.lastname}${ReservationVO.firstname}</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.hotelname }</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.type }</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkin_date }</a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkout_date }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_number }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.reservation_date }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.lastname}${ReservationVO.firstname}</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.hotelname }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.type }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkin_date }</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">${ReservationVO.checkout_date }</a></td>
 										<c:choose>
 										<c:when test="${ReservationVO.status == true }">
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">정상</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">정상</a></td>
 										</c:when>
 										<c:otherwise>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">취소</a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">취소</a></td>
 										</c:otherwise>
 										</c:choose>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.price }"/></a></td>
-										<td><a href="reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.commission}"/></a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.price }"/></a></td>
+										<td><a href="${contextPath}/reservationStatusDetail.mdo?reservation_number=${ReservationVO.reservation_number}">&#8361;<fmt:formatNumber type="number" value="${ReservationVO.commission}"/></a></td>
 									</tr>
 									<c:set var="sum_price" value="${sum_price + ReservationVO.price }"/>
 									<c:set var="sum_commission" value="${sum_commission + ReservationVO.commission}"/>

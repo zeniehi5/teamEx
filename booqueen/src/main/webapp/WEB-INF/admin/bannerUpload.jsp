@@ -62,7 +62,7 @@
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header"><h3 class="text-center font-weight-light my-4">배너 등록</h3></div>
 								<div class="card-body" style="padding: 3rem 3rem;">
-									<form action="bannerRegister.mdo" method="post" id="addBanner" enctype="multipart/form-data">
+									<form action="${contextPath}/bannerRegister.mdo" method="post" id="addBanner" enctype="multipart/form-data">
 										<div class="row mb-3" style="margin-bottom: 0!important;">
 											<div class="col-md-6" style="width: 100%;">
 												<div class="form-floating mb-3 mb-md-0">
@@ -78,7 +78,7 @@
 										<div class="d-grid gap-2" style="display: flex!important; justify-content: center; margin-top: 38px;">
 											<button class="btn btn-primary" type="submit" style="padding: 8px 20px; min-width: 14%;">배너 등록</button>
 											<div class="d-grid" style="min-width: 14%;">
-												<a class="btn btn-danger btn-block" id="cancle" style="background-color: #dc3545; border:solid 1px #dc3545; width: 100%; padding: 8px 20px;" href="banner.mdo">취	소</a>
+												<a class="btn btn-danger btn-block" id="cancle" style="background-color: #dc3545; border:solid 1px #dc3545; width: 100%; padding: 8px 20px;" href="${contextPath}/banner.mdo">취	소</a>
 											</div>
 										</div>
 									</form>

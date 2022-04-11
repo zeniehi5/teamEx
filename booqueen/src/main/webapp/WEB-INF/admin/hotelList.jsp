@@ -54,7 +54,7 @@
 											<c:if test="${hotelList.star+0 == '2'}">★★</c:if>
 											<c:if test="${hotelList.star+0 == '1'}">★</c:if>
 										</td>
-										<td><a class="btn btn-danger" href="hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a></td>
+										<td><a class="btn btn-danger" href="${contextPath}/hotelDetail.mdo?serialnumber=${hotelList.serialnumber }">상세정보</a></td>
 									</tr>
 									</c:forEach>
 								</tbody>

@@ -28,7 +28,7 @@
    						<div class="col-xl-3 col-md-6">
        						<div class="card bg-primary text-white mb-4">
            						<div class="card-body" style="text-align:center;">배너 등록</div>
-								<a class="small text-white stretched-link" href="bannerUpload.mdo"></a>
+								<a class="small text-white stretched-link" href="${contextPath}/bannerUpload.mdo"></a>
 							</div>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 										<th>${status.index+1}</th>
 										<th>${bannerList.city}</th>
 										<th><a href="${bannerList.file_url}">${bannerList.file_url}</a></th>
-										<td><a class="btn btn-danger" href="bannerCorrection.mdo?seq_city=${bannerList.seq_city}">수정 및 삭제</a></td>
+										<td><a class="btn btn-danger" href="${contextPath}/bannerCorrection.mdo?seq_city=${bannerList.seq_city}">수정 및 삭제</a></td>
 									</tr>
 									</c:forEach>
 								</tbody>

@@ -59,7 +59,7 @@
 						<div style="text-align: center; margin: 12px 0 24px;">
 							<button form="updateFaq" type="submit" id="submit" class="btn btn-primary">수정하기</button>
 							<a href="${contextPath}/deleteFaq.mdo?seq=${faqVO.seq}" class="btn btn-danger">삭제하기</a>
-							<a href="faq.mdo" class="btn btn-warning">돌아가기</a>
+							<a href="${contextPath}/faq.mdo" class="btn btn-warning">돌아가기</a>
 						</div>
 					</div>
 				</div>
