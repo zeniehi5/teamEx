@@ -60,7 +60,7 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector URIEncoding="UTF-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+    <Connector URIEncoding="UTF-8" connectionTimeout="20000" port="80" protocol="HTTP/1.1" redirectPort="8443"/>
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -152,8 +152,8 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="booqueen" path="/web" reloadable="true" source="org.eclipse.jst.jee.server:booqueen"/></Host>
-    	<Context allowCasualMultipartParsing="true" path="/"> <Resources cachingAllowed="true" cacheMaxSize="1000000" /> <!-- Default set of monitored resources. If one of these changes, the --> <!-- web application will be reloaded. --> <WatchedResource>WEB-INF/web.xml</WatchedResource> <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource> <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> <!-- Uncomment this to disable session persistence across Tomcat restarts --> <!-- <Manager pathname="" /> --> </Context>
+      <Context docBase="booqueen" path="/" reloadable="true" source="org.eclipse.jst.jee.server:booqueen"/></Host>
+    	<Context allowCasualMultipartParsing="true" path="/"> <Resources cacheMaxSize="1000000" cachingAllowed="true"/> <!-- Default set of monitored resources. If one of these changes, the --> <!-- web application will be reloaded. --> <WatchedResource>WEB-INF/web.xml</WatchedResource> <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource> <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> <!-- Uncomment this to disable session persistence across Tomcat restarts --> <!-- <Manager pathname="" /> --> </Context>
     </Engine>
   </Service>
 </Server>

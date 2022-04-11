@@ -112,60 +112,10 @@ public class InvoiceController {
 		return result;
 	}
 
-	/*
-	 * @RequestMapping("/makePDF.pdo") public String makePdf() {
-	 * 
-	 * List<String> list = new ArrayList<String>(); // list.add("Java"); //
-	 * list.add("파이썬"); // list.add("R"); // list.add("C++"); // list.add("자바스크립트");
-	 * // list.add("Ruby"); // list.add("스칼라"); // list.add("클로져"); //
-	 * list.add("자바"); // // //뷰에게 전달할 데이터 저장 // model.addAttribute("list",list);
-	 * 
-	 * 
-	 * 
-	 * UserReserveVO reserveVo = userBoardService.userReserveFinish(merchantUid);
-	 * AdminMovieVO movieVo = userBoardService.movieList(reserveVo.getMovie_num());
-	 * reserveVo.setMovie_title(movieVo.getMovie_title()); DecimalFormat formatter =
-	 * new DecimalFormat("￦###,###,###"); String price =
-	 * formatter.format(reserveVo.getReserve_price());
-	 * reserveVo.setFomatter_price(price);
-	 * 
-	 * 
-	 * list.add("회원ID : "+reserveVo.getUser_id());
-	 * list.add("예매번호 : "+reserveVo.getReserve_merchant_uid());
-	 * list.add("영화제목 : "+reserveVo.getMovie_title());
-	 * list.add("결제금액 : "+reserveVo.getFomatter_price());
-	 * list.add("결제수단 : "+reserveVo.getReserve_method());
-	 * if(reserveVo.getReserve_apply_num() == "" ||reserveVo.getReserve_apply_num()
-	 * == null ||reserveVo.getReserve_apply_num().length()==0 ) {
-	 * reserveVo.setReserve_apply_num("카드결제 x"); }
-	 * list.add("카드 승인번호 : "+reserveVo.getReserve_apply_num());
-	 * list.add("결제일 : "+reserveVo.getReserve_date());
-	 * 
-	 * 
-	 * model.addAttribute("list",list);
-	 * 
-	 * //출력할 뷰 이름 리턴 return "pdf"; }
-	 */
-
 	// excel 변환
 	@RequestMapping("excelConvert.pdo")
 	public void excelConvert(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
-		/*
-		 * List<UserReserveVO> paymentList = adminMovieService.SelectReserveInfo();
-		 * DecimalFormat formatter = new DecimalFormat("###,###,###");
-		 * PaymentCancelDetail dd = new PaymentCancelDetail();
-		 * System.out.println("dddd엑셀"); for (UserReserveVO reserveVo : paymentList) {
-		 * AdminMovieVO movieVo = userBoardService.movieList(reserveVo.getMovie_num());
-		 * reserveVo.setMovie_title(movieVo.getMovie_title()); String price =
-		 * formatter.format(reserveVo.getReserve_price());
-		 * reserveVo.setFomatter_price(price);
-		 * 
-		 * }
-		 */
-		
-//		invoice.setSerialnumber(1201);
-//		invoice.setSearchOption(3);
-		//List<InvoiceVO> monthlyInvoice = reservationService.selectInvoiceListByMonth(invoice);
+
 		HotelVO hotel = hotelService.getHotelByMemberEmail(session.getAttribute("email").toString());
 		List<InvoiceVO> monthlyInvoice = reservationService.selectInvoiceListByHotelSerial(hotel.getSerialnumber());
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
@@ -181,8 +131,6 @@ public class InvoiceController {
 		font.setFontName("맑은 고딕"); // 글씨체
 		sheet.setDefaultColumnWidth(30); // sheet 전체 기본 너비설정
 		sheet.setDefaultRowHeightInPoints(30); // sheet 전체 기본 너비설정
-		// sheet.setColumnWidth(4, 2100); // 특정 cell 설정 => 5번째(e) cell 2100=7.63
-		// sheet.setColumnWidth(7, 3400); // 7번째(h) cell 3400=12.63
 		Row titleRow = sheet.createRow(0); // 타이틀 행 생성
 		int titleColNum = 0;// 첫번째 열이기때문에 0으로
 
@@ -193,13 +141,6 @@ public class InvoiceController {
 		int headerCol = 0;
 
 		CellStyle dataStyle = wb.createCellStyle(); // 셀 스타일!
-
-		/*
-		 * dataStyle.setBorderRight(BorderStyle.DOUBLE);
-		 * dataStyle.setBorderLeft(BorderStyle.DOUBLE);
-		 * dataStyle.setBorderBottom(BorderStyle.DOUBLE);
-		 * dataStyle.setBorderTop(BorderStyle.DOUBLE);
-		 */
 
 		Cell headerCell = headRow.createCell(headerCol++);
 		headerCell.setCellValue("예약번호");
